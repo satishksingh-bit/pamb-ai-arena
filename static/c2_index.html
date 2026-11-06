@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deck Challenge · Prudential</title>
+  <link rel="icon" href="/static/img/prudential-logo.png" />
+  <link rel="stylesheet" href="/static/css/deck.css" />
+  <link rel="stylesheet" href="/static/css/prudential.css" />
+</head>
+<body>
+  <header class="ph">
+    <img src="/static/img/prudential-logo.png" alt="Prudential" />
+    <div class="sep"></div>
+    <div class="title">Deck Challenge<span>Simple → Enhanced</span></div>
+    <div class="grow"></div>
+    <select id="langSel" class="optional" aria-label="Language"></select>
+    <div class="seg" id="marketSeg"><button data-market="MY">🇲🇾 MY</button><button data-market="SG">🇸🇬 SG</button></div>
+    <button class="link optional" id="lbBtn">🏆 Leaderboard</button>
+    <button class="link" id="resetBtn">Reset</button>
+  </header>
+  <div id="app"></div>
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

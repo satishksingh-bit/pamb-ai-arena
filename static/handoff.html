@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🇲🇾 PAMB 11 Nov AI Bootcamp — Team Jetski Handoff & Collaboration Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#080b12] text-white min-h-screen font-sans">
+  <div class="max-w-6xl mx-auto px-4 sm:px-8 py-8 space-y-8">
+    <!-- Top Header -->
+    <header class="bg-gradient-to-r from-[#171c2e] via-[#121624] to-[#1e1220] border-2 border-amber-400/70 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-wrap items-center justify-between gap-4">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ed1b2e]/20 border border-[#ed1b2e] text-red-300 text-xs font-extrabold uppercase tracking-wider">
+          🇲🇾 11 NOVEMBER PAMB MALAYSIA AGENCY AI BOOTCAMP • TEAM COLLABORATION KIT
+        </div>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-white">
+          Team Jetski Handoff, Build, Argolis Deploy &amp; Merge Hub
+        </h1>
+        <p class="text-sm text-gray-300 max-w-3xl">
+          Everything your colleagues need to pull the starter codebase into <strong>Jetski</strong>, develop their Challenge module in isolation (`Challenge 1`, `Challenge 2`, or `Challenge 3`), deploy to their own <strong>Argolis Cloud Run</strong>, and share back for a 1-command merge.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a
+          href="/handoff/pamb-ai-arena.tar.gz"
+          class="px-5 py-3.5 rounded-2xl bg-gradient-to-r from-[#ed1b2e] to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-sm shadow-xl text-center"
+        >
+          📦 Download Full Codebase (.tar.gz)
+        </a>
+        <a
+          href="/presenter"
+          target="_blank"
+          class="px-5 py-3.5 rounded-2xl bg-[#111522] hover:bg-gray-800 border border-gray-700 text-amber-300 font-extrabold text-sm text-center"
+        >
+          🖥️ Open Live Presenter Screen ↗
+        </a>
+      </div>
+    </header>
+
+    <!-- STEP 1: ONE-PASTE JETSKI PROMPTS FOR EACH COLLEAGUE -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-amber-300">
+            🚀 Step 1: Copy-Paste Starter Prompt into Jetski (By Challenge Role)
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-400">
+            Each colleague simply copies their role prompt below and pastes it directly into their <strong>Jetski</strong> chat. Jetski will automatically download the codebase, read <code>AGENTS.md</code>, start the local sandbox, and assist them!
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <!-- COLLEAGUE 1 CARD -->
+        <div class="bg-[#111522] border-2 border-amber-500/60 rounded-3xl p-5 flex flex-col justify-between space-y-4 shadow-xl">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-amber-500 text-black font-extrabold text-xs">
+                👤 COLLEAGUE 1 • CHALLENGE 1
+              </span>
+              <span class="text-xs font-mono text-gray-400">14:00 – 14:20</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-white">
+              📸 Reinvent Professional Image &amp; Customer Outreach
+            </h3>
+            <p class="text-xs text-gray-300">
+              <strong>Files Owned:</strong><br/>
+              • <code>challenges/c1_image_outreach.py</code><br/>
+              • <code>static/challenge1.js</code>
+            </p>
+            <div class="bg-[#090c14] border border-gray-800 rounded-xl p-3 text-[11px] font-mono text-gray-300 h-48 overflow-y-auto whitespace-pre-wrap" id="prompt-c1">Please help me develop and enhance Challenge 1 (14:00-14:20 Reinvent Your Professional Image & Customer Outreach) for the 11th November PAMB Malaysia Agency AI Bootcamp Arena.
+
+1. First, download and unpack the starter codebase into ~/pamb-ai-arena:
+   mkdir -p ~/pamb-ai-arena && cd ~/pamb-ai-arena && curl -sL ORIGIN_URL/handoff/pamb-ai-arena.tar.gz | tar -xz
+2. Read AGENTS.md and README.md in ~/pamb-ai-arena to understand the architecture and strict file ownership rules.
+3. My owned files are ONLY:
+   - challenges/c1_image_outreach.py (backend Gemini 2.5 Flash Image studio portrait transformation + outreach + AI scoring)
+   - static/challenge1.js (mobile camera selfie capture, Before/After studio portrait card, and submission to Big Screen)
+4. Start the local server on port 8095 so I can test in the isolated Challenge 1 sandbox (/sandbox/1) and Presenter screen (/presenter), and help me deploy to my own Argolis Cloud Run project using ./deploy.sh <MY_ARGOLIS_PROJECT_ID>.</div>
+          </div>
+
+          <div class="space-y-2">
+            <button
+              onclick="copyPrompt('prompt-c1', 'btn-c1')"
+              id="btn-c1"
+              class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs sm:text-sm transition-all shadow-lg"
+            >
+              📋 Copy Jetski Prompt for Colleague 1
+            </button>
+            <a
+              href="/sandbox/1"
+              target="_blank"
+              class="block w-full py-2 rounded-xl bg-black/50 hover:bg-black border border-gray-700 text-center text-xs font-bold text-amber-300"
+            >
+              🧪 Open Challenge 1 Sandbox (/sandbox/1) ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- COLLEAGUE 2 CARD -->
+        <div class="bg-[#111522] border-2 border-blue-500/60 rounded-3xl p-5 flex flex-col justify-between space-y-4 shadow-xl">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-blue-500 text-white font-extrabold text-xs">
+                👤 COLLEAGUE 2 • CHALLENGE 2
+              </span>
+              <span class="text-xs font-mono text-gray-400">14:20 – 14:35</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-white">
+              🧠 Master the Art of AI Dialogue (4-Pillar Prompting)
+            </h3>
+            <p class="text-xs text-gray-300">
+              <strong>Files Owned:</strong><br/>
+              • <code>challenges/c2_prompt_duel.py</code><br/>
+              • <code>static/challenge2.js</code>
+            </p>
+            <div class="bg-[#090c14] border border-gray-800 rounded-xl p-3 text-[11px] font-mono text-gray-300 h-48 overflow-y-auto whitespace-pre-wrap" id="prompt-c2">Please help me develop and enhance Challenge 2 (14:20-14:35 Master the Art of AI Dialogue / 4-Pillar Prompting) for the 11th November PAMB Malaysia Agency AI Bootcamp Arena.
+
+1. First, download and unpack the starter codebase into ~/pamb-ai-arena:
+   mkdir -p ~/pamb-ai-arena && cd ~/pamb-ai-arena && curl -sL ORIGIN_URL/handoff/pamb-ai-arena.tar.gz | tar -xz
+2. Read AGENTS.md and README.md in ~/pamb-ai-arena to understand the architecture and strict file ownership rules.
+3. My owned files are ONLY:
+   - challenges/c2_prompt_duel.py (backend 4-Pillar Prompt evaluation: Persona, Context, Task, Format/Tone + Gemini dialogue output)
+   - static/challenge2.js (mobile 4-Pillar Prompting workbench UI and submission to Big Screen)
+4. Start the local server on port 8095 so I can test in the isolated Challenge 2 sandbox (/sandbox/2) and Presenter screen (/presenter), and help me deploy to my own Argolis Cloud Run project using ./deploy.sh <MY_ARGOLIS_PROJECT_ID>.</div>
+          </div>
+
+          <div class="space-y-2">
+            <button
+              onclick="copyPrompt('prompt-c2', 'btn-c2')"
+              id="btn-c2"
+              class="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-extrabold text-xs sm:text-sm transition-all shadow-lg"
+            >
+              📋 Copy Jetski Prompt for Colleague 2
+            </button>
+            <a
+              href="/sandbox/2"
+              target="_blank"
+              class="block w-full py-2 rounded-xl bg-black/50 hover:bg-black border border-gray-700 text-center text-xs font-bold text-blue-300"
+            >
+              🧪 Open Challenge 2 Sandbox (/sandbox/2) ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- CHALLENGE 3 CARD (SATISH) -->
+        <div class="bg-[#111522] border-2 border-emerald-500/60 rounded-3xl p-5 flex flex-col justify-between space-y-4 shadow-xl">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-emerald-500 text-black font-extrabold text-xs">
+                👑 LEAD • CHALLENGE 3
+              </span>
+              <span class="text-xs font-mono text-gray-400">14:35 – 15:05</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-white">
+              🎯 Drive Faster Pipeline — Pre-Pitch &amp; Agent Assist
+            </h3>
+            <p class="text-xs text-gray-300">
+              <strong>Files Owned:</strong><br/>
+              • <code>challenges/c3_pre_pitch.py</code><br/>
+              • <code>static/challenge3.js</code>
+            </p>
+            <div class="bg-[#090c14] border border-gray-800 rounded-xl p-3 text-[11px] font-mono text-gray-300 h-48 overflow-y-auto whitespace-pre-wrap" id="prompt-c3">Let's develop and enhance Challenge 3 (14:35-15:05 Drive Faster Pipeline, Sharpen Your Strategic Proposal — Pre-Pitch & Agent Assist) in ~/pamb-ai-arena:
+- challenges/c3_pre_pitch.py (Gemini Grounded Dossier Synthesis + Agent Assist Strategic Counter-Pitch + Clause 4.2.a grounding judge)
+- static/challenge3.js (Dato' Sri Raymond Tan HNW dossier reader, Gemini synthesis trigger, Agent Assist co-creator, and submission to Big Screen)
+Test at /sandbox/3 and /presenter.</div>
+          </div>
+
+          <div class="space-y-2">
+            <button
+              onclick="copyPrompt('prompt-c3', 'btn-c3')"
+              id="btn-c3"
+              class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs sm:text-sm transition-all shadow-lg"
+            >
+              📋 Copy Challenge 3 Prompt
+            </button>
+            <a
+              href="/sandbox/3"
+              target="_blank"
+              class="block w-full py-2 rounded-xl bg-black/50 hover:bg-black border border-gray-700 text-center text-xs font-bold text-emerald-300"
+            >
+              🧪 Open Challenge 3 Sandbox (/sandbox/3) ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: TERMINAL COMMANDS FOR LOCAL BUILD, ARGOLIS DEPLOY, AND MERGING BACK -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-[#111522] border border-gray-800 rounded-3xl p-6 space-y-4">
+        <h3 class="text-lg font-extrabold text-white">
+          ☁️ Step 2: Deploy &amp; Test in Colleague&apos;s Own Argolis Cloud Run
+        </h3>
+        <p class="text-xs text-gray-300">
+          Each colleague can deploy the full arena (with Simulation Director &amp; their Challenge enhancements) to their own Argolis GCP project:
+        </p>
+        <pre class="bg-[#090c14] border border-gray-800 rounded-2xl p-4 text-xs font-mono text-amber-300 overflow-x-auto"># 1. Download &amp; unpack codebase
+mkdir -p ~/pamb-ai-arena &amp;&amp; cd ~/pamb-ai-arena
+curl -sL <span class="origin-url"></span>/handoff/pamb-ai-arena.tar.gz | tar -xz
+
+# 2. Run locally &amp; test your challenge sandbox
+PORT=8095 python3 server.py
+# Open http://localhost:8095/sandbox/1 (or /2 or /3)
+# Open http://localhost:8095/presenter
+
+# 3. Deploy to your own Argolis Cloud Run project
+gcloud auth login
+./deploy.sh &lt;YOUR_ARGOLIS_PROJECT_ID&gt;</pre>
+      </div>
+
+      <div class="bg-[#111522] border border-gray-800 rounded-3xl p-6 space-y-4">
+        <h3 class="text-lg font-extrabold text-white">
+          🔄 Step 3: How Colleagues Share Back &amp; How You Merge in 1 Command
+        </h3>
+        <p class="text-xs text-gray-300">
+          Because each Challenge only touches 2 isolated files, merging a colleague&apos;s work back into the master codebase takes <strong>1 command</strong> with zero merge conflicts:
+        </p>
+        <pre class="bg-[#090c14] border border-gray-800 rounded-2xl p-4 text-xs font-mono text-emerald-300 overflow-x-auto"># OPTION A: Pull directly from Colleague's live Argolis Cloud Run URL!
+./import_challenge.sh 1 https://pamb-agency-ai-arena-colleague1.a.run.app
+./import_challenge.sh 2 https://pamb-agency-ai-arena-colleague2.a.run.app
+
+# OPTION B: Or Colleague runs ./export_challenge.sh 1
+# and sends pamb-challenge-1-handoff.tar.gz (or Git branch):
+./import_challenge.sh 1 ./pamb-challenge-1-handoff.tar.gz
+
+# Finally, deploy the merged master arena:
+./deploy.sh argolis-sandbox-main</pre>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const origin = window.location.origin;
+    document.querySelectorAll('.origin-url').forEach(el => { el.textContent = origin; });
+    ['prompt-c1', 'prompt-c2'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = el.textContent.replace(/ORIGIN_URL/g, origin);
+    });
+
+    function copyPrompt(preId, btnId) {
+      const text = document.getElementById(preId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById(btnId);
+        const orig = btn.textContent;
+        btn.textContent = '✅ Copied! Paste directly into Jetski';
+        setTimeout(() => { btn.textContent = orig; }, 2200);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deck viewer · Deck Challenge</title>
+  <link rel="stylesheet" href="/static/css/deck.css" />
+  <link rel="stylesheet" href="/static/css/prudential.css" />
+  <style>
+    body { background: #fff; }
+    main { padding: 8px; display: block; }
+    .hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 10px; }
+    .score { font-size: 22px; font-weight: 800; color: var(--red); }
+  </style>
+</head>
+<body>
+  <main><div id="v"></div></main>
+  <script type="module">
+    import { createViewer } from "/static/js/deck_renderer.js";
+    import { esc } from "/static/js/util.js";
+    const root = document.getElementById("v");
+    const qs = new URLSearchParams(location.search);
+    const auto = qs.get("autoplay");
+    (async () => {
+      let deck, head = "";
+      if (location.pathname.startsWith("/target")) {
+        const r = await (await fetch(`/api/challenge?market=${qs.get("market") || "MY"}&lang=${qs.get("lang") || "en"}`)).json();
+        deck = r.target; head = `<img src="/static/img/prudential-logo.png" alt="Prudential" style="height:20px" /><div style="font-weight:700">Target deck</div>`;
+      } else {
+        const id = location.pathname.split("/").pop();
+        const r = await (await fetch(`/api/submissions/${id}`)).json();
+        deck = r.deck;
+        head = `<div style="font-weight:700">${esc(r.name)} · v${r.iterations} · ${deck.slides.length} slides</div><div class="score">${r.result.total.toFixed(1)}/10</div>`;
+      }
+      root.innerHTML = `<div class="hdr">${head}</div><div id="viewer"></div>`;
+      const viewer = createViewer(document.getElementById("viewer"));
+      viewer.setDeck(deck);
+      if (auto) { setInterval(() => document.querySelector('[data-a="next"]')?.click(), +auto * 1000 || 5000); }
+    })();
+  </script>
+</body>
+</html>
