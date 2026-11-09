@@ -1279,30 +1279,9 @@ def _detect_heuristic_intent(
     elif any(k in low for k in ("charcoal", "mdrt", "gala", "golden hour", "marina bay", "炭灰", "kelabu gelap", "சாம்பல் நிற")):
         style = "mdrt_keynote"
 
-    # 5. Detect copy-only refinement ("keep the photo/card, just make the message shorter")
-    explicit_keep_phrases = (
-        "keep the image", "keep my image", "keep the photo", "keep my photo",
-        "keep the card", "keep my card", "keep current", "as-is", "as is",
-        "don't change the image", "only change the message", "just rewrite",
-        "just make the whatsapp", "保持当前图片", "保持图片不变", "保持現有圖片",
-        "图片不变", "圖片不變", "只修改", "kekalkan imej",
-    )
-    visual_words = (
-        "suit", "blazer", "shirt", "tie", "background", "backdrop", "skyline", "lighting",
-        "headshot", "portrait", "card", "banner", "badge", "color", "navy", "charcoal",
-        "beige", "crimson", "gold", "tower", "office", "lounge", "西装", "背景", "光影",
-        "形象照", "贺卡", "横幅", "颜色", "sut", "latar", "potret", "kad", "sepanduk",
-    )
-    copy_words = (
-        "message", "whatsapp", "copy", "text", "shorter", "longer", "translate", "tone",
-        "wechat", "caption", "rewrite", "话术", "話術", "文案", "简短", "溫馨", "翻译", "mesej", "pendek",
-    )
-    explicit_keep = has_existing_visual and any(kp in low for kp in explicit_keep_phrases) and any(cw in low for cw in copy_words)
-    copy_only = explicit_keep or (
-        has_existing_visual
-        and any(cw in low for cw in copy_words)
-        and not any(vw in low for vw in visual_words)
-    )
+    # 5. Pure Visual Challenge 1: every turn generates/updates a visual image (copy_only is disabled)
+    explicit_keep = False
+    copy_only = False
 
     return {
         "creationMode": mode,
@@ -1845,13 +1824,12 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         p_occ = str(parsed.get("occasionKey") or "").strip()
         if p_occ in OCCASION_META:
             occasion_key = p_occ
-        if isinstance(parsed.get("copyOnly"), bool) and has_existing_visual and not heur.get("explicitKeep"):
-            copy_only = bool(parsed["copyOnly"])
+        copy_only = False
 
-    # Enforce Step 1 Studio Portrait first before Step 2 Outreach Cards / Banners / Copy unlock
+    # Enforce Step 1 Studio Portrait first before Step 2 Outreach Cards / Banners unlock
     if not has_step1_portrait:
         creation_mode = "executive_headshot"
-        copy_only = False
+    copy_only = False
 
     # Enforce Step 0 Gate if no photo was provided
     if not has_custom_photo and not use_studio_avatar:
@@ -1884,19 +1862,43 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     if resolved_client and clean_adv_check and resolved_client.strip().lower() == clean_adv_check.strip().lower():
         if resolved_client.strip().lower() not in (user_message or "").lower():
             resolved_client = ""
-    effective_motto = (
+    def _strip_raw_emojis(txt: str) -> str:
+        cleaned_txt = re.sub(r"[\U0001F300-\U0001FAFF\u2600-\u27BF\uFE0F]+", "", txt or "")
+        return re.sub(r"\s{2,}", " ", cleaned_txt).strip()
+
+    resolved_client = _strip_raw_emojis(resolved_client)
+    effective_motto = _strip_raw_emojis(
         (str(parsed.get("motto")).strip() if parsed and parsed.get("motto") else "")
         or (default_motto if creation_mode == "brand_banner" else "")
     )
-    effective_headline = (
+    effective_headline = _strip_raw_emojis(
         (str(parsed.get("cardHeadline")).strip() if parsed and parsed.get("cardHeadline") else "")
         or card_headline_in
         or o_meta["cardHeadline"]
     )
     effective_headline = re.sub(r"\s*[—–-]{2,}\s*", " • ", effective_headline).strip(" —–-")
-    effective_subtext = (
+    effective_subtext = _strip_raw_emojis(
         str(parsed.get("cardSubtext")).strip() if parsed and parsed.get("cardSubtext") else ""
     )
+    # Guard against ultra-long pasted paragraphs (>14 words / >95 chars) overflowing into a 9-line block
+    h_words = effective_headline.split()
+    if len(h_words) > 13 or len(effective_headline) > 95:
+        if len(h_words) > 13:
+            head_part = " ".join(h_words[:7])
+            rest_words = h_words[7:18]
+            tail_part = " ".join(rest_words)
+            effective_headline = head_part
+            if not effective_subtext:
+                effective_subtext = tail_part
+        else:
+            effective_headline = effective_headline[:60].strip()
+    if len(effective_subtext) > 85 or effective_subtext.lower().endswith((" and", " or", " with", " for", " to", " in", " of", " throughout")):
+        s_words = effective_subtext.split()
+        if len(s_words) > 12:
+            s_words = s_words[:12]
+        while s_words and s_words[-1].lower().strip(",;:") in ("and", "or", "with", "for", "to", "in", "of", "the", "a", "throughout"):
+            s_words.pop()
+        effective_subtext = " ".join(s_words).strip()
 
     planned_visual = (
         str(parsed.get("visualPrompt")).strip()

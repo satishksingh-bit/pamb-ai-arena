@@ -32,13 +32,14 @@ Verifies:
 - **4 Real Selfie 3-Turn Face-Lock tracks** (`leader_1..4` in `static/sim_portraits/`)
 - **Zero text overlap**, **single clean portrait medallion**, and **centered face cropping** audited via `gemini-3-flash-preview`
 
-## 2. Run the 12-Case Adversarial Red-Team Suite
+## 2. Run the 22-Case Adversarial Red-Team Suite (`adv01..adv22`)
 ```bash
+# Run all 22 adversarial cases (or --subset orig12 / --subset new10):
 python3 tests/c1/test_c1_adversarial.py \
   --api-url http://localhost:8095/api/ai \
   --project <YOUR_GCP_PROJECT_ID>
 ```
-Stress-tests explicit bottom-right/left-side text collision traps, dense multi-line text walls, Traditional Chinese couplets, wide-wrapping Tamil script, mixed bilingual strings, ghost-circle prompt injections, extreme off-center (`x=82%, y=26%`) `16:9` portraits, low-contrast champagne script, and 3-turn `headshot -> banner -> card` mode flips.
+Stress-tests explicit bottom-right/left-side text collision traps, 4-corner text sieges, dense multi-line text walls, Traditional Chinese couplets, wide-wrapping Tamil script, Malaysian "Rojak" trilingual code-switching, JSON/quote escape injections, emoji floods (zero `□` tofu glyphs), `"Keep my card, only change the text"` regeneration traps, system-override + WhatsApp/logo prompt injections, tiny `160x160` grayscale thumbnails, tall `9:16` bottom-edge faces, wide `16:9` off-center faces, 300-char run-on paragraph overflows, and 4-turn cross-language/mode whiplash.
 
 ## 3. Run the Full 6-Language Coverage Suite (`en`, `zh-CN`, `yue`, `zh-TW`, `ms`, `ta`)
 ```bash
