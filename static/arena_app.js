@@ -1624,14 +1624,14 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
   );
   const [agentRegion] = useState("");
   const [lang, setLang] = useState(
-    () => localStorage.getItem("pamb_agent_lang_v1") || "zh-CN"
+    () => localStorage.getItem("pamb_agent_lang_v1") || "en"
   );
   const [registered, setRegistered] = useState(
     () => localStorage.getItem("pamb_agent_registered_v1") === "true"
   );
   const [activeTab, setActiveTab] = useState("1"); // "1" | "2" | "3" | "card"
 
-  const t = window.PAMB_I18N[lang] || window.PAMB_I18N["zh-CN"];
+  const t = window.PAMB_I18N[lang] || window.PAMB_I18N.en;
   const phase = arenaState.phase || "LOBBY";
   const myRecord =
     (arenaState.participants || []).find((p) => p.id === agentId) || null;
@@ -1990,9 +1990,9 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
 ============================================================================ */
 function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) {
   const [cNum, setCNum] = useState(initialChallenge || "1");
-  const [lang, setLang] = useState("zh-CN");
+  const [lang, setLang] = useState("en");
   const [sandboxSubmission, setSandboxSubmission] = useState(null);
-  const t = window.PAMB_I18N[lang] || window.PAMB_I18N["zh-CN"];
+  const t = window.PAMB_I18N[lang] || window.PAMB_I18N.en;
 
   const demoLeader = (arenaState.participants || [])[0] || {};
   const activeSubmission =

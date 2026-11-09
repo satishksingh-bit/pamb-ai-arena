@@ -1474,7 +1474,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
             name = (body.get("name") or "PRUMDA Leader").strip()
             region = (body.get("region") or "").strip()
             r_meta = {"flag": "🇲🇾", "badge": "✨ PRUMDA Learning Trip"}
-            lang = (body.get("language") or "zh-CN").strip()
+            lang = (body.get("language") or "en").strip()
             with _STATE_LOCK:
                 st = load_state()
                 existing = st["participants"].get(pid, {})

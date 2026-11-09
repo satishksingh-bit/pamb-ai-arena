@@ -517,12 +517,29 @@ const PILLAR_HEURISTICS = {
 
 function detectPillarStatusClient(promptText, guideSteps) {
   const txt = String(promptText || "");
+  const hasExplicitTags = /\[(Role|Context|Task|Format|Constraints)\]:/i.test(txt);
+  const tagMap = {
+    role: "Role",
+    context: "Context",
+    task: "Task",
+    format: "Format",
+    constraints: "Constraints",
+  };
   const out = {};
   (guideSteps || []).forEach((g) => {
     const k = g.key;
+    const tag = tagMap[k];
+    if (tag && new RegExp(`\\[${tag}\\]:\\s*\\S`, "i").test(txt)) {
+      out[k] = "done";
+      return;
+    }
     const tmpl = String(g.template || "").trim();
     if (tmpl && txt.includes(tmpl.slice(0, Math.min(26, tmpl.length)))) {
       out[k] = "done";
+      return;
+    }
+    if (hasExplicitTags) {
+      out[k] = "missing";
       return;
     }
     const regexes = PILLAR_HEURISTICS[k] || [];
@@ -785,50 +802,16 @@ function ExecutiveSlideCard({
             </div>
           )}
 
-          {/* Bullets + Optional 16:9 Slide Artwork */}
-          {(Array.isArray(slide.bullets) && slide.bullets.length > 0) ||
-          slide.image ||
-          (generatingImages && slide.image_prompt) ? (
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-              <div
-                className={
-                  slide.image || (generatingImages && slide.image_prompt)
-                    ? "md:col-span-8 space-y-1.5"
-                    : "md:col-span-12 space-y-1.5"
-                }
-              >
-                {Array.isArray(slide.bullets) && slide.bullets.length > 0 && (
-                  <ul className="space-y-1.5 text-xs text-slate-800 leading-snug">
-                    {slide.bullets.slice(0, 5).map((b, bi) => (
-                      <li key={bi} className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#ed1b2e] mt-1.5 shrink-0" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              {slide.image ? (
-                <div className="md:col-span-4 relative group">
-                  <img
-                    src={slide.image}
-                    alt={slide.title || "Executive Slide Visual"}
-                    title="Tap to zoom"
-                    data-zoomable="true"
-                    className="w-full aspect-video object-cover rounded-xl border border-slate-200 shadow-sm cursor-zoom-in"
-                  />
-                  <span className="pointer-events-none absolute bottom-1.5 right-1.5 px-2 py-0.5 rounded-full bg-slate-900/70 text-white text-[9px] font-bold opacity-85 group-hover:opacity-100">
-                    🔍 Zoom
-                  </span>
-                </div>
-              ) : generatingImages && slide.image_prompt ? (
-                <div className="md:col-span-4">
-                  <div className="w-full aspect-video rounded-xl border border-dashed border-amber-300 bg-amber-50/60 flex items-center justify-center text-[11px] font-bold text-amber-800 animate-pulse px-2 text-center">
-                    🎨 Rendering 16:9 Slide Visual...
-                  </div>
-                </div>
-              ) : null}
-            </div>
+          {/* Full-Width Executive Bullets (No Decorative Boardroom Image Clutter) */}
+          {Array.isArray(slide.bullets) && slide.bullets.length > 0 ? (
+            <ul className="space-y-1.5 text-xs text-slate-800 leading-snug">
+              {slide.bullets.slice(0, 5).map((b, bi) => (
+                <li key={bi} className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#ed1b2e] mt-1.5 shrink-0" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
           ) : null}
 
           {/* Executive Callout Strip */}
@@ -890,9 +873,9 @@ window.Challenge2ParticipantView = function ({
   const { useState, useEffect, useRef } = React;
   const normLang = lang === "zh-TW" || lang === "zh-HK" ? "yue" : lang || "en";
   const ui = C2_UI_I18N[normLang] || C2_UI_I18N.en;
-  const storageKey = `prumda_c2_v4_${agentId || "anon"}`;
+  const storageKey = `prumda_c2_v6_${agentId || "anon"}`;
 
-  // Restore saved draft from localStorage if available
+  // Restore saved draft from localStorage if available (only reuse text if draftLang matches normLang!)
   const savedDraftRef = useRef(null);
   if (savedDraftRef.current === null) {
     try {
@@ -903,6 +886,7 @@ window.Challenge2ParticipantView = function ({
     }
   }
   const initDraft = savedDraftRef.current || {};
+  const sameDraftLang = !initDraft.draftLang || initDraft.draftLang === normLang;
 
   const [challengeData, setChallengeData] = useState(null);
   const [loadingChallenge, setLoadingChallenge] = useState(true);
@@ -919,21 +903,37 @@ window.Challenge2ParticipantView = function ({
   // Step & Brief Collapse State
   const [activeStep, setActiveStep] = useState(initDraft.deck ? "2" : "1");
   const [showBrief, setShowBrief] = useState(initDraft.deck ? false : true);
-  const [selectedToneId, setSelectedToneId] = useState(initDraft.selectedToneId || "boardroom");
-  const [personalAngle, setPersonalAngle] = useState(initDraft.personalAngle || "");
-  const [promptText, setPromptText] = useState(initDraft.promptText || "");
-  const [manualPromptEdited, setManualPromptEdited] = useState(Boolean(initDraft.manualPromptEdited));
-  const [manualEditUnlocked, setManualEditUnlocked] = useState(Boolean(initDraft.manualPromptEdited));
-  const [activePillarsMap, setActivePillarsMap] = useState(
-    initDraft.activePillarsMap || {
-      role: true,
-      context: true,
-      task: true,
-      format: true,
-      constraints: true,
-    }
+  const [selectedToneId, setSelectedToneId] = useState(
+    sameDraftLang && initDraft.selectedToneId ? initDraft.selectedToneId : null
   );
-  const [showPromptDrawer, setShowPromptDrawer] = useState(false);
+  const [selectedAngleChipIdx, setSelectedAngleChipIdx] = useState(
+    sameDraftLang && typeof initDraft.selectedAngleChipIdx === "number"
+      ? initDraft.selectedAngleChipIdx
+      : null
+  );
+  const [userTypedCustomAngle, setUserTypedCustomAngle] = useState(
+    sameDraftLang ? Boolean(initDraft.userTypedCustomAngle) : false
+  );
+  const [personalAngle, setPersonalAngle] = useState(
+    sameDraftLang ? initDraft.personalAngle || "" : ""
+  );
+  const [promptText, setPromptText] = useState(
+    sameDraftLang ? initDraft.promptText || "" : ""
+  );
+  const [manualPromptEdited, setManualPromptEdited] = useState(false);
+  const [manualEditUnlocked, setManualEditUnlocked] = useState(true);
+  const [activePillarsMap, setActivePillarsMap] = useState(
+    sameDraftLang && initDraft.activePillarsMap
+      ? initDraft.activePillarsMap
+      : {
+          role: false,
+          context: false,
+          task: true,
+          format: false,
+          constraints: false,
+        }
+  );
+  const [lastUpdatedTag, setLastUpdatedTag] = useState("");
 
   // Generated 3-Slide Deck State
   const [deck, setDeck] = useState(initDraft.deck || null);
@@ -970,16 +970,19 @@ window.Challenge2ParticipantView = function ({
     }
   }, [activeStep]);
 
-  // Persist draft in localStorage (preserving userPickedSeat vs server-assigned seat)
+  // Persist draft in localStorage (preserving draftLang & userPickedSeat vs server-assigned seat)
   useEffect(() => {
     if (lockedSubmission) return;
     try {
       localStorage.setItem(
         storageKey,
         JSON.stringify({
+          draftLang: normLang,
           userPickedSeat: seatOverride !== null && seatOverride !== undefined,
           seatOverride: seatOverride,
           selectedToneId,
+          selectedAngleChipIdx,
+          userTypedCustomAngle,
           personalAngle,
           promptText,
           manualPromptEdited,
@@ -992,8 +995,11 @@ window.Challenge2ParticipantView = function ({
     } catch (e) {}
   }, [
     storageKey,
+    normLang,
     seatOverride,
     selectedToneId,
+    selectedAngleChipIdx,
+    userTypedCustomAngle,
     personalAngle,
     promptText,
     manualPromptEdited,
@@ -1045,35 +1051,121 @@ window.Challenge2ParticipantView = function ({
     }
   }, [isCompleted, existingSubmission, existingScore]);
 
-  // Assemble clean R.C.T.F.C. + Tone + Personal Strategic Angle prompt
-  const buildAssembledPrompt = (guideList, pMap, toneId, angleStr, simpleFallback) => {
-    const anyActive = Object.values(pMap || {}).some(Boolean);
-    if (!anyActive) {
-      return simpleFallback || "";
-    }
-    const parts = [];
-    (guideList || []).forEach((g) => {
-      if (pMap[g.key] && g.template) {
-        parts.push(g.template.trim());
+  const KEY_TO_TAG = {
+    role: "Role",
+    context: "Context",
+    task: "Task",
+    format: "Format",
+    constraints: "Constraints",
+  };
+  const CANONICAL_TAGS = [
+    "Role",
+    "Context",
+    "Task",
+    "Format",
+    "Constraints",
+    "Tone",
+    "Personal Strategic Angle",
+  ];
+
+  // Parse promptText into tagged canonical blocks + any untagged custom user paragraphs
+  const parsePromptBlocks = (rawPrompt) => {
+    const blocks = {};
+    const customParas = [];
+    const tagRegex = /^\[(Role|Context|Task|Format|Constraints|Tone|Personal Strategic Angle)\]:\s*([\s\S]*)$/i;
+    String(rawPrompt || "")
+      .split(/\n{2,}/)
+      .map((p) => p.trim())
+      .filter(Boolean)
+      .forEach((para) => {
+        const m = para.match(tagRegex);
+        if (m) {
+          const canon = CANONICAL_TAGS.find((t) => t.toLowerCase() === m[1].toLowerCase()) || m[1];
+          blocks[canon] = m[2].trim();
+        } else {
+          customParas.push(para);
+        }
+      });
+    return { blocks, customParas };
+  };
+
+  const serializePromptBlocks = (blocks, customParas) => {
+    const out = [];
+    CANONICAL_TAGS.forEach((tag) => {
+      if (blocks[tag] && String(blocks[tag]).trim()) {
+        out.push(`[${tag}]: ${String(blocks[tag]).trim()}`);
       }
     });
-    const toneObj = (ui.tones || []).find((x) => x.id === toneId);
+    (customParas || []).forEach((cp) => {
+      if (cp && cp.trim()) out.push(cp.trim());
+    });
+    return out.join("\n\n");
+  };
+
+  const upsertOrRemovePromptBlock = (currentPrompt, tag, bodyText, shouldInclude) => {
+    const { blocks, customParas } = parsePromptBlocks(currentPrompt);
+    if (shouldInclude && bodyText && String(bodyText).trim()) {
+      blocks[tag] = String(bodyText).trim();
+    } else {
+      delete blocks[tag];
+    }
+    return serializePromptBlocks(blocks, customParas);
+  };
+
+  // Assemble clean R.C.T.F.C. + Tone + Personal Strategic Angle prompt in explicit targetLang
+  const buildAssembledPrompt = (
+    guideList,
+    pMap,
+    toneId,
+    angleStr,
+    simpleFallback,
+    targetLang = normLang
+  ) => {
+    const anyActive = Object.values(pMap || {}).some(Boolean);
+    const langDict = C2_UI_I18N[targetLang] || C2_UI_I18N.en;
+    const blocks = {};
+    if (anyActive) {
+      (guideList || []).forEach((g) => {
+        const tag = KEY_TO_TAG[g.key];
+        if (tag && pMap[g.key] && g.template) {
+          blocks[tag] = g.template.trim();
+        }
+      });
+    }
+    const toneObj = toneId ? (langDict.tones || []).find((x) => x.id === toneId) : null;
     if (toneObj && toneObj.clause) {
-      parts.push(toneObj.clause);
+      blocks["Tone"] = toneObj.clause.trim();
     }
     if (angleStr && angleStr.trim().length > 0) {
-      parts.push(`[Personal Strategic Angle]: ${angleStr.trim()}`);
+      blocks["Personal Strategic Angle"] = angleStr.trim();
     }
-    return parts.join("\n\n");
+    const built = serializePromptBlocks(blocks, []);
+    return built || simpleFallback || "";
   };
+
+  const flashTagFeedback = (label) => {
+    setLastUpdatedTag(label);
+    setTimeout(() => {
+      setLastUpdatedTag((cur) => (cur === label ? "" : cur));
+    }, 1800);
+  };
+
+  const prevNormLangRef = useRef(normLang);
+  const latestReqIdRef = useRef(0);
 
   // Load localized, per-seat Challenge 2 scenario (/api/challenge)
   // WITHOUT seat= on initial load so server-assigned 72-seat distribution is preserved!
-  const loadScenarioSeat = (explicitSeat = null, resetDeckOnSwitch = false) => {
+  const loadScenarioSeat = (
+    explicitSeat = null,
+    resetDeckOnSwitch = false,
+    targetLang = normLang,
+    langSwitched = false
+  ) => {
+    const reqId = ++latestReqIdRef.current;
     setLoadingChallenge(true);
     const params = new URLSearchParams({
       market: "MY",
-      lang: normLang,
+      lang: targetLang,
     });
     if (agentId) params.set("id", agentId);
     if (explicitSeat !== null && explicitSeat !== undefined) {
@@ -1083,70 +1175,82 @@ window.Challenge2ParticipantView = function ({
     fetch(`/api/challenge?${params.toString()}`, { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => {
+        if (reqId !== latestReqIdRef.current) return;
         setChallengeData(data);
         setLoadingChallenge(false);
         const gList = data.guide || [];
+        const hints = data.angleHints || [];
         if (resetDeckOnSwitch) {
-          const allOn = { role: true, context: true, task: true, format: true, constraints: true };
-          const defaultHint = (data.angleHints && data.angleHints[0]) || "";
-          setActivePillarsMap(allOn);
-          setPersonalAngle(defaultHint);
-          setManualPromptEdited(false);
-          setManualEditUnlocked(false);
+          const starterMap = { role: false, context: false, task: true, format: false, constraints: false };
+          setActivePillarsMap(starterMap);
+          setSelectedToneId(null);
+          setSelectedAngleChipIdx(null);
+          setUserTypedCustomAngle(false);
+          setPersonalAngle("");
           setDeck(null);
           setDeckSignature("");
           setActiveStep("1");
           setShowBrief(true);
           setPromptText(
-            buildAssembledPrompt(gList, allOn, selectedToneId, defaultHint, data.simple_prompt)
+            buildAssembledPrompt(gList, starterMap, null, "", data.simple_prompt, targetLang)
           );
         } else {
-          setPersonalAngle((prevAngle) => {
-            const nextAngle =
-              prevAngle && prevAngle.trim().length > 0
-                ? prevAngle
-                : (data.angleHints && data.angleHints[0]) || "";
-            if (!manualPromptEdited) {
-              setPromptText(
-                buildAssembledPrompt(
-                  gList,
-                  activePillarsMap,
-                  selectedToneId,
-                  nextAngle,
-                  data.simple_prompt
-                )
-              );
-            }
-            return nextAngle;
-          });
+          const isTargetCjk = targetLang === "zh-CN" || targetLang === "yue";
+          const hasStaleCjkInNonCjk = !isTargetCjk && /[\u4e00-\u9fff]/.test(personalAngle || "");
+          const hasChipSelected =
+            typeof selectedAngleChipIdx === "number" &&
+            selectedAngleChipIdx >= 0 &&
+            selectedAngleChipIdx < hints.length;
+          const nextAngle = hasChipSelected
+            ? hints[selectedAngleChipIdx]
+            : hasStaleCjkInNonCjk
+            ? ""
+            : personalAngle || "";
+
+          setPersonalAngle(nextAngle);
+          if (
+            langSwitched ||
+            !promptText ||
+            !promptText.trim() ||
+            (!isTargetCjk && /[\u4e00-\u9fff]/.test(promptText || ""))
+          ) {
+            setPromptText(
+              buildAssembledPrompt(
+                gList,
+                activePillarsMap,
+                selectedToneId,
+                nextAngle,
+                data.simple_prompt,
+                targetLang
+              )
+            );
+          }
         }
       })
-      .catch(() => setLoadingChallenge(false));
+      .catch(() => {
+        if (reqId === latestReqIdRef.current) setLoadingChallenge(false);
+      });
   };
 
   useEffect(() => {
-    loadScenarioSeat(seatOverride, false);
+    const langSwitched = prevNormLangRef.current !== normLang;
+    prevNormLangRef.current = normLang;
+    loadScenarioSeat(seatOverride, false, normLang, langSwitched);
   }, [normLang, agentId]);
 
-  // Re-assemble prompt automatically when structured controls change
-  const syncStructuredPrompt = (nextMap, nextTone, nextAngle) => {
-    if (!challengeData) return;
-    setManualPromptEdited(false);
-    setManualEditUnlocked(false);
-    const built = buildAssembledPrompt(
-      challengeData.guide || [],
-      nextMap,
-      nextTone,
-      nextAngle,
-      challengeData.simple_prompt
-    );
-    setPromptText(built);
-  };
-
   const handleTogglePillar = (key) => {
-    const nextMap = { ...activePillarsMap, [key]: !activePillarsMap[key] };
+    const gObj = (challengeData?.guide || []).find((x) => x.key === key);
+    if (!gObj) return;
+    const tag = KEY_TO_TAG[key];
+    const currentlyActive = pillarStatuses[key] === "done";
+    const shouldInclude = !currentlyActive;
+    const nextMap = { ...activePillarsMap, [key]: shouldInclude };
     setActivePillarsMap(nextMap);
-    syncStructuredPrompt(nextMap, selectedToneId, personalAngle);
+    setPromptText((prev) => {
+      const updated = upsertOrRemovePromptBlock(prev, tag, gObj.template, shouldInclude);
+      return updated || challengeData?.simple_prompt || "";
+    });
+    flashTagFeedback(`${shouldInclude ? "+ Added" : "− Removed"} [${tag}]`);
     setLineage((prev) => [
       ...prev,
       { t: Math.round((Date.now() - startRef.current) / 1000), e: "toggle", k: key },
@@ -1155,31 +1259,57 @@ window.Challenge2ParticipantView = function ({
 
   const handleActivateAllPillars = () => {
     const allOn = { role: true, context: true, task: true, format: true, constraints: true };
-    const nextAngle =
-      personalAngle || (challengeData?.angleHints && challengeData.angleHints[0]) || "";
     setActivePillarsMap(allOn);
-    setPersonalAngle(nextAngle);
-    syncStructuredPrompt(allOn, selectedToneId, nextAngle);
+    setPromptText((prev) => {
+      let cur = prev;
+      (challengeData?.guide || []).forEach((g) => {
+        const tag = KEY_TO_TAG[g.key];
+        if (tag && g.template) {
+          cur = upsertOrRemovePromptBlock(cur, tag, g.template, true);
+        }
+      });
+      return cur;
+    });
+    flashTagFeedback("✓ Added All 5 R.C.T.F.C. Pillars");
   };
 
   const handleSelectTone = (toneId) => {
-    setSelectedToneId(toneId);
-    syncStructuredPrompt(activePillarsMap, toneId, personalAngle);
+    const togglingOff = selectedToneId === toneId;
+    const nextTone = togglingOff ? null : toneId;
+    setSelectedToneId(nextTone);
+    const toneObj = nextTone ? (ui.tones || []).find((x) => x.id === nextTone) : null;
+    setPromptText((prev) =>
+      upsertOrRemovePromptBlock(prev, "Tone", toneObj?.clause || "", Boolean(toneObj))
+    );
+    flashTagFeedback(toneObj ? `+ Tone: ${toneObj.shortLabel}` : "− Removed [Tone]");
   };
 
-  const handleAngleChange = (val) => {
-    setPersonalAngle(val);
-    if (!manualPromptEdited) {
-      syncStructuredPrompt(activePillarsMap, selectedToneId, val);
-    } else {
-      setPromptText((prev) => {
-        const cleaned = String(prev || "")
-          .replace(/\n*\[Personal Strategic Angle\]:[^\n]*/gi, "")
-          .trim();
-        return val && val.trim()
-          ? `${cleaned}\n\n[Personal Strategic Angle]: ${val.trim()}`
-          : cleaned;
-      });
+  const handlePickAngleChip = (hintVal, chipIdx) => {
+    const togglingOff = personalAngle.trim() === hintVal.trim();
+    const nextIdx = togglingOff ? null : chipIdx;
+    const nextVal = togglingOff ? "" : hintVal;
+    setSelectedAngleChipIdx(nextIdx);
+    setUserTypedCustomAngle(false);
+    setPersonalAngle(nextVal);
+    setPromptText((prev) =>
+      upsertOrRemovePromptBlock(prev, "Personal Strategic Angle", nextVal, Boolean(nextVal))
+    );
+    flashTagFeedback(nextVal ? "+ Added [Personal Strategic Angle]" : "− Removed [Angle]");
+  };
+
+  const handleLivePromptEdit = (rawVal) => {
+    setPromptText(rawVal);
+    const { blocks } = parsePromptBlocks(rawVal);
+    const nextMap = {
+      role: Boolean(blocks["Role"]),
+      context: Boolean(blocks["Context"]),
+      task: Boolean(blocks["Task"]),
+      format: Boolean(blocks["Format"]),
+      constraints: Boolean(blocks["Constraints"]),
+    };
+    setActivePillarsMap(nextMap);
+    if (blocks["Personal Strategic Angle"]) {
+      setPersonalAngle(blocks["Personal Strategic Angle"]);
     }
   };
 
@@ -1227,7 +1357,7 @@ window.Challenge2ParticipantView = function ({
   const caseCards = challengeData?.caseCards || scen?.caseCards || [];
   const angleHints = challengeData?.angleHints || scen?.angleHints || [];
 
-  // Generate Strictly 3-Slide Deck (/api/deck/generate + /api/deck/images)
+  // Generate Strictly 3-Slide Deck (/api/deck/generate)
   const handleGenerateDeck = async () => {
     if (!promptText || promptText.trim().length < 3 || generatingDeck) return;
     setGeneratingDeck(true);
@@ -1286,44 +1416,6 @@ window.Challenge2ParticipantView = function ({
           len: promptText.length,
         },
       ]);
-
-      // Generate 16:9 boardroom visuals in background
-      const slidesWithPrompts = clampedSlides
-        .map((s, idx) => ({ idx, prompt: s.image_prompt }))
-        .filter((x) => Boolean(x.prompt))
-        .slice(0, 2);
-
-      if (slidesWithPrompts.length > 0) {
-        setImagesLoading(true);
-        const imgJob = fetch("/api/deck/images", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompts: slidesWithPrompts.map((x) => x.prompt) }),
-        })
-          .then((ir) => ir.json())
-          .then((imgData) => {
-            if (imgData && Array.isArray(imgData.images)) {
-              setDeck((cur) => {
-                if (!cur || !Array.isArray(cur.slides)) return cur;
-                const clonedSlides = cur.slides.slice(0, 3).map((sl) => ({ ...sl }));
-                slidesWithPrompts.forEach((item, ii) => {
-                  if (imgData.images[ii] && clonedSlides[item.idx]) {
-                    clonedSlides[item.idx].image = imgData.images[ii];
-                  }
-                });
-                const updated = { ...cur, slides: clonedSlides };
-                latestDeckRef.current = updated;
-                return updated;
-              });
-            }
-          })
-          .catch(() => {})
-          .finally(() => {
-            setImagesLoading(false);
-            imagePromiseRef.current = null;
-          });
-        imagePromiseRef.current = imgJob;
-      }
     } catch (err) {
       setGenError(err.message || "Could not generate 3-slide deck.");
     } finally {
@@ -1996,93 +2088,56 @@ window.Challenge2ParticipantView = function ({
             </div>
           </div>
 
-          {/* 3. Personal Strategic Angle (Compact 1-Line Chips + 2-Row Textarea) */}
-          <div className="bg-amber-50/80 border border-amber-300 rounded-2xl p-3 space-y-2">
-            <div className="text-xs font-extrabold text-slate-900">{ui.angleHeader}</div>
-
-            {angleHints.length > 0 && (
+          {/* 3. Personal Strategic Angle Quick-Insert Chips */}
+          {angleHints.length > 0 && (
+            <div className="space-y-1.5">
+              <div className="text-xs font-extrabold text-slate-900">{ui.angleHeader}</div>
               <div className="flex flex-col gap-1.5">
                 {angleHints.map((hint, hi) => {
-                  const selected = personalAngle.trim() === hint.trim();
+                  const selected = promptText.includes(hint.trim());
                   return (
                     <button
                       key={hi}
                       type="button"
-                      onClick={() => handleAngleChange(hint)}
+                      onClick={() => handlePickAngleChip(hint, hi)}
                       className={`w-full px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left truncate transition-all ${
                         selected
                           ? "bg-amber-600 text-white border-amber-700 shadow-xs"
-                          : "bg-white hover:bg-amber-100 text-slate-800 border-amber-300"
+                          : "bg-amber-50/70 hover:bg-amber-100 text-slate-800 border-amber-300"
                       }`}
                     >
-                      ✨ {hint}
+                      {selected ? "✓ " : "+ ✨ "}
+                      {hint}
                     </button>
                   );
                 })}
               </div>
-            )}
+            </div>
+          )}
 
-            <textarea
-              rows={2}
-              value={personalAngle}
-              onChange={(e) => handleAngleChange(e.target.value)}
-              placeholder={ui.anglePlaceholder}
-              className="w-full rounded-xl border border-amber-300 focus:border-[#ed1b2e] focus:outline-none p-2 text-xs text-slate-900 bg-white leading-relaxed"
-            />
-          </div>
-
-          {/* 4. Subtle Read-Only Master Prompt Footer (with Optional Manual Edit Unlock) */}
-          <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
-            <button
-              type="button"
-              onClick={() => setShowPromptDrawer((v) => !v)}
-              className="w-full px-3 py-2 flex items-center justify-between gap-2 text-[11px] font-extrabold text-slate-600 hover:bg-slate-100"
-            >
-              <span>
-                ✓ {activePillarCount}/5 {ui.pillarsReadySuffix} ·{" "}
-                {showPromptDrawer ? ui.inspectPromptHide : ui.inspectPromptShow}
+          {/* 4. SINGLE LIVE EDITABLE PROMPT BOX (100% Transparent — Every Pill Updates This Directly!) */}
+          <div className="bg-slate-50 border-2 border-slate-300 focus-within:border-[#ed1b2e] rounded-2xl p-2.5 space-y-1.5 transition-all">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[11px] font-extrabold text-slate-800">
+                ✍️ Your Live AI Prompt ({activePillarCount}/5 Pillars)
               </span>
-            </button>
-            {showPromptDrawer && (
-              <div className="p-2.5 border-t border-slate-200 bg-white space-y-2">
-                <div className="flex items-center justify-end">
-                  {!manualEditUnlocked ? (
-                    <button
-                      type="button"
-                      onClick={() => setManualEditUnlocked(true)}
-                      className="text-[10px] font-extrabold text-slate-600 hover:text-slate-900 px-2 py-0.5 rounded bg-slate-100"
-                    >
-                      {ui.unlockEditBtn}
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        syncStructuredPrompt(activePillarsMap, selectedToneId, personalAngle)
-                      }
-                      className="text-[10px] font-extrabold text-emerald-700 hover:text-emerald-900 px-2 py-0.5 rounded bg-emerald-50"
-                    >
-                      {ui.lockAutoSyncBtn}
-                    </button>
-                  )}
-                </div>
-                <textarea
-                  rows={5}
-                  readOnly={!manualEditUnlocked}
-                  value={promptText}
-                  onChange={(e) => {
-                    if (!manualEditUnlocked) return;
-                    setManualPromptEdited(true);
-                    setPromptText(e.target.value);
-                  }}
-                  className={`w-full rounded-xl border p-2.5 text-xs leading-relaxed font-mono ${
-                    manualEditUnlocked
-                      ? "border-[#ed1b2e] bg-white text-slate-900 focus:outline-none"
-                      : "border-slate-200 bg-slate-50 text-slate-600 cursor-default focus:outline-none"
-                  }`}
-                />
-              </div>
-            )}
+              {lastUpdatedTag ? (
+                <span className="px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-[10px] font-extrabold">
+                  {lastUpdatedTag}
+                </span>
+              ) : (
+                <span className="text-[10px] font-semibold text-slate-500">
+                  Tap pills above or edit directly
+                </span>
+              )}
+            </div>
+            <textarea
+              rows={6}
+              value={promptText}
+              onChange={(e) => handleLivePromptEdit(e.target.value)}
+              placeholder={ui.anglePlaceholder}
+              className="w-full rounded-xl border border-slate-200 bg-white focus:outline-none p-2.5 text-xs text-slate-900 leading-relaxed font-sans"
+            />
           </div>
 
           {genError && (

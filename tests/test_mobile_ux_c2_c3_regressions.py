@@ -155,10 +155,8 @@ async function run() {
       await sleep(200);
     }
 
-    // Select English on onboarding form and register mobile participant cleanly
+    // Register mobile participant cleanly WITHOUT clicking any language button -> verify default is English!
     await evalJs(`(() => {
-      const enBtn = Array.from(document.querySelectorAll("form button")).find(b => /English|^EN$/i.test(b.textContent.trim()));
-      if (enBtn) enBtn.click();
       const inp = document.querySelector("form input[type='text']");
       if (inp) {
         const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
@@ -232,21 +230,67 @@ async function run() {
       };
     })()`);
 
-    // Inspect Raw Master Prompt toggle -> verify readOnly === true by default
-    const c2PromptReadOnly = await evalJs(`(async () => {
-      const inspBtn = Array.from(document.querySelectorAll("button")).find(b => b.textContent.includes("5/5") && b.textContent.includes("✓"));
-      if (!inspBtn) return { found: false };
-      inspBtn.click();
-      await new Promise(r => setTimeout(r, 120));
-      const tas = Array.from(document.querySelectorAll("textarea"));
-      const rawTa = tas[tas.length - 1];
-      const ro = rawTa ? rawTa.readOnly : null;
-      inspBtn.click();
-      await new Promise(r => setTimeout(r, 80));
-      return { found: true, readOnly: ro, countWhenOpen: tas.length };
+    // Test Live Visible Prompt Editing: tapping +Role visibly adds [Role]:, tapping again removes it,
+    // tapping +Add All 5 adds all 5 pillars, and switching Mandarin -> English leaves ZERO Chinese chars!
+    const c2LivePromptAudit = await evalJs(`(async () => {
+      const ta = document.querySelector("textarea");
+      if (!ta) return { found: false };
+      const initialVal = ta.value;
+      const initialEnglishOnly = !/[\\u4e00-\\u9fff]/.test(initialVal) && initialVal.includes("[Task]:");
+      const editable = !ta.readOnly;
+
+      // Click + Role pill -> verify [Role]: appears in live textarea!
+      const roleBtn = Array.from(document.querySelectorAll("button")).find(b => /R\\s*·\\s*Role/i.test(b.textContent));
+      if (roleBtn) roleBtn.click();
+      await new Promise(r => setTimeout(r, 100));
+      const afterAddRole = document.querySelector("textarea").value;
+      const roleAddedVisibly = afterAddRole.includes("[Role]:") && afterAddRole.includes("[Task]:");
+
+      // Click Role pill again -> verify [Role]: is removed from live textarea!
+      const roleBtn2 = Array.from(document.querySelectorAll("button")).find(b => /R\\s*·\\s*Role/i.test(b.textContent));
+      if (roleBtn2) roleBtn2.click();
+      await new Promise(r => setTimeout(r, 100));
+      const afterRemoveRole = document.querySelector("textarea").value;
+      const roleRemovedVisibly = !afterRemoveRole.includes("[Role]:") && afterRemoveRole.includes("[Task]:");
+
+      // Click All 5 On button -> verify all 5 sections appear visibly!
+      const addAllBtn = Array.from(document.querySelectorAll("button")).find(b => /All 5 On|Activate All 5|Add All 5/i.test(b.textContent));
+      if (addAllBtn) addAllBtn.click();
+      await new Promise(r => setTimeout(r, 100));
+      const afterAll5 = document.querySelector("textarea").value;
+      const all5AddedVisibly =
+        afterAll5.includes("[Role]:") &&
+        afterAll5.includes("[Context]:") &&
+        afterAll5.includes("[Task]:") &&
+        afterAll5.includes("[Format]:") &&
+        afterAll5.includes("[Constraints]:");
+
+      // Switch language to Mandarin (华语) then back to EN -> verify ZERO leftover Chinese in promptText!
+      const zhBtn = Array.from(document.querySelectorAll("header button")).find(b => b.textContent.includes("华语"));
+      if (zhBtn) zhBtn.click();
+      await new Promise(r => setTimeout(r, 350));
+      const zhPrompt = document.querySelector("textarea").value;
+      const switchedToChineseOk = /[\\u4e00-\\u9fff]/.test(zhPrompt);
+
+      const enBtn = Array.from(document.querySelectorAll("header button")).find(b => b.textContent.trim() === "EN" || b.textContent.includes("English"));
+      if (enBtn) enBtn.click();
+      await new Promise(r => setTimeout(r, 350));
+      const backToEnPrompt = document.querySelector("textarea").value;
+      const backToEnglishZeroCjk = !/[\\u4e00-\\u9fff]/.test(backToEnPrompt) && backToEnPrompt.includes("[Role]:");
+
+      return {
+        found: true,
+        editable,
+        initialEnglishOnly,
+        roleAddedVisibly,
+        roleRemovedVisibly,
+        all5AddedVisibly,
+        switchedToChineseOk,
+        backToEnglishZeroCjk,
+      };
     })()`);
 
-    // Open 🎯 Sample modal -> verify position:fixed, Slide 3 mobile cards, Speaker Notes collapsed, and Zoom lightbox!
+    // Open 🎯 Sample modal -> verify position:fixed, Slide 3 mobile cards, Speaker Notes collapsed, ZERO boardroom image, and test Click-to-Zoom helper!
     const c2SampleModalAudit = await evalJs(`(async () => {
       const sampleBtn = Array.from(document.querySelectorAll("button")).find(b => /Sample/i.test(b.textContent));
       if (!sampleBtn) return { opened: false };
@@ -255,6 +299,9 @@ async function run() {
 
       const modal = document.querySelector("div.fixed.inset-0.z-50");
       if (!modal) return { opened: false };
+
+      // Verify Slide 1 inside modal has ZERO decorative boardroom images!
+      const slide1ImgCount = modal.querySelectorAll("img").length;
 
       // Switch to Slide 3 inside Sample Modal
       const slide3Tab = Array.from(modal.querySelectorAll("button")).find(b => /3\\.|Strategy/i.test(b.textContent));
@@ -269,34 +316,30 @@ async function run() {
       // Verify Speaker Notes is collapsed behind a button toggle on mobile
       const notesBtn = Array.from(modal.querySelectorAll("button")).find(b => /Speaker Notes|Presenter Notes/i.test(b.textContent));
 
-      // Test clicking zoomable 16:9 slide visual inside modal!
-      const zoomImg = modal.querySelector("img[data-zoomable='true']");
-      let zoomOpened = false;
-      let zoom2xOk = false;
-      let zoomClosed = false;
-      if (zoomImg) {
-        zoomImg.click();
-        await new Promise(r => setTimeout(r, 120));
-        const lb = document.getElementById("arena-image-zoom-lightbox");
-        zoomOpened = Boolean(lb && window.getComputedStyle(lb).display === "flex");
-        const btn2x = lb ? Array.from(lb.querySelectorAll("button")).find(b => b.textContent.trim() === "2×") : null;
-        if (btn2x) {
-          btn2x.click();
-          await new Promise(r => setTimeout(r, 80));
-          zoom2xOk = document.getElementById("arena-zoom-reset")?.textContent.trim() === "200%";
-        }
-        window.closeArenaImageZoom();
-        await new Promise(r => setTimeout(r, 80));
-        zoomClosed = Boolean(lb && window.getComputedStyle(lb).display === "none");
-      }
-
       // Close Sample Modal
       const closeBtn = Array.from(modal.querySelectorAll("button")).find(b => /Close|✕/i.test(b.textContent));
       if (closeBtn) closeBtn.click();
       await new Promise(r => setTimeout(r, 120));
 
+      // Verify global Click-to-Zoom lightbox (used on C1/C3 portraits & greeting cards) opens, zooms 2x, and closes!
+      window.openArenaImageZoom("data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=", "Greeting Card Preview");
+      await new Promise(r => setTimeout(r, 80));
+      const lb = document.getElementById("arena-image-zoom-lightbox");
+      const zoomOpened = Boolean(lb && window.getComputedStyle(lb).display === "flex");
+      const btn2x = lb ? Array.from(lb.querySelectorAll("button")).find(b => b.textContent.trim() === "2×") : null;
+      let zoom2xOk = false;
+      if (btn2x) {
+        btn2x.click();
+        await new Promise(r => setTimeout(r, 80));
+        zoom2xOk = document.getElementById("arena-zoom-reset")?.textContent.trim() === "200%";
+      }
+      window.closeArenaImageZoom();
+      await new Promise(r => setTimeout(r, 80));
+      const zoomClosed = Boolean(lb && window.getComputedStyle(lb).display === "none");
+
       return {
         opened: true,
+        slide1ImgCount,
         tableParentDisplayAt390px: tableDisplay,
         modalScrollW,
         hasCollapsedNotesToggle: Boolean(notesBtn),
@@ -460,7 +503,7 @@ async function run() {
         ok: true,
         consoleErrors,
         c2Step1Audit,
-        c2PromptReadOnly,
+        c2LivePromptAudit,
         c2SampleModalAudit,
         c2CaseSwitcherAudit,
         c3CaseSwitcherAudit,
@@ -641,14 +684,22 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         self.assertEqual(len(c2["toneRects"]), 3, f"Expected 3 tone pills, got {c2['toneRects']}")
         self.assertLessEqual(max(c2["toneRects"]) - min(c2["toneRects"]), 3)
 
-        # Raw Prompt collapsed by default (only 1 textarea open = Personal Strategic Angle) & readOnly when inspected
+        # Single Always-Visible Live Editable Prompt Box + Pillar Toggle & Language Switch Sync
         self.assertEqual(c2["textareaCountCollapsed"], 1)
-        self.assertTrue(res["c2PromptReadOnly"]["found"])
-        self.assertTrue(res["c2PromptReadOnly"]["readOnly"])
+        lp = res["c2LivePromptAudit"]
+        self.assertTrue(lp["found"])
+        self.assertTrue(lp["editable"], "C2 Live Prompt Box should be directly editable")
+        self.assertTrue(lp["initialEnglishOnly"], "C2 default prompt was not English on load!")
+        self.assertTrue(lp["roleAddedVisibly"], "Clicking +Role did not visibly add [Role]: to promptText")
+        self.assertTrue(lp["roleRemovedVisibly"], "Clicking Role again did not visibly remove [Role]:")
+        self.assertTrue(lp["all5AddedVisibly"], "Clicking Add All 5 did not visibly populate all 5 pillars")
+        self.assertTrue(lp["switchedToChineseOk"], "Switching to Mandarin did not translate promptText")
+        self.assertTrue(lp["backToEnglishZeroCjk"], "Switching back to English left Chinese text in prompt!")
 
-        # Sample Modal overlay + mobile Slide-3 cards + Click-to-Zoom lightbox
+        # Sample Modal overlay + ZERO boardroom image + mobile Slide-3 cards + Click-to-Zoom lightbox
         modal = res["c2SampleModalAudit"]
         self.assertTrue(modal["opened"], "C2 Sample Modal did not open")
+        self.assertEqual(modal["slide1ImgCount"], 0, "C2 slide still rendered decorative boardroom image!")
         self.assertEqual(modal["tableParentDisplayAt390px"], "none", "Desktop 4-col table should hide at 390px")
         self.assertTrue(modal["hasCollapsedNotesToggle"], "Speaker Notes should collapse behind toggle on mobile")
         self.assertTrue(modal["zoomOpened"], "Click-to-Zoom lightbox failed to open on slide image")

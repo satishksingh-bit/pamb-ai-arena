@@ -349,7 +349,7 @@ class TestWorkshopPositivityAndUX(unittest.TestCase):
         self.assertIn("window.openArenaImageZoom", index_html)
         self.assertIn("window.closeArenaImageZoom", index_html)
 
-        for js_name in ("challenge1.js", "challenge2.js", "challenge3.js", "showcases.js", "arena_app.js"):
+        for js_name in ("challenge1.js", "challenge3.js", "showcases.js", "arena_app.js"):
             with open(os.path.join(ROOT_DIR, "static", js_name), encoding="utf-8") as f:
                 js_src = f.read()
             self.assertIn(
@@ -357,6 +357,11 @@ class TestWorkshopPositivityAndUX(unittest.TestCase):
                 js_src,
                 f"Expected data-zoomable attribute in static/{js_name}",
             )
+        # Challenge 2 slides intentionally omit decorative stock boardroom images
+        with open(os.path.join(ROOT_DIR, "static", "challenge2.js"), encoding="utf-8") as f:
+            c2_src = f.read()
+        self.assertNotIn("Rendering 16:9 Slide Visual", c2_src)
+        self.assertNotIn("/api/deck/images", c2_src)
 
 
 if __name__ == "__main__":
