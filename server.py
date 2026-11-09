@@ -726,7 +726,7 @@ EXTRA_SIM_ROSTER = [
     ("Priya Nair", "", "en", "leader_6", "mdrt_keynote", "💎 MDRT Executive Studio", "Protecting Tomorrow's Dreams Today"),
     ("Adrian Lau", "", "zh-CN", "leader_5", "festive_vip", "🧧 PRUMDA Prosperity VIP", "家族基业长青的坚实后盾"),
     ("Nurul Izzah", "", "ms", "leader_3", "family_advisor", "🌿 Premier Family Office", "Perancangan Harta & Pendidikan Terbaik"),
-    ("stephenie Koh", "", "en", "leader_2", "mdrt_keynote", "💎 MDRT Executive Studio", "Your Cross-Border Legacy Architect"),
+    ("Stephenie Koh", "", "en", "leader_2", "mdrt_keynote", "💎 MDRT Executive Studio", "Your Cross-Border Legacy Architect"),
     ("Raymond Cheah", "", "zh-CN", "leader_4", "forbes_studio", "🏛️ Forbes Wealth Leader", "守护企业现金流与家族信托"),
     ("Carmen Yap", "", "zh-TW", "leader_6", "family_advisor", "🌿 Premier Family Office", "用心傾聽，定制專屬保障"),
     ("Hafiz Zulkifli", "", "ms", "leader_1", "mdrt_keynote", "💎 MDRT Executive Studio", "Membina Generasi Bebas Kewangan"),
