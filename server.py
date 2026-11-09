@@ -49,6 +49,10 @@ from challenges.c2_prompt_duel import (
     handle_c2_target_pptx,
     norm_lang,
 )
+from challenges.c2_scenarios_bank import (
+    get_c2_total_unique_seats,
+    resolve_c2_seat_scenario,
+)
 from challenges.c3_pre_pitch import SCENARIO_CATALOG, get_sim_c3_greeting_card, handle_c3_ai
 from challenges.c3_scenarios_bank import (
     get_total_unique_seats,
@@ -308,7 +312,7 @@ DEMO_AGENTS = [
         "accuracy": 97,
         "total": 96,
         "xp": 2880,
-        "badges": ["📸 AI Brand Icon", "🧠 4-Pillar Master", "🏆 PRUMDA 10x Closer"],
+        "badges": ["📸 AI Brand Icon", "🧠 R.C.T.F.C. Deck Master", "🏆 PRUMDA 10x Closer"],
         "completed": {"1": True, "2": True, "3": True},
         "scores": {
             "1": {
@@ -389,7 +393,7 @@ DEMO_AGENTS = [
         "accuracy": 95,
         "total": 93,
         "xp": 1860,
-        "badges": ["📸 AI Brand Icon", "🧠 4-Pillar Master"],
+        "badges": ["📸 AI Brand Icon", "🧠 R.C.T.F.C. Deck Master"],
         "completed": {"1": True, "2": True, "3": False},
         "scores": {
             "1": {
@@ -533,7 +537,7 @@ DEMO_AGENTS = [
         "accuracy": 95,
         "total": 94,
         "xp": 2820,
-        "badges": ["📸 AI Brand Icon", "🧠 4-Pillar Master", "🎯 Pre-Pitch Strategist"],
+        "badges": ["📸 AI Brand Icon", "🧠 R.C.T.F.C. Deck Master", "🎯 Pre-Pitch Strategist"],
         "completed": {"1": True, "2": True, "3": True},
         "scores": {
             "1": {
@@ -641,43 +645,40 @@ for _idx, _ag in enumerate(DEMO_AGENTS):
     _ag["submissions"]["1"]["imageBefore"] = f"/static/sim_portraits/{_pkey}_before.png"
     _ag["submissions"]["1"]["motto"] = _motto
     _ag["submissions"]["1"]["avatarIdx"] = _idx
-    # Populate Challenge 2 with the 3-Slide Deck Challenge (Datin Sharifah Aleya) in the leader's language
+    # Populate Challenge 2 across varied 56-seat HNW scenarios in the leader's language
     _lang_c2 = norm_lang(_ag.get("language", "en"))
-    _c2_target = PRETRANSLATED_MY.get(_lang_c2, {}).get("target", TARGET_MY) if _lang_c2 != "en" else TARGET_MY
-    _c2_deck = _with_target_images(_c2_target, "MY")
+    _c2_scen = resolve_c2_seat_scenario(_idx, _lang_c2)
+    _c2_deck = _c2_scen["target"]
     _c2_tot = _ag["scores"].get("2", {}).get("total", 95)
     _c2_tsec = _ag["scores"].get("2", {}).get("timeSec", 22)
     _c2_rubric_map = {
-        "Structure & Completeness": 10,
-        "Client Personalisation": 10,
-        "Insight & Quantification": 9,
-        "Solution Fit": 10,
-        "Objection Readiness": 9,
-        "Compliance & Fair Dealing": 10,
+        "Structure & Completeness": "10/10",
+        "Client Personalisation": "10/10",
+        "Insight & Quantification": "9/10",
+        "Solution Fit": "10/10",
+        "Objection Readiness": "9/10",
+        "Compliance & Fair Dealing": "10/10",
     }
+    _c2_angle = (_c2_scen.get("angleHints") or [""])[0]
     _ag["scores"]["2"]["criteria"] = _c2_rubric_map
     _ag["submissions"]["2"] = {
         "challenge": "2",
         "title": f"{_c2_deck['title']} • 3-Slide Pre-Pitch Deck",
         "deck_title": _c2_deck["title"],
-        "styleBadge": f"📊 {round(_c2_tot / 10, 1)}/10 Deck Score • 3 Slides",
-        "userInput": (
-            f"[Role]: Senior PRUMDA Wealth & Legacy Planning Consultant\n"
-            f"[Context]: Datin Sharifah Aleya (52, 6 clinics in Klang Valley, Net Worth ≈ RM 28M [68% clinic shares], RM 4.5M loan guarantee, RM 1M 2009 policy)\n"
-            f"[Task]: Create a 3-slide pre-pitch deck for her 60-min Bangsar meeting\n"
-            f"[Format]: Slide 1 KPI Snapshot, Slide 2 RM 6.5M Liquidity Gap Bar Chart, Slide 3 Family Takaful + Hibah Strategy Table + Speaker Notes\n"
-            f"[Constraints]: BNM Fair Treatment rules, fact-find first, PDS & 15-day free-look, Shariah principles, illustrative figures"
-        ),
+        "styleBadge": f"📊 {round(_c2_tot / 10, 1)}/10 Deck • {_c2_scen['icon']} {_c2_scen['clientShort']}",
+        "personalAngle": _c2_angle,
+        "userInput": "\n\n".join(g["template"] for g in _c2_scen["guide"]) + (f"\n\n[Personal Strategic Angle]: {_c2_angle}" if _c2_angle else ""),
         "aiOutput": "\n".join(f"Slide {i+1}: {s['title']}" for i, s in enumerate(_c2_deck["slides"])),
         "deck": _c2_deck,
+        "deckScore10": round(_c2_tot / 10, 1),
         "slide_titles": [s["title"] for s in _c2_deck["slides"]],
-        "slides": len(_c2_deck["slides"]),
+        "slides": 3,
         "rubric": [
-            {"dimension": k, "score": v, "comment": "Strong alignment with Datin Sharifah Aleya case facts & BNM compliance."}
+            {"dimension": k, "score": 10 if "10" in v else 9, "comment": f"Tailored to {_c2_scen['clientShort']} balance sheet & BNM guardrails."}
             for k, v in _c2_rubric_map.items()
         ],
         "pillarScores": _c2_rubric_map,
-        "judgeFeedback": _ag["scores"]["2"].get("judgeFeedback", "Outstanding 3-slide pre-pitch deck with KPI snapshot, RM 6.5M liquidity gap chart, and Family Takaful + Hibah strategy table!"),
+        "judgeFeedback": f"Boardroom-ready 3-slide pre-pitch deck for {_c2_scen['clientShort']} ({_c2_scen['gapAmount']} liquidity gap) with co-advisory close!",
         "total": _c2_tot,
         "timeSec": _c2_tsec,
     }
@@ -735,16 +736,15 @@ EXTRA_SIM_ROSTER = [
 ]
 
 
-def _enrich_sim_c2_submission(tmpl: dict):
-    """Attaches a localized 3-slide Pre-Pitch Deck and 6-dimension rubric to simulated Challenge 2 submissions."""
+def _enrich_sim_c2_submission(tmpl: dict, seat_idx: int = 0):
+    """Attaches a localized, scenario-varied 3-slide Pre-Pitch Deck and 6-dimension rubric to simulated Challenge 2 submissions."""
     lang = norm_lang(tmpl.get("language", "en"))
-    target_deck = PRETRANSLATED_MY.get(lang, {}).get("target") or TARGET_MY
-    deck_with_imgs = _with_target_images(target_deck, "MY")
-    guide_steps = PRETRANSLATED_MY.get(lang, {}).get("guide")
-    if guide_steps:
-        prompt_str = "\n\n".join(g["template"] for g in guide_steps)
-    else:
-        prompt_str = tmpl.get("submissions", {}).get("2", {}).get("userInput", "")
+    scen = resolve_c2_seat_scenario(seat_idx, lang)
+    deck_with_imgs = scen["target"]
+    angle_str = (scen.get("angleHints") or [""])[0]
+    prompt_str = "\n\n".join(g["template"] for g in scen["guide"])
+    if angle_str:
+        prompt_str += f"\n\n[Personal Strategic Angle]: {angle_str}"
     tot = tmpl.get("scores", {}).get("2", {}).get("total", 96)
     deck_10 = round(tot / 10.0, 1)
     rubric_map = {
@@ -758,19 +758,21 @@ def _enrich_sim_c2_submission(tmpl: dict):
     tmpl.setdefault("scores", {}).setdefault("2", {})["criteria"] = rubric_map
     sub2 = tmpl.setdefault("submissions", {}).setdefault("2", {})
     sub2["challenge"] = "2"
-    sub2["title"] = f"{deck_with_imgs.get('title', 'Pre-Pitch Brief: Datin Sharifah Aleya')} ({deck_10}/10)"
-    sub2["styleBadge"] = f"🧠 {deck_10}/10 Deck (5/5 R.C.T.F.C.)"
+    sub2["title"] = f"{deck_with_imgs.get('title', 'Executive Pre-Pitch Brief')} ({deck_10}/10)"
+    sub2["styleBadge"] = f"📊 {deck_10}/10 Deck • {scen['icon']} {scen['clientShort']}"
+    sub2["personalAngle"] = angle_str
     sub2["userInput"] = prompt_str
     sub2["deck"] = deck_with_imgs
     sub2["deckScore10"] = deck_10
     sub2["pillarScores"] = rubric_map
+    sub2["judgeFeedback"] = f"Boardroom-ready 3-slide pre-pitch deck for {scen['clientShort']} ({scen['gapAmount']} liquidity gap)!"
 
 
 def _get_sim_template_by_index(idx: int) -> dict:
     """Returns a complete 3-challenge simulation template for participant #idx (0..23)."""
     if idx < len(DEMO_AGENTS):
         t_copy = json.loads(json.dumps(DEMO_AGENTS[idx]))
-        _enrich_sim_c2_submission(t_copy)
+        _enrich_sim_c2_submission(t_copy, seat_idx=idx)
         return t_copy
 
     ext_idx = (idx - len(DEMO_AGENTS)) % len(EXTRA_SIM_ROSTER)
@@ -822,7 +824,7 @@ def _get_sim_template_by_index(idx: int) -> dict:
 
     base_tmpl["submissions"]["2"]["total"] = s2_tot
     base_tmpl["submissions"]["2"]["timeSec"] = base_tmpl["scores"]["2"]["timeSec"]
-    _enrich_sim_c2_submission(base_tmpl)
+    _enrich_sim_c2_submission(base_tmpl, seat_idx=idx)
 
     sc_key = _SIM_C3_KEYS[idx % len(_SIM_C3_KEYS)]
     sc_obj = SCENARIO_CATALOG[sc_key]
@@ -930,7 +932,7 @@ _MEM_STATE: dict | None = None
 def _offload_media_if_data_url(val):
     """Offloads large data:image/... strings (> 4 KB) to /tmp/pamb_arena_media/<sha20>.<ext>
     and returns '/api/media/<fname>' so GET /api/state stays < 80 KB across 50+ mobile phones."""
-    if not isinstance(val, str) or not val.startswith("data:image/") or len(val) <= 4096:
+    if not isinstance(val, str) or not val.startswith("data:image/") or len(val) <= 64:
         return val
     if "," not in val:
         return val
@@ -1069,7 +1071,7 @@ def recompute_participant(p: dict):
     if "1" in scores:
         badges.append("📸 AI Brand Icon")
     if "2" in scores:
-        badges.append("🧠 4-Pillar Master")
+        badges.append("🧠 R.C.T.F.C. Deck Master")
     if "3" in scores:
         badges.append("🎯 Pre-Pitch Strategist")
     if completed_count >= 3:
@@ -1261,7 +1263,42 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
             qs = urllib.parse.parse_qs(parsed.query)
             market = (qs.get("market", ["MY"])[0] or "MY").strip()
             lang = (qs.get("lang", ["en"])[0] or "en").strip()
-            res = handle_c2_get_challenge(market, lang, get_access_token, PROJECT_ID, LOCATION)
+            pid = (qs.get("id", [""])[0] or "").strip()
+            explicit_seat = qs.get("seat", [None])[0]
+            total_c2_seats = get_c2_total_unique_seats()
+
+            seat_idx = None
+            if explicit_seat is not None and str(explicit_seat).strip() != "":
+                try:
+                    seat_idx = int(explicit_seat) % total_c2_seats
+                except Exception:
+                    seat_idx = None
+
+            with _STATE_LOCK:
+                st = load_state()
+                if seat_idx is None:
+                    if pid and pid in st["participants"]:
+                        p_rec = st["participants"][pid]
+                        if "c2Seat" not in p_rec or p_rec.get("c2Seat") is None:
+                            nxt = int(st.get("nextC2Seat", 0))
+                            p_rec["c2Seat"] = nxt % total_c2_seats
+                            st["nextC2Seat"] = nxt + 1
+                            save_state(st)
+                        seat_idx = int(p_rec["c2Seat"]) % total_c2_seats
+                    elif pid:
+                        h = 0
+                        for idx_c, ch in enumerate(pid):
+                            h = (h * 37 + ord(ch) + idx_c) & 0x7FFFFFFF
+                        seat_idx = h % total_c2_seats
+                    else:
+                        seat_idx = 0
+                elif pid and pid in st["participants"] and qs.get("persist", ["0"])[0] == "1":
+                    st["participants"][pid]["c2Seat"] = seat_idx
+                    save_state(st)
+
+            res = handle_c2_get_challenge(
+                market, lang, get_access_token, PROJECT_ID, LOCATION, seat_index=seat_idx
+            )
             return self._send_json(res)
 
         if path.startswith("/api/submissions/"):
@@ -1360,8 +1397,8 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
             cnum = path.removeprefix("/handoff/export-challenge/").strip("/")
             mapping = {
                 "1": ("challenges/c1_image_outreach.py", "static/challenge1.js"),
-                "2": ("challenges/c2_prompt_duel.py", "static/challenge2.js"),
-                "3": ("challenges/c3_pre_pitch.py", "static/challenge3.js"),
+                "2": ("challenges/c2_prompt_duel.py", "challenges/c2_scenarios_bank.py", "static/challenge2.js"),
+                "3": ("challenges/c3_pre_pitch.py", "challenges/c3_scenarios_bank.py", "static/challenge3.js"),
             }
             if cnum not in mapping:
                 return self._send_json({"ok": False, "error": "Invalid challenge number (use 1, 2, or 3)"}, 400)
@@ -1403,9 +1440,22 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
 
         if path == "/api/deck/images":
             res, status = handle_c2_images(body, call_vertex_gemini_image)
+            if status == 200 and isinstance(res.get("images"), list):
+                res["images"] = [
+                    _offload_media_if_data_url(img) if isinstance(img, str) else img
+                    for img in res["images"]
+                ]
             return self._send_json(res, status=status)
 
         if path == "/api/deck/submit":
+            if body.get("seat_index") is None and body.get("seatIndex") is None:
+                pid_sub = (body.get("participant_id") or "").strip()
+                if pid_sub:
+                    with _STATE_LOCK:
+                        st_sub = load_state()
+                        if pid_sub in st_sub["participants"] and "c2Seat" in st_sub["participants"][pid_sub]:
+                            body = dict(body)
+                            body["seat_index"] = st_sub["participants"][pid_sub]["c2Seat"]
             res, status = handle_c2_submit_deck(body, get_access_token, PROJECT_ID, LOCATION)
             return self._send_json(res, status=status)
 
@@ -1436,6 +1486,15 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     nxt_seat = int(st.get("nextC3Seat", 0))
                     assigned_c3_seat = nxt_seat % total_seats
                     st["nextC3Seat"] = nxt_seat + 1
+
+                total_c2_seats = get_c2_total_unique_seats()
+                if "c2Seat" in existing and existing.get("c2Seat") is not None:
+                    assigned_c2_seat = int(existing["c2Seat"]) % total_c2_seats
+                else:
+                    nxt_c2 = int(st.get("nextC2Seat", 0))
+                    assigned_c2_seat = nxt_c2 % total_c2_seats
+                    st["nextC2Seat"] = nxt_c2 + 1
+
                 p = {
                     "id": pid,
                     "name": name,
@@ -1443,6 +1502,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     "regionBadge": r_meta["badge"],
                     "countryFlag": "🇲🇾",
                     "language": lang,
+                    "c2Seat": assigned_c2_seat,
                     "c3Seat": assigned_c3_seat,
                     "speed": existing.get("speed", 0),
                     "accuracy": existing.get("accuracy", 0),
@@ -1582,7 +1642,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
 
                 c_titles = {
                     "1": "C1: Executive AI Image & Outreach",
-                    "2": "C2: 4-Pillar Prompt Duel",
+                    "2": "C2: R.C.T.F.C. 3-Slide Executive Deck",
                     "3": "C3: Pre-Pitch Synthesis & Agent Assist",
                 }
                 add_event(
@@ -1719,18 +1779,18 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                 activity_phrases = {
                     "1": [
                         ("📸 Capturing live selfie on phone camera...", "Camera Capture"),
-                        ("✨ Transforming selfie into MDRT Studio Portrait (Gemini 2.5 Flash Image)...", "Studio Image Synthesis"),
+                        ("✨ Transforming selfie into MDRT Studio Portrait...", "Studio Image Synthesis"),
                         ("💬 Generating localized VIP customer outreach message...", "VIP Outreach Drafting"),
                     ],
                     "2": [
-                        ("🎭 Structuring Pillar 1 & 2 (PAMB Persona + HNW Client Context)...", "4-Pillar Framing"),
-                        ("⚡ Testing 4-Pillar Prompt with Gemini 2.5 Flash...", "Live Prompt Evaluation"),
-                        ("🏅 AI Prompt Judge scoring 4 Pillars (Persona, Context, Task, Format)...", "Rubric Grading"),
+                        ("🧭 Activating R.C.T.F.C. Pillars + Personal Strategic Angle...", "R.C.T.F.C. Deck Architect"),
+                        ("📊 Building 3-Slide HNW Executive Pre-Pitch Deck...", "3-Slide Deck Synthesis"),
+                        ("🏅 AI Judge scoring 6-Dimension Boardroom Rubric...", "6-Dimension Deck Grading"),
                     ],
                     "3": [
-                        ("📂 Reviewing Dato' Sri Raymond Tan RM 6M Bank Guarantee dossier...", "Dossier Analysis"),
-                        ("⚡ Synthesizing PRUWealth Enrich Clause 4.2.a...", "Grounded Policy Lookup"),
-                        ("🤝 Co-creating counter-pitch with Agent Assist...", "Agent Assist Co-Creation"),
+                        ("📂 Reviewing assigned Customer X life-event dossier...", "Dossier Analysis"),
+                        ("⚡ Matching official Malaysia plans & brochure clauses...", "Grounded Policy Lookup"),
+                        ("🤝 Generating greeting card, WhatsApp & plan comparison...", "Agent Assist Co-Creation"),
                     ],
                 }
 

@@ -1,91 +1,96 @@
 /* ============================================================================
    CHALLENGE 2 MODULE (14:20 - 14:35 | 15 Mins)
-   "Executive Pre-Pitch Deck Prompt Duel (R.C.T.F.C. Framework)"
-   100% Native React Integration — Adaptive across Phone, iPad & Laptop
-   Full 5-Language Native Localization (EN, ZH-CN, YUE, MS, TA)
-   Strict One-Time Final Submission -> Feeds Main Arena Score & Locks ("Job Done!")
+   "Executive Pre-Pitch 3-Slide Deck Studio (R.C.T.F.C. + Personal Touch)"
+   - Strictly 3 Slides Only (Slide 1 KPI Snapshot · Slide 2 Gap Chart · Slide 3 Strategy Matrix)
+   - 56 Unique HNW Malaysian Client Scenarios (14 Archetypes × 4 Personas)
+   - Clean Visual R.C.T.F.C. Builder + Boardroom Tone + Personal Strategic Angle
+   - Full 5-Language Native Localization (EN, ZH-CN, YUE, MS, TA)
+   - Mobile localStorage Persistence + Strict One-Time Final Submission Lock
 ============================================================================ */
 
 const C2_UI_I18N = {
   en: {
-    badge: "🧠 CHALLENGE 2 • R.C.T.F.C. PROMPT DUEL",
-    title: "Executive Pre-Pitch Deck Studio",
+    badge: "🧠 CHALLENGE 2 • R.C.T.F.C. 3-SLIDE DECK STUDIO",
+    title: "Executive Pre-Pitch 3-Slide Studio",
     subtitle:
-      "Combine the 5 R.C.T.F.C. Pillars + Agency Leader Wealth & Empathy Boosters to generate a 3-slide HNW Pre-Pitch Deck for Datin Sharifah Aleya. Edit your prompt freely, iterate, then submit once when finalized.",
-    step1Tab: "1️⃣ Craft R.C.T.F.C. Prompt",
+      "Every leader receives a unique HNW client case. Activate the 5 R.C.T.F.C. pillars, add your Personal Strategic Angle, and generate a strictly 3-slide boardroom pre-pitch deck.",
+    step1Tab: "1️⃣ Architect Prompt & Angle",
     step2Tab: "2️⃣ Review 3-Slide Deck & Submit",
-    targetBtn: "🎯 View Target Deck",
-    hideTargetBtn: "✕ Hide Target Deck",
-    targetGoalBanner: "🎯 TARGET 3-SLIDE BENCHMARK DECK (YOUR GOAL)",
-    caseHeader: "📋 Client Scenario: Datin Sharifah Aleya (HNW Founder, 52)",
-    moreCaseBtn: "Full Case Details ▾",
-    lessCaseBtn: "Compact View ▴",
-    caseCards: [
-      { icon: "👤", label: "Client & Clinic Group", value: "Founder & MD, 6 Specialist Clinics (Klang Valley)" },
-      { icon: "💰", label: "Net Worth ≈ RM 28M", value: "RM 19M (68%) Clinic Shares • RM 6M Property • RM 3M Liquid" },
-      { icon: "🏦", label: "Liabilities & Cover", value: "RM 4.5M Loan (Personal Guarantee) • RM 1M 2009 Life Policy" },
-      { icon: "👨‍👩‍👧‍👦", label: "Family & Education", value: "Husband (RM 30k/mo dividends) • 2 Kids UK/Melb (RM 450k/yr)" },
-      { icon: "📉", label: "Estate Liquidity Gap", value: "RM 10.5M Needed vs RM 4.0M Liquid = RM 6.5M Shortfall" },
-      { icon: "🕌", label: "Shariah & BNM Rules", value: "Family Takaful + Hibah • Fact-Find • PDS & 15-Day Free-Look" },
-    ],
-    pillarsHeader: "5-Pillar R.C.T.F.C. Prompt Builder (Tap any pillar or insert all 5 & edit below)",
-    insertPillarBtn: "+ Insert into Prompt",
-    pillarIncluded: "✓ Included in Prompt",
-    insertAllBtn: "✨ Insert All 5 Pillars",
-    resetPromptBtn: "↺ Reset Starter Prompt",
-    leaderBoostersHeader: "💡 Agency Leader Wealth, Empathy & Creative Boosters (Tap to combine into prompt):",
-    addAllBoostersBtn: "✨ Add All 3 Leader Boosters",
-    leaderBoosters: [
+    targetBtn: "🎯 Benchmark Deck",
+    hideTargetBtn: "✕ Hide Benchmark",
+    browseCasesBtn: "📂 14 Cases",
+    switchCaseBtn: "🎲 Switch Case",
+    casePickerTitle: "Choose an HNW Executive Scenario (14 Archetypes • 56 Unique Seats)",
+    targetGoalBanner: "🎯 3-SLIDE BENCHMARK REFERENCE DECK (FOR YOUR CLIENT)",
+    assignedCaseLabel: "ASSIGNED HNW CLIENT BRIEF",
+    moreCaseBtn: "Full Dossier ▾",
+    lessCaseBtn: "Compact ▴",
+    pillarsHeader: "1. Activate the 5 R.C.T.F.C. Prompt Pillars",
+    pillarsSub: "Tap individual pillars to toggle, or activate all 5 and focus on your personal angle below.",
+    insertAllBtn: "✨ Activate All 5 Pillars",
+    weakPromptBtn: "🧪 Try Weak 1-Line Prompt",
+    toneHeader: "2. Choose Boardroom Presentation Style",
+    tones: [
       {
-        label: "❤️ Founder Empathy & Family Dignity",
-        snippet:
-          "[Empathy & Family Continuity]: Frame with warm founder empathy — protect Datin Aleya's 6 clinics from forced fire-sale so Dr Hakim stays supported and Aisyah (UK medicine) & Imran (Melbourne) finish university uninterrupted.",
+        id: "boardroom",
+        label: "🏛️ Family-Office Boardroom",
+        clause: "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales fluff.",
       },
       {
-        label: "🛡️ Hibah & Creditor Ring-Fencing",
-        snippet:
-          "[Wealth Planning & Hibah Strategy]: Show how Family Takaful + Hibah nomination injects immediate Shariah-compliant cash outside estate freeze to settle the RM 4.5M personal-guarantee loan and preserve Faraid harmony.",
+        id: "empathy",
+        label: "❤️ Founder & Family Empathy",
+        clause: "[Presentation Style]: Warm founder & family-dignity tone — protect family harmony, spouse security, and children's dreams.",
       },
       {
-        label: "🤝 Accountant Co-Advisory Close",
-        snippet:
-          "[Creative Relationship Close]: Propose a collaborative 30-minute joint review with Datin's company secretary & tax accountant rather than a product push.",
+        id: "cfo",
+        label: "📊 CFO Precision & IRR Clarity",
+        clause: "[Presentation Style]: Analytical CFO tone — emphasize cost-of-capital (~2% p.a. vs 40% fire-sale loss) and statutory ring-fencing.",
       },
     ],
-    promptLabel: "✏️ Your Master Prompt to Gemini (Combine pillars & boosters above, then edit freely in your own words):",
-    promptPlaceholder: "Write or assemble your 5-pillar R.C.T.F.C. + Wealth Planning prompt here...",
-    pillarsActiveLabel: "R.C.T.F.C. Pillars Active",
-    generateBtn: "⚡ Generate 3-Slide Pre-Pitch Deck",
-    regenerateBtn: "🔄 Update & Regenerate 3-Slide Deck",
-    generatingText: "✨ Gemini 2.5 Flash is building your 3-slide executive deck...",
-    generatingImgText: "🎨 Generating slide visuals...",
+    angleHeader: "3. 💡 Add Your Personal Strategic Angle / Relationship Hook",
+    angleSub: "What makes YOUR advisory approach stand out? Tap an idea below or write your own custom angle:",
+    anglePlaceholder: "e.g., Propose a 30-min joint review with their tax accountant & company secretary—zero product push...",
+    promptDrawerShow: "🔍 Inspect / Edit Full Assembled Prompt",
+    promptDrawerHide: "▴ Collapse Prompt Editor",
+    pillarsActiveLabel: "R.C.T.F.C. Active",
+    strictly3Badge: "STRICTLY 3 SLIDES",
+    generateBtn: "⚡ Generate 3-Slide Executive Deck",
+    regenerateBtn: "🔄 Regenerate 3-Slide Deck",
+    genStages: [
+      "1/3 · Structuring Slide 1 Client & Balance-Sheet KPIs...",
+      "2/3 · Modeling Slide 2 Liquidity Gap Bar Chart...",
+      "3/3 · Synthesizing Slide 3 Strategy Matrix & Speaker Notes...",
+    ],
+    generatingImgText: "🎨 Rendering bespoke 16:9 boardroom slide visuals...",
+    finishingImgBeforeSubmit: "🎨 Attaching slide visuals before locking your final deck...",
     slideTabPrefix: "Slide ",
     slideTabSuffix: "",
-    slidesCountBadge: "Slides ✓",
-    compareToggleOn: "🔀 Side-by-Side Target Compare: ON",
-    compareToggleOff: "🔀 Compare with Target Deck",
-    downloadPptxBtn: "⬇ Download .pptx",
+    slideShortLabels: ["Snapshot & KPIs", "Liquidity Gap", "Strategy Matrix"],
+    slidesCountBadge: "3 Slides Locked ✓",
+    compareToggleOn: "🔀 Side-by-Side Benchmark: ON",
+    compareToggleOff: "🔀 Compare vs Benchmark",
+    downloadPptxBtn: "⬇ Export .pptx",
     yourSlideLabel: "📊 YOUR GENERATED SLIDE",
-    targetSlideLabel: "🎯 TARGET BENCHMARK SLIDE",
-    speakerNotesLabel: "🎙️ Presenter Speaker Notes",
-    qualityChecksHeader: "✅ Pre-Submit Deck Quality Readiness",
+    targetSlideLabel: "🎯 BENCHMARK SLIDE",
+    speakerNotesLabel: "🎙️ Presenter Notes",
+    qualityChecksHeader: "✅ Pre-Submit 3-Slide Readiness Checklist",
     checkLabels: {
-      slides3: "3 Structured Slides",
-      clientFacts: "Client Facts (RM 28M / 4.5M / 6.5M)",
-      visuals: "KPIs, Gap Chart & Strategy Table",
-      notes: "Speaker Notes Included",
-      compliance: "BNM & Shariah Guardrails",
+      slides3: "Strictly 3 Slides",
+      clientFacts: "Client Balance-Sheet Numbers",
+      visuals: "KPIs + Gap Chart + Strategy Table",
+      personalTouch: "Personal Strategic Angle",
+      compliance: "BNM & Trust/Hibah Guardrails",
     },
-    backToPromptBtn: "✏️ Edit Prompt & Regenerate",
-    finalSubmitBtn: "🏆 Finalize & Submit Deck to Arena (Submit Once)",
-    finalSubmittingText: "⚖️ AI Judge Scoring & Locking Your Final Submission...",
+    backToPromptBtn: "✏️ Refine Prompt / Angle",
+    finalSubmitBtn: "🏆 Finalize & Submit 3-Slide Deck to Arena",
+    finalSubmittingText: "⚖️ Executive Judge Scoring Your 3-Slide Deck & Personal Angle...",
     oneTimeNotice:
-      "🔒 You can edit your prompt and regenerate your deck as many times as you wish while drafting. Once you click Finalize & Submit, your score is locked and sent to the Main Arena Leaderboard.",
-    jobDoneBadge: "✅ CHALLENGE 2 COMPLETE — JOB DONE! (LOCKED)",
-    jobDoneTitle: "Your 3-Slide Pre-Pitch Deck is Finalized & Scored in the Main Arena",
-    arenaScoreLabel: "Main Arena Score",
-    deckScoreLabel: "AI Judge Deck Rating",
-    rubricHeader: "🏅 6-Dimension AI Judge Breakdown",
+      "🔒 Regenerate freely while drafting. Clicking Finalize & Submit locks your 3-slide deck onto the Live Arena Leaderboard.",
+    jobDoneBadge: "✅ CHALLENGE 2 COMPLETE — LOCKED ON LEADERBOARD",
+    jobDoneTitle: "Your 3-Slide Executive Pre-Pitch Deck is Live in the Arena",
+    arenaScoreLabel: "Arena Score",
+    deckScoreLabel: "Deck Rating",
+    rubricHeader: "🏅 6-Dimension Executive Deck Breakdown",
     rubricDims: [
       "Structure & Completeness",
       "Client Personalisation",
@@ -94,90 +99,93 @@ const C2_UI_I18N = {
       "Objection Readiness",
       "Compliance & Fair Dealing",
     ],
-    viewMainScoreBtn: "🏆 View Main Arena Scoreboard",
+    viewMainScoreBtn: "🏆 View Live Leaderboard",
     proceedC3Btn: "🚀 Proceed to Challenge 3 →",
-    waitingC3Text: "⏳ Score fed to Main Arena! Waiting for Presenter to unlock Challenge 3...",
-    promptUsedLabel: "📝 Your Final Submitted R.C.T.F.C. Prompt",
+    waitingC3Text: "⏳ Score recorded on the Big Screen! Waiting for Presenter to launch Challenge 3...",
+    promptUsedLabel: "📝 Your Submitted R.C.T.F.C. Prompt & Strategic Angle",
   },
   "zh-CN": {
-    badge: "🧠 挑战 2 • R.C.T.F.C. 提示词对决",
-    title: "高管战前提案简报工作室 (3-Slide Deck Studio)",
+    badge: "🧠 挑战 2 • R.C.T.F.C. 三页高管简报工作室",
+    title: "高管战前 3 页简报工作室",
     subtitle:
-      "结合 R.C.T.F.C. 五维提示词框架与团队长「财富规划 + 客户共情」加分项，为高净值客户 Datin Sharifah Aleya 生成 3 页战前提案简报。您可自由编辑提示词并多次生成，定稿后最终提交一次。",
-    step1Tab: "1️⃣ 构建 R.C.T.F.C. 提示词",
+      "每位团队长均获分配专属高净值客户案例。激活 R.C.T.F.C. 五大维度并融入您的「个人策略切入点」，生成严格限定 3 页的家族办公室级提案简报。",
+    step1Tab: "1️⃣ 构建五维策略与个人切入点",
     step2Tab: "2️⃣ 预览 3 页简报并最终提交",
-    targetBtn: "🎯 查看目标参考简报",
-    hideTargetBtn: "✕ 收起目标简报",
-    targetGoalBanner: "🎯 目标 3 页参考简报（您的对标目标）",
-    caseHeader: "📋 客户背景档案：Datin Sharifah Aleya（52岁，专科诊所集团创始人）",
-    moreCaseBtn: "查看完整档案 ▾",
-    lessCaseBtn: "收起详情 ▴",
-    caseCards: [
-      { icon: "👤", label: "客户与企业", value: "巴生谷 6 家专科诊所创始人兼董事总经理 (52岁)" },
-      { icon: "💰", label: "净资产 ≈ RM 28M", value: "诊所股权 RM 19M (68%) • 房产 RM 6M • 流动资金 RM 3M" },
-      { icon: "🏦", label: "负债与现有保单", value: "RM 4.5M 诊所扩建贷款(个人担保) • 仅 RM 1M 旧寿险" },
-      { icon: "👨‍👩‍👧‍👦", label: "家庭与留学负担", value: "丈夫靠每月 RM 30k 分红 • 2名子女英国/墨尔本留学(RM 450k/年)" },
-      { icon: "📉", label: "遗产流动性缺口", value: "需 RM 10.5M 流动资金 vs 现有 RM 4.0M = RM 6.5M 缺口" },
-      { icon: "🕌", label: "伊斯兰方案与 BNM 合规", value: "Family Takaful + Hibah • 先做 Fact-Find • PDS 及15天犹豫期" },
-    ],
-    pillarsHeader: "R.C.T.F.C. 五维提示词构建器（点击任意维度或一键全选 5 个维度后自由修改）",
-    insertPillarBtn: "+ 插入到提示词",
-    pillarIncluded: "✓ 已包含此维度",
-    insertAllBtn: "✨ 一键插入全部 5 个维度",
-    resetPromptBtn: "↺ 重置初始提示词",
-    leaderBoostersHeader: "💡 团队长「财富规划 · 客户共情 · 创意关系」加分项（点击可叠加进提示词）：",
-    addAllBoostersBtn: "✨ 一键叠加全部 3 大领袖加分项",
-    leaderBoosters: [
+    targetBtn: "🎯 参考标杆简报",
+    hideTargetBtn: "✕ 收起标杆",
+    browseCasesBtn: "📂 14类案例",
+    switchCaseBtn: "🎲 切换客户",
+    casePickerTitle: "选择高净值客户实战案例（14 大行业原型 • 全场 56 席独立案例）",
+    targetGoalBanner: "🎯 3 页标杆参考简报（对应您当前客户）",
+    assignedCaseLabel: "您的专属高净值客户档案",
+    moreCaseBtn: "完整背景 ▾",
+    lessCaseBtn: "收起 ▴",
+    pillarsHeader: "1. 激活 R.C.T.F.C. 五维提示词积木",
+    pillarsSub: "点击点亮各维度，或一键激活全部 5 个维度后专注打磨下方的个人策略切入点。",
+    insertAllBtn: "✨ 一键激活全部 5 个维度",
+    weakPromptBtn: "🧪 体验普通一句话提示词对比",
+    toneHeader: "2. 选择简报呈现风格",
+    tones: [
       {
-        label: "❤️ 创办人共情与守护家庭尊严",
-        snippet:
-          "[客户共情与家族传承]：以温暖共情切入——守护 Datin Aleya 辛苦创立的 6 家诊所免遭低价贱卖，确保丈夫 Dr Hakim 维持每月生活开销，且英国学医长女 Aisyah 与墨尔本幼子 Imran 学业不受任何影响。",
+        id: "boardroom",
+        label: "🏛️ 家族办公室尊尚风",
+        clause: "[呈现风格]：采用资深家族办公室董事会风格——聚焦资产负债表与传承结构，零推销感。",
       },
       {
-        label: "🛡️ Hibah 赠与及债务隔离策略",
-        snippet:
-          "[财富规划与 Hibah 隔离]：清晰展示 Family Takaful 搭配 Hibah 指定受益人如何在遗产冻结期外即刻注入免税流动现金，清偿 RM 4.5M 个人担保贷款并兼顾 Faraid 家族和谐。",
+        id: "empathy",
+        label: "❤️ 创办人共情与家风守护",
+        clause: "[呈现风格]：温暖共情切入——守护创业心血免遭折价变卖，保障配偶尊严与子女学业和谐。",
       },
       {
-        label: "🤝 联合会计师与公司秘书协同面谈",
-        snippet:
-          "[顾问式成交邀约]：不硬推销产品，建议与 Datin 的公司秘书及税务会计师进行 30 分钟三方协同财务审视。",
+        id: "cfo",
+        label: "📊 CFO 财务量化对比",
+        clause: "[呈现风格]：严谨 CFO 财务视角——用每年约 2% 保费成本对比资产冻结 40% 折价损失与法定信托隔离。",
       },
     ],
-    promptLabel: "✏️ 您发送给 Gemini 的完整提示词（可一键组合上方全部要点，并用自己的话自由修改）：",
-    promptPlaceholder: "在此输入或组合您的 R.C.T.F.C. 与财富规划提示词...",
-    pillarsActiveLabel: "已激活 R.C.T.F.C. 维度",
-    generateBtn: "⚡ 生成 3 页高管战前简报",
+    angleHeader: "3. 💡 加入您的「个人策略切入点 / 顾问式邀约钩子」",
+    angleSub: "展现您独特的团队长破局思路！可点击下方灵感胶囊，或用自己的话输入：",
+    anglePlaceholder: "例如：提议与客户的公司秘书及税务会计师进行30分钟三方联合审视，零推销压力...",
+    promptDrawerShow: "🔍 查看 / 自由编辑完整提示词原文",
+    promptDrawerHide: "▴ 收起提示词编辑器",
+    pillarsActiveLabel: "已激活 R.C.T.F.C.",
+    strictly3Badge: "严格限定 3 页",
+    generateBtn: "⚡ 生成严格 3 页高管战前简报",
     regenerateBtn: "🔄 更新并重新生成 3 页简报",
-    generatingText: "✨ Gemini 2.5 Flash 正在为您生成 3 页高管战前简报...",
-    generatingImgText: "🎨 正在生成简报配图...",
+    genStages: [
+      "1/3 · 正在构建第 1 页：客户资产快照与 4 大 KPI 指标卡...",
+      "2/3 · 正在测算第 2 页：流动性缺口量化对比柱状图...",
+      "3/3 · 正在生成第 3 页：定制传承策略矩阵表与演讲备注...",
+    ],
+    generatingImgText: "🎨 正在绘制 16:9 高管简报尊尚配图...",
+    finishingImgBeforeSubmit: "🎨 正在合成简报视觉配图并锁定最终成绩...",
     slideTabPrefix: "第 ",
     slideTabSuffix: " 页",
-    slidesCountBadge: "页简报 ✓",
-    compareToggleOn: "🔀 对比目标简报：已开启",
-    compareToggleOff: "🔀 与目标参考简报并排对比",
+    slideShortLabels: ["全景与KPI", "流动性缺口图", "策略矩阵表"],
+    slidesCountBadge: "严格 3 页已就绪 ✓",
+    compareToggleOn: "🔀 对标标杆简报：开启",
+    compareToggleOff: "🔀 与标杆简报并排对比",
     downloadPptxBtn: "⬇ 下载 .pptx",
     yourSlideLabel: "📊 您生成的简报页",
-    targetSlideLabel: "🎯 目标基准简报页",
-    speakerNotesLabel: "🎙️ 演讲者备注 (Speaker Notes)",
-    qualityChecksHeader: "✅ 提交前简报质量自检",
+    targetSlideLabel: "🎯 标杆参考简报页",
+    speakerNotesLabel: "🎙️ 演讲者备注",
+    qualityChecksHeader: "✅ 提交前 3 页简报质量自检",
     checkLabels: {
-      slides3: "完整 3 页结构",
-      clientFacts: "包含核心客户数据 (RM 28M / 4.5M / 6.5M)",
-      visuals: "包含 KPI 卡、缺口柱状图与策略表",
-      notes: "包含演讲者备注",
-      compliance: "包含 BNM 与 Shariah 合规说明",
+      slides3: "严格限定 3 页结构",
+      clientFacts: "精准引用客户财务数据",
+      visuals: "KPI卡 + 缺口柱状图 + 策略表",
+      personalTouch: "融入个人策略切入点",
+      compliance: "BNM 与信托/Hibah合规护栏",
     },
-    backToPromptBtn: "✏️ 返回修改提示词并重新生成",
-    finalSubmitBtn: "🏆 最终确认并提交简报至主赛场（仅限提交一次）",
-    finalSubmittingText: "⚖️ AI 评审团正在评分并锁定您的最终成绩...",
+    backToPromptBtn: "✏️ 返回调整策略或切入点",
+    finalSubmitBtn: "🏆 最终确认并提交 3 页简报至主赛场",
+    finalSubmittingText: "⚖️ AI 评审团正在为您的 3 页简报与个人策略打分...",
     oneTimeNotice:
-      "🔒 定稿前您可以多次修改提示词并重新生成简报。一旦点击「最终确认并提交」，成绩将立即锁定并同步至主赛场总积分榜！",
-    jobDoneBadge: "✅ 挑战 2 已完成 — 任务达成！(已锁定)",
-    jobDoneTitle: "您的 3 页高管战前提案简报已定稿并计入主赛场总成绩",
+      "🔒 定稿前可无限次调整并重新生成 3 页简报；点击「最终确认并提交」后成绩即锁定上榜！",
+    jobDoneBadge: "✅ 挑战 2 已完成 — 已锁定上榜",
+    jobDoneTitle: "您的 3 页高管战前提案简报已同步至主赛场大屏",
     arenaScoreLabel: "主赛场得分",
-    deckScoreLabel: "AI 评审简报评级",
-    rubricHeader: "🏅 6 维 AI 专业评审得分详情",
+    deckScoreLabel: "简报专业评级",
+    rubricHeader: "🏅 6 维高管简报评审详情",
     rubricDims: [
       "结构与完整度",
       "客户共情与定制化",
@@ -186,90 +194,93 @@ const C2_UI_I18N = {
       "异议应对准备",
       "合规与公平待客",
     ],
-    viewMainScoreBtn: "🏆 查看主赛场总积分榜与成绩单",
+    viewMainScoreBtn: "🏆 查看主赛场总积分榜",
     proceedC3Btn: "🚀 进入挑战 3 →",
-    waitingC3Text: "⏳ 分数已计入主赛场总榜！请等待主持人解锁挑战 3...",
-    promptUsedLabel: "📝 您最终提交的 R.C.T.F.C. 提示词",
+    waitingC3Text: "⏳ 分数已计入大屏总榜！请等待主持人开启挑战 3...",
+    promptUsedLabel: "📝 您最终提交的提示词与个人策略切入点",
   },
   yue: {
-    badge: "🧠 挑戰 2 • R.C.T.F.C. 提示詞對決",
-    title: "高管戰前提案簡報工作室 (3-Slide Deck Studio)",
+    badge: "🧠 挑戰 2 • R.C.T.F.C. 三頁高管簡報工作室",
+    title: "高管戰前 3 頁簡報工作室",
     subtitle:
-      "結合 R.C.T.F.C. 五維提示詞框架同團隊長「財富規劃 + 人情味共情」加分項，為高淨值客戶 Datin Sharifah Aleya 生成 3 頁戰前提案簡報。你可以自由改提示詞同多次生成，定稿後最終提交一次。",
-    step1Tab: "1️⃣ 構建 R.C.T.F.C. 提示詞",
+      "每位團隊長都會獲派專屬高淨值客戶個案。激活 R.C.T.F.C. 五大維度並加入你嘅「個人策略切入點」，生成嚴格限定 3 頁嘅董事會級簡報。",
+    step1Tab: "1️⃣ 構建五維策略與個人切入點",
     step2Tab: "2️⃣ 預覽 3 頁簡報並最終提交",
-    targetBtn: "🎯 查看目標參考簡報",
-    hideTargetBtn: "✕ 收起目標簡報",
-    targetGoalBanner: "🎯 目標 3 頁參考簡報（你嘅對標目標）",
-    caseHeader: "📋 客戶背景檔案：Datin Sharifah Aleya（52歲，專科診所集團創辦人）",
-    moreCaseBtn: "查看完整檔案 ▾",
-    lessCaseBtn: "收起詳情 ▴",
-    caseCards: [
-      { icon: "👤", label: "客戶與企業", value: "巴生谷 6 間專科診所創辦人兼董事總經理 (52歲)" },
-      { icon: "💰", label: "淨資產 ≈ RM 28M", value: "診所股權 RM 19M (68%) • 物業 RM 6M • 流動資金 RM 3M" },
-      { icon: "🏦", label: "負債與現有保單", value: "RM 4.5M 診所擴建貸款(個人擔保) • 僅 RM 1M 舊人壽" },
-      { icon: "👨‍👩‍👧‍👦", label: "家庭與留學負擔", value: "丈夫靠每月 RM 30k 分紅 • 2名仔女英國/墨爾本讀書(RM 450k/年)" },
-      { icon: "📉", label: "遺產流動性缺口", value: "需 RM 10.5M 流動資金 vs 現有 RM 4.0M = RM 6.5M 缺口" },
-      { icon: "🕌", label: "伊斯蘭方案與 BNM 合規", value: "Family Takaful + Hibah • 先做 Fact-Find • PDS 及15日冷靜期" },
-    ],
-    pillarsHeader: "R.C.T.F.C. 五維提示詞構建器（撳任何維度或者一鍵全選 5 個維度再自由執靚）",
-    insertPillarBtn: "+ 插入到提示詞",
-    pillarIncluded: "✓ 已包含呢個維度",
-    insertAllBtn: "✨ 一鍵插入全部 5 個維度",
-    resetPromptBtn: "↺ 重置初始提示詞",
-    leaderBoostersHeader: "💡 團隊長「財富規劃 · 客戶人情味 · 關係成交」加分項（撳一下加落提示詞）：",
-    addAllBoostersBtn: "✨ 一鍵加晒 3 大領袖加分項",
-    leaderBoosters: [
+    targetBtn: "🎯 參考標竿簡報",
+    hideTargetBtn: "✕ 收起標竿",
+    browseCasesBtn: "📂 14類個案",
+    switchCaseBtn: "🎲 轉另一個案",
+    casePickerTitle: "揀選高淨值客戶實戰個案（14 大行業原型 • 全場 56 席獨立個案）",
+    targetGoalBanner: "🎯 3 頁標竿參考簡報（對應你當前客戶）",
+    assignedCaseLabel: "你嘅專屬高淨值客戶檔案",
+    moreCaseBtn: "完整背景 ▾",
+    lessCaseBtn: "收起 ▴",
+    pillarsHeader: "1. 激活 R.C.T.F.C. 五維提示詞積木",
+    pillarsSub: "撳一下點亮各個維度，或者一鍵激活晒 5 個維度再專注寫下面嘅個人策略切入點。",
+    insertAllBtn: "✨ 一鍵激活全部 5 個維度",
+    weakPromptBtn: "🧪 試下普通一句話提示詞對比",
+    toneHeader: "2. 揀選簡報呈現風格",
+    tones: [
       {
-        label: "❤️ 創辦人共情與守護屋企尊嚴",
-        snippet:
-          "[客戶人情味與家族傳承]：用窩心共情角度切入——保護 Datin Aleya 一手創立嘅 6 間診所唔使被迫賤賣，確保老公 Dr Hakim 維持生活品質，同埋英國讀醫大女 Aisyah、墨爾本細仔 Imran 安心完成大學。",
+        id: "boardroom",
+        label: "🏛️ 家族辦公室尊尚風",
+        clause: "[呈現風格]：採用資深家族辦公室董事會風格——聚焦資產負債表同傳承架構，零 Hard Sell。",
       },
       {
-        label: "🛡️ Hibah 贈與同債務隔離策略",
-        snippet:
-          "[財富規劃與 Hibah 隔離]：清晰展示 Family Takaful 配合 Hibah 指定受益人點樣喺遺產凍結之外即刻注入流動現金，清還 RM 4.5M 個人擔保貸款兼顧及 Faraid 屋企和睦。",
+        id: "empathy",
+        label: "❤️ 創辦人共情與守護屋企",
+        clause: "[呈現風格]：窩心共情切入——守護創業心血免遭賤賣，保障另一半生活尊嚴同仔女升學和睦。",
       },
       {
-        label: "🤝 約埋會計師同公司秘書一齊傾",
-        snippet:
-          "[專業顧問式約見]：唔做 Hard Sell，建議同 Datin 嘅公司秘書及稅務會計師開個 30 分鐘三方財富規劃會議。",
+        id: "cfo",
+        label: "📊 CFO 財務量化對比",
+        clause: "[呈現風格]：嚴謹 CFO 財務視角——用每年約 2% 成本對比資產凍結 40% 折價損失同法定信託隔離。",
       },
     ],
-    promptLabel: "✏️ 你發送俾 Gemini 嘅完整提示詞（可一鍵組合上面全部重點，再用自己說話自由改）：",
-    promptPlaceholder: "喺度輸入或者組合你嘅 R.C.T.F.C. 同財富規劃提示詞...",
-    pillarsActiveLabel: "已激活 R.C.T.F.C. 維度",
-    generateBtn: "⚡ 生成 3 頁高管戰前簡報",
+    angleHeader: "3. 💡 加入你嘅「個人策略切入點 / 約見鉤子」",
+    angleSub: "騷出你獨門嘅團隊長破局心法！可以撳下面靈感膠囊，或者用自己說話輸入：",
+    anglePlaceholder: "例如：提議同客戶嘅公司秘書及稅務會計師開個30分鐘三方聯合審視，零推銷壓力...",
+    promptDrawerShow: "🔍 查看 / 自由修改完整提示詞原文",
+    promptDrawerHide: "▴ 收起提示詞編輯器",
+    pillarsActiveLabel: "已激活 R.C.T.F.C.",
+    strictly3Badge: "嚴格限定 3 頁",
+    generateBtn: "⚡ 生成嚴格 3 頁高管戰前簡報",
     regenerateBtn: "🔄 更新並重新生成 3 頁簡報",
-    generatingText: "✨ Gemini 2.5 Flash 正在為你生成 3 頁高管戰前簡報...",
-    generatingImgText: "🎨 正在生成簡報配圖...",
+    genStages: [
+      "1/3 · 緊係度構建第 1 頁：客戶資產快照同 4 大 KPI 指標卡...",
+      "2/3 · 緊係度測算第 2 頁：流動性缺口量化對比柱狀圖...",
+      "3/3 · 緊係度生成第 3 頁：定制傳承策略矩陣表同演講備註...",
+    ],
+    generatingImgText: "🎨 緊係度繪製 16:9 高管簡報配圖...",
+    finishingImgBeforeSubmit: "🎨 緊係度附上簡報配圖並鎖定最終成績...",
     slideTabPrefix: "第 ",
     slideTabSuffix: " 頁",
-    slidesCountBadge: "頁簡報 ✓",
-    compareToggleOn: "🔀 對比目標簡報：已開啟",
-    compareToggleOff: "🔀 與目標參考簡報並排對比",
+    slideShortLabels: ["全景與KPI", "流動性缺口圖", "策略矩陣表"],
+    slidesCountBadge: "嚴格 3 頁已就緒 ✓",
+    compareToggleOn: "🔀 對比標竿簡報：開啟",
+    compareToggleOff: "🔀 與標竿簡報並排對比",
     downloadPptxBtn: "⬇ 下載 .pptx",
     yourSlideLabel: "📊 你生成嘅簡報頁",
-    targetSlideLabel: "🎯 目標基準簡報頁",
-    speakerNotesLabel: "🎙️ 演講者備註 (Speaker Notes)",
-    qualityChecksHeader: "✅ 提交前簡報質量自檢",
+    targetSlideLabel: "🎯 標竿參考簡報頁",
+    speakerNotesLabel: "🎙️ 演講者備註",
+    qualityChecksHeader: "✅ 提交前 3 頁簡報質量自檢",
     checkLabels: {
-      slides3: "完整 3 頁結構",
-      clientFacts: "包含核心客戶數據 (RM 28M / 4.5M / 6.5M)",
-      visuals: "包含 KPI 卡、缺口柱狀圖與策略表",
-      notes: "包含演講者備註",
-      compliance: "包含 BNM 與 Shariah 合規說明",
+      slides3: "嚴格限定 3 頁結構",
+      clientFacts: "精準引用客戶財務數據",
+      visuals: "KPI卡 + 缺口柱狀圖 + 策略表",
+      personalTouch: "融入個人策略切入點",
+      compliance: "BNM 與信託/Hibah合規護欄",
     },
-    backToPromptBtn: "✏️ 返回修改提示詞並重新生成",
-    finalSubmitBtn: "🏆 最終確認並提交簡報至主賽場（只限提交一次）",
-    finalSubmittingText: "⚖️ AI 評審團正在評分並鎖定你嘅最終成績...",
+    backToPromptBtn: "✏️ 返回調整策略或切入點",
+    finalSubmitBtn: "🏆 最終確認並提交 3 頁簡報至主賽場",
+    finalSubmittingText: "⚖️ AI 評審團緊係度為你份 3 頁簡報同個人策略評分...",
     oneTimeNotice:
-      "🔒 定稿前你可以多次修改提示詞並重新生成簡報。一旦撳咗「最終確認並提交」，成績會即刻鎖定並同步去主賽場總積分榜！",
-    jobDoneBadge: "✅ 挑戰 2 已完成 — 任務達成！(已鎖定)",
-    jobDoneTitle: "你嘅 3 頁高管戰前提案簡報已定稿並計入主賽場總成績",
+      "🔒 定稿前可以無限次調整並重新生成 3 頁簡報；撳咗「最終確認並提交」之後成績即刻鎖定上榜！",
+    jobDoneBadge: "✅ 挑戰 2 已完成 — 已鎖定上榜",
+    jobDoneTitle: "你份 3 頁高管戰前提案簡報已同步上主賽場大屏",
     arenaScoreLabel: "主賽場得分",
-    deckScoreLabel: "AI 評審簡報評級",
-    rubricHeader: "🏅 6 維 AI 專業評審得分詳情",
+    deckScoreLabel: "簡報專業評級",
+    rubricHeader: "🏅 6 維高管簡報評審詳情",
     rubricDims: [
       "結構同完整度",
       "客戶人情味同個人化",
@@ -278,90 +289,93 @@ const C2_UI_I18N = {
       "異議應對準備",
       "合規同公平待客",
     ],
-    viewMainScoreBtn: "🏆 查看主賽場總積分榜與成績單",
+    viewMainScoreBtn: "🏆 查看主賽場總積分榜",
     proceedC3Btn: "🚀 進入挑戰 3 →",
-    waitingC3Text: "⏳ 分數已計入主賽場總榜！請等待主持人解鎖挑戰 3...",
-    promptUsedLabel: "📝 你最終提交嘅 R.C.T.F.C. 提示詞",
+    waitingC3Text: "⏳ 分數已計入大屏總榜！請等待主持人開啟挑戰 3...",
+    promptUsedLabel: "📝 你最終提交嘅提示詞同個人策略切入點",
   },
   ms: {
-    badge: "🧠 CABARAN 2 • DUEL PROMPT R.C.T.F.C.",
-    title: "Studio Dek Pra-Pembentangan Eksekutif",
+    badge: "🧠 CABARAN 2 • STUDIO DEK 3-SLAID R.C.T.F.C.",
+    title: "Studio Dek Pra-Pembentangan 3-Slaid",
     subtitle:
-      "Gabungkan 5 Tiang R.C.T.F.C. + Penggalak Perancangan Kekayaan & Empati Pemimpin Agensi untuk menjana Dek Pra-Pembentangan 3-Slaid bagi Datin Sharifah Aleya. Sunting bebas, dan hantar sekali apabila muktamad.",
-    step1Tab: "1️⃣ Bina Prompt R.C.T.F.C.",
+      "Setiap pemimpin menerima kes pelanggan HNW unik. Aktifkan 5 tiang R.C.T.F.C., tambah Sudut Strategik Peribadi anda, dan jana dek tepat 3-slaid bertaraf bilik lembaga.",
+    step1Tab: "1️⃣ Bina Strategi & Sudut Peribadi",
     step2Tab: "2️⃣ Semak Dek 3-Slaid & Hantar",
-    targetBtn: "🎯 Lihat Dek Sasaran",
-    hideTargetBtn: "✕ Tutup Dek Sasaran",
-    targetGoalBanner: "🎯 DEK PENANDA ARAS 3-SLAID SASARAN (MATLAMAT ANDA)",
-    caseHeader: "📋 Senario Pelanggan: Datin Sharifah Aleya (Pengasas HNW, 52)",
-    moreCaseBtn: "Butiran Kes Penuh ▾",
-    lessCaseBtn: "Paparan Ringkas ▴",
-    caseCards: [
-      { icon: "👤", label: "Pelanggan & Klinik", value: "Pengasas & MD, 6 Klinik Pakar di Lembah Klang (52 thn)" },
-      { icon: "💰", label: "Nilai Bersih ≈ RM 28J", value: "Saham Klinik RM 19J (68%) • Hartanah RM 6J • Tunai RM 3J" },
-      { icon: "🏦", label: "Liabiliti & Polisi", value: "Pinjaman RM 4.5J (Jaminan Peribadi) • Polisi Hayat RM 1J" },
-      { icon: "👨‍👩‍👧‍👦", label: "Keluarga & Pendidikan", value: "Suami (dividen RM 30k/bln) • 2 Anak UK/Melb (RM 450k/thn)" },
-      { icon: "📉", label: "Jurang Kecairan Pusaka", value: "Perlu RM 10.5J lwn Aset Cair RM 4.0J = Jurang RM 6.5J" },
-      { icon: "🕌", label: "Syariah & Peraturan BNM", value: "Takaful Keluarga + Hibah • Fact-Find • PDS & 15 Hari Free-Look" },
-    ],
-    pillarsHeader: "Pembina Prompt 5-Tiang R.C.T.F.C. (Ketik mana-mana tiang atau masukkan kesemua 5 & sunting)",
-    insertPillarBtn: "+ Masukkan ke Prompt",
-    pillarIncluded: "✓ Sudah Dimasukkan",
-    insertAllBtn: "✨ Masukkan Kesemua 5 Tiang",
-    resetPromptBtn: "↺ Tetap Semula Prompt Asal",
-    leaderBoostersHeader: "💡 Penggalak Perancangan Kekayaan, Empati & Kreativiti Pemimpin Agensi (Ketik untuk gabung):",
-    addAllBoostersBtn: "✨ Tambah Kesemua 3 Penggalak Pemimpin",
-    leaderBoosters: [
+    targetBtn: "🎯 Dek Penanda Aras",
+    hideTargetBtn: "✕ Tutup Penanda Aras",
+    browseCasesBtn: "📂 14 Kes",
+    switchCaseBtn: "🎲 Tukar Kes",
+    casePickerTitle: "Pilih Senario Pelanggan HNW (14 Arketaip • 56 Kerusi Unik)",
+    targetGoalBanner: "🎯 DEK PENANDA ARAS 3-SLAID (UNTUK PELANGGAN ANDA)",
+    assignedCaseLabel: "PROFIL PELANGGAN HNW ANDA",
+    moreCaseBtn: "Butiran Penuh ▾",
+    lessCaseBtn: "Ringkas ▴",
+    pillarsHeader: "1. Aktifkan 5 Tiang Prompt R.C.T.F.C.",
+    pillarsSub: "Ketik setiap tiang atau aktifkan kesemua 5 tiang dan fokus pada sudut peribadi anda di bawah.",
+    insertAllBtn: "✨ Aktifkan Kesemua 5 Tiang",
+    weakPromptBtn: "🧪 Cuba Prompt Lemah 1-Baris",
+    toneHeader: "2. Pilih Gaya Pembentangan",
+    tones: [
       {
-        label: "❤️ Empati Pengasas & Maruah Keluarga",
-        snippet:
-          "[Empati & Kesinambungan Keluarga]: Gunakan nada empati yang mesra — lindungi 6 klinik Datin Aleya daripada jualan terpaksa supaya Dr Hakim terus terpelihara dan pengajian Aisyah (UK) & Imran (Melbourne) tidak terjejas.",
+        id: "boardroom",
+        label: "🏛️ Bilik Lembaga Pejabat Keluarga",
+        clause: "[Gaya Pembentangan]: Nada eksekutif Pejabat Keluarga yang berwibawa — fokus kunci kira-kira tanpa tekanan jualan.",
       },
       {
-        label: "🛡️ Strategi Hibah & Perlindungan Pemiutang",
-        snippet:
-          "[Perancangan Kekayaan & Hibah]: Tunjukkan bagaimana Takaful Keluarga + penamaan Hibah menyuntik tunai segera patuh Syariah di luar pembekuan pusaka untuk menyelesaikan pinjaman jaminan peribadi RM 4.5J serta menjaga keharmonian Faraid.",
+        id: "empathy",
+        label: "❤️ Empati Pengasas & Keluarga",
+        clause: "[Gaya Pembentangan]: Nada empati hangat — lindungi maruah keluarga, kesinambungan perniagaan dan pendidikan anak.",
       },
       {
-        label: "🤝 Sesi Bersama Akauntan & Setiausaha Syarikat",
-        snippet:
-          "[Penutup Perundingan Kolaboratif]: Cadangkan sesi semakan bersama selama 30 minit dengan setiausaha syarikat & akauntan cukai Datin tanpa tekanan jualan.",
+        id: "cfo",
+        label: "📊 Ketepatan Analitik CFO",
+        clause: "[Gaya Pembentangan]: Nada analitik CFO — bandingkan kos ~2% setahun lwn risiko jualan terpaksa diskaun 40%.",
       },
     ],
-    promptLabel: "✏️ Prompt Utama Anda kepada Gemini (Gabungkan tiang & penggalak di atas, dan sunting bebas):",
-    promptPlaceholder: "Tulis atau gabungkan prompt 5-tiang R.C.T.F.C. & perancangan kekayaan anda di sini...",
+    angleHeader: "3. 💡 Tambah Sudut Strategik Peribadi Anda",
+    angleSub: "Apakah sentuhan peribadi anda untuk memikat pelanggan ini? Ketik cadangan atau tulis sendiri:",
+    anglePlaceholder: "cth: Cadangkan semakan 30 minit bersama setiausaha syarikat & akauntan cukai tanpa tekanan jualan...",
+    promptDrawerShow: "🔍 Lihat / Sunting Prompt Penuh",
+    promptDrawerHide: "▴ Tutup Penyunting Prompt",
     pillarsActiveLabel: "Tiang R.C.T.F.C. Aktif",
-    generateBtn: "⚡ Jana Dek Pra-Pembentangan 3-Slaid",
-    regenerateBtn: "🔄 Kemas Kini & Jana Semula Dek 3-Slaid",
-    generatingText: "✨ Gemini 2.5 Flash sedang membina dek eksekutif 3-slaid anda...",
-    generatingImgText: "🎨 Menjana ilustrasi slaid...",
+    strictly3Badge: "TEPAT 3 SLAID",
+    generateBtn: "⚡ Jana Dek Eksekutif 3-Slaid",
+    regenerateBtn: "🔄 Jana Semula Dek 3-Slaid",
+    genStages: [
+      "1/3 · Membina Slaid 1 Gambaran Pelanggan & 4 Kad KPI...",
+      "2/3 · Memodelkan Slaid 2 Carta Palang Jurang Kecairan...",
+      "3/3 · Menyusun Slaid 3 Jadual Strategi & Nota Pembentang...",
+    ],
+    generatingImgText: "🎨 Menjana visual slaid eksekutif 16:9...",
+    finishingImgBeforeSubmit: "🎨 Melampirkan visual slaid sebelum mengunci penghantaran...",
     slideTabPrefix: "Slaid ",
     slideTabSuffix: "",
-    slidesCountBadge: "Slaid ✓",
-    compareToggleOn: "🔀 Banding dengan Dek Sasaran: AKTIF",
-    compareToggleOff: "🔀 Banding Sebelah-menyebelah dengan Sasaran",
+    slideShortLabels: ["Ringkasan KPI", "Carta Jurang", "Jadual Strategi"],
+    slidesCountBadge: "3 Slaid Sedia ✓",
+    compareToggleOn: "🔀 Banding Penanda Aras: AKTIF",
+    compareToggleOff: "🔀 Banding dengan Penanda Aras",
     downloadPptxBtn: "⬇ Muat Turun .pptx",
     yourSlideLabel: "📊 SLAID JANAAN ANDA",
-    targetSlideLabel: "🎯 SLAID PENANDA ARAS SASARAN",
-    speakerNotesLabel: "🎙️ Nota Pembentang (Speaker Notes)",
-    qualityChecksHeader: "✅ Senarai Semak Kualiti Sebelum Hantar",
+    targetSlideLabel: "🎯 SLAID PENANDA ARAS",
+    speakerNotesLabel: "🎙️ Nota Pembentang",
+    qualityChecksHeader: "✅ Senarai Semak Kualiti Dek 3-Slaid",
     checkLabels: {
-      slides3: "3 Slaid Berstruktur",
-      clientFacts: "Fakta Pelanggan (RM 28J / 4.5J / 6.5J)",
-      visuals: "Kad KPI, Carta Jurang & Jadual Strategi",
-      notes: "Nota Pembentang Disertakan",
-      compliance: "Garis Panduan Pematuhan BNM & Syariah",
+      slides3: "Tepat 3 Slaid",
+      clientFacts: "Angka Kunci Kira-kira Pelanggan",
+      visuals: "KPI + Carta Jurang + Jadual",
+      personalTouch: "Sudut Strategik Peribadi",
+      compliance: "Pematuhan BNM & Amanah/Hibah",
     },
-    backToPromptBtn: "✏️ Edit Prompt & Jana Semula",
-    finalSubmitBtn: "🏆 Muktamadkan & Hantar Dek ke Arena (Hantar Sekali)",
-    finalSubmittingText: "⚖️ Hakim AI Sedang Menilai & Mengunci Markah Akhir Anda...",
+    backToPromptBtn: "✏️ Kemas Kini Strategi / Sudut",
+    finalSubmitBtn: "🏆 Muktamadkan & Hantar Dek 3-Slaid ke Arena",
+    finalSubmittingText: "⚖️ Hakim AI Menilai Dek 3-Slaid & Sudut Strategik Anda...",
     oneTimeNotice:
-      "🔒 Anda boleh menyunting prompt dan menjana semula dek seberapa banyak kali semasa draf. Sebaik sahaja anda klik Muktamadkan & Hantar, markah anda dikunci dan dihantar ke Papan Pendahulu Utama Arena.",
-    jobDoneBadge: "✅ CABARAN 2 SELESAI — TUGAS SELESAI! (DIKUNCI)",
-    jobDoneTitle: "Dek Pra-Pembentangan 3-Slaid Anda Telah Dimuktamadkan & Dinilai",
-    arenaScoreLabel: "Markah Arena Utama",
-    deckScoreLabel: "Penilaian Dek Hakim AI",
-    rubricHeader: "🏅 Pecahan Rubrik 6-Dimensi Hakim AI",
+      "🔒 Jana semula seberapa kerap semasa draf. Klik Muktamadkan & Hantar akan mengunci markah ke Papan Pendahulu.",
+    jobDoneBadge: "✅ CABARAN 2 SELESAI — DIKUNCI",
+    jobDoneTitle: "Dek Pra-Pembentangan Eksekutif 3-Slaid Anda Kini Di Arena Utama",
+    arenaScoreLabel: "Markah Arena",
+    deckScoreLabel: "Penilaian Dek",
+    rubricHeader: "🏅 Pecahan Rubrik 6-Dimensi",
     rubricDims: [
       "Struktur & Kesempurnaan",
       "Empati & Pemperibadian Pelanggan",
@@ -370,90 +384,93 @@ const C2_UI_I18N = {
       "Kesediaan Menangani Bantahan",
       "Pematuhan & Layanan Adil",
     ],
-    viewMainScoreBtn: "🏆 Lihat Kad Skor & Kedudukan Utama",
+    viewMainScoreBtn: "🏆 Lihat Papan Pendahulu Utama",
     proceedC3Btn: "🚀 Teruskan ke Cabaran 3 →",
-    waitingC3Text: "⏳ Markah dimasukkan ke Arena Utama! Menunggu Penyampai membuka Cabaran 3...",
-    promptUsedLabel: "📝 Prompt R.C.T.F.C. Muktamad Anda",
+    waitingC3Text: "⏳ Markah direkodkan! Menunggu Penyampai membuka Cabaran 3...",
+    promptUsedLabel: "📝 Prompt R.C.T.F.C. & Sudut Strategik Anda",
   },
   ta: {
-    badge: "🧠 சவால் 2 • R.C.T.F.C. ப்ராம்ப்ட் போட்டி",
-    title: "நிர்வாக முன்-முன்மொழிவு ஸ்லைடு ஸ்டுடியோ",
+    badge: "🧠 சவால் 2 • R.C.T.F.C. 3-ஸ்லைடு ஸ்டுடியோ",
+    title: "நிர்வாக முன்-முன்மொழிவு 3-ஸ்லைடு ஸ்டுடியோ",
     subtitle:
-      "Datin Sharifah Aleya-க்கான 3-ஸ்லைடு முன்-முன்மொழிவு விளக்கக்காட்சியை உருவாக்க 5-தூண் R.C.T.F.C. கட்டமைப்பு மற்றும் செல்வத் திட்டமிடல் & அக்கறை ஊக்கிகளை இணைத்து சுதந்திரமாகத் திருத்துங்கள்.",
-    step1Tab: "1️⃣ R.C.T.F.C. ப்ராம்ப்ட் உருவாக்கம்",
-    step2Tab: "2️⃣ 3-ஸ்லைடு ஆய்வு & இறுதி சமர்ப்பிப்பு",
-    targetBtn: "🎯 இலக்கு ஸ்லைடுகளைப் பார்க்க",
-    hideTargetBtn: "✕ இலக்கு ஸ்லைடுகளை மறை",
-    targetGoalBanner: "🎯 இலக்கு 3-ஸ்லைடு மாதிரி விளக்கக்காட்சி (உங்கள் இலக்கு)",
-    caseHeader: "📋 வாடிக்கையாளர் விவரம்: Datin Sharifah Aleya (நிறுவனர், 52)",
-    moreCaseBtn: "முழு விவரங்கள் ▾",
-    lessCaseBtn: "சுருக்கமான காட்சி ▴",
-    caseCards: [
-      { icon: "👤", label: "வாடிக்கையாளர் & நிறுவனம்", value: "நிறுவனர் & MD, 6 சிறப்பு கிளினிக்குகள் (கிள்ளான் பள்ளத்தாக்கு)" },
-      { icon: "💰", label: "நிகர சொத்து ≈ RM 28M", value: "கிளினிக் பங்குகள் RM 19M (68%) • சொத்து RM 6M • ரொக்கம் RM 3M" },
-      { icon: "🏦", label: "கடன் & காப்பீடு", value: "RM 4.5M கிளினிக் கடன் (தனிப்பட்ட உத்தரவாதம்) • RM 1M ஆயுள் பாலிசி" },
-      { icon: "👨‍👩‍👧‍👦", label: "குடும்பம் & கல்வி", value: "கணவர் (RM 30k/மாதம்) • 2 பிள்ளைகள் UK/Melb கல்வி (RM 450k/ஆண்டு)" },
-      { icon: "📉", label: "பணப்புழக்க இடைவெளி", value: "தேவை RM 10.5M vs திரவ சொத்து RM 4.0M = RM 6.5M பற்றாக்குறை" },
-      { icon: "🕌", label: "ஷரியா & BNM விதிகள்", value: "Family Takaful + Hibah • Fact-Find • PDS & 15-நாள் Free-Look" },
-    ],
-    pillarsHeader: "5-தூண் R.C.T.F.C. ப்ராம்ப்ட் கட்டமைப்பாளர் (எந்த தூணையும் தட்டிச் சேர்க்கவும் அல்லது திருத்தவும்)",
-    insertPillarBtn: "+ ப்ராம்ப்ட்டில் சேர்க்கவும்",
-    pillarIncluded: "✓ ப்ராம்ப்ட்டில் உள்ளது",
-    insertAllBtn: "✨ அனைத்து 5 தூண்களையும் சேர்",
-    resetPromptBtn: "↺ தொடக்க ப்ராம்ப்ட்டுக்கு மீட்டமை",
-    leaderBoostersHeader: "💡 முகமைத் தலைவர் செல்வத் திட்டமிடல் & வாடிக்கையாளர் அக்கறை ஊக்கிகள் (சேர்க்க அழுத்தவும்):",
-    addAllBoostersBtn: "✨ அனைத்து 3 தலைவர் ஊக்கிகளையும் சேர்",
-    leaderBoosters: [
+      "ஒவ்வொரு தலைவருக்கும் தனித்துவமான HNW வாடிக்கையாளர் வழக்கு வழங்கப்படுகிறது. 5 R.C.T.F.C. தூண்கள் மற்றும் உங்கள் தனிப்பட்ட உத்தியை இணைத்து சரியாக 3-ஸ்லைடு விளக்கக்காட்சியை உருவாக்குங்கள்.",
+    step1Tab: "1️⃣ உத்தி & தனிப்பட்ட கோணம்",
+    step2Tab: "2️⃣ 3-ஸ்லைடு ஆய்வு & சமர்ப்பிப்பு",
+    targetBtn: "🎯 மாதிரி டெக்",
+    hideTargetBtn: "✕ மாதிரியை மறை",
+    browseCasesBtn: "📂 14 வழக்குகள்",
+    switchCaseBtn: "🎲 வழக்கை மாற்று",
+    casePickerTitle: "HNW வாடிக்கையாளர் வழக்கைத் தேர்ந்தெடுக்கவும் (14 வகைகள் • 56 இடங்கள்)",
+    targetGoalBanner: "🎯 3-ஸ்லைடு மாதிரி விளக்கக்காட்சி",
+    assignedCaseLabel: "உங்கள் HNW வாடிக்கையாளர் விவரம்",
+    moreCaseBtn: "முழு விவரம் ▾",
+    lessCaseBtn: "சுருக்கு ▴",
+    pillarsHeader: "1. 5 R.C.T.F.C. தூண்களைச் செயல்படுத்தவும்",
+    pillarsSub: "ஒவ்வொரு தூணையும் தட்டவும் அல்லது அனைத்தையும் இயக்கி கீழே உங்கள் தனிப்பட்ட உத்தியைச் சேர்க்கவும்.",
+    insertAllBtn: "✨ அனைத்து 5 தூண்களையும் இயக்கு",
+    weakPromptBtn: "🧪 எளிய 1-வரி ப்ராம்ப்ட் சோதனை",
+    toneHeader: "2. விளக்கக்காட்சி பாணியைத் தேர்ந்தெடுக்கவும்",
+    tones: [
       {
-        label: "❤️ நிறுவனர் அக்கறை & குடும்ப கௌரவம்",
-        snippet:
-          "[வாடிக்கையாளர் அக்கறை & குடும்ப பாதுகாப்பு]: Datin Aleya-வின் 6 கிளினிக்குகள் அவசர விற்பனைக்குச் செல்லாமல் பாதுகாத்து, கணவர் Dr Hakim மற்றும் பிள்ளைகள் Aisyah (UK), Imran (Melbourne) கல்வி தடையின்றித் தொடர அக்கறையுடன் அணுகவும்.",
+        id: "boardroom",
+        label: "🏛️ குடும்ப அலுவலக போர்டுரூம்",
+        clause: "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales pressure.",
       },
       {
-        label: "🛡️ Hibah & கடன் பாதுகாப்பு உத்தி",
-        snippet:
-          "[செல்வத் திட்டமிடல் & Hibah]: Family Takaful மற்றும் Hibah மூலம் சொத்து முடக்கத்திற்கு வெளியே உடனடி ரொக்கத்தை வழங்கி RM 4.5M கடனை அடைத்து Faraid குடும்ப ஒற்றுமையைப் பாதுகாப்பதை விளக்கவும்.",
+        id: "empathy",
+        label: "❤️ நிறுவனர் & குடும்ப அக்கறை",
+        clause: "[Presentation Style]: Warm founder empathy — protect family harmony, spouse security, and children's education.",
       },
       {
-        label: "🤝 கணக்காளர் & நிறுவனச் செயலாளருடன் கூட்டு ஆலோசனை",
-        snippet:
-          "[ஆலோசனை அணுகுமுறை]: விற்பனை அழுத்தமின்றி Datin-ன் கணக்காளர் மற்றும் நிறுவனச் செயலாளருடன் 30 நிமிட கூட்டு ஆலோசனைக் கூட்டத்தை முன்மொழியவும்.",
+        id: "cfo",
+        label: "📊 CFO நிதித் துல்லியம்",
+        clause: "[Presentation Style]: Analytical CFO tone — compare ~2% annual cost vs 40% forced asset fire-sale loss.",
       },
     ],
-    promptLabel: "✏️ Gemini-க்கான உங்கள் முழு ப்ராம்ப்ட் (மேலே உள்ளவற்றை இணைத்து உங்கள் சொந்த நடையில் திருத்தவும்):",
-    promptPlaceholder: "உங்கள் 5-தூண் R.C.T.F.C. மற்றும் செல்வத் திட்டமிடல் ப்ராம்ப்ட்டை இங்கே எழுதவும்...",
-    pillarsActiveLabel: "செயலில் உள்ள R.C.T.F.C. தூண்கள்",
+    angleHeader: "3. 💡 உங்கள் தனிப்பட்ட உத்தி / ஆலோசனை அணுகுமுறை",
+    angleSub: "உங்கள் தனித்துவமான ஆலோசனைக் கோணத்தைத் தட்டவும் அல்லது எழுதவும்:",
+    anglePlaceholder: "எ.கா: கணக்காளர் மற்றும் நிறுவனச் செயலாளருடன் 30 நிமிட கூட்டு ஆய்வுக்கு அழைப்பு...",
+    promptDrawerShow: "🔍 முழு ப்ராம்ப்ட்டை பார்க்க / திருத்த",
+    promptDrawerHide: "▴ ப்ராம்ப்ட் பெட்டியை மூடு",
+    pillarsActiveLabel: "R.C.T.F.C. தூண்கள்",
+    strictly3Badge: "சரியாக 3 ஸ்லைடுகள்",
     generateBtn: "⚡ 3-ஸ்லைடு விளக்கக்காட்சியை உருவாக்கு",
-    regenerateBtn: "🔄 புதுப்பித்து மீண்டும் 3-ஸ்லைடு உருவாக்கு",
-    generatingText: "✨ Gemini 2.5 Flash உங்கள் 3-ஸ்லைடு விளக்கக்காட்சியை உருவாக்குகிறது...",
-    generatingImgText: "🎨 ஸ்லைடு படங்களை உருவாக்குகிறது...",
+    regenerateBtn: "🔄 மீண்டும் 3-ஸ்லைடு உருவாக்கு",
+    genStages: [
+      "1/3 · ஸ்லைடு 1 வாடிக்கையாளர் சுருக்கம் & KPI அட்டைகள்...",
+      "2/3 · ஸ்லைடு 2 பணப்புழக்க இடைவெளி வரைபடம்...",
+      "3/3 · ஸ்லைடு 3 தீர்வு அட்டவணை & பேச்சாளர் குறிப்புகள்...",
+    ],
+    generatingImgText: "🎨 16:9 ஸ்லைடு காட்சிகளை உருவாக்குகிறது...",
+    finishingImgBeforeSubmit: "🎨 ஸ்லைடு படங்களை இணைத்து இறுதி செய்கிறது...",
     slideTabPrefix: "ஸ்லைடு ",
     slideTabSuffix: "",
-    slidesCountBadge: "ஸ்லைடுகள் ✓",
-    compareToggleOn: "🔀 இலக்குடன் ஒப்பீடு: இயக்கத்தில்",
-    compareToggleOff: "🔀 இலக்கு ஸ்லைடுடன் ஒப்பிடுக",
+    slideShortLabels: ["KPI சுருக்கம்", "இடைவெளி வரைபடம்", "தீர்வு அட்டவணை"],
+    slidesCountBadge: "3 ஸ்லைடுகள் தயார் ✓",
+    compareToggleOn: "🔀 மாதிரியுடன் ஒப்பீடு: இயக்கத்தில்",
+    compareToggleOff: "🔀 மாதிரியுடன் ஒப்பிடுக",
     downloadPptxBtn: "⬇ .pptx பதிவிறக்கம்",
-    yourSlideLabel: "📊 நீங்கள் உருவாக்கிய ஸ்லைடு",
-    targetSlideLabel: "🎯 இலக்கு மாதிரி ஸ்லைடு",
-    speakerNotesLabel: "🎙️ பேச்சாளர் குறிப்புகள் (Speaker Notes)",
-    qualityChecksHeader: "✅ சமர்ப்பிக்கும் முன் தர சரிபார்ப்பு",
+    yourSlideLabel: "📊 உங்கள் ஸ்லைடு",
+    targetSlideLabel: "🎯 மாதிரி ஸ்லைடு",
+    speakerNotesLabel: "🎙️ பேச்சாளர் குறிப்புகள்",
+    qualityChecksHeader: "✅ சமர்ப்பிக்கும் முன் 3-ஸ்லைடு தர சரிபார்ப்பு",
     checkLabels: {
-      slides3: "3 ஸ்லைடுகள் கட்டமைப்பு",
-      clientFacts: "வாடிக்கையாளர் எண்கள் (RM 28M / 4.5M / 6.5M)",
-      visuals: "KPI அட்டைகள், வரைபடம் & அட்டவணை",
-      notes: "பேச்சாளர் குறிப்புகள் உள்ளன",
-      compliance: "BNM & ஷரியா விதிமுறைகள்",
+      slides3: "சரியாக 3 ஸ்லைடுகள்",
+      clientFacts: "வாடிக்கையாளர் நிதி எண்கள்",
+      visuals: "KPI + வரைபடம் + அட்டவணை",
+      personalTouch: "தனிப்பட்ட உத்தி கோணம்",
+      compliance: "BNM & அறக்கட்டளை/Hibah விதிகள்",
     },
-    backToPromptBtn: "✏️ ப்ராம்ப்ட்டை மாற்றி மீண்டும் உருவாக்கு",
-    finalSubmitBtn: "🏆 இறுதி செய்து அரங்கிற்கு சமர்ப்பிக்கவும் (ஒருமுறை மட்டும்)",
-    finalSubmittingText: "⚖️ AI நடுவர் மதிப்பிட்டு உங்கள் இறுதி மதிப்பெண்ணை உறுதி செய்கிறார்...",
+    backToPromptBtn: "✏️ உத்தியை மாற்றி உருவாக்கு",
+    finalSubmitBtn: "🏆 3-ஸ்லைடு டெக்கை அரங்கிற்கு சமர்ப்பிக்கவும்",
+    finalSubmittingText: "⚖️ AI நடுவர் உங்கள் 3-ஸ்லைடு டெக்கை மதிப்பிடுகிறார்...",
     oneTimeNotice:
-      "🔒 வரைவு செய்யும்போது எத்தனை முறை வேண்டுமானாலும் ப்ராம்ப்ட்டை மாற்றி ஸ்லைடுகளை உருவாக்கலாம். இறுதி சமர்ப்பிப்பை அழுத்தியவுடன் உங்கள் மதிப்பெண் பிரதான தரவரிசைப் பட்டியலில் சேர்க்கப்பட்டு பூட்டப்படும்.",
-    jobDoneBadge: "✅ சவால் 2 முடிந்தது — பணி நிறைவு! (பூட்டப்பட்டது)",
-    jobDoneTitle: "உங்கள் 3-ஸ்லைடு விளக்கக்காட்சி இறுதி செய்யப்பட்டு பிரதான அரங்கில் மதிப்பிடப்பட்டது",
-    arenaScoreLabel: "பிரதான அரங்க மதிப்பெண்",
-    deckScoreLabel: "AI நடுவர் ஸ்லைடு மதிப்பீடு",
-    rubricHeader: "🏅 6-பரிமாண AI நடுவர் மதிப்பெண் விவரம்",
+      "🔒 வரைவு செய்யும்போது பலமுறை உருவாக்கலாம். இறுதி சமர்ப்பிப்பை அழுத்தியவுடன் மதிப்பெண் பூட்டப்படும்.",
+    jobDoneBadge: "✅ சவால் 2 முடிந்தது — பூட்டப்பட்டது",
+    jobDoneTitle: "உங்கள் 3-ஸ்லைடு விளக்கக்காட்சி பிரதான அரங்கில் பதிவானது",
+    arenaScoreLabel: "அரங்க மதிப்பெண்",
+    deckScoreLabel: "டெக் மதிப்பீடு",
+    rubricHeader: "🏅 6-பரிமாண AI நடுவர் மதிப்பீடு",
     rubricDims: [
       "கட்டமைப்பு & முழுமை",
       "வாடிக்கையாளர் அக்கறை & தனிப்பயனாக்கம்",
@@ -462,27 +479,27 @@ const C2_UI_I18N = {
       "ஆட்சேபனை எதிர்கொள்ளல்",
       "விதிமுறை இணக்கம் & நேர்மை",
     ],
-    viewMainScoreBtn: "🏆 பிரதான மதிப்பெண் பட்டியலைப் பார்க்க",
+    viewMainScoreBtn: "🏆 பிரதான தரவரிசைப் பட்டியல்",
     proceedC3Btn: "🚀 சவால் 3-க்குச் செல்லவும் →",
-    waitingC3Text: "⏳ மதிப்பெண் பிரதான பட்டியலில் சேர்க்கப்பட்டது! சவால் 3 திறக்கப்படும் வரை காத்திருக்கவும்...",
-    promptUsedLabel: "📝 நீங்கள் சமர்ப்பித்த இறுதி R.C.T.F.C. ப்ராம்ப்ட்",
+    waitingC3Text: "⏳ மதிப்பெண் பதிவானது! சவால் 3 திறக்கப்படும் வரை காத்திருக்கவும்...",
+    promptUsedLabel: "📝 நீங்கள் சமர்ப்பித்த ப்ராம்ப்ட் & தனிப்பட்ட உத்தி",
   },
 };
 
-const PILLAR_ICONS = {
-  role: "🎭",
-  context: "📋",
-  task: "🎯",
-  format: "📐",
-  constraints: "⚖️",
+const PILLAR_META = {
+  role: { icon: "🎭", code: "R" },
+  context: { icon: "📋", code: "C" },
+  task: { icon: "🎯", code: "T" },
+  format: { icon: "📐", code: "F" },
+  constraints: { icon: "⚖️", code: "C" },
 };
 
 const PILLAR_HEURISTICS = {
-  role: [/role|peranan|角色|பங்கு|consultant|advisor|perunding|顾问|顧問|ஆலோசகர்|prumda|prudential|pamb/i],
-  context: [/aleya|28m|28j|2800|4\.5m|4\.5j|450|6\.5m|6\.5j|650|19m|19j|1900|clinic|klinik|诊所|診所|கிளினிக்|hakim|aisyah|imran/i],
-  task: [/3-slide|3 slide|3 slaid|3页|3 頁|3頁|3-ஸ்லைடு|pre-pitch|pra-pembentangan|战前|戰前|முன்-முன்மொழிவு|liquidity|kecairan|流动性|流動性|பணப்புழக்க/i],
-  format: [/kpi|chart|table|carta|jadual|柱状图|柱狀圖|策略表|வரைபடம்|அட்டவணை|speaker notes|nota pembentang|演讲者备注|演講備註|பேச்சாளர்/i],
-  constraints: [/bnm|pds|free-look|free look|15-day|15 hari|15天|15日|15-நாள்|fact-find|analisis keperluan|需求分析|shariah|syariah|takaful|伊斯兰|伊斯蘭|ஷரியா/i],
+  role: [/role|peranan|角色|பங்கு|strategist|consultant|advisor|perunding|顾问|顧問|ஆலோசகர்|family-office|prumda/i],
+  context: [/rm\s*\d+|net worth|nilai bersih|净资产|淨資產|நிகர சொத்து|liquidity|kecairan|流动性|流動性|பணப்புழக்க/i],
+  task: [/3-slide|3 slide|3 slaid|3页|3 页|3頁|3 頁|3-ஸ்லைடு|3 ஸ்லைடுகள்|pre-pitch|pra-pembentangan|战前|戰前|முன்-முன்மொழிவு/i],
+  format: [/kpi|chart|table|carta|jadual|柱状图|柱狀圖|策略|வரைபடம்|அட்டவணை|speaker notes|nota pembentang|备注|備註|பேச்சாளர்/i],
+  constraints: [/bnm|pds|free-look|free look|15-day|15 hari|15天|15日|15-நாள்|fact-find|analisis keperluan|需求分析|schedule 10|shariah|syariah|takaful|hibah|法定信托|法定信託|ஷரியா/i],
 };
 
 function detectPillarStatusClient(promptText, guideSteps) {
@@ -491,102 +508,158 @@ function detectPillarStatusClient(promptText, guideSteps) {
   (guideSteps || []).forEach((g) => {
     const k = g.key;
     const tmpl = String(g.template || "").trim();
-    if (tmpl && txt.includes(tmpl.slice(0, Math.min(28, tmpl.length)))) {
+    if (tmpl && txt.includes(tmpl.slice(0, Math.min(26, tmpl.length)))) {
       out[k] = "done";
       return;
     }
     const regexes = PILLAR_HEURISTICS[k] || [];
-    const hit = regexes.some((rx) => rx.test(txt));
-    out[k] = hit ? "done" : "missing";
+    out[k] = regexes.some((rx) => rx.test(txt)) ? "done" : "missing";
   });
   return out;
 }
 
-/* Reusable 16:9 Executive Slide Card Component */
-function ExecutiveSlideCard({ slide, slideIndex, totalSlides, badgeLabel, speakerNotesLabel, compact = false }) {
+function getSemanticBarStyle(label, idx, totalBars) {
+  const low = String(label || "").toLowerCase();
+  if (/gap|shortfall|缺口|jurang|பற்றாக்குறை|இடைவெளி/.test(low) || (totalBars === 3 && idx === 2)) {
+    return {
+      bar: "bg-gradient-to-t from-[#b80d1d] to-[#ed1b2e] ring-2 ring-red-200",
+      val: "text-[#ed1b2e]",
+      tag: "GAP",
+    };
+  }
+  if (/available|liquid|have|cover|现有|現有|sedia ada|இருப்பு/.test(low) || (totalBars === 3 && idx === 1)) {
+    return {
+      bar: "bg-gradient-to-t from-emerald-700 to-emerald-500",
+      val: "text-emerald-700",
+      tag: null,
+    };
+  }
+  return {
+    bar: "bg-gradient-to-t from-slate-900 to-slate-700",
+    val: "text-slate-900",
+    tag: null,
+  };
+}
+
+/* Luxury 16:9 Executive Keynote Slide Card Component (Shared Globally) */
+function ExecutiveSlideCard({
+  slide,
+  slideIndex,
+  totalSlides = 3,
+  badgeLabel,
+  speakerNotesLabel,
+  generatingImages = false,
+  compact = false,
+}) {
   if (!slide) return null;
+  const clampedTotal = Math.min(3, Math.max(1, totalSlides || 3));
   const maxChartVal =
     slide.chart && Array.isArray(slide.chart.series)
       ? Math.max(...slide.chart.series.map((p) => Number(p.value) || 0), 1)
       : 1;
 
   return (
-    <div className="bg-white border-2 border-slate-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+    <div className="bg-white border-2 border-slate-200 rounded-2xl overflow-hidden shadow-md flex flex-col justify-between">
       <div>
-        <div className="h-1.5 bg-[#ed1b2e]" />
-        <div className={`${compact ? "p-3 space-y-2.5" : "p-4 sm:p-5 space-y-3"}`}>
-          {/* Top metadata row */}
-          <div className="flex items-start justify-between gap-2">
-            <div>
+        {/* Executive Dark Navy + Crimson Keynote Banner */}
+        <div className="h-1.5 bg-gradient-to-r from-[#ed1b2e] via-red-500 to-amber-500" />
+        <div className="bg-slate-900 text-white px-4 py-3 sm:px-5 sm:py-3.5 flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="px-2 py-0.5 rounded bg-[#ed1b2e] text-white text-[10px] font-extrabold uppercase tracking-wider">
+                SLIDE {slideIndex + 1} / {clampedTotal}
+              </span>
               {badgeLabel && (
-                <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#ed1b2e] mb-0.5">
-                  {badgeLabel} • {slideIndex + 1}/{totalSlides}
-                </div>
-              )}
-              <h4 className={`${compact ? "text-xs sm:text-sm" : "text-sm sm:text-base"} font-extrabold text-slate-900 leading-snug`}>
-                {slide.title}
-              </h4>
-              {slide.subtitle && (
-                <div className="text-[11px] text-slate-500 mt-0.5">{slide.subtitle}</div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">
+                  {badgeLabel}
+                </span>
               )}
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-50 text-[#ed1b2e] border border-red-200 font-bold uppercase shrink-0">
-              {slide.layout || "slide"}
-            </span>
+            <h4
+              className={`${
+                compact ? "text-xs sm:text-sm" : "text-sm sm:text-base"
+              } font-extrabold text-white leading-snug`}
+            >
+              {slide.title}
+            </h4>
+            {slide.subtitle && (
+              <div className="text-[11px] text-slate-300 mt-0.5 leading-snug">{slide.subtitle}</div>
+            )}
           </div>
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-bold uppercase shrink-0">
+            {slide.layout || "executive"}
+          </span>
+        </div>
 
-          {/* KPI Cards */}
+        {/* Slide Body */}
+        <div className={`${compact ? "p-3 space-y-2.5" : "p-4 sm:p-5 space-y-3.5"}`}>
+          {/* KPI Metric Cards */}
           {Array.isArray(slide.kpis) && slide.kpis.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {slide.kpis.map((k, ki) => (
-                <div key={ki} className="bg-red-50/60 border border-red-200 rounded-xl p-2">
-                  <div className="text-[10px] font-bold uppercase text-slate-500 truncate">{k.label}</div>
-                  <div className="text-xs sm:text-sm font-extrabold text-[#ed1b2e] mt-0.5">{k.value}</div>
-                  {k.note && <div className="text-[10px] text-slate-500 mt-0.5 leading-tight">{k.note}</div>}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {slide.kpis.slice(0, 4).map((k, ki) => (
+                <div
+                  key={ki}
+                  className="bg-gradient-to-br from-slate-50 to-red-50/40 border border-slate-200 border-t-2 border-t-[#ed1b2e] rounded-xl p-2.5 shadow-sm"
+                >
+                  <div className="text-[10px] font-extrabold uppercase tracking-wide text-slate-500 truncate">
+                    {k.label}
+                  </div>
+                  <div className="text-sm sm:text-base font-extrabold text-slate-900 mt-0.5">
+                    {k.value}
+                  </div>
+                  {k.note && (
+                    <div className="text-[10px] text-slate-500 mt-0.5 leading-tight">{k.note}</div>
+                  )}
                 </div>
               ))}
             </div>
           )}
 
-          {/* Bar Chart */}
+          {/* Semantic Liquidity Gap Bar Chart */}
           {slide.chart && Array.isArray(slide.chart.series) && slide.chart.series.length > 0 && (
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-1.5">
-              <div className="flex items-end gap-3 h-24 pt-3 px-2 border-b border-slate-300">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2">
+              <div className="flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                <span>Quantified Exposure Stress-Test</span>
+                {slide.chart.unit && <span>{slide.chart.unit}</span>}
+              </div>
+              <div className="flex items-end gap-4 h-28 pt-5 px-3 border-b-2 border-slate-300">
                 {slide.chart.series.map((pt, pi) => {
-                  const pct = Math.max(10, Math.round(((Number(pt.value) || 0) / maxChartVal) * 100));
-                  const barColors = ["bg-[#ed1b2e]", "bg-blue-600", "bg-amber-500", "bg-emerald-600"];
+                  const pct = Math.max(12, Math.round(((Number(pt.value) || 0) / maxChartVal) * 100));
+                  const st = getSemanticBarStyle(pt.label, pi, slide.chart.series.length);
                   return (
                     <div key={pi} className="flex-1 flex flex-col items-center justify-end h-full">
-                      <div className="text-[11px] font-extrabold text-slate-900 mb-0.5">{pt.value}</div>
+                      <div className={`text-xs font-extrabold mb-1 ${st.val}`}>
+                        {pt.value}
+                      </div>
                       <div
-                        className={`w-3/4 rounded-t-md transition-all ${barColors[pi % barColors.length]}`}
+                        className={`w-3/4 max-w-[76px] rounded-t-lg transition-all shadow-sm ${st.bar}`}
                         style={{ height: `${pct}%` }}
                       />
                     </div>
                   );
                 })}
               </div>
-              <div className="flex gap-3 px-2">
+              <div className="flex gap-4 px-3">
                 {slide.chart.series.map((pt, pi) => (
-                  <div key={pi} className="flex-1 text-center text-[10px] font-bold text-slate-700 leading-tight">
+                  <div
+                    key={pi}
+                    className="flex-1 text-center text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight"
+                  >
                     {pt.label}
                   </div>
                 ))}
               </div>
-              {slide.chart.unit && (
-                <div className="text-[10px] text-slate-400 text-right">{slide.chart.unit}</div>
-              )}
             </div>
           )}
 
-          {/* Strategy Table */}
+          {/* Executive Strategy Matrix Table */}
           {slide.table && Array.isArray(slide.table.headers) && slide.table.headers.length > 0 && (
-            <div className="overflow-x-auto border border-slate-200 rounded-xl">
+            <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
                   <tr className="bg-slate-900 text-white">
                     {slide.table.headers.map((h, hi) => (
-                      <th key={hi} className="p-2 font-bold text-[11px]">
+                      <th key={hi} className="px-2.5 py-2 font-extrabold text-[11px] tracking-wide">
                         {h}
                       </th>
                     ))}
@@ -594,9 +667,18 @@ function ExecutiveSlideCard({ slide, slideIndex, totalSlides, badgeLabel, speake
                 </thead>
                 <tbody>
                   {(slide.table.rows || []).map((row, ri) => (
-                    <tr key={ri} className={ri % 2 === 1 ? "bg-slate-50" : "bg-white"}>
+                    <tr key={ri} className={ri % 2 === 1 ? "bg-slate-50/90" : "bg-white"}>
                       {slide.table.headers.map((_, ci) => (
-                        <td key={ci} className="p-2 border-t border-slate-200 text-[11px] text-slate-800 align-top">
+                        <td
+                          key={ci}
+                          className={`px-2.5 py-2 border-t border-slate-200 text-[11px] align-top ${
+                            ci === 0
+                              ? "font-extrabold text-slate-900"
+                              : ci === slide.table.headers.length - 1
+                              ? "font-extrabold text-[#ed1b2e] whitespace-nowrap"
+                              : "text-slate-700"
+                          }`}
+                        >
                           {row[ci] || ""}
                         </td>
                       ))}
@@ -612,14 +694,17 @@ function ExecutiveSlideCard({ slide, slideIndex, totalSlides, badgeLabel, speake
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {[slide.left, slide.right].map((col, ci) =>
                 col ? (
-                  <div key={ci} className="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                  <div key={ci} className="bg-slate-50 border border-slate-200 rounded-xl p-3">
                     {col.heading && (
-                      <div className="text-xs font-extrabold text-[#ed1b2e] mb-1">{col.heading}</div>
+                      <div className="text-xs font-extrabold text-[#ed1b2e] mb-1.5">{col.heading}</div>
                     )}
                     {Array.isArray(col.bullets) && (
-                      <ul className="list-disc pl-4 space-y-1 text-[11px] text-slate-700">
+                      <ul className="space-y-1 text-[11px] text-slate-700">
                         {col.bullets.map((b, bi) => (
-                          <li key={bi}>{b}</li>
+                          <li key={bi} className="flex items-start gap-1.5">
+                            <span className="text-[#ed1b2e] font-bold">▪</span>
+                            <span>{b}</span>
+                          </li>
                         ))}
                       </ul>
                     )}
@@ -643,44 +728,61 @@ function ExecutiveSlideCard({ slide, slideIndex, totalSlides, badgeLabel, speake
             </div>
           )}
 
-          {/* Bullets + Optional Slide Image */}
-          {(Array.isArray(slide.bullets) && slide.bullets.length > 0) || slide.image ? (
+          {/* Bullets + Optional 16:9 Slide Artwork */}
+          {(Array.isArray(slide.bullets) && slide.bullets.length > 0) ||
+          slide.image ||
+          (generatingImages && slide.image_prompt) ? (
             <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-              <div className={slide.image ? "md:col-span-8 space-y-1" : "md:col-span-12 space-y-1"}>
+              <div
+                className={
+                  slide.image || (generatingImages && slide.image_prompt)
+                    ? "md:col-span-8 space-y-1.5"
+                    : "md:col-span-12 space-y-1.5"
+                }
+              >
                 {Array.isArray(slide.bullets) && slide.bullets.length > 0 && (
-                  <ul className="list-disc pl-5 space-y-1 text-xs text-slate-700 leading-snug">
-                    {slide.bullets.map((b, bi) => (
-                      <li key={bi}>{b}</li>
+                  <ul className="space-y-1.5 text-xs text-slate-800 leading-snug">
+                    {slide.bullets.slice(0, 5).map((b, bi) => (
+                      <li key={bi} className="flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#ed1b2e] mt-1.5 shrink-0" />
+                        <span>{b}</span>
+                      </li>
                     ))}
                   </ul>
                 )}
               </div>
-              {slide.image && (
+              {slide.image ? (
                 <div className="md:col-span-4">
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    className="w-full h-28 object-cover rounded-xl border border-slate-200 shadow-sm"
+                    className="w-full aspect-video object-cover rounded-xl border border-slate-200 shadow-sm"
                   />
                 </div>
-              )}
+              ) : generatingImages && slide.image_prompt ? (
+                <div className="md:col-span-4">
+                  <div className="w-full aspect-video rounded-xl border border-dashed border-amber-300 bg-amber-50/60 flex items-center justify-center text-[11px] font-bold text-amber-800 animate-pulse px-2 text-center">
+                    🎨 Rendering 16:9 Slide Visual...
+                  </div>
+                </div>
+              ) : null}
             </div>
           ) : null}
 
-          {/* Callout Banner */}
+          {/* Executive Callout Strip */}
           {slide.callout && (
-            <div className="bg-red-50/70 border-l-4 border-l-[#ed1b2e] px-3 py-2 rounded-r-xl text-xs font-bold text-slate-900">
+            <div className="bg-gradient-to-r from-red-50 to-amber-50/50 border-l-4 border-l-[#ed1b2e] px-3.5 py-2 rounded-r-xl text-xs font-bold text-slate-900">
               {slide.callout}
             </div>
           )}
         </div>
       </div>
 
-      {/* Speaker Notes Footer */}
+      {/* Presenter Speaker Notes Footer */}
       {slide.speaker_notes && (
-        <div className="bg-slate-50 border-t border-slate-200 px-3.5 py-2 text-[11px] text-slate-600">
+        <div className="bg-slate-50 border-t border-slate-200 px-4 py-2 text-[11px] text-slate-600 leading-snug">
           <span className="font-extrabold text-slate-800 mr-1.5">
-            {speakerNotesLabel || "🎙️ Speaker Notes"}:
+            {speakerNotesLabel || "🎙️ Presenter Notes"}:
           </span>
           {slide.speaker_notes}
         </div>
@@ -688,6 +790,8 @@ function ExecutiveSlideCard({ slide, slideIndex, totalSlides, badgeLabel, speake
     </div>
   );
 }
+
+window.ExecutiveSlideCard = ExecutiveSlideCard;
 
 window.Challenge2ParticipantView = function ({
   t,
@@ -705,26 +809,60 @@ window.Challenge2ParticipantView = function ({
   onViewScorecard = null,
 }) {
   const { useState, useEffect, useRef } = React;
-  const ui = C2_UI_I18N[lang] || C2_UI_I18N.en;
+  const normLang = lang === "zh-TW" || lang === "zh-HK" ? "yue" : lang || "en";
+  const ui = C2_UI_I18N[normLang] || C2_UI_I18N.en;
+  const storageKey = `prumda_c2_v3_${agentId || "anon"}`;
+
+  // Restore saved draft from localStorage if available
+  const savedDraftRef = useRef(null);
+  if (savedDraftRef.current === null) {
+    try {
+      const raw = localStorage.getItem(storageKey);
+      savedDraftRef.current = raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      savedDraftRef.current = {};
+    }
+  }
+  const initDraft = savedDraftRef.current || {};
 
   const [challengeData, setChallengeData] = useState(null);
   const [loadingChallenge, setLoadingChallenge] = useState(true);
-  const [activeStep, setActiveStep] = useState("1"); // "1" = Prompt Builder, "2" = Review & Final Submit
-  const [selectedPillarKey, setSelectedPillarKey] = useState("role");
-  const [promptText, setPromptText] = useState("");
+  const [seatOverride, setSeatOverride] = useState(
+    typeof initDraft.seatIndex === "number" ? initDraft.seatIndex : null
+  );
+  const [showCasePicker, setShowCasePicker] = useState(false);
   const [showFullCase, setShowFullCase] = useState(false);
   const [showTargetModal, setShowTargetModal] = useState(false);
   const [targetSlideIdx, setTargetSlideIdx] = useState(0);
 
-  // Generated Deck State
-  const [deck, setDeck] = useState(null);
-  const [deckSignature, setDeckSignature] = useState("");
+  // Step & Prompt Builder State
+  const [activeStep, setActiveStep] = useState(initDraft.deck ? "2" : "1");
+  const [selectedToneId, setSelectedToneId] = useState(initDraft.selectedToneId || "boardroom");
+  const [personalAngle, setPersonalAngle] = useState(initDraft.personalAngle || "");
+  const [promptText, setPromptText] = useState(initDraft.promptText || "");
+  const [manualPromptEdited, setManualPromptEdited] = useState(Boolean(initDraft.manualPromptEdited));
+  const [activePillarsMap, setActivePillarsMap] = useState(
+    initDraft.activePillarsMap || {
+      role: true,
+      context: true,
+      task: true,
+      format: true,
+      constraints: true,
+    }
+  );
+  const [showPromptDrawer, setShowPromptDrawer] = useState(false);
+
+  // Generated 3-Slide Deck State
+  const [deck, setDeck] = useState(initDraft.deck || null);
+  const [deckSignature, setDeckSignature] = useState(initDraft.deckSignature || "");
   const [slideIdx, setSlideIdx] = useState(0);
   const [compareMode, setCompareMode] = useState(false);
   const [generatingDeck, setGeneratingDeck] = useState(false);
+  const [genStageIdx, setGenStageIdx] = useState(0);
   const [generatingImages, setGeneratingImages] = useState(false);
+  const [waitingImagesForSubmit, setWaitingImagesForSubmit] = useState(false);
   const [genError, setGenError] = useState(null);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(initDraft.history || []);
   const [lineage, setLineage] = useState([]);
 
   // One-Time Final Submission State
@@ -734,7 +872,57 @@ window.Challenge2ParticipantView = function ({
 
   const startRef = useRef(Date.now());
   const sessionIdRef = useRef(`c2-${agentId || "anon"}-${Date.now()}`);
-  const lastLangRef = useRef(lang);
+  const imagePromiseRef = useRef(null);
+  const latestDeckRef = useRef(initDraft.deck || null);
+  useEffect(() => {
+    latestDeckRef.current = deck;
+  }, [deck]);
+
+  // Persist draft in localStorage
+  useEffect(() => {
+    if (lockedSubmission) return;
+    try {
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify({
+          seatIndex: challengeData?.seatIndex ?? seatOverride,
+          selectedToneId,
+          personalAngle,
+          promptText,
+          manualPromptEdited,
+          activePillarsMap,
+          deck,
+          deckSignature,
+          history,
+        })
+      );
+    } catch (e) {}
+  }, [
+    storageKey,
+    challengeData?.seatIndex,
+    seatOverride,
+    selectedToneId,
+    personalAngle,
+    promptText,
+    manualPromptEdited,
+    activePillarsMap,
+    deck,
+    deckSignature,
+    history,
+    lockedSubmission,
+  ]);
+
+  // Animated 3-stage progress ticker while deck is generating
+  useEffect(() => {
+    if (!generatingDeck) {
+      setGenStageIdx(0);
+      return;
+    }
+    const iv = setInterval(() => {
+      setGenStageIdx((prev) => (prev + 1) % 3);
+    }, 850);
+    return () => clearInterval(iv);
+  }, [generatingDeck]);
 
   // Sync if participant already completed Challenge 2 in Arena State
   useEffect(() => {
@@ -751,43 +939,173 @@ window.Challenge2ParticipantView = function ({
         }
       );
       if (existingSubmission.deck) {
-        setDeck(existingSubmission.deck);
+        setDeck({
+          ...existingSubmission.deck,
+          slides: (existingSubmission.deck.slides || []).slice(0, 3),
+        });
       }
       if (existingSubmission.userInput) {
         setPromptText(existingSubmission.userInput);
       }
+      if (existingSubmission.personalAngle) {
+        setPersonalAngle(existingSubmission.personalAngle);
+      }
     }
   }, [isCompleted, existingSubmission, existingScore]);
 
-  // Load localized Challenge 2 bundle (/api/challenge?market=MY&lang=...)
-  useEffect(() => {
-    let active = true;
+  // Assemble clean R.C.T.F.C. + Tone + Personal Strategic Angle prompt
+  const buildAssembledPrompt = (guideList, pMap, toneId, angleStr, simpleFallback) => {
+    const anyActive = Object.values(pMap || {}).some(Boolean);
+    if (!anyActive) {
+      return simpleFallback || "";
+    }
+    const parts = [];
+    (guideList || []).forEach((g) => {
+      if (pMap[g.key] && g.template) {
+        parts.push(g.template.trim());
+      }
+    });
+    const toneObj = (ui.tones || []).find((x) => x.id === toneId);
+    if (toneObj && toneObj.clause) {
+      parts.push(toneObj.clause);
+    }
+    if (angleStr && angleStr.trim().length > 0) {
+      parts.push(`[Personal Strategic Angle]: ${angleStr.trim()}`);
+    }
+    return parts.join("\n\n");
+  };
+
+  // Load localized, per-seat Challenge 2 scenario (/api/challenge)
+  const loadScenarioSeat = (explicitSeat = null, resetDeckOnSwitch = false) => {
     setLoadingChallenge(true);
-    fetch(`/api/challenge?market=MY&lang=${encodeURIComponent(lang)}`, { cache: "no-store" })
+    const params = new URLSearchParams({
+      market: "MY",
+      lang: normLang,
+    });
+    if (agentId) params.set("id", agentId);
+    if (explicitSeat !== null && explicitSeat !== undefined) {
+      params.set("seat", String(explicitSeat));
+      params.set("persist", "1");
+    }
+    fetch(`/api/challenge?${params.toString()}`, { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => {
-        if (!active) return;
         setChallengeData(data);
         setLoadingChallenge(false);
-        // Initialize or update starter prompt if user hasn't customized it yet
-        setPromptText((prev) => {
-          if (!prev || prev.trim().length === 0 || lastLangRef.current !== lang) {
-            // Only overwrite on language switch if they haven't generated a deck yet
-            if (!deck) {
-              return data.simple_prompt || "";
+        const gList = data.guide || [];
+        if (resetDeckOnSwitch) {
+          const allOn = { role: true, context: true, task: true, format: true, constraints: true };
+          const defaultHint = (data.angleHints && data.angleHints[0]) || "";
+          setActivePillarsMap(allOn);
+          setPersonalAngle(defaultHint);
+          setManualPromptEdited(false);
+          setDeck(null);
+          setDeckSignature("");
+          setActiveStep("1");
+          setPromptText(
+            buildAssembledPrompt(gList, allOn, selectedToneId, defaultHint, data.simple_prompt)
+          );
+        } else {
+          setPersonalAngle((prevAngle) => {
+            const nextAngle =
+              prevAngle && prevAngle.trim().length > 0
+                ? prevAngle
+                : (data.angleHints && data.angleHints[0]) || "";
+            if (!manualPromptEdited) {
+              setPromptText(
+                buildAssembledPrompt(
+                  gList,
+                  activePillarsMap,
+                  selectedToneId,
+                  nextAngle,
+                  data.simple_prompt
+                )
+              );
             }
-          }
-          return prev;
-        });
-        lastLangRef.current = lang;
+            return nextAngle;
+          });
+        }
       })
-      .catch(() => {
-        if (active) setLoadingChallenge(false);
+      .catch(() => setLoadingChallenge(false));
+  };
+
+  useEffect(() => {
+    loadScenarioSeat(seatOverride, false);
+  }, [normLang, agentId]);
+
+  // Re-assemble prompt automatically when structured controls change (unless manually overridden)
+  const syncStructuredPrompt = (nextMap, nextTone, nextAngle) => {
+    if (!challengeData) return;
+    setManualPromptEdited(false);
+    const built = buildAssembledPrompt(
+      challengeData.guide || [],
+      nextMap,
+      nextTone,
+      nextAngle,
+      challengeData.simple_prompt
+    );
+    setPromptText(built);
+  };
+
+  const handleTogglePillar = (key) => {
+    const nextMap = { ...activePillarsMap, [key]: !activePillarsMap[key] };
+    setActivePillarsMap(nextMap);
+    syncStructuredPrompt(nextMap, selectedToneId, personalAngle);
+    setLineage((prev) => [
+      ...prev,
+      { t: Math.round((Date.now() - startRef.current) / 1000), e: "toggle", k: key },
+    ]);
+  };
+
+  const handleActivateAllPillars = () => {
+    const allOn = { role: true, context: true, task: true, format: true, constraints: true };
+    const nextAngle =
+      personalAngle || (challengeData?.angleHints && challengeData.angleHints[0]) || "";
+    setActivePillarsMap(allOn);
+    setPersonalAngle(nextAngle);
+    syncStructuredPrompt(allOn, selectedToneId, nextAngle);
+  };
+
+  const handleTryWeakPrompt = () => {
+    const allOff = { role: false, context: false, task: false, format: false, constraints: false };
+    setActivePillarsMap(allOff);
+    setPersonalAngle("");
+    setManualPromptEdited(false);
+    setPromptText(challengeData?.simple_prompt || "Create a presentation for my client about insurance.");
+  };
+
+  const handleSelectTone = (toneId) => {
+    setSelectedToneId(toneId);
+    syncStructuredPrompt(activePillarsMap, toneId, personalAngle);
+  };
+
+  const handleAngleChange = (val) => {
+    setPersonalAngle(val);
+    if (!manualPromptEdited) {
+      syncStructuredPrompt(activePillarsMap, selectedToneId, val);
+    } else {
+      // Update or append [Personal Strategic Angle] line inside custom prompt
+      setPromptText((prev) => {
+        const cleaned = String(prev || "")
+          .replace(/\n*\[Personal Strategic Angle\]:[^\n]*/gi, "")
+          .trim();
+        return val && val.trim()
+          ? `${cleaned}\n\n[Personal Strategic Angle]: ${val.trim()}`
+          : cleaned;
       });
-    return () => {
-      active = false;
-    };
-  }, [lang]);
+    }
+  };
+
+  const handleSwitchSeat = (targetSeat) => {
+    const total = challengeData?.totalUniqueSeats || 56;
+    const nextS =
+      typeof targetSeat === "number"
+        ? targetSeat % total
+        : ((challengeData?.seatIndex || 0) + 1) % total;
+    setSeatOverride(nextS);
+    setShowCasePicker(false);
+    loadScenarioSeat(nextS, true);
+  };
 
   // Ping Arena activity
   const pingActivity = (statusText, stepLabel) => {
@@ -808,117 +1126,19 @@ window.Challenge2ParticipantView = function ({
   const guideSteps = challengeData?.guide || [];
   const pillarStatuses = detectPillarStatusClient(promptText, guideSteps);
   const activePillarCount = Object.values(pillarStatuses).filter((v) => v === "done").length;
-  const currentPillarObj =
-    guideSteps.find((g) => g.key === selectedPillarKey) || guideSteps[0] || null;
+  const scen = challengeData?.scenario || null;
+  const caseCards = challengeData?.caseCards || scen?.caseCards || [];
+  const angleHints = challengeData?.angleHints || scen?.angleHints || [];
 
-  // Insert single R.C.T.F.C. pillar template into prompt (strip weak 1-line starter cleanly)
-  const handleInsertPillar = (pillarObj) => {
-    if (!pillarObj || !pillarObj.template) return;
-    const clause = pillarObj.template.trim();
-    setPromptText((prev) => {
-      let base = (prev || "").trim();
-      const simpleStarter = (challengeData?.simple_prompt || "").trim();
-      if (simpleStarter && base === simpleStarter) {
-        base = "";
-      } else if (simpleStarter && base.startsWith(simpleStarter)) {
-        base = base.slice(simpleStarter.length).trim();
-      }
-      const nextText = base
-        ? base.includes(clause)
-          ? base
-          : `${base}\n\n${clause}`
-        : clause;
-      return nextText;
-    });
-    setLineage((prev) => [
-      ...prev,
-      { t: Math.round((Date.now() - startRef.current) / 1000), e: "chip", k: pillarObj.key },
-    ]);
-    // Advance selector to next missing pillar
-    const order = ["role", "context", "task", "format", "constraints"];
-    const curIdx = order.indexOf(pillarObj.key);
-    for (let i = 1; i <= order.length; i++) {
-      const candidate = order[(curIdx + i) % order.length];
-      if (pillarStatuses[candidate] !== "done" && candidate !== pillarObj.key) {
-        setSelectedPillarKey(candidate);
-        break;
-      }
-    }
-  };
-
-  // Insert all 5 R.C.T.F.C. pillars at once while preserving any custom user edits / boosters
-  const handleInsertAllPillars = () => {
-    if (!guideSteps.length) return;
-    setPromptText((prev) => {
-      let cur = (prev || "").trim();
-      const simpleStarter = (challengeData?.simple_prompt || "").trim();
-      if (simpleStarter && cur === simpleStarter) {
-        cur = "";
-      } else if (simpleStarter && cur.startsWith(simpleStarter)) {
-        cur = cur.slice(simpleStarter.length).trim();
-      }
-      guideSteps.forEach((g) => {
-        const tmpl = (g.template || "").trim();
-        if (tmpl && !cur.includes(tmpl.slice(0, Math.min(28, tmpl.length)))) {
-          cur = cur ? `${cur}\n\n${tmpl}` : tmpl;
-        }
-      });
-      return cur;
-    });
-    setLineage((prev) => [
-      ...prev,
-      { t: Math.round((Date.now() - startRef.current) / 1000), e: "insert_all" },
-    ]);
-  };
-
-  // Toggle or append an Agency Leader Wealth / Empathy / Relationship Booster into prompt
-  const handleToggleLeaderBooster = (snippet) => {
-    const clean = (snippet || "").trim();
-    if (!clean) return;
-    setPromptText((prev) => {
-      let cur = (prev || "").trim();
-      const simpleStarter = (challengeData?.simple_prompt || "").trim();
-      if (simpleStarter && cur === simpleStarter) {
-        cur = "";
-      }
-      if (cur.includes(clean)) {
-        return cur.replace(clean, "").replace(/\n{3,}/g, "\n\n").trim();
-      }
-      return cur ? `${cur}\n\n${clean}` : clean;
-    });
-  };
-
-  // Add all 3 Agency Leader Wealth / Empathy / Relationship Boosters at once
-  const handleAddAllLeaderBoosters = () => {
-    const list = ui.leaderBoosters || [];
-    if (!list.length) return;
-    setPromptText((prev) => {
-      let cur = (prev || "").trim();
-      const simpleStarter = (challengeData?.simple_prompt || "").trim();
-      if (simpleStarter && cur === simpleStarter) {
-        cur = "";
-      }
-      list.forEach((b) => {
-        const clean = (b.snippet || "").trim();
-        if (clean && !cur.includes(clean)) {
-          cur = cur ? `${cur}\n\n${clean}` : clean;
-        }
-      });
-      return cur;
-    });
-  };
-
-  // Reset to starter prompt
-  const handleResetPrompt = () => {
-    setPromptText(challengeData?.simple_prompt || "");
-  };
-
-  // Generate 3-Slide Deck via /api/deck/generate (+ background /api/deck/images)
+  // Generate Strictly 3-Slide Deck (/api/deck/generate + /api/deck/images)
   const handleGenerateDeck = async () => {
     if (!promptText || promptText.trim().length < 3 || generatingDeck) return;
     setGeneratingDeck(true);
     setGenError(null);
-    pingActivity("⚡ Generating 3-Slide Pre-Pitch Deck with Gemini...", "C2: Generating 3-Slide Deck");
+    pingActivity(
+      `📊 Building 3-Slide Pre-Pitch Deck (${scen?.clientShort || "HNW Case"})...`,
+      "C2: Generating 3-Slide Deck"
+    );
 
     try {
       const nextVersion = history.length + 1;
@@ -928,18 +1148,20 @@ window.Challenge2ParticipantView = function ({
         body: JSON.stringify({
           session_id: sessionIdRef.current,
           prompt: promptText,
-          lang,
+          lang: normLang,
           market: "MY",
           version: nextVersion,
         }),
       });
       const data = await res.json();
       if (!res.ok || !data.deck) {
-        throw new Error(data.detail || "Failed to generate deck. Please try again.");
+        throw new Error(data.detail || "Could not generate deck. Please try again.");
       }
 
-      const newDeck = data.deck;
+      const clampedSlides = (data.deck.slides || []).slice(0, 3);
+      const newDeck = { ...data.deck, slides: clampedSlides };
       setDeck(newDeck);
+      latestDeckRef.current = newDeck;
       setDeckSignature(data.signature || "");
       setSlideIdx(0);
       setActiveStep("2");
@@ -948,7 +1170,7 @@ window.Challenge2ParticipantView = function ({
         {
           version: nextVersion,
           prompt: promptText,
-          slide_count: (newDeck.slides || []).length,
+          slide_count: clampedSlides.length,
           at: Date.now() / 1000,
         },
       ]);
@@ -958,20 +1180,20 @@ window.Challenge2ParticipantView = function ({
           t: Math.round((Date.now() - startRef.current) / 1000),
           e: "gen",
           v: nextVersion,
-          n: (newDeck.slides || []).length,
+          n: clampedSlides.length,
           len: promptText.length,
         },
       ]);
 
-      // Generate slide illustrations in background if any slide has image_prompt
-      const slidesWithPrompts = (newDeck.slides || [])
+      // Generate 16:9 boardroom visuals in background & store promise so Submit can await if still running
+      const slidesWithPrompts = clampedSlides
         .map((s, idx) => ({ idx, prompt: s.image_prompt }))
         .filter((x) => Boolean(x.prompt))
         .slice(0, 2);
 
       if (slidesWithPrompts.length > 0) {
         setGeneratingImages(true);
-        fetch("/api/deck/images", {
+        const imgJob = fetch("/api/deck/images", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ prompts: slidesWithPrompts.map((x) => x.prompt) }),
@@ -981,29 +1203,35 @@ window.Challenge2ParticipantView = function ({
             if (imgData && Array.isArray(imgData.images)) {
               setDeck((cur) => {
                 if (!cur || !Array.isArray(cur.slides)) return cur;
-                const clonedSlides = cur.slides.map((sl) => ({ ...sl }));
+                const clonedSlides = cur.slides.slice(0, 3).map((sl) => ({ ...sl }));
                 slidesWithPrompts.forEach((item, ii) => {
                   if (imgData.images[ii] && clonedSlides[item.idx]) {
                     clonedSlides[item.idx].image = imgData.images[ii];
                   }
                 });
-                return { ...cur, slides: clonedSlides };
+                const updated = { ...cur, slides: clonedSlides };
+                latestDeckRef.current = updated;
+                return updated;
               });
             }
           })
           .catch(() => {})
-          .finally(() => setGeneratingImages(false));
+          .finally(() => {
+            setGeneratingImages(false);
+            imagePromiseRef.current = null;
+          });
+        imagePromiseRef.current = imgJob;
       }
     } catch (err) {
-      setGenError(err.message || "Could not generate slide deck.");
+      setGenError(err.message || "Could not generate 3-slide deck.");
     } finally {
       setGeneratingDeck(false);
     }
   };
 
-  // Download .pptx for current deck
+  // Export .pptx
   const handleDownloadPptx = async (targetDeckObj) => {
-    const deckToExport = targetDeckObj || deck;
+    const deckToExport = targetDeckObj || latestDeckRef.current || deck;
     if (!deckToExport) return;
     try {
       const res = await fetch("/api/deck/pptx", {
@@ -1016,7 +1244,7 @@ window.Challenge2ParticipantView = function ({
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "PRUMDA-Pre-Pitch-Deck.pptx";
+      a.download = `PRUMDA-3Slide-Deck-${(scen?.clientShort || "HNW").replace(/\s+/g, "-")}.pptx`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -1024,38 +1252,66 @@ window.Challenge2ParticipantView = function ({
     } catch (e) {}
   };
 
-  // Compute live pre-submit quality checks on the generated deck (supports EN/BM/ZH/YUE/TA numbers)
+  // Dynamic Scenario-Aware Pre-Submit Readiness Checks
   const computePreSubmitChecks = (d) => {
     if (!d || !Array.isArray(d.slides)) {
-      return { slides3: false, clientFacts: false, visuals: false, notes: false, compliance: false };
+      return {
+        slides3: false,
+        clientFacts: false,
+        visuals: false,
+        personalTouch: false,
+        compliance: false,
+      };
     }
-    const slides = d.slides;
+    const slides = d.slides.slice(0, 3);
     const rawJson = JSON.stringify(d).toLowerCase();
     const slides3 = slides.length === 3;
+    const keyNums = scen?.keyNumbers || ["28", "4.5", "6.5"];
+    const matchedKeyNums = keyNums.filter((n) => rawJson.includes(String(n).toLowerCase()));
     const clientFacts =
-      (rawJson.includes("28") || rawJson.includes("19") || rawJson.includes("2800") || rawJson.includes("1900")) &&
-      (rawJson.includes("4.5") || rawJson.includes("6.5") || rawJson.includes("450") || rawJson.includes("650") || rawJson.includes("aleya"));
-    const visuals = slides.some(
-      (s) =>
-        (Array.isArray(s.kpis) && s.kpis.length > 0) ||
-        (s.chart && Array.isArray(s.chart.series)) ||
-        (s.table && Array.isArray(s.table.headers))
+      matchedKeyNums.length >= 2 ||
+      (scen?.clientShort && rawJson.includes(scen.clientShort.split(" ")[0].toLowerCase()));
+    const hasKpi = slides.some((s) => Array.isArray(s.kpis) && s.kpis.length >= 2);
+    const hasChart = slides.some((s) => s.chart && Array.isArray(s.chart.series) && s.chart.series.length >= 2);
+    const hasTable = slides.some((s) => s.table && Array.isArray(s.table.rows) && s.table.rows.length >= 2);
+    const visuals = [hasKpi, hasChart, hasTable].filter(Boolean).length >= 2;
+    const personalTouch = Boolean(
+      (personalAngle && personalAngle.trim().length >= 10) ||
+        /\[personal strategic angle\]/i.test(promptText)
     );
-    const notes = slides.every((s) => Boolean((s.speaker_notes || "").trim()));
     const compliance =
-      /bnm|pds|free-look|free look|15|fact-find|fact find|analisis keperluan|shariah|syariah|takaful|hibah|犹豫期|猶豫期|冷静期|冷靜期|需求分析|ஷரியா|தகாஃபுல்/i.test(
+      /bnm|pds|free-look|free look|15|fact-find|fact find|analisis keperluan|schedule 10|sched 10|shariah|syariah|takaful|hibah|犹豫期|猶豫期|冷静期|冷靜期|需求分析|法定信托|法定信託|ஷரியா/i.test(
         rawJson
       );
-    return { slides3, clientFacts, visuals, notes, compliance };
+    return { slides3, clientFacts, visuals, personalTouch, compliance };
   };
 
   const preChecks = computePreSubmitChecks(deck);
 
-  // ONE-TIME FINAL SUBMIT: Evaluates via /api/deck/submit and posts to Main Arena /api/submit
+  // ONE-TIME FINAL SUBMIT
   const handleFinalSubmitOnce = async () => {
     if (!deck || submittingFinal || lockedSubmission) return;
     setSubmittingFinal(true);
-    pingActivity("⚖️ Submitting Final 3-Slide Deck to AI Judge...", "C2: Finalizing & Scoring Deck");
+
+    // Briefly await in-flight slide visual generation (up to 5.5s) so Big Screen card has slide artwork
+    if (imagePromiseRef.current) {
+      setWaitingImagesForSubmit(true);
+      await Promise.race([
+        imagePromiseRef.current,
+        new Promise((resolve) => setTimeout(resolve, 5500)),
+      ]);
+      setWaitingImagesForSubmit(false);
+    }
+
+    const finalDeckToSubmit = {
+      ...(latestDeckRef.current || deck),
+      slides: ((latestDeckRef.current || deck).slides || []).slice(0, 3),
+    };
+
+    pingActivity(
+      "⚖️ Submitting Final 3-Slide Executive Deck to Judge...",
+      "C2: Finalizing & Scoring 3-Slide Deck"
+    );
 
     const elapsedSec = Math.max(8, Math.round((Date.now() - startRef.current) / 1000));
     let evalResult = null;
@@ -1067,10 +1323,12 @@ window.Challenge2ParticipantView = function ({
         body: JSON.stringify({
           name: agentName || "PRUMDA Leader",
           participant_id: agentId || null,
+          seat_index: challengeData?.seatIndex ?? 0,
+          personal_angle: personalAngle || "",
           market: "MY",
-          lang,
+          lang: normLang,
           prompt: promptText,
-          deck,
+          deck: finalDeckToSubmit,
           signature: deckSignature,
           history,
           lineage,
@@ -1081,28 +1339,21 @@ window.Challenge2ParticipantView = function ({
       }
     } catch (e) {}
 
-    // Extract or synthesize fallback score if Vertex judge timed out
-    const checksPassed = Object.values(preChecks).filter(Boolean).length;
+    const checksPassed = Object.values(computePreSubmitChecks(finalDeckToSubmit)).filter(Boolean).length;
     const fallbackTotal10 = Math.min(
-      9.8,
-      Math.max(7.8, Number((6.8 + activePillarCount * 0.4 + checksPassed * 0.25).toFixed(1)))
+      9.7,
+      Math.max(5.8, Number((5.5 + activePillarCount * 0.45 + checksPassed * 0.35).toFixed(1)))
     );
     const total10 =
       evalResult && typeof evalResult.total === "number" ? evalResult.total : fallbackTotal10;
-    const accuracyScore = Math.min(100, Math.max(78, Math.round(total10 * 10)));
-    const speedScore = Math.max(85, Math.min(99, 100 - Math.floor(elapsedSec / 10)));
+    const accuracyScore = Math.min(100, Math.max(55, Math.round(total10 * 10)));
+    const speedScore = Math.max(84, Math.min(99, 100 - Math.floor(elapsedSec / 12)));
     const arenaTotal = Math.round((speedScore + accuracyScore) / 2);
 
-    const locDims = ui.rubricDims || [
-      "Structure & Completeness",
-      "Client Personalisation",
-      "Insight & Quantification",
-      "Solution Fit",
-      "Objection Readiness",
-      "Compliance & Fair Dealing",
-    ];
-
-    const rawRubric = evalResult?.judge?.rubric || locDims.map((d) => ({ dimension: d, score: Math.round(total10) }));
+    const locDims = ui.rubricDims || C2_UI_I18N.en.rubricDims;
+    const rawRubric =
+      evalResult?.judge?.rubric ||
+      locDims.map((d) => ({ dimension: d, score: Math.round(total10) }));
     const rubricArr = rawRubric.map((r, i) => ({
       ...r,
       dimension: locDims[i] || r.dimension,
@@ -1114,11 +1365,11 @@ window.Challenge2ParticipantView = function ({
     });
 
     const fallbackVerdictByLang = {
-      en: `Strong ${deck.slides?.length || 3}-slide executive pre-pitch brief (${total10}/10) with ${activePillarCount}/5 R.C.T.F.C. pillars applied.`,
-      "zh-CN": `极具水准的 ${deck.slides?.length || 3} 页高管战前提案简报（${total10}/10），完整覆盖 ${activePillarCount}/5 个 R.C.T.F.C. 核心维度与家族财富规划洞察！`,
-      yue: `極具水準嘅 ${deck.slides?.length || 3} 頁高管戰前提案簡報（${total10}/10），完整覆蓋 ${activePillarCount}/5 個 R.C.T.F.C. 核心維度同家族財富規劃心法！`,
-      ms: `Ringkasan pra-pembentangan eksekutif ${deck.slides?.length || 3}-slaid yang mantap (${total10}/10) dengan ${activePillarCount}/5 tiang R.C.T.F.C. diterapkan.`,
-      ta: `சிறந்த ${deck.slides?.length || 3}-ஸ்லைடு நிர்வாக முன்-முன்மொழிவு (${total10}/10) — ${activePillarCount}/5 R.C.T.F.C. தூண்கள் மற்றும் செல்வத் திட்டமிடல் பயன்படுத்தப்பட்டுள்ளது!`,
+      en: `Boardroom-ready 3-slide pre-pitch brief (${total10}/10) for ${scen?.clientShort || "HNW Client"} with ${activePillarCount}/5 R.C.T.F.C. pillars applied.`,
+      "zh-CN": `极具水准的 3 页高管战前提案简报（${total10}/10），精准匹配 ${scen?.clientShort || "高净值客户"} 需求与 ${activePillarCount}/5 个 R.C.T.F.C. 核心维度！`,
+      yue: `極具水準嘅 3 頁高管戰前提案簡報（${total10}/10），精準貼合 ${scen?.clientShort || "高淨值客戶"} 需求同 ${activePillarCount}/5 個 R.C.T.F.C. 核心維度！`,
+      ms: `Dek pra-pembentangan eksekutif 3-slaid yang mantap (${total10}/10) untuk ${scen?.clientShort || "Pelanggan HNW"} dengan ${activePillarCount}/5 tiang R.C.T.F.C.`,
+      ta: `சிறந்த 3-ஸ்லைடு நிர்வாக முன்-முன்மொழிவு (${total10}/10) — ${activePillarCount}/5 R.C.T.F.C. தூண்கள் பயன்படுத்தப்பட்டுள்ளன!`,
     };
 
     const verdictText =
@@ -1126,17 +1377,21 @@ window.Challenge2ParticipantView = function ({
       fallbackVerdictByLang[normLang] ||
       fallbackVerdictByLang.en;
 
-    const slideSummary = (deck.slides || [])
+    const slideSummary = (finalDeckToSubmit.slides || [])
       .map((s, i) => `${ui.slideTabPrefix}${i + 1}${ui.slideTabSuffix || ""}: ${s.title}`)
       .join(" • ");
 
     const submissionPayload = {
       challenge: "2",
-      title: `${deck.title || "Pre-Pitch Brief: Datin Sharifah Aleya"} (${total10}/10)`,
-      styleBadge: `🧠 ${total10}/10 Deck (${activePillarCount}/5 R.C.T.F.C.)`,
+      seatIndex: challengeData?.seatIndex ?? 0,
+      scenarioId: scen?.id || "clinic_founder_takaful",
+      clientName: scen?.clientName || "",
+      personalAngle: personalAngle || "",
+      title: `${finalDeckToSubmit.title || `Pre-Pitch: ${scen?.clientShort || "HNW Client"}`} (${total10}/10)`,
+      styleBadge: `📊 ${total10}/10 Deck • ${scen?.icon || "🏛️"} ${scen?.clientShort || "3 Slides"}`,
       userInput: promptText,
       aiOutput: slideSummary,
-      deck,
+      deck: finalDeckToSubmit,
       deckScore10: total10,
       rubricList: rubricArr,
       coverageList: evalResult?.judge?.coverage || [],
@@ -1165,6 +1420,7 @@ window.Challenge2ParticipantView = function ({
           submission: submissionPayload,
         }),
       });
+      localStorage.removeItem(storageKey);
     } catch (e) {}
 
     const finalScoreObj = {
@@ -1177,24 +1433,21 @@ window.Challenge2ParticipantView = function ({
       judgeFeedback: verdictText,
     };
 
+    setDeck(finalDeckToSubmit);
     setLockedSubmission(submissionPayload);
     setLockedScore(finalScoreObj);
     setSubmittingFinal(false);
 
-    if (onSandboxPreview) {
-      onSandboxPreview(submissionPayload);
-    }
-    if (fetchArenaState) {
-      fetchArenaState();
-    }
+    if (onSandboxPreview) onSandboxPreview(submissionPayload);
+    if (fetchArenaState) fetchArenaState();
   };
 
   /* ============================================================================
-     RENDER 1: LOCKED "JOB DONE!" VIEW (AFTER ONE-TIME FINAL SUBMISSION)
+     RENDER 1: LOCKED "JOB DONE!" VIEW (AFTER FINAL SUBMISSION)
   ============================================================================ */
   if (lockedSubmission) {
     const finalDeck = lockedSubmission.deck || deck || challengeData?.target;
-    const finalSlides = finalDeck?.slides || [];
+    const finalSlides = (finalDeck?.slides || []).slice(0, 3);
     const safeIdx = Math.min(slideIdx, Math.max(0, finalSlides.length - 1));
     const curSlide = finalSlides[safeIdx];
     const arenaPts = lockedScore?.total || lockedSubmission.total || 95;
@@ -1208,8 +1461,7 @@ window.Challenge2ParticipantView = function ({
 
     return (
       <div className="bg-white border-2 border-emerald-500 rounded-3xl p-4 sm:p-6 space-y-4 shadow-lg">
-        {/* Top Locked Completion Banner */}
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
           <div className="space-y-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-extrabold tracking-wide">
               {ui.jobDoneBadge}
@@ -1245,106 +1497,93 @@ window.Challenge2ParticipantView = function ({
           </div>
         </div>
 
-        {/* 6-Dimension Rubric Breakdown Pills */}
+        {lockedSubmission.personalAngle && (
+          <div className="bg-amber-50 border border-amber-300 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-amber-950">
+            <span className="uppercase tracking-wider text-[10px] font-extrabold text-amber-800 mr-1.5">
+              💡 Personal Strategic Angle:
+            </span>
+            {lockedSubmission.personalAngle}
+          </div>
+        )}
+
         {criteriaEntries.length > 0 && (
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-2">
-            <div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-700">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2">
+            <div className="text-xs font-extrabold uppercase tracking-wider text-slate-700">
               {ui.rubricHeader}
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {criteriaEntries.map(([dim, val]) => (
                 <div
                   key={dim}
-                  className="bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 flex flex-col justify-between"
+                  className="bg-white border border-slate-200 rounded-xl px-2.5 py-2 flex items-center justify-between gap-2"
                 >
-                  <span className="text-[10px] font-semibold text-slate-600 leading-tight">
-                    {dim}
-                  </span>
-                  <span className="text-xs font-extrabold text-[#ed1b2e] mt-1">
-                    {typeof val === "number" ? `${val}` : val}
-                  </span>
+                  <span className="text-[11px] font-bold text-slate-700 truncate">{dim}</span>
+                  <span className="text-xs font-extrabold text-[#ed1b2e] shrink-0">{val}</span>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Finalized 3-Slide Deck Interactive Viewer */}
         {finalSlides.length > 0 && (
           <div className="space-y-2.5">
-            <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-100 border border-slate-200 rounded-xl px-3 py-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-1.5">
                 {finalSlides.map((_, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setSlideIdx(idx)}
-                    className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all ${
                       safeIdx === idx
-                        ? "bg-[#ed1b2e] text-white shadow-sm"
-                        : "bg-white hover:bg-red-50 text-slate-700 border border-slate-200"
+                        ? "bg-slate-900 text-white shadow-sm"
+                        : "bg-slate-100 hover:bg-slate-200 text-slate-700"
                     }`}
                   >
-                    {ui.slideTabPrefix}{idx + 1}{ui.slideTabSuffix || ""}
+                    {ui.slideTabPrefix}
+                    {idx + 1}
+                    {ui.slideTabSuffix} · {(ui.slideShortLabels || [])[idx] || ""}
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleDownloadPptx(finalDeck)}
-                  className="px-3 py-1 rounded-lg bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs font-extrabold shadow-sm"
-                >
-                  {ui.downloadPptxBtn}
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => handleDownloadPptx(finalDeck)}
+                className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold"
+              >
+                {ui.downloadPptxBtn}
+              </button>
             </div>
-
             <ExecutiveSlideCard
               slide={curSlide}
               slideIndex={safeIdx}
-              totalSlides={finalSlides.length}
-              badgeLabel={finalDeck.title}
+              totalSlides={3}
+              badgeLabel={ui.yourSlideLabel}
               speakerNotesLabel={ui.speakerNotesLabel}
-              compact={true}
             />
           </div>
         )}
 
-        {/* Final Submitted Prompt Accordion */}
-        {lockedSubmission.userInput && (
-          <details className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs">
-            <summary className="font-extrabold text-slate-700 cursor-pointer">
-              {ui.promptUsedLabel}
-            </summary>
-            <div className="mt-2 font-mono text-[11px] text-slate-800 whitespace-pre-line bg-white p-2.5 rounded-lg border border-slate-200 max-h-32 overflow-y-auto">
-              {lockedSubmission.userInput}
-            </div>
-          </details>
-        )}
-
-        {/* Progression Footer to Main Scoreboard or Challenge 3 */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200">
+        <div className="flex flex-wrap items-center justify-between gap-2.5 pt-2 border-t border-slate-200">
           {onViewScorecard && (
             <button
               type="button"
               onClick={onViewScorecard}
-              className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-extrabold shadow-sm transition-all"
+              className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-extrabold transition-all"
             >
               {ui.viewMainScoreBtn}
             </button>
           )}
-
           {canProceedNext ? (
             <button
               type="button"
               onClick={onNext}
-              className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c81526] text-white text-xs sm:text-sm font-extrabold shadow-md transition-all"
+              className="px-5 py-2.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c81526] text-white text-xs sm:text-sm font-extrabold shadow-md transition-all ml-auto"
             >
               {ui.proceedC3Btn}
             </button>
           ) : (
-            <div className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3.5 py-2 rounded-xl">
+            <div className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3.5 py-2 rounded-xl ml-auto">
               {ui.waitingC3Text}
             </div>
           )}
@@ -1354,39 +1593,35 @@ window.Challenge2ParticipantView = function ({
   }
 
   /* ============================================================================
-     RENDER 2: ACTIVE CHALLENGE 2 STUDIO (STEP 1 PROMPT BUILDER & STEP 2 REVIEW)
+     RENDER 2: ACTIVE CHALLENGE 2 EXECUTIVE 3-SLIDE STUDIO
   ============================================================================ */
   const targetDeck = challengeData?.target || null;
-  const targetSlides = targetDeck?.slides || [];
-  const generatedSlides = deck?.slides || [];
-  const safeSlideIdx = Math.min(slideIdx, Math.max(0, generatedSlides.length - 1));
-  const curGeneratedSlide = generatedSlides[safeSlideIdx] || null;
-  const curTargetSlide =
-    targetSlides[Math.min(safeSlideIdx, Math.max(0, targetSlides.length - 1))] || null;
+  const targetSlides = (targetDeck?.slides || []).slice(0, 3);
+  const currentSlides = (deck?.slides || []).slice(0, 3);
+  const safeSlideIdx = Math.min(slideIdx, Math.max(0, currentSlides.length - 1));
+  const safeTargetIdx = Math.min(targetSlideIdx, Math.max(0, targetSlides.length - 1));
 
   return (
-    <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-3xl p-3.5 sm:p-5 space-y-3.5 shadow-md">
-      {/* Top Executive Title + Target Benchmark Button */}
-      <div className="flex flex-wrap items-start justify-between gap-2.5 border-b border-slate-200 pb-3">
-        <div className="space-y-0.5">
+    <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 space-y-4 shadow-sm">
+      {/* Top Studio Header + Strictly 3 Slides Pill + Benchmark Toggle */}
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-200 pb-3.5">
+        <div className="space-y-1 max-w-2xl">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-red-50 text-[#ed1b2e] border border-red-200 font-extrabold">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-red-50 text-[#ed1b2e] border border-red-200 text-[11px] font-extrabold">
               {ui.badge}
             </span>
-            <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-              {ui.pillarsActiveLabel}: {activePillarCount}/5
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-slate-900 text-amber-300 text-[10px] font-extrabold tracking-wider">
+              📐 {ui.strictly3Badge}
             </span>
           </div>
-          <h2 className="text-base sm:text-xl font-extrabold text-slate-900 pt-0.5">
-            {ui.title}
-          </h2>
-          <p className="text-xs text-slate-600 leading-relaxed max-w-3xl">{ui.subtitle}</p>
+          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">{ui.title}</h2>
+          <p className="text-xs text-slate-600 leading-relaxed">{ui.subtitle}</p>
         </div>
 
         <button
           type="button"
           onClick={() => setShowTargetModal((v) => !v)}
-          className={`px-3.5 py-2 rounded-xl text-xs font-extrabold border-2 transition-all shrink-0 shadow-sm ${
+          className={`px-3.5 py-2 rounded-xl text-xs font-extrabold border-2 transition-all shrink-0 ${
             showTargetModal
               ? "bg-slate-900 text-white border-slate-900"
               : "bg-white hover:bg-red-50 text-[#ed1b2e] border-[#ed1b2e]"
@@ -1396,85 +1631,139 @@ window.Challenge2ParticipantView = function ({
         </button>
       </div>
 
-      {/* Collapsible Target Benchmark Deck Drawer */}
-      {showTargetModal && targetDeck && (
+      {/* Collapsible 3-Slide Benchmark Reference Deck */}
+      {showTargetModal && targetSlides.length > 0 && (
         <div className="bg-slate-900 text-white rounded-2xl p-3.5 sm:p-4 space-y-3 shadow-inner">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <div className="text-[10px] font-extrabold uppercase tracking-wider text-red-400">
-                {ui.targetGoalBanner}
-              </div>
-              <div className="text-xs sm:text-sm font-extrabold text-white">
-                {targetDeck.title} — {targetDeck.subtitle}
-              </div>
+            <div className="text-xs font-extrabold uppercase tracking-wider text-amber-300">
+              {ui.targetGoalBanner}
             </div>
             <div className="flex items-center gap-1.5">
-              {targetSlides.map((_, idx) => (
+              {targetSlides.map((_, ti) => (
                 <button
-                  key={idx}
+                  key={ti}
                   type="button"
-                  onClick={() => setTargetSlideIdx(idx)}
+                  onClick={() => setTargetSlideIdx(ti)}
                   className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all ${
-                    targetSlideIdx === idx
+                    safeTargetIdx === ti
                       ? "bg-[#ed1b2e] text-white"
                       : "bg-slate-800 hover:bg-slate-700 text-slate-200"
                   }`}
                 >
-                  {ui.slideTabPrefix}{idx + 1}{ui.slideTabSuffix || ""}
+                  {ui.slideTabPrefix}
+                  {ti + 1}
+                  {ui.slideTabSuffix}
                 </button>
               ))}
             </div>
           </div>
-
-          <div className="text-slate-900">
-            <ExecutiveSlideCard
-              slide={targetSlides[targetSlideIdx] || targetSlides[0]}
-              slideIndex={targetSlideIdx}
-              totalSlides={targetSlides.length}
-              badgeLabel={ui.targetSlideLabel}
-              speakerNotesLabel={ui.speakerNotesLabel}
-              compact={true}
-            />
-          </div>
+          <ExecutiveSlideCard
+            slide={targetSlides[safeTargetIdx]}
+            slideIndex={safeTargetIdx}
+            totalSlides={3}
+            badgeLabel={ui.targetSlideLabel}
+            speakerNotesLabel={ui.speakerNotesLabel}
+            compact={true}
+          />
         </div>
       )}
 
-      {/* Crisp 6-Card Client Case Fact Strip (Always Visible + Expandable) */}
-      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-2.5">
-        <div className="flex items-center justify-between gap-2">
-          <div className="text-xs font-extrabold text-slate-900">{ui.caseHeader}</div>
-          <button
-            type="button"
-            onClick={() => setShowFullCase((v) => !v)}
-            className="text-[11px] font-extrabold text-[#ed1b2e] hover:underline"
-          >
-            {showFullCase ? ui.lessCaseBtn : ui.moreCaseBtn}
-          </button>
+      {/* Assigned Unique Client Scenario Card + 14-Archetype Case Picker */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-2xl p-3.5 sm:p-4 space-y-3 shadow-md">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#ed1b2e] text-white text-[10px] font-extrabold uppercase tracking-wider">
+              Case #{(challengeData?.seatIndex ?? 0) + 1}/{challengeData?.totalUniqueSeats || 56}
+            </span>
+            <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wide">
+              {scen?.icon || "🏛️"} {scen?.shortLabel || ui.assignedCaseLabel}
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => setShowCasePicker((v) => !v)}
+              className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-extrabold text-white"
+            >
+              {ui.browseCasesBtn}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSwitchSeat()}
+              className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-extrabold text-amber-300"
+            >
+              {ui.switchCaseBtn}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowFullCase((v) => !v)}
+              className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] font-bold text-slate-300"
+            >
+              {showFullCase ? ui.lessCaseBtn : ui.moreCaseBtn}
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          {ui.caseCards.map((c, idx) => (
+        {/* 14-Archetype Case Picker Drawer */}
+        {showCasePicker && Array.isArray(challengeData?.archetypes) && (
+          <div className="bg-slate-800/95 border border-slate-700 rounded-xl p-3 space-y-2">
+            <div className="text-[11px] font-extrabold text-amber-300">{ui.casePickerTitle}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-56 overflow-y-auto pr-1">
+              {challengeData.archetypes.map((arch) => {
+                const isCur = scen?.id === arch.id;
+                return (
+                  <button
+                    key={arch.id}
+                    type="button"
+                    onClick={() => handleSwitchSeat(arch.seatIndex)}
+                    className={`text-left p-2 rounded-lg border text-xs transition-all flex items-center justify-between gap-2 ${
+                      isCur
+                        ? "bg-[#ed1b2e]/20 border-[#ed1b2e] text-white"
+                        : "bg-slate-900/70 hover:bg-slate-900 border-slate-700 text-slate-200"
+                    }`}
+                  >
+                    <div className="min-w-0">
+                      <div className="font-extrabold truncate">
+                        {arch.icon} {arch.shortLabel}
+                      </div>
+                      <div className="text-[10px] text-slate-400 truncate">{arch.clientName}</div>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold text-amber-300 shrink-0">
+                      Gap {arch.gapAmount}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* 4 Crisp Balance-Sheet Snapshot Tiles */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+          {caseCards.map((c, ci) => (
             <div
-              key={idx}
-              className="bg-white border border-slate-200 rounded-xl px-2.5 py-2 flex items-start gap-2 shadow-sm"
+              key={ci}
+              className="bg-slate-800/90 border border-slate-700 rounded-xl px-3 py-2 flex items-start gap-2"
             >
-              <span className="text-sm shrink-0 mt-0.5">{c.icon}</span>
+              <span className="text-base leading-none mt-0.5">{c.icon}</span>
               <div className="min-w-0">
-                <div className="text-[11px] font-extrabold text-slate-900 leading-tight">
+                <div className="text-[11px] font-extrabold text-amber-300 leading-tight">
                   {c.label}
                 </div>
-                <div className="text-[11px] text-slate-600 leading-snug mt-0.5">{c.value}</div>
+                <div className="text-[11px] text-slate-200 leading-snug mt-0.5">{c.value}</div>
               </div>
             </div>
           ))}
         </div>
 
+        {/* Expanded Case File Details */}
         {showFullCase && challengeData?.case_file && (
-          <div className="bg-white border border-slate-200 rounded-xl p-3 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-700">
+          <div className="bg-slate-950/70 border border-slate-700 rounded-xl p-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-200">
             {Object.entries(challengeData.case_file).map(([k, v]) => (
-              <div key={k} className="leading-snug">
-                <span className="font-extrabold text-slate-900 capitalize">
-                  {k.replace(/_/g, " ")}:{" "}
+              <div key={k}>
+                <span className="font-extrabold uppercase text-amber-400 mr-1">
+                  {k.replace("_", " ")}:
                 </span>
                 <span>{v}</span>
               </div>
@@ -1483,211 +1772,203 @@ window.Challenge2ParticipantView = function ({
         )}
       </div>
 
-      {/* 2-Step Navigation Bar: Step 1 (Craft Prompt) -> Step 2 (Review 3-Slide Deck & Final Submit) */}
-      <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+      {/* Two-Step Workflow Bar */}
+      <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1.5 rounded-2xl">
         <button
           type="button"
           onClick={() => setActiveStep("1")}
-          className={`py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 ${
+          className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all ${
             activeStep === "1"
-              ? "bg-[#ed1b2e] text-white shadow-sm"
-              : "bg-white text-slate-700 hover:bg-red-50 hover:text-[#ed1b2e]"
+              ? "bg-white text-slate-900 shadow-sm border border-slate-200"
+              : "text-slate-600 hover:text-slate-900"
           }`}
         >
-          <span>{ui.step1Tab}</span>
-          <span
-            className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-              activeStep === "1" ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"
-            }`}
-          >
-            {activePillarCount}/5
-          </span>
+          {ui.step1Tab}
         </button>
-
         <button
           type="button"
+          onClick={() => deck && setActiveStep("2")}
           disabled={!deck}
-          onClick={() => {
-            if (deck) setActiveStep("2");
-          }}
-          className={`py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 ${
-            !deck
-              ? "bg-slate-50 text-slate-400 cursor-not-allowed"
-              : activeStep === "2"
+          className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 ${
+            activeStep === "2"
               ? "bg-[#ed1b2e] text-white shadow-sm"
-              : "bg-white text-emerald-700 border border-emerald-300 hover:bg-emerald-50"
+              : deck
+              ? "text-slate-800 hover:bg-white/60"
+              : "text-slate-400 cursor-not-allowed"
           }`}
         >
           <span>{ui.step2Tab}</span>
           {deck && (
-            <span
-              className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                activeStep === "2"
-                  ? "bg-white/20 text-white"
-                  : "bg-emerald-100 text-emerald-800"
-              }`}
-            >
-              {generatedSlides.length} {ui.slidesCountBadge}
+            <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[10px]">
+              3/3
             </span>
           )}
         </button>
       </div>
 
       {/* ========================================================================
-          STEP 1: 5-PILLAR R.C.T.F.C. PROMPT BUILDER + LEADER BOOSTERS + PROMPT BOX
+         STEP 1: CLEAN VISUAL R.C.T.F.C. ARCHITECT + PERSONAL STRATEGIC ANGLE
       ======================================================================== */}
       {activeStep === "1" && (
-        <div className="space-y-3">
-          {/* 5-Pillar Selector Strip */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-2.5">
+        <div className="space-y-4">
+          {/* 1. 5 Visual R.C.T.F.C. Toggle Cards */}
+          <div className="space-y-2.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="text-xs font-extrabold text-slate-800">{ui.pillarsHeader}</div>
-              <div className="flex items-center gap-1.5">
+              <div>
+                <div className="text-xs sm:text-sm font-extrabold text-slate-900">
+                  {ui.pillarsHeader}
+                </div>
+                <div className="text-[11px] text-slate-500">{ui.pillarsSub}</div>
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5">
                 <button
                   type="button"
-                  onClick={handleInsertAllPillars}
-                  className="px-2.5 py-1 rounded-lg bg-[#ed1b2e] hover:bg-[#c81526] text-white text-[11px] font-extrabold shadow-sm transition-all"
+                  onClick={handleActivateAllPillars}
+                  className="px-3 py-1.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c81526] text-white text-xs font-extrabold shadow-sm"
                 >
                   {ui.insertAllBtn}
                 </button>
                 <button
                   type="button"
-                  onClick={handleResetPrompt}
-                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-bold transition-all"
+                  onClick={handleTryWeakPrompt}
+                  className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold"
                 >
-                  {ui.resetPromptBtn}
+                  {ui.weakPromptBtn}
                 </button>
               </div>
             </div>
 
-            {/* 5 Pillar Buttons */}
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
-              {guideSteps.map((g, idx) => {
-                const isDone = pillarStatuses[g.key] === "done";
-                const isSelected = selectedPillarKey === g.key;
-                return (
-                  <button
-                    key={g.key}
-                    type="button"
-                    onClick={() => setSelectedPillarKey(g.key)}
-                    className={`p-2 rounded-xl border text-left transition-all flex items-center justify-between gap-1 ${
-                      isSelected
-                        ? "bg-slate-900 text-white border-slate-900 shadow-sm"
-                        : isDone
-                        ? "bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100"
-                        : "bg-white text-slate-700 border-slate-200 hover:border-[#ed1b2e]"
-                    }`}
-                  >
-                    <div className="min-w-0">
-                      <div className="text-[10px] font-mono opacity-75">
-                        {PILLAR_ICONS[g.key] || "📌"} #{idx + 1}
-                      </div>
-                      <div className="text-xs font-extrabold truncate">{g.label}</div>
-                    </div>
-                    <span
-                      className={`text-xs font-extrabold px-1.5 py-0.5 rounded-full shrink-0 ${
+            {loadingChallenge ? (
+              <div className="text-xs text-slate-500 py-4 text-center">Loading scenario...</div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
+                {guideSteps.map((g) => {
+                  const isDone = pillarStatuses[g.key] === "done";
+                  const meta = PILLAR_META[g.key] || { icon: "•", code: "•" };
+                  return (
+                    <button
+                      key={g.key}
+                      type="button"
+                      onClick={() => handleTogglePillar(g.key)}
+                      className={`p-3 rounded-2xl border-2 text-left transition-all flex flex-col justify-between gap-1.5 ${
                         isDone
-                          ? "bg-emerald-600 text-white"
-                          : isSelected
-                          ? "bg-[#ed1b2e] text-white"
-                          : "bg-slate-100 text-slate-500"
+                          ? "bg-emerald-50/70 border-emerald-500 shadow-sm"
+                          : "bg-slate-50 hover:bg-slate-100 border-slate-200 opacity-75"
                       }`}
                     >
-                      {isDone ? "✓" : "+"}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active Pillar Detail & One-Tap Insert Box */}
-            {currentPillarObj && (
-              <div className="bg-white border-2 border-slate-200 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="space-y-1 flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-extrabold text-[#ed1b2e]">
-                      {PILLAR_ICONS[currentPillarObj.key]} {currentPillarObj.label}
-                    </span>
-                    <span className="text-[11px] text-slate-500 font-medium">
-                      — {currentPillarObj.tip}
-                    </span>
-                  </div>
-                  <div className="text-xs text-slate-800 bg-slate-50 border border-slate-200 rounded-lg p-2 font-medium leading-relaxed">
-                    &ldquo;{currentPillarObj.template}&rdquo;
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => handleInsertPillar(currentPillarObj)}
-                  className={`px-3.5 py-2.5 rounded-xl text-xs font-extrabold shrink-0 transition-all shadow-sm ${
-                    pillarStatuses[currentPillarObj.key] === "done"
-                      ? "bg-emerald-600 hover:bg-emerald-700 text-white"
-                      : "bg-[#ed1b2e] hover:bg-[#c81526] text-white"
-                  }`}
-                >
-                  {pillarStatuses[currentPillarObj.key] === "done"
-                    ? ui.pillarIncluded
-                    : ui.insertPillarBtn}
-                </button>
-              </div>
-            )}
-
-            {/* NEW: Agency Leader Wealth, Empathy & Relationship Boosters Bar */}
-            {(ui.leaderBoosters || []).length > 0 && (
-              <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-2.5 space-y-2">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[11px] sm:text-xs font-extrabold text-amber-950">
-                    {ui.leaderBoostersHeader}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={handleAddAllLeaderBoosters}
-                    className="px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-extrabold shadow-sm transition-all"
-                  >
-                    {ui.addAllBoostersBtn}
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {ui.leaderBoosters.map((b, bIdx) => {
-                    const active = (promptText || "").includes(b.snippet);
-                    return (
-                      <button
-                        type="button"
-                        key={bIdx}
-                        onClick={() => handleToggleLeaderBooster(b.snippet)}
-                        className={`text-left px-3 py-1.5 rounded-lg border text-xs font-bold transition-all shadow-sm ${
-                          active
-                            ? "bg-emerald-50 border-emerald-500 text-emerald-950"
-                            : "bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border-amber-300"
-                        }`}
-                      >
-                        {active ? "✓ " : "+ "}{b.label}
-                      </button>
-                    );
-                  })}
-                </div>
+                      <div className="flex items-center justify-between gap-1">
+                        <span className="text-xs font-extrabold text-slate-900">
+                          {meta.icon} {g.label}
+                        </span>
+                        <span
+                          className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-extrabold shrink-0 ${
+                            isDone
+                              ? "bg-emerald-600 text-white"
+                              : "bg-white border border-slate-300 text-slate-400"
+                          }`}
+                        >
+                          {isDone ? "✓" : "+"}
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-slate-600 font-medium leading-snug line-clamp-2">
+                        {g.summary || g.tip}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
 
-          {/* Large High-Visibility Editable Prompt Box */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label className="text-xs sm:text-sm font-extrabold text-slate-900">
-                {ui.promptLabel}
-              </label>
-              <span className="text-[11px] font-mono text-slate-500">
-                {promptText.length} chars
-              </span>
+          {/* 2. Boardroom Presentation Tone Selector */}
+          <div className="space-y-2">
+            <div className="text-xs sm:text-sm font-extrabold text-slate-900">{ui.toneHeader}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {(ui.tones || []).map((tn) => {
+                const active = selectedToneId === tn.id;
+                return (
+                  <button
+                    key={tn.id}
+                    type="button"
+                    onClick={() => handleSelectTone(tn.id)}
+                    className={`px-3 py-2.5 rounded-xl border-2 text-xs font-extrabold text-left transition-all ${
+                      active
+                        ? "bg-slate-900 text-white border-slate-900 shadow-sm"
+                        : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200"
+                    }`}
+                  >
+                    {tn.label}
+                  </button>
+                );
+              })}
             </div>
+          </div>
+
+          {/* 3. Personal Strategic Angle / Relationship Hook */}
+          <div className="bg-amber-50/80 border-2 border-amber-300 rounded-2xl p-3.5 space-y-2.5">
+            <div>
+              <div className="text-xs sm:text-sm font-extrabold text-slate-900">
+                {ui.angleHeader}
+              </div>
+              <div className="text-[11px] text-slate-600">{ui.angleSub}</div>
+            </div>
+
+            {angleHints.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {angleHints.map((hint, hi) => {
+                  const selected = personalAngle.trim() === hint.trim();
+                  return (
+                    <button
+                      key={hi}
+                      type="button"
+                      onClick={() => handleAngleChange(hint)}
+                      className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left transition-all ${
+                        selected
+                          ? "bg-amber-600 text-white border-amber-700 shadow-sm"
+                          : "bg-white hover:bg-amber-100 text-slate-800 border-amber-300"
+                      }`}
+                    >
+                      ✨ {hint}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
             <textarea
-              rows={6}
-              value={promptText}
-              onChange={(e) => setPromptText(e.target.value)}
-              placeholder={ui.promptPlaceholder}
-              className="w-full rounded-2xl bg-white border-2 border-slate-300 focus:border-[#ed1b2e] focus:outline-none px-3.5 py-3 text-sm sm:text-base text-slate-900 font-medium leading-relaxed shadow-inner"
+              rows={2}
+              value={personalAngle}
+              onChange={(e) => handleAngleChange(e.target.value)}
+              placeholder={ui.anglePlaceholder}
+              className="w-full rounded-xl border border-amber-300 focus:border-[#ed1b2e] focus:outline-none p-2.5 text-xs sm:text-sm text-slate-900 bg-white leading-relaxed"
             />
+          </div>
+
+          {/* 4. Collapsible Master Prompt Inspector / Editor */}
+          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50">
+            <button
+              type="button"
+              onClick={() => setShowPromptDrawer((v) => !v)}
+              className="w-full px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs font-extrabold text-slate-700 hover:bg-slate-100"
+            >
+              <span>{showPromptDrawer ? ui.promptDrawerHide : ui.promptDrawerShow}</span>
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold">
+                {ui.pillarsActiveLabel}: {activePillarCount}/5
+              </span>
+            </button>
+            {showPromptDrawer && (
+              <div className="p-3 border-t border-slate-200 bg-white">
+                <textarea
+                  rows={6}
+                  value={promptText}
+                  onChange={(e) => {
+                    setManualPromptEdited(true);
+                    setPromptText(e.target.value);
+                  }}
+                  className="w-full rounded-xl border border-slate-300 focus:border-[#ed1b2e] focus:outline-none p-3 text-xs text-slate-900 leading-relaxed font-mono"
+                />
+              </div>
+            )}
           </div>
 
           {genError && (
@@ -1696,54 +1977,60 @@ window.Challenge2ParticipantView = function ({
             </div>
           )}
 
-          {/* Generate / Update 3-Slide Deck CTA */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-            <div className="text-[11px] text-slate-500 font-medium max-w-xl">
-              {ui.oneTimeNotice}
+          {/* Animated 3-Stage Deck Build Progress or Primary Generate CTA */}
+          {generatingDeck ? (
+            <div className="bg-slate-900 text-white rounded-2xl p-4 space-y-2.5 shadow-md">
+              <div className="flex items-center justify-between text-xs font-extrabold text-amber-300">
+                <span>{(ui.genStages || [])[genStageIdx] || ui.genStages[0]}</span>
+                <span>{Math.min(95, (genStageIdx + 1) * 32)}%</span>
+              </div>
+              <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-[#ed1b2e] to-amber-400 transition-all duration-500"
+                  style={{ width: `${(genStageIdx + 1) * 33}%` }}
+                />
+              </div>
             </div>
-
+          ) : (
             <button
               type="button"
-              disabled={generatingDeck || loadingChallenge || !promptText.trim()}
               onClick={handleGenerateDeck}
-              className={`w-full sm:w-auto px-6 py-3 rounded-2xl font-extrabold text-sm text-white shadow-md transition-all ${
-                generatingDeck
-                  ? "bg-slate-400 cursor-wait"
-                  : "bg-[#ed1b2e] hover:bg-[#c81526]"
-              }`}
+              disabled={!promptText || promptText.trim().length < 3}
+              className="w-full py-3.5 px-5 rounded-2xl bg-[#ed1b2e] hover:bg-[#c81526] disabled:opacity-50 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
             >
-              {generatingDeck
-                ? ui.generatingText
-                : deck
-                ? ui.regenerateBtn
-                : ui.generateBtn}
+              {deck ? ui.regenerateBtn : ui.generateBtn}
             </button>
-          </div>
+          )}
         </div>
       )}
 
       {/* ========================================================================
-          STEP 2: INTERACTIVE 3-SLIDE DECK PREVIEW, COMPARE & ONE-TIME FINAL SUBMIT
+         STEP 2: 3-SLIDE KEYNOTE PREVIEW, CHECKLIST & ONE-TIME FINAL SUBMIT
       ======================================================================== */}
       {activeStep === "2" && deck && (
-        <div className="space-y-3.5">
-          {/* Slide Selector + Compare with Target + PPTX Download Toolbar */}
+        <div className="space-y-4">
+          {/* 3-Slide Keynote Filmstrip Switcher + Compare & Export Controls */}
           <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-100 border border-slate-200 rounded-2xl p-2.5">
-            <div className="flex items-center gap-1.5">
-              {generatedSlides.map((_, idx) => (
+            <div className="flex flex-wrap items-center gap-1.5">
+              {currentSlides.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setSlideIdx(idx)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all ${
                     safeSlideIdx === idx
-                      ? "bg-[#ed1b2e] text-white shadow-sm"
+                      ? "bg-slate-900 text-white shadow-sm"
                       : "bg-white hover:bg-red-50 text-slate-700 border border-slate-200"
                   }`}
                 >
-                  {ui.slideTabPrefix}{idx + 1}{ui.slideTabSuffix || ""}
+                  {ui.slideTabPrefix}
+                  {idx + 1}
+                  {ui.slideTabSuffix} · {(ui.slideShortLabels || [])[idx] || ""}
                 </button>
               ))}
+              <span className="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                {ui.slidesCountBadge}
+              </span>
               {generatingImages && (
                 <span className="text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg animate-pulse">
                   {ui.generatingImgText}
@@ -1751,19 +2038,18 @@ window.Challenge2ParticipantView = function ({
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={() => setCompareMode((v) => !v)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-extrabold border transition-all ${
                   compareMode
                     ? "bg-slate-900 text-white border-slate-900"
-                    : "bg-white hover:bg-red-50 text-slate-800 border-slate-300"
+                    : "bg-white hover:bg-slate-50 text-slate-700 border-slate-300"
                 }`}
               >
                 {compareMode ? ui.compareToggleOn : ui.compareToggleOff}
               </button>
-
               <button
                 type="button"
                 onClick={() => handleDownloadPptx(deck)}
@@ -1774,92 +2060,86 @@ window.Challenge2ParticipantView = function ({
             </div>
           </div>
 
-          {/* Slide Canvas: Single View or Side-by-Side Target Comparison */}
-          {compareMode && curTargetSlide ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch">
+          {/* Slide Canvas (Single or Side-by-Side vs Benchmark) */}
+          {compareMode && targetSlides.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
               <ExecutiveSlideCard
-                slide={curGeneratedSlide}
+                slide={currentSlides[safeSlideIdx]}
                 slideIndex={safeSlideIdx}
-                totalSlides={generatedSlides.length}
+                totalSlides={3}
                 badgeLabel={ui.yourSlideLabel}
                 speakerNotesLabel={ui.speakerNotesLabel}
-                compact={true}
+                generatingImages={generatingImages}
               />
               <ExecutiveSlideCard
-                slide={curTargetSlide}
-                slideIndex={safeSlideIdx}
-                totalSlides={targetSlides.length}
+                slide={targetSlides[Math.min(safeSlideIdx, targetSlides.length - 1)]}
+                slideIndex={Math.min(safeSlideIdx, targetSlides.length - 1)}
+                totalSlides={3}
                 badgeLabel={ui.targetSlideLabel}
                 speakerNotesLabel={ui.speakerNotesLabel}
-                compact={true}
               />
             </div>
           ) : (
             <ExecutiveSlideCard
-              slide={curGeneratedSlide}
+              slide={currentSlides[safeSlideIdx]}
               slideIndex={safeSlideIdx}
-              totalSlides={generatedSlides.length}
-              badgeLabel={deck.title || ui.yourSlideLabel}
+              totalSlides={3}
+              badgeLabel={ui.yourSlideLabel}
               speakerNotesLabel={ui.speakerNotesLabel}
-              compact={false}
+              generatingImages={generatingImages}
             />
           )}
 
-          {/* 5-Point Pre-Submit Quality Checklist */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-2">
-            <div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-700">
+          {/* Pre-Submit 5-Point Readiness Bar */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2">
+            <div className="text-xs font-extrabold uppercase tracking-wider text-slate-700">
               {ui.qualityChecksHeader}
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
               {Object.entries(ui.checkLabels).map(([ckKey, ckLabel]) => {
-                const passed = Boolean(preChecks[ckKey]);
+                const ok = preChecks[ckKey];
                 return (
                   <div
                     key={ckKey}
-                    className={`rounded-xl px-2.5 py-2 border text-xs font-bold flex items-center gap-1.5 ${
-                      passed
+                    className={`px-2.5 py-2 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 ${
+                      ok
                         ? "bg-emerald-50 border-emerald-300 text-emerald-900"
                         : "bg-white border-slate-200 text-slate-500"
                     }`}
                   >
-                    <span
-                      className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-extrabold shrink-0 ${
-                        passed
-                          ? "bg-emerald-600 text-white"
-                          : "bg-slate-200 text-slate-600"
-                      }`}
-                    >
-                      {passed ? "✓" : "•"}
-                    </span>
-                    <span className="text-[11px] leading-tight">{ckLabel}</span>
+                    <span className="font-extrabold">{ok ? "✅" : "⚪"}</span>
+                    <span className="leading-tight">{ckLabel}</span>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          {/* Final Decision Bar: Back to Edit Prompt OR One-Time Final Submit */}
-          <div className="bg-red-50/60 border-2 border-red-200 rounded-2xl p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-2.5 text-xs text-amber-900 font-medium">
+            {ui.oneTimeNotice}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
             <button
               type="button"
-              disabled={submittingFinal}
               onClick={() => setActiveStep("1")}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border-2 border-slate-300 text-xs sm:text-sm font-extrabold transition-all"
+              disabled={submittingFinal}
+              className="px-4 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-extrabold transition-all"
             >
               {ui.backToPromptBtn}
             </button>
 
             <button
               type="button"
-              disabled={submittingFinal}
               onClick={handleFinalSubmitOnce}
-              className={`w-full sm:w-auto px-6 py-3 rounded-xl font-extrabold text-xs sm:text-sm text-white shadow-md transition-all ${
-                submittingFinal
-                  ? "bg-slate-500 cursor-wait"
-                  : "bg-emerald-600 hover:bg-emerald-700"
-              }`}
+              disabled={submittingFinal}
+              className="flex-1 py-3.5 px-5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
             >
-              {submittingFinal ? ui.finalSubmittingText : ui.finalSubmitBtn}
+              {waitingImagesForSubmit
+                ? ui.finishingImgBeforeSubmit
+                : submittingFinal
+                ? ui.finalSubmittingText
+                : ui.finalSubmitBtn}
             </button>
           </div>
         </div>

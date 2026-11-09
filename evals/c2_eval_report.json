@@ -1,0 +1,188 @@
+{
+  "timestamp": "2026-11-09T07:55:22Z",
+  "passed": 30,
+  "total": 30,
+  "pass_rate_pct": 100.0,
+  "checks": [
+    {
+      "suite": "S1_Scale_Hygiene",
+      "name": "Clean Real-Event Reset",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "suite": "S1_Scale_Hygiene",
+      "name": "280-Payload Schema & 3-Slide Target Completeness (56 Seats × 5 Langs)",
+      "passed": true,
+      "detail": "seats=56, missing=0, bad_target_slides=0"
+    },
+    {
+      "suite": "S1_Scale_Hygiene",
+      "name": "Zero 'PAMB' / 'Gemini 2.5' / Stale Number Leaks Across Bank & UI",
+      "passed": true,
+      "detail": "bank_leaks=0, ui_hits=[]"
+    },
+    {
+      "suite": "S1_Scale_Hygiene",
+      "name": "54-Leader Room Seat Uniqueness (100% Distinct Client Cases)",
+      "passed": true,
+      "detail": "unique_seats=54/54, unique_keys=54/54"
+    },
+    {
+      "suite": "S1_Scale_Hygiene",
+      "name": "All 14 HNW Malaysian Executive Archetypes Distributed Across Room",
+      "passed": true,
+      "detail": "archetypes=14/14"
+    },
+    {
+      "suite": "S1_Scale_Hygiene",
+      "name": "54-Deck State Payload Media Offload (< 360 KB & /api/media/ URLs)",
+      "passed": true,
+      "detail": "state_size=295.4 KB, sample_img=/api/media/6b7fa434f92a8b80aab0.png"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Adversarial Over-Request ('8 slides')",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=4.06s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Adversarial Under-Request ('only 1 slide')",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=1.6s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Weak 1-Line Starter Prompt",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=1.53s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Full 5-Pillar + Angle (en, Seat #1 penang_semicon_keyman)",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=4.43s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Full 5-Pillar + Angle (zh-CN, Seat #6 halal_fnb_cofounders)",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=5.61s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Full 5-Pillar + Angle (yue, Seat #2 johor_logistics_succession)",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=6.32s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Full 5-Pillar + Angle (ms, Seat #0 clinic_founder_takaful)",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=5.66s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "3-Slide Invariant & Quality — Full 5-Pillar + Angle (ta, Seat #12 glc_cfo_golden_bridge)",
+      "passed": true,
+      "detail": "slides=3, model=gemini-3.5-flash-lite, lang_ok=True, rich_ok=True, latency=5.42s"
+    },
+    {
+      "suite": "S2_Strict_3Slides_Multilingual",
+      "name": "Median Deck Generation Latency (< 6.0s on gemini-3.5-flash-lite)",
+      "passed": true,
+      "detail": "median=4.92s, max=6.32s"
+    },
+    {
+      "suite": "S3_Visuals_And_PPTX",
+      "name": "Live Slide Artwork Generation & /api/media/ Offload (gemini-3.1-flash-image)",
+      "passed": true,
+      "detail": "url=/api/media/9fcf5acd32bf6c2eb8ac.png, bytes=1692410, latency=8.14s"
+    },
+    {
+      "suite": "S3_Visuals_And_PPTX",
+      "name": "3-Slide .pptx Export with Embedded /api/media/ Artwork",
+      "passed": true,
+      "detail": "pptx_bytes=1783825, slide_xmls=3, embedded_media=2"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #0 (clinic_founder_takaful, en) Tier A Band (>= 9.0)",
+      "passed": true,
+      "detail": "score=10.0/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #0 (clinic_founder_takaful, en) Tier B Band (7.4..8.9)",
+      "passed": true,
+      "detail": "score=8.8/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #0 (clinic_founder_takaful, en) Tier C Band (3.5..6.9)",
+      "passed": true,
+      "detail": "score=4.2/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #0 (clinic_founder_takaful, en) Tier D Band (<= 6.2 + BNM violation flagged)",
+      "passed": true,
+      "detail": "score=2.0/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #1 (penang_semicon_keyman, zh-CN) Tier A Band (>= 9.0)",
+      "passed": true,
+      "detail": "score=9.8/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #1 (penang_semicon_keyman, zh-CN) Tier B Band (7.4..8.9)",
+      "passed": true,
+      "detail": "score=8.8/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #1 (penang_semicon_keyman, zh-CN) Tier C Band (3.5..6.9)",
+      "passed": true,
+      "detail": "score=4.2/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #1 (penang_semicon_keyman, zh-CN) Tier D Band (<= 6.2 + BNM violation flagged)",
+      "passed": true,
+      "detail": "score=2.4/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #12 (glc_cfo_golden_bridge, en) Tier A Band (>= 9.0)",
+      "passed": true,
+      "detail": "score=9.8/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #12 (glc_cfo_golden_bridge, en) Tier B Band (7.4..8.9)",
+      "passed": true,
+      "detail": "score=8.8/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #12 (glc_cfo_golden_bridge, en) Tier C Band (3.5..6.9)",
+      "passed": true,
+      "detail": "score=4.2/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Seat #12 (glc_cfo_golden_bridge, en) Tier D Band (<= 6.2 + BNM violation flagged)",
+      "passed": true,
+      "detail": "score=2.0/10"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "100% Pairwise Tier Ordering Across Varied Scenarios (A > B > C & A > D)",
+      "passed": true,
+      "detail": "pairwise=9/9 | means: A=9.87, B=8.80, C=4.20, D=2.13"
+    }
+  ]
+}

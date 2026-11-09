@@ -182,20 +182,26 @@ window.SubmissionCardRenderer = function ({
           )}
         </div>
       ) : cNum === "2" && submission.deck && Array.isArray(submission.deck.slides) && submission.deck.slides.length > 0 ? (
-        /* Challenge 2: Interactive 3-Slide Enterprise Deck Preview + Prompt & 6-Dimension Rubric */
+        /* Challenge 2: Strictly 3-Slide Executive Keynote Deck Preview + Personal Angle & 6-Dimension Rubric */
         (() => {
-          const slides = submission.deck.slides;
+          const slides = submission.deck.slides.slice(0, 3);
           const safeSlideIdx = Math.min(slideIdx, slides.length - 1);
           const curSlide = slides[safeSlideIdx] || slides[0];
-          const maxChartVal =
-            curSlide.chart && Array.isArray(curSlide.chart.series)
-              ? Math.max(...curSlide.chart.series.map((p) => Number(p.value) || 0), 1)
-              : 1;
+          const SlideComp = window.ExecutiveSlideCard;
 
           return (
             <div className="space-y-3">
-              {/* Slide Selector Tabs */}
-              <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2">
+              {submission.personalAngle && (
+                <div className="bg-amber-50 border border-amber-300 rounded-xl px-3 py-2 text-xs font-bold text-amber-950">
+                  <span className="uppercase tracking-wider text-[10px] font-extrabold text-amber-800 mr-1.5">
+                    💡 Leader&apos;s Strategic Angle:
+                  </span>
+                  {submission.personalAngle}
+                </div>
+              )}
+
+              {/* 3-Slide Keynote Switcher */}
+              <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-100 border border-slate-200 rounded-xl px-3 py-2">
                 <div className="flex items-center gap-1.5">
                   {slides.map((sl, idx) => (
                     <button
@@ -204,7 +210,7 @@ window.SubmissionCardRenderer = function ({
                       onClick={() => setSlideIdx(idx)}
                       className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all ${
                         safeSlideIdx === idx
-                          ? "bg-[#ed1b2e] text-white shadow-sm"
+                          ? "bg-slate-900 text-white shadow-sm"
                           : "bg-white hover:bg-red-50 text-slate-700 border border-slate-200"
                       }`}
                     >
@@ -212,152 +218,30 @@ window.SubmissionCardRenderer = function ({
                     </button>
                   ))}
                 </div>
-                <span className="text-[11px] font-bold text-slate-500">
-                  {submission.deck.title} ({safeSlideIdx + 1}/{slides.length})
+                <span className="text-[11px] font-bold text-slate-600">
+                  {submission.deck.title} ({safeSlideIdx + 1}/3)
                 </span>
               </div>
 
-              {/* 16:9 Slide Card Render */}
-              <div className="bg-white border-2 border-slate-200 rounded-2xl overflow-hidden shadow-md">
-                <div className="h-1.5 bg-[#ed1b2e]" />
-                <div className="p-4 sm:p-5 space-y-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h4 className="text-sm sm:text-base font-extrabold text-slate-900">
-                        {curSlide.title}
-                      </h4>
-                      {curSlide.subtitle && (
-                        <div className="text-xs text-slate-500 mt-0.5">{curSlide.subtitle}</div>
-                      )}
-                    </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-50 text-[#ed1b2e] border border-red-200 font-bold uppercase shrink-0">
-                      {curSlide.layout || "slide"}
-                    </span>
-                  </div>
-
-                  {/* KPIs if present */}
-                  {Array.isArray(curSlide.kpis) && curSlide.kpis.length > 0 && (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {curSlide.kpis.map((k, ki) => (
-                        <div
-                          key={ki}
-                          className="bg-red-50/60 border border-red-200 rounded-xl p-2.5"
-                        >
-                          <div className="text-[10px] font-bold uppercase text-slate-500">
-                            {k.label}
-                          </div>
-                          <div className="text-sm sm:text-base font-extrabold text-[#ed1b2e] mt-0.5">
-                            {k.value}
-                          </div>
-                          {k.note && (
-                            <div className="text-[10px] text-slate-500 mt-0.5">{k.note}</div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Chart if present */}
-                  {curSlide.chart && Array.isArray(curSlide.chart.series) && (
-                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2">
-                      <div className="flex items-end gap-4 h-28 pt-4 px-2 border-b border-slate-300">
-                        {curSlide.chart.series.map((pt, pi) => {
-                          const pct = Math.max(8, Math.round(((Number(pt.value) || 0) / maxChartVal) * 100));
-                          const barColors = [
-                            "bg-[#ed1b2e]",
-                            "bg-blue-600",
-                            "bg-amber-500",
-                            "bg-emerald-600",
-                          ];
-                          return (
-                            <div key={pi} className="flex-1 flex flex-col items-center justify-end h-full">
-                              <div className="text-[11px] font-extrabold text-slate-900 mb-1">
-                                {pt.value}
-                              </div>
-                              <div
-                                className={`w-3/4 rounded-t-md ${barColors[pi % barColors.length]}`}
-                                style={{ height: `${pct}%` }}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                      <div className="flex gap-4 px-2">
-                        {curSlide.chart.series.map((pt, pi) => (
-                          <div key={pi} className="flex-1 text-center text-[10px] font-bold text-slate-600">
-                            {pt.label}
-                          </div>
-                        ))}
-                      </div>
-                      {curSlide.chart.unit && (
-                        <div className="text-[10px] text-slate-400 text-right">{curSlide.chart.unit}</div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Table if present */}
-                  {curSlide.table && Array.isArray(curSlide.table.headers) && (
-                    <div className="overflow-x-auto border border-slate-200 rounded-xl">
-                      <table className="w-full text-left border-collapse text-xs">
-                        <thead>
-                          <tr className="bg-slate-900 text-white">
-                            {curSlide.table.headers.map((h, hi) => (
-                              <th key={hi} className="p-2 font-bold text-[11px]">
-                                {h}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {(curSlide.table.rows || []).map((row, ri) => (
-                            <tr key={ri} className={ri % 2 === 1 ? "bg-slate-50" : "bg-white"}>
-                              {curSlide.table.headers.map((_, ci) => (
-                                <td key={ci} className="p-2 border-t border-slate-200 text-[11px] text-slate-700">
-                                  {row[ci] || ""}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-
-                  {/* Bullets + Optional Image */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-                    <div className={curSlide.image ? "md:col-span-8 space-y-1.5" : "md:col-span-12 space-y-1.5"}>
-                      {Array.isArray(curSlide.bullets) && curSlide.bullets.length > 0 && (
-                        <ul className="list-disc pl-5 space-y-1 text-xs text-slate-700">
-                          {curSlide.bullets.map((b, bi) => (
-                            <li key={bi}>{b}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                    {curSlide.image && (
-                      <div className="md:col-span-4">
-                        <img
-                          src={curSlide.image}
-                          alt={curSlide.title}
-                          className="w-full h-28 object-cover rounded-xl border border-slate-200"
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  {curSlide.callout && (
-                    <div className="bg-slate-50 border-l-4 border-l-[#ed1b2e] px-3 py-2 rounded-r-lg text-xs font-semibold text-slate-800">
-                      {curSlide.callout}
-                    </div>
-                  )}
+              {/* Luxury 16:9 Executive Slide Card */}
+              {SlideComp ? (
+                <SlideComp
+                  slide={curSlide}
+                  slideIndex={safeSlideIdx}
+                  totalSlides={3}
+                  compact={mode !== "spotlight"}
+                />
+              ) : (
+                <div className="bg-white border-2 border-slate-200 rounded-2xl p-4">
+                  <h4 className="text-sm font-extrabold text-slate-900">{curSlide.title}</h4>
                 </div>
-              </div>
+              )}
 
-              {/* Upgraded Prompt + Rubric Pills + Judge Feedback */}
+              {/* Assembled Prompt + 6-Dimension Rubric Pills + Judge Verdict */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
                   <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-600 mb-1">
-                    📝 Final Upgraded Prompt ({agentName})
+                    📝 R.C.T.F.C. Master Prompt ({agentName})
                   </div>
                   <div className="text-[11px] text-slate-800 whitespace-pre-line font-mono leading-snug max-h-28 overflow-y-auto bg-white p-2 rounded-lg border border-slate-200">
                     {submission.userInput}
@@ -366,7 +250,7 @@ window.SubmissionCardRenderer = function ({
 
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
                   <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#ed1b2e]">
-                    🏅 6-Dimension AI Rubric &amp; Verdict
+                    🏅 6-Dimension Executive Rubric &amp; Verdict
                   </div>
                   {Object.keys(criteria).length > 0 && (
                     <div className="flex flex-wrap gap-1.5">

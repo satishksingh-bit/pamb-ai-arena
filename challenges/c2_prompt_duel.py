@@ -36,8 +36,15 @@ import re
 import secrets
 import threading
 import time
+import xml.sax.saxutils as saxutils
 import zipfile
 import requests
+
+from challenges.c2_scenarios_bank import (
+    get_c2_total_unique_seats,
+    list_c2_archetype_summaries,
+    resolve_c2_seat_scenario,
+)
 
 logger = logging.getLogger("deck-challenge")
 
@@ -1012,7 +1019,12 @@ DECK_SCHEMA = {
     "properties": {
         "title": {"type": "STRING"},
         "subtitle": {"type": "STRING"},
-        "slides": {"type": "ARRAY", "items": SLIDE_SCHEMA},
+        "slides": {
+            "type": "ARRAY",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": SLIDE_SCHEMA,
+        },
     },
     "required": ["title", "slides"],
 }
@@ -1291,16 +1303,51 @@ def _normalize_slide_dict(s: dict) -> dict:
     }
 
 
-def _normalize_deck_dict(d: dict) -> dict:
+_FALLBACK_SLIDE_TITLES = {
+    "en": ["Client Overview & Meeting Objective", "Financial Exposure & Liquidity Review", "Proposed Strategy & Next Steps"],
+    "zh-CN": ["客户概况与会面目标", "财务风险与流动性审视", "建议策略方案与下一步"],
+    "yue": ["客戶概況與會面目標", "財務風險與流動性審視", "建議策略方案與下一步"],
+    "ms": ["Gambaran Pelanggan & Objektif Mesyuarat", "Semakan Pendedahan & Kecairan", "Cadangan Strategi & Langkah Seterusnya"],
+    "ta": ["வாடிக்கையாளர் சுருக்கம் & சந்திப்பு நோக்கம்", "நிதி மற்றும் பணப்புழக்க ஆய்வு", "பரிந்துரைக்கப்பட்ட திட்டம் & அடுத்த படிகள்"],
+}
+
+
+def _enforce_exact_3_slides(slides: list[dict], lang: str = "en") -> list[dict]:
+    """Guarantees strictly 3 slides (never < 3, never > 3)."""
+    norm = norm_lang(lang)
+    out = [_normalize_slide_dict(s) for s in (slides or [])[:3]]
+    titles = _FALLBACK_SLIDE_TITLES.get(norm, _FALLBACK_SLIDE_TITLES["en"])
+    while len(out) < 3:
+        idx = len(out)
+        out.append({
+            "layout": "bullets",
+            "title": titles[idx],
+            "subtitle": None,
+            "bullets": [" Clarify client priorities and review financial needs before product sizing."],
+            "left": None,
+            "right": None,
+            "kpis": None,
+            "chart": None,
+            "table": None,
+            "steps": None,
+            "callout": None,
+            "speaker_notes": "",
+            "image_prompt": None,
+            "image": None,
+        })
+    return out[:3]
+
+
+def _normalize_deck_dict(d: dict, lang: str = "en") -> dict:
     return {
-        "title": d.get("title") or "Pre-Pitch Brief",
+        "title": d.get("title") or "Executive Pre-Pitch Brief",
         "subtitle": d.get("subtitle") or "",
-        "slides": [_normalize_slide_dict(s) for s in (d.get("slides") or [])],
+        "slides": _enforce_exact_3_slides(d.get("slides") or [], lang=lang),
     }
 
 
 def _with_target_images(deck_dict: dict, market: str, as_data_url: bool = False) -> dict:
-    d = copy.deepcopy(deck_dict)
+    d = copy.deepcopy(_normalize_deck_dict(deck_dict))
     for i, s in enumerate(d.get("slides", []), 1):
         f = STATIC_DIR / "target" / f"{market}_{i}.jpg"
         if s.get("image_prompt") and f.exists():
@@ -1313,27 +1360,233 @@ def _with_target_images(deck_dict: dict, market: str, as_data_url: bool = False)
 
 # ----------------------------------------------------------------------------- GENERATOR & SIGNING
 GENERATOR_SYSTEM = (
-    "You are a presentation generator. Convert the user's request into a slide deck JSON.\n"
-    "STRICT RULES:\n"
-    "1. Follow the user's prompt faithfully: produce exactly the number of slides requested (if not "
-    "specified, use 2-3), the sections requested, and the level of detail implied by the prompt.\n"
-    "2. Do NOT invent specific client facts (names, ages, amounts, family details) that are not in the "
-    "prompt. If the prompt is generic, keep the content generic.\n"
-    "3. Choose a fitting layout per slide: title, bullets, two_column, kpi, chart, table, timeline, quote. "
-    "Use chart/table/kpi only when the prompt provides or asks for numbers/comparisons.\n"
-    "4. Keep slides readable: at most 6 bullets per slide, concise bullets.\n"
-    "5. Add speaker_notes only if the prompt asks for them (or for presenter notes/script).\n"
-    "6. You may set image_prompt (English, photo-style, no text in image) on at most 2 slides where a "
-    "visual helps (e.g. the title slide). Leave `image` null.\n"
-    "7. Write all slide text in the requested output language unless the prompt explicitly asks for another."
+    "You are an executive presentation generator for HNW wealth & business succession advisors. "
+    "Convert the user's prompt into a structured slide deck JSON.\n"
+    "STRICT INVARIANT RULES:\n"
+    "1. STRICTLY 3 SLIDES ONLY: The `slides` array MUST ALWAYS contain EXACTLY 3 slides (Slide 1, Slide 2, Slide 3) — "
+    "NEVER fewer than 3 and NEVER more than 3, even if the user prompt explicitly asks for 1 slide, 5 slides, 7 slides, or 10 slides! "
+    "If more topics are requested, synthesize them cleanly across the 3 slides.\n"
+    "2. MATCH DEPTH & DATA TO PROMPT QUALITY (DO NOT INVENT MISSING CLIENT FACTS): "
+    "Do NOT invent client names, net worth, debt numbers, liquidity math, or BNM/Takaful/Schedule 10 compliance clauses "
+    "that are NOT present in the user's prompt. If the prompt is a short generic 1-liner, produce 3 simple generic `bullets` slides "
+    "without fabricated KPIs, charts, tables, or compliance language.\n"
+    "3. WHEN THE USER PROVIDES STRUCTURED FACTS & FORMAT INSTRUCTIONS:\n"
+    "   - Slide 1: Use layout `kpi` with 4 crisp KPI cards (e.g. Net Worth, Debt Exposure, Existing Cover, Liquidity Gap) + concise agenda bullets.\n"
+    "   - Slide 2: Use layout `chart` with a 3-bar `series` comparing Liquidity Needed vs Liquid Assets + Cover vs Net Liquidity Gap, plus key risk bullets.\n"
+    "   - Slide 3: Use layout `table` with a tailored Strategy Matrix (`headers` + 3 `rows`) plus consultative next steps & BNM guardrails.\n"
+    "4. PERSONAL STRATEGIC TOUCH: If the user prompt includes a Personal Strategic Angle, relationship hook, or co-advisory framing, "
+    "highlight it prominently in Slide 1 or Slide 3 `callout` and `bullets`.\n"
+    "5. Keep slides boardroom-scannable: max 4 concise bullets per slide. Populate `speaker_notes` when requested or when R.C.T.F.C. structure is present.\n"
+    "6. Set `image_prompt` (English, luxury architectural/editorial illustration, zero text/words/logos) on Slide 1 and optionally Slide 3 when prompt is detailed; leave `image` null.\n"
+    "7. Write ALL slide titles, subtitles, KPIs, chart labels, table cells, bullets, callouts, and speaker_notes in the requested OUTPUT LANGUAGE."
 )
 
-_COUNT_RE = re.compile(r"(\d{1,2})\s*[- ]?\s*(?:slides?|slaid|页|頁|ஸ்லைடு)", re.I)
+
+_KPI_ITEM_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "label": {"type": "STRING"},
+        "value": {"type": "STRING"},
+        "note": {"type": "STRING"},
+    },
+    "required": ["label", "value", "note"],
+}
+
+_CHART_OBJ_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "type": {"type": "STRING", "enum": ["bar"]},
+        "unit": {"type": "STRING"},
+        "series": {
+            "type": "ARRAY",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+                "type": "OBJECT",
+                "properties": {
+                    "label": {"type": "STRING"},
+                    "value": {"type": "NUMBER"},
+                },
+                "required": ["label", "value"],
+            },
+        },
+    },
+    "required": ["type", "unit", "series"],
+}
+
+_TABLE_OBJ_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "headers": {"type": "ARRAY", "minItems": 4, "maxItems": 4, "items": {"type": "STRING"}},
+        "rows": {
+            "type": "ARRAY",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {"type": "ARRAY", "minItems": 4, "maxItems": 4, "items": {"type": "STRING"}},
+        },
+    },
+    "required": ["headers", "rows"],
+}
+
+RICH_3SLIDE_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "title": {"type": "STRING"},
+        "subtitle": {"type": "STRING"},
+        "slide1": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["kpi"]},
+                "title": {"type": "STRING"},
+                "subtitle": {"type": "STRING"},
+                "kpis": {"type": "ARRAY", "minItems": 4, "maxItems": 4, "items": _KPI_ITEM_SCHEMA},
+                "bullets": {"type": "ARRAY", "minItems": 2, "maxItems": 3, "items": {"type": "STRING"}},
+                "callout": {"type": "STRING"},
+                "speaker_notes": {"type": "STRING"},
+                "image_prompt": {"type": "STRING"},
+            },
+            "required": ["layout", "title", "subtitle", "kpis", "bullets", "callout", "speaker_notes", "image_prompt"],
+        },
+        "slide2": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["chart"]},
+                "title": {"type": "STRING"},
+                "subtitle": {"type": "STRING"},
+                "chart": _CHART_OBJ_SCHEMA,
+                "bullets": {"type": "ARRAY", "minItems": 2, "maxItems": 3, "items": {"type": "STRING"}},
+                "callout": {"type": "STRING"},
+                "speaker_notes": {"type": "STRING"},
+            },
+            "required": ["layout", "title", "subtitle", "chart", "bullets", "callout", "speaker_notes"],
+        },
+        "slide3": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["table"]},
+                "title": {"type": "STRING"},
+                "subtitle": {"type": "STRING"},
+                "table": _TABLE_OBJ_SCHEMA,
+                "bullets": {"type": "ARRAY", "minItems": 2, "maxItems": 3, "items": {"type": "STRING"}},
+                "callout": {"type": "STRING"},
+                "speaker_notes": {"type": "STRING"},
+                "image_prompt": {"type": "STRING"},
+            },
+            "required": ["layout", "title", "subtitle", "table", "bullets", "callout", "speaker_notes", "image_prompt"],
+        },
+    },
+    "required": ["title", "subtitle", "slide1", "slide2", "slide3"],
+}
+
+CONTEXT_3SLIDE_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "title": {"type": "STRING"},
+        "subtitle": {"type": "STRING"},
+        "slide1": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["kpi"]},
+                "title": {"type": "STRING"},
+                "subtitle": {"type": "STRING"},
+                "kpis": {"type": "ARRAY", "minItems": 3, "maxItems": 4, "items": _KPI_ITEM_SCHEMA},
+                "bullets": {"type": "ARRAY", "minItems": 2, "maxItems": 3, "items": {"type": "STRING"}},
+                "speaker_notes": {"type": "STRING"},
+                "image_prompt": {"type": "STRING"},
+            },
+            "required": ["layout", "title", "subtitle", "kpis", "bullets", "speaker_notes", "image_prompt"],
+        },
+        "slide2": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["two_column"]},
+                "title": {"type": "STRING"},
+                "left": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "heading": {"type": "STRING"},
+                        "bullets": {"type": "ARRAY", "minItems": 2, "maxItems": 3, "items": {"type": "STRING"}},
+                    },
+                    "required": ["heading", "bullets"],
+                },
+                "right": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "heading": {"type": "STRING"},
+                        "bullets": {"type": "ARRAY", "minItems": 2, "maxItems": 3, "items": {"type": "STRING"}},
+                    },
+                    "required": ["heading", "bullets"],
+                },
+                "callout": {"type": "STRING"},
+                "speaker_notes": {"type": "STRING"},
+            },
+            "required": ["layout", "title", "left", "right", "callout", "speaker_notes"],
+        },
+        "slide3": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["table"]},
+                "title": {"type": "STRING"},
+                "table": _TABLE_OBJ_SCHEMA,
+                "bullets": {"type": "ARRAY", "minItems": 2, "maxItems": 3, "items": {"type": "STRING"}},
+                "speaker_notes": {"type": "STRING"},
+            },
+            "required": ["layout", "title", "table", "bullets", "speaker_notes"],
+        },
+    },
+    "required": ["title", "subtitle", "slide1", "slide2", "slide3"],
+}
+
+SIMPLE_3SLIDE_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "title": {"type": "STRING"},
+        "subtitle": {"type": "STRING"},
+        "slide1": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["bullets"]},
+                "title": {"type": "STRING"},
+                "bullets": {"type": "ARRAY", "minItems": 3, "maxItems": 4, "items": {"type": "STRING"}},
+            },
+            "required": ["layout", "title", "bullets"],
+        },
+        "slide2": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["bullets"]},
+                "title": {"type": "STRING"},
+                "bullets": {"type": "ARRAY", "minItems": 3, "maxItems": 4, "items": {"type": "STRING"}},
+            },
+            "required": ["layout", "title", "bullets"],
+        },
+        "slide3": {
+            "type": "OBJECT",
+            "properties": {
+                "layout": {"type": "STRING", "enum": ["bullets"]},
+                "title": {"type": "STRING"},
+                "bullets": {"type": "ARRAY", "minItems": 3, "maxItems": 4, "items": {"type": "STRING"}},
+            },
+            "required": ["layout", "title", "bullets"],
+        },
+    },
+    "required": ["title", "subtitle", "slide1", "slide2", "slide3"],
+}
+
+_FORMAT_VISUAL_RE = re.compile(
+    r"kpi|chart|bar\s+chart|table|matrix|carta|jadual|柱状图|柱狀圖|策略表|对比表|對比表|வரைபடம்|அட்டவணை",
+    re.I,
+)
 
 
-def requested_slides(prompt: str) -> int | None:
-    nums = [int(n) for n in _COUNT_RE.findall(prompt) if 1 <= int(n) <= 10]
-    return max(nums) if nums else None
+def _select_generation_schema(prompt: str) -> dict:
+    p = (prompt or "").strip()
+    if _FORMAT_VISUAL_RE.search(p):
+        return RICH_3SLIDE_SCHEMA
+    num_hits = re.findall(r"\d+(?:\.\d+)?", p)
+    if len(num_hits) >= 3 or len(p) >= 220:
+        return CONTEXT_3SLIDE_SCHEMA
+    return SIMPLE_3SLIDE_SCHEMA
 
 
 def generate_deck_sync(
@@ -1343,38 +1596,35 @@ def generate_deck_sync(
     project_id: str,
     location: str,
 ) -> tuple[dict, str]:
-    full = f"OUTPUT LANGUAGE: {LANGS.get(lang, 'English')}\n\nUSER PROMPT:\n\"\"\"{prompt.strip()}\"\"\""
-    want = requested_slides(prompt)
-    raw_deck, model = call_vertex_structured(
+    norm_l = norm_lang(lang)
+    chosen_schema = _select_generation_schema(prompt)
+    full = (
+        f"OUTPUT LANGUAGE: {LANGS.get(norm_l, 'English')}\n"
+        "SLIDE COUNT INVARIANT: Populate `slide1`, `slide2`, and `slide3` (STRICTLY 3 slides total). "
+        "Populate EVERY required visual array (`kpis`, `chart.series`, `table.rows`, `bullets`) with concise, boardroom-grade content grounded strictly in the user's prompt.\n\n"
+        f"USER PROMPT:\n\"\"\"{prompt.strip()}\"\"\""
+    )
+    raw_obj, model = call_vertex_structured(
         full,
-        DECK_SCHEMA,
+        chosen_schema,
         get_access_token_fn,
         project_id=project_id,
         location=location,
         system_instruction=GENERATOR_SYSTEM,
-        temperature=0.45,
+        temperature=0.3,
         max_output_tokens=8192,
     )
-    deck = _normalize_deck_dict(raw_deck)
-    if want and len(deck["slides"]) < want:
-        try:
-            retry_raw, model = call_vertex_structured(
-                full + f"\n\nIMPORTANT: output ALL {want} slides in the `slides` array.",
-                DECK_SCHEMA,
-                get_access_token_fn,
-                project_id=project_id,
-                location=location,
-                system_instruction=GENERATOR_SYSTEM,
-                temperature=0.35,
-                max_output_tokens=8192,
-            )
-            retry_deck = _normalize_deck_dict(retry_raw)
-            if len(retry_deck["slides"]) > len(deck["slides"]):
-                deck = retry_deck
-        except Exception:
-            pass
-
-    deck["slides"] = deck["slides"][:10]
+    assembled = {
+        "title": raw_obj.get("title") or "Executive Pre-Pitch Brief",
+        "subtitle": raw_obj.get("subtitle") or "",
+        "slides": [
+            raw_obj.get("slide1") or {},
+            raw_obj.get("slide2") or {},
+            raw_obj.get("slide3") or {},
+        ],
+    }
+    deck = _normalize_deck_dict(assembled, lang=norm_l)
+    deck["slides"] = _enforce_exact_3_slides(deck["slides"], lang=norm_l)
     for s in deck["slides"]:
         s["image"] = None
     imgs = [s for s in deck["slides"] if s.get("image_prompt")]
@@ -1402,10 +1652,25 @@ def verify_deck(deck: dict, signature: str) -> bool:
 
 # ----------------------------------------------------------------------------- COACH
 COACH_SYSTEM = (
-    "You are a friendly prompt-engineering coach for insurance agents. You help them improve a prompt "
-    "step by step (Role, Context, Task, Format, Constraints) so that Gemini produces a deck close to a target "
-    "pre-pitch deck. Be specific, short and encouraging. Never reveal a score."
+    "You are a friendly executive prompt-engineering coach for PRUMDA Learning Trip Agency Leaders. "
+    "Help them strengthen their prompt across Role, Context, Task, Format, and Constraints (plus a personal strategic angle) "
+    "to generate a boardroom-grade 3-slide pre-pitch deck. Be specific, concise, and encouraging. Never reveal a score."
 )
+
+
+def _resolve_case_and_target(market: str, lang: str, seat_index: int | None = None) -> tuple[dict, dict, list[dict], list[str]]:
+    """Returns (case_dict, target_deck, guide_steps, key_numbers) for either a specific 56-seat MY case or market default."""
+    if market == "MY" and seat_index is not None:
+        sc = resolve_c2_seat_scenario(int(seat_index), lang)
+        return sc["case_file"], sc["target"], sc["guide"], [str(x) for x in sc.get("keyNumbers", [])]
+    c_dict = CASES[market]
+    t_deck = TARGETS[market]
+    nums = sorted({x for x in _numbers(case_file_text(market)) if x not in {"0", "1", "2", "3"}})
+    return c_dict, t_deck, GUIDE, nums
+
+
+def _format_case_dict_text(c_dict: dict) -> str:
+    return "\n".join(f"- {k.replace('_', ' ').title()}: {v}" for k, v in c_dict.items())
 
 
 def coach_sync(
@@ -1416,18 +1681,20 @@ def coach_sync(
 ) -> dict:
     market = "SG" if str(req_body.get("market", "MY")).upper() == "SG" else "MY"
     lang = norm_lang(req_body.get("lang", "en"))
+    seat_raw = req_body.get("seat_index", req_body.get("seatIndex"))
+    seat_idx = int(seat_raw) if seat_raw is not None and str(seat_raw).strip() != "" else None
     user_prompt = str(req_body.get("prompt") or "").strip()
     slide_titles = req_body.get("slide_titles") or []
-    target = TARGETS[market]
+    case_dict, target, guide_ref, _ = _resolve_case_and_target(market, lang, seat_idx)
     outline = "\n".join(f"{i + 1}. {s['title']}" for i, s in enumerate(target["slides"]))
     prompt = (
-        f"CLIENT CASE FILE (facts the agent may use):\n{case_file_text(market)}\n\n"
-        f"TARGET DECK ({TARGET_SLIDES} slides):\n{outline}\nTarget detail: {json.dumps(target, ensure_ascii=False)}\n\n"
-        f"AGENT'S CURRENT PROMPT:\n\"\"\"{user_prompt}\"\"\"\n"
+        f"CLIENT CASE FILE (facts the leader may use):\n{_format_case_dict_text(case_dict)}\n\n"
+        f"TARGET 3-SLIDE BENCHMARK DECK:\n{outline}\nTarget detail: {json.dumps(target, ensure_ascii=False)}\n\n"
+        f"LEADER'S CURRENT PROMPT:\n\"\"\"{user_prompt}\"\"\"\n"
         + (f"Slides their last deck produced: {slide_titles}\n" if slide_titles else "")
         + "\nFor each element role, context, task, format, constraints (in that order) rate the CURRENT PROMPT "
-        "done / partial / missing compared with what is needed to reproduce the target deck, give one short tip "
-        "and a ready-to-insert suggestion (use real facts from the case file). Pick next_step = the most valuable "
+        "done / partial / missing compared with what is needed to produce an executive 3-slide deck, give one short tip "
+        "and a ready-to-insert suggestion (using real facts from THIS client's case file). Pick next_step = the most valuable "
         f"element to improve now. Write tip, suggestion and headline in {LANGS[lang]}."
     )
     out, _ = call_vertex_structured(
@@ -1443,7 +1710,7 @@ def coach_sync(
     steps_by_key = {s["key"]: s for s in out.get("steps", []) if s.get("key") in order}
     for k in order:
         if k not in steps_by_key:
-            g_fallback = next((g for g in GUIDE if g["key"] == k), GUIDE[0])
+            g_fallback = next((g for g in guide_ref if g["key"] == k), guide_ref[0])
             steps_by_key[k] = {
                 "key": k,
                 "status": "missing",
@@ -1502,11 +1769,31 @@ RUBRIC_I18N = {
 }
 COMPLIANCE_TERMS = [
     "pds", "free-look", "free look", "fact-find", "fact find", "needs analysis", "fair dealing", "shariah",
-    "product summary", "faa", "bnm", "mas ", "pdpa", "illustrative", "no guaranteed", "not guaranteed",
-    "lembaran pendedahan", "tempoh bertenang", "analisis keperluan", "syariah", "patuh",
-    "犹豫期", "猶豫期", "冷静期", "冷靜期", "产品披露", "產品披露", "需求分析", "合规", "合規", "伊斯兰", "伊斯蘭",
+    "schedule 10", "sched 10", "statutory trust", "hibah", "ftfc",
+    "product summary", "faa", "bnm", "mas ", "pdpa", "illustrative", "no guaranteed", "not guaranteed", "non-guaranteed",
+    "lembaran pendedahan", "tempoh bertenang", "analisis keperluan", "syariah", "patuh", "ilustratif",
+    "犹豫期", "猶豫期", "冷静期", "冷靜期", "产品披露", "產品披露", "需求分析", "合规", "合規", "伊斯兰", "伊斯蘭", "法定信托", "法定信託", "仅供说明",
     "இணக்க", "ஷரியா", "வெளிப்படுத்தல்", "தேவை பகுப்பாய்வு", "உத்தரவாத", "ஆலோசனை",
 ]
+
+BNM_VIOLATION_PATTERNS = [
+    re.compile(r"guarante(?:e|ed|es|ing)\s+\d{1,2}(?:\.\d+)?\s*%\s*(?:annual|yearly|p\.?a\.?|investment|return|yield|profit)", re.I),
+    re.compile(r"\d{1,2}(?:\.\d+)?\s*%\s*guaranteed\s*(?:return|yield|profit|interest|dividend)", re.I),
+    re.compile(r"100%\s*risk[- ]?free\s*(?:investment|return|profit)", re.I),
+    re.compile(r"(?:skip|bypass|ignore|without)\s+(?:any\s+)?(?:fact[- ]?find|needs\s+analysis|pds)", re.I),
+    re.compile(r"(?:保证|保證)\s*(?:每年|年化)?\s*\d{1,2}(?:\.\d+)?\s*%\s*(?:回报|回報|收益|利息)", re.I),
+    re.compile(r"pulangan\s+pelaburan\s+dijamin\s+\d{1,2}\s*%", re.I),
+    re.compile(r"(?:skip|跳过|跳過|abaikan)\s*fact[- ]?find", re.I),
+]
+
+
+def _detect_bnm_violation(prompt: str, deck_text: str) -> str | None:
+    combined = f"{prompt}\n{deck_text}"
+    for rx in BNM_VIOLATION_PATTERNS:
+        m = rx.search(combined)
+        if m:
+            return f"BNM Fair Dealing Violation detected ('{m.group(0)}'): Never promise guaranteed investment returns or bypass mandatory Fact-Find / PDS disclosure."
+    return None
 
 
 def _deck_text(deck: dict) -> str:
@@ -1525,12 +1812,11 @@ def _fmt_num(val: float) -> str:
 def _numbers(text: str) -> set[str]:
     clean = text.replace(",", "")
     nums = {n.rstrip("0").rstrip(".") if "." in n else n for n in re.findall(r"\d+(?:\.\d+)?", clean)}
-    # Normalize Chinese/Cantonese 万/萬 units (e.g., 2800万 -> 28M, 450万 -> 4.5M, 650万 -> 6.5M, 40万 -> 400k)
     for m in re.findall(r"(\d+(?:\.\d+)?)\s*[万萬]", clean):
         try:
             v = float(m)
-            nums.add(_fmt_num(v / 100.0))  # in Millions (e.g. 2800万 -> "28", 450万 -> "4.5")
-            nums.add(_fmt_num(v * 10.0))   # in Thousands (e.g. 40万 -> "400")
+            nums.add(_fmt_num(v / 100.0))
+            nums.add(_fmt_num(v * 10.0))
         except Exception:
             pass
     return nums
@@ -1541,33 +1827,65 @@ def _bullet_words(b: str) -> float:
     return len(b.split()) + cjk / 3.0
 
 
-def deterministic_checks(deck: dict, market: str) -> dict:
+def deterministic_checks(
+    deck: dict,
+    market: str,
+    seat_index: int | None = None,
+    prompt: str = "",
+    personal_angle: str = "",
+) -> dict:
     slides = deck.get("slides") or []
     n = len(slides)
-    slide_count = 1.0 if n == TARGET_SLIDES else 0.5 if abs(n - TARGET_SLIDES) == 1 else 0.0
+    slide_count = 1.0 if n == 3 else 0.0
     notes_ratio = sum(1 for s in slides if (s.get("speaker_notes") or "").strip()) / max(n, 1)
     text = _deck_text(deck)
-    case_nums = {x for x in _numbers(case_file_text(market)) if x not in {"1", "2", "0"}}
+
+    case_dict, _, _, key_nums = _resolve_case_and_target(market, "en", seat_index)
+    case_nums = {x for x in (_numbers(_format_case_dict_text(case_dict)) | set(key_nums)) if x not in {"1", "2", "0", "3"}}
     matched = case_nums & _numbers(text)
-    facts = min(1.0, len(matched) / 3)
+    facts = min(1.0, len(matched) / 3.0)
+
+    has_kpi = any(isinstance(s.get("kpis"), list) and len(s.get("kpis")) >= 2 for s in slides)
+    has_chart = any(isinstance((s.get("chart") or {}).get("series"), list) and len((s.get("chart") or {}).get("series")) >= 2 for s in slides)
+    has_table = any(isinstance((s.get("table") or {}).get("rows"), list) and len((s.get("table") or {}).get("rows")) >= 2 for s in slides)
+    visual_richness = round((int(has_kpi) + int(has_chart) + int(has_table)) / 3.0, 2)
+
     low = text.lower()
     compliance = 1.0 if any(t in low for t in COMPLIANCE_TERMS) else 0.0
+    violation = _detect_bnm_violation(prompt, text)
+    if violation:
+        compliance = 0.0
+
+    angle_clean = (personal_angle or "").strip()
+    has_angle_tag = bool(
+        len(angle_clean) >= 10
+        or re.search(
+            r"\[(?:Personal Strategic Angle|Leader Strategic Angle|Empathy|Wealth Planning|Creative Relationship|个人策略切入|個人策略切入|Sudut Strategik|தனிப்பட்ட உத்தி)\]",
+            prompt or "",
+            re.I,
+        )
+    )
+    personal_touch_score = 1.0 if has_angle_tag else (0.35 if len((prompt or "").strip()) > 320 else 0.0)
+
     dense = 0.0
     for s in slides:
         left_b = (s.get("left") or {}).get("bullets") or []
         right_b = (s.get("right") or {}).get("bullets") or []
         bl = (s.get("bullets") or []) + left_b + right_b
         max_w = max((_bullet_words(b) for b in bl), default=0.0)
-        if len(s.get("bullets") or []) <= 6 and max_w <= 35:
+        if len(s.get("bullets") or []) <= 6 and max_w <= 38:
             dense += 1.0
-        elif len(s.get("bullets") or []) <= 7 and max_w <= 50:
+        elif len(s.get("bullets") or []) <= 7 and max_w <= 52:
             dense += 0.75
     density = dense / max(n, 1)
+
     items = {
         "slide_count": slide_count,
+        "visual_richness": visual_richness,
         "speaker_notes": round(notes_ratio, 2),
         "case_facts_used": round(facts, 2),
         "compliance_mentioned": compliance,
+        "personal_touch": round(personal_touch_score, 2),
         "readable_density": round(density, 2),
     }
     return {
@@ -1575,35 +1893,43 @@ def deterministic_checks(deck: dict, market: str) -> dict:
         "ratio": round(sum(items.values()) / len(items), 3),
         "slide_count": n,
         "matched_numbers": sorted(matched)[:12],
+        "visual_flags": {"kpi": has_kpi, "chart": has_chart, "table": has_table},
+        "compliance_violation": violation,
     }
 
 
-def _judge_prompt(deck: dict, prompt: str, market: str, lang: str) -> str:
-    target = TARGETS[market]
+def _judge_prompt(
+    deck: dict,
+    prompt: str,
+    market: str,
+    lang: str,
+    seat_index: int | None = None,
+    personal_angle: str = "",
+) -> str:
+    case_dict, target, _, _ = _resolve_case_and_target(market, lang, seat_index)
     target_outline = "\n".join(f"{i + 1}. {s['title']}" for i, s in enumerate(target["slides"]))
     loc_dims = RUBRIC_I18N.get(lang, RUBRIC)
     return (
         f"{market_context_block(market)}\n\n"
-        f"CLIENT CASE FILE (ground truth facts):\n{case_file_text(market)}\n\n"
-        f"TARGET DECK (enterprise reference, {TARGET_SLIDES} slides):\n{target_outline}\n"
-        f"Full target JSON:\n{_deck_text(target)}\n\n"
-        f"PARTICIPANT'S FINAL PROMPT:\n\"\"\"{prompt}\"\"\"\n\n"
-        f"PARTICIPANT'S DECK (generated from that prompt):\n{_deck_text(deck)}\n\n"
-        "You are an encouraging, fair MDRT Executive Coach judging an AI deck-building challenge for PRUMDA Learning Trip Agency Leaders. "
-        "These leaders are champions of Wealth Planning, Customer Empathy, and Creative relationship-building (not technical prompt engineers). "
-        "Reward decks and prompts that demonstrate strong Wealth Planning insight (estate liquidity gap math, Hibah/creditor ring-fencing), "
-        "deep Customer Empathy (protecting family dignity, clinic continuity, spouse & children harmony), and collaborative co-advisory next steps.\n"
-        f"Write all feedback text in {LANGS.get(lang, 'English')}.\n"
-        f"1. rubric: score 1-10 for exactly these 6 dimensions in order: {', '.join(loc_dims)}. Quote short evidence "
-        "from the participant's deck. Reward client facts, wealth-planning clarity, and empathetic framing generously.\n"
-        f"2. coverage: for EACH of the {TARGET_SLIDES} target slides (target_slide 1..{TARGET_SLIDES} with its title) mark covered / partial / "
-        "missing, list matching participant slide numbers (1-based) and missing key elements.\n"
-        "3. factual_issues: facts in the deck that contradict the case file.\n"
-        "4. what_went_well: 2-4 encouraging items celebrating their wealth-planning & empathy strengths. "
-        "prompt_improvements: 2-3 constructive items, each with a concrete line to add to the prompt.\n"
-        "Rubric comments must be ONE short sentence (max 20 words).\n"
+        f"ASSIGNED CLIENT CASE FILE (ground truth facts for THIS participant's unique seat):\n{_format_case_dict_text(case_dict)}\n\n"
+        f"REFERENCE 3-SLIDE BENCHMARK DECK (3 slides):\n{target_outline}\n"
+        f"Benchmark JSON:\n{_deck_text(target)}\n\n"
+        f"PARTICIPANT'S ASSEMBLED PROMPT:\n\"\"\"{prompt}\"\"\"\n\n"
+        f"PARTICIPANT'S PERSONAL STRATEGIC ANGLE / HOOK:\n\"\"\"{personal_angle or '(See prompt)'}\"\"\"\n\n"
+        f"PARTICIPANT'S GENERATED 3-SLIDE DECK:\n{_deck_text(deck)}\n\n"
+        "You are a calibrated, rigorous yet encouraging MDRT Executive Judge evaluating Challenge 2 for PRUMDA Learning Trip Agency Leaders.\n"
+        "IMPORTANT CALIBRATION RULES (grade the QUALITY OF THE 3-SLIDE DECK + R.C.T.F.C. LOGIC + PERSONAL STRATEGIC TOUCH, independent of which client scenario was assigned):\n"
+        "- Score 9–10 ONLY when the deck has quantified client numbers, structured visuals (KPIs + Gap Chart + Strategy Table), speaker notes, BNM/Shariah/Trust compliance, AND a bespoke Personal Strategic Angle / Co-Advisory Hook.\n"
+        "- Score 7–8 when the deck uses R.C.T.F.C. structure and client facts well, but lacks a bespoke personal strategic touch or misses one visual/compliance element.\n"
+        "- Score 4–6 when the prompt was a generic 1-liner producing generic bullet slides without the client's specific liquidity gap math, chart, table, or compliance guardrails.\n"
+        "- Score 1–3 on Compliance & Fair Dealing (and flag in `factual_issues`) if the prompt or deck promises guaranteed investment returns (e.g. 'guaranteed 12% return') or skips mandatory BNM Fact-Find / PDS.\n"
+        f"Write ALL feedback strings in {LANGS.get(lang, 'English')}.\n"
+        f"1. rubric: score 1-10 for exactly these 6 dimensions in order: {', '.join(loc_dims)}. Quote brief evidence from the deck.\n"
+        "2. coverage: for EACH of the 3 benchmark slides (target_slide 1..3 with its title) mark covered / partial / missing.\n"
+        "3. factual_issues: any contradicted numbers or BNM compliance violations.\n"
+        "4. what_went_well: 2-4 specific strengths. prompt_improvements: 2-3 actionable lines to add.\n"
         "5. prompt_craft: rate the PROMPT (0-2 each) for Role, Context, Task, Format, Constraints.\n"
-        "6. verdict: one inspiring summary sentence."
+        "6. verdict: one crisp, executive summary sentence."
     )
 
 
@@ -1615,22 +1941,28 @@ def evaluate_sync(
     get_access_token_fn,
     project_id: str,
     location: str,
+    seat_index: int | None = None,
+    personal_angle: str = "",
 ) -> dict:
-    norm_deck = _normalize_deck_dict(deck)
-    checks = deterministic_checks(norm_deck, market)
-    loc_dims = RUBRIC_I18N.get(lang, RUBRIC)
+    norm_l = norm_lang(lang)
+    norm_deck = _normalize_deck_dict(deck, lang=norm_l)
+    checks = deterministic_checks(
+        norm_deck, market, seat_index=seat_index, prompt=prompt, personal_angle=personal_angle
+    )
+    _, target_ref, _, _ = _resolve_case_and_target(market, norm_l, seat_index)
+    loc_dims = RUBRIC_I18N.get(norm_l, RUBRIC)
     try:
         judge, model = call_vertex_structured(
-            _judge_prompt(norm_deck, prompt, market, lang),
+            _judge_prompt(norm_deck, prompt, market, norm_l, seat_index=seat_index, personal_angle=personal_angle),
             JUDGE_SCHEMA,
             get_access_token_fn,
             project_id=project_id,
             location=location,
-            temperature=0.2,
+            temperature=0.15,
         )
     except Exception as exc:
         logger.warning("Vertex judge fallback triggered: %s", exc)
-        base_sc = max(8, min(10, int(round(7.5 + checks["ratio"] * 2.5))))
+        base_sc = max(5, min(10, int(round(4.5 + checks["ratio"] * 5.2))))
         judge = {
             "rubric": [
                 {"dimension": dim, "score": base_sc, "evidence": "", "comment": ""}
@@ -1639,39 +1971,93 @@ def evaluate_sync(
             "coverage": [
                 {
                     "target_slide": i + 1,
-                    "title": s.get("title", f"Slide {i + 1}"),
-                    "status": "covered" if i < len(norm_deck.get("slides") or []) else "partial",
-                    "matched_slides": [i + 1] if i < len(norm_deck.get("slides") or []) else [],
+                    "target_title": s.get("title", f"Slide {i + 1}"),
+                    "status": "covered" if checks["items"]["case_facts_used"] >= 0.6 else "partial",
+                    "matched_user_slides": [i + 1],
                     "missing_elements": [],
                 }
-                for i, s in enumerate(TARGETS[market]["slides"][:TARGET_SLIDES])
+                for i, s in enumerate(target_ref["slides"][:3])
             ],
-            "factual_issues": [],
+            "factual_issues": [checks["compliance_violation"]] if checks.get("compliance_violation") else [],
             "what_went_well": [],
             "prompt_improvements": [],
-            "prompt_craft": {"role": 2, "context": 2, "task": 2, "format": 2, "constraints": 2},
+            "prompt_craft": {"role": 2, "context": 2, "task": 2, "format": 2, "constraints": 2, "comment": ""},
             "verdict": "",
         }
         model = "deterministic-fallback"
 
     rubric_list = judge.get("rubric") or []
     for idx, r in enumerate(rubric_list):
-        r["score"] = max(1, min(10, int(r.get("score", 8))))
+        r["score"] = max(1, min(10, int(r.get("score", 7))))
         if idx < len(loc_dims):
             r["dimension"] = loc_dims[idx]
+
+    # Enforce deterministic BNM violation penalty if detected
+    if checks.get("compliance_violation"):
+        if rubric_list and len(rubric_list) >= 6:
+            rubric_list[5]["score"] = min(rubric_list[5]["score"], 2)
+        issues = judge.setdefault("factual_issues", [])
+        if checks["compliance_violation"] not in issues:
+            issues.insert(0, checks["compliance_violation"])
+
     rubric_avg = sum(r["score"] for r in rubric_list) / max(len(rubric_list), 1)
     cov_points = {"covered": 1.0, "partial": 0.5, "missing": 0.0}
-    coverage_list = (judge.get("coverage") or [])[:TARGET_SLIDES]
-    coverage_ratio = sum(cov_points.get(c.get("status", "missing"), 0.0) for c in coverage_list) / TARGET_SLIDES
-    part_a = 6.0 * rubric_avg / 10
-    part_b = 2.5 * coverage_ratio
+    coverage_list = (judge.get("coverage") or [])[:3]
+    coverage_ratio = sum(cov_points.get(c.get("status", "missing"), 0.0) for c in coverage_list) / 3.0
+
+    craft = judge.get("prompt_craft") or {}
+    craft_sum = sum(max(0, min(2, int(craft.get(k, 1)))) for k in ("role", "context", "task", "format", "constraints"))
+    craft_ratio = craft_sum / 10.0
+
+    # Hybrid calibration anchors grounded in deterministic structural evidence:
+    # Ensure non-violating rich decks across all 5 languages receive consistent executive grading
+    if not checks.get("compliance_violation"):
+        if (
+            checks["items"]["visual_richness"] >= 0.99
+            and checks["items"]["case_facts_used"] >= 0.66
+            and checks["items"]["compliance_mentioned"] >= 1.0
+            and checks["items"]["personal_touch"] >= 1.0
+        ):
+            rubric_avg = max(rubric_avg, 9.1)
+            coverage_ratio = max(coverage_ratio, 1.0)
+            craft_ratio = max(craft_ratio, 0.9)
+        elif (
+            checks["items"]["visual_richness"] >= 0.6
+            and checks["items"]["case_facts_used"] >= 0.66
+            and checks["items"]["compliance_mentioned"] >= 1.0
+        ):
+            rubric_avg = max(rubric_avg, 8.0)
+            coverage_ratio = max(coverage_ratio, 0.83)
+            craft_ratio = max(craft_ratio, 0.8)
+
+    # Weighted 10-point score:
+    # - 5.2 pts: 6-Dimension Deck Quality Rubric
+    # - 1.8 pts: 3-Slide Benchmark Coverage
+    # - 1.5 pts: R.C.T.F.C. Prompt Craft
+    # - 1.5 pts: Deterministic Visuals, Case Facts, Compliance & Personal Strategic Touch
+    part_a = 5.2 * (rubric_avg / 10.0)
+    part_b = 1.8 * coverage_ratio
+    part_craft = 1.5 * craft_ratio
     part_c = 1.5 * checks["ratio"]
-    total = round(min(10.0, part_a + part_b + part_c), 1)
+    raw_total = part_a + part_b + part_craft + part_c
+
+    # Hard cap if BNM Fair Dealing violation (e.g. guaranteed % return promise)
+    if checks.get("compliance_violation"):
+        raw_total = min(raw_total, 5.8)
+    # Fair baseline floor (4.2) & ceiling (6.6) for non-violating bare 1-line prompts
+    elif checks["items"]["case_facts_used"] == 0.0 and checks["items"]["visual_richness"] == 0.0:
+        raw_total = max(4.2, min(raw_total, 6.6))
+    # Cap decks that have no Personal Strategic Touch at 8.8 so Master + Personal Touch cleanly wins Tier A (9.1+)
+    elif checks["items"]["personal_touch"] < 0.5:
+        raw_total = min(raw_total, 8.8)
+
+    total = round(max(1.0, min(10.0, raw_total)), 1)
     return {
         "total": total,
         "breakdown": {
             "rubric": round(part_a, 2),
             "coverage": round(part_b, 2),
+            "prompt_craft": round(part_craft, 2),
             "checks": round(part_c, 2),
             "rubric_avg": round(rubric_avg, 1),
             "coverage_ratio": round(coverage_ratio, 2),
@@ -1683,8 +2069,165 @@ def evaluate_sync(
 
 
 # ----------------------------------------------------------------------------- PPTX EXPORT
+def _resolve_slide_image_bytes(img_val: str | None) -> tuple[bytes | None, str]:
+    """Resolves slide image bytes from data: URLs, /api/media/<fname>, or /static/<rel>."""
+    if not img_val or not isinstance(img_val, str):
+        return None, ".jpg"
+    val = img_val.strip()
+    try:
+        if val.startswith("data:image/"):
+            header, b64 = val.split(",", 1)
+            ext = ".png" if "png" in header.lower() else ".jpg"
+            return base64.b64decode(b64), ext
+        if val.startswith("/api/media/"):
+            fname = val.removeprefix("/api/media/").strip("/")
+            media_dir = Path(os.environ.get("PAMB_MEDIA_DIR", "/tmp/pamb_arena_media"))
+            fpath = media_dir / fname
+            if fpath.is_file() and fpath.suffix.lower() in (".png", ".jpg", ".jpeg"):
+                return fpath.read_bytes(), fpath.suffix.lower()
+        if val.startswith("/static/"):
+            rel = val.removeprefix("/static/").lstrip("/")
+            fpath = STATIC_DIR / rel
+            if fpath.is_file() and fpath.suffix.lower() in (".png", ".jpg", ".jpeg"):
+                return fpath.read_bytes(), fpath.suffix.lower()
+    except Exception:
+        pass
+    return None, ".jpg"
+
+
+def _build_minimal_openxml_pptx(deck_dict: dict) -> bytes:
+    """Pure-stdlib valid OpenXML .pptx builder (3 slides + embedded media) when python-pptx is absent."""
+    slides = (deck_dict.get("slides") or [])[:3]
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        media_exts = set()
+        slide_media: dict[int, str] = {}
+        for idx, s in enumerate(slides, 1):
+            raw_img, ext = _resolve_slide_image_bytes(s.get("image"))
+            if raw_img:
+                ext_clean = "jpeg" if ext in (".jpg", ".jpeg") else "png"
+                media_exts.add(ext_clean)
+                mname = f"image{idx}.{ext_clean}"
+                zf.writestr(f"ppt/media/{mname}", raw_img)
+                slide_media[idx] = mname
+
+        ext_defaults = [
+            '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>',
+            '<Default Extension="xml" ContentType="application/xml"/>',
+        ]
+        if "png" in media_exts:
+            ext_defaults.append('<Default Extension="png" ContentType="image/png"/>')
+        if "jpeg" in media_exts:
+            ext_defaults.append('<Default Extension="jpeg" ContentType="image/jpeg"/>')
+
+        slide_overrides = "".join(
+            f'<Override PartName="/ppt/slides/slide{i}.xml" '
+            'ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>'
+            for i in range(1, len(slides) + 1)
+        )
+        zf.writestr(
+            "[Content_Types].xml",
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+            '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+            + "".join(ext_defaults)
+            + '<Override PartName="/ppt/presentation.xml" '
+            'ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>'
+            + slide_overrides
+            + "</Types>",
+        )
+        zf.writestr(
+            "_rels/.rels",
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            '<Relationship Id="rId1" '
+            'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '
+            'Target="ppt/presentation.xml"/></Relationships>',
+        )
+        pres_rels = "".join(
+            f'<Relationship Id="rId{i}" '
+            'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" '
+            f'Target="slides/slide{i}.xml"/>'
+            for i in range(1, len(slides) + 1)
+        )
+        zf.writestr(
+            "ppt/_rels/presentation.xml.rels",
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+            f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">{pres_rels}</Relationships>',
+        )
+        sld_ids = "".join(
+            f'<p:sldId id="{255 + i}" r:id="rId{i}"/>' for i in range(1, len(slides) + 1)
+        )
+        zf.writestr(
+            "ppt/presentation.xml",
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+            '<p:presentation xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+            'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
+            'xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
+            f"<p:sldIdLst>{sld_ids}</p:sldIdLst>"
+            '<p:sldSz cx="12192000" cy="6858000"/>'
+            '<p:notesSz cx="6858000" cy="9144000"/>'
+            "</p:presentation>",
+        )
+
+        for i, s in enumerate(slides, 1):
+            lines_out = [s.get("title") or f"Slide {i}"]
+            if s.get("subtitle"):
+                lines_out.append(str(s["subtitle"]))
+            for kp in s.get("kpis") or []:
+                lines_out.append(f"{kp.get('label', '')}: {kp.get('value', '')} ({kp.get('note', '')})")
+            if s.get("chart") and (s["chart"].get("series") or []):
+                lines_out.append(
+                    " | ".join(f"{pt.get('label', '')}: {pt.get('value', '')}" for pt in s["chart"]["series"])
+                )
+            if s.get("table") and (s["table"].get("rows") or []):
+                for r in s["table"]["rows"]:
+                    lines_out.append(" • ".join(str(c) for c in r))
+            for b in s.get("bullets") or []:
+                lines_out.append(f"• {b}")
+            if s.get("callout"):
+                lines_out.append(str(s["callout"]))
+
+            paras = "".join(
+                f"<a:p><a:r><a:t>{saxutils.escape(str(line))}</a:t></a:r></a:p>"
+                for line in lines_out
+            )
+            pic_xml = ""
+            if i in slide_media:
+                zf.writestr(
+                    f"ppt/slides/_rels/slide{i}.xml.rels",
+                    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                    '<Relationship Id="rImg1" '
+                    'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" '
+                    f'Target="../media/{slide_media[i]}"/></Relationships>',
+                )
+                pic_xml = (
+                    "<p:pic><p:nvPicPr><p:cNvPr id=\"4\" name=\"SlideVisual\"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr>"
+                    "<p:blipFill><a:blip r:embed=\"rImg1\"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>"
+                    "<p:spPr><a:xfrm><a:off x=\"7600000\" y=\"1600000\"/><a:ext cx=\"4100000\" cy=\"2300000\"/></a:xfrm>"
+                    "<a:prstGeom prst=\"rect\"><a:avLst/></a:prstGeom></p:spPr></p:pic>"
+                )
+            zf.writestr(
+                f"ppt/slides/slide{i}.xml",
+                '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+                'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
+                'xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
+                "<p:cSld><p:spTree>"
+                '<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>'
+                "<p:grpSpPr/>"
+                '<p:sp><p:nvSpPr><p:cNvPr id="2" name="Content"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr>'
+                '<p:spPr><a:xfrm><a:off x="550000" y="450000"/><a:ext cx="6800000" cy="5800000"/></a:xfrm>'
+                '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr>'
+                f"<p:txBody><a:bodyPr/><a:lstStyle/>{paras}</p:txBody></p:sp>"
+                f"{pic_xml}"
+                "</p:spTree></p:cSld></p:sld>",
+            )
+    return buf.getvalue()
+
+
 def build_pptx_bytes(deck_dict: dict) -> bytes:
-    """Builds .pptx using python-pptx when installed, or a clean minimal OpenXML .pptx zip fallback."""
+    """Builds 3-slide .pptx using python-pptx when installed, or valid OpenXML .pptx fallback."""
     deck_dict = _normalize_deck_dict(deck_dict)
     try:
         from pptx import Presentation
@@ -1722,16 +2265,9 @@ def build_pptx_bytes(deck_dict: dict) -> bytes:
                 p.font.color.rgb = GREY
                 p.space_after = Pt(6)
 
-        def _image(slide, data_url, x, y, w, h):
-            if not data_url or not data_url.startswith("data:image"):
-                return False
-            raw = base64.b64decode(data_url.split(",", 1)[1])
-            slide.shapes.add_picture(io.BytesIO(raw), x, y, w, h)
-            return True
-
         prs = Presentation()
         prs.slide_width, prs.slide_height = W, H
-        slides = deck_dict.get("slides") or []
+        slides = (deck_dict.get("slides") or [])[:3]
         n = len(slides)
         for i, s in enumerate(slides, 1):
             sl = prs.slides.add_slide(prs.slide_layouts[6])
@@ -1747,11 +2283,14 @@ def build_pptx_bytes(deck_dict: dict) -> bytes:
                 sl.notes_slide.notes_text_frame.text = s.get("speaker_notes")
 
             top = Inches(1.8)
-            img_val = s.get("image") or ""
-            has_img = bool(img_val.startswith("data:image"))
+            raw_img_bytes, _ = _resolve_slide_image_bytes(s.get("image"))
+            has_img = raw_img_bytes is not None
             content_w = Inches(7.4) if has_img else Inches(12.1)
             if has_img:
-                _image(sl, img_val, Inches(8.2), top, Inches(4.6), Inches(2.6))
+                try:
+                    sl.shapes.add_picture(io.BytesIO(raw_img_bytes), Inches(8.2), top, Inches(4.6), Inches(2.6))
+                except Exception:
+                    content_w = Inches(12.1)
             kpis = s.get("kpis") or []
             if kpis:
                 cw = (content_w - Inches(0.3) * (len(kpis) - 1)) / max(len(kpis), 1)
@@ -1831,11 +2370,7 @@ def build_pptx_bytes(deck_dict: dict) -> bytes:
         prs.save(buf)
         return buf.getvalue()
     except ImportError:
-        # Minimal valid .pptx container fallback if python-pptx is not installed in local dev
-        buf = io.BytesIO()
-        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
-            zf.writestr("deck.json", json.dumps(deck_dict, indent=2, ensure_ascii=False))
-        return buf.getvalue()
+        return _build_minimal_openxml_pptx(deck_dict)
 
 
 # ----------------------------------------------------------------------------- IN-MEMORY STATE & HANDLERS
@@ -1844,9 +2379,41 @@ _last_gen: dict[str, float] = {}
 _submissions: dict[str, dict] = {}
 
 
-def handle_c2_get_challenge(market: str, lang: str, get_access_token_fn, project_id: str, location: str) -> dict:
+def handle_c2_get_challenge(
+    market: str,
+    lang: str,
+    get_access_token_fn,
+    project_id: str,
+    location: str,
+    seat_index: int | None = None,
+) -> dict:
     market = "SG" if (market or "MY").upper() == "SG" else "MY"
     lang = norm_lang(lang)
+
+    if market == "MY":
+        effective_seat = int(seat_index) if seat_index is not None else 0
+        scen = resolve_c2_seat_scenario(effective_seat, lang)
+        archetypes = list_c2_archetype_summaries(lang)
+        return {
+            "market": market,
+            "lang": lang,
+            "langs": LANG_LABELS,
+            "ui": UI[lang],
+            "seatIndex": scen["seatIndex"],
+            "totalUniqueSeats": scen["totalUniqueSeats"],
+            "scenario": scen,
+            "archetypes": archetypes,
+            "caseCards": scen["caseCards"],
+            "angleHints": scen["angleHints"],
+            "simple_prompt": scen["simple_prompt"],
+            "target_slides": 3,
+            "case_file": scen["case_file"],
+            "guide": scen["guide"],
+            "target": scen["target"],
+            "rubric": RUBRIC_I18N.get(lang, RUBRIC),
+            "scoring": {"rubric": 5.2, "coverage": 1.8, "prompt_craft": 1.5, "checks": 1.5, "max": 10},
+        }
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
         f_case = pool.submit(_translated_sync, "case", market, lang, get_access_token_fn, project_id, location)
         f_guide = pool.submit(_translated_sync, "guide", market, lang, get_access_token_fn, project_id, location)
@@ -1860,15 +2427,15 @@ def handle_c2_get_challenge(market: str, lang: str, get_access_token_fn, project
         "lang": lang,
         "langs": LANG_LABELS,
         "ui": UI[lang],
+        "seatIndex": 0,
+        "totalUniqueSeats": get_c2_total_unique_seats(),
         "simple_prompt": SIMPLE_PROMPT[lang],
-        "target_slides": TARGET_SLIDES,
+        "target_slides": 3,
         "case_file": case_out,
         "guide": guide_out,
         "target": _with_target_images(target_out, market),
         "rubric": RUBRIC_I18N.get(lang, RUBRIC),
-        "scoring": {"rubric": 6.0, "coverage": 2.5, "checks": 1.5, "max": 10},
-        "text_model": "gemini-3.5-flash-lite",
-        "image_model": IMAGE_MODEL,
+        "scoring": {"rubric": 5.2, "coverage": 1.8, "prompt_craft": 1.5, "checks": 1.5, "max": 10},
     }
 
 
@@ -1880,8 +2447,8 @@ def handle_c2_generate_deck(body: dict, get_access_token_fn, project_id: str, lo
 
     now = time.time()
     with _lock:
-        if now - _last_gen.get(session_id, 0) < 3.5:
-            return {"detail": "Please wait a few seconds between generations."}, 429
+        if now - _last_gen.get(session_id, 0) < 1.2:
+            return {"detail": "Please wait a moment between generations."}, 429
         _last_gen[session_id] = now
 
     try:
@@ -1921,8 +2488,8 @@ def handle_c2_images(body: dict, call_image_fn) -> tuple[dict, int]:
         if not p:
             return None
         styled = (
-            f"{p}. Premium corporate presentation illustration, clean composition, soft natural light, "
-            "navy, white and subtle red accents, 16:9, absolutely no text, letters or logos."
+            f"{p}. Luxury editorial boardroom presentation illustration, architectural geometry, warm natural light, "
+            "deep slate navy, crisp ivory and subtle crimson accents, 16:9 widescreen, strictly zero text, letters, numbers or logos."
         )
         try:
             data_url, _ = call_image_fn(None, styled)
@@ -1936,17 +2503,30 @@ def handle_c2_images(body: dict, call_image_fn) -> tuple[dict, int]:
 
 
 def handle_c2_submit_deck(body: dict, get_access_token_fn, project_id: str, location: str) -> tuple[dict, int]:
-    deck = _normalize_deck_dict(body.get("deck") or {})
+    lang = norm_lang(body.get("lang", "en"))
+    deck = _normalize_deck_dict(body.get("deck") or {}, lang=lang)
     signature = str(body.get("signature") or "")
     if not verify_deck(deck, signature):
         return {"detail": "This deck was not generated by the challenge (signature mismatch)."}, 400
 
     started = time.time()
     market = "SG" if str(body.get("market", "MY")).upper() == "SG" else "MY"
-    lang = norm_lang(body.get("lang", "en"))
     prompt = str(body.get("prompt") or "")
+    personal_angle = str(body.get("personal_angle") or body.get("personalAngle") or "")
+    seat_raw = body.get("seat_index", body.get("seatIndex"))
+    seat_idx = int(seat_raw) if seat_raw is not None and str(seat_raw).strip() != "" else None
     try:
-        result = evaluate_sync(deck, prompt, market, lang, get_access_token_fn, project_id, location)
+        result = evaluate_sync(
+            deck,
+            prompt,
+            market,
+            lang,
+            get_access_token_fn,
+            project_id,
+            location,
+            seat_index=seat_idx,
+            personal_angle=personal_angle,
+        )
     except Exception as exc:
         logger.exception("evaluation failed")
         return {"detail": f"Evaluation failed: {exc}"}, 502
@@ -1966,6 +2546,8 @@ def handle_c2_submit_deck(body: dict, get_access_token_fn, project_id: str, loca
         "id": sid,
         "name": (body.get("name") or "Agent").strip() or "Agent",
         "participant_id": body.get("participant_id"),
+        "seat_index": seat_idx,
+        "personal_angle": personal_angle,
         "market": market,
         "lang": lang,
         "prompt": prompt,
@@ -1973,7 +2555,7 @@ def handle_c2_submit_deck(body: dict, get_access_token_fn, project_id: str, loca
         "result": result,
         "iterations": len(history) or 1,
         "first_prompt": first.get("prompt", prompt) if isinstance(first, dict) else prompt,
-        "first_slide_count": first.get("slide_count", len(deck["slides"])) if isinstance(first, dict) else len(deck["slides"]),
+        "first_slide_count": 3,
         "lineage": lineage[-60:],
         "duration_s": duration_s,
         "submitted_at": time.time(),
