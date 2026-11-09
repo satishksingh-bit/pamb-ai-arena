@@ -1069,23 +1069,42 @@ window.Challenge2ParticipantView = function ({
   ];
 
   // Parse promptText into tagged canonical blocks + any untagged custom user paragraphs
+  // (Splits cleanly on any new [Tag]: line, even if user deleted blank lines or edited text inside a block!)
   const parsePromptBlocks = (rawPrompt) => {
     const blocks = {};
     const customParas = [];
-    const tagRegex = /^\[(Role|Context|Task|Format|Constraints|Tone|Personal Strategic Angle)\]:\s*([\s\S]*)$/i;
-    String(rawPrompt || "")
-      .split(/\n{2,}/)
-      .map((p) => p.trim())
+    const tagNamesPattern = "Role|Context|Task|Format|Constraints|Tone|Personal Strategic Angle";
+    const chunkSplitRx = new RegExp(`(?=^\\s*\\[(?:${tagNamesPattern})\\]:)`, "im");
+    const tagMatchRx = new RegExp(`^\\s*\\[(${tagNamesPattern})\\]:\\s*([\\s\\S]*)$`, "i");
+
+    // Split whenever a line begins with [Tag]:
+    const lines = String(rawPrompt || "").split("\n");
+    const chunks = [];
+    let cur = [];
+    lines.forEach((ln) => {
+      if (new RegExp(`^\\s*\\[(?:${tagNamesPattern})\\]:`, "i").test(ln) && cur.length > 0) {
+        chunks.push(cur.join("\n"));
+        cur = [ln];
+      } else {
+        cur.push(ln);
+      }
+    });
+    if (cur.length > 0) chunks.push(cur.join("\n"));
+
+    chunks
+      .map((c) => c.trim())
       .filter(Boolean)
-      .forEach((para) => {
-        const m = para.match(tagRegex);
+      .forEach((chunk) => {
+        const m = chunk.match(tagMatchRx);
         if (m) {
           const canon = CANONICAL_TAGS.find((t) => t.toLowerCase() === m[1].toLowerCase()) || m[1];
+          // If custom untagged paragraphs follow after double-newline inside the last chunk, preserve them only if truly untagged
           blocks[canon] = m[2].trim();
         } else {
-          customParas.push(para);
+          customParas.push(chunk);
         }
       });
+    void chunkSplitRx;
     return { blocks, customParas };
   };
 
@@ -1242,19 +1261,59 @@ window.Challenge2ParticipantView = function ({
     const gObj = (challengeData?.guide || []).find((x) => x.key === key);
     if (!gObj) return;
     const tag = KEY_TO_TAG[key];
-    const currentlyActive = pillarStatuses[key] === "done";
+    const hasTagBlock = new RegExp(`^\\s*\\[${tag}\\]:`, "im").test(promptText || "");
+    const currentlyActive = hasTagBlock || pillarStatuses[key] === "done";
     const shouldInclude = !currentlyActive;
     const nextMap = { ...activePillarsMap, [key]: shouldInclude };
     setActivePillarsMap(nextMap);
-    setPromptText((prev) => {
-      const updated = upsertOrRemovePromptBlock(prev, tag, gObj.template, shouldInclude);
-      return updated || challengeData?.simple_prompt || "";
-    });
+    setPromptText((prev) => upsertOrRemovePromptBlock(prev, tag, gObj.template, shouldInclude));
     flashTagFeedback(`${shouldInclude ? "+ Added" : "− Removed"} [${tag}]`);
     setLineage((prev) => [
       ...prev,
       { t: Math.round((Date.now() - startRef.current) / 1000), e: "toggle", k: key },
     ]);
+  };
+
+  const handleRemoveBlockByTag = (tag) => {
+    setPromptText((prev) => upsertOrRemovePromptBlock(prev, tag, "", false));
+    const pillarKey = Object.keys(KEY_TO_TAG).find((k) => KEY_TO_TAG[k] === tag);
+    if (pillarKey) {
+      setActivePillarsMap((prev) => ({ ...prev, [pillarKey]: false }));
+    } else if (tag === "Tone") {
+      setSelectedToneId(null);
+    } else if (tag === "Personal Strategic Angle") {
+      setSelectedAngleChipIdx(null);
+      setPersonalAngle("");
+    }
+    flashTagFeedback(`− Removed [${tag}]`);
+  };
+
+  const handleClearAllPrompt = () => {
+    setActivePillarsMap({ role: false, context: false, task: false, format: false, constraints: false });
+    setSelectedToneId(null);
+    setSelectedAngleChipIdx(null);
+    setPersonalAngle("");
+    setPromptText("");
+    flashTagFeedback("✕ Cleared Prompt");
+  };
+
+  const handleResetStarterPrompt = () => {
+    const starterMap = { role: false, context: false, task: true, format: false, constraints: false };
+    setActivePillarsMap(starterMap);
+    setSelectedToneId(null);
+    setSelectedAngleChipIdx(null);
+    setPersonalAngle("");
+    setPromptText(
+      buildAssembledPrompt(
+        challengeData?.guide || [],
+        starterMap,
+        null,
+        "",
+        challengeData?.simple_prompt || "",
+        normLang
+      )
+    );
+    flashTagFeedback("↺ Reset to Starter");
   };
 
   const handleActivateAllPillars = () => {
@@ -1274,7 +1333,8 @@ window.Challenge2ParticipantView = function ({
   };
 
   const handleSelectTone = (toneId) => {
-    const togglingOff = selectedToneId === toneId;
+    const hasToneBlock = /^\s*\[Tone\]:/im.test(promptText || "");
+    const togglingOff = selectedToneId === toneId && hasToneBlock;
     const nextTone = togglingOff ? null : toneId;
     setSelectedToneId(nextTone);
     const toneObj = nextTone ? (ui.tones || []).find((x) => x.id === nextTone) : null;
@@ -1285,7 +1345,9 @@ window.Challenge2ParticipantView = function ({
   };
 
   const handlePickAngleChip = (hintVal, chipIdx) => {
-    const togglingOff = personalAngle.trim() === hintVal.trim();
+    const hasAngleBlock = /^\s*\[Personal Strategic Angle\]:/im.test(promptText || "");
+    const togglingOff =
+      hasAngleBlock && (selectedAngleChipIdx === chipIdx || personalAngle.trim() === hintVal.trim());
     const nextIdx = togglingOff ? null : chipIdx;
     const nextVal = togglingOff ? "" : hintVal;
     setSelectedAngleChipIdx(nextIdx);
@@ -2094,7 +2156,9 @@ window.Challenge2ParticipantView = function ({
               <div className="text-xs font-extrabold text-slate-900">{ui.angleHeader}</div>
               <div className="flex flex-col gap-1.5">
                 {angleHints.map((hint, hi) => {
-                  const selected = promptText.includes(hint.trim());
+                  const hasAngleBlock = /^\s*\[Personal Strategic Angle\]:/im.test(promptText || "");
+                  const selected =
+                    hasAngleBlock && (selectedAngleChipIdx === hi || promptText.includes(hint.trim()));
                   return (
                     <button
                       key={hi}
@@ -2115,30 +2179,75 @@ window.Challenge2ParticipantView = function ({
             </div>
           )}
 
-          {/* 4. SINGLE LIVE EDITABLE PROMPT BOX (100% Transparent — Every Pill Updates This Directly!) */}
-          <div className="bg-slate-50 border-2 border-slate-300 focus-within:border-[#ed1b2e] rounded-2xl p-2.5 space-y-1.5 transition-all">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[11px] font-extrabold text-slate-800">
-                ✍️ Your Live AI Prompt ({activePillarCount}/5 Pillars)
-              </span>
-              {lastUpdatedTag ? (
-                <span className="px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-[10px] font-extrabold">
-                  {lastUpdatedTag}
-                </span>
-              ) : (
-                <span className="text-[10px] font-semibold text-slate-500">
-                  Tap pills above or edit directly
-                </span>
-              )}
-            </div>
-            <textarea
-              rows={6}
-              value={promptText}
-              onChange={(e) => handleLivePromptEdit(e.target.value)}
-              placeholder={ui.anglePlaceholder}
-              className="w-full rounded-xl border border-slate-200 bg-white focus:outline-none p-2.5 text-xs text-slate-900 leading-relaxed font-sans"
-            />
-          </div>
+          {/* 4. SINGLE LIVE EDITABLE PROMPT BOX (100% Transparent — Removable [Tag ✕] Pills + Clear/Reset!) */}
+          {(() => {
+            const activeTagsInPrompt = CANONICAL_TAGS.filter((tg) =>
+              new RegExp(`^\\s*\\[${tg}\\]:`, "im").test(promptText || "")
+            );
+            return (
+              <div className="bg-slate-50 border-2 border-slate-300 focus-within:border-[#ed1b2e] rounded-2xl p-2.5 space-y-2 transition-all">
+                <div className="flex flex-wrap items-center justify-between gap-1.5">
+                  <span className="text-[11px] font-extrabold text-slate-800">
+                    ✍️ Your Live AI Prompt ({activePillarCount}/5 Pillars)
+                  </span>
+                  <div className="flex items-center gap-1">
+                    {lastUpdatedTag && (
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-[10px] font-extrabold">
+                        {lastUpdatedTag}
+                      </span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={handleResetStarterPrompt}
+                      className="px-2 py-0.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-[10px] font-extrabold text-slate-700"
+                      title="Reset to starter prompt"
+                    >
+                      ↺ Reset
+                    </button>
+                    {promptText.trim().length > 0 && (
+                      <button
+                        type="button"
+                        onClick={handleClearAllPrompt}
+                        className="px-2 py-0.5 rounded-lg bg-white hover:bg-red-50 border border-slate-300 hover:border-red-300 text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e]"
+                        title="Clear entire prompt"
+                      >
+                        ✕ Clear
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* One-Tap Removable [Section ✕] Chips — Works Even After You Edit Text! */}
+                {activeTagsInPrompt.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1">
+                    {activeTagsInPrompt.map((tg) => {
+                      const shortTg = tg === "Personal Strategic Angle" ? "Angle" : tg;
+                      return (
+                        <button
+                          key={tg}
+                          type="button"
+                          onClick={() => handleRemoveBlockByTag(tg)}
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white hover:bg-red-50 border border-slate-300 hover:border-[#ed1b2e] text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e] transition-all"
+                          title={`Remove [${tg}] section`}
+                        >
+                          <span>{shortTg}</span>
+                          <span className="text-[#ed1b2e]">✕</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+
+                <textarea
+                  rows={6}
+                  value={promptText}
+                  onChange={(e) => handleLivePromptEdit(e.target.value)}
+                  placeholder={ui.anglePlaceholder}
+                  className="w-full rounded-xl border border-slate-200 bg-white focus:outline-none p-2.5 text-xs text-slate-900 leading-relaxed font-sans"
+                />
+              </div>
+            );
+          })()}
 
           {genError && (
             <div className="bg-red-50 border border-red-200 text-[#ed1b2e] text-xs font-bold px-3 py-2 rounded-xl">

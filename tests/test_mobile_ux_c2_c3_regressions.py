@@ -278,6 +278,23 @@ async function run() {
       const backToEnPrompt = document.querySelector("textarea").value;
       const backToEnglishZeroCjk = !/[\\u4e00-\\u9fff]/.test(backToEnPrompt) && backToEnPrompt.includes("[Role]:");
 
+      // Edit text inside [Role]: block manually (even collapsing blank lines!), then click [Role ✕] chip -> verify 100% removed!
+      const taNow = document.querySelector("textarea");
+      const editedVal = taNow.value.replace(/\\[Role\\]:[^\\n]*/, "[Role]: Custom edited family office advisor text!");
+      const taSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
+      taSetter.call(taNow, editedVal);
+      taNow.dispatchEvent(new Event("input", { bubbles: true }));
+      await new Promise(r => setTimeout(r, 100));
+
+      const roleRemoveChip = Array.from(document.querySelectorAll("button")).find(b => b.title === "Remove [Role] section");
+      if (roleRemoveChip) roleRemoveChip.click();
+      await new Promise(r => setTimeout(r, 100));
+      const afterEditedRemove = document.querySelector("textarea").value;
+      const editedBlockRemovedCleanly =
+        !afterEditedRemove.includes("[Role]:") &&
+        !afterEditedRemove.includes("Custom edited family office") &&
+        afterEditedRemove.includes("[Task]:");
+
       return {
         found: true,
         editable,
@@ -287,6 +304,7 @@ async function run() {
         all5AddedVisibly,
         switchedToChineseOk,
         backToEnglishZeroCjk,
+        editedBlockRemovedCleanly,
       };
     })()`);
 
@@ -695,6 +713,7 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         self.assertTrue(lp["all5AddedVisibly"], "Clicking Add All 5 did not visibly populate all 5 pillars")
         self.assertTrue(lp["switchedToChineseOk"], "Switching to Mandarin did not translate promptText")
         self.assertTrue(lp["backToEnglishZeroCjk"], "Switching back to English left Chinese text in prompt!")
+        self.assertTrue(lp["editedBlockRemovedCleanly"], "Edited [Role] block was not removed cleanly!")
 
         # Sample Modal overlay + ZERO boardroom image + mobile Slide-3 cards + Click-to-Zoom lightbox
         modal = res["c2SampleModalAudit"]
