@@ -44,7 +44,7 @@ const C2_UI_I18N = {
       {
         label: "🛡️ Hibah & Creditor Ring-Fencing",
         snippet:
-          "[Wealth Planning & Hibah Strategy]: Show how PAMB Family Takaful + Hibah nomination injects immediate Shariah-compliant cash outside estate freeze to settle the RM 4.5M personal-guarantee loan and preserve Faraid harmony.",
+          "[Wealth Planning & Hibah Strategy]: Show how Family Takaful + Hibah nomination injects immediate Shariah-compliant cash outside estate freeze to settle the RM 4.5M personal-guarantee loan and preserve Faraid harmony.",
       },
       {
         label: "🤝 Accountant Co-Advisory Close",
@@ -136,7 +136,7 @@ const C2_UI_I18N = {
       {
         label: "🛡️ Hibah 赠与及债务隔离策略",
         snippet:
-          "[财富规划与 Hibah 隔离]：清晰展示保诚 Family Takaful 搭配 Hibah 指定受益人如何在遗产冻结期外即刻注入免税流动现金，清偿 RM 4.5M 个人担保贷款并兼顾 Faraid 家族和谐。",
+          "[财富规划与 Hibah 隔离]：清晰展示 Family Takaful 搭配 Hibah 指定受益人如何在遗产冻结期外即刻注入免税流动现金，清偿 RM 4.5M 个人担保贷款并兼顾 Faraid 家族和谐。",
       },
       {
         label: "🤝 联合会计师与公司秘书协同面谈",
@@ -228,7 +228,7 @@ const C2_UI_I18N = {
       {
         label: "🛡️ Hibah 贈與同債務隔離策略",
         snippet:
-          "[財富規劃與 Hibah 隔離]：清晰展示保誠 Family Takaful 配合 Hibah 指定受益人點樣喺遺產凍結之外即刻注入流動現金，清還 RM 4.5M 個人擔保貸款兼顧及 Faraid 屋企和睦。",
+          "[財富規劃與 Hibah 隔離]：清晰展示 Family Takaful 配合 Hibah 指定受益人點樣喺遺產凍結之外即刻注入流動現金，清還 RM 4.5M 個人擔保貸款兼顧及 Faraid 屋企和睦。",
       },
       {
         label: "🤝 約埋會計師同公司秘書一齊傾",
@@ -320,7 +320,7 @@ const C2_UI_I18N = {
       {
         label: "🛡️ Strategi Hibah & Perlindungan Pemiutang",
         snippet:
-          "[Perancangan Kekayaan & Hibah]: Tunjukkan bagaimana Takaful Keluarga PAMB + penamaan Hibah menyuntik tunai segera patuh Syariah di luar pembekuan pusaka untuk menyelesaikan pinjaman jaminan peribadi RM 4.5J serta menjaga keharmonian Faraid.",
+          "[Perancangan Kekayaan & Hibah]: Tunjukkan bagaimana Takaful Keluarga + penamaan Hibah menyuntik tunai segera patuh Syariah di luar pembekuan pusaka untuk menyelesaikan pinjaman jaminan peribadi RM 4.5J serta menjaga keharmonian Faraid.",
       },
       {
         label: "🤝 Sesi Bersama Akauntan & Setiausaha Syarikat",
@@ -412,7 +412,7 @@ const C2_UI_I18N = {
       {
         label: "🛡️ Hibah & கடன் பாதுகாப்பு உத்தி",
         snippet:
-          "[செல்வத் திட்டமிடல் & Hibah]: PAMB Family Takaful மற்றும் Hibah மூலம் சொத்து முடக்கத்திற்கு வெளியே உடனடி ரொக்கத்தை வழங்கி RM 4.5M கடனை அடைத்து Faraid குடும்ப ஒற்றுமையைப் பாதுகாப்பதை விளக்கவும்.",
+          "[செல்வத் திட்டமிடல் & Hibah]: Family Takaful மற்றும் Hibah மூலம் சொத்து முடக்கத்திற்கு வெளியே உடனடி ரொக்கத்தை வழங்கி RM 4.5M கடனை அடைத்து Faraid குடும்ப ஒற்றுமையைப் பாதுகாப்பதை விளக்கவும்.",
       },
       {
         label: "🤝 கணக்காளர் & நிறுவனச் செயலாளருடன் கூட்டு ஆலோசனை",
@@ -478,7 +478,7 @@ const PILLAR_ICONS = {
 };
 
 const PILLAR_HEURISTICS = {
-  role: [/role|peranan|角色|பங்கு|consultant|advisor|perunding|顾问|顧問|ஆலோசகர்|prudential|pamb/i],
+  role: [/role|peranan|角色|பங்கு|consultant|advisor|perunding|顾问|顧問|ஆலோசகர்|prumda|prudential|pamb/i],
   context: [/aleya|28m|28j|2800|4\.5m|4\.5j|450|6\.5m|6\.5j|650|19m|19j|1900|clinic|klinik|诊所|診所|கிளினிக்|hakim|aisyah|imran/i],
   task: [/3-slide|3 slide|3 slaid|3页|3 頁|3頁|3-ஸ்லைடு|pre-pitch|pra-pembentangan|战前|戰前|முன்-முன்மொழிவு|liquidity|kecairan|流动性|流動性|பணப்புழக்க/i],
   format: [/kpi|chart|table|carta|jadual|柱状图|柱狀圖|策略表|வரைபடம்|அட்டவணை|speaker notes|nota pembentang|演讲者备注|演講備註|பேச்சாளர்/i],
@@ -1016,7 +1016,7 @@ window.Challenge2ParticipantView = function ({
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "PAMB-Pre-Pitch-Deck.pptx";
+      a.download = "PRUMDA-Pre-Pitch-Deck.pptx";
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -1065,7 +1065,7 @@ window.Challenge2ParticipantView = function ({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: agentName || "PAMB Leader",
+          name: agentName || "PRUMDA Leader",
           participant_id: agentId || null,
           market: "MY",
           lang,

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Prudential Malaysia (PAMB) Agency AI Bootcamp Arena — 11 November (Google Singapore).
+"""PRUMDA Learning Trip • AI Arena — 11 November (Google Singapore).
 
 Strictly Isolated Presenter Command Screen (/ , /presenter), Participant Mobile Experience (/join),
 and Developer Split-Screen Sandbox (/sandbox/1, /sandbox/2, /sandbox/3).
 
 Aligned 1:1 with the 11 November PAMB Agenda (13:45 - 15:30):
 - Stage 0 ("LAUNCH"): 13:45 - 13:55 | Envision the future — Overview of AI
-- Stage 1 ("LOBBY"):  13:55 - 14:00 | QR Code Onboarding (/join) — PAMB Malaysia Regions & Language Selection
+- Stage 1 ("LOBBY"):  13:55 - 14:00 | QR Code Onboarding (/join) — PRUMDA Learning Trip Onboarding & Language Selection
 - Stage 2 ("LIVE"):   14:00 - 15:05 | The 3 Hands-On Challenges + Live Submissions Wall & Spotlight Modal:
     • Challenge 1 (14:00 - 14:20 | 20m): Reinvent your professional image & customer outreach (Camera Selfie + GenAI Card)
     • Challenge 2 (14:20 - 14:35 | 15m): Master the art of AI dialogue (4-Pillar Prompting Duel + AI Judge)
@@ -63,15 +63,8 @@ MODEL_CANDIDATES = [
     "gemini-2.0-flash",
 ]
 
-# All participants are visiting from Prudential Assurance Malaysia Berhad (PAMB) 🇲🇾
-PAMB_REGIONS = {
-    "Kuala Lumpur / Klang Valley": {"flag": "🇲🇾", "badge": "🏙️ KL / Klang Valley"},
-    "Penang & Northern Region": {"flag": "🇲🇾", "badge": "🌉 Penang / North"},
-    "Johor Bahru & Southern": {"flag": "🇲🇾", "badge": "🌴 JB / South"},
-    "Perak / Ipoh & Central": {"flag": "🇲🇾", "badge": "⛰️ Perak / Central"},
-    "Sabah & Sarawak (East MY)": {"flag": "🇲🇾", "badge": "🦅 East Malaysia"},
-    "PAMB Agency HQ": {"flag": "🇲🇾", "badge": "🏛️ PAMB HQ"},
-}
+# All participants are visiting for PRUMDA Learning Trip 🇲🇾
+PAMB_REGIONS = {}
 
 LANG_NAMES = {
     "en": "English",
@@ -260,15 +253,15 @@ DEMO_AGENTS = [
     {
         "id": "demo-jason-kl",
         "name": "Dato' Jason Lim",
-        "region": "Kuala Lumpur / Klang Valley",
-        "regionBadge": "🏙️ KL / Klang Valley",
+        "region": "",
+        "regionBadge": "✨ PRUMDA Learning Trip",
         "countryFlag": "🇲🇾",
         "language": "zh-CN",
         "speed": 95,
         "accuracy": 97,
         "total": 96,
         "xp": 2880,
-        "badges": ["📸 AI Brand Icon", "🧠 4-Pillar Master", "🏆 PAMB 10x Closer"],
+        "badges": ["📸 AI Brand Icon", "🧠 4-Pillar Master", "🏆 PRUMDA 10x Closer"],
         "completed": {"1": True, "2": True, "3": True},
         "scores": {
             "1": {
@@ -302,7 +295,7 @@ DEMO_AGENTS = [
                 "title": "MDRT Gala Executive Portrait • Newborn VIP Card",
                 "styleBadge": "💎 MDRT Executive Studio",
                 "userInput": "Style: MDRT Gala Keynote | Occasion: Newborn Baby Protection | Motto: 守护大马每个家庭的世代传承",
-                "aiOutput": "尊敬的陈总您好！衷心祝贺您喜添新丁！🍼 作为您在马来西亚保诚（PAMB）的专属财务顾问，我特别为您定制了《PRUMy Child 与海外名校教育金蓝图》，等您有 10 分钟空闲时我们喝杯咖啡聊聊！✨",
+                "aiOutput": "尊敬的陈总您好！衷心祝贺您喜添新丁！🍼 作为您的专属财富顾问，我特别为您定制了《PRUMy Child 与海外名校教育金蓝图》，等您有 10 分钟空闲时我们喝杯咖啡聊聊！✨",
                 "judgeFeedback": "极具MDRT总监风范！将专业形象照与新生儿教育金问候完美结合！",
                 "portraitSvg": "mdrt_keynote",
                 "total": 96,
@@ -312,8 +305,8 @@ DEMO_AGENTS = [
                 "challenge": "2",
                 "title": "4-Pillar Prompt Duel • HNW SME Boss (FD & Property)",
                 "styleBadge": "🧠 96/100 Prompt Mastery",
-                "userInput": "[Persona]: 15年经验马来西亚保诚 MDRT 总监\n[Context]: 吉隆坡物流集团王拿督（49岁），认为资金放厂房与4.1%定存回报更高\n[Task]: 用资产流动性护盾与杠杆传承化解异议\n[Format]: 3点高管简报 + 温暖咖啡邀约",
-                "aiOutput": "王拿督，物流仓储与定存确实是您创富的基石！但 PAMB PRUWealth Enrich 是为您千万房产加装「免税现金流防火墙」：房产变现需 6–18 个月，而保单能即时提供免遗产冻结的百万现金流！",
+                "userInput": "[Persona]: 15年经验 PRUMDA MDRT 总监\n[Context]: 吉隆坡物流集团王拿督（49岁），认为资金放厂房与4.1%定存回报更高\n[Task]: 用资产流动性护盾与杠杆传承化解异议\n[Format]: 3点高管简报 + 温暖咖啡邀约",
+                "aiOutput": "王拿督，物流仓储与定存确实是您创富的基石！但 PRUWealth Enrich 是为您千万房产加装「免税现金流防火墙」：房产变现需 6–18 个月，而保单能即时提供免遗产冻结的百万现金流！",
                 "judgeFeedback": "四维提示词精准锁定高净值物流老板痛点，免税流动性护盾话术极具说服力！",
                 "pillarScores": {"persona": 25, "context": 24, "task": 24, "format": 23},
                 "total": 96,
@@ -326,12 +319,12 @@ DEMO_AGENTS = [
                 "userInput": "Angle: Creditor-Protected Keyman Shield (Clause 4.2.a) + UK/Melbourne Children Inheritance Equalization",
                 "aiOutput": "陈拿督，正因为今年您全力冲刺槟城二期新厂，RM 600万个人担保敞口处于最高峰！采用 PRUWealth Enrich（条款 4.2.a）仅需极低首年现金流即可锁定 RM 1,000万债权人隔离池，同时用保险金平衡英国长子与接班次女的传承！",
                 "judgeFeedback": "精准定位 RM 600万扩厂个人担保敞口，巧妙运用 PRUWealth Enrich 条款 4.2.a 破局！",
-                "policyCitation": "PAMB PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
+                "policyCitation": "PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
                 "total": 97,
                 "timeSec": 29,
             },
         },
-        "status": "🏆 Completed all 3 PAMB Bootcamp Challenges!",
+        "status": "🏆 Completed all 3 PRUMDA Learning Trip Challenges!",
         "agenticStep": "All 3 Challenges Complete ✓",
         "activeChallenge": 3,
         "isDemo": True,
@@ -341,8 +334,8 @@ DEMO_AGENTS = [
     {
         "id": "demo-mei-penang",
         "name": "Mei Ling Tan",
-        "region": "Penang & Northern Region",
-        "regionBadge": "🌉 Penang / North",
+        "region": "",
+        "regionBadge": "✨ PRUMDA Learning Trip",
         "countryFlag": "🇲🇾",
         "language": "zh-TW",
         "speed": 91,
@@ -373,9 +366,9 @@ DEMO_AGENTS = [
             "1": {
                 "challenge": "1",
                 "title": "Festive Prosperity VIP Portrait • SME Legacy Card",
-                "styleBadge": "🧧 PAMB Prosperity VIP",
+                "styleBadge": "🧧 PRUMDA Prosperity VIP",
                 "userInput": "Style: Festive VIP | Occasion: SME Boss Factory Expansion | Motto: 穩健傳承，富過三代",
-                "aiOutput": "拿督林您好！祝賀貴集團檳城新廠順利落成！🏛️ 我為您準備了一份《PAMB PRUWealth Enrich 企業關鍵人與家族傳承簡報》，期待週四下午用 15 分鐘與您分享！🤝",
+                "aiOutput": "拿督林您好！祝賀貴集團檳城新廠順利落成！🏛️ 我為您準備了一份《PRUWealth Enrich 企業關鍵人與家族傳承簡報》，期待週四下午用 15 分鐘與您分享！🤝",
                 "judgeFeedback": "東方喜慶金紅尊尚風格搭配企業傳承賀詞，非常契合檳城企業家客群！",
                 "portraitSvg": "festive_vip",
                 "total": 93,
@@ -385,8 +378,8 @@ DEMO_AGENTS = [
                 "challenge": "2",
                 "title": "4-Pillar Prompt Duel • Re-Igniting Slumping Rookie",
                 "styleBadge": "🧠 95/100 Prompt Mastery",
-                "userInput": "[Persona]: 溫暖且堅定的 PAMB 區經理\n[Context]: 新人 Jason 連續遭遇 4 次高淨值客戶拒絕想放棄\n[Task]: 肯定第一季佳績 + 邀約明早 9:30 用 AI 復盤並陪同拜訪",
-                "aiOutput": "Jason，還記得你第一季連簽三單時的衝勁嗎？🔥 在保誠（PAMB），每一次被高淨值客戶拒絕都是晉升 MDRT 的必經勳章！明早 9:30 來我辦公室，我們用 AI 復盤，下一單我陪你去談！💪",
+                "userInput": "[Persona]: 溫暖且堅定的 PRUMDA 區經理\n[Context]: 新人 Jason 連續遭遇 4 次高淨值客戶拒絕想放棄\n[Task]: 肯定第一季佳績 + 邀約明早 9:30 用 AI 復盤並陪同拜訪",
+                "aiOutput": "Jason，還記得你第一季連簽三單時的衝勁嗎？🔥 在 PRUMDA 團隊，每一次被高淨值客戶拒絕都是晉升 MDRT 的必經勳章！明早 9:30 來我辦公室，我們用 AI 復盤，下一單我陪你去談！💪",
                 "judgeFeedback": "完美示範如何用 AI 激勵受挫的新人顧問，既有同理心又有明確陪訪行動！",
                 "pillarScores": {"persona": 24, "context": 24, "task": 23, "format": 24},
                 "total": 94,
@@ -403,8 +396,8 @@ DEMO_AGENTS = [
     {
         "id": "demo-ariff-jb",
         "name": "Ariff Iskandar",
-        "region": "Johor Bahru & Southern",
-        "regionBadge": "🌴 JB / South",
+        "region": "",
+        "regionBadge": "✨ PRUMDA Learning Trip",
         "countryFlag": "🇲🇾",
         "language": "en",
         "speed": 89,
@@ -456,8 +449,8 @@ DEMO_AGENTS = [
                 "challenge": "2",
                 "title": "4-Pillar Prompt Duel • HNW FD & Property Objection",
                 "styleBadge": "🧠 91/100 Prompt Mastery",
-                "userInput": "[Persona]: PAMB HNW Family Office Specialist\n[Context]: Dato' Wong (KL Logistics Boss) has RM 12M in warehouses & FDs\n[Task]: Reframe PRUWealth Enrich as an instant tax-free Estate Liquidity Firewall\n[Format]: Crisp executive bullets + Tuesday coffee invite",
-                "aiOutput": "Dear Dato' Wong, your logistics warehouses and FDs are outstanding wealth engines—yet commercial property takes 12–18 months to liquidate during probate. By allocating just a fraction of your FD yield into PAMB PRUWealth Enrich, you lock in an instant, creditor-protected RM 5M cash buffer for your family.",
+                "userInput": "[Persona]: PRUMDA HNW Family Office Specialist\n[Context]: Dato' Wong (KL Logistics Boss) has RM 12M in warehouses & FDs\n[Task]: Reframe PRUWealth Enrich as an instant tax-free Estate Liquidity Firewall\n[Format]: Crisp executive bullets + Tuesday coffee invite",
+                "aiOutput": "Dear Dato' Wong, your logistics warehouses and FDs are outstanding wealth engines—yet commercial property takes 12–18 months to liquidate during probate. By allocating just a fraction of your FD yield into PRUWealth Enrich, you lock in an instant, creditor-protected RM 5M cash buffer for your family.",
                 "judgeFeedback": "Clear 4-Pillar structure addressing SME fixed deposit liquidity trade-offs!",
                 "pillarScores": {"persona": 23, "context": 23, "task": 23, "format": 23},
                 "total": 91,
@@ -468,9 +461,9 @@ DEMO_AGENTS = [
                 "title": "Pre-Pitch War Room • Cross-Border Inheritance Equalizer",
                 "styleBadge": "🎯 Clause 4.2.a Verified",
                 "userInput": "Angle: Cross-Border Children Inheritance Equalizer + Creditor-Protected Keyman Shield (Clause 4.2.a)",
-                "aiOutput": "Dato' Sri Raymond, since your daughter Chloe is returning from Melbourne to run the Penang plant while your son Ryan practices medicine in the UK, PAMB PRUWealth Enrich (Clause 4.2.a) lets you leave 100% of the factory shares to Chloe while creating an instant RM 10M tax-free trust for Ryan—while ring-fencing your RM 6M bank guarantee!",
+                "aiOutput": "Dato' Sri Raymond, since your daughter Chloe is returning from Melbourne to run the Penang plant while your son Ryan practices medicine in the UK, PRUWealth Enrich (Clause 4.2.a) lets you leave 100% of the factory shares to Chloe while creating an instant RM 10M tax-free trust for Ryan—while ring-fencing your RM 6M bank guarantee!",
                 "judgeFeedback": "Strong synthesis of Dato' Sri Tan's UK/Melbourne children inheritance equalization!",
-                "policyCitation": "PAMB PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
+                "policyCitation": "PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
                 "total": 93,
                 "timeSec": 31,
             },
@@ -485,8 +478,8 @@ DEMO_AGENTS = [
     {
         "id": "demo-siti-kl",
         "name": "Siti Nurhaliza Rahman",
-        "region": "Kuala Lumpur / Klang Valley",
-        "regionBadge": "🏙️ KL / Klang Valley",
+        "region": "",
+        "regionBadge": "✨ PRUMDA Learning Trip",
         "countryFlag": "🇲🇾",
         "language": "ms",
         "speed": 93,
@@ -527,7 +520,7 @@ DEMO_AGENTS = [
                 "title": "Premier Family Office Portrait • Family Blessing Card",
                 "styleBadge": "🌿 Premier Family Office",
                 "userInput": "Style: Premier Family Office | Occasion: Newborn & Education | Motto: Melindungi Masa Depan Keluarga Malaysia",
-                "aiOutput": "Tahniah Dato' & Datin atas kelahiran cahaya mata baharu! 🌟 Sebagai perunding kewangan PAMB anda, saya telah menyediakan pelan pendidikan global PRUMy Child khas untuk masa depan si kecil. Jom minum kopi 10 minit minggu ini!",
+                "aiOutput": "Tahniah Dato' & Datin atas kelahiran cahaya mata baharu! 🌟 Sebagai perunding kewangan anda, saya telah menyediakan pelan pendidikan global PRUMy Child khas untuk masa depan si kecil. Jom minum kopi 10 minit minggu ini!",
                 "judgeFeedback": "Potret Eksekutif Family Office yang sangat meyakinkan dengan mesej perlindungan keluarga yang mesra!",
                 "portraitSvg": "family_advisor",
                 "avatarIdx": 1,
@@ -538,7 +531,7 @@ DEMO_AGENTS = [
                 "challenge": "2",
                 "title": "4-Pillar Prompt Duel • Motivasi Ejen Baharu MDRT",
                 "styleBadge": "🧠 94/100 Prompt Mastery",
-                "userInput": "[Persona]: Pengurus Agensi PAMB MDRT\n[Context]: Ejen baharu kecewa selepas 4 penolakan pelanggan HNW\n[Task]: Beri semangat & jadualkan sesi latihan AI esok 9:30 pagi",
+                "userInput": "[Persona]: Pengurus Agensi PRUMDA MDRT\n[Context]: Ejen baharu kecewa selepas 4 penolakan pelanggan HNW\n[Task]: Beri semangat & jadualkan sesi latihan AI esok 9:30 pagi",
                 "aiOutput": "Jangan putus asa! Setiap penolakan daripada pelanggan korporat sebenarnya membina ketahanan anda menuju MDRT. Esok jam 9:30 pagi kita analisa skrip bersama AI dan saya akan temankan anda ke temujanji seterusnya! 💪🔥",
                 "judgeFeedback": "Struktur prompt 4-Tiang yang sangat jelas dan penuh empati untuk membakar semangat ejen baharu!",
                 "pillarScores": {"persona": 24, "context": 24, "task": 23, "format": 24},
@@ -552,7 +545,7 @@ DEMO_AGENTS = [
                 "userInput": "Angle: Perisai Jaminan Bank RM 6 Juta (Klausa 4.2.a) + Pewarisan Anak UK/Melbourne",
                 "aiOutput": "Dato' Sri, melalui PRUWealth Enrich (Klausa 4.2.a), hanya ~3% komitmen tahunan diperlukan untuk mewujudkan dana amanah RM 10 Juta yang dilindungi daripada pemiutang bagi melindungi jaminan peribadi RM 6 Juta kilang Pulau Pinang anda!",
                 "judgeFeedback": "Strategi perlindungan jaminan bank RM 6 Juta (Klausa 4.2.a) yang sangat tepat!",
-                "policyCitation": "PAMB PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
+                "policyCitation": "PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
                 "total": 95,
                 "timeSec": 27,
             },
@@ -580,9 +573,9 @@ DEMO_AGENTS[1]["submissions"]["3"] = {
     "title": "Pre-Pitch War Room • 跨國子女資產傳承與債務隔離方案",
     "styleBadge": "🎯 Clause 4.2.a Verified",
     "userInput": "Angle: 跨國子女傳承平衡 + 條款 4.2.a 債權人隔離信託",
-    "aiOutput": "陳拿督，透過 PAMB PRUWealth Enrich（條款 4.2.a），我們能為英國行醫的長子建立 RM 1,000萬免稅現金信託，讓墨爾本歸國的次女完整繼承檳城廠房股權，同時隔離 RM 600萬銀行個人擔保風險！",
+    "aiOutput": "陳拿督，透過 PRUWealth Enrich（條款 4.2.a），我們能為英國行醫的長子建立 RM 1,000萬免稅現金信託，讓墨爾本歸國的次女完整繼承檳城廠房股權，同時隔離 RM 600萬銀行個人擔保風險！",
     "judgeFeedback": "跨國子女傳承平衡方案（英國長子現金信託 + 澳洲次女股權）極具說服力！",
-    "policyCitation": "PAMB PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
+    "policyCitation": "PRUWealth Enrich [Page 38, Clause 4.2.a — Creditor-Protected Trust]",
     "total": 94,
     "timeSec": 28,
 }
@@ -622,7 +615,7 @@ for _idx, _ag in enumerate(DEMO_AGENTS):
         "deck_title": _c2_deck["title"],
         "styleBadge": f"📊 {round(_c2_tot / 10, 1)}/10 Deck Score • 3 Slides",
         "userInput": (
-            f"[Role]: Senior PAMB Wealth & Legacy Planning Consultant\n"
+            f"[Role]: Senior PRUMDA Wealth & Legacy Planning Consultant\n"
             f"[Context]: Datin Sharifah Aleya (52, 6 clinics in Klang Valley, Net Worth ≈ RM 28M [68% clinic shares], RM 4.5M loan guarantee, RM 1M 2009 policy)\n"
             f"[Task]: Create a 3-slide pre-pitch deck for her 60-min Bangsar meeting\n"
             f"[Format]: Slide 1 KPI Snapshot, Slide 2 RM 6.5M Liquidity Gap Bar Chart, Slide 3 Family Takaful + Hibah Strategy Table + Speaker Notes\n"
@@ -649,13 +642,13 @@ for _idx, _ag in enumerate(DEMO_AGENTS):
     _c3_pillars = {
         "Greeting Card": 25,
         "WhatsApp Pitch": 24,
-        "PAMB vs AIA Email": 25,
+        "PRU vs AIA Email": 25,
         "Factual Accuracy": 24,
     }
     _ag["scores"]["3"]["criteria"] = _c3_pillars
     _ag["submissions"]["3"] = {
         "challenge": "3",
-        "title": f"{_sc_obj['customerName'].split('(')[0].strip()} • PAMB vs. AIA Pre-Pitch",
+        "title": f"{_sc_obj['customerName'].split('(')[0].strip()} • PRU vs. AIA Pre-Pitch",
         "styleBadge": _sc_obj["badge"],
         "userInput": f"Assigned Case: {_sc_obj['customerName']} | {_sc_obj['policyCitation']}",
         "aiOutput": _fb_c3["firstTouchMessage"],
@@ -672,26 +665,26 @@ for _idx, _ag in enumerate(DEMO_AGENTS):
 
 
 EXTRA_SIM_ROSTER = [
-    ("Dato' Marcus Wong", "Penang & Northern Region", "zh-CN", "leader_5", "forbes_studio", "🏛️ Forbes Wealth Leader", "跨代财富护航 • 槟城家族办公室"),
-    ("Grace Lee", "Kuala Lumpur / Klang Valley", "en", "leader_6", "mdrt_keynote", "💎 MDRT Executive Studio", "Empowering Malaysian Families with AI Clarity"),
-    ("Rajesh Krishnan", "Johor Bahru & Southern", "en", "leader_4", "festive_vip", "🧧 PAMB Prosperity VIP", "Building Generational Wealth in Southern Malaysia"),
-    ("Vivian Khor", "Perak / Ipoh & Central", "zh-TW", "leader_2", "forbes_studio", "🏛️ Forbes Wealth Leader", "以專業與科技守護大馬企業家"),
-    ("Farah Aziz", "PAMB Agency HQ", "ms", "leader_3", "family_advisor", "🌿 Premier Family Office", "Warisan Teguh Untuk Setiap Keluarga"),
-    ("Dato' Kelvin Chong", "Sabah & Sarawak (East MY)", "zh-CN", "leader_1", "mdrt_keynote", "💎 MDRT Executive Studio", "立足东马，服务全马高净值家族"),
-    ("Michelle Yeoh-Lim", "Kuala Lumpur / Klang Valley", "en", "leader_6", "family_advisor", "🌿 Premier Family Office", "Trusted Legacy Partner for SME Founders"),
-    ("Daniel Hakim", "Johor Bahru & Southern", "ms", "leader_5", "forbes_studio", "🏛️ Forbes Wealth Leader", "Kepimpinan AI & Perlindungan Takaful/Insurans"),
-    ("Evelyn Ooi", "Penang & Northern Region", "zh-TW", "leader_2", "festive_vip", "🧧 PAMB Prosperity VIP", "百萬圓桌頂尖團隊 • 世代傳承"),
-    ("Vincent Tan-Ng", "Kuala Lumpur / Klang Valley", "zh-CN", "leader_1", "forbes_studio", "🏛️ Forbes Wealth Leader", "用 AI 速度创造有温度的保障"),
-    ("Priya Nair", "Perak / Ipoh & Central", "en", "leader_6", "mdrt_keynote", "💎 MDRT Executive Studio", "Protecting Tomorrow's Dreams Today"),
-    ("Adrian Lau", "Sabah & Sarawak (East MY)", "zh-CN", "leader_5", "festive_vip", "🧧 PAMB Prosperity VIP", "家族基业长青的坚实后盾"),
-    ("Nurul Izzah", "PAMB Agency HQ", "ms", "leader_3", "family_advisor", "🌿 Premier Family Office", "Perancangan Harta & Pendidikan Terbaik"),
-    ("stephenie Koh", "Johor Bahru & Southern", "en", "leader_2", "mdrt_keynote", "💎 MDRT Executive Studio", "Your Cross-Border Legacy Architect"),
-    ("Raymond Cheah", "Penang & Northern Region", "zh-CN", "leader_4", "forbes_studio", "🏛️ Forbes Wealth Leader", "守护企业现金流与家族信托"),
-    ("Carmen Yap", "Kuala Lumpur / Klang Valley", "zh-TW", "leader_6", "family_advisor", "🌿 Premier Family Office", "用心傾聽，定制專屬保障"),
-    ("Hafiz Zulkifli", "Perak / Ipoh & Central", "ms", "leader_1", "mdrt_keynote", "💎 MDRT Executive Studio", "Membina Generasi Bebas Kewangan"),
-    ("Serena Ong", "Penang & Northern Region", "en", "leader_2", "festive_vip", "🧧 PAMB Prosperity VIP", "Excellence in High-Net-Worth Advisory"),
-    ("Nicholas Teoh", "Kuala Lumpur / Klang Valley", "zh-CN", "leader_5", "mdrt_keynote", "💎 MDRT Executive Studio", "十年百万圆桌，终身家庭挚友"),
-    ("Aishah Mansor", "Sabah & Sarawak (East MY)", "ms", "leader_3", "forbes_studio", "🏛️ Forbes Wealth Leader", "Pakar Perancangan Legasi Korporat"),
+    ("Dato' Marcus Wong", "", "zh-CN", "leader_5", "forbes_studio", "🏛️ Forbes Wealth Leader", "跨代财富护航 • 槟城家族办公室"),
+    ("Grace Lee", "", "en", "leader_6", "mdrt_keynote", "💎 MDRT Executive Studio", "Empowering Malaysian Families with AI Clarity"),
+    ("Rajesh Krishnan", "", "en", "leader_4", "festive_vip", "🧧 PRUMDA Prosperity VIP", "Building Generational Wealth in Southern Malaysia"),
+    ("Vivian Khor", "", "zh-TW", "leader_2", "forbes_studio", "🏛️ Forbes Wealth Leader", "以專業與科技守護大馬企業家"),
+    ("Farah Aziz", "", "ms", "leader_3", "family_advisor", "🌿 Premier Family Office", "Warisan Teguh Untuk Setiap Keluarga"),
+    ("Dato' Kelvin Chong", "", "zh-CN", "leader_1", "mdrt_keynote", "💎 MDRT Executive Studio", "立足东马，服务全马高净值家族"),
+    ("Michelle Yeoh-Lim", "", "en", "leader_6", "family_advisor", "🌿 Premier Family Office", "Trusted Legacy Partner for SME Founders"),
+    ("Daniel Hakim", "", "ms", "leader_5", "forbes_studio", "🏛️ Forbes Wealth Leader", "Kepimpinan AI & Perlindungan Takaful/Insurans"),
+    ("Evelyn Ooi", "", "zh-TW", "leader_2", "festive_vip", "🧧 PRUMDA Prosperity VIP", "百萬圓桌頂尖團隊 • 世代傳承"),
+    ("Vincent Tan-Ng", "", "zh-CN", "leader_1", "forbes_studio", "🏛️ Forbes Wealth Leader", "用 AI 速度创造有温度的保障"),
+    ("Priya Nair", "", "en", "leader_6", "mdrt_keynote", "💎 MDRT Executive Studio", "Protecting Tomorrow's Dreams Today"),
+    ("Adrian Lau", "", "zh-CN", "leader_5", "festive_vip", "🧧 PRUMDA Prosperity VIP", "家族基业长青的坚实后盾"),
+    ("Nurul Izzah", "", "ms", "leader_3", "family_advisor", "🌿 Premier Family Office", "Perancangan Harta & Pendidikan Terbaik"),
+    ("stephenie Koh", "", "en", "leader_2", "mdrt_keynote", "💎 MDRT Executive Studio", "Your Cross-Border Legacy Architect"),
+    ("Raymond Cheah", "", "zh-CN", "leader_4", "forbes_studio", "🏛️ Forbes Wealth Leader", "守护企业现金流与家族信托"),
+    ("Carmen Yap", "", "zh-TW", "leader_6", "family_advisor", "🌿 Premier Family Office", "用心傾聽，定制專屬保障"),
+    ("Hafiz Zulkifli", "", "ms", "leader_1", "mdrt_keynote", "💎 MDRT Executive Studio", "Membina Generasi Bebas Kewangan"),
+    ("Serena Ong", "", "en", "leader_2", "festive_vip", "🧧 PRUMDA Prosperity VIP", "Excellence in High-Net-Worth Advisory"),
+    ("Nicholas Teoh", "", "zh-CN", "leader_5", "mdrt_keynote", "💎 MDRT Executive Studio", "十年百万圆桌，终身家庭挚友"),
+    ("Aishah Mansor", "", "ms", "leader_3", "forbes_studio", "🏛️ Forbes Wealth Leader", "Pakar Perancangan Legasi Korporat"),
 ]
 
 
@@ -790,13 +783,13 @@ def _get_sim_template_by_index(idx: int) -> dict:
     c3_pillars = {
         "Greeting Card": 25,
         "WhatsApp Pitch": 24,
-        "PAMB vs AIA Email": 25,
+        "PRU vs AIA Email": 25,
         "Factual Accuracy": 24,
     }
     base_tmpl["scores"]["3"]["criteria"] = c3_pillars
     base_tmpl["submissions"]["3"] = {
         "challenge": "3",
-        "title": f"{sc_obj['customerName'].split('(')[0].strip()} • PAMB vs. AIA Pre-Pitch",
+        "title": f"{sc_obj['customerName'].split('(')[0].strip()} • PRU vs. AIA Pre-Pitch",
         "styleBadge": sc_obj["badge"],
         "userInput": f"Assigned Case: {sc_obj['customerName']} | {sc_obj['policyCitation']}",
         "aiOutput": fb_c3["firstTouchMessage"],
@@ -827,7 +820,7 @@ def _make_lobby_only_participant(template: dict) -> dict:
         "accuracy": 0,
         "total": 0,
         "xp": 100,
-        "badges": ["🇲🇾 PAMB Leader"],
+        "badges": ["🇲🇾 PRUMDA Leader"],
         "completed": {"1": False, "2": False, "3": False},
         "scores": {},
         "submissions": {},
@@ -956,15 +949,15 @@ def recompute_participant(p: dict):
     if "3" in scores:
         badges.append("🎯 Pre-Pitch Strategist")
     if completed_count >= 3:
-        badges.append("🏆 PAMB 10x Closer")
+        badges.append("🏆 PRUMDA 10x Closer")
     p["badges"] = badges
 
 
 def compute_region_standings(participants: list) -> list:
     by_reg = {}
     for p in participants:
-        r = p.get("region", "Kuala Lumpur / Klang Valley")
-        badge = p.get("regionBadge") or PAMB_REGIONS.get(r, {}).get("badge", "🇲🇾 PAMB Malaysia")
+        r = p.get("region", "")
+        badge = p.get("regionBadge") or PAMB_REGIONS.get(r, {}).get("badge", "✨ PRUMDA Learning Trip")
         entry = by_reg.setdefault(
             r,
             {"region": r, "badge": badge, "flag": "🇲🇾", "agents": 0, "totalSum": 0, "completedMissions": 0},
@@ -1234,9 +1227,9 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
 
         if path == "/api/register":
             pid = (body.get("id") or f"pamb-{int(time.time()*1000)}").strip()
-            name = (body.get("name") or "PAMB Leader").strip()
-            region = (body.get("region") or "Kuala Lumpur / Klang Valley").strip()
-            r_meta = PAMB_REGIONS.get(region, {"flag": "🇲🇾", "badge": f"🇲🇾 {region}"})
+            name = (body.get("name") or "PRUMDA Leader").strip()
+            region = (body.get("region") or "").strip()
+            r_meta = {"flag": "🇲🇾", "badge": "✨ PRUMDA Learning Trip"}
             lang = (body.get("language") or "zh-CN").strip()
             with _STATE_LOCK:
                 st = load_state()
@@ -1253,11 +1246,11 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     "accuracy": existing.get("accuracy", 0),
                     "total": existing.get("total", 0),
                     "xp": existing.get("xp", 100),
-                    "badges": existing.get("badges", ["🇲🇾 PAMB Leader"]),
+                    "badges": existing.get("badges", ["🇲🇾 PRUMDA Leader"]),
                     "completed": existing.get("completed", {"1": False, "2": False, "3": False}),
                     "scores": existing.get("scores", {}),
                     "submissions": existing.get("submissions", {}),
-                    "status": body.get("status") or existing.get("status") or "📖 Joined Lobby • Ready for 11 Nov Bootcamp",
+                    "status": body.get("status") or existing.get("status") or "📖 Joined Lobby • Ready for PRUMDA Learning Trip",
                     "agenticStep": existing.get("agenticStep", "Briefing & Strategy Pre-Read"),
                     "activeChallenge": existing.get("activeChallenge", 1),
                     "isDemo": False,
@@ -1268,7 +1261,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                 if is_new:
                     add_event(
                         st,
-                        f"🇲🇾 {name} ({r_meta['badge']}) joined in {LANG_NAMES.get(lang, lang)}!",
+                        f"🇲🇾 {name} joined PRUMDA Learning Trip in {LANG_NAMES.get(lang, lang)}!",
                         "join",
                     )
                 save_state(st)
@@ -1300,7 +1293,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     if body.get("logEvent") and status_text:
                         add_event(
                             st,
-                            f"🇲🇾 {p['name']} ({p.get('regionBadge', '')}): {status_text}",
+                            f"🇲🇾 {p['name']}: {status_text}",
                             "activity",
                         )
                     save_state(st)
@@ -1308,9 +1301,9 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
 
         if path == "/api/submit":
             pid = body.get("id", "")
-            name = body.get("name", "PAMB Leader")
-            region = body.get("region", "Kuala Lumpur / Klang Valley")
-            r_meta = PAMB_REGIONS.get(region, {"flag": "🇲🇾", "badge": f"🇲🇾 {region}"})
+            name = body.get("name", "PRUMDA Leader")
+            region = body.get("region", "")
+            r_meta = {"flag": "🇲🇾", "badge": "✨ PRUMDA Learning Trip"}
             lang = body.get("language", "zh-CN")
             c_num = str(body.get("challenge", "1"))
             speed = int(body.get("speed", 92))
@@ -1378,7 +1371,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                 done_count = sum(1 for k in ("1", "2", "3") if p["completed"].get(k))
                 if done_count >= 3:
                     p["status"] = f"🏆 CLEARED ALL 3 CHALLENGES! ({p['total']} pts • {p['xp']} XP)"
-                    p["agenticStep"] = "All 3 PAMB Challenges Complete ✓"
+                    p["agenticStep"] = "All 3 PRUMDA Learning Trip Challenges Complete ✓"
                 else:
                     p["status"] = f"✅ Submitted Challenge {c_num} ({c_total} pts in {time_sec}s)"
                     p["agenticStep"] = f"Challenge {c_num} Scored → Ready for Challenge {int(c_num)+1}"
@@ -1392,7 +1385,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                 }
                 add_event(
                     st,
-                    f"🔥 🇲🇾 {name} ({r_meta['badge']}) submitted {c_titles.get(c_num, f'Challenge {c_num}')} — "
+                    f"🔥 🇲🇾 {name} submitted {c_titles.get(c_num, f'Challenge {c_num}')} — "
                     f"Score: {c_total} pts (Speed {speed}% • Quality {accuracy}%)!",
                     "submit",
                 )
@@ -1459,7 +1452,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     st["participants"] = new_parts
                     add_event(
                         st,
-                        f"👥 Simulation Headcount set to {target_count} PAMB Malaysia Leaders.",
+                        f"👥 Simulation Headcount set to {target_count} PRUMDA Learning Trip Leaders.",
                         "join",
                     )
                     save_state(st)
@@ -1534,7 +1527,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     ],
                     "3": [
                         ("📂 Reviewing Dato' Sri Raymond Tan RM 6M Bank Guarantee dossier...", "Dossier Analysis"),
-                        ("⚡ Synthesizing PAMB PRUWealth Enrich Clause 4.2.a...", "Grounded Policy Lookup"),
+                        ("⚡ Synthesizing PRUWealth Enrich Clause 4.2.a...", "Grounded Policy Lookup"),
                         ("🤝 Co-creating counter-pitch with Agent Assist...", "Agent Assist Co-Creation"),
                     ],
                 }
@@ -1577,7 +1570,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                         submitted_count += 1
                     add_event(
                         st,
-                        f"🔥 All {submitted_count} remaining PAMB Leaders submitted Challenge {c_num}!",
+                        f"🔥 All {submitted_count} remaining PRUMDA Leaders submitted Challenge {c_num}!",
                         "submit",
                     )
                     save_state(st)
@@ -1665,7 +1658,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
 
         if path == "/api/coach-react":
             reaction = body.get("reaction", "fire")
-            actor = body.get("name", "PAMB Leader")
+            actor = body.get("name", "PRUMDA Leader")
             with _STATE_LOCK:
                 st = load_state()
                 cs = st.setdefault("coachState", {})
@@ -1782,5 +1775,5 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     os.makedirs(STATIC_DIR, exist_ok=True)
     server = ThreadingHTTPServer(("0.0.0.0", PORT), PAMBArenaHTTPHandler)
-    print(f"PAMB Agency AI Bootcamp Arena running on http://0.0.0.0:{PORT}", flush=True)
+    print(f"PRUMDA Learning Trip AI Arena running on http://0.0.0.0:{PORT}", flush=True)
     server.serve_forever()

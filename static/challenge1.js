@@ -1477,7 +1477,7 @@ window.Challenge1ParticipantView = function ({
           },
           celebrityName: rawPhoto ? "" : celebrityName.trim(),
           agentName: agentName || "",
-          region: agentRegion || "Kuala Lumpur",
+          region: agentRegion || "",
           hasCustomPhoto: Boolean(rawPhoto),
           photoBase64: rawPhoto,
           prevPortraitDataUrl: studioState.aiPortraitDataUrl || null,
@@ -2114,7 +2114,7 @@ window.Challenge1ParticipantView = function ({
       <window.PAMBChatShell
         badgeLeft="14:00 – 14:20 • CHALLENGE 1"
         badgeRight="✨ AI Image Assistant"
-        regionLabel={agentRegion}
+        regionLabel=""
         title={t.c1Title}
         subtitle={t.c1Sub}
         briefSteps={ui.briefSteps}

@@ -49,7 +49,7 @@ export function renderSlide(s, i = 0, n = 1) {
       ${body(s)}
       ${s.callout && s.layout !== "quote" ? `<div class="callout">${esc(s.callout)}</div>` : ""}
     </div>
-    <div class="brand">PRUDENTIAL · PRE-PITCH BRIEF</div>
+    <div class="brand">PRUMDA LEARNING TRIP · PRE-PITCH BRIEF</div>
     <div class="pg">${i + 1} / ${n}</div>
   </div>`;
 }

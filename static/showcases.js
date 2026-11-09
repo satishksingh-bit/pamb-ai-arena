@@ -29,8 +29,8 @@ window.SubmissionCardRenderer = function ({
         .composeExecutivePortraitCard({
           rawImageDataUrl: submission.rawPortraitUrl || null,
           styleKey: submission.portraitSvg || "mdrt_keynote",
-          agentName: agentName || "PAMB Leader",
-          region: (regionBadge || "Kuala Lumpur").replace(/🇲🇾/g, "").trim(),
+          agentName: agentName || "PRUMDA Leader",
+          region: "",
           motto: submission.motto || "Protecting Malaysian Families Across Generations",
           avatarIndex: submission.avatarIdx || 0,
         })
@@ -75,9 +75,6 @@ window.SubmissionCardRenderer = function ({
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-extrabold text-slate-900 text-base">{agentName}</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 font-semibold">
-                {regionBadge || "🇲🇾 PAMB Malaysia"}
-              </span>
               {submission.styleBadge && (
                 <span className={`text-[11px] px-2.5 py-0.5 rounded-full border font-extrabold ${badgeColors[cNum] || badgeColors["1"]}`}>
                   {submission.styleBadge}
@@ -109,14 +106,14 @@ window.SubmissionCardRenderer = function ({
         </div>
       </div>
 
-      {/* Challenge 3 Compact Single-Box Layout: Greeting Card at Top + WhatsApp & PAMB vs. AIA Email Below */}
+      {/* Challenge 3 Compact Single-Box Layout: Greeting Card at Top + WhatsApp & Plan Comparison Email Below */}
       {cNum === "3" ? (
         <div className="space-y-2.5">
           {displayPortrait && (
             <div className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-2">
               <img
                 src={displayPortrait}
-                alt="Submitted PAMB Life-Event Greeting Card"
+                alt="Submitted Life-Event Greeting Card"
                 className={`${
                   mode === "spotlight" ? "h-40 sm:h-44" : "h-32"
                 } w-auto object-contain rounded-lg border-2 border-[#ed1b2e] shadow-sm`}
@@ -136,7 +133,7 @@ window.SubmissionCardRenderer = function ({
 
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
               <div className="text-[11px] font-extrabold text-[#ed1b2e] mb-1">
-                📧 2. Factual PAMB vs. AIA Malaysia Email
+                📧 2. Factual Plan Comparison Email (vs. AIA)
               </div>
               <div className="text-[11px] text-slate-800 whitespace-pre-line leading-snug max-h-36 overflow-y-auto bg-white p-2 rounded-lg border border-slate-200">
                 {submission.aiaComparisonEmail || submission.dossierSynthesis || submission.aiOutput}
@@ -465,7 +462,7 @@ window.SubmissionCardRenderer = function ({
 window.CanvasStageShowcase = function ({ arenaState, fetchArenaState, initialSeed }) {
   const { useState } = React;
   const participants = arenaState.participants || [];
-  const topLeader = participants[0] || { name: "Dato' Jason Lim", regionBadge: "🏙️ KL / Klang Valley" };
+  const topLeader = participants[0] || { name: "Dato' Jason Lim" };
 
   const [seedKey, setSeedKey] = useState(initialSeed?.seedKey || "mdrt_sprint");
   const [winnerName, setWinnerName] = useState(initialSeed?.winnerName || topLeader.name);
@@ -515,7 +512,7 @@ window.CanvasStageShowcase = function ({ arenaState, fetchArenaState, initialSee
               Canvas to Ideate to Your Team: Concept → Realisation
             </h2>
             <p className="text-xs sm:text-sm text-gray-300 mt-1">
-              Watch how an Agency Leader&apos;s raw idea transforms side-by-side into a structured PAMB Team Playbook, KPI Tracker &amp; Morning Huddle Script!
+              Watch how an Agency Leader&apos;s raw idea transforms side-by-side into a structured PRUMDA Learning Trip Team Playbook, KPI Tracker &amp; Morning Huddle Script!
             </p>
           </div>
 
@@ -547,7 +544,7 @@ window.CanvasStageShowcase = function ({ arenaState, fetchArenaState, initialSee
 
           <div className="grid grid-cols-1 gap-2">
             {[
-              { id: "mdrt_sprint", icon: "🏆", label: "Blueprint A: PAMB 90-Day 'Road to MDRT' Agency Sprint" },
+              { id: "mdrt_sprint", icon: "🏆", label: "Blueprint A: PRUMDA 90-Day 'Road to MDRT' Agency Sprint" },
               { id: "genz_recruit", icon: "🚀", label: "Blueprint B: 'Next-Gen AI Wealth Entrepreneur' Recruitment Campaign" },
             ].map((item) => (
               <button
@@ -570,7 +567,7 @@ window.CanvasStageShowcase = function ({ arenaState, fetchArenaState, initialSee
 
           <div className="bg-[#0a0d14] border border-gray-800 rounded-xl p-3.5 space-y-2">
             <div className="text-xs font-bold text-amber-300">
-              🌟 Pull Inspiration from Top PAMB Leaderboard Challenger:
+              🌟 Pull Inspiration from Top PRUMDA Leaderboard Challenger:
             </div>
             <div className="flex flex-wrap gap-1.5">
               {participants.slice(0, 5).map((p) => (
@@ -639,7 +636,7 @@ window.CanvasStageShowcase = function ({ arenaState, fetchArenaState, initialSee
                 LIVE CANVAS DOCUMENT REALISATION
               </span>
               <h3 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
-                {canvasData.title || "PAMB 90-Day 'Road to MDRT' Agency Sprint Playbook"}
+                {canvasData.title || "PRUMDA 90-Day 'Road to MDRT' Agency Sprint Playbook"}
               </h3>
               <p className="text-xs text-purple-300 font-semibold">
                 {canvasData.customBanner || canvasData.subtitle}
@@ -675,7 +672,7 @@ window.CanvasStageShowcase = function ({ arenaState, fetchArenaState, initialSee
           {/* 3 Execution Phases */}
           <div className="space-y-2.5">
             <div className="text-xs font-extrabold uppercase text-amber-400">
-              🗓️ Phased Rollout Blueprint for PAMB Malaysia Units
+              🗓️ Phased Rollout Blueprint for PRUMDA Units
             </div>
             {(canvasData.phases || []).map((ph, i) => (
               <div key={i} className="bg-[#0d101a] border border-gray-800 rounded-xl p-3.5">
@@ -714,7 +711,7 @@ window.LiveCoachStageShowcase = function ({ arenaState, fetchArenaState }) {
   const reactions = coachState.reactions || { fire: 28, clap: 34, diamond: 19, rocket: 22 };
 
   const [speakerName, setSpeakerName] = useState(
-    participants[0]?.name || "Dato' Jason Lim (KL Agency Leader)"
+    participants[0]?.name || "Dato' Jason Lim (PRUMDA Leader)"
   );
   const [topic, setTopic] = useState("60-Second MDRT Agency Morning Rally (Mandarin / EN)");
   const [lang, setLang] = useState("zh-CN");
@@ -722,7 +719,7 @@ window.LiveCoachStageShowcase = function ({ arenaState, fetchArenaState }) {
   const [isRecording, setIsRecording] = useState(false);
   const [pitchSeconds, setPitchSeconds] = useState(0);
   const [transcript, setTranscript] = useState(
-    "各位马来西亚保诚的精英伙伴们，AI 时代不是要取代有温度的保险顾问，而是让我们用 10 倍的速度去守护每一个马来西亚家庭的未来！今天让我们一起冲刺百万圆桌！"
+    "各位 PRUMDA Learning Trip 的精英伙伴们，AI 时代不是要取代有温度的财富顾问，而是让我们用 10 倍的速度去守护每一个马来西亚家庭的未来！今天让我们一起冲刺百万圆桌！"
   );
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -904,7 +901,7 @@ window.LiveCoachStageShowcase = function ({ arenaState, fetchArenaState }) {
               {participants.slice(0, 4).map((p) => (
                 <button
                   key={p.id}
-                  onClick={() => setSpeakerName(`${p.name} (${p.regionBadge || "PAMB"})`)}
+                  onClick={() => setSpeakerName(p.name)}
                   className="px-2.5 py-1 rounded-lg bg-[#181d2c] hover:bg-amber-500/20 border border-gray-700 text-xs font-bold text-gray-200"
                 >
                   🇲🇾 {p.name}

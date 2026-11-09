@@ -1,6 +1,6 @@
-# 🇲🇾 Prudential Malaysia (PAMB) Agency Leaders AI Bootcamp Arena — 11 November
+# 🇲🇾 PRUMDA Learning Trip • AI Arena — 11 November
 
-**Event:** Prudential Assurance Malaysia Berhad (PAMB) Agency AI Bootcamp  
+**Event:** PRUMDA Learning Trip AI Arena  
 **Date & Time:** 11 November | 13:45 – 15:30 (Hands-On Challenges & Stage Showcases)  
 **Venue:** Google Singapore (Room Bromo)  
 **Audience:** Exclusively PAMB Malaysia Agency Leaders (`🇲🇾`) — supporting **简体中文 (Mandarin)**, **繁體中文**, **English**, and **Bahasa Melayu**.

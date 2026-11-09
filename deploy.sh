@@ -12,7 +12,7 @@ REGION="${REGION:-us-central1}"
 SERVICE_NAME="${SERVICE_NAME:-pamb-agency-ai-arena}"
 
 echo "=================================================================="
-echo "🚀 Deploying PAMB Agency AI Bootcamp Arena (11 Nov)"
+echo "🚀 Deploying PRUMDA Learning Trip AI Arena"
 echo "   Project : ${PROJECT_ID}"
 echo "   Region  : ${REGION}"
 echo "   Service : ${SERVICE_NAME}"

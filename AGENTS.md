@@ -1,6 +1,6 @@
-# 🇲🇾 PAMB Malaysia Agency AI Bootcamp Arena (11 November) — Jetski Agent Guide (`AGENTS.md`)
+# 🇲🇾 PRUMDA Learning Trip • AI Arena — Jetski Agent Guide (`AGENTS.md`)
 
-Welcome! You are assisting a developer working on the **11th November Prudential Assurance Malaysia Berhad (PAMB) Agency Leaders AI Bootcamp Arena**.
+Welcome! You are assisting a developer working on the **11th November PRUMDA Learning Trip Arena**.
 
 ---
 

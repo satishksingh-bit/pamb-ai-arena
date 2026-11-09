@@ -52,7 +52,7 @@ STYLE_META: dict[str, dict[str, str]] = {
         "lighting": "Warm Golden-Hour Rim & Luxury Office Bokeh",
         "wardrobePrompt": (
             "tailored charcoal-grey executive business suit with a crisp white dress shirt "
-            "and a subtle Prudential-red silk pocket square against a warm, softly blurred "
+            "and a subtle crimson-red silk pocket square against a warm, softly blurred "
             "Kuala Lumpur / Marina Bay financial district glass office interior at golden hour, "
             "with warm studio ambient lighting"
         ),
@@ -80,7 +80,7 @@ STYLE_META: dict[str, dict[str, str]] = {
     },
     "festive_vip": {
         "label": "Festive Prosperity VIP Studio",
-        "badge": "🧧 PAMB Prosperity VIP",
+        "badge": "🧧 PRUMDA Prosperity VIP",
         "accent": "#ed1b2e",
         "lighting": "Crimson & Brushed-Gold Oriental Studio Glow",
         "wardrobePrompt": (
@@ -163,58 +163,58 @@ OCCASION_META: dict[str, dict[str, str]] = {
 
 FALLBACK_OUTREACH: dict[str, dict[str, str]] = {
     "zh-CN": {
-        "newborn": "尊敬的{client}您好！衷心祝贺您喜添新丁！🍼 作为您在马来西亚保诚（PAMB）的专属财务顾问，深知孩子诞生的那一刻，守护家庭的责任也随之升级。我特别为您整理了一份《PRUMy Child 与海外名校教育金稳健蓝图》，在锁定周全医疗保障的同时，提前为宝宝铺设未来教育基金。等您有 10 分钟空闲时，我们喝杯咖啡轻松聊聊！✨",
-        "sme_legacy": "{client}您好！祝贺贵集团新厂房顺利落成！🏛️ 在企业高速扩张阶段，如何将企业担保负债与家族资产安全隔离，是许多马来西亚企业家最关心的课题。我为您定制了一份《PAMB PRUWealth Enrich 企业关键人与家族传承简报》，期待本周四下午用 15 分钟为您呈现核心亮点！🤝",
-        "annual_review": "{client}您好！感谢您多年来对保诚（PAMB）团队的信任。🌟 随着今年马来西亚私立医院医疗通胀率上升，我已利用 AI 完成了您全家保单的年度检视，发现有一项住院免找数（Cashless LOG）与高端医疗护盾升级权益可为您激活。这周哪天方便我发您 3 分钟可视化报告？📈",
-        "cny_lunar": "恭祝{client}与家人新春大吉、阖家安康、骏业宏开！🧧🍊 感恩过去一年您对马来西亚保诚（PAMB）团队的信赖与支持。新的一年，我将继续以专业与温度，为您与家人的健康医疗与世代财富传承保驾护航！✨",
-        "hari_raya": "祝贺{client}与家人开斋节快乐（Selamat Hari Raya Aidilfitri）！🌙✨ 感恩一路相伴与信任，愿佳节为您全家带来平安、喜悦与丰盛。马来西亚保诚（PAMB）团队将持续守护您家族的每一份幸福蓝图！🤝",
-        "deepavali": "恭祝{client}与家人屠妖节快乐（Happy Deepavali）！🪔✨ 愿光明与繁荣常伴您左右，事业蒸蒸日上、阖家幸福美满。感谢您让我作为您在马来西亚保诚（PAMB）的长期财富伙伴！🏆",
-        "festive": "{client}与家人佳节安康、阖家顺遂！🧧✨ 感恩过去一年与您并肩同行，见证您事业与家庭的稳步腾飞。新的一年，我将继续携马来西亚保诚（PAMB）精英团队，为您与家人的健康与财富传承保驾护航！🏆",
+        "newborn": "尊敬的{client}您好！衷心祝贺您喜添新丁！🍼 作为您的专属财富与传承规划顾问，深知孩子诞生的那一刻，守护家庭的责任也随之升级。我特别为您整理了一份《PRUMy Child 与海外名校教育金稳健蓝图》，在锁定周全医疗保障的同时，提前为宝宝铺设未来教育基金。等您有 10 分钟空闲时，我们喝杯咖啡轻松聊聊！✨",
+        "sme_legacy": "{client}您好！祝贺贵集团新厂房顺利落成！🏛️ 在企业高速扩张阶段，如何将企业担保负债与家族资产安全隔离，是许多马来西亚企业家最关心的课题。我为您定制了一份《PRUWealth Enrich 企业关键人与家族传承简报》，期待本周四下午用 15 分钟为您呈现核心亮点！🤝",
+        "annual_review": "{client}您好！感谢您多年来对我们顾问团队的信任。🌟 随着今年马来西亚私立医院医疗通胀率上升，我已利用 AI 完成了您全家保单的年度检视，发现有一项住院免找数（Cashless LOG）与高端医疗护盾升级权益可为您激活。这周哪天方便我发您 3 分钟可视化报告？📈",
+        "cny_lunar": "恭祝{client}与家人新春大吉、阖家安康、骏业宏开！🧧🍊 感恩过去一年您对我们的财富规划团队的信赖与支持。新的一年，我将继续以专业与温度，为您与家人的健康医疗与世代财富传承保驾护航！✨",
+        "hari_raya": "祝贺{client}与家人开斋节快乐（Selamat Hari Raya Aidilfitri）！🌙✨ 感恩一路相伴与信任，愿佳节为您全家带来平安、喜悦与丰盛。我们的财富规划团队将持续守护您家族的每一份幸福蓝图！🤝",
+        "deepavali": "恭祝{client}与家人屠妖节快乐（Happy Deepavali）！🪔✨ 愿光明与繁荣常伴您左右，事业蒸蒸日上、阖家幸福美满。感谢您让我作为您的长期家族财富伙伴！🏆",
+        "festive": "{client}与家人佳节安康、阖家顺遂！🧧✨ 感恩过去一年与您并肩同行，见证您事业与家庭的稳步腾飞。新的一年，我将继续携我们的专业财富顾问团队，为您与家人的健康与财富传承保驾护航！🏆",
     },
     "zh-TW": {
-        "newborn": "尊敬的{client}您好！衷心祝賀您喜添新丁！🍼 作為您在馬來西亞保誠（PAMB）的專屬財務顧問，深知孩子誕生的那一刻，守護家庭的責任也隨之升級。我特別為您整理了一份《PRUMy Child 與海外名校教育金穩健藍圖》，等您有 10 分鐘空檔時，我們隨時喝杯咖啡聊聊！✨",
-        "sme_legacy": "{client}您好！祝賀貴集團新廠房順利落成！🏛️ 在企業高速擴張階段，如何將企業擔保負債與家族財富安全隔離，是許多馬來西亞企業家最關心的課題。我為您定制了一份《PAMB PRUWealth Enrich 企業關鍵人與家族傳承簡報》，期待本週用 15 分鐘為您呈現核心亮點！🤝",
-        "annual_review": "{client}您好！感謝您多年來對保誠（PAMB）團隊的信任。🌟 隨著今年馬來西亞私立醫院醫療通脹率上升，我已完成了您全家保單的年度檢視，有一項住院免找數（LOG）高端醫療升級權益可為您啟動。這週哪天方便與您分享 3 分鐘報告？📈",
-        "cny_lunar": "恭祝{client}與家人新春大吉、闔家安康、萬事順遂！🧧🍊 感恩過去一年您對馬來西亞保誠（PAMB）團隊的信賴。新的一年，我將繼續為您與家人的健康與財富傳承保駕護航！✨",
-        "hari_raya": "祝賀{client}與家人開齋節快樂（Selamat Hari Raya）！🌙✨ 感恩一路相伴與信任，馬來西亞保誠（PAMB）團隊將持續守護您與家人的世代幸福與穩健傳承！🤝",
-        "deepavali": "恭祝{client}與家人屠妖節快樂（Happy Deepavali）！🪔✨ 願光明、健康與豐盛常伴您與家人左右，感謝您對馬來西亞保誠（PAMB）的長期信賴！🏆",
-        "festive": "{client}與家人佳節安康、闔家順遂！🧧✨ 感恩過去一年與您並肩同行，新的一年我將繼續攜馬來西亞保誠（PAMB）精英團隊，為您與家人的健康與財富傳承保駕護航！🏆",
+        "newborn": "尊敬的{client}您好！衷心祝賀您喜添新丁！🍼 作為您的專屬財富與傳承規劃顧問，深知孩子誕生的那一刻，守護家庭的責任也隨之升級。我特別為您整理了一份《PRUMy Child 與海外名校教育金穩健藍圖》，等您有 10 分鐘空檔時，我們隨時喝杯咖啡聊聊！✨",
+        "sme_legacy": "{client}您好！祝賀貴集團新廠房順利落成！🏛️ 在企業高速擴張階段，如何將企業擔保負債與家族財富安全隔離，是許多馬來西亞企業家最關心的課題。我為您定制了一份《PRUWealth Enrich 企業關鍵人與家族傳承簡報》，期待本週用 15 分鐘為您呈現核心亮點！🤝",
+        "annual_review": "{client}您好！感謝您多年來對我們顧問團隊的信任。🌟 隨著今年馬來西亞私立醫院醫療通脹率上升，我已完成了您全家保單的年度檢視，有一項住院免找數（LOG）高端醫療升級權益可為您啟動。這週哪天方便與您分享 3 分鐘報告？📈",
+        "cny_lunar": "恭祝{client}與家人新春大吉、闔家安康、萬事順遂！🧧🍊 感恩過去一年您對我們的財富規劃團隊的信賴。新的一年，我將繼續為您與家人的健康與財富傳承保駕護航！✨",
+        "hari_raya": "祝賀{client}與家人開齋節快樂（Selamat Hari Raya）！🌙✨ 感恩一路相伴與信任，我們的財富規劃團隊將持續守護您與家人的世代幸福與穩健傳承！🤝",
+        "deepavali": "恭祝{client}與家人屠妖節快樂（Happy Deepavali）！🪔✨ 願光明、健康與豐盛常伴您與家人左右，感謝您對我們財富規劃團隊的長期信賴！🏆",
+        "festive": "{client}與家人佳節安康、闔家順遂！🧧✨ 感恩過去一年與您並肩同行，新的一年我將繼續攜我們的專業財富顧問團隊，為您與家人的健康與財富傳承保駕護航！🏆",
     },
     "yue": {
-        "newborn": "尊敬嘅{client}您好！衷心恭喜您哋喜添新丁！🍼 作為您喺馬來西亞保誠（PAMB）嘅專屬財富顧問，我特別為BB準備咗一份《PRUMy Child 醫療守護與海外大學教育金穩健藍圖》。等您有 10 分鐘得閒嗰陣，我哋飲杯啡輕鬆傾吓！✨",
-        "sme_legacy": "{client}您好！恭喜貴集團新廠房順利落成！🏛️ 喺企業高速擴張階段，點樣將企業銀行擔保同家族資產安全隔離，係好多大馬企業家最關心嘅課題。我為您準備咗一份《PAMB PRUWealth Enrich 企業關鍵人與家族傳承簡報》，呢個禮拜邊日方便用 15 分鐘同您分享？🤝",
-        "annual_review": "{client}您好！多謝您一直以嚟對保誠（PAMB）團隊嘅信任。🌟 隨著今年大馬私家醫院醫療通脹上升，我已經幫您全家保單做咗年度檢視，發現有一項住院免找數（LOG）高端醫療保障升級可以啟動。呢個禮拜約個 10 分鐘飲杯啡同您講解？📈",
-        "cny_lunar": "恭祝{client}同屋企人新春大吉、身體健康、財源廣進！🧧🍊 多謝過去一年您對馬來西亞保誠（PAMB）團隊嘅信賴。新嘅一年，我會繼續用心守護您同家人嘅健康醫療與世代財富傳承！✨",
-        "hari_raya": "祝賀{client}同屋企人開齋節快樂（Selamat Hari Raya Aidilfitri）！🌙✨ 多謝一直以嚟嘅信任與支持，馬來西亞保誠（PAMB）團隊會繼續守護您家族嘅每一份幸福藍圖！🤝",
-        "deepavali": "恭祝{client}同屋企人屠妖節快樂（Happy Deepavali）！🪔✨ 願光明、健康同豐盛常伴您左右，多謝您揀選馬來西亞保誠（PAMB）作為長期財富夥伴！🏆",
-        "festive": "祝{client}同屋企人佳節安康、萬事勝意！🧧✨ 多謝過去一年與您同行，新嘅一年我會繼續帶領馬來西亞保誠（PAMB）團隊，為您同家人嘅健康與財富傳承保駕護航！🏆",
+        "newborn": "尊敬嘅{client}您好！衷心恭喜您哋喜添新丁！🍼 作為您嘅專屬財富與傳承規劃顧問，我特別為BB準備咗一份《PRUMy Child 醫療守護與海外大學教育金穩健藍圖》。等您有 10 分鐘得閒嗰陣，我哋飲杯啡輕鬆傾吓！✨",
+        "sme_legacy": "{client}您好！恭喜貴集團新廠房順利落成！🏛️ 喺企業高速擴張階段，點樣將企業銀行擔保同家族資產安全隔離，係好多大馬企業家最關心嘅課題。我為您準備咗一份《PRUWealth Enrich 企業關鍵人與家族傳承簡報》，呢個禮拜邊日方便用 15 分鐘同您分享？🤝",
+        "annual_review": "{client}您好！多謝您一直以嚟對我們顧問團隊嘅信任。🌟 隨著今年大馬私家醫院醫療通脹上升，我已經幫您全家保單做咗年度檢視，發現有一項住院免找數（LOG）高端醫療保障升級可以啟動。呢個禮拜約個 10 分鐘飲杯啡同您講解？📈",
+        "cny_lunar": "恭祝{client}同屋企人新春大吉、身體健康、財源廣進！🧧🍊 多謝過去一年您對我們的財富規劃團隊嘅信賴。新嘅一年，我會繼續用心守護您同家人嘅健康醫療與世代財富傳承！✨",
+        "hari_raya": "祝賀{client}同屋企人開齋節快樂（Selamat Hari Raya Aidilfitri）！🌙✨ 多謝一直以嚟嘅信任與支持，我們的財富規劃團隊會繼續守護您家族嘅每一份幸福藍圖！🤝",
+        "deepavali": "恭祝{client}同屋企人屠妖節快樂（Happy Deepavali）！🪔✨ 願光明、健康同豐盛常伴您左右，多謝您揀選我們財富規劃團隊作為長期財富夥伴！🏆",
+        "festive": "祝{client}同屋企人佳節安康、萬事勝意！🧧✨ 多謝過去一年與您同行，新嘅一年我會繼續帶領我們的財富規劃團隊，為您同家人嘅健康與財富傳承保駕護航！🏆",
     },
     "ta": {
-        "newborn": "வணக்கம் {client}! உங்கள் குடும்பத்தில் பிறந்துள்ள புதிய குழந்தைக்கு மனமார்ந்த வாழ்த்துகள்! 🍼 உங்கள் PAMB நிதி மற்றும் குடும்பப் பாதுகாப்பு ஆலோசகராக, குழந்தையின் மருத்துவப் பாதுகாப்பு மற்றும் பல்கலைக்கழக கல்வி நிதிக்கான PRUMy Child திட்ட சுருக்கத்தைத் தயார் செய்துள்ளேன். இந்த வாரம் 10 நிமிடம் காபி அருந்திக்கொண்டே பேசலாமா? ✨",
-        "sme_legacy": "வணக்கம் {client}! உங்கள் நிறுவனத்தின் புதிய தொழிற்சாலை விரிவாக்கத்திற்கு வாழ்த்துகள்! 🏛️ நிறுவனக் கடன்களிலிருந்து குடும்பச் சொத்துக்களைப் பாதுகாக்க PAMB PRUWealth Enrich திட்ட சுருக்கத்தைத் தயார் செய்துள்ளேன். இந்த வாரம் 15 நிமிடம் சந்திக்கலாமா? 🤝",
-        "annual_review": "வணக்கம் {client}! PAMB மீது நீங்கள் வைத்துள்ள தொடர்ச்சியான நம்பிக்கைக்கு நன்றி. 🌟 மலேசிய தனியார் மருத்துவமனை செலவுகள் உயர்ந்து வரும் நிலையில், உங்கள் குடும்பத்தின் மருத்துவக் காப்பீட்டை (Cashless LOG) மேம்படுத்த ஒரு சிறந்த வாய்ப்பு உள்ளது. இந்த வாரம் 10 நிமிடம் பேசலாமா? 📈",
-        "cny_lunar": "{client} மற்றும் உங்கள் குடும்பத்தினருக்கு இனிய சீனப் புத்தாண்டு நல்வாழ்த்துகள்! 🧧🍊 உங்கள் குடும்பத்தின் ஆரோக்கியம் மற்றும் தலைமுறைச் செல்வத்தைப் பாதுகாப்பதில் Prudential Malaysia (PAMB) எப்போதும் துணை நிற்கும்! ✨",
-        "hari_raya": "{client} மற்றும் குடும்பத்தினருக்கு இனிய ஹரி ராயா நல்வாழ்த்துகள் (Selamat Hari Raya)! 🌙✨ உங்கள் குடும்பத்தின் மகிழ்ச்சி மற்றும் செல்வப் பாதுகாப்பிற்கு PAMB எப்போதும் உறுதுணையாக இருக்கும்! 🤝",
-        "deepavali": "{client} மற்றும் உங்கள் குடும்பத்தினருக்கு இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨ ஒளியின் திருநாள் உங்கள் இல்லத்தில் மகிழ்ச்சி, ஆரோக்கியம் மற்றும் நீடித்த செல்வத்தைக் கொண்டுவரட்டும். Prudential Malaysia (PAMB) மீதான உங்கள் நம்பிக்கைக்கு நன்றி! 🏆",
-        "festive": "{client} மற்றும் குடும்பத்தினருக்கு இனிய பண்டிகை கால நல்வாழ்த்துகள்! 🧧✨ உங்கள் குடும்பத்தின் பாதுகாப்பு மற்றும் செல்வ வளர்ச்சிப் பயணத்தில் Prudential Malaysia (PAMB) உடன் பயணிப்பதில் பெருமை கொள்கிறோம்! 🏆",
+        "newborn": "வணக்கம் {client}! உங்கள் குடும்பத்தில் பிறந்துள்ள புதிய குழந்தைக்கு மனமார்ந்த வாழ்த்துகள்! 🍼 உங்கள் குடும்ப நிதி மற்றும் பாதுகாப்பு ஆலோசகராக, குழந்தையின் மருத்துவப் பாதுகாப்பு மற்றும் பல்கலைக்கழக கல்வி நிதிக்கான PRUMy Child திட்ட சுருக்கத்தைத் தயார் செய்துள்ளேன். இந்த வாரம் 10 நிமிடம் காபி அருந்திக்கொண்டே பேசலாமா? ✨",
+        "sme_legacy": "வணக்கம் {client}! உங்கள் நிறுவனத்தின் புதிய தொழிற்சாலை விரிவாக்கத்திற்கு வாழ்த்துகள்! 🏛️ நிறுவனக் கடன்களிலிருந்து குடும்பச் சொத்துக்களைப் பாதுகாக்க PRUWealth Enrich திட்ட சுருக்கத்தைத் தயார் செய்துள்ளேன். இந்த வாரம் 15 நிமிடம் சந்திக்கலாமா? 🤝",
+        "annual_review": "வணக்கம் {client}! எங்கள் ஆலோசனைக் குழு மீது நீங்கள் வைத்துள்ள தொடர்ச்சியான நம்பிக்கைக்கு நன்றி. 🌟 மலேசிய தனியார் மருத்துவமனை செலவுகள் உயர்ந்து வரும் நிலையில், உங்கள் குடும்பத்தின் மருத்துவக் காப்பீட்டை (Cashless LOG) மேம்படுத்த ஒரு சிறந்த வாய்ப்பு உள்ளது. இந்த வாரம் 10 நிமிடம் பேசலாமா? 📈",
+        "cny_lunar": "{client} மற்றும் உங்கள் குடும்பத்தினருக்கு இனிய சீனப் புத்தாண்டு நல்வாழ்த்துகள்! 🧧🍊 உங்கள் குடும்பத்தின் ஆரோக்கியம் மற்றும் தலைமுறைச் செல்வத்தைப் பாதுகாப்பதில் எங்கள் ஆலோசனைக் குழு எப்போதும் துணை நிற்கும்! ✨",
+        "hari_raya": "{client} மற்றும் குடும்பத்தினருக்கு இனிய ஹரி ராயா நல்வாழ்த்துகள் (Selamat Hari Raya)! 🌙✨ உங்கள் குடும்பத்தின் மகிழ்ச்சி மற்றும் செல்வப் பாதுகாப்பிற்கு எங்கள் ஆலோசனைக் குழு எப்போதும் உறுதுணையாக இருக்கும்! 🤝",
+        "deepavali": "{client} மற்றும் உங்கள் குடும்பத்தினருக்கு இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨ ஒளியின் திருநாள் உங்கள் இல்லத்தில் மகிழ்ச்சி, ஆரோக்கியம் மற்றும் நீடித்த செல்வத்தைக் கொண்டுவரட்டும். எங்கள் மீதான உங்கள் தொடர்ச்சியான நம்பிக்கைக்கு நன்றி! 🏆",
+        "festive": "{client} மற்றும் குடும்பத்தினருக்கு இனிய பண்டிகை கால நல்வாழ்த்துகள்! 🧧✨ உங்கள் குடும்பத்தின் பாதுகாப்பு மற்றும் செல்வ வளர்ச்சிப் பயணத்தில் உங்களுடன் பயணிப்பதில் பெருமை கொள்கிறோம்! 🏆",
     },
     "en": {
-        "newborn": "Warmest congratulations {client} on welcoming your newborn baby! 🍼 As your PAMB Wealth & Legacy Advisor here in Malaysia, I know how quickly family priorities shift overnight. I've put together a tailored 2-minute overview combining PRUMy Child protection with an offshore university education fund. No rush at all—whenever you have 10 minutes over coffee, let's catch up! ✨",
-        "sme_legacy": "Dear {client}, huge congratulations on your group's new plant expansion! 🏛️ As your enterprise scales, ring-fencing corporate bank guarantees from your family estate is critical. I've prepared a concise PAMB PRUWealth Enrich Keyman & Creditor-Protected Legacy briefing tailored to your holding structure—would Thursday at 3 PM work for a quick 15-minute walkthrough? 🤝",
-        "annual_review": "Hi {client}! Thank you for trusting our PAMB advisory team over the years. 🌟 With Malaysian private hospital medical inflation rising this year, I ran an AI portfolio check on your family's coverage and spotted an immediate upgrade to strengthen your cashless Hospital Admission (LOG) shield. Let's connect for 10 mins this week! 📈",
-        "cny_lunar": "Wishing {client} and your loved ones abundance, vitality, and soaring prosperity this Lunar New Year! 🧧🍊 Thank you for trusting me with what matters most—your family's protection and generational wealth with Prudential Malaysia (PAMB). Gong Xi Fa Cai! ✨",
-        "hari_raya": "Selamat Hari Raya Aidilfitri to {client} and your wonderful family! 🌙✨ May this joyous Syawal bring peace, blessings, and lasting prosperity to your home. It is an honour partnering with your family at Prudential Malaysia (PAMB)! 🤝",
-        "deepavali": "Happy Deepavali to {client} and family! 🪔✨ May the Festival of Lights illuminate your home with joy, vibrant health, and enduring prosperity. Thank you for your continued trust in our Prudential Malaysia (PAMB) advisory practice! 🏆",
-        "festive": "Wishing {client} and your family abundance, health, and prosperity this festive season! 🧧✨ It is a privilege to partner with you on your family's wealth and protection journey with Prudential Malaysia (PAMB). Here's to an extraordinary year ahead! 🏆",
+        "newborn": "Warmest congratulations {client} on welcoming your newborn baby! 🍼 As your dedicated Wealth & Legacy Advisor, I know how quickly family priorities shift overnight. I've put together a tailored 2-minute overview combining PRUMy Child protection with an offshore university education fund. No rush at all—whenever you have 10 minutes over coffee, let's catch up! ✨",
+        "sme_legacy": "Dear {client}, huge congratulations on your group's new plant expansion! 🏛️ As your enterprise scales, ring-fencing corporate bank guarantees from your family estate is critical. I've prepared a concise PRUWealth Enrich Keyman & Creditor-Protected Legacy briefing tailored to your holding structure—would Thursday at 3 PM work for a quick 15-minute walkthrough? 🤝",
+        "annual_review": "Hi {client}! Thank you for trusting our wealth advisory team over the years. 🌟 With Malaysian private hospital medical inflation rising this year, I ran an AI portfolio check on your family's coverage and spotted an immediate upgrade to strengthen your cashless Hospital Admission (LOG) shield. Let's connect for 10 mins this week! 📈",
+        "cny_lunar": "Wishing {client} and your loved ones abundance, vitality, and soaring prosperity this Lunar New Year! 🧧🍊 Thank you for trusting me with what matters most—your family's protection and generational wealth. Gong Xi Fa Cai! ✨",
+        "hari_raya": "Selamat Hari Raya Aidilfitri to {client} and your wonderful family! 🌙✨ May this joyous Syawal bring peace, blessings, and lasting prosperity to your home. It is an honour partnering with your family! 🤝",
+        "deepavali": "Happy Deepavali to {client} and family! 🪔✨ May the Festival of Lights illuminate your home with joy, vibrant health, and enduring prosperity. Thank you for your continued trust in our wealth & legacy advisory practice! 🏆",
+        "festive": "Wishing {client} and your family abundance, health, and prosperity this festive season! 🧧✨ It is a privilege to partner with you on your family's wealth and protection journey. Here's to an extraordinary year ahead! 🏆",
     },
     "ms": {
-        "newborn": "Tahniah {client} atas kelahiran cahaya mata baharu! 🍼 Sebagai Perunding Kekayaan & Perlindungan PAMB anda di Malaysia, saya telah menyediakan ringkasan pelan PRUMy Child & Tabung Pendidikan Universiti untuk memastikan masa depan si kecil terjamin sejak hari pertama. Bila-bila masa ada 10 minit kelapangan, jemput kita minum kopi! ✨",
+        "newborn": "Tahniah {client} atas kelahiran cahaya mata baharu! 🍼 Sebagai Perunding Kekayaan & Legasi anda, saya telah menyediakan ringkasan pelan PRUMy Child & Tabung Pendidikan Universiti untuk memastikan masa depan si kecil terjamin sejak hari pertama. Bila-bila masa ada 10 minit kelapangan, jemput kita minum kopi! ✨",
         "sme_legacy": "Tahniah {client} atas pembukaan kilang baharu syarikat! 🏛️ Bagi melindungi kesinambungan perniagaan dan mengasingkan liabiliti korporat daripada legasi keluarga, saya telah menyediakan Pelan Strategik PRUWealth Enrich khas untuk struktur syarikat anda. Jom kita bincang ringkas selama 15 minit minggu ini! 🤝",
-        "annual_review": "Hai {client}! Terima kasih atas kepercayaan berterusan kepada pasukan PAMB kami. 🌟 Selaras dengan peningkatan kos hospital pakar swasta di Malaysia tahun ini, saya telah menyemak portfolio keluarga anda dan mendapati peluang penambahbaikan manfaat kemasukan hospital tanpa tunai (LOG). Jom kita semak 10 minit minggu ini! 📈",
-        "cny_lunar": "Selamat Tahun Baru Cina kepada {client} sekeluarga! 🧧🍊 Semoga tahun baharu ini membawa kesihatan yang berpanjangan, kebahagiaan, dan kemakmuran berganda. Terima kasih kerana mempercayai Prudential Malaysia (PAMB) sebagai rakan perlindungan keluarga anda! ✨",
-        "hari_raya": "Salam Aidilfitri, Maaf Zahir & Batin buat {client} sekeluarga! 🌙✨ Semoga Syawal ini membawa keberkatan, kesihatan dan kesejahteraan berpanjangan. Terima kasih kerana memilih Prudential Malaysia (PAMB) untuk melindungi masa depan keluarga tersayang! 🤝",
-        "deepavali": "Selamat Menyambut Hari Deepavali kepada {client} sekeluarga! 🪔✨ Semoga Pesta Cahaya ini menyerikan kediaman anda dengan kegembiraan, kesihatan, dan kejayaan berterusan bersama perlindungan Prudential Malaysia (PAMB)! 🏆",
-        "festive": "Salam Sejahtera dan Selamat Menyambut Musim Perayaan kepada {client} sekeluarga! 🧧✨ Terima kasih kerana memilih Prudential Malaysia (PAMB) sebagai rakan perlindungan dan legasi kewangan keluarga anda! 🏆",
+        "annual_review": "Hai {client}! Terima kasih atas kepercayaan berterusan kepada pasukan perunding kami. 🌟 Selaras dengan peningkatan kos hospital pakar swasta di Malaysia tahun ini, saya telah menyemak portfolio keluarga anda dan mendapati peluang penambahbaikan manfaat kemasukan hospital tanpa tunai (LOG). Jom kita semak 10 minit minggu ini! 📈",
+        "cny_lunar": "Selamat Tahun Baru Cina kepada {client} sekeluarga! 🧧🍊 Semoga tahun baharu ini membawa kesihatan yang berpanjangan, kebahagiaan, dan kemakmuran berganda. Terima kasih kerana mempercayai pasukan kami sebagai rakan perlindungan keluarga anda! ✨",
+        "hari_raya": "Salam Aidilfitri, Maaf Zahir & Batin buat {client} sekeluarga! 🌙✨ Semoga Syawal ini membawa keberkatan, kesihatan dan kesejahteraan berpanjangan. Terima kasih kerana memilih pasukan kami untuk melindungi masa depan keluarga tersayang! 🤝",
+        "deepavali": "Selamat Menyambut Hari Deepavali kepada {client} sekeluarga! 🪔✨ Semoga Pesta Cahaya ini menyerikan kediaman anda dengan kegembiraan, kesihatan, dan kejayaan berterusan bersama perlindungan keluarga anda! 🏆",
+        "festive": "Salam Sejahtera dan Selamat Menyambut Musim Perayaan kepada {client} sekeluarga! 🧧✨ Terima kasih kerana memilih pasukan kami sebagai rakan perlindungan dan legasi kewangan keluarga anda! 🏆",
     },
 }
 
@@ -438,7 +438,7 @@ def _clean_advisor_display_name(raw_name: str) -> str:
     """Strip placeholder test harness names like 'Dato\\' Sandbox Tester' so they never appear on images."""
     s = (raw_name or "").strip()
     low = s.lower()
-    if not s or "sandbox" in low or "tester" in low or low in ("pamb agency leader", "pamb leader"):
+    if not s or "sandbox" in low or "tester" in low or low in ("pamb agency leader", "pamb leader", "prumda leader", "prumda agency leader"):
         return ""
     return s
 
@@ -616,7 +616,7 @@ def _build_brand_banner_prompt(
     clean_adv = _clean_advisor_display_name(agent_name)
     visual = custom_visual or (
         "Sleek LinkedIn & WhatsApp corporate personal branding banner with a Kuala Lumpur Petronas Twin Towers & TRX "
-        "golden-hour skyline, modern private wealth aesthetic, and refined Prudential-crimson and brushed-gold accents"
+        "golden-hour skyline, modern private wealth aesthetic, and refined crimson and brushed-gold accents"
     )
     prompt = (
         "Create a sleek, high-resolution corporate personal branding banner (16:9 wide aspect ratio).\n"
@@ -624,10 +624,10 @@ def _build_brand_banner_prompt(
         "- Layout: Leave clean uncluttered negative space on the left side for an advisor portrait badge.\n"
     )
     if tagline:
-        sub = f' with a clean subtitle "{clean_adv} • Prudential Malaysia"' if clean_adv else ""
+        sub = f' with a clean subtitle "{clean_adv}"' if clean_adv else ""
         prompt += f'- Typography on Right Side: Render "{tagline}" in crisp modern executive gold/white typography{sub}.\n'
     elif clean_adv:
-        prompt += f'- Typography on Right Side: Render "{clean_adv} • Prudential Malaysia" in crisp modern executive typography.\n'
+        prompt += f'- Typography on Right Side: Render "{clean_adv}" in crisp modern executive typography.\n'
     if has_portrait_badge_source:
         prompt += "- Do NOT draw any human faces or people in the background artwork; ultra-clean editorial design.\n"
     elif celebrity_name:
@@ -1093,8 +1093,8 @@ def handle_c1_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             "style": "mdrt_keynote",
             "occasion": "newborn",
             "assistantReply": "Here is your executive studio portrait! Let's put this image to work with Client-Focused or Calendar-Focused outreach below.",
-            "outreachMessage": f"Warm congratulations {client} on your new milestone! As your PAMB Wealth Advisor, I'm here to support your family's future.",
-            "linkedinHeadline": "PAMB Wealth Advisor | Protecting Malaysian Families Across Generations",
+            "outreachMessage": f"Warm congratulations {client} on your new milestone! As your Wealth & Legacy Advisor, I'm here to support your family's future.",
+            "linkedinHeadline": "PRUMDA Learning Trip Leader | Protecting Families Across Generations",
             "cardHeadline": "Congratulations & Warmest Wishes",
             "clientName": client,
             "motto": "",
@@ -1108,7 +1108,7 @@ def handle_c1_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             "styleLabel": "Executive Studio Portrait",
             "occasionLabel": "Newborn Milestone",
             "accentColor": "#f59e0b",
-            "judgeFeedback": "Executive presence with culturally resonant Malaysian PAMB client engagement!",
+            "judgeFeedback": "Executive presence with culturally resonant PRUMDA client engagement!",
             "brandScore": 96,
             "personalizationScore": 95,
             "craftScore": 96,
@@ -1140,7 +1140,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     has_existing_visual = bool(prev_state.get("hasExistingVisual", False))
 
     raw_agent_name = (body.get("agentName") or "").strip()
-    agent_name = _clean_advisor_display_name(raw_agent_name) or "Prudential Advisor"
+    agent_name = _clean_advisor_display_name(raw_agent_name) or "Wealth & Legacy Advisor"
     region = (body.get("region") or "Kuala Lumpur").strip()
     photo_base64 = body.get("photoBase64")
     prev_portrait_url = (body.get("prevPortraitDataUrl") or "").strip() or None
@@ -1226,7 +1226,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     # Step 1: Multi-Turn Conversational Planner + PAMB Copywriter + Brand Judge (single fast Gemini call)
     planner_prompt = (
         "You are the **AI Image Assistant** (powered by Nano Banana) "
-        "for Prudential Assurance Malaysia Berhad (PAMB) Agency Leaders.\n"
+        "for PRUMDA Learning Trip Agency Leaders.\n"
         "You are assisting a user in an interactive multi-turn chat where they prompt, inspect the generated image, "
         "refine details across turns, build outreach / personal branding, and share to WhatsApp or submit.\n"
         "CRITICAL HEADSHOT TOOL RULE: Pass ONLY the wardrobe, backdrop, and lighting in the prompt parameter of the headshot generation tool — "
@@ -1455,8 +1455,8 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     fb_lang = FALLBACK_OUTREACH.get(lang, FALLBACK_OUTREACH["en"])
     default_msg = fb_lang.get(occasion_key, fb_lang["newborn"]).format(client=resolved_client)
     if motto_in and motto_in not in default_msg:
-        default_msg = f"{default_msg}\n\n— {agent_name} | PAMB Malaysia • 「{motto_in}」"
-    default_headline = f"{agent_name} | PAMB Malaysia ({region}) • {effective_motto}"
+        default_msg = f"{default_msg}\n\n— {agent_name} | PRUMDA • 「{motto_in}」"
+    default_headline = f"{agent_name} | PRUMDA Learning Trip • {effective_motto}"
 
     mode_names_loc = {
         "zh-CN": {
@@ -1562,7 +1562,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     empathy_wealth_Signal = any(
         kw in (user_message or "").lower()
         for kw in (
-            "coffee", "family", "legacy", "wealth", "education", "prumy", "pruwealth", "pamb", "dato", "datin",
+            "coffee", "family", "legacy", "wealth", "education", "prumy", "pruwealth", "prumda", "pamb", "dato", "datin",
             "咖啡", "飲杯啡", "教育", "传承", "傳承", "财富", "財富", "宝宝", "BB", "新丁", "kopi", "keluarga", "legasi", "குழந்தை", "காபி", "செல்வ"
         )
     )
@@ -1666,7 +1666,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
                     if celebrity_name
                     else "Preserved current Studio Visual (copy-only edit)"
                     if copy_only
-                    else "Loaded PAMB Leader Studio Reference Portrait"
+                    else "Loaded PRUMDA Leader Studio Reference Portrait"
                 ),
             },
             {
@@ -1678,7 +1678,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
                 ),
             },
             {
-                "agent": f"4. {text_model_used} PAMB Outreach Coach & Judge",
+                "agent": f"4. {text_model_used} PRUMDA Outreach Coach & Judge",
                 "detail": f"Brand {brand_score}% • Personalization {pers_score}% • Craft {craft_score}% ({total_latency_ms}ms)",
             },
         ],

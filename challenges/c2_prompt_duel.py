@@ -92,7 +92,7 @@ GUIDE = [
         "key": "role",
         "label": "Role",
         "tip": "Tell Gemini who it is. A clear expert role raises the quality of every slide.",
-        "template": "Act as a senior Prudential wealth & legacy planning consultant preparing a client pre-pitch brief.",
+        "template": "Act as a senior PRUMDA wealth & legacy planning consultant preparing a client pre-pitch brief.",
     },
     {
         "key": "context",
@@ -155,8 +155,8 @@ MARKETS = {
     "MY": {
         "code": "MY",
         "flag": "🇲🇾",
-        "company": "Prudential Assurance Malaysia Berhad (PAMB)",
-        "short_name": "PAMB",
+        "company": "PRUMDA Learning Trip (Malaysia)",
+        "short_name": "PRUMDA",
         "currency": "RM",
         "regulator": "Bank Negara Malaysia (BNM)",
         "compliance_rules": [
@@ -419,7 +419,7 @@ PRETRANSLATED_MY = {
                 "key": "role",
                 "label": "角色 (Role)",
                 "tip": "告诉 Gemini 它的专业身份。清晰的资深顾问角色能全面提升每一页简报的专业度。",
-                "template": "请扮演一位马来西亚保诚 (PAMB) 资深财富与家族传承规划顾问，正在为高净值客户准备首次会面的战前提案简报 (Pre-Pitch Brief)。",
+                "template": "请扮演一位 PRUMDA 资深财富与家族传承规划顾问，正在为高净值客户准备首次会面的战前提案简报 (Pre-Pitch Brief)。",
             },
             {
                 "key": "context",
@@ -547,7 +547,7 @@ PRETRANSLATED_MY = {
                 "key": "role",
                 "label": "角色 (Role)",
                 "tip": "話俾 Gemini 知佢嘅專業身份。清晰嘅資深顧問角色可以令每一頁簡報都更有說服力。",
-                "template": "請扮演一位馬來西亞保誠 (PAMB) 資深財富與家族傳承規劃顧問，為高淨值客戶準備首次會面嘅戰前提案簡報 (Pre-Pitch Brief)。",
+                "template": "請扮演一位 PRUMDA 資深財富與家族傳承規劃顧問，為高淨值客戶準備首次會面嘅戰前提案簡報 (Pre-Pitch Brief)。",
             },
             {
                 "key": "context",
@@ -675,7 +675,7 @@ PRETRANSLATED_MY = {
                 "key": "role",
                 "label": "Peranan (Role)",
                 "tip": "Beritahu Gemini peranannya. Peranan pakar yang jelas meningkatkan kualiti setiap slaid.",
-                "template": "Bertindak sebagai perunding kanan perancangan kekayaan & legasi Prudential yang menyediakan ringkasan pra-pembentangan pelanggan.",
+                "template": "Bertindak sebagai perunding kanan perancangan kekayaan & legasi PRUMDA yang menyediakan ringkasan pra-pembentangan pelanggan.",
             },
             {
                 "key": "context",
@@ -803,7 +803,7 @@ PRETRANSLATED_MY = {
                 "key": "role",
                 "label": "பங்கு (Role)",
                 "tip": "Gemini-க்கு அதன் நிபுணர் பாத்திரத்தைத் தெளிவாகக் கூறுங்கள். இது ஒவ்வொரு ஸ்லைடின் தரத்தையும் உயர்த்தும்.",
-                "template": "வாடிக்கையாளர் சந்திப்புக்கு முன் சுருக்க அறிக்கையைத் தயாரிக்கும் மூத்த புருடென்ஷியல் (Prudential) செல்வ மற்றும் மரபுத் திட்டமிடல் ஆலோசகராகச் செயல்படுங்கள்.",
+                "template": "வாடிக்கையாளர் சந்திப்புக்கு முன் சுருக்க அறிக்கையைத் தயாரிக்கும் மூத்த PRUMDA செல்வ மற்றும் மரபுத் திட்டமிடல் ஆலோசகராகச் செயல்படுங்கள்.",
             },
             {
                 "key": "context",
@@ -1583,7 +1583,7 @@ def _judge_prompt(deck: dict, prompt: str, market: str, lang: str) -> str:
         f"Full target JSON:\n{_deck_text(target)}\n\n"
         f"PARTICIPANT'S FINAL PROMPT:\n\"\"\"{prompt}\"\"\"\n\n"
         f"PARTICIPANT'S DECK (generated from that prompt):\n{_deck_text(deck)}\n\n"
-        "You are an encouraging, fair MDRT Executive Coach judging an AI deck-building challenge for PAMB Agency Leaders. "
+        "You are an encouraging, fair MDRT Executive Coach judging an AI deck-building challenge for PRUMDA Learning Trip Agency Leaders. "
         "These leaders are champions of Wealth Planning, Customer Empathy, and Creative relationship-building (not technical prompt engineers). "
         "Reward decks and prompts that demonstrate strong Wealth Planning insight (estate liquidity gap math, Hibah/creditor ring-fencing), "
         "deep Customer Empathy (protecting family dignity, clinic continuity, spouse & children harmony), and collaborative co-advisory next steps.\n"
@@ -2023,7 +2023,7 @@ def handle_c2_target_pptx(market: str, lang: str, get_access_token_fn, project_i
 def handle_c2_ai(body: dict, call_gemini_fn, lang_names: dict) -> dict:
     lang = body.get("language", "zh-CN")
     lang_label = lang_names.get(lang, "English")
-    persona = body.get("persona", "Senior PAMB Wealth & Legacy Planning Consultant")
+    persona = body.get("persona", "Senior PRUMDA Wealth & Legacy Planning Consultant")
     context = body.get("context", "Datin Sharifah Aleya (52, Founder of 6 specialist clinics in Klang Valley, RM 28M net worth)")
     task = body.get("task", "Create a 3-slide pre-pitch deck covering Client Snapshot, Estate Liquidity Gap, and Shariah-compliant Takaful Strategy")
     fmt = body.get("format", "3 structured slides with KPI cards, bar chart, strategy table, and speaker notes")

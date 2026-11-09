@@ -10,9 +10,9 @@ import json
 
 CANVAS_BLUEPRINTS = {
     "mdrt_sprint": {
-        "title": "PAMB 90-Day 'Road to MDRT' Agency Sprint & AI Co-Pilot Playbook",
+        "title": "PRUMDA 90-Day 'Road to MDRT' Agency Sprint & AI Co-Pilot Playbook",
         "subtitle": "Co-Created Live in Gemini Canvas • Ready for Malaysia Agency Rollout",
-        "executiveSummary": "A structured 12-week transformation program equipping PAMB agency leaders and rookies with daily AI-powered morning huddles, HNW pre-pitch dossiers, and automated follow-up workflows.",
+        "executiveSummary": "A structured 12-week transformation program equipping PRUMDA agency leaders and rookies with daily AI-powered morning huddles, HNW pre-pitch dossiers, and automated follow-up workflows.",
         "kpis": [
             {"metric": "Weekly HNW Pre-Pitch Dossiers / Agent", "baseline": "1.5 / week", "target": "8.0 / week (5.3x)"},
             {"metric": "Proposal Turnaround Time", "baseline": "3 Days", "target": "12 Minutes"},
@@ -38,9 +38,9 @@ CANVAS_BLUEPRINTS = {
         "huddleScript": "「各位夥伴早安！今天我們的 15 分鐘晨會聚焦一個核心動作：打開 Gemini 選出 3 位今年有新生兒或企業擴張的客戶，用 4 維提示詞生成專屬問候，中午 12 點前完成發送！」",
     },
     "genz_recruit": {
-        "title": "PAMB 'Next-Gen AI Wealth Entrepreneur' Recruitment Campaign",
+        "title": "PRUMDA 'Next-Gen AI Wealth Entrepreneur' Recruitment Campaign",
         "subtitle": "Conceptual Idea → Realized Interactive Recruitment Blueprint",
-        "executiveSummary": "Positions PAMB Malaysia not as traditional insurance sales, but as an AI-augmented Wealth & Legacy Advisory career for ambitious 23–32 year old graduates and corporate switchers.",
+        "executiveSummary": "Positions PRUMDA Learning Trip not as traditional insurance sales, but as an AI-augmented Wealth & Legacy Advisory career for ambitious 23–32 year old graduates and corporate switchers.",
         "kpis": [
             {"metric": "Candidate Discovery-to-Interview Conversion", "baseline": "18%", "target": "52%"},
             {"metric": "New Recruit First-30-Day Confidence Score", "baseline": "61%", "target": "94%"},
@@ -63,7 +63,7 @@ CANVAS_BLUEPRINTS = {
                 "deliverable": "New recruits practice 10 simulated pitches with Gemini Live before meeting their first real prospect.",
             },
         ],
-        "huddleScript": "「加入馬來西亞保誠（PAMB），你不是一個人在戰鬥——從第一天起，你就擁有 Google Gemini 頂尖 AI 智囊團作為你的 24 小時隨身導師！」",
+        "huddleScript": "「加入PRUMDA Learning Trip，你不是一個人在戰鬥——從第一天起，你就擁有 Google Gemini 頂尖 AI 智囊團作為你的 24 小時隨身導師！」",
     },
 }
 
@@ -71,7 +71,7 @@ CANVAS_BLUEPRINTS = {
 def handle_canvas_ai(body: dict, call_vertex_fn, lang_names: dict) -> dict:
     seed_key = body.get("seedKey", "mdrt_sprint")
     refinement = (body.get("refinement") or "").strip()
-    winner_name = (body.get("winnerName") or "PAMB Top Challenger").strip()
+    winner_name = (body.get("winnerName") or "PRUMDA Top Challenger").strip()
     winner_idea = (body.get("winnerIdea") or "").strip()
     lang = body.get("language", "zh-CN")
     lang_full = lang_names.get(lang, "Simplified Chinese (Mandarin)")
@@ -79,7 +79,7 @@ def handle_canvas_ai(body: dict, call_vertex_fn, lang_names: dict) -> dict:
     bp = dict(CANVAS_BLUEPRINTS.get(seed_key, CANVAS_BLUEPRINTS["mdrt_sprint"]))
 
     prompt = (
-        f"You are Gemini Canvas Co-Creator for Prudential Malaysia (PAMB) Agency Leaders.\n"
+        f"You are Gemini Canvas Co-Creator for PRUMDA Learning Trip Agency Leaders.\n"
         f"Base Blueprint: {bp['title']}\n"
         f"Inspired by participant {winner_name}'s idea: {winner_idea if winner_idea else bp['executiveSummary']}\n"
         f"Requested Live Stage Refinement: {refinement if refinement else 'Make it actionable for Malaysian Agency Leaders in Mandarin & English'}\n"
@@ -124,7 +124,7 @@ def handle_canvas_ai(body: dict, call_vertex_fn, lang_names: dict) -> dict:
 
 
 def handle_coach_ai(body: dict, call_vertex_fn, lang_names: dict) -> dict:
-    speaker_name = (body.get("speakerName") or "PAMB Executive Speaker").strip()
+    speaker_name = (body.get("speakerName") or "PRUMDA Executive Speaker").strip()
     topic = (body.get("topic") or "MDRT Agency Morning Rally").strip()
     transcript = (body.get("transcript") or "").strip()
     duration_sec = int(body.get("durationSec") or 30)
@@ -132,11 +132,11 @@ def handle_coach_ai(body: dict, call_vertex_fn, lang_names: dict) -> dict:
     lang_full = lang_names.get(lang, "Simplified Chinese (Mandarin)")
 
     prompt = (
-        f"You are 'The Public Speaker' — a Multimodal AI Executive Speech & Presence Coach for Prudential Malaysia (PAMB) Agency Leaders.\n"
+        f"You are 'The Public Speaker' — a Multimodal AI Executive Speech & Presence Coach for PRUMDA Learning Trip Agency Leaders.\n"
         f"Speaker on Stage: {speaker_name}\n"
         f"Pitch Topic: {topic}\n"
         f"Duration: {duration_sec} seconds\n"
-        f"Spoken Transcript: {transcript if transcript else 'Delivered an inspiring bilingual keynote rallying the PAMB agency team to embrace AI and protect Malaysian families.'}\n\n"
+        f"Spoken Transcript: {transcript if transcript else 'Delivered an inspiring bilingual keynote rallying the PRUMDA agency team to embrace AI and protect Malaysian families.'}\n\n"
         f"Respond strictly in valid JSON with keys (text written in {lang_full}):\n"
         f"- \"presenceScore\": integer 90-99 (Eye contact, posture, executive command)\n"
         f"- \"vocalScore\": integer 89-98 (Pacing, vocal conviction, pause control)\n"

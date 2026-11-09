@@ -100,7 +100,7 @@ def ensure_repo_exists(token: str, repo: str):
         {
             "name": repo,
             "description": (
-                "Prudential Malaysia (PAMB) 11 Nov Agency AI Bootcamp Arena — "
+                "PRUMDA Learning Trip AI Arena — "
                 "Multi-Agent Challenge Platform (C1 Executive Image & Outreach, C2 R.C.T.F.C. Prompt Duel, C3 Pre-Pitch War Room)"
             ),
             "private": False,
@@ -231,6 +231,6 @@ if __name__ == "__main__":
     msg = (
         sys.argv[2]
         if len(sys.argv) > 2
-        else "PAMB 11 Nov Agency AI Bootcamp Arena — Full C1, C2 & C3 Codebase"
+        else "PRUMDA Learning Trip — Updated Onboarding & Branding"
     )
     push_all_files(token, repo_name, msg)

@@ -186,7 +186,7 @@ function ChallengeStageBriefBoard({
     "3": {
       badge: "🎯 CHALLENGE 3 LIVE (14:35 – 15:05)",
       title: "Drive Faster Pipeline, Sharpen Your Strategic Proposal — Pre-Pitch",
-      subtitle: "Existing Customer X Life-Event Scenario • PAMB Malaysia Brochure Match • AI Greeting Card & First-Touch Outreach",
+      subtitle: "Existing Customer X Life-Event Scenario • Official Plan Match • AI Greeting Card & First-Touch Outreach",
       steps: [
         {
           num: "1",
@@ -197,8 +197,8 @@ function ChallengeStageBriefBoard({
         {
           num: "2",
           icon: "🇲🇾",
-          title: "Match Official PAMB Malaysia Plans",
-          desc: "Select the right PAMB brochure solution (PRUAll Care, PRUMillion Med Active 2.0, PRUValue Med, PRUMy Child Plus, PRUWith You Plus, PRULady/PRUMan, PRUWealth Enrich 2.0, PRUElite Flex).",
+          title: "Match Official Malaysia Plans",
+          desc: "Select the right brochure solution (PRUAll Care, PRUMillion Med Active 2.0, PRUValue Med, PRUMy Child Plus, PRUWith You Plus, PRULady/PRUMan, PRUWealth Enrich 2.0, PRUElite Flex).",
         },
         {
           num: "3",
@@ -352,7 +352,7 @@ function LobbyFloatingJoinersStage({ participants }) {
       <div className="flex items-center justify-between gap-3 z-10 border-b border-slate-200 pb-3.5 shrink-0">
         <div>
           <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-            ✨ Live Joining Arena — PAMB Malaysia Leaders
+            ✨ Live Joining Arena — PRUMDA Learning Trip
           </h3>
           <p className="text-xs text-slate-500 font-medium">
             Newer joiners float in &amp; replace older cards • Briefs for Challenge 1, 2 &amp; 3 unlocked on phones
@@ -403,7 +403,7 @@ function LobbyFloatingJoinersStage({ participants }) {
                       )}
                     </div>
                     <div className="text-xs text-slate-500 font-medium truncate mt-0.5">
-                      {p.regionBadge}
+                      ✨ PRUMDA Learning Trip
                     </div>
                   </div>
                 </div>
@@ -839,7 +839,7 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
             </div>
             <div className="flex items-center gap-2.5">
               <span className="font-extrabold text-base sm:text-lg text-slate-900">
-                Prudential Malaysia (PAMB) AI Bootcamp
+                PRUMDA Learning Trip
               </span>
               <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-red-50 text-[#ed1b2e] border border-red-200">
                 {phaseLabels[phase] || phase}
@@ -953,17 +953,17 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                   📡 SCAN QR TO JOIN
                 </div>
                 <h2 className="text-2xl font-extrabold text-slate-900">
-                  Select Your Name &amp; Language
+                  Select Your Language &amp; Name
                 </h2>
                 <p className="text-xs text-slate-500 font-semibold">
-                  简体中文 • 繁體中文 • English • Bahasa Melayu
+                  English • 华语 • 廣東話 • Bahasa Melayu • தமிழ்
                 </p>
               </div>
 
               <div className="space-y-2">
                 <img
                   src={qrImageUrl}
-                  alt="Scan to join PAMB Arena"
+                  alt="Scan to join PRUMDA Learning Trip"
                   className="w-52 h-52 mx-auto rounded-2xl border-4 border-[#ed1b2e]/20 shadow-lg bg-white p-1"
                 />
                 <div className="text-xs font-mono font-extrabold text-[#ed1b2e] break-all">
@@ -1104,7 +1104,7 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                           🇲🇾 {item.participant.name}
                         </div>
                         <div className="text-xs text-slate-500 font-medium">
-                          {item.participant.regionBadge} • {item.submission?.styleBadge}
+                          {item.submission?.styleBadge || "✨ PRUMDA Learning Trip"}
                         </div>
                       </div>
                     </div>
@@ -1242,7 +1242,7 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                           🇲🇾 {item.participant.name}
                         </div>
                         <div className="text-xs text-slate-500 font-medium">
-                          {item.participant.regionBadge} • {item.submission?.title}
+                          {item.submission?.title || "✨ PRUMDA Learning Trip"}
                         </div>
                       </div>
                     </div>
@@ -1411,7 +1411,7 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                         🇲🇾 {item.participant.name}
                       </div>
                       <div className="text-xs text-slate-500 font-medium">
-                        {item.participant.regionBadge} • {item.submission?.styleBadge}
+                        {item.submission?.styleBadge || item.submission?.title || "✨ PRUMDA Learning Trip"}
                       </div>
                     </div>
                   </div>
@@ -1438,10 +1438,10 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
           <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-3xl p-8 text-center space-y-6 shadow-2xl">
             <div className="space-y-1">
               <div className="text-xs font-extrabold uppercase tracking-widest text-[#ed1b2e]">
-                🏆 11 NOVEMBER PRUDENTIAL MALAYSIA (PAMB) AI BOOTCAMP • COMBINED TOP 3 PODIUM
+                🏆 PRUMDA LEARNING TRIP • COMBINED TOP 3 PODIUM
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900">
-                🎉 Congratulations, PAMB Malaysia 10x AI Champions! 🎉
+                🎉 Congratulations, PRUMDA Learning Trip Champions! 🎉
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 font-medium">
                 Combined Score across Challenge 1 + Challenge 2 + Challenge 3 (Max 300 pts)
@@ -1466,9 +1466,6 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                   <div className="text-2xl font-extrabold text-slate-900">
                     🇲🇾 {finalCombinedRanked[1].participant.name}
                   </div>
-                  <div className="text-xs text-slate-500 font-medium">
-                    {finalCombinedRanked[1].participant.regionBadge}
-                  </div>
                   <div className="text-4xl font-extrabold text-slate-900">
                     {finalCombinedRanked[1].combined}{" "}
                     <span className="text-xs text-slate-500 font-normal">pts</span>
@@ -1491,13 +1488,10 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                 >
                   <div className="text-5xl animate-bounce">👑🥇</div>
                   <div className="px-3.5 py-1 rounded-full bg-[#ed1b2e] text-white font-extrabold text-xs inline-block shadow-sm">
-                    #1 GRAND CHAMPION • PAMB MALAYSIA
+                    #1 GRAND CHAMPION • PRUMDA LEARNING TRIP
                   </div>
                   <div className="text-3xl font-extrabold text-slate-900">
                     🇲🇾 {finalCombinedRanked[0].participant.name}
-                  </div>
-                  <div className="text-xs text-[#ed1b2e] font-extrabold">
-                    {finalCombinedRanked[0].participant.regionBadge}
                   </div>
                   <div className="text-5xl font-extrabold text-[#ed1b2e]">
                     {finalCombinedRanked[0].combined}{" "}
@@ -1526,9 +1520,6 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                   <div className="text-2xl font-extrabold text-slate-900">
                     🇲🇾 {finalCombinedRanked[2].participant.name}
                   </div>
-                  <div className="text-xs text-slate-500 font-medium">
-                    {finalCombinedRanked[2].participant.regionBadge}
-                  </div>
                   <div className="text-4xl font-extrabold text-[#ed1b2e]">
                     {finalCombinedRanked[2].combined}{" "}
                     <span className="text-xs text-slate-500 font-normal">pts</span>
@@ -1556,7 +1547,7 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                   🔍 SUBMISSION SPOTLIGHT
                 </span>
                 <span className="font-extrabold text-slate-900 text-lg">
-                  🇲🇾 {spotlightModal.participant.name} ({spotlightModal.participant.regionBadge})
+                  🇲🇾 {spotlightModal.participant.name}
                 </span>
               </div>
 
@@ -1629,9 +1620,7 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
   const [agentName, setAgentName] = useState(
     () => localStorage.getItem("pamb_agent_name_v1") || ""
   );
-  const [agentRegion, setAgentRegion] = useState(
-    () => localStorage.getItem("pamb_agent_region_v1") || "Kuala Lumpur / Klang Valley"
-  );
+  const [agentRegion] = useState("");
   const [lang, setLang] = useState(
     () => localStorage.getItem("pamb_agent_lang_v1") || "zh-CN"
   );
@@ -1673,10 +1662,10 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
 
   const handleRegister = async (e) => {
     if (e) e.preventDefault();
-    const cleanName = agentName.trim() || "PAMB Agency Leader";
+    const cleanName = agentName.trim() || "PRUMDA Leader";
     setAgentName(cleanName);
     localStorage.setItem("pamb_agent_name_v1", cleanName);
-    localStorage.setItem("pamb_agent_region_v1", agentRegion);
+    localStorage.removeItem("pamb_agent_region_v1");
     localStorage.setItem("pamb_agent_lang_v1", lang);
     localStorage.setItem("pamb_agent_registered_v1", "true");
     if (arenaState.gameSessionId) {
@@ -1691,7 +1680,6 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
         body: JSON.stringify({
           id: agentId,
           name: cleanName,
-          region: agentRegion,
           language: lang,
         }),
       });
@@ -1708,7 +1696,7 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
         >
           <div className="flex items-center justify-between">
             <span className="px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#ed1b2e] text-xs font-extrabold">
-              🇲🇾 PRUDENTIAL MALAYSIA (PAMB)
+              🇲🇾 PRUMDA LEARNING TRIP
             </span>
             <span className="text-xs font-mono font-bold text-slate-500">11 Nov • Google SG</span>
           </div>
@@ -1756,29 +1744,6 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
             />
           </div>
 
-          {/* PAMB Malaysia Region Selector */}
-          <div>
-            <label className="block text-xs font-extrabold uppercase text-slate-800 mb-1.5">
-              3. {t.yourRegion}
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {window.PAMB_REGIONS.map((reg) => (
-                <button
-                  key={reg.name}
-                  type="button"
-                  onClick={() => setAgentRegion(reg.name)}
-                  className={`p-2.5 rounded-xl border-2 text-left text-xs font-extrabold transition-all ${
-                    agentRegion === reg.name
-                      ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
-                      : "bg-white hover:bg-red-50/50 border-slate-200 hover:border-[#ed1b2e] text-slate-700"
-                  }`}
-                >
-                  {reg.badge}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <button
             type="submit"
             className="w-full py-4 rounded-2xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white font-extrabold text-sm sm:text-base shadow-lg transition-all"
@@ -1816,7 +1781,6 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
                 ✎ Re-Join
               </button>
             </div>
-            <div className="text-[11px] text-slate-500 font-medium">{agentRegion}</div>
           </div>
 
           <div className="flex flex-wrap items-center gap-1">
@@ -1983,10 +1947,9 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
               <div className="space-y-4">
                 <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-3xl p-6 text-center space-y-3 shadow-lg">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#ed1b2e] text-xs font-extrabold">
-                    🏆 PAMB MALAYSIA 10X LEADER SCORECARD
+                    🏆 PRUMDA LEARNING TRIP • 10X LEADER SCORECARD
                   </div>
                   <h2 className="text-2xl font-extrabold text-slate-900">🇲🇾 {agentName}</h2>
-                  <div className="text-xs text-slate-500 font-medium">{agentRegion}</div>
                   <div className="text-5xl font-extrabold text-[#ed1b2e]">
                     {(myRecord?.scores?.["1"]?.total || 0) +
                       (myRecord?.scores?.["2"]?.total || 0) +
@@ -2103,7 +2066,7 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
               lang={lang}
               agentId="sandbox-dev-agent"
               agentName="Dato' Sandbox Tester"
-              agentRegion="Kuala Lumpur / Klang Valley"
+              agentRegion=""
               onNext={() => setCNum("2")}
               fetchArenaState={fetchArenaState}
               onSandboxPreview={(sub) => setSandboxSubmission(sub)}
@@ -2115,7 +2078,7 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
               lang={lang}
               agentId="sandbox-dev-agent"
               agentName="Dato' Sandbox Tester"
-              agentRegion="Kuala Lumpur / Klang Valley"
+              agentRegion=""
               onNext={() => setCNum("3")}
               fetchArenaState={fetchArenaState}
               onSandboxPreview={(sub) => setSandboxSubmission(sub)}
@@ -2127,7 +2090,7 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
               lang={lang}
               agentId="sandbox-dev-agent"
               agentName="Dato' Sandbox Tester"
-              agentRegion="Kuala Lumpur / Klang Valley"
+              agentRegion=""
               onNext={() => setCNum("1")}
               fetchArenaState={fetchArenaState}
               onSandboxPreview={(sub) => setSandboxSubmission(sub)}
@@ -2143,7 +2106,7 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
             {activeSubmission && (
               <window.SubmissionCardRenderer
                 agentName="Dato' Sandbox Tester"
-                regionBadge="🏙️ KL / Klang Valley"
+                regionBadge=""
                 language={lang}
                 submission={activeSubmission}
                 scoreObj={{

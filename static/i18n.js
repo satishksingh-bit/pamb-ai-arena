@@ -1,11 +1,11 @@
 /* ============================================================================
-   Shared Multilingual Dictionary:
+   Shared Multilingual Dictionary — PRUMDA Learning Trip:
    - Mandarin (zh-CN)
    - Cantonese (yue / zh-TW)
    - Tamil (ta)
    - Bahasa Melayu (ms)
    - English (en)
-   Plus PAMB Malaysia Regions and Studio Portrait Compositor
+   Plus Studio Portrait Compositor
 ============================================================================ */
 
 window.PAMB_LANGUAGES = [
@@ -16,24 +16,16 @@ window.PAMB_LANGUAGES = [
   { code: "ta", label: "தமிழ் (Tamil)", short: "தமிழ்", flag: "🇲🇾", speechLang: "ta-MY" },
 ];
 
-window.PAMB_REGIONS = [
-  { name: "Kuala Lumpur / Klang Valley", badge: "🏙️ KL / Klang Valley", flag: "🇲🇾" },
-  { name: "Penang & Northern Region", badge: "🌉 Penang / North", flag: "🇲🇾" },
-  { name: "Johor Bahru & Southern", badge: "🌴 JB / South", flag: "🇲🇾" },
-  { name: "Perak / Ipoh & Central", badge: "⛰️ Perak / Central", flag: "🇲🇾" },
-  { name: "Sabah & Sarawak (East MY)", badge: "🦅 East Malaysia", flag: "🇲🇾" },
-  { name: "PAMB Agency HQ", badge: "🏛️ PAMB HQ", flag: "🇲🇾" },
-];
+window.PAMB_REGIONS = [];
 
 const _CANTONESE_I18N = {
-  appTitle: "馬來西亞保誠 (PAMB) AI 領袖訓練營",
+  appTitle: "PRUMDA Learning Trip • AI 實戰擂台",
   appSubtitle: "11月11日 新加坡 Google 總部 • 實戰挑戰擂台",
-  joinHeading: "歡迎加入 PAMB AI 領袖訓練營",
-  joinSub: "專為馬來西亞保誠 (PAMB) 🇲🇾 團隊而設 — 請輸入你嘅姓名、所屬區域同埋揀選你慣用嘅語言（英文 / 華語 / 廣東話 / 馬來語 / 淡米爾語）。",
+  joinHeading: "歡迎加入 PRUMDA Learning Trip",
+  joinSub: "專為 PRUMDA Learning Trip 🇲🇾 領袖團隊而設 — 請揀選你慣用嘅語言（英文 / 華語 / 廣東話 / 馬來語 / 淡米爾語）並輸入你嘅姓名。",
   yourName: "你嘅姓名 / 職銜 (例如: Dato' Jason / 區域總監)",
-  yourRegion: "揀選你嘅馬來西亞 PAMB 區域",
   yourLang: "揀選你嘅介面與 AI 互動語言",
-  enterArenaBtn: "🚀 進入訓練營大廳並預覽今日議程",
+  enterArenaBtn: "🚀 進入 PRUMDA Learning Trip 大廳並預覽今日議程",
   lobbyWaitBanner: "等待主持人開啟實戰挑戰",
   lobbyReadSub: "請先睇下今日 14:00 – 15:30 嘅三大實戰挑戰同兩場舞台示範。主持人一撳開始，你部手機就會自動解鎖！",
   lockedNotice: "🔒 等主持人開始後自動解鎖",
@@ -47,26 +39,25 @@ const _CANTONESE_I18N = {
   c2Title: "挑戰 2 (14:20–14:35)：由簡單提示詞升級至高管級簡報 (Deck Challenge)",
   c2Sub: "運用 5步 R.C.T.F.C. 提示詞教練（角色 · 背景 · 任務 · 格式 · 合規約束）打造 3頁高淨值客戶戰前簡報",
   c2Scenario: "實戰任務：針對大馬專科診所創辦人 Datin Sharifah Aleya（RM 28M 淨資產、RM 4.5M 貸款擔保）個案，不斷改良簡單提示詞直至生成貼近目標嘅 3頁簡報（KPI快照 + RM 6.5M 遺產流動性缺口圖表 + Takaful/Hibah 策略表）！",
-  c3Title: "挑戰 3 (14:35–15:05)：客戶人生大事預熱 (賀卡 + WhatsApp + 擊敗 AIA 電郵)",
-  c3Sub: "三步實戰：生成專屬祝賀卡 → 首條 WhatsApp 破冰 → 客觀對比 PAMB vs AIA 電郵",
-  c3Scenario: "實戰任務：系統會隨機派發一位現有客戶嘅人生大事個案，先整張 AI 祝賀卡，再寫首條 WhatsApp 問候，最後用保誠真實條款優勢回覆客戶「想同 AIA 比較」嘅電郵！",
+  c3Title: "挑戰 3 (14:35–15:05)：客戶人生大事預熱 (賀卡 + WhatsApp + 方案對比電郵)",
+  c3Sub: "三步實戰：生成專屬祝賀卡 → 首條 WhatsApp 破冰 → 客觀方案條款對比電郵",
+  c3Scenario: "實戰任務：系統會隨機派發一位現有客戶嘅人生大事個案，先整張 AI 祝賀卡，再寫首條 WhatsApp 問候，最後用真實保障條款優勢回覆客戶「想同 AIA 比較」嘅電郵！",
   submitBtn: "🚀 提交作品至大螢幕並同步計分",
   submittedTitle: "作品已經提交並即時投射去主螢幕！",
   submittedSub: "主持人可以喺大螢幕展示你嘅作品同 AI 評分。",
   nextMission: "繼續去下一項挑戰 →",
-  viewMyCard: "🏆 睇我嘅 PAMB 10x 戰績卡 →",
+  viewMyCard: "🏆 睇我嘅 PRUMDA Learning Trip 戰績卡 →",
 };
 
 window.PAMB_I18N = {
   "zh-CN": {
-    appTitle: "马来西亚保诚 (PAMB) AI 领袖训练营",
+    appTitle: "PRUMDA Learning Trip • AI 实战擂台",
     appSubtitle: "11月11日 新加坡 Google 总部 • 实战挑战与演练擂台",
-    joinHeading: "欢迎加入 PAMB AI 领袖训练营",
-    joinSub: "全员来自马来西亚保诚 (PAMB) 🇲🇾 — 请输入您的姓名、所属区域并选择您偏好的语言（华语 / 广东话 / 英文 / 马来语 / 淡米尔语）。",
+    joinHeading: "欢迎加入 PRUMDA Learning Trip",
+    joinSub: "专为 PRUMDA Learning Trip 🇲🇾 精英领袖打造 — 请选择您偏好的语言（华语 / 广东话 / 英文 / 马来语 / 淡米尔语）并输入您的姓名。",
     yourName: "您的姓名 / 职称 (如: Dato' Jason / 区经理)",
-    yourRegion: "选择您的马来西亚 PAMB 所属区域",
     yourLang: "选择您的界面与 AI 互动语言",
-    enterArenaBtn: "🚀 进入训练营大厅并预览今日议程",
+    enterArenaBtn: "🚀 进入 PRUMDA Learning Trip 大厅并预览议程",
     lobbyWaitBanner: "等待主持人开启实战挑战",
     lobbyReadSub: "请先预览今日 14:00 – 15:30 的三大实战挑战与两场舞台实景秀。主持人启动后您的手机将自动解锁！",
     lockedNotice: "🔒 等待主持人开启后自动解锁",
@@ -80,26 +71,25 @@ window.PAMB_I18N = {
     c2Title: "挑战 2 (14:20–14:35)：从简单提示词到高管级提案简报 (Deck Challenge)",
     c2Sub: "运用 5步 R.C.T.F.C. 提示词教练（角色 · 背景 · 任务 · 格式 · 合规约束）打造 3页高净值客户战前简报",
     c2Scenario: "实战任务：针对大马专科诊所创始人 Datin Sharifah Aleya（RM 28M 净资产、RM 4.5M 贷款担保）档案，升级一句话提示词，让 Gemini 生成贴近目标的 3页高管简报（KPI快照 + RM 6.5M 流动性缺口图表 + Takaful/Hibah 策略表）！",
-    c3Title: "挑战 3 (14:35–15:05)：客户人生大事战前预热 (贺卡 + WhatsApp + 击败 AIA 邮件)",
-    c3Sub: "三步实战：生成专属祝贺卡 → 首条 WhatsApp 破冰 → 客观对比 PAMB vs AIA 邮件",
-    c3Scenario: "实战任务：针对随机分配的现有客户人生大事（添丁、40岁心脏警钟、新居入伙、升职、扩厂贷款或50岁退休），依次生成祝贺卡、WhatsApp 问候及保诚对比友邦（AIA）的客观邮件！",
+    c3Title: "挑战 3 (14:35–15:05)：客户人生大事战前预热 (贺卡 + WhatsApp + 方案对比邮件)",
+    c3Sub: "三步实战：生成专属祝贺卡 → 首条 WhatsApp 破冰 → 客观方案条款对比邮件",
+    c3Scenario: "实战任务：针对随机分配的现有客户人生大事（添丁、40岁心脏警钟、新居入伙、升职、扩厂贷款或50岁退休），依次生成祝贺卡、WhatsApp 问候及方案对比友邦（AIA）的客观邮件！",
     submitBtn: "🚀 提交作品至大屏幕并同步得分",
     submittedTitle: "作品已提交并实时投射至主屏幕！",
     submittedSub: "主持人可在 Room Bromo 大屏幕上展示您的作品与 AI 裁判评分。",
     nextMission: "继续前往下一项挑战 →",
-    viewMyCard: "🏆 查看我的 PAMB 10x 领袖战绩卡 →",
+    viewMyCard: "🏆 查看我的 PRUMDA Learning Trip 战绩卡 →",
   },
   yue: _CANTONESE_I18N,
   "zh-TW": _CANTONESE_I18N,
   en: {
-    appTitle: "Prudential Malaysia (PAMB) AI Bootcamp",
+    appTitle: "PRUMDA Learning Trip",
     appSubtitle: "11 Nov • Google Singapore (Room Bromo) • Live Executive Arena",
-    joinHeading: "Welcome PAMB Malaysia Agency Leaders",
-    joinSub: "Exclusively for Prudential Assurance Malaysia Berhad (PAMB) 🇲🇾 — Enter your name, select your Malaysian region, and choose your preferred language (English, Mandarin, Cantonese, Bahasa Melayu, or Tamil).",
+    joinHeading: "Welcome to PRUMDA Learning Trip",
+    joinSub: "Welcome, Agency Leaders! 🇲🇾 Choose your preferred language (English, Mandarin, Cantonese, Bahasa Melayu, or Tamil) and enter your name to join the live AI Arena.",
     yourName: "Your Name & Title (e.g. Dato' Jason / Agency Manager)",
-    yourRegion: "Select Your PAMB Malaysia Region",
     yourLang: "Choose Your Preferred Language",
-    enterArenaBtn: "🚀 Join Bootcamp Lobby & Preview Agenda",
+    enterArenaBtn: "🚀 Join PRUMDA Learning Trip Lobby & Preview Agenda",
     lobbyWaitBanner: "WAITING FOR PRESENTER TO LAUNCH CHALLENGE",
     lobbyReadSub: "Preview the 3 Hands-On Challenges (14:00–15:05) and 2 Live Stage Demos (15:05–15:30) below. Your device will unlock automatically!",
     lockedNotice: "🔒 Unlocks when Presenter starts the session",
@@ -113,24 +103,23 @@ window.PAMB_I18N = {
     c2Title: "Challenge 2 (14:20–14:35): Simple → Enhanced Presentation (Deck Challenge)",
     c2Sub: "Master 5-Step R.C.T.F.C. Prompting (Role · Context · Task · Format · Constraints) to build a 3-Slide HNW Pre-Pitch Deck",
     c2Scenario: "Task: Review the HNW client case file (Datin Sharifah Aleya, RM 28M net worth, RM 4.5M clinic loan guarantee) and iteratively upgrade a simple 1-line prompt until Gemini builds a 3-slide enterprise deck matching the target!",
-    c3Title: "Challenge 3 (14:35–15:05): Pre-Pitch Studio (Greeting Card + WhatsApp + PAMB vs. AIA Email)",
-    c3Sub: "3-Step Guided Flow: Greeting Card → First-Touch WhatsApp → Factual PAMB vs. AIA Comparison Email",
+    c3Title: "Challenge 3 (14:35–15:05): Pre-Pitch Studio (Greeting Card + WhatsApp + Plan Comparison Email)",
+    c3Sub: "3-Step Guided Flow: Greeting Card → First-Touch WhatsApp → Factual Plan Comparison Email",
     c3Scenario: "Task: Read your assigned Customer X life-event scenario, generate a Greeting Card (Step 1), craft your First-Touch WhatsApp (Step 2), and counter the customer's AIA Malaysia comparison request via Email (Step 3)!",
     submitBtn: "🚀 Submit to Big Screen & Sync Score",
     submittedTitle: "Submitted Live to the Room Bromo Screen!",
     submittedSub: "Your creation and AI Judge score are now visible on the Presenter Leaderboard & Gallery Wall.",
     nextMission: "Continue to Next Challenge →",
-    viewMyCard: "🏆 View My PAMB 10x Scorecard →",
+    viewMyCard: "🏆 View My PRUMDA Learning Trip Scorecard →",
   },
   ms: {
-    appTitle: "Kem Latihan AI Agensi PAMB Malaysia",
+    appTitle: "PRUMDA Learning Trip • Arena AI",
     appSubtitle: "11 Nov • Google Singapura (Bilik Bromo) • Arena Eksekutif Langsung",
-    joinHeading: "Selamat Datang Pemimpin Agensi PAMB Malaysia",
-    joinSub: "Khas untuk Prudential Assurance Malaysia Berhad (PAMB) 🇲🇾 — Masukkan nama anda, pilih wilayah Malaysia anda, dan pilih bahasa pilihan anda.",
+    joinHeading: "Selamat Datang ke PRUMDA Learning Trip",
+    joinSub: "Selamat datang Pemimpin Agensi 🇲🇾 — Pilih bahasa pilihan anda dan masukkan nama anda untuk menyertai Arena AI.",
     yourName: "Nama & Jawatan Anda (cth. Dato' Jason / Pengurus Agensi)",
-    yourRegion: "Pilih Wilayah PAMB Malaysia Anda",
     yourLang: "Pilih Bahasa Pilihan Anda",
-    enterArenaBtn: "🚀 Sertai Lobi & Pratonton Agenda",
+    enterArenaBtn: "🚀 Sertai Lobi PRUMDA Learning Trip & Pratonton Agenda",
     lobbyWaitBanner: "MENUNGGU PENGACARA MEMULAKAN CABARAN",
     lobbyReadSub: "Pratonton 3 Cabaran Interaktif (14:00–15:05) dan 2 Demo Pentas (15:05–15:30) di bawah.",
     lockedNotice: "🔒 Akan dibuka apabila sesi bermula",
@@ -144,24 +133,23 @@ window.PAMB_I18N = {
     c2Title: "Cabaran 2 (14:20–14:35): Pembentangan Ringkas → Dipertingkat (Deck Challenge)",
     c2Sub: "Kuasai Jurulatih Prompt 5-Langkah R.C.T.F.C. (Peranan · Konteks · Tugasan · Format · Kekangan) untuk membina Dek 3 Slaid",
     c2Scenario: "Tugas: Semak fail kes pelanggan HNW (Datin Sharifah Aleya, nilai bersih RM 28J, jaminan pinjaman klinik RM 4.5J) dan tingkatkan prompt ringkas sehingga Gemini membina dek 3 slaid yang menyamai dek sasaran!",
-    c3Title: "Cabaran 3 (14:35–15:05): Pra-Temujanji (Kad Ucapan + WhatsApp + E-mel PAMB lwn AIA)",
-    c3Sub: "Aliran 3 Langkah: Kad Ucapan → Mesej WhatsApp → E-mel Perbandingan Fakta PAMB lwn AIA Malaysia",
+    c3Title: "Cabaran 3 (14:35–15:05): Pra-Temujanji (Kad Ucapan + WhatsApp + E-mel Perbandingan Pelan)",
+    c3Sub: "Aliran 3 Langkah: Kad Ucapan → Mesej WhatsApp → E-mel Perbandingan Fakta Pelan",
     c3Scenario: "Tugas: Baca senario peristiwa hidup Pelanggan X anda, hasilkan Kad Ucapan (Langkah 1), tulis WhatsApp Pertama (Langkah 2), dan jawab permintaan perbandingan AIA Malaysia melalui E-mel (Langkah 3)!",
     submitBtn: "🚀 Hantar ke Skrin Besar & Simpan Skor",
     submittedTitle: "Dihantar Secara Langsung ke Skrin Utama!",
     submittedSub: "Hasil kerja dan skor Hakim AI anda kini dipaparkan di papan pendahulu.",
     nextMission: "Teruskan ke Cabaran Seterusnya →",
-    viewMyCard: "🏆 Lihat Kad Skor 10x PAMB Saya →",
+    viewMyCard: "🏆 Lihat Kad Skor PRUMDA Learning Trip Saya →",
   },
   ta: {
-    appTitle: "புருடென்ஷியல் மலேசியா (PAMB) AI பயிற்சி அரங்கம்",
+    appTitle: "PRUMDA Learning Trip • AI அரங்கம்",
     appSubtitle: "நவம்பர் 11 • கூகுள் சிங்கப்பூர் • நேரடி முகவர் போட்டி",
-    joinHeading: "PAMB மலேசியா முகமைத் தலைவர்களே வருக!",
-    joinSub: "புருடென்ஷியல் அஷ்யூரன்ஸ் மலேசியா பெர்ஹாட் (PAMB) 🇲🇾 தலைவர்களுக்கானது — உங்கள் பெயர், மண்டலம் மற்றும் விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்.",
+    joinHeading: "PRUMDA Learning Trip-க்கு நல்வரவு!",
+    joinSub: "முகமைத் தலைவர்களே வருக 🇲🇾 — உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுத்து உங்கள் பெயரை உள்ளிடவும்.",
     yourName: "உங்கள் பெயர் & பதவி (எ.கா. Dato' Jason / முகமை மேலாளர்)",
-    yourRegion: "உங்கள் PAMB மலேசியா மண்டலத்தைத் தேர்ந்தெடுக்கவும்",
     yourLang: "உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்",
-    enterArenaBtn: "🚀 அரங்கில் இணைந்து நிகழ்ச்சி நிரலைப் பார்க்கவும்",
+    enterArenaBtn: "🚀 PRUMDA Learning Trip அரங்கில் இணைந்து நிகழ்ச்சி நிரலைப் பார்க்கவும்",
     lobbyWaitBanner: "நிகழ்ச்சித் தொகுப்பாளர் போட்டியைத் தொடங்க காத்திருக்கிறது",
     lobbyReadSub: "இன்றைய 3 நேரடி AI சவால்களை (14:00–15:05) கீழே முன்னோட்டமிடுங்கள். போட்டி தொடங்கியதும் உங்கள் திரை தானாகத் திறக்கும்!",
     lockedNotice: "🔒 தொகுப்பாளர் தொடங்கியதும் திறக்கப்படும்",
@@ -175,14 +163,14 @@ window.PAMB_I18N = {
     c2Title: "சவால் 2 (14:20–14:35): எளிய → மேம்படுத்தப்பட்ட விளக்கக்காட்சி (Deck Challenge)",
     c2Sub: "5-படி R.C.T.F.C. பயிற்சியாளரைப் பயன்படுத்தி 3-ஸ்லைடு முன்-முன்மொழிவு விளக்கக்காட்சியை உருவாக்குதல்",
     c2Scenario: "பணி: வாடிக்கையாளர் கோப்பைப் (Datin Sharifah Aleya, RM 28M நிகர சொத்து) படித்து, 3-ஸ்லைடு இலக்கு விளக்கக்காட்சிக்குப் பொருந்தும் வகையில் எளிய ப்ராம்ப்டை மேம்படுத்தி சமர்ப்பிக்கவும்!",
-    c3Title: "சவால் 3 (14:35–15:05): வாடிக்கையாளர் முன்-பிற்ச் (வாழ்த்து அட்டை + WhatsApp + PAMB vs AIA மின்னஞ்சல்)",
-    c3Sub: "3 படிகள்: வாழ்த்து அட்டை → முதல் WhatsApp செய்தி → PAMB vs AIA ஒப்பீட்டு மின்னஞ்சல்",
+    c3Title: "சவால் 3 (14:35–15:05): வாடிக்கையாளர் முன்-பிற்ச் (வாழ்த்து அட்டை + WhatsApp + ஒப்பீட்டு மின்னஞ்சல்)",
+    c3Sub: "3 படிகள்: வாழ்த்து அட்டை → முதல் WhatsApp செய்தி → திட்ட ஒப்பீட்டு மின்னஞ்சல்",
     c3Scenario: "பணி: உங்களுக்கு வழங்கப்பட்ட வாடிக்கையாளர் நிகழ்வைப் படித்து, படி 1-ல் வாழ்த்து அட்டை, படி 2-ல் WhatsApp செய்தி, மற்றும் படி 3-ல் AIA மலேசியா ஒப்பீட்டு மின்னஞ்சலை உருவாக்கி சமர்ப்பிக்கவும்!",
     submitBtn: "🚀 பெரிய திரைக்கு சமர்ப்பித்து மதிப்பெண் பெறுக",
     submittedTitle: "வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
     submittedSub: "உங்கள் படைப்பும் மதிப்பெண்ணும் பிரதான திரையில் காட்டப்படுகின்றன.",
     nextMission: "அடுத்த சவாலுக்குச் செல்லவும் →",
-    viewMyCard: "🏆 எனது PAMB 10x மதிப்பெண் அட்டை →",
+    viewMyCard: "🏆 எனது PRUMDA Learning Trip மதிப்பெண் அட்டை →",
   },
 };
 
@@ -196,8 +184,8 @@ window.formatMMSS = function (totalSec) {
 window.composeExecutivePortraitCard = function ({
   rawImageDataUrl,
   styleKey = "mdrt_keynote",
-  agentName = "PAMB Leader",
-  region = "Kuala Lumpur",
+  agentName = "PRUMDA Leader",
+  region = "",
   motto = "Protecting Malaysian Families",
   avatarIndex = 0,
 }) {
@@ -233,7 +221,7 @@ window.composeExecutivePortraitCard = function ({
         bg1: "#2c0910",
         bg2: "#120609",
         accent: "#fbbf24",
-        badge: "🧧 PAMB PROSPERITY VIP",
+        badge: "🧧 PRUMDA PROSPERITY VIP",
         glow: "rgba(237, 27, 46, 0.45)",
       },
     };
@@ -344,7 +332,7 @@ window.composeExecutivePortraitCard = function ({
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 13px sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("🇲🇾 PRUDENTIAL PAMB", 437, 46);
+      ctx.fillText("🇲🇾 PRUMDA", 437, 46);
 
       ctx.fillStyle = "rgba(12, 16, 28, 0.95)";
       ctx.beginPath();
@@ -357,11 +345,11 @@ window.composeExecutivePortraitCard = function ({
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 26px sans-serif";
       ctx.textAlign = "left";
-      ctx.fillText((agentName || "PAMB Leader").slice(0, 28), 58, 548);
+      ctx.fillText((agentName || "PRUMDA Leader").slice(0, 28), 58, 548);
 
       ctx.fillStyle = pal.accent;
       ctx.font = "bold 14px sans-serif";
-      ctx.fillText(`🇲🇾 PAMB Premier Agency Leader • ${region}`, 58, 575);
+      ctx.fillText("🇲🇾 PRUMDA Learning Trip • Agency Leader", 58, 575);
 
       ctx.strokeStyle = "rgba(255,255,255,0.12)";
       ctx.beginPath();
@@ -376,7 +364,7 @@ window.composeExecutivePortraitCard = function ({
 
       ctx.fillStyle = "#94a3b8";
       ctx.font = "bold 11px monospace";
-      ctx.fillText("VERIFIED BY GEMINI AI STUDIO • 11 NOV BOOTCAMP", 58, 640);
+      ctx.fillText("VERIFIED BY GEMINI AI STUDIO • PRUMDA LEARNING TRIP", 58, 640);
 
       try {
         resolve(canvas.toDataURL("image/jpeg", 0.86));
