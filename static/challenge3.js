@@ -14,13 +14,24 @@ const C3_PLAYBOOK_UI = {
   en: {
     badge: "CHALLENGE 3 • ADVISOR PLAYBOOK",
     assignedCase: "Client Case:",
-    switchCase: "🎲 Switch Case",
-    lifeEventLabel: "🎉 Life Moment",
-    gapLabel: "⚠️ Coverage Gap",
-    offerLabel: "🇲🇾 Suitable PRU Portfolio",
-    step1Tab: "1. 🎨 Greeting Card",
-    step2Tab: "2. 💬 First WhatsApp",
-    step3Tab: "3. 📧 Win vs. AIA",
+    switchCase: "Switch Case",
+    caseInfoBtn: "Case Info",
+    personalTouchBtn: "+ 💡 Add Personal Touch (Bonus pts)",
+    cardSettingsBar: "🎨 Card Settings",
+    promptHooksBar: "💬 Prompt Hooks",
+    comparisonSettingsBar: "📧 Comparison Settings",
+    editBtn: "✎ Edit",
+    detailsBtn: "Details",
+    hideBtn: "Hide",
+    lifeEventLabel: "🎉 Moment",
+    gapLabel: "⚠️ Gap",
+    offerLabel: "🛡️ PRU Plan",
+    step1Tab: "1. 🎨 Card",
+    step2Tab: "2. 💬 WhatsApp",
+    step3Tab: "3. 📧 vs. AIA",
+    step1TabFull: "1. 🎨 Greeting Card",
+    step2TabFull: "2. 💬 First WhatsApp",
+    step3TabFull: "3. 📧 Win vs. AIA",
 
     step1Title: "Step 1: Warm Door-Opener Greeting Card",
     pickVisualStyle: "1. Choose Card Visual Style:",
@@ -100,13 +111,24 @@ const C3_PLAYBOOK_UI = {
   "zh-CN": {
     badge: "挑战 3 • 绩优顾问实战手册",
     assignedCase: "客户案例：",
-    switchCase: "🎲 切换案例",
-    lifeEventLabel: "🎉 人生重要时刻",
-    gapLabel: "⚠️ 现有保障缺口",
-    offerLabel: "🇲🇾 推荐 PRU 方案组合",
-    step1Tab: "1. 🎨 暖心祝贺卡",
-    step2Tab: "2. 💬 首条 WhatsApp",
-    step3Tab: "3. 📧 应对 AIA 对比",
+    switchCase: "切换案例",
+    caseInfoBtn: "案例详情",
+    personalTouchBtn: "+ 💡 专属巧思（加分）",
+    cardSettingsBar: "🎨 贺卡设定",
+    promptHooksBar: "💬 破冰设定",
+    comparisonSettingsBar: "📧 对比设定",
+    editBtn: "✎ 修改",
+    detailsBtn: "详情",
+    hideBtn: "收起",
+    lifeEventLabel: "🎉 时刻",
+    gapLabel: "⚠️ 缺口",
+    offerLabel: "🛡️ PRU 方案",
+    step1Tab: "1. 🎨 贺卡",
+    step2Tab: "2. 💬 WhatsApp",
+    step3Tab: "3. 📧 vs AIA",
+    step1TabFull: "1. 🎨 暖心祝贺卡",
+    step2TabFull: "2. 💬 首条 WhatsApp",
+    step3TabFull: "3. 📧 应对 AIA 对比",
 
     step1Title: "第 1 步：制作专属开门红祝贺卡",
     pickVisualStyle: "1. 选择祝贺卡视觉风格：",
@@ -186,13 +208,24 @@ const C3_PLAYBOOK_UI = {
   yue: {
     badge: "挑戰 3 • 王牌顧問實戰手冊",
     assignedCase: "客戶個案：",
-    switchCase: "🎲 轉另一個案",
-    lifeEventLabel: "🎉 人生重要時刻",
-    gapLabel: "⚠️ 現有保障缺口",
-    offerLabel: "🇲🇾 推薦 PRU 方案組合",
-    step1Tab: "1. 🎨 窩心賀卡",
-    step2Tab: "2. 💬 首條 WhatsApp",
-    step3Tab: "3. 📧 應對 AIA 比較",
+    switchCase: "轉個案",
+    caseInfoBtn: "個案詳情",
+    personalTouchBtn: "+ 💡 專屬心思（加分）",
+    cardSettingsBar: "🎨 賀卡設定",
+    promptHooksBar: "💬 破冰設定",
+    comparisonSettingsBar: "📧 對比設定",
+    editBtn: "✎ 修改",
+    detailsBtn: "詳情",
+    hideBtn: "收起",
+    lifeEventLabel: "🎉 時刻",
+    gapLabel: "⚠️ 缺口",
+    offerLabel: "🛡️ PRU 方案",
+    step1Tab: "1. 🎨 賀卡",
+    step2Tab: "2. 💬 WhatsApp",
+    step3Tab: "3. 📧 vs AIA",
+    step1TabFull: "1. 🎨 窩心賀卡",
+    step2TabFull: "2. 💬 首條 WhatsApp",
+    step3TabFull: "3. 📧 應對 AIA 比較",
 
     step1Title: "第 1 步：整張專屬開門紅賀卡",
     pickVisualStyle: "1. 揀賀卡視覺風格：",
@@ -272,13 +305,24 @@ const C3_PLAYBOOK_UI = {
   ms: {
     badge: "CABARAN 3 • BUKU PANDUAN PERUNDING",
     assignedCase: "Kes Pelanggan:",
-    switchCase: "🎲 Tukar Kes",
-    lifeEventLabel: "🎉 Detik Kehidupan",
-    gapLabel: "⚠️ Jurang Perlindungan",
-    offerLabel: "🇲🇾 Portfolio PRU Sesuai",
-    step1Tab: "1. 🎨 Kad Ucapan",
-    step2Tab: "2. 💬 WhatsApp Pertama",
-    step3Tab: "3. 📧 Banding lwn AIA",
+    switchCase: "Tukar Kes",
+    caseInfoBtn: "Info Kes",
+    personalTouchBtn: "+ 💡 Sentuhan Peribadi (Bonus)",
+    cardSettingsBar: "🎨 Tetapan Kad",
+    promptHooksBar: "💬 Idea Pembuka",
+    comparisonSettingsBar: "📧 Tetapan Banding",
+    editBtn: "✎ Ubah",
+    detailsBtn: "Butiran",
+    hideBtn: "Tutup",
+    lifeEventLabel: "🎉 Detik",
+    gapLabel: "⚠️ Jurang",
+    offerLabel: "🛡️ Pelan PRU",
+    step1Tab: "1. 🎨 Kad",
+    step2Tab: "2. 💬 WhatsApp",
+    step3Tab: "3. 📧 lwn AIA",
+    step1TabFull: "1. 🎨 Kad Ucapan",
+    step2TabFull: "2. 💬 WhatsApp Pertama",
+    step3TabFull: "3. 📧 Banding lwn AIA",
 
     step1Title: "Langkah 1: Kad Ucapan Pembuka Bicara Mesra",
     pickVisualStyle: "1. Pilih Gaya Visual Kad:",
@@ -358,13 +402,24 @@ const C3_PLAYBOOK_UI = {
   ta: {
     badge: "சவால் 3 • ஆலோசகர் வழிகாட்டி",
     assignedCase: "வாடிக்கையாளர்:",
-    switchCase: "🎲 வேறு கேஸ்",
-    lifeEventLabel: "🎉 வாழ்க்கை நிகழ்வு",
-    gapLabel: "⚠️ பாதுகாப்பு இடைவெளி",
-    offerLabel: "🇲🇾 பரிந்துரைக்கப்பட்ட PRU திட்டம்",
-    step1Tab: "1. 🎨 வாழ்த்து அட்டை",
-    step2Tab: "2. 💬 முதல் WhatsApp",
-    step3Tab: "3. 📧 AIA ஒப்பீடு",
+    switchCase: "கேஸ் மாற்று",
+    caseInfoBtn: "கேஸ் விவரம்",
+    personalTouchBtn: "+ 💡 தனிப்பட்ட தொடல் (போனஸ்)",
+    cardSettingsBar: "🎨 அட்டை அமைப்பு",
+    promptHooksBar: "💬 தொடக்க அமைப்பு",
+    comparisonSettingsBar: "📧 ஒப்பீட்டு அமைப்பு",
+    editBtn: "✎ திருத்து",
+    detailsBtn: "விவரம்",
+    hideBtn: "மறை",
+    lifeEventLabel: "🎉 நிகழ்வு",
+    gapLabel: "⚠️ இடைவெளி",
+    offerLabel: "🛡️ PRU திட்டம்",
+    step1Tab: "1. 🎨 அட்டை",
+    step2Tab: "2. 💬 WhatsApp",
+    step3Tab: "3. 📧 vs AIA",
+    step1TabFull: "1. 🎨 வாழ்த்து அட்டை",
+    step2TabFull: "2. 💬 முதல் WhatsApp",
+    step3TabFull: "3. 📧 AIA ஒப்பீடு",
 
     step1Title: "படி 1: அன்பான வாழ்த்து அட்டையை உருவாக்குங்கள்",
     pickVisualStyle: "1. அட்டையின் காட்சி பாணியைத் தேர்ந்தெடுக்கவும்:",
@@ -759,6 +814,59 @@ const C3_ADVISOR_PLAYBOOK = {
       ],
       waHints: ["50வது பிறந்தநாள் & மகளின் மெல்போர்ன் பல்கலைக்கழக வெற்றிக்கு வாழ்த்துகள்!", "AUD கல்வி நிதியைத் தொடாமல் 60 வயது மருத்துவப் பாதுகாப்பை உறுதி செய்யலாம்", "இந்த வார இறுதியில் எலைனுடன் 10 நிமிடம் காபி?"],
       closeHints: ["சனிக்கிழமை காலை 11 மணிக்கு எலைனுடன் 10 நிமிட Zoom", "கிளைம் பிறகும் உயரும் வரம்பு vs AIA நிபந்தனை வாலட் ஒப்பீடு", "50–100 வயது ஓய்வூதியப் பால அட்டவணையை அனுப்புகிறேன்"],
+    },
+  },
+
+  takaful_hibah_estate: {
+    en: {
+      cardHints: ["🕌 Elegant emerald & gold geometric arabesque motif", "🌿 Peaceful family legacy & Barakah theme", "✨ Celebrating Engineering Sdn Bhd milestone"],
+      waIdeas: [
+        { label: "🕌 Conditional Hibah (No Freeze)", detail: "Inject immediate Shariah-compliant cash via PRUBSN WarisanPlus Hibah outside probate/estate freeze" },
+        { label: "📈 Up to 400% Accidental Shield", detail: "Up to 400% accidental / public transport & overseas Umrah/Hajj protection built in" },
+        { label: "🛡️ Preserve Faraid Harmony", detail: "Provide instant family & business liquidity to settle debts without forced sale of company assets" },
+      ],
+      waHints: ["Alhamdulillah, huge congrats on your company's record milestone!", "Prepared a 2-min Hibah liquidity brief to keep family assets intact", "10-min coffee after Friday prayers or next week?"],
+      closeHints: ["15-min coffee with you & Puan Aishah to map Hibah vs Faraid", "1-page side-by-side PRUBSN WarisanPlus vs AIA Legasi table", "Quick 10-min Zoom Wednesday evening"],
+    },
+    "zh-CN": {
+      cardHints: ["🕌 典雅翠绿与描金几何艺术纹样", "🌿 家族和谐与世代平安主题", "✨ 祝贺企业业绩创下里程碑"],
+      waIdeas: [
+        { label: "🕌 Hibah 免遗产冻结直付", detail: "通过 PRUBSN WarisanPlus 指定 Hibah 受益人，绕过漫长遗产冻结即刻注入免税现金" },
+        { label: "📈 高达 400% 意外与朝圣护盾", detail: "内建高达400%特定意外（含朝圣 Umrah/Hajj 与公共枢纽）高额保障" },
+        { label: "🛡️ 守护 Faraid 家族和谐", detail: "提供充裕流动现金清偿企业负债，无需变卖企业资产" },
+      ],
+      waHints: ["衷心祝贺贵公司今年创下业绩新高！", "特意整理了2分钟 Hibah 免冻结现金流简报供您参考", "下周方便约10分钟喝杯咖啡聊聊吗？"],
+      closeHints: ["与您和夫人喝杯15分钟咖啡梳理 Hibah 配比", "发您1页 PRUBSN WarisanPlus vs AIA Legasi 对比表", "周三晚8点10分钟Zoom快速讲解"],
+    },
+    yue: {
+      cardHints: ["🕌 典雅翠綠配描金幾何藝術花紋", "🌿 家族和諧同世代平安主題", "✨ 恭喜公司業績創下新里程碑"],
+      waIdeas: [
+        { label: "🕌 Hibah 免遺產凍結直付", detail: "透過 PRUBSN WarisanPlus 指定 Hibah 受益人，免卻漫長遺產凍結即刻注入現金" },
+        { label: "📈 高達 400% 意外與朝聖保障", detail: "內置高達400%特定意外（包埋 Umrah/Hajj 朝聖同公共交通）高額保障" },
+        { label: "🛡️ 守護 Faraid 家族和諧", detail: "提供充裕流動現金清還公司負債，唔使變賣生意資產" },
+      ],
+      waHints: ["恭喜晒貴公司今年業績再創新高！", "特登整理咗份2分鐘 Hibah 免凍結現金流懶人包俾你參考", "下個禮拜方唔方便飲杯10分鐘咖啡傾吓？"],
+      closeHints: ["同你和夫人飲杯15分鐘咖啡傾吓 Hibah 配比", "Send 張1頁紙 PRUBSN WarisanPlus vs AIA Legasi 對比表俾你", "星期三晚8點10分鐘 Zoom 快閃講解"],
+    },
+    ms: {
+      cardHints: ["🕌 Motif geometri Islam zamrud & emas", "🌿 Doa keberkatan & keharmonian keluarga", "✨ Meraikan kejayaan cemerlang syarikat"],
+      waIdeas: [
+        { label: "🕌 Hibah Tanpa Pembekuan", detail: "Suntik tunai segera patuh Syariah melalui Hibah PRUBSN WarisanPlus di luar pembekuan pusaka" },
+        { label: "📈 Perlindungan Kemalangan 400%", detail: "Perlindungan sehingga 400% kemalangan termasuk ketika menunaikan Umrah/Haji" },
+        { label: "🛡️ Jaga Keharmonian Faraid", detail: "Sediakan tunai segera untuk menjelaskan liabiliti tanpa perlu menjual aset perniagaan" },
+      ],
+      waHints: ["Alhamdulillah, tahniah atas pencapaian hebat syarikat Tuan Haji!", "Saya sediakan ringkasan 2 minit strategi kecairan Hibah", "Minum kopi 10 minit minggu depan?"],
+      closeHints: ["Kopi 15 minit bersama Puan Aishah untuk semak struktur Hibah", "Jadual 1 halaman PRUBSN WarisanPlus lwn AIA Legasi", "Zoom ringkas 10 minit Rabu malam"],
+    },
+    ta: {
+      cardHints: ["🕌 மரகத பச்சை & தங்க இஸ்லாமிய கலை வடிவம்", "🌿 குடும்ப ஒற்றுமை மற்றும் Barakah வாழ்த்து", "✨ நிறுவனத்தின் சாதனை வெற்றி வாழ்த்து"],
+      waIdeas: [
+        { label: "🕌 Hibah உடனடி ரொக்கப் பாதுகாப்பு", detail: "சொத்து முடக்கமின்றி PRUBSN WarisanPlus Hibah மூலம் உடனடி ஷரியா ரொக்கப் பாதுகாப்பு" },
+        { label: "📈 400% வரை விபத்து பாதுகாப்பு", detail: "Umrah/Hajj மற்றும் பொதுப் போக்குவரத்து உட்பட 400% வரை விபத்து காப்பீடு" },
+        { label: "🛡️ Faraid குடும்ப ஒற்றுமை", detail: "நிறுவனச் சொத்துக்களை விற்காமல் கடன்களைத் தீர்க்க உடனடி பணப்புழக்கம்" },
+      ],
+      waHints: ["உங்கள் நிறுவனத்தின் சாதனை வெற்றிக்கு வாழ்த்துகள்!", "குடும்பச் சொத்துக்களைப் பாதுகாக்கும் 2 நிமிட Hibah சுருக்கம்", "அடுத்த வாரம் 10 நிமிடம் காபி அருந்திப் பேசலாமா?"],
+      closeHints: ["துணைவியாருடன் 15 நிமிட Hibah ஆலோசனைச் சந்திப்பு", "PRUBSN WarisanPlus vs AIA Legasi 1 பக்க ஒப்பீடு", "புதன் மாலை 10 நிமிட Zoom அழைப்பு"],
     },
   },
 };
@@ -1640,6 +1748,209 @@ const PAMB_C3_SCENARIOS = [
       },
     },
   },
+  {
+    id: "takaful_hibah_estate",
+    icon: "🕌",
+    rivalBrand: "AIA Public Takaful",
+    i18n: {
+      en: {
+        shortLabel: "Hibah & SME Estate",
+        rivalBrand: "AIA Public Takaful",
+        customerName: "Tuan Haji Zulkarnain & Puan Aishah (46, Shah Alam)",
+        existingGap: "RM 9M business & property in joint names • Zero conditional Hibah Takaful liquidity",
+        lifeEvent: "Engineering Sdn Bhd hit record revenue; wants Shariah Hibah liquidity outside 18-mth estate freeze",
+        pambPlan: "PRUBSN WarisanPlus + PRUBSN AnugerahPlus (Shariah Hibah)",
+        aiaPlan: "AIA Public Takaful A-Life Legasi + A-Life Ikhtiar",
+        customerReply:
+          "\"Alhamdulillah, thank you for the card! AIA Public Takaful quoted us A-Life Legasi. How does PRUBSN WarisanPlus compare for Hibah?\"",
+        cardHeadline: "Mabruk on Engineering Sdn Bhd's Record Milestone & Barakah! 🌟",
+        cardChips: [
+          "Mabruk on Engineering Sdn Bhd's Record Milestone & Barakah! 🌟",
+          "Wishing Continued Barakah, Harmony & Family Legacy! 🕌",
+        ],
+        aiaFacts: [
+          "✓ Immediate Conditional Hibah Payout Outside Estate Freeze: PRUBSN WarisanPlus delivers fast Shariah liquidity without annual AIA Vitality fees",
+          "✓ Up to 400% Accidental Cover (including Umrah/Hajj & public hubs) + rare diseases protection built into the certificate",
+          "✓ Flexible Wakaf & Charitable Endowments option alongside family Hibah nomination for lasting Sadaqah Jariyah",
+        ],
+        defaultWhatsapp:
+          "Assalamualaikum & Mabruk Tuan Haji Zulkarnain & Puan Aishah on Engineering Sdn Bhd's record milestone! 🕌✨ I designed this celebratory card specially for your family.\n\nQuick Shariah estate note: PRUBSN WarisanPlus injects immediate Conditional Hibah cash outside probate/estate freeze while adding up to 400% Umrah/Hajj accidental protection so your RM 9M business assets stay intact. Shall I send a 2-min Hibah summary? 😊",
+        defaultEmail:
+          "Subject: Shariah Hibah & Legacy Comparison: PRUBSN WarisanPlus vs. AIA Public Takaful A-Life Legasi\n\nAssalamualaikum Tuan Haji Zulkarnain & Puan Aishah,\nHere are 3 factual reasons PRUBSN WarisanPlus serves your family & business legacy stronger than AIA A-Life Legasi:\n1. Immediate Conditional Hibah Outside Estate Freeze: Delivers fast Shariah-compliant family liquidity with zero annual AIA Vitality fees required.\n2. Up to 400% Accidental & Umrah/Hajj Shield: Built-in high multiplier protection for public transport and overseas pilgrimage.\n3. Built-In Wakaf & Faraid Harmony: Settles company liabilities cleanly without forced asset sales while supporting Sadaqah Jariyah.\n\nHow about a 15-min coffee with you and Puan Aishah next week to review both tables?",
+      },
+      "zh-CN": {
+        shortLabel: "清真企业 Hibah 传承",
+        rivalBrand: "AIA Public Takaful",
+        customerName: "Haji Zulkarnain & Aishah (46岁, 莎阿南企业主)",
+        existingGap: "RM 900万房产与公司股份联名持有 • 缺乏免冻结即刻到账的 Hibah 流动现金",
+        lifeEvent: "Engineering Sdn Bhd 业绩创历史新高；希望通过 Hibah 赠与隔离长达18个月遗产冻结",
+        pambPlan: "PRUBSN WarisanPlus + PRUBSN AnugerahPlus (Shariah Hibah)",
+        aiaPlan: "AIA Public Takaful A-Life Legasi + A-Life Ikhtiar",
+        customerReply:
+          "“非常感谢精美的祝贺卡！AIA Public Takaful 刚报了 A-Life Legasi，PRUBSN WarisanPlus 在 Hibah 传承上有什么优势？”",
+        cardHeadline: "祝贺 Engineering Sdn Bhd 业绩长虹、家族福泽绵长！🌟",
+        cardChips: [
+          "祝贺 Engineering Sdn Bhd 业绩长虹、家族福泽绵长！🌟",
+          "愿事业兴旺、家族和谐传承世代平安！🕌",
+        ],
+        aiaFacts: [
+          "✓ 免 Vitality 会费稳享高额 Hibah 传承：PRUBSN WarisanPlus 绕过遗产冻结即刻直付，无需每年缴会费打卡",
+          "✓ 高达 400% 特定意外与朝圣保障（含 Umrah/Hajj 与公共枢纽）+ 罕见重症覆盖",
+          "✓ 内建 Wakaf 公益捐赠选项：守护家人 Hibah 之外可同步规划永续慈善传承",
+        ],
+        defaultWhatsapp:
+          "Haji Zulkarnain 与夫人您好！衷心祝贺贵公司创下业绩历史新高！🕌✨ 特意为您一家制作了这张专属祝贺卡。\n\n顺带分享：通过 PRUBSN WarisanPlus 指定 Hibah 受益人，可绕过漫长遗产冻结即刻注入免税流动现金，并享高达 400% 朝圣与意外保障，稳护公司资产。方便发一份 2 分钟简报给您参考吗？😊",
+        defaultEmail:
+          "主题：清真家族传承客观对比：PRUBSN WarisanPlus vs AIA Public Takaful (A-Life Legasi)\n\nHaji Zulkarnain 您好：\n针对您的企业与家族传承需求，以下是 PRUBSN WarisanPlus 相比 AIA A-Life Legasi 的 3 大客观条款优势：\n1. 免遗产冻结 Hibah 即刻直付：无需像友邦每年缴付 Vitality 会费打卡即可稳锁高额传承杠杆。\n2. 高达 400% 特定意外与朝圣保障：涵盖 Umrah/Hajj 及公共交通高额护盾。\n3. 兼顾 Faraid 家族和谐与 Wakaf 慈善传承：无需变卖公司资产即可清偿负债。\n\n下周与您和夫人喝杯 15 分钟咖啡一起对照利益表吧！",
+      },
+      yue: {
+        shortLabel: "清真企業 Hibah 傳承",
+        rivalBrand: "AIA Public Takaful",
+        customerName: "Haji Zulkarnain & Aishah (46歲, 莎阿南企業主)",
+        existingGap: "RM 900萬物業同公司股份聯名持有 • 缺乏免凍結即刻到賬嘅 Hibah 流動現金",
+        lifeEvent: "Engineering Sdn Bhd 業績創新高；希望透過 Hibah 贈與避開 18 個月遺產凍結",
+        pambPlan: "PRUBSN WarisanPlus + PRUBSN AnugerahPlus (Shariah Hibah)",
+        aiaPlan: "AIA Public Takaful A-Life Legasi + A-Life Ikhtiar",
+        customerReply:
+          "「多謝晒張咁靚嘅賀卡！AIA Public Takaful 啱啱 quote 咗 A-Life Legasi，PRUBSN WarisanPlus 喺 Hibah 傳承上有咩優勢？」",
+        cardHeadline: "恭賀 Engineering Sdn Bhd 業績長虹、家族福澤綿長！🌟",
+        cardChips: [
+          "恭賀 Engineering Sdn Bhd 業績長虹、家族福澤綿長！🌟",
+          "願事業興旺、家族和諧傳承世代平安！🕌",
+        ],
+        aiaFacts: [
+          "✓ 免 Vitality 會費穩享高額 Hibah 傳承：PRUBSN WarisanPlus 免遺產凍結即刻直付，唔使年年交會費打卡",
+          "✓ 高達 400% 特定意外同朝聖保障（包埋 Umrah/Hajj 同公共交通）+ 罕見危疾保障",
+          "✓ 內置 Wakaf 公益捐贈選項：守護屋企人 Hibah 同時規劃永續慈善傳承",
+        ],
+        defaultWhatsapp:
+          "Haji Zulkarnain 同夫人你好！恭喜晒貴公司今年創下業績新高！🕌✨ 特登整咗呢張賀卡送俾你哋。\n\n順便提一提：透過 PRUBSN WarisanPlus 指定 Hibah 受益人，可以免卻漫長遺產凍結即刻注入現金，仲包高達 400% 朝聖同意外保障，保護公司股份唔使變賣。Send 份 2 分鐘懶人包俾你睇下好嗎？😊",
+        defaultEmail:
+          "主題：清真家族傳承客觀比較：PRUBSN WarisanPlus vs AIA Public Takaful (A-Life Legasi)\n\nHi Haji Zulkarnain：\n以下係 PRUBSN WarisanPlus 對比 AIA A-Life Legasi 嘅 3 個真實條款優勢：\n1. 免遺產凍結 Hibah 即刻直付：唔使好似 AIA Vitality 咁年年交會費打卡都可以鎖定高額傳承。\n2. 高達 400% 特定意外同朝聖保障：包埋 Umrah/Hajj 同公共交通高額保障。\n3. 守護 Faraid 家族和諧兼內置 Wakaf 慈善傳承。\n\n下個禮拜同你和夫人飲杯 15 分鐘咖啡一齊睇下張對比表啦！",
+      },
+      ms: {
+        shortLabel: "Hibah Takaful & Pusaka",
+        rivalBrand: "AIA Public Takaful",
+        customerName: "Tuan Haji Zulkarnain & Puan Aishah (46, Shah Alam)",
+        existingGap: "Aset perniagaan & hartanah RM 9J terikat nama bersama • Tiada tunai segera Hibah Takaful",
+        lifeEvent: "Engineering Sdn Bhd mencatat rekod jualan tertinggi; mahu kecairan Hibah elak pembekuan pusaka 18 bulan",
+        pambPlan: "PRUBSN WarisanPlus + PRUBSN AnugerahPlus (Shariah Hibah)",
+        aiaPlan: "AIA Public Takaful A-Life Legasi + A-Life Ikhtiar",
+        customerReply:
+          "\"Alhamdulillah, terima kasih atas kad ini! AIA Public Takaful mencadangkan A-Life Legasi. Bagaimana PRUBSN WarisanPlus lebih baik untuk Hibah?\"",
+        cardHeadline: "Tahniah & Mabruk atas Pencapaian Cemerlang Engineering Sdn Bhd! 🌟",
+        cardChips: [
+          "Tahniah & Mabruk atas Pencapaian Cemerlang Engineering Sdn Bhd! 🌟",
+          "Semoga Terus Diberkati & Harmoni Sekeluarga! 🕌",
+        ],
+        aiaFacts: [
+          "✓ Bayaran Hibah Bersyarat Segera Di Luar Pembekuan Pusaka tanpa perlu membayar yuran tahunan AIA Vitality",
+          "✓ Perlindungan Kemalangan Sehingga 400% (termasuk semasa Umrah/Haji & pengangkutan awam) terbina dalam sijil",
+          "✓ Pilihan Wakaf & Amal Jariah terbina bersama penamaan Hibah keluarga untuk pahala berpanjangan",
+        ],
+        defaultWhatsapp:
+          "Assalamualaikum & Tahniah Tuan Haji Zulkarnain & Puan Aishah atas pencapaian cemerlang Engineering Sdn Bhd! 🕌✨ Saya reka kad khas ini untuk keluarga Tuan Haji.\n\nInfo ringkas: PRUBSN WarisanPlus menyuntik tunai segera Hibah patuh Syariah di luar pembekuan pusaka berserta perlindungan kemalangan sehingga 400% (termasuk Umrah/Haji) tanpa perlu menjual aset perniagaan. Boleh saya kongsikan ringkasan 2 minit? 😊",
+        defaultEmail:
+          "Subjek: Perbandingan Fakta Hibah & Legasi: PRUBSN WarisanPlus lwn AIA Public Takaful A-Life Legasi\n\nAssalamualaikum Tuan Haji Zulkarnain & Puan Aishah,\nBerikut ialah 3 kelebihan berfakta PRUBSN WarisanPlus berbanding AIA A-Life Legasi:\n1. Bayaran Hibah Segera Tanpa Pembekuan Pusaka: Kecairan pantas patuh Syariah tanpa yuran tahunan AIA Vitality.\n2. Perlindungan Kemalangan Sehingga 400%: Termasuk perlindungan semasa menunaikan Umrah/Haji & pengangkutan awam.\n3. Pilihan Wakaf & Keharmonian Faraid: Menyelesaikan liabiliti syarikat tanpa jualan paksa aset.\n\nJom minum kopi 15 minit bersama Puan Aishah minggu depan untuk semak jadual perbandingan!",
+      },
+      ta: {
+        shortLabel: "தகாஃபுல் Hibah பாதுகாப்பு",
+        rivalBrand: "AIA Public Takaful",
+        customerName: "Tuan Haji Zulkarnain & Puan Aishah (46, Shah Alam)",
+        existingGap: "RM 9M தொழில் & சொத்துக்கள் கூட்டுப் பெயரில் • உடனடி Hibah ரொக்கப் பாதுகாப்பு இல்லை",
+        lifeEvent: "Engineering Sdn Bhd சாதனை வருவாய்; 18 மாத சொத்து முடக்கத்தைத் தவிர்க்க Shariah Hibah தேவை",
+        pambPlan: "PRUBSN WarisanPlus + PRUBSN AnugerahPlus (Shariah Hibah)",
+        aiaPlan: "AIA Public Takaful A-Life Legasi + A-Life Ikhtiar",
+        customerReply:
+          "\"வாழ்த்து அட்டைக்கு நன்றி! AIA Public Takaful எங்களுக்கு A-Life Legasi திட்டத்தை பரிந்துரைத்தது. Hibah பாதுகாப்பிற்கு PRUBSN WarisanPlus எவ்வாறு சிறந்தது?\"",
+        cardHeadline: "Engineering Sdn Bhd சாதனை வெற்றிக்கு மனமார்ந்த வாழ்த்துகள்! 🌟",
+        cardChips: [
+          "Engineering Sdn Bhd சாதனை வெற்றிக்கு மனமார்ந்த வாழ்த்துகள்! 🌟",
+          "குடும்ப ஒற்றுமையும் தொழில் வளமும் என்றென்றும் நிலைக்க வாழ்த்துகள்! 🕌",
+        ],
+        aiaFacts: [
+          "✓ சொத்து முடக்கமின்றி உடனடி Hibah ரொக்கப் பட்டுவாடா (AIA Vitality வருடாந்திர கட்டணம் தேவையில்லை)",
+          "✓ Umrah/Hajj மற்றும் பொதுப் போக்குவரத்து உட்பட 400% வரை விபத்து பாதுகாப்பு",
+          "✓ குடும்ப Hibah உடன் இணைந்த Wakaf தர்ம நன்கொடை வசதி",
+        ],
+        defaultWhatsapp:
+          "Tuan Haji Zulkarnain & Puan Aishah அவர்களுக்கு வணக்கம்! Engineering Sdn Bhd சாதனை வெற்றிக்கு வாழ்த்துகள்! 🕌✨ உங்கள் குடும்பத்திற்காக இந்த சிறப்பு அட்டையை உருவாக்கினேன்.\n\nPRUBSN WarisanPlus மூலம் சொத்து முடக்கமின்றி உடனடி Shariah Hibah ரொக்கப் பாதுகாப்பும் 400% வரை விபத்து காப்பீடும் பெறலாம். 2 நிமிட சுருக்கத்தை அனுப்பட்டுமா? 😊",
+        defaultEmail:
+          "பொருள்: Hibah ஒப்பீடு: PRUBSN WarisanPlus vs AIA Public Takaful A-Life Legasi\n\nவணக்கம் Tuan Haji Zulkarnain & Puan Aishah,\nAIA A-Life Legasi திட்டத்தை விட PRUBSN WarisanPlus சிறந்ததாக இருப்பதற்கான 3 காரணங்கள்:\n1. சொத்து முடக்கமின்றி உடனடி Hibah பட்டுவாடா (AIA Vitality கட்டணம் இல்லை).\n2. Umrah/Hajj உட்பட 400% வரை விபத்து பாதுகாப்பு.\n3. தொழில் சொத்துக்களை விற்காமல் பாதுகாக்கும் Faraid & Wakaf வசதி.\n\nஅடுத்த வாரம் 15 நிமிட சந்திப்பில் இரு அட்டவணைகளையும் ஒப்பிட்டுப் பார்ப்போம்!",
+      },
+    },
+  },
+];
+
+// Curated Top-5 Malaysian Advisor Playbook Cases (hiding crowded multi-dozen rosters on mobile)
+const C3_TOP5_SEATS = [0, 1, 4, 6, 5];
+
+const C3_TOP5_CASES_META = [
+  {
+    seat: 0,
+    id: "newborn_baby",
+    icon: "🍼",
+    clientName: "Tan Wei Ming & Chloe",
+    labels: {
+      en: "Newborn Baby",
+      "zh-CN": "新生宝宝",
+      yue: "初生 BB",
+      ms: "Bayi Baharu",
+      ta: "பிறந்த குழந்தை",
+    },
+  },
+  {
+    seat: 1,
+    id: "ci_health_scare",
+    icon: "❤️‍🩹",
+    clientName: "Jason Khoo",
+    labels: {
+      en: "Age-39 CI Wake-Up",
+      "zh-CN": "39岁重疾警钟",
+      yue: "39歲危疾警鐘",
+      ms: "Kejutan CI Umur 39",
+      ta: "வயது 39 CI எச்சரிக்கை",
+    },
+  },
+  {
+    seat: 4,
+    id: "sme_expansion",
+    icon: "🏭",
+    clientName: "Dato' Sri Raymond Tan",
+    labels: {
+      en: "SME RM 6M Keyman",
+      "zh-CN": "企业 RM 600万担保",
+      yue: "廠家 RM 600萬擔保",
+      ms: "Jaminan PKS RM 6J",
+      ta: "RM 6M நிறுவன பாதுகாப்பு",
+    },
+  },
+  {
+    seat: 6,
+    id: "takaful_hibah_estate",
+    icon: "🕌",
+    clientName: "Tuan Haji Zulkarnain & Puan Aishah",
+    labels: {
+      en: "Shariah Hibah Estate",
+      "zh-CN": "清真企业 Hibah",
+      yue: "清真企業 Hibah",
+      ms: "Hibah Takaful PKS",
+      ta: "தகாஃபுல் Hibah",
+    },
+  },
+  {
+    seat: 5,
+    id: "uni_retirement_50",
+    icon: "🎓",
+    clientName: "Vincent Ong & Elaine Khor",
+    labels: {
+      en: "Age-50 Med & Uni",
+      "zh-CN": "50岁退休与留学",
+      yue: "50歲退休兼留學",
+      ms: "Umur 50 & Universiti",
+      ta: "வயது 50 & பல்கலைக்கழகம்",
+    },
+  },
 ];
 
 function _pickAssignedScenarioIdx(agentId) {
@@ -1648,7 +1959,43 @@ function _pickAssignedScenarioIdx(agentId) {
   for (let i = 0; i < agentId.length; i++) {
     hash = (hash * 31 + agentId.charCodeAt(i)) % 997;
   }
-  return hash % PAMB_C3_SCENARIOS.length;
+  return hash;
+}
+
+function _summarizeFactClause(rawFact) {
+  const clean = String(rawFact || "").replace(/^✓\s*/, "").trim();
+  const colonIdx = clean.indexOf(":");
+  const fullColonIdx = clean.indexOf("：");
+  const splitAt =
+    colonIdx > 8 && colonIdx <= 66
+      ? colonIdx
+      : fullColonIdx > 4 && fullColonIdx <= 36
+      ? fullColonIdx
+      : -1;
+  if (splitAt > 0) {
+    return {
+      summary: clean.slice(0, splitAt).trim(),
+      detail: clean.slice(splitAt + 1).trim(),
+      full: clean,
+    };
+  }
+  const parenIdx = clean.search(/\s*[\(（]/);
+  if (parenIdx > 10 && parenIdx <= 66) {
+    return {
+      summary: clean.slice(0, parenIdx).trim(),
+      detail: clean.slice(parenIdx).trim(),
+      full: clean,
+    };
+  }
+  if (clean.length <= 65) {
+    return { summary: clean, detail: "", full: clean };
+  }
+  const cut = clean.slice(0, 62).replace(/\s+\S*$/, "");
+  return {
+    summary: `${cut || clean.slice(0, 62)}…`,
+    detail: clean,
+    full: clean,
+  };
 }
 
 function _getLocalizedScenario(scObj, lang) {
@@ -1691,17 +2038,35 @@ window.Challenge3ParticipantView = function ({
     }
   });
 
-  const [scenarioIdx, setScenarioIdx] = useState(() =>
-    typeof savedInit.scenarioIdx === "number"
-      ? savedInit.scenarioIdx
-      : _pickAssignedScenarioIdx(agentId)
-  );
+  const defaultTop5Seat = C3_TOP5_SEATS[_pickAssignedScenarioIdx(agentId) % C3_TOP5_SEATS.length];
+
   const [seatOverride, setSeatOverride] = useState(() =>
-    typeof savedInit.seatOverride === "number" ? savedInit.seatOverride : null
+    typeof savedInit.seatOverride === "number" && C3_TOP5_SEATS.includes(savedInit.seatOverride)
+      ? savedInit.seatOverride
+      : defaultTop5Seat
+  );
+
+  const seatToFallbackIdx = (targetSeat) => {
+    const meta = C3_TOP5_CASES_META.find((m) => m.seat === targetSeat);
+    if (meta) {
+      const foundIdx = PAMB_C3_SCENARIOS.findIndex((s) => s.id === meta.id);
+      if (foundIdx >= 0) return foundIdx;
+    }
+    return 0;
+  };
+
+  const [scenarioIdx, setScenarioIdx] = useState(() =>
+    seatToFallbackIdx(
+      typeof savedInit.seatOverride === "number" && C3_TOP5_SEATS.includes(savedInit.seatOverride)
+        ? savedInit.seatOverride
+        : defaultTop5Seat
+    )
   );
   const [serverScenario, setServerScenario] = useState(null);
-  const [archetypeList, setArchetypeList] = useState([]);
   const [showCasePicker, setShowCasePicker] = useState(false);
+
+  const activeTop5Slot = Math.max(0, C3_TOP5_SEATS.indexOf(seatOverride));
+  const activeTop5Meta = C3_TOP5_CASES_META[activeTop5Slot] || C3_TOP5_CASES_META[0];
 
   const rawFallbackSc = PAMB_C3_SCENARIOS[scenarioIdx % PAMB_C3_SCENARIOS.length] || PAMB_C3_SCENARIOS[0];
   const fallbackSc = _getLocalizedScenario(rawFallbackSc, normLang);
@@ -1748,6 +2113,10 @@ window.Challenge3ParticipantView = function ({
   const [selectedHeadlineIdx, setSelectedHeadlineIdx] = useState(() => savedInit.selectedHeadlineIdx || 0);
   const [cardPersonalNote, setCardPersonalNote] = useState(() => savedInit.cardPersonalNote || "");
   const [cardUrl, setCardUrl] = useState(() => savedInit.cardUrl || existingSubmission?.imageAfter || null);
+  const [showStep1Pickers, setShowStep1Pickers] = useState(
+    () => !(savedInit.cardUrl || existingSubmission?.imageAfter)
+  );
+  const [showCardTouch, setShowCardTouch] = useState(() => Boolean((savedInit.cardPersonalNote || "").trim()));
 
   // Step 2 State
   const [openingToneId, setOpeningToneId] = useState(() => savedInit.openingToneId || "warm_zero_push");
@@ -1758,6 +2127,10 @@ window.Challenge3ParticipantView = function ({
   const [whatsappText, setWhatsappText] = useState(
     () => savedInit.whatsappText || existingSubmission?.whatsappMessage || ""
   );
+  const [showStep2Pickers, setShowStep2Pickers] = useState(
+    () => !(savedInit.whatsappText || existingSubmission?.whatsappMessage)
+  );
+  const [showWaTouch, setShowWaTouch] = useState(() => Boolean((savedInit.waPersonalNote || "").trim()));
 
   // Step 3 State
   const [selectedFactIdxs, setSelectedFactIdxs] = useState(() =>
@@ -1768,6 +2141,17 @@ window.Challenge3ParticipantView = function ({
   const [emailText, setEmailText] = useState(
     () => savedInit.emailText || existingSubmission?.aiaComparisonEmail || ""
   );
+  const [showStep3Pickers, setShowStep3Pickers] = useState(
+    () => !(savedInit.emailText || existingSubmission?.aiaComparisonEmail)
+  );
+  const [showEmailTouch, setShowEmailTouch] = useState(() => Boolean((savedInit.emailPersonalNote || "").trim()));
+  const [expandedFactIdxs, setExpandedFactIdxs] = useState([]);
+
+  // Collapsible Brief Card & Post-Submit Tab State
+  const [showCaseBrief, setShowCaseBrief] = useState(
+    () => (savedInit.step || 1) === 1 && !(savedInit.cardUrl || existingSubmission?.imageAfter)
+  );
+  const [postSubmitTab, setPostSubmitTab] = useState("whatsapp");
 
   // Final Submit State (restored from server submission or localStorage if already completed)
   const [submitted, setSubmitted] = useState(() => Boolean(isCompleted && existingSubmission));
@@ -1856,7 +2240,7 @@ window.Challenge3ParticipantView = function ({
     startTime,
   ]);
 
-  // Fetch assigned unique seat scenario (out of 56 unique seats across 16 archetypes)
+  // Fetch assigned curated seat scenario from backend
   useEffect(() => {
     let active = true;
     const qs = new URLSearchParams({
@@ -1872,15 +2256,19 @@ window.Challenge3ParticipantView = function ({
       .then((data) => {
         if (!active || !data || !data.scenario) return;
         setServerScenario(data.scenario);
-        if (Array.isArray(data.archetypes)) {
-          setArchetypeList(data.archetypes);
-        }
       })
       .catch(() => {});
     return () => {
       active = false;
     };
   }, [agentId, normLang, seatOverride]);
+
+  // Auto-collapse Client Brief Card whenever cardUrl is generated OR user moves to Step 2 / Step 3
+  useEffect(() => {
+    if (step === 2 || step === 3 || Boolean(cardUrl)) {
+      setShowCaseBrief(false);
+    }
+  }, [step, cardUrl]);
 
   // Preserve user's drafted messages on language toggle instead of wiping them silently
   const prevLangRef = useRef(normLang);
@@ -1931,33 +2319,36 @@ window.Challenge3ParticipantView = function ({
     setSelectedHeadlineIdx(0);
     setCardPersonalNote("");
     setCardUrl(null);
+    setShowStep1Pickers(true);
+    setShowCardTouch(false);
     setSelectedWaIdeaIdxs([0, 1]);
     setWaPersonalNote("");
     setWhatsappText("");
+    setShowStep2Pickers(true);
+    setShowWaTouch(false);
     setSelectedFactIdxs([0, 1, 2]);
     setEmailPersonalNote("");
     setEmailText("");
+    setShowStep3Pickers(true);
+    setShowEmailTouch(false);
+    setExpandedFactIdxs([]);
+    setShowCaseBrief(true);
     setLangChangedBanner(false);
     setStep(1);
   };
 
   const handleSelectSeat = (targetSeat) => {
-    setSeatOverride(targetSeat);
-    setScenarioIdx(targetSeat % PAMB_C3_SCENARIOS.length);
+    const safeSeat = C3_TOP5_SEATS.includes(targetSeat) ? targetSeat : C3_TOP5_SEATS[0];
+    setSeatOverride(safeSeat);
+    setScenarioIdx(seatToFallbackIdx(safeSeat));
     setShowCasePicker(false);
     resetDraftsForNewCase();
   };
 
   const handleRotateScenario = () => {
-    const curSeat =
-      seatOverride !== null
-        ? seatOverride
-        : typeof sc.seatIndex === "number"
-        ? sc.seatIndex
-        : scenarioIdx;
-    const totalSeats = sc.totalUniqueSeats || 56;
-    // Jump +1 seat (interleaved across all 16 archetypes!)
-    handleSelectSeat((curSeat + 1) % totalSeats);
+    const curSlot = Math.max(0, C3_TOP5_SEATS.indexOf(seatOverride));
+    const nextSeat = C3_TOP5_SEATS[(curSlot + 1) % C3_TOP5_SEATS.length];
+    handleSelectSeat(nextSeat);
   };
 
   const activeHeadline =
@@ -2030,6 +2421,8 @@ window.Challenge3ParticipantView = function ({
       const data = await res.json();
       if (data.greetingCardDataUrl) {
         setCardUrl(data.greetingCardDataUrl);
+        setShowStep1Pickers(false);
+        setShowCaseBrief(false);
       }
     } catch (e) {}
     setIsBusy(false);
@@ -2063,11 +2456,16 @@ window.Challenge3ParticipantView = function ({
       const data = await res.json();
       if (typeof data.firstTouchMessage === "string" && data.firstTouchMessage.trim()) {
         setWhatsappText(data.firstTouchMessage.trim());
+        setShowStep2Pickers(false);
       } else if (!whatsappText) {
         setWhatsappText(sc.defaultWhatsapp);
+        setShowStep2Pickers(false);
       }
     } catch (e) {
-      if (!whatsappText) setWhatsappText(sc.defaultWhatsapp);
+      if (!whatsappText) {
+        setWhatsappText(sc.defaultWhatsapp);
+        setShowStep2Pickers(false);
+      }
     }
     setIsBusy(false);
   };
@@ -2100,11 +2498,16 @@ window.Challenge3ParticipantView = function ({
       const data = await res.json();
       if (typeof data.aiaComparisonEmail === "string" && data.aiaComparisonEmail.trim()) {
         setEmailText(data.aiaComparisonEmail.trim());
+        setShowStep3Pickers(false);
       } else if (!emailText) {
         setEmailText(sc.defaultEmail);
+        setShowStep3Pickers(false);
       }
     } catch (e) {
-      if (!emailText) setEmailText(sc.defaultEmail);
+      if (!emailText) {
+        setEmailText(sc.defaultEmail);
+        setShowStep3Pickers(false);
+      }
     }
     setIsBusy(false);
   };
@@ -2356,99 +2759,163 @@ window.Challenge3ParticipantView = function ({
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="bg-emerald-50/50 border border-emerald-200 rounded-xl p-2.5">
-            <div className="text-xs font-extrabold text-emerald-900 mb-1">
-              {ui.waFinalHeader}
-            </div>
-            <div className="text-xs sm:text-sm text-slate-900 whitespace-pre-line leading-snug max-h-36 overflow-y-auto bg-white p-2.5 rounded-lg border border-emerald-200">
-              {submittedData.whatsappText}
-            </div>
+        {/* Clean 2-Tab Switcher for Submitted WhatsApp vs. Comparison Email */}
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
+            <button
+              type="button"
+              onClick={() => setPostSubmitTab("whatsapp")}
+              className={`py-2 px-2.5 rounded-lg text-xs font-extrabold transition-all truncate ${
+                postSubmitTab === "whatsapp"
+                  ? "bg-white text-emerald-900 shadow-sm border border-emerald-300"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              💬 WhatsApp
+            </button>
+            <button
+              type="button"
+              onClick={() => setPostSubmitTab("email")}
+              className={`py-2 px-2.5 rounded-lg text-xs font-extrabold transition-all truncate ${
+                postSubmitTab === "email"
+                  ? "bg-white text-blue-950 shadow-sm border border-blue-300"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              {adaptRivalLabel("📧 vs. AIA Email")}
+            </button>
           </div>
 
-          <div className="bg-blue-50/50 border border-blue-200 rounded-xl p-2.5">
-            <div className="text-xs font-extrabold text-blue-950 mb-1">
-              {adaptRivalLabel(ui.emailFinalHeader)}
+          {postSubmitTab === "whatsapp" ? (
+            <div className="bg-emerald-50/50 border border-emerald-200 rounded-xl p-2.5">
+              <div className="text-xs font-extrabold text-emerald-900 mb-1">
+                {ui.waFinalHeader}
+              </div>
+              <div className="text-xs sm:text-sm text-slate-900 whitespace-pre-line leading-snug max-h-44 overflow-y-auto bg-white p-2.5 rounded-lg border border-emerald-200">
+                {submittedData.whatsappText}
+              </div>
             </div>
-            <div className="text-xs sm:text-sm text-slate-900 whitespace-pre-line leading-snug max-h-36 overflow-y-auto bg-white p-2.5 rounded-lg border border-blue-200">
-              {submittedData.emailText}
+          ) : (
+            <div className="bg-blue-50/50 border border-blue-200 rounded-xl p-2.5">
+              <div className="text-xs font-extrabold text-blue-950 mb-1">
+                {adaptRivalLabel(ui.emailFinalHeader)}
+              </div>
+              <div className="text-xs sm:text-sm text-slate-900 whitespace-pre-line leading-snug max-h-44 overflow-y-auto bg-white p-2.5 rounded-lg border border-blue-200">
+                {submittedData.emailText}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );
   }
 
+  const clientShortName = (sc.customerName || activeTop5Meta.clientName || "").split("(")[0].trim();
+  const clientShortTitle =
+    sc.shortLabel || activeTop5Meta.labels[normLang] || activeTop5Meta.labels.en;
+
   return (
-    <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-4 md:p-5 shadow-md space-y-3.5">
-      {/* Top Client Header + Unique Seat Badge + Case Switcher */}
-      <div className="space-y-2 border-b border-slate-200 pb-2.5">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="px-2.5 py-1 rounded-full bg-red-50 text-[#ed1b2e] border border-red-200 text-xs font-extrabold">
-              {ui.badge}
-            </span>
-            {typeof sc.seatIndex === "number" && (
-              <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-900 border border-amber-300 text-[11px] font-extrabold">
-                Case #{sc.seatIndex + 1}/{sc.totalUniqueSeats || 56}
-              </span>
-            )}
-            <span className="text-sm sm:text-base font-extrabold text-slate-900">
-              {sc.icon} {ui.assignedCase} {sc.customerName}
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            {archetypeList.length > 0 && (
-              <button
-                type="button"
-                onClick={() => setShowCasePicker((v) => !v)}
-                className="px-2.5 py-1.5 rounded-xl bg-white hover:bg-red-50 text-slate-700 hover:text-[#ed1b2e] border border-slate-300 text-xs font-extrabold transition-all"
-              >
-                📂 16 Scenarios {showCasePicker ? "▲" : "▼"}
-              </button>
-            )}
+    <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-2.5 sm:p-4 shadow-md space-y-2.5">
+      {/* Unified Auto-Collapsing Mobile Client Brief Card + Curated Top-5 Switcher */}
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
+        <div className="flex items-center justify-between gap-1.5 min-h-[36px]">
+          <button
+            type="button"
+            onClick={() => setShowCaseBrief((v) => !v)}
+            className="flex items-center gap-1.5 min-w-0 text-left flex-1"
+          >
+            <span className="text-base shrink-0">{sc.icon || activeTop5Meta.icon}</span>
+            <div className="min-w-0 flex-1">
+              <div className="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
+                {clientShortName} <span className="text-[#ed1b2e]">• {clientShortTitle}</span>
+              </div>
+            </div>
+          </button>
+
+          <div className="flex items-center gap-1 shrink-0">
+            <button
+              type="button"
+              onClick={() => setShowCaseBrief((v) => !v)}
+              className={`px-2 py-1 rounded-lg border text-[11px] font-extrabold transition-all ${
+                showCaseBrief
+                  ? "bg-red-50 border-red-200 text-[#ed1b2e]"
+                  : "bg-white border-slate-300 text-slate-700 hover:border-[#ed1b2e]"
+              }`}
+            >
+              {ui.caseInfoBtn} {showCaseBrief ? "▴" : "▾"}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowCasePicker((v) => !v)}
+              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold transition-all"
+            >
+              {ui.switchCase} ({activeTop5Slot + 1}/5) {showCasePicker ? "▴" : "▾"}
+            </button>
+
             <button
               type="button"
               onClick={handleRotateScenario}
-              className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-xs font-extrabold transition-all"
+              title="Next curated case"
+              aria-label="Next curated case"
+              className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-slate-700 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold transition-all"
             >
-              {ui.switchCase}
+              ↻
             </button>
           </div>
         </div>
 
-        {/* Optional 16-Archetype Quick Case Picker */}
-        {showCasePicker && archetypeList.length > 0 && (
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1.5 max-h-56 overflow-y-auto">
-            {archetypeList.map((item) => {
-              const isCurrent = item.id === sc.id;
+        {/* Curated Top-5 Popover / List */}
+        {showCasePicker && (
+          <div className="bg-white border border-slate-200 rounded-xl p-1.5 grid grid-cols-1 sm:grid-cols-5 gap-1 shadow-sm">
+            {C3_TOP5_CASES_META.map((item, idx) => {
+              const isCurrent = item.seat === seatOverride;
+              const locLabel = item.labels[normLang] || item.labels.en;
               return (
                 <button
-                  key={item.id}
+                  key={item.seat}
                   type="button"
-                  onClick={() => handleSelectSeat(item.seatIndex)}
-                  className={`p-2 rounded-lg border text-left text-xs font-bold transition-all ${
+                  onClick={() => handleSelectSeat(item.seat)}
+                  className={`px-2.5 py-1.5 rounded-lg border text-left text-xs font-bold transition-all flex items-center justify-between sm:block gap-2 ${
                     isCurrent
                       ? "bg-[#ed1b2e] text-white border-[#ed1b2e]"
-                      : "bg-white hover:bg-red-50 text-slate-800 border-slate-200"
+                      : "bg-slate-50 hover:bg-red-50 text-slate-800 border-slate-200"
                   }`}
                 >
                   <div className="truncate font-extrabold">
-                    {item.icon} {item.shortLabel}
+                    {idx + 1}. {item.icon} {locLabel}
                   </div>
                   <div className={`text-[10px] truncate ${isCurrent ? "text-red-100" : "text-slate-500"}`}>
-                    {item.customerName.split("(")[0].trim()} • vs {item.rivalBrand.replace(" Malaysia", "")}
+                    {item.clientName}
                   </div>
                 </button>
               );
             })}
           </div>
         )}
+
+        {/* Expandable 3 Ultra-Concise 1-Line Bullets */}
+        {showCaseBrief && (
+          <div className="bg-white border border-slate-200 rounded-lg px-2.5 py-2 space-y-1 text-[11px] sm:text-xs leading-snug">
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-extrabold text-[#ed1b2e] shrink-0">{ui.lifeEventLabel}:</span>
+              <span className="text-slate-800 font-medium line-clamp-1">{sc.lifeEvent}</span>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-extrabold text-slate-700 shrink-0">{ui.gapLabel}:</span>
+              <span className="text-slate-700 line-clamp-1">{sc.existingGap}</span>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-extrabold text-[#ed1b2e] shrink-0">{ui.offerLabel}:</span>
+              <span className="text-slate-900 font-bold line-clamp-1">{sc.pambPlan}</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {langChangedBanner && (
-        <div className="bg-amber-50 border border-amber-300 rounded-xl px-3 py-2 flex items-center justify-between gap-2 text-xs font-bold text-amber-950">
-          <span>🌐 Language switched — your current draft was safely kept! Tap Re-Draft anytime to regenerate in this language.</span>
+        <div className="bg-amber-50 border border-amber-300 rounded-xl px-3 py-1.5 flex items-center justify-between gap-2 text-xs font-bold text-amber-950">
+          <span>🌐 Draft kept — tap Re-Draft anytime to translate.</span>
           <button
             type="button"
             onClick={() => setLangChangedBanner(false)}
@@ -2459,28 +2926,17 @@ window.Challenge3ParticipantView = function ({
         </div>
       )}
 
-      {/* Clean 3-Point Client Story Strip (No Step 3 Rival Spoiler!) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
-          <span className="font-extrabold text-[#ed1b2e] block mb-0.5">{ui.lifeEventLabel}</span>
-          <span className="text-slate-900 font-semibold leading-snug">{sc.lifeEvent}</span>
-        </div>
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
-          <span className="font-extrabold text-slate-700 block mb-0.5">{ui.gapLabel}</span>
-          <span className="text-slate-800 leading-snug">{sc.existingGap}</span>
-        </div>
-        <div className="bg-red-50/60 border border-red-200 rounded-xl p-2.5">
-          <span className="font-extrabold text-[#ed1b2e] block mb-0.5">{ui.offerLabel}</span>
-          <span className="text-slate-900 font-bold leading-snug">{sc.pambPlan}</span>
-        </div>
-      </div>
-
-      {/* 3-Step Navigation Bar */}
-      <div className="grid grid-cols-3 gap-2">
+      {/* 3-Step Navigation Bar (375px-safe concise labels on mobile, full labels on sm+) */}
+      <div className="grid grid-cols-3 gap-1.5">
         {[
-          { n: 1, label: ui.step1Tab, done: !!cardUrl },
-          { n: 2, label: ui.step2Tab, done: !!whatsappText.trim() },
-          { n: 3, label: adaptRivalLabel(ui.step3Tab), done: !!emailText.trim() },
+          { n: 1, short: ui.step1Tab, full: ui.step1TabFull || ui.step1Tab, done: !!cardUrl },
+          { n: 2, short: ui.step2Tab, full: ui.step2TabFull || ui.step2Tab, done: !!whatsappText.trim() },
+          {
+            n: 3,
+            short: adaptRivalLabel(ui.step3Tab),
+            full: adaptRivalLabel(ui.step3TabFull || ui.step3Tab),
+            done: !!emailText.trim(),
+          },
         ].map((s) => {
           const active = step === s.n;
           return (
@@ -2488,7 +2944,7 @@ window.Challenge3ParticipantView = function ({
               type="button"
               key={s.n}
               onClick={() => setStep(s.n)}
-              className={`py-2.5 px-2 sm:px-3 rounded-xl border text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 ${
+              className={`py-2 px-1.5 sm:px-3 rounded-xl border text-[11px] sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1 min-w-0 ${
                 active
                   ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow"
                   : s.done
@@ -2496,8 +2952,9 @@ window.Challenge3ParticipantView = function ({
                   : "bg-slate-50 border-slate-200 text-slate-700 hover:border-[#ed1b2e]"
               }`}
             >
-              <span>{s.done && !active ? "✓" : ""}</span>
-              <span className="truncate">{s.label}</span>
+              {s.done && !active && <span className="shrink-0">✓</span>}
+              <span className="truncate sm:hidden">{s.short}</span>
+              <span className="hidden sm:inline truncate">{s.full}</span>
             </button>
           );
         })}
@@ -2505,103 +2962,143 @@ window.Challenge3ParticipantView = function ({
 
       {/* STEP 1: DOOR-OPENER GREETING CARD */}
       {step === 1 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
-          <div className="text-sm sm:text-base font-extrabold text-slate-900">
-            {ui.step1Title}
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="text-xs font-extrabold text-slate-700">{ui.pickVisualStyle}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {ui.visualStyles.map((vs) => {
-                const active = cardStyleId === vs.id;
-                return (
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2.5">
+          {cardUrl && !showStep1Pickers ? (
+            <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
+              <div className="text-xs font-extrabold text-slate-800 truncate">
+                {ui.cardSettingsBar} <span className="text-slate-500 font-semibold">• {activeStyleObj.label}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowStep1Pickers(true)}
+                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-[#ed1b2e] border border-slate-300 text-xs font-extrabold shrink-0"
+              >
+                {ui.editBtn}
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <div className="text-xs sm:text-sm font-extrabold text-slate-900">
+                  {ui.step1Title}
+                </div>
+                {cardUrl && (
                   <button
-                    key={vs.id}
                     type="button"
-                    onClick={() => setCardStyleId(vs.id)}
-                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
-                      active
-                        ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
-                        : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
-                    }`}
+                    onClick={() => setShowStep1Pickers(false)}
+                    className="text-[11px] font-extrabold text-slate-500 hover:text-slate-800"
                   >
-                    {vs.label}
+                    {ui.hideBtn} ▴
                   </button>
-                );
-              })}
-            </div>
-          </div>
+                )}
+              </div>
 
-          <div className="space-y-1.5">
-            <div className="text-xs font-extrabold text-slate-700">{ui.pickHeadline}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {(sc.cardChips || [sc.cardHeadline]).map((hl, idx) => {
-                const active = selectedHeadlineIdx === idx;
-                return (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setSelectedHeadlineIdx(idx)}
-                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-bold transition-all ${
-                      active
-                        ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
-                        : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
-                    }`}
-                  >
-                    {active ? "✓ " : ""}{hl}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+              <div className="space-y-1">
+                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickVisualStyle}</div>
+                <div className="grid grid-cols-3 gap-1.5">
+                  {ui.visualStyles.map((vs) => {
+                    const active = cardStyleId === vs.id;
+                    return (
+                      <button
+                        key={vs.id}
+                        type="button"
+                        onClick={() => setCardStyleId(vs.id)}
+                        className={`px-2 py-2 rounded-xl border text-center sm:text-left text-[11px] sm:text-xs font-extrabold leading-tight transition-all ${
+                          active
+                            ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
+                            : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
+                        }`}
+                      >
+                        {vs.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
-            <label className="block text-xs font-extrabold text-slate-900">
-              {ui.cardTouchLabel}
-            </label>
-            <div className="text-[11px] text-slate-600 leading-relaxed">
-              💡 {ui.cardTouchHint}
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {(pb.cardHints || []).map((hintTxt, hIdx) => {
-                const isUsed = cardPersonalNote === hintTxt;
-                return (
-                  <button
-                    key={hIdx}
-                    type="button"
-                    onClick={() => setCardPersonalNote(isUsed ? "" : hintTxt)}
-                    className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
-                      isUsed
-                        ? "bg-amber-100 border-amber-400 text-amber-950"
-                        : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
-                    }`}
-                  >
-                    {isUsed ? "✓ " : "+ "}{hintTxt}
-                  </button>
-                );
-              })}
-            </div>
-            <input
-              type="text"
-              value={cardPersonalNote}
-              onChange={(e) => setCardPersonalNote(e.target.value)}
-              placeholder={ui.cardTouchPlaceholder}
-              className="w-full bg-slate-50 focus:bg-white border-2 border-slate-200 focus:border-[#ed1b2e] rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:outline-none"
-            />
-          </div>
+              <div className="space-y-1">
+                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickHeadline}</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                  {(sc.cardChips || [sc.cardHeadline]).map((hl, idx) => {
+                    const active = selectedHeadlineIdx === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setSelectedHeadlineIdx(idx)}
+                        className={`px-2.5 py-2 rounded-xl border text-left text-xs font-bold leading-snug transition-all ${
+                          active
+                            ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
+                            : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
+                        }`}
+                      >
+                        {active ? "✓ " : ""}{hl}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-          <button
-            type="button"
-            onClick={handleGenerateCard}
-            disabled={isBusy}
-            className="w-full py-3.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
-          >
-            {isBusy ? ui.generatingCard : cardUrl ? ui.redrawCard : ui.generateCardBtn}
-          </button>
+              {/* Collapsed Optional Personal Touch */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setShowCardTouch((v) => !v)}
+                  className={`px-3 py-1.5 rounded-full border text-[11px] font-extrabold transition-all ${
+                    showCardTouch || cardPersonalNote.trim()
+                      ? "bg-amber-50 border-amber-300 text-amber-950"
+                      : "bg-white border-slate-300 text-slate-700 hover:border-[#ed1b2e]"
+                  }`}
+                >
+                  {cardPersonalNote.trim() ? `✓ 💡 ${cardPersonalNote.trim()}` : ui.personalTouchBtn}{" "}
+                  {showCardTouch ? "▴" : "▾"}
+                </button>
+
+                {showCardTouch && (
+                  <div className="mt-1.5 bg-white border border-slate-200 rounded-xl p-2.5 space-y-2">
+                    <div className="flex flex-wrap gap-1">
+                      {(pb.cardHints || []).map((hintTxt, hIdx) => {
+                        const isUsed = cardPersonalNote === hintTxt;
+                        return (
+                          <button
+                            key={hIdx}
+                            type="button"
+                            onClick={() => setCardPersonalNote(isUsed ? "" : hintTxt)}
+                            className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
+                              isUsed
+                                ? "bg-amber-100 border-amber-400 text-amber-950"
+                                : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
+                            }`}
+                          >
+                            {isUsed ? "✓ " : "+ "}{hintTxt}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <input
+                      type="text"
+                      value={cardPersonalNote}
+                      onChange={(e) => setCardPersonalNote(e.target.value)}
+                      placeholder={ui.cardTouchPlaceholder}
+                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-xs text-slate-900 font-medium focus:outline-none"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleGenerateCard}
+                disabled={isBusy}
+                className="w-full py-3 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+              >
+                {isBusy ? ui.generatingCard : cardUrl ? ui.redrawCard : ui.generateCardBtn}
+              </button>
+            </div>
+          )}
 
           {isBusy && (
-            <div className="bg-white border border-red-200 rounded-xl p-3 space-y-2">
+            <div className="bg-white border border-red-200 rounded-xl p-2.5 space-y-1.5">
               <div className="flex items-center justify-between text-xs font-extrabold text-[#ed1b2e]">
                 <span>{cardProgressStages[cardStageIdx] || cardProgressStages[0]}</span>
                 <span>{cardStageIdx === 0 ? "35%" : cardStageIdx === 1 ? "72%" : "92%"}</span>
@@ -2616,27 +3113,27 @@ window.Challenge3ParticipantView = function ({
           )}
 
           {cardUrl && (
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white border-2 border-emerald-300 rounded-2xl p-3.5 shadow-sm">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 bg-white border-2 border-emerald-300 rounded-2xl p-3 shadow-sm">
               <div className="relative group mx-auto md:mx-0 shrink-0">
                 <img
                   src={cardUrl}
                   alt="Generated Greeting Card"
                   title="Tap to zoom"
                   data-zoomable="true"
-                  className="h-48 sm:h-56 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md cursor-zoom-in"
+                  className="h-44 sm:h-52 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md cursor-zoom-in"
                 />
                 <span className="pointer-events-none absolute bottom-2 right-2 px-2.5 py-0.5 rounded-full bg-slate-900/75 text-white text-[10px] font-bold">
                   🔍 Tap to zoom
                 </span>
               </div>
-              <div className="flex flex-col gap-2.5 w-full md:flex-1">
-                <div className="text-xs sm:text-sm font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-3.5 py-2.5 rounded-xl">
+              <div className="flex flex-col gap-2 w-full md:flex-1">
+                <div className="text-xs font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
                   {ui.cardReadyMsg}
                 </div>
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+                  className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-sm font-extrabold shadow-md transition-all"
                 >
                   {ui.nextStep2Btn}
                 </button>
@@ -2648,16 +3145,16 @@ window.Challenge3ParticipantView = function ({
 
       {/* STEP 2: FIRST-TOUCH WHATSAPP */}
       {step === 2 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2.5">
           {cardUrl && (
-            <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
-              <div className="flex items-center gap-2.5 min-w-0">
+            <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-2.5 py-1.5">
+              <div className="flex items-center gap-2 min-w-0">
                 <img
                   src={cardUrl}
                   alt="Greeting Card Thumbnail"
                   title="Tap to zoom"
                   data-zoomable="true"
-                  className="h-10 w-auto rounded border border-[#ed1b2e] shrink-0 cursor-zoom-in hover:opacity-90"
+                  className="h-9 w-auto rounded border border-[#ed1b2e] shrink-0 cursor-zoom-in hover:opacity-90"
                 />
                 <span className="text-xs font-extrabold text-emerald-700 truncate">
                   {ui.cardAttachedBadge}
@@ -2665,7 +3162,10 @@ window.Challenge3ParticipantView = function ({
               </div>
               <button
                 type="button"
-                onClick={() => setStep(1)}
+                onClick={() => {
+                  setShowStep1Pickers(true);
+                  setStep(1);
+                }}
                 className="text-xs font-extrabold text-[#ed1b2e] hover:underline shrink-0"
               >
                 {ui.editCardBtn}
@@ -2673,113 +3173,153 @@ window.Challenge3ParticipantView = function ({
             </div>
           )}
 
-          <div className="text-sm sm:text-base font-extrabold text-slate-900">
-            {ui.step2Title}
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="text-xs font-extrabold text-slate-700">{ui.pickOpeningTone}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {ui.openingTones.map((ot) => {
-                const active = openingToneId === ot.id;
-                return (
-                  <button
-                    key={ot.id}
-                    type="button"
-                    onClick={() => setOpeningToneId(ot.id)}
-                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
-                      active
-                        ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
-                        : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
-                    }`}
-                  >
-                    {ot.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="text-xs font-extrabold text-slate-700">{ui.pickWealthHooks}</span>
+          {whatsappText && !showStep2Pickers ? (
+            <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
+              <div className="text-xs font-extrabold text-slate-800 truncate">
+                {ui.promptHooksBar} <span className="text-slate-500 font-semibold">• {activeOpeningObj.label}</span>
+              </div>
               <button
                 type="button"
-                onClick={() => setSelectedWaIdeaIdxs((pb.waIdeas || []).map((_, i) => i))}
-                className="text-xs font-extrabold text-[#ed1b2e] hover:underline"
+                onClick={() => setShowStep2Pickers(true)}
+                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-[#ed1b2e] border border-slate-300 text-xs font-extrabold shrink-0"
               >
-                {ui.selectAllIdeas}
+                {ui.editBtn}
               </button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {(pb.waIdeas || []).map((idea, idx) => {
-                const active = selectedWaIdeaIdxs.includes(idx);
-                return (
+          ) : (
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <div className="text-xs sm:text-sm font-extrabold text-slate-900">
+                  {ui.step2Title}
+                </div>
+                {whatsappText && (
                   <button
-                    key={idx}
                     type="button"
-                    onClick={() =>
-                      setSelectedWaIdeaIdxs((prev) => toggleIdxInList(prev, idx))
-                    }
-                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
-                      active
-                        ? "bg-emerald-50 border-emerald-500 text-emerald-950 shadow-sm"
-                        : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
-                    }`}
+                    onClick={() => setShowStep2Pickers(false)}
+                    className="text-[11px] font-extrabold text-slate-500 hover:text-slate-800"
                   >
-                    {active ? "✓ " : "+ "}{idea.label}
+                    {ui.hideBtn} ▴
                   </button>
-                );
-              })}
-            </div>
-          </div>
+                )}
+              </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
-            <label className="block text-xs font-extrabold text-slate-900">
-              {ui.waTouchLabel}
-            </label>
-            <div className="text-[11px] text-slate-600 leading-relaxed">
-              💡 {ui.waTouchHint}
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {(pb.waHints || []).map((hTxt, hIdx) => {
-                const isUsed = waPersonalNote === hTxt;
-                return (
+              <div className="space-y-1">
+                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickOpeningTone}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {ui.openingTones.map((ot) => {
+                    const active = openingToneId === ot.id;
+                    return (
+                      <button
+                        key={ot.id}
+                        type="button"
+                        onClick={() => setOpeningToneId(ot.id)}
+                        className={`px-2.5 py-1.5 rounded-xl border text-xs font-extrabold transition-all flex-1 min-w-[105px] ${
+                          active
+                            ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
+                            : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
+                        }`}
+                      >
+                        {ot.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-[11px] font-extrabold text-slate-700">{ui.pickWealthHooks}</span>
                   <button
-                    key={hIdx}
                     type="button"
-                    onClick={() => setWaPersonalNote(isUsed ? "" : hTxt)}
-                    className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
-                      isUsed
-                        ? "bg-amber-100 border-amber-400 text-amber-950"
-                        : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
-                    }`}
+                    onClick={() => setSelectedWaIdeaIdxs((pb.waIdeas || []).map((_, i) => i))}
+                    className="text-[11px] font-extrabold text-[#ed1b2e] hover:underline"
                   >
-                    {isUsed ? "✓ " : "+ "}{hTxt}
+                    {ui.selectAllIdeas}
                   </button>
-                );
-              })}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {(pb.waIdeas || []).map((idea, idx) => {
+                    const active = selectedWaIdeaIdxs.includes(idx);
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() =>
+                          setSelectedWaIdeaIdxs((prev) => toggleIdxInList(prev, idx))
+                        }
+                        className={`px-2.5 py-1.5 rounded-xl border text-left text-xs font-extrabold transition-all flex-1 min-w-[130px] ${
+                          active
+                            ? "bg-emerald-50 border-emerald-500 text-emerald-950 shadow-sm"
+                            : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
+                        }`}
+                      >
+                        {active ? "✓ " : "+ "}{idea.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Collapsed Optional Personal Touch */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setShowWaTouch((v) => !v)}
+                  className={`px-3 py-1.5 rounded-full border text-[11px] font-extrabold transition-all ${
+                    showWaTouch || waPersonalNote.trim()
+                      ? "bg-amber-50 border-amber-300 text-amber-950"
+                      : "bg-white border-slate-300 text-slate-700 hover:border-[#ed1b2e]"
+                  }`}
+                >
+                  {waPersonalNote.trim() ? `✓ 💡 ${waPersonalNote.trim()}` : ui.personalTouchBtn}{" "}
+                  {showWaTouch ? "▴" : "▾"}
+                </button>
+
+                {showWaTouch && (
+                  <div className="mt-1.5 bg-white border border-slate-200 rounded-xl p-2.5 space-y-2">
+                    <div className="flex flex-wrap gap-1">
+                      {(pb.waHints || []).map((hTxt, hIdx) => {
+                        const isUsed = waPersonalNote === hTxt;
+                        return (
+                          <button
+                            key={hIdx}
+                            type="button"
+                            onClick={() => setWaPersonalNote(isUsed ? "" : hTxt)}
+                            className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
+                              isUsed
+                                ? "bg-amber-100 border-amber-400 text-amber-950"
+                                : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
+                            }`}
+                          >
+                            {isUsed ? "✓ " : "+ "}{hTxt}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <input
+                      type="text"
+                      value={waPersonalNote}
+                      onChange={(e) => setWaPersonalNote(e.target.value)}
+                      placeholder={ui.waTouchPlaceholder}
+                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-xs text-slate-900 font-medium focus:outline-none"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleGenerateWhatsapp("")}
+                disabled={isBusy}
+                className="w-full py-3 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+              >
+                {isBusy ? ui.waDrafting : whatsappText ? ui.waRegenerateBtn : ui.waGenerateBtn}
+              </button>
             </div>
-            <input
-              type="text"
-              value={waPersonalNote}
-              onChange={(e) => setWaPersonalNote(e.target.value)}
-              placeholder={ui.waTouchPlaceholder}
-              className="w-full bg-slate-50 focus:bg-white border-2 border-slate-200 focus:border-[#ed1b2e] rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:outline-none"
-            />
-          </div>
+          )}
 
-          <button
-            type="button"
-            onClick={() => handleGenerateWhatsapp("")}
-            disabled={isBusy}
-            className="w-full py-3.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
-          >
-            {isBusy ? ui.waDrafting : whatsappText ? ui.waRegenerateBtn : ui.waGenerateBtn}
-          </button>
-
-          {whatsappText ? (
-            <div className="bg-[#e7f8ee] border-2 border-emerald-400 rounded-2xl p-3.5 space-y-2.5 shadow-sm">
+          {whatsappText && (
+            <div className="bg-[#e7f8ee] border-2 border-emerald-400 rounded-2xl p-3 space-y-2 shadow-sm">
               <div className="text-xs font-extrabold text-emerald-950">
                 {ui.waPreviewHeader}
               </div>
@@ -2787,10 +3327,10 @@ window.Challenge3ParticipantView = function ({
                 rows={4}
                 value={whatsappText}
                 onChange={(e) => setWhatsappText(e.target.value)}
-                className="w-full bg-white border border-emerald-300 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
+                className="w-full bg-white border border-emerald-300 rounded-xl p-2.5 text-sm text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
               />
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className="text-[11px] font-extrabold text-emerald-900 mr-1">
+                <span className="text-[11px] font-extrabold text-emerald-900 mr-0.5">
                   {ui.quickPolishLabel}
                 </span>
                 {ui.waPolishes.map((pol, pIdx) => (
@@ -2806,17 +3346,13 @@ window.Challenge3ParticipantView = function ({
                 ))}
               </div>
             </div>
-          ) : (
-            <div className="bg-white/80 border border-dashed border-slate-300 rounded-xl p-3 text-center text-xs text-slate-500 font-semibold">
-              {ui.waEmptyHint}
-            </div>
           )}
 
-          <div className="flex flex-wrap justify-between items-center gap-2 pt-1">
+          <div className="flex flex-wrap justify-between items-center gap-2 pt-0.5">
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm font-extrabold text-slate-700"
+              className="px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-xs font-extrabold text-slate-700"
             >
               {ui.backBtn}
             </button>
@@ -2824,7 +3360,7 @@ window.Challenge3ParticipantView = function ({
               <button
                 type="button"
                 onClick={() => setStep(3)}
-                className="py-3 px-5 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-xs sm:text-sm font-extrabold shadow-md transition-all"
+                className="py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-xs sm:text-sm font-extrabold shadow-md transition-all"
               >
                 {ui.nextStep3Btn}
               </button>
@@ -2835,129 +3371,193 @@ window.Challenge3ParticipantView = function ({
 
       {/* STEP 3: PLOT TWIST! CLIENT REPLIES ("COMPETITOR QUOTED US!") -> WINNING REPLY */}
       {step === 3 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
-          <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5 space-y-1.5 shadow-sm">
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2.5">
+          <div className="bg-amber-50 border border-amber-300 rounded-xl p-2.5 space-y-1 shadow-sm">
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-extrabold uppercase text-amber-900">
+              <span className="text-[11px] font-extrabold uppercase text-amber-900">
                 {ui.incomingBubbleTag}
               </span>
-              <span className="text-[11px] font-bold text-amber-800">
-                {sc.customerName.split("(")[0].trim()}
+              <span className="text-[11px] font-bold text-amber-800 truncate">
+                {clientShortName}
               </span>
             </div>
-            <div className="bg-white border border-amber-200 rounded-2xl rounded-tl-none p-3 text-xs sm:text-sm font-bold text-slate-900 leading-relaxed shadow-sm">
+            <div className="bg-white border border-amber-200 rounded-xl rounded-tl-none px-2.5 py-2 text-xs font-bold text-slate-900 leading-snug">
               {sc.customerReply}
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="text-xs font-extrabold text-slate-800">
-                {adaptRivalLabel(ui.pickWinningFacts)}
-              </span>
+          {emailText && !showStep3Pickers ? (
+            <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
+              <div className="text-xs font-extrabold text-slate-800 truncate">
+                {ui.comparisonSettingsBar}{" "}
+                <span className="text-slate-500 font-semibold">• {activeAdvisoryObj.label}</span>
+              </div>
               <button
                 type="button"
-                onClick={() => setSelectedFactIdxs([0, 1, 2])}
-                className="px-3 py-1 rounded-lg bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-xs font-extrabold shadow-sm"
+                onClick={() => setShowStep3Pickers(true)}
+                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-[#ed1b2e] border border-slate-300 text-xs font-extrabold shrink-0"
               >
-                {ui.selectAll3Facts}
+                {ui.editBtn}
               </button>
             </div>
-            <div className="space-y-1.5">
-              {(sc.aiaFacts || []).map((fact, idx) => {
-                const active = selectedFactIdxs.includes(idx);
-                return (
+          ) : (
+            <div className="space-y-2.5">
+              {emailText && (
+                <div className="flex justify-end">
                   <button
-                    key={idx}
                     type="button"
-                    onClick={() =>
-                      setSelectedFactIdxs((prev) => toggleIdxInList(prev, idx))
-                    }
-                    className={`w-full p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-bold transition-all flex items-start gap-2 ${
-                      active
-                        ? "bg-emerald-50 border-emerald-500 text-emerald-950 shadow-sm"
-                        : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-700"
-                    }`}
+                    onClick={() => setShowStep3Pickers(false)}
+                    className="text-[11px] font-extrabold text-slate-500 hover:text-slate-800"
                   >
-                    <span className="font-black text-sm shrink-0">
-                      {active ? "☑️" : "⬜"}
-                    </span>
-                    <span className="leading-snug">{fact.replace(/^✓\s*/, "")}</span>
+                    {ui.hideBtn} ▴
                   </button>
-                );
-              })}
-            </div>
-          </div>
+                </div>
+              )}
 
-          <div className="space-y-1.5">
-            <div className="text-xs font-extrabold text-slate-700">{ui.pickAdvisoryStyle}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {ui.advisoryStyles.map((as) => {
-                const active = advisoryStyleId === as.id;
-                return (
+              <div className="space-y-1.5">
+                <div className="flex flex-wrap items-center justify-between gap-1.5">
+                  <span className="text-[11px] font-extrabold text-slate-800">
+                    {adaptRivalLabel(ui.pickWinningFacts)}
+                  </span>
                   <button
-                    key={as.id}
                     type="button"
-                    onClick={() => setAdvisoryStyleId(as.id)}
-                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
-                      active
-                        ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
-                        : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
-                    }`}
+                    onClick={() => setSelectedFactIdxs([0, 1, 2])}
+                    className="px-2.5 py-0.5 rounded-lg bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-[11px] font-extrabold shadow-sm"
                   >
-                    {as.label}
+                    {ui.selectAll3Facts}
                   </button>
-                );
-              })}
-            </div>
-          </div>
+                </div>
+                <div className="space-y-1.5">
+                  {(sc.aiaFacts || []).map((fact, idx) => {
+                    const active = selectedFactIdxs.includes(idx);
+                    const parsed = _summarizeFactClause(fact);
+                    const isExpanded = expandedFactIdxs.includes(idx);
+                    return (
+                      <div
+                        key={idx}
+                        className={`w-full px-2.5 py-2 rounded-xl border transition-all ${
+                          active
+                            ? "bg-emerald-50 border-emerald-500 text-emerald-950 shadow-sm"
+                            : "bg-white border-slate-200 text-slate-700"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setSelectedFactIdxs((prev) => toggleIdxInList(prev, idx))
+                            }
+                            className="flex items-center gap-2 text-left min-w-0 flex-1 text-xs font-extrabold"
+                          >
+                            <span className="shrink-0 text-sm">{active ? "☑️" : "⬜"}</span>
+                            <span className="truncate">{parsed.summary}</span>
+                          </button>
+                          {parsed.detail && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setExpandedFactIdxs((prev) => toggleIdxInList(prev, idx))
+                              }
+                              className="text-[10px] font-extrabold text-slate-500 hover:text-[#ed1b2e] shrink-0 px-1.5 py-0.5 rounded bg-white/80 border border-slate-200"
+                            >
+                              {ui.detailsBtn} {isExpanded ? "▴" : "▾"}
+                            </button>
+                          )}
+                        </div>
+                        {isExpanded && parsed.detail && (
+                          <div className="mt-1 pl-6 text-[11px] font-medium text-slate-700 leading-snug">
+                            {parsed.full}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
-            <label className="block text-xs font-extrabold text-slate-900">
-              {ui.closeTouchLabel}
-            </label>
-            <div className="text-[11px] text-slate-600 leading-relaxed">
-              💡 {ui.closeTouchHint}
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {(pb.closeHints || []).map((cTxt, cIdx) => {
-                const isUsed = emailPersonalNote === cTxt;
-                return (
-                  <button
-                    key={cIdx}
-                    type="button"
-                    onClick={() => setEmailPersonalNote(isUsed ? "" : cTxt)}
-                    className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
-                      isUsed
-                        ? "bg-amber-100 border-amber-400 text-amber-950"
-                        : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
-                    }`}
-                  >
-                    {isUsed ? "✓ " : "+ "}{cTxt}
-                  </button>
-                );
-              })}
-            </div>
-            <input
-              type="text"
-              value={emailPersonalNote}
-              onChange={(e) => setEmailPersonalNote(e.target.value)}
-              placeholder={ui.closeTouchPlaceholder}
-              className="w-full bg-slate-50 focus:bg-white border-2 border-slate-200 focus:border-[#ed1b2e] rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:outline-none"
-            />
-          </div>
+              <div className="space-y-1">
+                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickAdvisoryStyle}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {ui.advisoryStyles.map((as) => {
+                    const active = advisoryStyleId === as.id;
+                    return (
+                      <button
+                        key={as.id}
+                        type="button"
+                        onClick={() => setAdvisoryStyleId(as.id)}
+                        className={`px-2.5 py-1.5 rounded-xl border text-xs font-extrabold transition-all flex-1 min-w-[105px] ${
+                          active
+                            ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
+                            : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
+                        }`}
+                      >
+                        {as.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-          <button
-            type="button"
-            onClick={() => handleGenerateEmail("")}
-            disabled={isBusy}
-            className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
-          >
-            {isBusy ? ui.emailDrafting : emailText ? ui.emailRegenerateBtn : ui.emailGenerateBtn}
-          </button>
+              {/* Collapsed Optional Meeting Closer Touch */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setShowEmailTouch((v) => !v)}
+                  className={`px-3 py-1.5 rounded-full border text-[11px] font-extrabold transition-all ${
+                    showEmailTouch || emailPersonalNote.trim()
+                      ? "bg-amber-50 border-amber-300 text-amber-950"
+                      : "bg-white border-slate-300 text-slate-700 hover:border-[#ed1b2e]"
+                  }`}
+                >
+                  {emailPersonalNote.trim() ? `✓ 💡 ${emailPersonalNote.trim()}` : ui.personalTouchBtn}{" "}
+                  {showEmailTouch ? "▴" : "▾"}
+                </button>
 
-          {emailText ? (
-            <div className="bg-blue-50/60 border-2 border-blue-400 rounded-2xl p-3.5 space-y-2.5 shadow-sm">
+                {showEmailTouch && (
+                  <div className="mt-1.5 bg-white border border-slate-200 rounded-xl p-2.5 space-y-2">
+                    <div className="flex flex-wrap gap-1">
+                      {(pb.closeHints || []).map((cTxt, cIdx) => {
+                        const isUsed = emailPersonalNote === cTxt;
+                        return (
+                          <button
+                            key={cIdx}
+                            type="button"
+                            onClick={() => setEmailPersonalNote(isUsed ? "" : cTxt)}
+                            className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
+                              isUsed
+                                ? "bg-amber-100 border-amber-400 text-amber-950"
+                                : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
+                            }`}
+                          >
+                            {isUsed ? "✓ " : "+ "}{cTxt}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <input
+                      type="text"
+                      value={emailPersonalNote}
+                      onChange={(e) => setEmailPersonalNote(e.target.value)}
+                      placeholder={ui.closeTouchPlaceholder}
+                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-xs text-slate-900 font-medium focus:outline-none"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleGenerateEmail("")}
+                disabled={isBusy}
+                className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+              >
+                {isBusy ? ui.emailDrafting : emailText ? ui.emailRegenerateBtn : ui.emailGenerateBtn}
+              </button>
+            </div>
+          )}
+
+          {emailText && (
+            <div className="bg-blue-50/60 border-2 border-blue-400 rounded-2xl p-3 space-y-2 shadow-sm">
               <div className="text-xs font-extrabold text-blue-950">
                 {ui.emailPreviewHeader}
               </div>
@@ -2965,10 +3565,10 @@ window.Challenge3ParticipantView = function ({
                 rows={5}
                 value={emailText}
                 onChange={(e) => setEmailText(e.target.value)}
-                className="w-full bg-white border border-blue-300 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
+                className="w-full bg-white border border-blue-300 rounded-xl p-2.5 text-sm text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
               />
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className="text-[11px] font-extrabold text-blue-950 mr-1">
+                <span className="text-[11px] font-extrabold text-blue-950 mr-0.5">
                   {ui.quickPolishLabel}
                 </span>
                 {ui.emailPolishes.map((pol, pIdx) => (
@@ -2984,52 +3584,38 @@ window.Challenge3ParticipantView = function ({
                 ))}
               </div>
             </div>
-          ) : (
-            <div className="bg-white/80 border border-dashed border-slate-300 rounded-xl p-3 text-center text-xs text-slate-500 font-semibold">
-              {ui.emailEmptyHint}
-            </div>
           )}
 
-          {/* Readiness Gate Checklist so nobody submits blank drafts by accident */}
-          {!readyToSubmit && (
-            <div className="bg-amber-50 border border-amber-300 rounded-xl p-2.5 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-amber-950">
-              <span>
-                {!whatsappText.trim()
-                  ? "⚠️ Step 2 First-Touch WhatsApp is still empty — tap Step 2 to generate it before submitting!"
-                  : "⚠️ Tap 'Draft Winning Comparison Reply' above so your Step 3 reply is ready before submitting!"}
-              </span>
-              {!whatsappText.trim() && (
-                <button
-                  type="button"
-                  onClick={() => setStep(2)}
-                  className="px-3 py-1 rounded-lg bg-amber-600 text-white font-extrabold"
-                >
-                  Go to Step 2 →
-                </button>
-              )}
-            </div>
-          )}
-
-          <div className="flex flex-wrap justify-between items-center gap-2 pt-1">
+          <div className="flex flex-wrap justify-between items-center gap-2 pt-0.5">
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm font-extrabold text-slate-700"
+              className="px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-xs font-extrabold text-slate-700"
             >
               {ui.backBtn}
             </button>
-            <button
-              type="button"
-              onClick={handleFinalSubmit}
-              disabled={isBusy || !readyToSubmit}
-              className={`py-3.5 px-6 rounded-xl text-sm sm:text-base font-extrabold shadow-lg transition-all ${
-                readyToSubmit
-                  ? "bg-[#ed1b2e] hover:bg-[#c8102e] text-white"
-                  : "bg-slate-200 text-slate-400 cursor-not-allowed"
-              }`}
-            >
-              {isBusy ? ui.submittingBtn : ui.finalSubmitBtn}
-            </button>
+            {!whatsappText.trim() && emailText.trim() ? (
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="py-2.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm font-extrabold shadow"
+              >
+                💬 Draft Step 2 WhatsApp →
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleFinalSubmit}
+                disabled={isBusy || !readyToSubmit}
+                className={`py-3 px-5 rounded-xl text-sm font-extrabold shadow-lg transition-all ${
+                  readyToSubmit
+                    ? "bg-[#ed1b2e] hover:bg-[#c8102e] text-white"
+                    : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                }`}
+              >
+                {isBusy ? ui.submittingBtn : ui.finalSubmitBtn}
+              </button>
+            )}
           </div>
         </div>
       )}
