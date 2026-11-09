@@ -402,23 +402,28 @@ function getPostPhotoPillsC1(lang) {
       },
       {
         group: "work",
-        label: "🤝 客户里程碑关怀卡",
-        prompt: "让我的形象照为您拓展业务：为刚迎来新生宝宝的客户「拿督陈与夫人」设计一张温馨香槟金贺卡，配一段约咖啡聊教育金的 WhatsApp 问候语。",
+        label: "🤝 客户里程碑贺卡",
+        prompt: "设计一张庆祝新生宝宝诞生的温馨香槟金纪念贺卡（融入我的头像徽章）。",
       },
       {
         group: "work",
         label: "🧧 新春尊尚贺卡 (CNY)",
-        prompt: "把形象转化为新春业务触达：为「拿督陈与夫人」制作一张红金新春尊尚贺卡（含梅花与双峰塔天际线），配一段温暖走心的 WhatsApp 佳节祝福语。",
+        prompt: "设计一张红金配色的新春尊尚贺卡，融入梅花、双峰塔天际线与我的头像徽章。",
+      },
+      {
+        group: "work",
+        label: "🌙 开斋节尊尚贺卡 (Hari Raya)",
+        prompt: "设计一张翡翠绿与拉丝金配色的开斋节（Hari Raya Aidilfitri）尊尚贺卡，搭配传统油灯、宋吉锦纹样与我的头像徽章。",
       },
       {
         group: "work",
         label: "🪔 屠妖节祈福贺卡 (Diwali)",
-        prompt: "为高净值客户制作一张奢华排灯节（Deepavali/Diwali）点灯贺卡，配金色蓝宝石油灯与传统蓝金图腾，附一段诚挚的 WhatsApp 节日问候。",
+        prompt: "设计一张奢华排灯节（Deepavali/Diwali）点灯贺卡，配金色油灯、传统蓝金图腾与我的头像徽章。",
       },
       {
         group: "work",
         label: "💼 个人品牌横幅",
-        prompt: "用我的照片生成一张 LinkedIn 与 WhatsApp Business 个人品牌横幅，背景是吉隆坡双峰塔金色黄昏天际线。",
+        prompt: "用我的形象照生成一张吉隆坡双峰塔金色黄昏天际线风格的个人品牌横幅。",
       },
     ];
   }
@@ -443,22 +448,27 @@ function getPostPhotoPillsC1(lang) {
       {
         group: "work",
         label: "🤝 客戶里程碑紀念卡",
-        prompt: "讓我的形象照為您拓展業務：為剛迎來新生兒的客戶「拿督陳與夫人」製作一張香檳金紀念賀卡，並附一段約咖啡的 WhatsApp 問候訊息。",
+        prompt: "製作一張慶祝新生兒誕生的香檳金紀念賀卡（融入我的頭像徽章）。",
       },
       {
         group: "work",
         label: "🧧 新春尊尚賀卡 (CNY)",
-        prompt: "把形象轉化為新春業務觸達：為「拿督陳與夫人」製作一張紅金新春尊尚賀卡（含梅花與雙峰塔天際線），配一段溫暖的 WhatsApp 祝福話術。",
+        prompt: "製作一張紅金新春尊尚賀卡，融入梅花、雙峰塔天際線與我的頭像徽章。",
+      },
+      {
+        group: "work",
+        label: "🌙 開齋節尊尚賀卡 (Hari Raya)",
+        prompt: "設計一張翡翠綠配拉絲金嘅開齋節（Hari Raya Aidilfitri）尊尚賀卡，融入傳統油燈、宋吉錦紋樣與我的頭像徽章。",
       },
       {
         group: "work",
         label: "🪔 屠妖節祈福賀卡 (Diwali)",
-        prompt: "為高淨值客戶製作一張奢華排燈節（Deepavali/Diwali）點燈賀卡，搭配金色彩繪油燈圖騰與 WhatsApp 節日問候。",
+        prompt: "製作一張奢華排燈節（Deepavali/Diwali）點燈賀卡，搭配金色彩繪油燈圖騰與我的頭像徽章。",
       },
       {
         group: "work",
         label: "💼 個人品牌橫幅",
-        prompt: "生成一張 LinkedIn 與 WhatsApp 個人品牌橫幅，搭配雙峰塔黃昏天際線與我的頭像。",
+        prompt: "生成一張雙峰塔黃昏天際線風格的高管個人品牌橫幅（融入我的頭像徽章）。",
       },
     ];
   }
@@ -483,22 +493,27 @@ function getPostPhotoPillsC1(lang) {
       {
         group: "work",
         label: "🤝 Kad Fokus Pelanggan",
-        prompt: "Jana hasil dari foto saya: hasilkan kad tahniah kelahiran cahaya mata baharu buat Dato' & Datin Tan bersama mesej WhatsApp.",
+        prompt: "Hasilkan kad ucapan mewah sambutan kelahiran cahaya mata baharu dengan lencana potret saya.",
       },
       {
         group: "work",
         label: "🧧 Kad Tahun Baru Cina (CNY)",
-        prompt: "Tukar imej kepada sentuhan perniagaan: hasilkan kad ucapan Tahun Baru Cina warna merah & emas bersama Menara KLCC dan ucapan WhatsApp.",
+        prompt: "Hasilkan kad ucapan Tahun Baru Cina warna merah & emas bersama Menara KLCC dan lencana potret saya.",
+      },
+      {
+        group: "work",
+        label: "🌙 Kad Hari Raya Aidilfitri",
+        prompt: "Hasilkan kad ucapan Hari Raya Aidilfitri zamrud & emas bersama pelita, corak songket, dan lencana potret saya.",
       },
       {
         group: "work",
         label: "🪔 Kad Pesta Deepavali (Diwali)",
-        prompt: "Hasilkan kad ucapan Pesta Cahaya Deepavali mewah dengan lampu pelita emas diyas dan corak rangoli bersama mesej WhatsApp santai.",
+        prompt: "Hasilkan kad ucapan Pesta Cahaya Deepavali mewah dengan lampu pelita emas diyas, corak rangoli, dan lencana potret saya.",
       },
       {
         group: "work",
         label: "💼 Penjenamaan Peribadi",
-        prompt: "Jana sepanduk penjenamaan peribadi LinkedIn & WhatsApp berlatarkan langit senja Kuala Lumpur.",
+        prompt: "Jana sepanduk penjenamaan peribadi eksekutif berlatarkan langit senja Kuala Lumpur dengan lencana potret saya.",
       },
     ];
   }
@@ -523,22 +538,27 @@ function getPostPhotoPillsC1(lang) {
       {
         group: "work",
         label: "🤝 வாடிக்கையாளர் வாழ்த்து அட்டை",
-        prompt: "எனது படத்தை வணிகத்திற்குப் பயன்படுத்துக: Dato' & Datin Tan தம்பதியரின் குழந்தை பிறப்பைக் கொண்டாடும் வாழ்த்து அட்டை மற்றும் அன்பான WhatsApp செய்தியை உருவாக்கவும்.",
+        prompt: "புதிய குழந்தை பிறப்பைக் கொண்டாடும் ஆடம்பர வாழ்த்து அட்டையை எனது உருவப்பட பேட்ஜுடன் உருவாக்கவும்.",
       },
       {
         group: "work",
         label: "🧧 சீனப் புத்தாண்டு வாழ்த்து அட்டை",
-        prompt: "எனது படத்தைக் கொண்டு சிவப்பு மற்றும் தங்க நிற சீனப் புத்தாண்டு (CNY) வாழ்த்து அட்டை மற்றும் WhatsApp வாழ்த்துச் செய்தியை உருவாக்கவும்.",
+        prompt: "எனது உருவப்பட பேட்ஜுடன் சிவப்பு மற்றும் தங்க நிற சீனப் புத்தாண்டு (CNY) வாழ்த்து அட்டையை உருவாக்கவும்.",
+      },
+      {
+        group: "work",
+        label: "🌙 ஹரி ராயா வாழ்த்து அட்டை",
+        prompt: "எனது உருவப்பட பேட்ஜுடன் மரகதப் பச்சை மற்றும் தங்க நிற ஹரி ராயா (Hari Raya Aidilfitri) வாழ்த்து அட்டையை உருவாக்கவும்.",
       },
       {
         group: "work",
         label: "🪔 தீபாவளி பண்டிகை வாழ்த்து அட்டை",
-        prompt: "எனது படத்தைக் கொண்டு அழகான அகல் விளக்குகள் மற்றும் ரங்கோலி கோலத்துடன் கூடிய தீபாவளி நல்வாழ்த்து அட்டை மற்றும் WhatsApp செய்தியை உருவாக்கவும்.",
+        prompt: "எனது உருவப்பட பேட்ஜுடன் அழகான அகல் விளக்குகள் மற்றும் ரங்கோலி கோலத்துடன் கூடிய தீபாவளி நல்வாழ்த்து அட்டையை உருவாக்கவும்.",
       },
       {
         group: "work",
         label: "💼 தனிப்பட்ட பிராண்டிங் பேனர்",
-        prompt: "கோலாலம்பூர் மாலை நேர பின்னணியில் எனது உருவப்படத்துடன் கூடிய LinkedIn மற்றும் WhatsApp தனிப்பட்ட பிராண்டிங் பேனரை உருவாக்கவும்.",
+        prompt: "கோலாலம்பூர் மாலை நேர பின்னணியில் எனது உருவப்பட பேட்ஜுடன் கூடிய தனிப்பட்ட பிராண்டிங் பேனரை உருவாக்கவும்.",
       },
     ];
   }
@@ -562,222 +582,27 @@ function getPostPhotoPillsC1(lang) {
     {
       group: "work",
       label: "🤝 Client Milestone Card",
-      prompt: "Let's put this image to work: create a warm Client-Focused milestone card for Dato' & Datin Tan celebrating their newborn baby, with a friendly WhatsApp coffee invite.",
+      prompt: "Put my studio portrait onto a champagne-ivory & brushed gold Client Milestone greeting card celebrating a newborn baby.",
     },
     {
       group: "work",
       label: "🧧 Chinese New Year Card",
-      prompt: "Put my image to work on a luxury Chinese New Year (CNY) prosperity card in imperial crimson & brushed gold with plum blossoms, KL skyline, and warm WhatsApp wishes for Dato' & Datin Tan.",
+      prompt: "Put my studio portrait onto a luxury Chinese New Year (CNY) prosperity greeting card in imperial crimson & brushed gold with plum blossoms and the KL skyline.",
+    },
+    {
+      group: "work",
+      label: "🌙 Hari Raya Aidilfitri Card",
+      prompt: "Put my studio portrait onto an emerald & brushed-gold Hari Raya Aidilfitri greeting card with woven songket patterns and warm pelita lamps.",
     },
     {
       group: "work",
       label: "🪔 Deepavali Festival Card",
-      prompt: "Put my image to work on an opulent Deepavali Festival of Lights greeting card with glowing brass diyas, golden rangoli, and warm festive WhatsApp wishes for Dato' & Datin Tan.",
+      prompt: "Put my studio portrait onto an opulent Deepavali Festival of Lights greeting card with glowing brass diyas and golden rangoli.",
     },
     {
       group: "work",
       label: "💼 Personal Branding Banner",
-      prompt: "Put this portrait onto a sleek LinkedIn & WhatsApp Personal Branding banner featuring my portrait badge and the Kuala Lumpur skyline at golden hour.",
-    },
-  ];
-}
-
-function getCelebrityPillsC1(lang) {
-  if (lang === "zh-CN") {
-    return [
-      {
-        group: "craft",
-        label: "🌟 杨紫琼炭灰西装",
-        prompt: "使用名人杨紫琼（Michelle Yeoh）生成一张身穿炭灰西装、背景为吉隆坡双峰塔黄昏的高管肖像照。",
-      },
-      {
-        group: "craft",
-        label: "🌟 亨利·高汀深蓝西装",
-        prompt: "使用名人亨利·高汀（Henry Golding）生成一张身穿深蓝订制三件套西装、背景为吉隆坡双峰塔的高管形象照。",
-      },
-      {
-        group: "craft",
-        label: "🌟 亲和顾问会客厅",
-        prompt: "使用名人杨紫琼（Michelle Yeoh）生成一张身穿米色休闲西装、背景为阳光私人会客厅的温和财富领袖形象照。",
-      },
-      {
-        group: "work",
-        label: "🤝 客户关怀贺卡（名人版）",
-        prompt: "使用名人杨紫琼头像，为客户「拿督陈与夫人」设计一张喜迎新生宝宝的温馨香槟金纪念贺卡，配一段 WhatsApp 问候语。",
-      },
-      {
-        group: "work",
-        label: "🧧 新春尊尚贺卡 (CNY)",
-        prompt: "使用名人杨紫琼头像，设计一张红金配色的吉隆坡双峰塔天际线新春尊尚贺卡与 WhatsApp 祝福语。",
-      },
-      {
-        group: "work",
-        label: "🪔 屠妖节祈福贺卡 (Diwali)",
-        prompt: "使用名人杨紫琼头像，制作一张奢华排灯节（Deepavali/Diwali）点灯贺卡与 WhatsApp 佳节祝福。",
-      },
-      {
-        group: "work",
-        label: "💼 个人品牌横幅（名人版）",
-        prompt: "使用名人杨紫琼头像，制作一张吉隆坡双峰塔黄昏天际线风格的 LinkedIn 与 WhatsApp 个人品牌横幅。",
-      },
-    ];
-  }
-
-  if (lang === "zh-TW" || lang === "yue") {
-    return [
-      {
-        group: "craft",
-        label: "🌟 楊紫瓊炭灰西裝",
-        prompt: "使用名人楊紫瓊（Michelle Yeoh）生成一張身穿炭灰西裝、背景為吉隆坡雙峰塔黃昏的高管肖像照。",
-      },
-      {
-        group: "craft",
-        label: "🌟 亨利·高汀深藍西裝",
-        prompt: "使用名人亨利·高汀（Henry Golding）生成一張深藍訂製西裝、背景為吉隆坡雙峰塔的高管形象照。",
-      },
-      {
-        group: "craft",
-        label: "🌟 親和顧問會客廳",
-        prompt: "使用名人楊紫瓊生成一張米色休閒西裝、陽光私人會客廳的溫和財富領袖形象照。",
-      },
-      {
-        group: "work",
-        label: "🤝 客戶關懷賀卡",
-        prompt: "使用名人楊紫瓊頭像，設計一張祝賀客戶喜迎新生寶寶的香檳金紀念賀卡，並附一段 WhatsApp 問候語。",
-      },
-      {
-        group: "work",
-        label: "🧧 新春尊尚賀卡 (CNY)",
-        prompt: "使用名人楊紫瓊頭像，設計一張紅金配色的吉隆坡天際線新春尊尚賀卡，並附一段 WhatsApp 祝福語。",
-      },
-      {
-        group: "work",
-        label: "🪔 屠妖節祈福賀卡 (Diwali)",
-        prompt: "使用名人楊紫瓊頭像，製作一張奢華排燈節（Deepavali/Diwali）點燈賀卡與 WhatsApp 祝福語。",
-      },
-      {
-        group: "work",
-        label: "💼 個人品牌橫幅",
-        prompt: "使用名人楊紫瓊頭像，製作一張吉隆坡雙峰塔黃昏天際線風格的 LinkedIn 與 WhatsApp 個人品牌橫幅。",
-      },
-    ];
-  }
-
-  if (lang === "ms") {
-    return [
-      {
-        group: "craft",
-        label: "🌟 Michelle Yeoh Sut Kelabu",
-        prompt: "Gunakan selebriti Michelle Yeoh untuk menghasilkan potret studio eksekutif memakai sut kelabu gelap berlatarkan Menara Berkembar KLCC waktu senja.",
-      },
-      {
-        group: "craft",
-        label: "🌟 Henry Golding Sut Biru",
-        prompt: "Gunakan selebriti Henry Golding untuk menghasilkan potret studio eksekutif memakai sut biru gelap berlatarkan KLCC.",
-      },
-      {
-        group: "craft",
-        label: "🌟 Michelle Yeoh Ruang Mesra",
-        prompt: "Gunakan selebriti Michelle Yeoh untuk menghasilkan potret memakai blazer cerah di ruang perbankan peribadi yang mesra.",
-      },
-      {
-        group: "work",
-        label: "🤝 Kad Fokus Pelanggan",
-        prompt: "Gunakan selebriti Michelle Yeoh untuk menghasilkan kad tahniah kelahiran cahaya mata baharu buat Dato' & Datin Tan bersama mesej WhatsApp.",
-      },
-      {
-        group: "work",
-        label: "🧧 Kad Tahun Baru Cina (CNY)",
-        prompt: "Gunakan selebriti Michelle Yeoh untuk mereka kad ucapan Tahun Baru Cina merah & emas bersama ucapan WhatsApp.",
-      },
-      {
-        group: "work",
-        label: "🪔 Kad Pesta Deepavali (Diwali)",
-        prompt: "Gunakan selebriti Michelle Yeoh untuk menghasilkan kad ucapan Deepavali mewah bersama pelita emas diyas dan mesej WhatsApp.",
-      },
-      {
-        group: "work",
-        label: "💼 Penjenamaan Peribadi",
-        prompt: "Gunakan selebriti Michelle Yeoh untuk menghasilkan sepanduk profil LinkedIn & WhatsApp Business berlatarkan KLCC waktu senja.",
-      },
-    ];
-  }
-
-  if (lang === "ta") {
-    return [
-      {
-        group: "craft",
-        label: "🌟 மிஷெல் யோ (Michelle Yeoh) கோட்",
-        prompt: "பிரபல நடிகை Michelle Yeoh-வைப் பயன்படுத்தி கோலாலம்பூர் இரட்டை கோபுர பின்னணியில் சாம்பல் நிற கோட் அணிந்த நிர்வாக உருவப்படத்தை உருவாக்கவும்.",
-      },
-      {
-        group: "craft",
-        label: "🌟 ஹென்றி கோல்டிங் (Henry Golding) சூட்",
-        prompt: "பிரபல நடிகர் Henry Golding-ஐப் பயன்படுத்தி KLCC பின்னணியில் நீல நிற சூட் அணிந்த நிர்வாக உருவப்படத்தை உருவாக்கவும்.",
-      },
-      {
-        group: "craft",
-        label: "🌟 அன்பான ஆலோசகர் தோற்றம்",
-        prompt: "பிரபல நடிகை Michelle Yeoh-வைப் பயன்படுத்தி நவீன செல்வ ஆலோசனை அறையில் நட்பான நிதி ஆலோசகர் உருவப்படத்தை உருவாக்கவும்.",
-      },
-      {
-        group: "work",
-        label: "🤝 வாடிக்கையாளர் வாழ்த்து அட்டை",
-        prompt: "Michelle Yeoh உருவப்படத்தைப் பயன்படுத்தி Dato' & Datin Tan தம்பதியரின் குழந்தை பிறப்பைக் கொண்டாடும் வாழ்த்து அட்டை மற்றும் WhatsApp செய்தியை உருவாக்கவும்.",
-      },
-      {
-        group: "work",
-        label: "🧧 சீனப் புத்தாண்டு வாழ்த்து அட்டை",
-        prompt: "Michelle Yeoh உருவப்படத்தைப் பயன்படுத்தி சிவப்பு மற்றும் தங்க நிற சீனப் புத்தாண்டு (CNY) வாழ்த்து அட்டை மற்றும் WhatsApp வாழ்த்தை உருவாக்கவும்.",
-      },
-      {
-        group: "work",
-        label: "🪔 தீபாவளி பண்டிகை வாழ்த்து அட்டை",
-        prompt: "Michelle Yeoh உருவப்படத்தைப் பயன்படுத்தி அகல் விளக்குகள் மற்றும் ரங்கோலி கோலத்துடன் கூடிய தீபாவளி வாழ்த்து அட்டை மற்றும் WhatsApp செய்தியை உருவாக்கவும்.",
-      },
-      {
-        group: "work",
-        label: "💼 தனிப்பட்ட பிராண்டிங் பேனர்",
-        prompt: "Michelle Yeoh உருவப்படத்தைப் பயன்படுத்தி கோலாலம்பூர் மாலை நேர பின்னணியில் LinkedIn மற்றும் WhatsApp தனிப்பட்ட பிராண்டிங் பேனரை உருவாக்கவும்.",
-      },
-    ];
-  }
-
-  return [
-    {
-      group: "craft",
-      label: "🌟 Michelle Yeoh (Charcoal Suit)",
-      prompt: "Use celebrity Michelle Yeoh to create an executive studio portrait in a tailored charcoal suit overlooking the Kuala Lumpur skyline at golden hour.",
-    },
-    {
-      group: "craft",
-      label: "🌟 Henry Golding (Navy Suit)",
-      prompt: "Use celebrity Henry Golding to create an executive studio portrait in a tailored royal-navy suit overlooking the Petronas Twin Towers at golden hour.",
-    },
-    {
-      group: "craft",
-      label: "🌟 Warm Advisor Lounge Look",
-      prompt: "Use celebrity Michelle Yeoh to create a warm, approachable portrait in a smart-casual beige blazer in a sunlit private wealth client lounge.",
-    },
-    {
-      group: "work",
-      label: "🤝 Client Milestone Card",
-      prompt: "Use celebrity Michelle Yeoh to create a warm Client-Focused milestone card for Dato' & Datin Tan celebrating their newborn baby, paired with a friendly WhatsApp coffee invite.",
-    },
-    {
-      group: "work",
-      label: "🧧 Chinese New Year Card",
-      prompt: "Use celebrity Michelle Yeoh to design a luxury Chinese New Year (CNY) greeting card in crimson & brushed gold with plum blossoms, KL skyline, and warm WhatsApp wishes.",
-    },
-    {
-      group: "work",
-      label: "🪔 Deepavali Festival Card",
-      prompt: "Use celebrity Michelle Yeoh to design an opulent Deepavali Festival of Lights greeting card with glowing brass diyas, golden rangoli, and warm WhatsApp wishes.",
-    },
-    {
-      group: "work",
-      label: "💼 Personal Branding Banner",
-      prompt: "Use celebrity Michelle Yeoh to create a sleek LinkedIn & WhatsApp Personal Branding banner featuring the Kuala Lumpur Petronas Twin Towers at golden hour.",
+      prompt: "Put my studio portrait onto a sleek Executive Personal Branding banner overlooking the Kuala Lumpur Petronas Twin Towers at golden hour.",
     },
   ];
 }
@@ -785,35 +610,27 @@ function getCelebrityPillsC1(lang) {
 const UI_COPY_C1 = {
   "zh-CN": {
     briefSteps: [
-      { title: "1. 塑造专业形象 (Craft Your Image)", desc: "拍照、上传图片或使用名人形象，定制专属高管大片。" },
-      { title: "2. 让形象为您赚钱 (Put Your Image to Work)", desc: "将形象转化为客户关怀卡、节日日历触达与个人品牌，驱动业务增长。" },
+      { title: "1. 塑造专业形象 (Craft Your Image)", desc: "请先拍照或上传图片，定制专属高管影棚大片。" },
+      { title: "2. 让形象为您赋能 (Put Your Image to Work)", desc: "生成形象照后解锁：客户里程碑贺卡、佳节贺卡与个人品牌横幅。" },
     ],
-    craftSectionTitle: "1. 塑造专业形象 (Craft Your Image)",
-    workSectionTitle: "2. 让形象为您拓展业务 (Put Your Image to Work)",
+    craftSectionTitle: "1. 塑造专业形象 (Craft Your Image — 第 1 步必选)",
+    workSectionTitle: "2. 让形象为您赋能 (Put Your Image to Work)",
     welcome:
-      "嗨！👋 我是您的 **AI 形象助手**，接下来由我一步步引导您。\n\n**第 1 步 — 我们需要一张您的照片开始创作：**",
+      "嗨！👋 我是您的 **AI 形象助手**。\n\n**第 1 步 — 请先拍照或上传一张图片（必须先提供图片才能开始创作）：**",
     photoReadyMsg:
-      "照片已就位！🙌 接下来您可以按两个方向进行（可同时点击组合多个标签并自由修改提示词）：\n• **1. 塑造专业形象**：定制高级西装、亲和会客厅或微调造型\n• **2. 让形象为您赚钱**：制作客户关怀卡、节日日历贺卡或个人品牌横幅\n\n点击下方药丸按钮组合示例提示词（可自由修改）：",
-    celebReadyMsg:
-      "名人模式已激活！🌟 接下来您可以按两个方向进行（可同时点击组合多个标签并自由修改提示词）：\n• **1. 塑造专业形象**：定制名人高管形象大片\n• **2. 让形象为您赚钱**：制作客户关怀卡、节日日历贺卡或个人品牌横幅\n\n点击下方药丸按钮组合示例提示词（可自由修改）：",
+      "照片已就位！🙌 **请先完成第 1 步 — 塑造您的专属高管影棚形象照**（生成形象照后，将自动解锁第 2 步尊尚贺卡与个人品牌横幅）：\n\n点击下方风格标签或自由修改提示词后发送：",
     takePhotoBtn: "拍照",
     uploadImageBtn: "上传图片",
-    useCelebrityBtn: "使用名人形象",
     changePhotoBtn: "更换照片",
     lockedSelfie: "照片已就绪",
-    lockedCeleb: "名人模式：",
-    placeholder: "可点击多个下方标签组合提示词，自由修改后按发送...",
+    placeholder: "选择上方形象风格标签或输入视觉提示词，先生成您的专属形象照...",
     streaming: "✨ 正在为您生成高清图片...",
-    editHint: "点击 1 个或多个标签组合提示词，在下方框内自由修改后发送：",
-    waBtn: "💬 发送到 WhatsApp",
-    copyBtn: "📋 复制",
-    copiedBtn: "✅ 已复制",
+    editHint: "点击标签载入提示词，可在下方输入框自由修改后发送：",
     saveImgBtn: "⬇️ 保存图片",
     dictateBtn: "🎙️ 语音",
     listeningBtn: "🔴 聆听中...",
     resetChatBtn: "↺ 重新开始",
     clearBtn: "✕ 清空",
-    outreachMsgLabel: "💬 客户关怀 WhatsApp 话术（可直接编辑修改）",
     submitBtn: "🚀 提交作品",
     submittingBtn: "正在提交...",
     submittedBadge: "✓ 挑战 1 已提交至实时总积分榜",
@@ -821,39 +638,31 @@ const UI_COPY_C1 = {
     backToChatBtn: "💬 返回继续创作",
     waitingC2Title: "⏳ 请等待主持人开启挑战 2...",
     waitingC2Sub: "您的挑战 1 成绩已同步至主舞台大屏！主持人开启挑战 2 后，您的手机将自动解锁下一关。",
-    criteriaLabels: ["高管品牌形象", "客户共情与定制", "创意提示词巧思"],
+    criteriaLabels: ["高管品牌形象", "视觉构图质感", "创意提示词巧思"],
   },
   "zh-TW": {
     briefSteps: [
-      { title: "1. 塑造專業形象 (Craft Your Image)", desc: "拍照、上傳圖片或使用名人形象，定制專屬高管大片。" },
-      { title: "2. 讓形象為您賺錢 (Put Your Image to Work)", desc: "將形象轉化為客戶關懷卡、節日日曆觸達與個人品牌，驅動業務增長。" },
+      { title: "1. 塑造專業形象 (Craft Your Image)", desc: "請先影相或上傳圖片，定制專屬高管影棚大片。" },
+      { title: "2. 讓形象為您賦能 (Put Your Image to Work)", desc: "生成形象照後解鎖：客戶里程碑賀卡、佳節賀卡與個人品牌橫幅。" },
     ],
-    craftSectionTitle: "1. 塑造專業形象 (Craft Your Image)",
-    workSectionTitle: "2. 讓形象為您拓展業務 (Put Your Image to Work)",
+    craftSectionTitle: "1. 塑造專業形象 (Craft Your Image — 第 1 步必選)",
+    workSectionTitle: "2. 讓形象為您賦能 (Put Your Image to Work)",
     welcome:
-      "嗨！👋 我係你嘅 **AI 形象助手**，跟住由我一步步引導你。\n\n**第 1 步 — 我們需要一張你嘅照片開始創作：**",
+      "嗨！👋 我係你嘅 **AI 形象助手**。\n\n**第 1 步 — 請先影相或上傳一張圖片（必須先提供相片先可以開始創作）：**",
     photoReadyMsg:
-      "相片已經準備好！🙌 跟住你可以按兩個方向進行（可以同時撳多個標籤組合提示詞並自由修改）：\n• **1. 塑造專業形象**：定制高級西裝、親和會客廳或微調造型\n• **2. 讓形象為你賺錢**：製作客戶關懷卡、節日日曆賀卡或個人品牌橫幅\n\n撳下方藥丸掣組合示例提示詞（可自由修改）：",
-    celebReadyMsg:
-      "名人模式已啟動！🌟 跟住你可以按兩個方向進行（可以同時撳多個標籤組合提示詞並自由修改）：\n• **1. 塑造專業形象**：定制名人高管形象大片\n• **2. 讓形象為你賺錢**：製作客戶關懷卡、節日日曆賀卡或個人品牌橫幅\n\n撳下方藥丸掣組合示例提示詞（可自由修改）：",
+      "相片已經準備好！🙌 **請先完成第 1 步 — 生成你嘅專屬高管影棚形象照**（生成形象照後，會自動解鎖第 2 步尊尚賀卡與個人品牌橫幅）：\n\n撳下方風格標籤或自由修改提示詞後發送：",
     takePhotoBtn: "影相",
     uploadImageBtn: "上傳圖片",
-    useCelebrityBtn: "使用名人形象",
     changePhotoBtn: "更換相片",
     lockedSelfie: "相片已就緒",
-    lockedCeleb: "名人模式：",
-    placeholder: "可撳多個標籤組合提示詞，自由修改後按發送...",
+    placeholder: "揀選上方形象風格標籤或輸入視覺提示詞，先生成你嘅專屬形象照...",
     streaming: "✨ 正在為你生成高清圖片...",
-    editHint: "撳 1 個或多個小標籤組合示例提示詞供你自由修改：",
-    waBtn: "💬 發送到 WhatsApp",
-    copyBtn: "📋 複製",
-    copiedBtn: "✅ 已複製",
+    editHint: "撳標籤載入提示詞，可喺下方輸入框自由修改後發送：",
     saveImgBtn: "⬇️ 儲存圖片",
     dictateBtn: "🎙️ 語音",
     listeningBtn: "🔴 聆聽中...",
     resetChatBtn: "↺ 重新開始",
     clearBtn: "✕ 清空",
-    outreachMsgLabel: "💬 客戶關懷 WhatsApp 話術（可直接改）",
     submitBtn: "🚀 提交作品",
     submittingBtn: "交緊卷...",
     submittedBadge: "✓ 挑戰 1 已提交至實時總積分榜",
@@ -861,39 +670,31 @@ const UI_COPY_C1 = {
     backToChatBtn: "💬 返去繼續創作",
     waitingC2Title: "⏳ 請等待主持人開啟挑戰 2...",
     waitingC2Sub: "你嘅挑戰 1 分數已經上咗主舞台大螢幕！主持人一開挑戰 2，你部電話就會自動解鎖下一關。",
-    criteriaLabels: ["高管品牌形象", "客戶人情味與定制", "創意提示詞巧思"],
+    criteriaLabels: ["高管品牌形象", "視覺構圖質感", "創意提示詞巧思"],
   },
   ms: {
     briefSteps: [
-      { title: "1. Cipta Imej Anda (Craft Your Image)", desc: "Ambil foto, muat naik imej, atau guna nama selebriti untuk gaya eksekutif." },
-      { title: "2. Jana Hasil Dari Imej Anda (Put Your Image to Work)", desc: "Tukar imej kepada kad sapaan pelanggan, kalendar perayaan & penjenamaan pemacu perniagaan." },
+      { title: "1. Cipta Imej Anda (Craft Your Image)", desc: "Ambil foto atau muat naik imej dahulu untuk menjana potret studio eksekutif anda." },
+      { title: "2. Gunakan Imej Anda (Put Your Image to Work)", desc: "Dibuka selepas potret siap: kad perayaan VIP & sepanduk penjenamaan peribadi." },
     ],
-    craftSectionTitle: "1. Cipta Imej Anda (Craft Your Image)",
-    workSectionTitle: "2. Jana Hasil Dari Imej Anda (Put Your Image to Work)",
+    craftSectionTitle: "1. Cipta Imej Anda (Langkah 1: Potret Studio Dahulu)",
+    workSectionTitle: "2. Gunakan Imej Anda (Put Your Image to Work)",
     welcome:
-      "Hai! 👋 Saya **Pembantu Imej AI** anda, dan saya akan membimbing anda.\n\n**Langkah 1 — Kita perlukan sekeping foto anda:**",
+      "Hai! 👋 Saya **Pembantu Imej AI** anda.\n\n**Langkah 1 — Sila ambil foto atau muat naik imej terlebih dahulu (imej diperlukan sebelum memulakan):**",
     photoReadyMsg:
-      "Terbaik — foto anda sudah sedia! 🙌 Anda kini boleh gabungkan pilihan di bawah dan sunting bebas:\n• **1. Cipta Imej Anda** — kemaskan potret eksekutif, pakaian atau latar belakang.\n• **2. Jana Hasil Dari Imej Anda** — tukar imej kepada kad sapaan pelanggan, kalendar atau penjenamaan peribadi.\n\nKlik satu atau beberapa pil di bawah untuk membina prompt anda:",
-    celebReadyMsg:
-      "Mod selebriti aktif! 🌟 Anda kini boleh gabungkan pilihan di bawah dan sunting bebas:\n• **1. Cipta Imej Anda** — jana potret studio selebriti.\n• **2. Jana Hasil Dari Imej Anda** — bina kad ucapan pelanggan, kalendar atau penjenamaan.\n\nKlik satu atau beberapa pil di bawah untuk membina prompt anda:",
+      "Terbaik — foto anda sudah sedia! 🙌 **Langkah 1: Cipta Potret Studio Eksekutif anda terlebih dahulu** (Langkah 2 kad ucapan VIP & penjenamaan peribadi akan dibuka sebaik sahaja potret anda siap):\n\nKlik gaya di bawah atau sunting prompt anda:",
     takePhotoBtn: "Ambil foto",
     uploadImageBtn: "Muat naik imej",
-    useCelebrityBtn: "Guna selebriti",
     changePhotoBtn: "Tukar foto",
     lockedSelfie: "Foto Sedia",
-    lockedCeleb: "Selebriti: ",
-    placeholder: "Klik beberapa pil untuk gabung prompt, ubah suai di sini, kemudian tekan Send...",
+    placeholder: "Pilih gaya potret di atas atau taip prompt visual anda, kemudian tekan Send...",
     streaming: "✨ Sedang menjana imej anda...",
-    editHint: "Klik 1 atau beberapa pil untuk gabungkan contoh prompt & sunting bebas:",
-    waBtn: "💬 Hantar ke WhatsApp",
-    copyBtn: "📋 Salin",
-    copiedBtn: "✅ Disalin",
+    editHint: "Klik pil pilihan untuk memuatkan contoh prompt & sunting bebas:",
     saveImgBtn: "⬇️ Simpan",
     dictateBtn: "🎙️ Suara",
     listeningBtn: "🔴 Mendengar...",
     resetChatBtn: "↺ Mula Semula",
     clearBtn: "✕ Kosongkan",
-    outreachMsgLabel: "💬 Mesej Sapaan Pelanggan (Boleh disunting)",
     submitBtn: "🚀 Hantar",
     submittingBtn: "Menghantar...",
     submittedBadge: "✓ CABARAN 1 DIHANTAR KE PAPAN PENDAHULU LANGSUNG",
@@ -901,39 +702,31 @@ const UI_COPY_C1 = {
     backToChatBtn: "💬 Kembali ke Ruang Sembang",
     waitingC2Title: "⏳ Menunggu Penyampai Memulakan Cabaran 2...",
     waitingC2Sub: "Markah Cabaran 1 anda kini dipaparkan di pentas utama! Cabaran 2 akan dibuka secara automatik sebaik sahaja Penyampai memulakannya.",
-    criteriaLabels: ["Jenama Eksekutif", "Empati & Pemperibadian", "Kreativiti Prompt"],
+    criteriaLabels: ["Jenama Eksekutif", "Komposisi Visual", "Kreativiti Prompt"],
   },
   en: {
     briefSteps: [
-      { title: "1. Craft Your Image", desc: "Take a photo, upload an image, or use a celebrity to style your executive portrait." },
-      { title: "2. Put Your Image to Work", desc: "Put that image to work driving business: client milestone cards, festive calendar greetings & personal branding." },
+      { title: "1. Craft Your Image", desc: "Take a photo or upload an image first, then generate your executive studio portrait." },
+      { title: "2. Put Your Image to Work", desc: "Unlocks after Step 1 portrait: VIP greeting cards, festive cards & personal branding banners." },
     ],
-    craftSectionTitle: "1. Craft Your Image",
-    workSectionTitle: "2. Put Your Image to Work (Make It Drive Business)",
+    craftSectionTitle: "1. Craft Your Image (Step 1 — Portrait First)",
+    workSectionTitle: "2. Put Your Image to Work (Cards & Branding Banners)",
     welcome:
-      "Hi! 👋 I'm your **AI Image Assistant**, and I'm going to guide you through this.\n\n**Step 1 — We need a photo of you to work with:**",
+      "Hi! 👋 I'm your **AI Image Assistant**, and I'll guide you step-by-step.\n\n**Step 1 — Please take a photo or upload an image first (an image is required before you can do anything):**",
     photoReadyMsg:
-      "Awesome — got your photo! 🙌 You can now tap 1 or multiple pills below to combine them and edit freely:\n• **1. Craft Your Image** — refine your executive portrait, wardrobe, or setting.\n• **2. Put Your Image to Work** — turn your image into client outreach cards, festive greetings, or personal branding.\n\nTap any pill(s) below to build your prompt:",
-    celebReadyMsg:
-      "Celebrity mode active! 🌟 You can now tap 1 or multiple pills below to combine them and edit freely:\n• **1. Craft Your Image** — generate celebrity executive studio headshots.\n• **2. Put Your Image to Work** — turn it into client milestone cards, festive greetings, or branding.\n\nTap any pill(s) below to build your prompt:",
+      "Awesome — got your image! 🙌 **First, let's craft your Step 1 Studio Portrait** (Step 2 Greeting Cards & Personal Branding Banners will unlock right after your portrait is generated):\n\nTap a portrait style below or customize your prompt:",
     takePhotoBtn: "Take a photo",
     uploadImageBtn: "Upload an image",
-    useCelebrityBtn: "Use a celebrity",
     changePhotoBtn: "Change photo",
-    lockedSelfie: "Photo Ready",
-    lockedCeleb: "Celebrity: ",
-    placeholder: "Tap multiple pills to combine them or type your own prompt here, then press Send...",
-    streaming: "✨ Generating your image...",
-    editHint: "Tap 1 or multiple option pills to combine into your prompt and edit freely:",
-    waBtn: "💬 Send to WhatsApp",
-    copyBtn: "📋 Copy",
-    copiedBtn: "✅ Copied",
+    lockedSelfie: "Image Ready",
+    placeholder: "Tap a portrait style pill or type your visual prompt, then press Send...",
+    streaming: "✨ Generating your studio image...",
+    editHint: "Tap an option pill to load or combine a visual prompt you can edit freely:",
     saveImgBtn: "⬇️ Save",
     dictateBtn: "🎙️ Voice",
     listeningBtn: "🔴 Listening...",
     resetChatBtn: "↺ Start Over",
     clearBtn: "✕ Clear",
-    outreachMsgLabel: "💬 Outreach Message (Editable)",
     submitBtn: "🚀 Submit",
     submittingBtn: "Submitting...",
     submittedBadge: "✓ CHALLENGE 1 SUBMITTED TO LIVE LEADERBOARD",
@@ -941,39 +734,31 @@ const UI_COPY_C1 = {
     backToChatBtn: "💬 Back to Chat",
     waitingC2Title: "⏳ Waiting for Presenter to Start Challenge 2...",
     waitingC2Sub: "Your Challenge 1 score is live on the main stage! Challenge 2 will unlock automatically on your phone as soon as the Presenter starts it.",
-    criteriaLabels: ["Executive Brand", "Empathy & Personalization", "Creative Prompt Craft"],
+    criteriaLabels: ["Executive Brand", "Visual Composition", "Creative Prompt Craft"],
   },
   ta: {
     briefSteps: [
-      { title: "1. உங்கள் தொழில்முறை தோற்றத்தை உருவாக்குங்கள் (Craft Your Image)", desc: "புகைப்படம் எடுக்கவும், பதிவேற்றவும் அல்லது பிரபல நபரைப் பயன்படுத்தி தொழில்முறை உருவப்படத்தை உருவாக்கவும்." },
-      { title: "2. உங்கள் படத்தை வணிகத்திற்குப் பயன்படுத்துங்கள் (Put Your Image to Work)", desc: "வாடிக்கையாளர் வாழ்த்து அட்டைகள், பண்டிகை காலண்டர் மற்றும் தனிப்பட்ட பிராண்டிங்காக மாற்றுங்கள்." },
+      { title: "1. உங்கள் தொழில்முறை தோற்றத்தை உருவாக்குங்கள் (Craft Your Image)", desc: "முதலில் புகைப்படம் எடுக்கவும் அல்லது பதிவேற்றவும், பின்னர் நிர்வாக உருவப்படத்தை உருவாக்கவும்." },
+      { title: "2. உங்கள் படத்தை பயன்படுத்துங்கள் (Put Your Image to Work)", desc: "உருவப்படம் தயாரானதும் திறக்கும்: வாழ்த்து அட்டைகள், பண்டிகை அட்டைகள் மற்றும் பிராண்டிங் பேனர்." },
     ],
-    craftSectionTitle: "1. உங்கள் தொழில்முறை தோற்றத்தை உருவாக்குங்கள் (Craft Your Image)",
-    workSectionTitle: "2. உங்கள் படத்தை வணிகத்திற்குப் பயன்படுத்துங்கள் (Put Your Image to Work)",
+    craftSectionTitle: "1. உங்கள் தொழில்முறை தோற்றத்தை உருவாக்குங்கள் (படி 1)",
+    workSectionTitle: "2. உங்கள் படத்தை பயன்படுத்துங்கள் (Put Your Image to Work)",
     welcome:
-      "வணக்கம்! 👋 நான் உங்கள் **AI பட உதவியாளர்**, உங்களுக்கு வழிகாட்ட உள்ளேன்.\n\n**படி 1 — தொடங்குவதற்கு உங்கள் புகைப்படம் தேவை:**",
+      "வணக்கம்! 👋 நான் உங்கள் **AI பட உதவியாளர்**.\n\n**படி 1 — தொடங்குவதற்கு முதலில் புகைப்படம் எடுக்கவும் அல்லது படத்தைப் பதிவேற்றவும்:**",
     photoReadyMsg:
-      "அருமை — உங்கள் புகைப்படம் தயார்! 🙌 கீழே உள்ள 1 அல்லது பல விருப்பங்களைத் தட்டி இணைத்து சுதந்திரமாகத் திருத்தலாம்:\n• **1. உங்கள் தோற்றத்தை வடிவமைக்கவும்** — உடை அல்லது பின்னணியை மாற்றவும்.\n• **2. வணிகத்திற்குப் பயன்படுத்தவும்** — வாடிக்கையாளர் வாழ்த்து அட்டை அல்லது காலண்டராக மாற்றவும்.\n\nகீழே உள்ள மாதிரி ப்ராம்ப்ட்களைத் தேர்ந்தெடுத்து இணைக்கவும்:",
-    celebReadyMsg:
-      "பிரபல பயன்முறை தயார்! 🌟 கீழே உள்ள 1 அல்லது பல மாதிரி ப்ராம்ப்ட்களைத் தட்டி இணைத்து மாற்றலாம்:",
+      "அருமை — உங்கள் புகைப்படம் தயார்! 🙌 **முதலில் படி 1: உங்கள் தொழில்முறை உருவப்படத்தை உருவாக்குவோம்** (அதன் பிறகு படி 2 வாழ்த்து அட்டைகள் மற்றும் பிராண்டிங் பேனர் திறக்கும்):",
     takePhotoBtn: "புகைப்படம் எடு",
     uploadImageBtn: "படத்தைப் பதிவேற்று",
-    useCelebrityBtn: "பிரபலரைப் பயன்படுத்து",
     changePhotoBtn: "படத்தை மாற்று",
     lockedSelfie: "புகைப்படம் தயார்",
-    lockedCeleb: "பிரபலம்: ",
-    placeholder: "பல விருப்பங்களை இணைத்து அல்லது உங்கள் ப்ராம்ப்டை உள்ளிட்டு அனுப்பவும்...",
+    placeholder: "மேலே உள்ள உருவப்பட பாணியைத் தேர்ந்தெடுத்து அனுப்பவும்...",
     streaming: "✨ உங்கள் படம் உருவாக்கப்படுகிறது...",
-    editHint: "1 அல்லது பல விருப்பங்களைத் தட்டி ப்ராம்ப்டில் இணைத்து சுதந்திரமாகத் திருத்தவும்:",
-    waBtn: "💬 WhatsApp-க்கு அனுப்பு",
-    copyBtn: "📋 நகலெடு",
-    copiedBtn: "✅ நகலெடுக்கப்பட்டது",
+    editHint: "விருப்பத்தைத் தட்டி ப்ராம்ப்டில் இணைத்து சுதந்திரமாகத் திருத்தவும்:",
     saveImgBtn: "⬇️ சேமி",
     dictateBtn: "🎙️ குரல்",
     listeningBtn: "🔴 கேட்கிறது...",
     resetChatBtn: "↺ மீண்டும் தொடங்கு",
     clearBtn: "✕ அழி",
-    outreachMsgLabel: "💬 வாடிக்கையாளர் WhatsApp செய்தி (திருத்தலாம்)",
     submitBtn: "🚀 சமர்ப்பி",
     submittingBtn: "சமர்ப்பிக்கிறது...",
     submittedBadge: "✓ சவால் 1 நேரடி தரவரிசைப் பட்டியலில் சமர்ப்பிக்கப்பட்டது",
@@ -981,10 +766,14 @@ const UI_COPY_C1 = {
     backToChatBtn: "💬 உரையாடலுக்குத் திரும்பு",
     waitingC2Title: "⏳ தொகுப்பாளர் சவால் 2-ஐத் தொடங்கும் வரை காத்திருக்கவும்...",
     waitingC2Sub: "உங்கள் சவால் 1 மதிப்பெண் பிரதான திரையில் பதிவாகியுள்ளது! தொகுப்பாளர் சவால் 2-ஐத் தொடங்கியவுடன் உங்கள் திரையில் தானாகத் திறக்கும்.",
-    criteriaLabels: ["நிர்வாக பிராண்ட்", "வாடிக்கையாளர் அக்கறை", "ப்ராம்ப்ட் படைப்பாற்றல்"],
+    criteriaLabels: ["நிர்வாக பிராண்ட்", "காட்சி அமைப்பு", "ப்ராம்ப்ட் படைப்பாற்றல்"],
   },
 };
 UI_COPY_C1["yue"] = UI_COPY_C1["zh-TW"];
+
+function getStep1CraftOnlyPillsC1(lang) {
+  return getPostPhotoPillsC1(lang).filter((p) => p.group === "craft");
+}
 
 function loadCanvasImageC1(src) {
   return new Promise((resolve) => {
@@ -1191,14 +980,12 @@ window.Challenge1ParticipantView = function ({
   const { useState, useEffect, useRef } = React;
   const ui = UI_COPY_C1[lang] || UI_COPY_C1.en;
 
-  // Step 1 State: Chat prompt stays hidden until user chooses Take Photo, Upload Image, or Use a Celebrity
+  // Step 0 Gate: Chat prompt stays strictly locked until user takes a photo or uploads an image
   const [rawPhoto, setRawPhoto] = useState(null);
-  const [celebrityMode, setCelebrityMode] = useState(false);
-  const [celebrityName, setCelebrityName] = useState("");
   const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
 
   const fileInputRef = useRef(null);
-  const isStep1Unlocked = Boolean(rawPhoto || celebrityMode);
+  const isStep1Unlocked = Boolean(rawPhoto);
 
   // Multi-Turn Chat & Artifact State
   const [messages, setMessages] = useState(() => [
@@ -1229,8 +1016,6 @@ window.Challenge1ParticipantView = function ({
   });
 
   const [showBeforeByMsg, setShowBeforeByMsg] = useState({});
-  const [outreachDraftByMsg, setOutreachDraftByMsg] = useState({});
-  const [copiedMsgId, setCopiedMsgId] = useState(null);
 
   // Submission State
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -1251,14 +1036,7 @@ window.Challenge1ParticipantView = function ({
           return {
             ...m,
             text: curUi.photoReadyMsg,
-            followUps: getPostPhotoPillsC1(lang),
-          };
-        }
-        if (m.isCelebReadyGreeting) {
-          return {
-            ...m,
-            text: curUi.celebReadyMsg,
-            followUps: getCelebrityPillsC1(lang),
+            followUps: getStep1CraftOnlyPillsC1(lang),
           };
         }
         return m;
@@ -1273,16 +1051,23 @@ window.Challenge1ParticipantView = function ({
         language: lang,
         region: agentRegion,
         status: "💬 Challenge 1: AI Image Assistant",
-        agenticStep: "Step 1: Photo, Upload, or Celebrity",
+        agenticStep: "Step 1: Take or Upload Photo",
       }),
     }).catch(() => {});
   }, [lang]);
 
-  // Option 1 & 2: User took a photo or uploaded an image
+  // User took a photo or uploaded an image -> unlock Step 1 (Craft Your Studio Portrait FIRST)
   const handlePhotoLocked = (dataUrl) => {
     setRawPhoto(dataUrl);
-    setCelebrityMode(false);
-    setCelebrityName("");
+    setStudioState((prev) => ({
+      ...prev,
+      aiPortraitDataUrl: null,
+      aiCardArtworkDataUrl: null,
+    }));
+    const step1Pills = getStep1CraftOnlyPillsC1(lang);
+    if (step1Pills.length > 0) {
+      setInputText(step1Pills[0].prompt);
+    }
     setMessages((prev) => [
       ...prev,
       {
@@ -1292,7 +1077,7 @@ window.Challenge1ParticipantView = function ({
         isPhotoReadyGreeting: true,
         photoThumb: dataUrl,
         text: ui.photoReadyMsg,
-        followUps: getPostPhotoPillsC1(lang),
+        followUps: step1Pills,
       },
     ]);
   };
@@ -1320,34 +1105,6 @@ window.Challenge1ParticipantView = function ({
     };
     reader.readAsDataURL(file);
     e.target.value = "";
-  };
-
-  // Option 3: User clicked "Use a celebrity"
-  const handleSelectCelebrity = () => {
-    setCelebrityMode(true);
-    setCelebrityName("Michelle Yeoh");
-    const sample =
-      lang === "zh-CN"
-        ? "使用名人杨紫琼（Michelle Yeoh）生成一张身穿炭灰西装、背景为吉隆坡双峰塔黄昏的高管肖像照。"
-        : lang === "zh-TW" || lang === "yue"
-        ? "使用名人楊紫瓊（Michelle Yeoh）生成一張身穿炭灰西裝、背景為吉隆坡雙峰塔黃昏的高管肖像照。"
-        : lang === "ms"
-        ? "Gunakan selebriti Michelle Yeoh untuk menghasilkan potret studio eksekutif memakai sut kelabu gelap berlatarkan Menara Berkembar KLCC waktu senja."
-        : lang === "ta"
-        ? "நடிகை மிஷெல் யோ (Michelle Yeoh) கோலாலம்பூர் இரட்டை கோபுரப் பின்னணியில் நிர்வாக உடையணிந்த தொழில்முறை உருவப்படத்தை உருவாக்கவும்."
-        : "Use celebrity Michelle Yeoh to create an executive studio portrait in a tailored charcoal suit overlooking the Kuala Lumpur skyline at golden hour.";
-    setInputText(sample);
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `celeb_ready_${Date.now()}`,
-        role: "assistant",
-        agentName: "AI Image Assistant",
-        isCelebReadyGreeting: true,
-        text: ui.celebReadyMsg,
-        followUps: getCelebrityPillsC1(lang),
-      },
-    ]);
   };
 
   const toggleVoiceDictation = () => {
@@ -1384,8 +1141,6 @@ window.Challenge1ParticipantView = function ({
 
   const handleResetChat = () => {
     setRawPhoto(null);
-    setCelebrityMode(false);
-    setCelebrityName("");
     setMessages([
       {
         id: "welcome_c1",
@@ -1412,6 +1167,19 @@ window.Challenge1ParticipantView = function ({
   };
 
   const handleSendMessage = async (overridePrompt = null) => {
+    if (!rawPhoto) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `gate_${Date.now()}`,
+          role: "assistant",
+          agentName: "AI Image Assistant",
+          text: ui.welcome,
+          needsStep1Actions: true,
+        },
+      ]);
+      return;
+    }
     const promptToSend = (overridePrompt !== null ? overridePrompt : inputText).trim();
     if (!promptToSend || isStreaming) return;
     if (overridePrompt === null) {
@@ -1450,7 +1218,7 @@ window.Challenge1ParticipantView = function ({
 
     try {
       const compactHistory = nextHistory
-        .filter((m) => m.id !== "welcome_c1" && !m.isPhotoReadyGreeting && !m.isCustomReadyGreeting)
+        .filter((m) => m.id !== "welcome_c1" && !m.isPhotoReadyGreeting)
         .slice(-6)
         .map((m) => ({ role: m.role, text: m.text }));
 
@@ -1471,18 +1239,15 @@ window.Challenge1ParticipantView = function ({
             motto: studioState.motto,
             cardHeadline: studioState.cardHeadline,
             visualPrompt: studioState.visualPrompt,
-            celebrityName: celebrityName.trim(),
             hasExistingVisual: Boolean(studioState.latestArtifact),
             hasAiPortrait: Boolean(studioState.aiPortraitDataUrl),
           },
-          celebrityName: rawPhoto ? "" : celebrityName.trim(),
           agentName: agentName || "",
           region: agentRegion || "",
           hasCustomPhoto: Boolean(rawPhoto),
           photoBase64: rawPhoto,
           prevPortraitDataUrl: studioState.aiPortraitDataUrl || null,
-          customImageMode: false,
-          requirePhotoOrCelebrity: !Boolean(rawPhoto || celebrityMode || celebrityName),
+          requirePhotoOrCelebrity: true,
           useStudioAvatar: false,
           seedIndex: 0,
         }),
@@ -1509,10 +1274,6 @@ window.Challenge1ParticipantView = function ({
         return;
       }
 
-      if (data.celebrityUsed && !rawPhoto) {
-        setCelebrityName(data.celebrityUsed);
-      }
-
       const nextMode = data.creationMode || studioState.creationMode || "executive_headshot";
       const nextStyle = data.style || studioState.style || "mdrt_keynote";
       const nextOccasion = data.occasion || studioState.occasion || "newborn";
@@ -1521,16 +1282,11 @@ window.Challenge1ParticipantView = function ({
         ? studioState.aiCardArtworkDataUrl
         : data.aiCardArtworkDataUrl || null;
 
-      // Pure, clean AI-generated image (NO fake canvas borders, NO "Dato' Sandbox Tester", NO fallback motto!)
+      // Pure, clean AI-generated image
       const cleanImageUrl =
         nextMode === "executive_headshot"
           ? mergedPortrait || studioState.latestArtifact?.cleanImageUrl || rawPhoto
           : mergedArtwork || mergedPortrait || studioState.latestArtifact?.cleanImageUrl || rawPhoto;
-
-      const userAskedForOutreach =
-        nextMode === "outreach_card" ||
-        Boolean(data.copyOnly) ||
-        /\b(whatsapp|outreach|message|greeting|card|client|calendar)\b/i.test(promptToSend);
 
       const aMsgId = `a_${Date.now()}`;
       const artifactObj = {
@@ -1541,8 +1297,8 @@ window.Challenge1ParticipantView = function ({
         styleBadge: data.styleBadge || "✨ AI Studio Image",
         cleanImageUrl,
         beforeUrl: rawPhoto || null,
-        showCopyBox: userAskedForOutreach,
-        outreachMessage: data.outreachMessage || "",
+        showCopyBox: false,
+        outreachMessage: "",
         linkedinHeadline: data.linkedinHeadline || "",
         judgeFeedback: data.judgeFeedback || "",
         brandScore: data.brandScore || 96,
@@ -1553,23 +1309,22 @@ window.Challenge1ParticipantView = function ({
         userPrompt: promptToSend,
       };
 
-      setOutreachDraftByMsg((prev) => ({
-        ...prev,
-        [aMsgId]: artifactObj.outreachMessage,
-      }));
-
       setStudioState({
         creationMode: nextMode,
         style: nextStyle,
         occasion: nextOccasion,
-        clientName: data.clientName || studioState.clientName,
-        motto: data.motto || studioState.motto,
+        clientName: typeof data.clientName === "string" ? data.clientName : "",
+        motto: typeof data.motto === "string" ? data.motto : "",
         cardHeadline: data.cardHeadline || studioState.cardHeadline,
         visualPrompt: data.visualPrompt || promptToSend,
         aiPortraitDataUrl: mergedPortrait,
         aiCardArtworkDataUrl: mergedArtwork,
         latestArtifact: artifactObj,
       });
+
+      const unlockedFollowUps = Boolean(mergedPortrait)
+        ? data.suggestedFollowUps || getPostPhotoPillsC1(lang)
+        : getStep1CraftOnlyPillsC1(lang);
 
       setMessages((prev) => [
         ...prev,
@@ -1580,7 +1335,7 @@ window.Challenge1ParticipantView = function ({
           turnBadge: `Turn ${data.turnNumber || 1}`,
           text: data.assistantReply || "",
           artifact: artifactObj,
-          followUps: data.suggestedFollowUps || [],
+          followUps: unlockedFollowUps,
         },
       ]);
     } catch (err) {
@@ -1648,18 +1403,9 @@ window.Challenge1ParticipantView = function ({
       const elapsedSec = Math.max(6, Math.round((Date.now() - startTime) / 1000));
       const speedScore = Math.max(85, Math.min(99, 100 - Math.floor(elapsedSec / 6)));
 
-      const editedCopy =
-        outreachDraftByMsg[art.msgId] !== undefined
-          ? outreachDraftByMsg[art.msgId]
-          : art.outreachMessage;
-      const didCustomizeCopy =
-        Boolean(editedCopy && art.outreachMessage) &&
-        editedCopy.trim() !== (art.outreachMessage || "").trim() &&
-        editedCopy.trim().length >= 15;
-
       const bScore = Math.min(99, art.brandScore || 96);
-      const pScore = Math.min(99, (art.personalizationScore || 96) + (didCustomizeCopy ? 2 : 0));
-      const cScore = Math.min(99, (art.craftScore || 96) + (didCustomizeCopy ? 1 : 0));
+      const pScore = Math.min(99, art.personalizationScore || 96);
+      const cScore = Math.min(99, art.craftScore || 96);
       const accuracyScore = Math.min(99, Math.round((bScore + pScore + cScore) / 3));
 
       const beforeThumb = await makeCompactBeforeThumb(rawPhoto);
@@ -1670,18 +1416,18 @@ window.Challenge1ParticipantView = function ({
 
       const cLabels = ui.criteriaLabels || [
         "Executive Brand",
-        "Empathy & Personalization",
+        "Visual Composition",
         "Creative Prompt Craft",
       ];
       const criteriaMap = {
         [cLabels[0] || "Executive Brand"]: bScore,
-        [cLabels[1] || "Empathy & Personalization"]: pScore,
+        [cLabels[1] || "Visual Composition"]: pScore,
         [cLabels[2] || "Creative Prompt Craft"]: cScore,
       };
 
       const modeLabelMap = {
-        executive_headshot: "AI Portrait",
-        outreach_card: "Outreach Card",
+        executive_headshot: "AI Studio Portrait",
+        outreach_card: "VIP Greeting Card",
         brand_banner: "Personal Branding Banner",
       };
 
@@ -1692,9 +1438,9 @@ window.Challenge1ParticipantView = function ({
         title: modeLabelMap[art.creationMode] || "AI Studio Image",
         styleBadge: art.styleBadge,
         userInput: userTurnTexts.slice(-3).join("\n") || art.userPrompt,
-        aiOutput: editedCopy,
+        aiOutput: art.userPrompt || modeLabelMap[art.creationMode] || "AI Studio Visual",
         judgeFeedback:
-          art.judgeFeedback || "Clean visual craft and personalized outreach!",
+          art.judgeFeedback || "Executive visual craft and sharp studio direction!",
         imageBefore: beforeThumb,
         imageAfter: art.cleanImageUrl,
         rawPortraitUrl: art.cleanImageUrl,
@@ -1763,29 +1509,7 @@ window.Challenge1ParticipantView = function ({
     document.body.removeChild(a);
   };
 
-  const handleCopyCopy = (msgId, text) => {
-    if (!text) return;
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        setCopiedMsgId(msgId);
-        setTimeout(() => setCopiedMsgId(null), 2000);
-      })
-      .catch(() => {});
-  };
-
-  const handleShareWhatsApp = (msgId, text) => {
-    const cleanText = (text || "").trim();
-    if (cleanText) {
-      navigator.clipboard?.writeText(cleanText).catch(() => {});
-      setCopiedMsgId(msgId);
-      setTimeout(() => setCopiedMsgId(null), 2000);
-    }
-    const waUrl = `https://wa.me/?text=${encodeURIComponent(cleanText)}`;
-    window.open(waUrl, "_blank", "noopener,noreferrer");
-  };
-
-  // Step 1: Exactly the 3 choices requested — Take a photo, Upload an image, Use a celebrity
+  // Step 1: Image-first gate — Take a photo OR Upload an image
   const renderMessageActions = (msg) => {
     if (!msg.needsStep1Actions || isStep1Unlocked) return null;
     return (
@@ -1804,35 +1528,29 @@ window.Challenge1ParticipantView = function ({
         >
           📤 {ui.uploadImageBtn || "Upload an image"}
         </button>
-        <button
-          type="button"
-          onClick={handleSelectCelebrity}
-          className="px-4 py-2 rounded-full bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] font-extrabold text-xs border border-slate-300 hover:border-[#ed1b2e] shadow-sm transition-all"
-        >
-          🌟 {ui.useCelebrityBtn || "Use a celebrity"}
-        </button>
       </div>
     );
   };
 
-  // Render JUST the clean generated image (+ Outreach copy box ONLY when building outreach)
+  // Render JUST the clean generated image + Original toggle + Save + Submit
   const renderArtifactCard = (msg) => {
     const art = msg.artifact;
     if (!art) return null;
     const showingBefore = Boolean(showBeforeByMsg[msg.id]);
-    const draftCopy =
-      outreachDraftByMsg[msg.id] !== undefined
-        ? outreachDraftByMsg[msg.id]
-        : art.outreachMessage;
 
     const displayedImg =
       showingBefore && art.beforeUrl ? art.beforeUrl : art.cleanImageUrl;
 
     return (
       <div className="space-y-2.5 pt-1">
-        {/* Clean Generated Image — No Fake Card Frame */}
         {displayedImg && (
-          <div className="relative max-w-[300px] sm:max-w-[340px] mx-auto">
+          <div
+            className={`relative mx-auto ${
+              art.creationMode === "executive_headshot"
+                ? "max-w-[300px] sm:max-w-[340px]"
+                : "max-w-full sm:max-w-[460px]"
+            }`}
+          >
             <img
               src={displayedImg}
               alt="Generated AI Image"
@@ -1861,46 +1579,12 @@ window.Challenge1ParticipantView = function ({
           </div>
         )}
 
-        {/* Editable WhatsApp Copy Box — Shown Only When Doing Outreach */}
-        {art.showCopyBox && draftCopy && (
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1.5">
-            <div className="flex items-center justify-between gap-1.5 text-[11px]">
-              <span className="font-bold text-slate-800">{ui.outreachMsgLabel || "💬 Outreach Message (Editable)"}</span>
-              <button
-                type="button"
-                onClick={() => handleCopyCopy(msg.id, draftCopy)}
-                className="px-2.5 py-0.5 rounded-full bg-white hover:bg-red-50 text-[#ed1b2e] font-bold text-[10px] border border-[#ed1b2e]"
-              >
-                {copiedMsgId === msg.id ? ui.copiedBtn : ui.copyBtn}
-              </button>
-            </div>
-
-            <textarea
-              rows={3}
-              value={draftCopy}
-              onChange={(e) =>
-                setOutreachDraftByMsg((p) => ({ ...p, [msg.id]: e.target.value }))
-              }
-              style={{ fontSize: "16px" }}
-              className="w-full bg-white border border-slate-300 focus:border-[#ed1b2e] focus:outline-none rounded-lg p-2.5 text-slate-900 leading-relaxed sm:text-xs"
-            />
-          </div>
-        )}
-
-        {/* Compact Action Row: Share to WhatsApp (White + Red Border) OR Submit (Solid Prudential Red) */}
-        <div className="grid grid-cols-2 gap-2.5 pt-1">
-          <button
-            type="button"
-            onClick={() => handleShareWhatsApp(msg.id, draftCopy)}
-            className="py-2.5 px-3 rounded-xl bg-white hover:bg-red-50 text-[#ed1b2e] border-2 border-[#ed1b2e] font-extrabold text-xs flex items-center justify-center gap-1 shadow-sm transition-all"
-          >
-            <span>{ui.waBtn}</span>
-          </button>
+        <div className="pt-1">
           <button
             type="button"
             disabled={isSubmitting}
             onClick={() => handleSubmitArtifact(art)}
-            className="py-2.5 px-3 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-50 text-white font-extrabold text-xs shadow-md shadow-red-600/20 transition-all"
+            className="w-full py-2.5 px-4 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-50 text-white font-extrabold text-xs shadow-md shadow-red-600/20 transition-all"
           >
             {isSubmitting ? (ui.submittingBtn || "Submitting...") : (ui.submitBtn || "🚀 Submit")}
           </button>
@@ -1910,10 +1594,6 @@ window.Challenge1ParticipantView = function ({
   };
 
   if (submitted) {
-    const finalCopy =
-      submittedSnapshot && outreachDraftByMsg[submittedSnapshot.msgId] !== undefined
-        ? outreachDraftByMsg[submittedSnapshot.msgId]
-        : submittedSnapshot?.outreachMessage || "";
     const totalPts = submittedSnapshot?.totalScore || 96;
     const spdPts = submittedSnapshot?.speedScore || 94;
     const accPts = submittedSnapshot?.accuracyScore || 97;
@@ -1922,7 +1602,7 @@ window.Challenge1ParticipantView = function ({
     const jFeedback =
       submittedSnapshot?.finalJudgeFeedback ||
       submittedSnapshot?.judgeFeedback ||
-      "Executive visual craft and personalized client outreach!";
+      "Executive visual craft and sharp studio direction!";
 
     return (
       <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-5 sm:p-6 text-center space-y-4 shadow-xl">
@@ -1976,13 +1656,6 @@ window.Challenge1ParticipantView = function ({
         <div className="flex flex-wrap justify-center gap-2">
           <button
             type="button"
-            onClick={() => handleShareWhatsApp(submittedSnapshot?.msgId || "sub", finalCopy)}
-            className="px-4 py-2 rounded-full bg-white hover:bg-red-50 text-[#ed1b2e] border-2 border-[#ed1b2e] text-xs font-extrabold shadow-sm"
-          >
-            {ui.waBtn}
-          </button>
-          <button
-            type="button"
             onClick={() => setSubmitted(false)}
             className="px-4 py-2 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-bold shadow-sm"
           >
@@ -2032,25 +1705,26 @@ window.Challenge1ParticipantView = function ({
   const compactAttachmentStrip = (
     <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px]">
       <div className="flex items-center gap-2 min-w-0">
-        {rawPhoto ? (
-          <>
-            <img
-              src={rawPhoto}
-              alt="Uploaded"
-              className="w-6 h-6 rounded-full object-cover border-2 border-[#ed1b2e] shrink-0"
-            />
-            <span className="font-bold text-slate-800 truncate">✓ {ui.lockedSelfie}</span>
-          </>
-        ) : (
-          <span className="font-bold text-[#ed1b2e] truncate">
-            🌟 {ui.lockedCeleb}{celebrityName || "Michelle Yeoh"}
-          </span>
+        {rawPhoto && (
+          <img
+            src={rawPhoto}
+            alt="Uploaded"
+            className="w-6 h-6 rounded-full object-cover border-2 border-[#ed1b2e] shrink-0"
+          />
         )}
+        <span className="font-bold text-slate-800 truncate">✓ {ui.lockedSelfie}</span>
       </div>
       <div className="flex items-center gap-1.5 shrink-0">
         <button
           type="button"
           onClick={() => setIsCameraModalOpen(true)}
+          className="px-2.5 py-0.5 rounded-full bg-white hover:bg-red-50 text-[#ed1b2e] border border-[#ed1b2e] font-bold text-[10px]"
+        >
+          📸 {ui.takePhotoBtn || "Camera"}
+        </button>
+        <button
+          type="button"
+          onClick={() => fileInputRef.current && fileInputRef.current.click()}
           className="px-2.5 py-0.5 rounded-full bg-white hover:bg-red-50 text-[#ed1b2e] border border-[#ed1b2e] font-bold text-[10px]"
         >
           📤 {ui.changePhotoBtn}

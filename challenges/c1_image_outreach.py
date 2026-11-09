@@ -23,6 +23,8 @@ Owner: Colleague 1 (`challenges/c1_image_outreach.py` + `static/challenge1.js`)
 from __future__ import annotations
 
 import base64
+import concurrent.futures
+import hashlib
 import io
 import json
 import os
@@ -43,6 +45,13 @@ except ImportError:  # pragma: no cover - optional in slim container
     ImageOps = None  # type: ignore[assignment]
 
 NANO_BANANA_MODEL = os.environ.get("NANO_BANANA_MODEL", "gemini-3.1-flash-image")
+NANO_BANANA_PRO_FALLBACK = os.environ.get("NANO_BANANA_PRO_FALLBACK", "gemini-3-pro-image")
+C1_TEXT_MODELS = [
+    os.environ.get("C1_PLANNER_MODEL", "gemini-3-flash-preview"),
+    "gemini-3.1-flash-lite",
+]
+_FACE_BOX_CACHE: dict[str, tuple[float, float, float, float]] = {}
+_TEXT_BOX_CACHE: dict[str, list[tuple[float, float, float, float]]] = {}
 
 STYLE_META: dict[str, dict[str, str]] = {
     "mdrt_keynote": {
@@ -143,7 +152,7 @@ OCCASION_META: dict[str, dict[str, str]] = {
     "deepavali": {
         "label": "Deepavali Festival of Lights & Wealth Blessing",
         "short": "Deepavali Festival of Lights",
-        "cardHeadline": "Happy Deepavali — Festival of Lights",
+        "cardHeadline": "Happy Deepavali",
         "cardArtPrompt": (
             "Opulent contemporary Deepavali greeting card illustration: jewel-toned royal sapphire, crimson, and "
             "brushed gold aesthetic, glowing brass diyas with warm candlelight, intricate golden floral rangoli geometry, "
@@ -219,12 +228,12 @@ FALLBACK_OUTREACH: dict[str, dict[str, str]] = {
 }
 
 DEFAULT_CLIENTS = {
-    "zh-CN": "拿督陈与夫人",
-    "zh-TW": "拿督陳與夫人",
-    "yue": "拿督陳同夫人",
-    "ta": "டத்தோ & டத்தின் தான் (Dato' & Datin Tan)",
-    "en": "Dato' & Datin Tan",
-    "ms": "Dato' & Datin Tan",
+    "zh-CN": "",
+    "zh-TW": "",
+    "yue": "",
+    "ta": "",
+    "en": "",
+    "ms": "",
 }
 
 KNOWN_CELEBRITIES = [
@@ -248,6 +257,27 @@ KNOWN_CELEBRITIES = [
     "Robert Downey Jr",
     "Anne Hathaway",
     "Dwayne Johnson",
+    "Simu Liu",
+    "Ronny Chieng",
+    "Priyanka Chopra",
+    "Deepika Padukone",
+    "Rajinikanth",
+    "Zendaya",
+    "Cillian Murphy",
+    "Hugh Jackman",
+    "Ryan Reynolds",
+    "Emma Stone",
+    "Margot Robbie",
+    "Idris Elba",
+    "Morgan Freeman",
+    "Son Heung-min",
+    "Lionel Messi",
+    "Cristiano Ronaldo",
+    "Lewis Hamilton",
+    "Gemma Chan",
+    "Donnie Yen",
+    "Chow Yun-fat",
+    "Yuna",
 ]
 
 
@@ -268,10 +298,56 @@ def _sanitize_styling_instructions(raw: str) -> str:
     return cleaned
 
 
-def _normalize_photo_data_url(photo_data_url: str | None) -> tuple[str | None, str, str | None]:
-    """Decode a data URL and normalize EXIF orientation when Pillow is available."""
+def _sanitize_card_artwork_prompt(raw: str, celebrity_name: str, fallback_art: str) -> str:
+    """Strip any badge, portrait, photo, WhatsApp, or celebrity references so card/banner backgrounds
+     NEVER render ghost circles, placeholder rings, or duplicate people behind our composited badge."""
+    if not raw or not raw.strip():
+        return fallback_art
+    cleaned = raw.strip()
+    if celebrity_name:
+        cleaned = re.sub(re.escape(celebrity_name), "", cleaned, flags=re.IGNORECASE)
+    for c_name in KNOWN_CELEBRITIES:
+        if c_name.lower() in cleaned.lower():
+            cleaned = re.sub(re.escape(c_name), "", cleaned, flags=re.IGNORECASE)
+    strip_patterns = [
+        r"\b(?:use|using|with|featuring)\s+(?:celebrity|actor|actress|singer|star)\b[^,.:\n]*",
+        r"\b(?:let's\s+)?put\s+(?:my|this|the)\s+(?:studio\s+|executive\s+|ai\s+)*(?:image|photo|portrait|headshot)\s+(?:to\s+work|onto)\s*(?:on|:)?\s*",
+        r"\b(?:featuring|with|including|plus)\s+(?:my|an?|the)?\s*(?:circular\s+|gold(?:-rimmed)?\s+|advisor\s+|executive\s+)*(?:portrait|headshot|photo|avatar|profile)?\s*(?:badge|medallion|circle|cutout|inset|overlay)\b",
+        r"\b(?:portrait|headshot|avatar|profile)\s+(?:badge|medallion|circle|overlay|placeholder|inset)\b",
+        r"\b(?:circular|circle|gold-rimmed)\s+(?:portrait|badge|frame|medallion|avatar|placeholder)\b",
+        r"(?:paired\s+with|and|with)\s+(?:a\s+)?(?:warm\s+|friendly\s+|festive\s+|short\s+)*whatsapp[^.\n]*",
+        r"（[^）]*(?:头像|頭像|徽章)[^）]*）",
+        r"\([^)]*(?:portrait|badge|headshot|avatar)[^)]*\)",
+        r"\b(?:lencana\s+potret(?:\s+saya)?|potret\s+saya)\b",
+        r"(?:எனது\s+)?உருவப்பட\s+பேட்ஜ்(?:\s+கொண்ட)?",
+    ]
+    for pat in strip_patterns:
+        cleaned = re.sub(pat, " ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s{2,}", " ", cleaned).strip(" ,.-;:")
+    if len(cleaned) < 25 or cleaned.lower().startswith(("create a", "design a", "make a")):
+        return f"{fallback_art}. Additional theme details: {cleaned}" if cleaned else fallback_art
+    return f"{fallback_art}. Styling details: {cleaned}"
+
+
+def _closest_aspect_ratio(width: int, height: int) -> str:
+    """Return the closest Vertex AI supported aspectRatio string so facial proportions never stretch."""
+    if width <= 0 or height <= 0:
+        return "1:1"
+    ratio = width / float(height)
+    candidates = [
+        ("1:1", 1.0),
+        ("3:4", 0.75),
+        ("4:3", 4.0 / 3.0),
+        ("9:16", 9.0 / 16.0),
+        ("16:9", 16.0 / 9.0),
+    ]
+    return min(candidates, key=lambda item: abs(ratio - item[1]))[0]
+
+
+def _normalize_photo_data_url(photo_data_url: str | None) -> tuple[str | None, str, str | None, str]:
+    """Decode a data URL, normalize EXIF orientation, and detect its natural aspect ratio."""
     if not photo_data_url or "," not in photo_data_url:
-        return None, "image/jpeg", None
+        return None, "image/jpeg", None, "1:1"
     try:
         header, b64_str = photo_data_url.split(",", 1)
         b64_clean = b64_str.strip()
@@ -285,15 +361,16 @@ def _normalize_photo_data_url(photo_data_url: str | None) -> tuple[str | None, s
             raw_bytes = base64.b64decode(b64_clean)
             with Image.open(io.BytesIO(raw_bytes)) as img:
                 transposed = ImageOps.exif_transpose(img).convert("RGB")
-                transposed.thumbnail((768, 768))
+                ar = _closest_aspect_ratio(transposed.width, transposed.height)
+                transposed.thumbnail((1024, 1024))
                 out = io.BytesIO()
-                transposed.save(out, format="JPEG", quality=90)
+                transposed.save(out, format="JPEG", quality=92)
                 norm_b64 = base64.b64encode(out.getvalue()).decode("utf-8")
-                return f"data:image/jpeg;base64,{norm_b64}", "image/jpeg", norm_b64
+                return f"data:image/jpeg;base64,{norm_b64}", "image/jpeg", norm_b64, ar
 
-        return photo_data_url, mime_type, b64_clean
+        return photo_data_url, mime_type, b64_clean, "1:1"
     except Exception:
-        return photo_data_url, "image/jpeg", None
+        return photo_data_url, "image/jpeg", None, "1:1"
 
 
 def _load_seed_before_data_url(seed_index: int) -> str | None:
@@ -356,18 +433,78 @@ def _resolve_server_auth(force_refresh: bool = False) -> tuple[str, str]:
     return token, project_id
 
 
+def _call_c1_text_model(prompt: str, call_vertex_fn: Any) -> tuple[str | None, str, int]:
+    """Call Gemini 3 Flash (`gemini-3-flash-preview` -> `gemini-3.1-flash-lite` on `locations/global`)
+    with native JSON output mode for Challenge 1 planning, outreach copywriting, and judging."""
+    t0 = time.time()
+    token, project_id = _resolve_server_auth(force_refresh=False)
+    if token and project_id:
+        for model_id in C1_TEXT_MODELS:
+            url = (
+                f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
+                f"/locations/global/publishers/google/models/{model_id}:generateContent"
+            )
+            gen_cfg: dict[str, Any] = {
+                "responseMimeType": "application/json",
+                "temperature": 0.3,
+                "maxOutputTokens": 900,
+            }
+            if "gemini-3-flash" in model_id:
+                gen_cfg["thinkingConfig"] = {"thinkingBudget": 0}
+            payload = {
+                "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+                "generationConfig": gen_cfg,
+            }
+            for attempt in range(2):
+                headers = {
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                    "X-Goog-User-Project": project_id,
+                }
+                try:
+                    resp = requests.post(url, headers=headers, json=payload, timeout=12)
+                    if resp.status_code == 200:
+                        c_parts = (
+                            resp.json()
+                            .get("candidates", [{}])[0]
+                            .get("content", {})
+                            .get("parts", [])
+                        )
+                        txt = "".join(
+                            p.get("text", "") for p in c_parts if not p.get("thought")
+                        ).strip()
+                        if txt:
+                            return txt, model_id, int((time.time() - t0) * 1000)
+                        break
+                    if resp.status_code in (401, 403) and attempt == 0:
+                        token, project_id = _resolve_server_auth(force_refresh=True)
+                        if not token:
+                            break
+                        continue
+                    break
+                except Exception:
+                    break
+
+    if call_vertex_fn is not None:
+        return call_vertex_fn(prompt)
+    return None, C1_TEXT_MODELS[0], int((time.time() - t0) * 1000)
+
+
 def _call_nano_banana_or_fallback(
     photo_data_url: str | None,
     image_prompt: str,
     temperature: float,
     call_image_fn: Any,
+    aspect_ratio: str | None = None,
+    allow_seed_fallback: bool = False,
 ) -> tuple[str | None, int, str]:
-    """Try Vertex AI Nano Banana (`gemini-3.1-flash-image` on `locations/global`) first,
-    then seamlessly fall back to `call_image_fn` (`gemini-2.5-flash-image`).
-    If both fail or network is unavailable, return a photorealistic seed portrait.
+    """Try Vertex AI Nano Banana 2 (`gemini-3.1-flash-image` on `locations/global`),
+    then `gemini-3-pro-image`, then `call_image_fn` (`gemini-2.5-flash-image`).
+    Never replaces a real user photo or celebrity request with a random stock face.
     """
     t0 = time.time()
-    norm_url, mime_type, b64_data = _normalize_photo_data_url(photo_data_url)
+    norm_url, mime_type, b64_data, detected_ar = _normalize_photo_data_url(photo_data_url)
+    effective_ar = aspect_ratio or (detected_ar if b64_data else "1:1")
     token, project_id = _resolve_server_auth(force_refresh=False)
 
     if token and project_id:
@@ -376,47 +513,52 @@ def _call_nano_banana_or_fallback(
             parts.append({"inlineData": {"mimeType": mime_type, "data": b64_data}})
         parts.append({"text": image_prompt})
 
-        nano_url = (
-            f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
-            f"/locations/global/publishers/google/models/{NANO_BANANA_MODEL}:generateContent"
-        )
-        payload = {
-            "contents": [{"role": "user", "parts": parts}],
-            "generationConfig": {
+        for model_id in (NANO_BANANA_MODEL, NANO_BANANA_PRO_FALLBACK):
+            nano_url = (
+                f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
+                f"/locations/global/publishers/google/models/{model_id}:generateContent"
+            )
+            gen_cfg: dict[str, Any] = {
                 "responseModalities": ["TEXT", "IMAGE"],
                 "temperature": temperature,
-            },
-        }
-        for attempt in range(2):
-            headers = {
-                "Authorization": f"Bearer {token}",
-                "Content-Type": "application/json",
-                "X-Goog-User-Project": project_id,
             }
-            try:
-                resp = requests.post(nano_url, headers=headers, json=payload, timeout=22)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    c_parts = (
-                        data.get("candidates", [{}])[0]
-                        .get("content", {})
-                        .get("parts", [])
-                    )
-                    for p in c_parts:
-                        inline = p.get("inlineData")
-                        if inline and inline.get("data"):
-                            out_mime = inline.get("mimeType", "image/png")
-                            ms = int((time.time() - t0) * 1000)
-                            return f"data:{out_mime};base64,{inline['data']}", ms, NANO_BANANA_MODEL
-                    break
-                if resp.status_code in (401, 403) and attempt == 0:
-                    token, project_id = _resolve_server_auth(force_refresh=True)
-                    if not token:
+            if effective_ar:
+                gen_cfg["imageConfig"] = {"aspectRatio": effective_ar}
+            payload = {
+                "contents": [{"role": "user", "parts": parts}],
+                "generationConfig": gen_cfg,
+            }
+            req_timeout = 28 if model_id == NANO_BANANA_PRO_FALLBACK else 24
+            for attempt in range(2):
+                headers = {
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                    "X-Goog-User-Project": project_id,
+                }
+                try:
+                    resp = requests.post(nano_url, headers=headers, json=payload, timeout=req_timeout)
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        c_parts = (
+                            data.get("candidates", [{}])[0]
+                            .get("content", {})
+                            .get("parts", [])
+                        )
+                        for p in c_parts:
+                            inline = p.get("inlineData")
+                            if inline and inline.get("data"):
+                                out_mime = inline.get("mimeType", "image/png")
+                                ms = int((time.time() - t0) * 1000)
+                                return f"data:{out_mime};base64,{inline['data']}", ms, model_id
                         break
-                    continue
-                break
-            except Exception:
-                break
+                    if resp.status_code in (401, 403) and attempt == 0:
+                        token, project_id = _resolve_server_auth(force_refresh=True)
+                        if not token:
+                            break
+                        continue
+                    break
+                except Exception:
+                    break
 
     if call_image_fn is not None:
         try:
@@ -426,10 +568,13 @@ def _call_nano_banana_or_fallback(
         except Exception:
             pass
 
-    # Deterministic high-quality studio fallback if Vertex times out or network is offline
-    seed_data_url = _load_seed_before_data_url(0)
-    if seed_data_url:
-        return seed_data_url, int((time.time() - t0) * 1000), "pamb-seed-studio"
+    if norm_url or photo_data_url:
+        return norm_url or photo_data_url, int((time.time() - t0) * 1000), "original-photo-preserved"
+
+    if allow_seed_fallback:
+        seed_data_url = _load_seed_before_data_url(0)
+        if seed_data_url:
+            return seed_data_url, int((time.time() - t0) * 1000), "pamb-seed-studio"
 
     return None, int((time.time() - t0) * 1000), NANO_BANANA_MODEL
 
@@ -443,12 +588,349 @@ def _clean_advisor_display_name(raw_name: str) -> str:
     return s
 
 
+def _detect_face_box_norm(port_bytes: bytes) -> tuple[float, float, float, float] | None:
+    """Detect normalized [ymin, xmin, ymax, xmax] (0..1000) of the person's head/face using
+    `gemini-3.1-flash-lite` so off-center or wide-aspect portraits are centered dead-on inside the circle."""
+    digest = hashlib.sha256(port_bytes).hexdigest()[:24]
+    if digest in _FACE_BOX_CACHE:
+        return _FACE_BOX_CACHE[digest]
+
+    token, project_id = _resolve_server_auth(force_refresh=False)
+    if not token or not project_id or Image is None:
+        return None
+    try:
+        with Image.open(io.BytesIO(port_bytes)) as im:
+            thumb = ImageOps.exif_transpose(im).convert("RGB")
+            thumb.thumbnail((512, 512))
+            buf = io.BytesIO()
+            thumb.save(buf, format="JPEG", quality=82)
+            thumb_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+
+        url = (
+            f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
+            "/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent"
+        )
+        payload = {
+            "contents": [
+                {
+                    "role": "user",
+                    "parts": [
+                        {"inlineData": {"mimeType": "image/jpeg", "data": thumb_b64}},
+                        {
+                            "text": (
+                                "Detect the 2D bounding box of the main person's head and face (from top of hair "
+                                "to bottom of chin) in normalized 0-1000 coordinates [ymin, xmin, ymax, xmax]. "
+                                'Return JSON: {"box_2d": [ymin, xmin, ymax, xmax]}'
+                            )
+                        },
+                    ],
+                }
+            ],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "temperature": 0.0,
+                "maxOutputTokens": 80,
+            },
+        }
+        resp = requests.post(
+            url,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+                "X-Goog-User-Project": project_id,
+            },
+            json=payload,
+            timeout=6,
+        )
+        if resp.status_code == 200:
+            c_parts = resp.json().get("candidates", [{}])[0].get("content", {}).get("parts", [])
+            txt = "".join(p.get("text", "") for p in c_parts if not p.get("thought")).strip()
+            parsed_box = json.loads(txt)
+            if isinstance(parsed_box, list) and parsed_box:
+                parsed_box = parsed_box[0]
+            box = parsed_box.get("box_2d") if isinstance(parsed_box, dict) else None
+            if isinstance(box, list) and len(box) == 4:
+                ymin, xmin, ymax, xmax = [float(v) for v in box]
+                if 0 <= ymin < ymax <= 1000 and 0 <= xmin < xmax <= 1000 and (ymax - ymin) >= 40:
+                    res = (ymin, xmin, ymax, xmax)
+                    _FACE_BOX_CACHE[digest] = res
+                    return res
+    except Exception:
+        pass
+    return None
+
+
+def _detect_text_boxes_norm(card_bytes: bytes) -> list[tuple[float, float, float, float]]:
+    """Detect normalized [ymin, xmin, ymax, xmax] (0..1000) bounding boxes for EVERY rendered text
+    element (headlines, custom user text, Chinese/Tamil/Malay calligraphy, numbers, cursive signatures)
+    on a generated card/banner using `gemini-3.1-flash-lite` so the portrait badge never covers text."""
+    digest = hashlib.sha256(card_bytes).hexdigest()[:24]
+    if digest in _TEXT_BOX_CACHE:
+        return _TEXT_BOX_CACHE[digest]
+
+    token, project_id = _resolve_server_auth(force_refresh=False)
+    if not token or not project_id or Image is None:
+        return []
+    try:
+        with Image.open(io.BytesIO(card_bytes)) as im:
+            thumb = ImageOps.exif_transpose(im).convert("RGB")
+            thumb.thumbnail((768, 768))
+            buf = io.BytesIO()
+            thumb.save(buf, format="JPEG", quality=85)
+            thumb_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+
+        url = (
+            f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
+            "/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent"
+        )
+        payload = {
+            "contents": [
+                {
+                    "role": "user",
+                    "parts": [
+                        {"inlineData": {"mimeType": "image/jpeg", "data": thumb_b64}},
+                        {
+                            "text": (
+                                "Detect EVERY visible text region, headline, custom phrase, subheading, word, "
+                                "Chinese/Tamil/Malay character group, calligraphy, number, or small corner cursive "
+                                "signature anywhere in this image. Return normalized 0-1000 coordinates "
+                                "[ymin, xmin, ymax, xmax] for every text block in JSON: "
+                                '{"text_boxes": [{"box_2d": [ymin, xmin, ymax, xmax]}]}. '
+                                'If there is no text, return {"text_boxes": []}.'
+                            )
+                        },
+                    ],
+                }
+            ],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "temperature": 0.0,
+                "maxOutputTokens": 512,
+                "thinkingConfig": {"thinkingBudget": 0},
+            },
+        }
+        for attempt in range(2):
+            resp = requests.post(
+                url,
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                    "X-Goog-User-Project": project_id,
+                },
+                json=payload,
+                timeout=7,
+            )
+            if resp.status_code in (401, 403) and attempt == 0:
+                token, project_id = _resolve_server_auth(force_refresh=True)
+                if not token:
+                    break
+                continue
+            if resp.status_code == 200:
+                c_parts = resp.json().get("candidates", [{}])[0].get("content", {}).get("parts", [])
+                txt = "".join(p.get("text", "") for p in c_parts if not p.get("thought")).strip()
+                parsed_json = json.loads(txt)
+                raw_items = (
+                    parsed_json.get("text_boxes", [])
+                    if isinstance(parsed_json, dict)
+                    else (parsed_json if isinstance(parsed_json, list) else [])
+                )
+                boxes: list[tuple[float, float, float, float]] = []
+                for item in raw_items:
+                    b = item.get("box_2d") if isinstance(item, dict) else (item if isinstance(item, list) else None)
+                    if isinstance(b, list) and len(b) == 4:
+                        ymin, xmin, ymax, xmax = [max(0.0, min(1000.0, float(v))) for v in b]
+                        if ymax > ymin + 4 and xmax > xmin + 4:
+                            boxes.append((ymin, xmin, ymax, xmax))
+                _TEXT_BOX_CACHE[digest] = boxes
+                return boxes
+            break
+    except Exception:
+        pass
+    return []
+
+
+def _choose_zero_overlap_badge_placement(
+    card: Any,
+    text_boxes_norm: list[tuple[float, float, float, float]],
+    preferred_position: str = "bottom-right",
+) -> tuple[int, int, int]:
+    """Dynamically compute `(badge_diam, pos_x, pos_y)` guaranteed to avoid covering detected text boxes,
+    while preferring natural corner/edge editorial anchors and calm background areas."""
+    card_w, card_h = card.size
+    min_dim = min(card_w, card_h)
+    diag = max(1.0, (card_w * card_w + card_h * card_h) ** 0.5)
+    base_ratio = 0.32 if preferred_position == "left-center" else 0.265
+
+    # Expand every detected text box with a generous safety halo so the gold ring never crowds letters
+    safety_pad = max(14.0, min_dim * 0.022)
+    padded_rects: list[tuple[float, float, float, float]] = []
+    for ymin, xmin, ymax, xmax in text_boxes_norm:
+        rx1 = max(0.0, (xmin / 1000.0) * card_w - safety_pad)
+        ry1 = max(0.0, (ymin / 1000.0) * card_h - safety_pad)
+        rx2 = min(float(card_w), (xmax / 1000.0) * card_w + safety_pad)
+        ry2 = min(float(card_h), (ymax / 1000.0) * card_h + safety_pad)
+        padded_rects.append((rx1, ry1, rx2, ry2))
+
+    # Fast 64x36 edge-energy map so ties prefer open negative space over dense lanterns/emblems
+    gw, gh = 64, 36
+    edge_grid: list[int] | None = None
+    if ImageFilter is not None:
+        try:
+            edges_small = card.convert("L").filter(ImageFilter.FIND_EDGES).resize((gw, gh), Image.Resampling.BILINEAR)
+            edge_grid = list(edges_small.getdata())
+        except Exception:
+            edge_grid = None
+
+    def _circle_busyness(cx: float, cy: float, r_vis: float) -> float:
+        if not edge_grid:
+            return 0.0
+        gx0 = max(0, int(((cx - r_vis) / card_w) * gw))
+        gx1 = min(gw - 1, int(((cx + r_vis) / card_w) * gw))
+        gy0 = max(0, int(((cy - r_vis) / card_h) * gh))
+        gy1 = min(gh - 1, int(((cy + r_vis) / card_h) * gh))
+        total = 0.0
+        cnt = 0
+        for gy in range(gy0, gy1 + 1):
+            row_off = gy * gw
+            for gx in range(gx0, gx1 + 1):
+                total += edge_grid[row_off + gx]
+                cnt += 1
+        return (total / max(1, cnt)) / 255.0
+
+    best_zero: tuple[float, int, int, int] | None = None
+    best_fallback: tuple[float, int, int, int] | None = None
+
+    for s_mul in (1.0, 0.90, 0.80, 0.70, 0.60):
+        badge_diam = max(104, int(min_dim * base_ratio * s_mul))
+        outer_ring = max(5, int(badge_diam * 0.036))
+        inner_ring = max(2, int(badge_diam * 0.014))
+        pad = max(16, outer_ring + inner_ring + 12)
+        canvas_size = badge_diam + pad * 2
+        r_vis = badge_diam / 2.0 + outer_ring + inner_ring + 4.0
+
+        margin_x = max(22.0, card_w * 0.042)
+        margin_y = max(22.0, card_h * 0.058)
+        x_lo = margin_x + canvas_size / 2.0
+        x_hi = max(x_lo, card_w - margin_x - canvas_size / 2.0)
+        y_lo = margin_y + canvas_size / 2.0
+        y_hi = max(y_lo, card_h - margin_y - canvas_size / 2.0)
+        x_mid = (x_lo + x_hi) / 2.0
+        y_mid = (y_lo + y_hi) / 2.0
+
+        if preferred_position == "left-center":
+            pref_cx = max(x_lo, card_w * 0.065 + canvas_size / 2.0)
+            pref_cy = y_mid
+        else:
+            pref_cx = x_hi
+            pref_cy = y_hi
+
+        # Fast-path when card has zero text
+        if not padded_rects:
+            px = int(round(pref_cx - canvas_size / 2.0))
+            py = int(round(pref_cy - canvas_size / 2.0))
+            return badge_diam, max(0, px), max(0, py)
+
+        candidates: list[tuple[float, float]] = [
+            (pref_cx, pref_cy),
+            (x_hi, y_hi),   # bottom-right
+            (x_hi, y_mid),  # right-center
+            (x_hi, y_lo),   # top-right
+            (x_lo, y_hi),   # bottom-left
+            (x_lo, y_mid),  # left-center
+            (x_lo, y_lo),   # top-left
+            (x_mid, y_hi),  # bottom-center
+            (x_mid, y_lo),  # top-center
+        ]
+        for ix in range(11):
+            gx = x_lo + (x_hi - x_lo) * (ix / 10.0)
+            for iy in range(7):
+                gy = y_lo + (y_hi - y_lo) * (iy / 6.0)
+                candidates.append((gx, gy))
+
+        seen_pts: set[tuple[int, int]] = set()
+        for cx, cy in candidates:
+            key = (int(round(cx)), int(round(cy)))
+            if key in seen_pts:
+                continue
+            seen_pts.add(key)
+
+            min_clearance = float("inf")
+            overlap_pen = 0.0
+            for rx1, ry1, rx2, ry2 in padded_rects:
+                dx = max(rx1 - cx, 0.0, cx - rx2)
+                dy = max(ry1 - cy, 0.0, cy - ry2)
+                dist = (dx * dx + dy * dy) ** 0.5
+                clearance = dist - r_vis
+                if clearance < min_clearance:
+                    min_clearance = clearance
+                if clearance < 0.0:
+                    overlap_pen += (-clearance) ** 2
+
+            dist_pref = ((cx - pref_cx) ** 2 + (cy - pref_cy) ** 2) ** 0.5 / diag
+            dist_edge = min(abs(cx - x_lo), abs(cx - x_hi), abs(cy - y_lo), abs(cy - y_hi))
+            interior_norm = dist_edge / max(1.0, min_dim * 0.35)
+            busy = _circle_busyness(cx, cy, r_vis)
+
+            px = max(0, min(card_w - canvas_size, int(round(cx - canvas_size / 2.0))))
+            py = max(0, min(card_h - canvas_size, int(round(cy - canvas_size / 2.0))))
+
+            if overlap_pen == 0.0:
+                score = (
+                    s_mul * 100.0
+                    - dist_pref * 28.0
+                    - interior_norm * 22.0
+                    + min(min_clearance, 42.0) * 0.25
+                    - busy * 12.0
+                )
+                if best_zero is None or score > best_zero[0]:
+                    best_zero = (score, badge_diam, px, py)
+            else:
+                fb_score = -overlap_pen + s_mul * 15.0 - dist_pref * 10.0
+                if best_fallback is None or fb_score > best_fallback[0]:
+                    best_fallback = (fb_score, badge_diam, px, py)
+
+    if best_zero is not None:
+        return best_zero[1], best_zero[2], best_zero[3]
+    if best_fallback is not None:
+        return best_fallback[1], best_fallback[2], best_fallback[3]
+
+    fallback_diam = max(128, int(min_dim * base_ratio))
+    return fallback_diam, max(24, card_w - fallback_diam - 60), max(24, card_h - fallback_diam - 60)
+
+
+def _crop_face_square(portrait: Any, badge_diam: int, port_bytes: bytes) -> Any:
+    """Smart head-and-shoulders square crop centered directly on the detected face."""
+    pw, ph = portrait.size
+    box = _detect_face_box_norm(port_bytes)
+    if box is not None:
+        ymin, xmin, ymax, xmax = box
+        y1, x1 = (ymin / 1000.0) * ph, (xmin / 1000.0) * pw
+        y2, x2 = (ymax / 1000.0) * ph, (xmax / 1000.0) * pw
+        head_h = max(24.0, y2 - y1)
+        head_w = max(24.0, x2 - x1)
+        cx = (x1 + x2) / 2.0
+        cy = y1 + head_h * 0.56
+        side = max(head_h * 2.15, head_w * 2.55, min(pw, ph) * 0.42)
+        side = min(side, float(min(pw, ph)))
+        left = max(0.0, min(pw - side, cx - side / 2.0))
+        top = max(0.0, min(ph - side, cy - side / 2.0))
+        cropped = portrait.crop((int(round(left)), int(round(top)), int(round(left + side)), int(round(top + side))))
+        return cropped.resize((badge_diam, badge_diam), Image.Resampling.LANCZOS)
+
+    return ImageOps.fit(
+        portrait,
+        (badge_diam, badge_diam),
+        method=Image.Resampling.LANCZOS,
+        centering=(0.5, 0.30),
+    )
+
+
 def _composite_portrait_badge_data_url(
     base_data_url: str | None,
     portrait_data_url: str | None,
     position: str = "bottom-right",
 ) -> str | None:
-    """Composite the user's portrait into a circular gold-rimmed badge directly onto a card/banner image."""
+    """Composite the portrait into a 4x-supersampled, face-centered circular gold medallion."""
     if not base_data_url or not portrait_data_url or Image is None or ImageDraw is None or ImageOps is None:
         return base_data_url
     try:
@@ -462,70 +944,69 @@ def _composite_portrait_badge_data_url(
         with Image.open(io.BytesIO(port_bytes)) as port_im:
             portrait = ImageOps.exif_transpose(port_im).convert("RGBA")
 
-        card_w, card_h = card.size
-        badge_diam = max(120, int(min(card_w, card_h) * 0.24))
+        # Run face bounding-box detection (on portrait) and text bounding-box detection (on card) concurrently
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+            fut_face = pool.submit(_detect_face_box_norm, port_bytes)
+            fut_text = pool.submit(_detect_text_boxes_norm, base_bytes)
+            _ = fut_face.result()
+            text_boxes_norm = fut_text.result()
 
-        cropped_face = ImageOps.fit(
-            portrait,
-            (badge_diam, badge_diam),
-            method=Image.Resampling.LANCZOS,
-            centering=(0.5, 0.35),
+        badge_diam, pos_x, pos_y = _choose_zero_overlap_badge_placement(
+            card=card,
+            text_boxes_norm=text_boxes_norm,
+            preferred_position=position,
         )
 
         scale = 4
-        hi_size = badge_diam * scale
-        mask_hi = Image.new("L", (hi_size, hi_size), 0)
-        ImageDraw.Draw(mask_hi).ellipse((0, 0, hi_size - 1, hi_size - 1), fill=255)
-        circle_mask = mask_hi.resize((badge_diam, badge_diam), Image.Resampling.LANCZOS)
+        hi_diam = badge_diam * scale
+        cropped_face_hi = _crop_face_square(portrait, hi_diam, port_bytes)
 
-        pad = max(12, int(badge_diam * 0.1))
+        outer_ring = max(5, int(badge_diam * 0.036))
+        inner_ring = max(2, int(badge_diam * 0.014))
+        pad = max(16, outer_ring + inner_ring + 12)
         canvas_size = badge_diam + pad * 2
-        badge_layer = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
+        hi_canvas = canvas_size * scale
+        hi_pad = pad * scale
+        hi_outer = outer_ring * scale
+        hi_inner = inner_ring * scale
 
+        # Soft ambient drop shadow at 1x, blurred smoothly
+        badge_layer = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
         shadow_layer = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
+        sh_inset = pad - outer_ring - inner_ring
         ImageDraw.Draw(shadow_layer).ellipse(
-            (pad - 2, pad + 3, pad + badge_diam + 2, pad + badge_diam + 7),
-            fill=(0, 0, 0, 145),
+            (sh_inset - 1, sh_inset + 4, canvas_size - sh_inset + 1, canvas_size - sh_inset + 8),
+            fill=(0, 0, 0, 155),
         )
         if ImageFilter is not None:
-            shadow_layer = shadow_layer.filter(ImageFilter.GaussianBlur(radius=6))
+            shadow_layer = shadow_layer.filter(ImageFilter.GaussianBlur(radius=7))
         badge_layer = Image.alpha_composite(badge_layer, shadow_layer)
-        badge_draw = ImageDraw.Draw(badge_layer)
 
-        outer_ring = max(4, int(badge_diam * 0.04))
-        inner_ring = max(2, int(badge_diam * 0.018))
-        badge_draw.ellipse(
-            (
-                pad - outer_ring - inner_ring,
-                pad - outer_ring - inner_ring,
-                pad + badge_diam + outer_ring + inner_ring - 1,
-                pad + badge_diam + outer_ring + inner_ring - 1,
-            ),
-            fill=(218, 175, 68, 255),
-        )
-        badge_draw.ellipse(
-            (
-                pad - inner_ring,
-                pad - inner_ring,
-                pad + badge_diam + inner_ring - 1,
-                pad + badge_diam + inner_ring - 1,
-            ),
-            fill=(217, 30, 24, 255),
-        )
-        badge_layer.paste(cropped_face, (pad, pad), circle_mask)
+        # 4x supersampled concentric brushed-gold medallion rings + circular portrait
+        ring_hi = Image.new("RGBA", (hi_canvas, hi_canvas), (0, 0, 0, 0))
+        rdraw = ImageDraw.Draw(ring_hi)
+        r0 = hi_pad - hi_outer - hi_inner
+        r1 = hi_canvas - r0 - 1
+        # Outer champagne gold bevel
+        rdraw.ellipse((r0, r0, r1, r1), fill=(214, 172, 71, 255))
+        # Mid warm 24k gold highlight
+        m_off = max(4, hi_outer // 3)
+        rdraw.ellipse((r0 + m_off, r0 + m_off, r1 - m_off, r1 - m_off), fill=(246, 222, 148, 255))
+        # Inner dark bronze hairline separating ring from portrait
+        i0 = hi_pad - hi_inner
+        i1 = hi_canvas - i0 - 1
+        rdraw.ellipse((i0, i0, i1, i1), fill=(42, 32, 24, 255))
 
-        margin_x = max(24, int(card_w * 0.04))
-        margin_y = max(24, int(card_h * 0.06))
-        if position == "left-center":
-            pos_x = margin_x
-            pos_y = max(margin_y, (card_h - canvas_size) // 2)
-        else:
-            pos_x = max(0, card_w - canvas_size - margin_x)
-            pos_y = max(0, card_h - canvas_size - margin_y)
+        mask_hi = Image.new("L", (hi_diam, hi_diam), 0)
+        ImageDraw.Draw(mask_hi).ellipse((0, 0, hi_diam - 1, hi_diam - 1), fill=255)
+        ring_hi.paste(cropped_face_hi, (hi_pad, hi_pad), mask_hi)
+
+        ring_smooth = ring_hi.resize((canvas_size, canvas_size), Image.Resampling.LANCZOS)
+        badge_layer = Image.alpha_composite(badge_layer, ring_smooth)
 
         card.alpha_composite(badge_layer, dest=(pos_x, pos_y))
         out_buf = io.BytesIO()
-        card.convert("RGB").save(out_buf, format="JPEG", quality=92)
+        card.convert("RGB").save(out_buf, format="JPEG", quality=93)
         encoded = base64.b64encode(out_buf.getvalue()).decode("utf-8")
         return f"data:image/jpeg;base64,{encoded}"
     except Exception:
@@ -540,33 +1021,36 @@ def _build_surgical_headshot_prompt(
     region: str,
     raw_user_prompt: str = "",
 ) -> str:
-    """Build strict face-lock surgical photo edit prompt (or custom / celebrity image prompt)."""
+    """Build strict face-lock surgical photo edit prompt (or centered 1:1 celebrity studio headshot prompt)."""
     if used_uploaded_photo:
         clean_prompt = _sanitize_styling_instructions(clean_styling) or clean_styling
         return (
             "SURGICAL PHOTO EDIT — STRICT FACE & IDENTITY LOCK:\n"
             "Edit the provided input photograph by replacing ONLY the clothing below the neck and the background behind the person.\n"
             "ABSOLUTE IDENTITY CONSTRAINTS (MUST FOLLOW STRICTLY):\n"
-            "1. DO NOT alter, redraw, retouch, morph, beautify, or replace the person's face, head shape, forehead, eyes, eyebrows, nose, mouth, lips, teeth, ears, skin texture, skin tone, facial hair/stubble, hair/hairline, eyeglasses, head tilt, camera angle, or facial expression. The face and head in the output image MUST remain 100% pixel-identical to the exact individual in the input photo.\n"
+            "1. DO NOT alter, redraw, retouch, morph, beautify, or replace the person's face, head shape, forehead, eyes, eyebrows, nose, mouth, lips, teeth, ears, skin texture, skin tone, facial hair/stubble, hair/hairline, eyeglasses, head tilt, or facial expression. The face and head in the output image MUST remain 100% identical to the exact individual in the input photo.\n"
             "2. DO NOT change the person's ethnicity, age, gender presentation, or physical build under any circumstances.\n"
-            f"3. Wardrobe & Backdrop Request (apply ONLY below the neck and behind the person): {clean_prompt}\n"
-            "4. Lighting preservation: Keep the original lighting on the face intact and match the clothing and background lighting to it naturally.\n"
-            "5. Do NOT add any text overlays, logos, or watermarks."
+            "3. If a handheld smartphone or extended selfie arm is visible in the foreground, cleanly remove the phone and reconstruct natural executive shoulders and suit posture below the neck while keeping the head and face untouched.\n"
+            f"4. Wardrobe & Backdrop Request (apply ONLY below the neck and behind the person): {clean_prompt}\n"
+            "5. Lighting preservation: Keep the original lighting on the face intact and match the clothing and background lighting naturally.\n"
+            "6. Center the subject cleanly in the frame with NO text overlays, logos, borders, or watermarks."
         )
 
     if celebrity_name:
+        styling_desc = _sanitize_styling_instructions(clean_styling) or clean_styling
         return (
-            f"Create an ultra-realistic, high-resolution portrait of celebrity **{celebrity_name}**.\n"
-            f"- Subject Likeness: Preserve the unmistakable facial features and likeness of {celebrity_name}.\n"
-            f"- Styling & Backdrop: {raw_user_prompt.strip() or clean_styling}\n"
-            "- Photorealistic 85mm f/1.8 photography, natural skin texture, NO text overlays, borders, or watermarks."
+            f"Create an ultra-realistic, high-resolution square (1:1) executive studio head-and-shoulders portrait of the world-famous public figure **{celebrity_name}**.\n"
+            f"- Subject Likeness: Render the exact, unmistakable, authentic real-world facial features, bone structure, eyes, smile, hair, and iconic likeness of {celebrity_name}.\n"
+            "- Framing & Centering: Close-up head-and-shoulders executive portrait with the subject's head and face dead-center horizontally (x=50%) in the middle of the frame, leaving clean headroom above the hair.\n"
+            f"- Wardrobe & Backdrop: {styling_desc}\n"
+            "- Photorealistic 85mm f/1.8 studio lens photography, natural skin texture, NO text overlays, circular frames, borders, or watermarks."
         )
 
     custom_desc = raw_user_prompt.strip() or clean_styling
     return (
-        f"Create a high-resolution, photorealistic image matching this request:\n"
+        f"Create a high-resolution, photorealistic square (1:1) centered studio portrait matching this request:\n"
         f"{custom_desc}\n"
-        "- Ultra-clean editorial photography/design, NO watermarks or unwanted borders."
+        "- Ultra-clean editorial photography/design, subject centered in frame, NO watermarks or unwanted borders."
     )
 
 
@@ -576,32 +1060,43 @@ def _build_outreach_card_prompt(
     agent_name: str,
     region: str,
     celebrity_name: str,
-    has_portrait_badge_source: bool,
+    occasion_key: str = "newborn",
+    card_subtext: str = "",
+    recipient_name: str = "",
 ) -> str:
-    """Build the Demo 1 bespoke luxury client outreach greeting card prompt."""
+    """Build a 100% person-free, circle-free luxury 16:9 greeting card background with dedicated
+    left-side typography breathing room and clean open space on the bottom-right for the portrait badge."""
     clean_adv = _clean_advisor_display_name(agent_name)
-    sig_clause = (
-        f', and at the bottom-left include a subtle personal signature line: "{clean_adv}" (do NOT include "Prudential Malaysia" or any company name/logo at the bottom of the card)'
+    fallback_art = OCCASION_META.get(occasion_key, OCCASION_META["newborn"])["cardArtPrompt"]
+    clean_art = _sanitize_card_artwork_prompt(art_prompt, celebrity_name, fallback_art)
+    clean_recip = (recipient_name or "").strip()
+    recip_clause = ""
+    if (
+        clean_recip
+        and clean_recip.lower() not in (card_headline or "").lower()
+        and clean_recip.lower() not in (card_subtext or "").lower()
+    ):
+        has_cjk = any("\u4e00" <= ch <= "\u9fff" for ch in clean_recip)
+        salutation = clean_recip if clean_recip.startswith("致") else (f"致 {clean_recip}" if has_cjk else f"For {clean_recip}")
+        recip_clause = f'a small dedication line "{salutation}" directly above '
+    sub_clause = (
+        f' and directly beneath it the subtitle "{card_subtext}"'
+        if card_subtext and card_subtext.strip() and card_subtext.strip().lower() != card_headline.strip().lower()
+        else ""
+    )
+    sig_line = (
+        f'\n- Corner Signature: Place ONLY the small cursive name "{clean_adv}" in the bottom-left corner.'
         if clean_adv
-        else ' (do NOT include "Prudential Malaysia" or any company name/logo at the bottom of the card)'
+        else ""
     )
-    prompt = (
-        "Design a high-resolution, luxury digital client outreach greeting card (16:9 landscape aspect ratio).\n"
-        f"- Card Visual Artwork: {art_prompt}\n"
-        f"- Typography on Card: Elegantly render the headline \"{card_headline}\" in refined serif gold/ivory typography{sig_clause}.\n"
+    return (
+        "Design a seamless, full-bleed, high-resolution luxury horizontal greeting card illustration (16:9 widescreen aspect ratio).\n"
+        f"- Decorative Visual Artwork: {clean_art}\n"
+        f'- Exact Headline Text (UPPER-LEFT / LEFT-CENTER, strictly within the left 60% of the card): Render ONLY {recip_clause}"{card_headline}"{sub_clause} in refined serif champagne-gold or ivory display lettering.{sig_line}\n'
+        "- STRICT NO-EXTRA-TEXT RULE: Do NOT write any body paragraphs, multi-line greeting prose, Lorem Ipsum, dummy/filler text, translations, captions, or company names anywhere on the card. Leave zero words or characters in the right 35% of the frame.\n"
+        "- Seamless Full-Bleed Composition: Keep the entire card background continuous, harmonious, and seamlessly blended from edge to edge (NO rectangular boxes, split-screen panels, dark cutouts, or sharp dividing lines). Frame decorative florals, lanterns, or festive motifs delicately around the outer edges so both the left headline area and the bottom-right corner have calm, uncluttered breathing room.\n"
+        "- STRICT NEGATIVE CONSTRAINTS: Do NOT draw any human faces, line-art faces, cameos, coins, people, silhouettes, portraits, avatars, circular frames, empty circles, grey circles, rings, medallions, seals, stickers, or solid rectangular overlays anywhere on the card.\n"
     )
-    if has_portrait_badge_source:
-        prompt += (
-            "- Layout Constraint: Leave clean, uncluttered decorative negative space in the bottom-right corner "
-            "for a circular portrait badge overlay, and do NOT draw any human faces or people in the illustration.\n"
-        )
-    elif celebrity_name:
-        prompt += (
-            f"- Portrait Badge: In the bottom-right corner, render an elegant circular brushed-gold-rimmed "
-            f"executive portrait badge featuring a photorealistic corporate headshot of celebrity **{celebrity_name}** "
-            "in a tailored business suit.\n"
-        )
-    return prompt
 
 
 def _build_brand_banner_prompt(
@@ -610,31 +1105,28 @@ def _build_brand_banner_prompt(
     region: str,
     tagline: str,
     celebrity_name: str,
-    has_portrait_badge_source: bool,
 ) -> str:
-    """Build the Demo 1 LinkedIn & WhatsApp Business personal branding banner prompt."""
+    """Build a 100% person-free, circle-free 16:9 personal branding banner background."""
     clean_adv = _clean_advisor_display_name(agent_name)
-    visual = custom_visual or (
-        "Sleek LinkedIn & WhatsApp corporate personal branding banner with a Kuala Lumpur Petronas Twin Towers & TRX "
-        "golden-hour skyline, modern private wealth aesthetic, and refined crimson and brushed-gold accents"
+    default_banner_art = (
+        "Sleek Executive corporate personal branding banner with a Kuala Lumpur Petronas Twin Towers & TRX "
+        "golden-hour skyline on the right side, modern private wealth aesthetic, and subtle warm champagne-gold lighting"
     )
+    clean_visual = _sanitize_card_artwork_prompt(custom_visual, celebrity_name, default_banner_art)
     prompt = (
-        "Create a sleek, high-resolution corporate personal branding banner (16:9 wide aspect ratio).\n"
-        f"- Banner Visual Scene: {visual}\n"
-        "- Layout: Leave clean uncluttered negative space on the left side for an advisor portrait badge.\n"
+        "Create a sleek, single-shot, unbroken full-bleed panoramic corporate background banner (16:9 widescreen aspect ratio).\n"
+        f"- Scenic Backdrop: {clean_visual}\n"
+        "- Seamless Single-Horizon Rule: Render ONE continuous, natural wide-angle cityscape photograph across the entire frame with ZERO vertical seams, split-screen panels, or abrupt sky/water color jumps — position the tallest skyscrapers toward the right side while the same continuous twilight sky and bay horizon fade smoothly and naturally into open negative space toward the left.\n"
     )
     if tagline:
-        sub = f' with a clean subtitle "{clean_adv}"' if clean_adv else ""
-        prompt += f'- Typography on Right Side: Render "{tagline}" in crisp modern executive gold/white typography{sub}.\n'
+        sub = f' with a clean subtitle "{clean_adv}"' if clean_adv and clean_adv.lower() not in tagline.lower() else ""
+        prompt += f'- Typography on Right Side (placed cleanly on the right half of the banner, never on the left): Render ONLY "{tagline}" in crisp modern executive gold/white typography{sub}.\n'
     elif clean_adv:
-        prompt += f'- Typography on Right Side: Render "{clean_adv}" in crisp modern executive typography.\n'
-    if has_portrait_badge_source:
-        prompt += "- Do NOT draw any human faces or people in the background artwork; ultra-clean editorial design.\n"
-    elif celebrity_name:
-        prompt += (
-            f"- Portrait Badge on Left: Render an elegant circular brushed-gold-rimmed executive portrait badge on the left "
-            f"featuring celebrity **{celebrity_name}** in a sharp tailored business suit.\n"
-        )
+        prompt += f'- Typography on Right Side (placed cleanly on the right half of the banner, never on the left): Render ONLY "{clean_adv}" in crisp modern executive gold/white typography.\n'
+    prompt += (
+        "- STRICT NEGATIVE CONSTRAINTS: Do NOT draw any human faces, people, silhouettes, portraits, circular frames, "
+        "empty circles, grey circles, rings, medallions, company logos, or placeholder shapes anywhere in the banner.\n"
+    )
     return prompt
 
 
@@ -649,11 +1141,11 @@ def _detect_heuristic_intent(
     """Deterministic multi-turn intent parser used to seed & backstop the LLM planner."""
     low = (user_msg or "").lower()
 
-    # 1. Detect celebrity mentioned directly in chat
-    detected_celeb = prev_celeb
+    # 1. Detect celebrity mentioned directly in the NEW user message FIRST, then fall back to prev_celeb
+    explicit_new_celeb = ""
     for c_name in KNOWN_CELEBRITIES:
         if c_name.lower() in low:
-            detected_celeb = c_name
+            explicit_new_celeb = c_name
             break
     zh_celebs = {
         "杨紫琼": "Michelle Yeoh",
@@ -664,18 +1156,27 @@ def _detect_heuristic_intent(
         "劉德華": "Andy Lau",
         "李宗伟": "Lee Chong Wei",
         "李宗偉": "Lee Chong Wei",
+        "周润发": "Chow Yun-fat",
+        "周潤發": "Chow Yun-fat",
+        "甄子丹": "Donnie Yen",
+        "成龙": "Jackie Chan",
+        "成龍": "Jackie Chan",
+        "周杰伦": "Jay Chou",
+        "周杰倫": "Jay Chou",
     }
-    for zh_k, en_v in zh_celebs.items():
-        if zh_k in (user_msg or ""):
-            detected_celeb = en_v
-            break
-    if not detected_celeb and user_msg:
+    if not explicit_new_celeb:
+        for zh_k, en_v in zh_celebs.items():
+            if zh_k in (user_msg or ""):
+                explicit_new_celeb = en_v
+                break
+    if not explicit_new_celeb and user_msg:
         m_cel = re.search(
-            r"\b(?:celebrity|actor|actress|singer|star)\s+([A-Z][a-zA-Z'.-]+(?:\s+[A-Z][a-zA-Z'.-]+){0,3})",
+            r"\b(?:use\s+celebrity|celebrity|actor|actress|singer|athlete|star)\s+([A-Z][a-zA-Z'.-]+(?:\s+[A-Z][a-zA-Z'.-]+){0,3}?)(?=\s+(?:to|in|for|on|with|wearing|overlooking|and|creating|designing)\b|[,.!?]|$)",
             user_msg,
         )
         if m_cel:
-            detected_celeb = m_cel.group(1).strip(" .,!?")
+            explicit_new_celeb = m_cel.group(1).strip(" .,!?")
+    detected_celeb = explicit_new_celeb or prev_celeb
 
     # 2. Detect creation mode (`executive_headshot`, `outreach_card`, `brand_banner`)
     mode = prev_mode or "executive_headshot"
@@ -728,8 +1229,10 @@ def _detect_heuristic_intent(
         occ = "newborn"
     elif any(k in low for k in ("sme", "factory", "plant", "keyman", "pruwealth", "企业", "企業", "厂房", "廠房", "kilang", "தொழிற்சாலை")):
         occ = "sme_legacy"
-    elif any(k in low for k in ("medical", "hospital", "log ", "annual review", "医疗", "醫療", "保单检视", "hospital", "மருத்துவ")):
+    elif any(k in low for k in ("medical", "hospital", "log ", "(log)", "cashless", "annual review", "policy review", "医疗", "醫療", "保单检视", "மருத்துவ")):
         occ = "annual_review"
+    elif any(k in low for k in ("appreciation", "year-end", "year end", "gratitude", "thank you", "感恩", "答谢", "答謝", "penghargaan")):
+        occ = "festive"
 
     # 4. Detect style preset
     style = prev_style or "mdrt_keynote"
@@ -782,10 +1285,8 @@ def _default_follow_ups(
 ) -> list[dict[str, str]]:
     """Return compact, guided next-step pills grouped into:
     1. 'craft' (Craft Your Image: 3 distinct styling options - Executive Charcoal Suit, Warm Advisor Portrait, Forbes Studio Leader)
-    2. 'work' (Put Your Image to Work: Client Milestone Card, Chinese New Year Card, Deepavali Festival Card, Personal Branding Banner).
+    2. 'work' (Put Your Image to Work: generic Client Milestone Card, Chinese New Year Card, Hari Raya Card, Deepavali Card, Personal Branding Banner).
     """
-    is_calendar = occasion_key in ("cny_lunar", "hari_raya", "deepavali", "festive")
-    c_name = client_name.strip() if client_name and client_name.strip() else ("拿督陈与夫人" if "zh" in lang else "Dato' & Datin Tan")
 
     if lang == "zh-CN":
         craft_options = [
@@ -809,30 +1310,29 @@ def _default_follow_ups(
             {
                 "group": "work",
                 "label": "🤝 客户里程碑关怀卡",
-                "prompt": f"让我的形象照为您拓展业务：为刚迎来新生宝宝的客户「{c_name}」设计一张香槟金纪念贺卡（带我的金边头像徽章），并附一段温暖约咖啡聊教育金的 WhatsApp 问候语。",
+                "prompt": "把我的高管形象照放到一张庆祝新生宝宝诞生的香槟金尊尚纪念贺卡上。",
             },
             {
                 "group": "work",
                 "label": "🧧 新春尊尚贺卡 (CNY)",
-                "prompt": f"把形象转化为新春业务触达：为「{c_name}」制作一张红金新春尊尚贺卡（含梅花、双峰塔天际线与我的金边头像徽章），配一段走心的 WhatsApp 佳节祝福语。",
+                "prompt": "把我的高管形象照放到一张红金新春尊尚贺卡上，搭配梅花与双峰塔天际线。",
+            },
+            {
+                "group": "work",
+                "label": "🌙 开斋节尊尚贺卡 (Hari Raya)",
+                "prompt": "把我的高管形象照放到一张翡翠绿与拉丝金开斋节（Hari Raya Aidilfitri）尊尚贺卡上，搭配传统油灯与宋吉锦纹样。",
             },
             {
                 "group": "work",
                 "label": "🪔 屠妖节祈福贺卡 (Diwali)",
-                "prompt": f"为高净值客户「{c_name}」制作一张奢华排灯节（Deepavali/Diwali）点灯贺卡，配金色蓝宝石油灯与传统蓝金图腾，附一段诚挚的 WhatsApp 节日问候。",
+                "prompt": "把我的高管形象照放到一张奢华排灯节（Deepavali/Diwali）点灯贺卡上，搭配金色油灯与传统蓝金图腾。",
             },
             {
                 "group": "work",
                 "label": "💼 个人品牌横幅",
-                "prompt": "用我的新形象照生成一张 LinkedIn 与 WhatsApp Business 个人品牌横幅，背景是吉隆坡双峰塔黄昏天际线，印上我的座右铭。",
+                "prompt": "把我的高管形象照放到一张吉隆坡双峰塔黄昏天际线风格的高管个人品牌横幅上。",
             },
         ]
-        if creation_mode == "outreach_card":
-            work_options.append({
-                "group": "work",
-                "label": "✍️ 缩短 WhatsApp 话术",
-                "prompt": f"保留当前贺卡图片不变，只把发给{c_name}的 WhatsApp 话术改得更简短亲切（3句话以内），结尾约 10 分钟咖啡。",
-            })
         return craft_options + work_options
 
     if lang == "zh-TW":
@@ -857,30 +1357,29 @@ def _default_follow_ups(
             {
                 "group": "work",
                 "label": "🤝 客戶里程碑紀念卡",
-                "prompt": f"讓我的形象照為您拓展業務：為剛迎來新生兒的客戶「{c_name}」製作一張香檳金紀念賀卡，並附一段約咖啡的 WhatsApp 問候訊息。",
+                "prompt": "把我的高管形象照放到一張慶祝新生兒誕生的香檳金尊尚紀念賀卡上。",
             },
             {
                 "group": "work",
                 "label": "🧧 新春尊尚賀卡 (CNY)",
-                "prompt": f"把形象轉化為新春業務觸達：為「{c_name}」製作一張紅金新春尊尚賀卡（含梅花與雙峰塔天際線），配一段溫暖的 WhatsApp 祝福話術。",
+                "prompt": "把我的高管形象照放到一張紅金新春尊尚賀卡上（含梅花與雙峰塔天際線）。",
+            },
+            {
+                "group": "work",
+                "label": "🌙 開齋節尊尚賀卡 (Hari Raya)",
+                "prompt": "把我的高管形象照放到一張翡翠綠配拉絲金開齋節（Hari Raya Aidilfitri）尊尚賀卡上，搭配傳統油燈與宋吉錦紋樣。",
             },
             {
                 "group": "work",
                 "label": "🪔 屠妖節祈福賀卡 (Diwali)",
-                "prompt": f"為高淨值客戶「{c_name}」製作一張奢華排燈節（Deepavali/Diwali）點燈賀卡，搭配金色彩繪油燈圖騰與 WhatsApp 節日問候。",
+                "prompt": "把我的高管形象照放到一張奢華排燈節（Deepavali/Diwali）點燈賀卡上，搭配金色彩繪油燈圖騰。",
             },
             {
                 "group": "work",
                 "label": "💼 個人品牌橫幅",
-                "prompt": "生成一張 LinkedIn 與 WhatsApp 個人品牌橫幅，搭配雙峰塔黃昏天際線與我的頭像。",
+                "prompt": "把我的高管形象照放到一張雙峰塔黃昏天際線風格的高管個人品牌橫幅上。",
             },
         ]
-        if creation_mode == "outreach_card":
-            work_options.append({
-                "group": "work",
-                "label": "✍️ 精簡 WhatsApp 話術",
-                "prompt": f"保留目前的圖片不變，將發給{c_name}的 WhatsApp 訊息精簡為 3 句溫暖問候並邀約喝咖啡。",
-            })
         return craft_options + work_options
 
     if lang == "yue":
@@ -905,30 +1404,29 @@ def _default_follow_ups(
             {
                 "group": "work",
                 "label": "🤝 客戶里程碑關懷卡",
-                "prompt": f"用我張相幫手拓客：為剛迎來新生BB嘅客戶「{c_name}」設計一張香檳金紀念賀卡（連我嘅金邊頭像徽章），並附一段約飲啡傾教育金嘅 WhatsApp 問候語。",
+                "prompt": "將我張高管形象照放到一張慶祝新生BB誕生嘅香檳金尊尚紀念賀卡上面。",
             },
             {
                 "group": "work",
                 "label": "🧧 新春尊尚賀卡 (CNY)",
-                "prompt": f"將形象轉化為新春業務觸達：為「{c_name}」製作一張紅金新春尊尚賀卡（含梅花、雙峰塔天際線同我嘅金邊頭像徽章），配一段暖心 WhatsApp 祝福。",
+                "prompt": "將我張高管形象照放到一張紅金新春尊尚賀卡上面（含梅花同雙峰塔天際線）。",
+            },
+            {
+                "group": "work",
+                "label": "🌙 開齋節尊尚賀卡 (Hari Raya)",
+                "prompt": "將我張高管形象照放到一張翡翠綠配拉絲金開齋節（Hari Raya Aidilfitri）尊尚賀卡上面，配傳統油燈與宋吉錦紋樣。",
             },
             {
                 "group": "work",
                 "label": "🪔 屠妖節祈福賀卡 (Diwali)",
-                "prompt": f"為高淨值客戶「{c_name}」製作一張奢華屠妖節（Deepavali）點燈賀卡，配金色油燈與藍金圖騰，附一段誠摯嘅 WhatsApp 節日問候。",
+                "prompt": "將我張高管形象照放到一張奢華屠妖節（Deepavali）點燈賀卡上面，配金色油燈與藍金圖騰。",
             },
             {
                 "group": "work",
                 "label": "💼 個人品牌橫幅",
-                "prompt": "用我張新形象照生成一張 LinkedIn 同 WhatsApp Business 個人品牌橫幅，背景係吉隆坡雙峰塔黃昏天際線。",
+                "prompt": "將我張高管形象照放到一張吉隆坡雙峰塔黃昏天際線風格嘅高管個人品牌橫幅上面。",
             },
         ]
-        if creation_mode == "outreach_card":
-            work_options.append({
-                "group": "work",
-                "label": "✍️ 縮短 WhatsApp 話術",
-                "prompt": f"保留而家張賀卡圖片唔變，只將發畀{c_name}嘅 WhatsApp 話術改得更簡短親切（3句話以內），結尾約 10 分鐘飲杯啡。",
-            })
         return craft_options + work_options
 
     if lang == "ta":
@@ -953,30 +1451,29 @@ def _default_follow_ups(
             {
                 "group": "work",
                 "label": "🤝 வாடிக்கையாளர் வாழ்த்து அட்டை",
-                "prompt": f"புதிய குழந்தை பிறந்திருக்கும் {c_name} குடும்பத்திற்கு எனது உருவப்பட பேட்ஜ் கொண்ட வாழ்த்து அட்டை மற்றும் நட்பான WhatsApp காபி அழைப்புச் செய்தியை உருவாக்கவும்.",
+                "prompt": "புதிய குழந்தை பிறப்பைக் கொண்டாடும் ஆடம்பர வாழ்த்து அட்டையை எனது ஸ்டுடியோ உருவப்படத்துடன் உருவாக்கவும்.",
             },
             {
                 "group": "work",
                 "label": "🧧 சீனப் புத்தாண்டு வாழ்த்து அட்டை",
-                "prompt": f"{c_name} குடும்பத்திற்கு சிவப்பு மற்றும் தங்க நிற சீனப் புத்தாண்டு (CNY) வாழ்த்து அட்டை மற்றும் WhatsApp வாழ்த்துச் செய்தியை உருவாக்கவும்.",
+                "prompt": "எனது ஸ்டுடியோ உருவப்படத்துடன் கூடிய சிவப்பு மற்றும் தங்க நிற சீனப் புத்தாண்டு (CNY) வாழ்த்து அட்டையை உருவாக்கவும்.",
+            },
+            {
+                "group": "work",
+                "label": "🌙 ஹரி ராயா வாழ்த்து அட்டை",
+                "prompt": "எனது ஸ்டுடியோ உருவப்படத்துடன் கூடிய மரகதப் பச்சை மற்றும் தங்க நிற ஹரி ராயா (Hari Raya Aidilfitri) வாழ்த்து அட்டையை உருவாக்கவும்.",
             },
             {
                 "group": "work",
                 "label": "🪔 தீபாவளி வாழ்த்து அட்டை",
-                "prompt": f"{c_name} குடும்பத்திற்கு அழகிய தீபங்கள் மற்றும் ரங்கோலி கொண்ட தீபாவளி வாழ்த்து அட்டை மற்றும் WhatsApp செய்தியை உருவாக்கவும்.",
+                "prompt": "எனது ஸ்டுடியோ உருவப்படத்துடன் கூடிய அழகிய தீபங்கள் மற்றும் ரங்கோலி கொண்ட தீபாவளி வாழ்த்து அட்டையை உருவாக்கவும்.",
             },
             {
                 "group": "work",
                 "label": "💼 தனிப்பட்ட பிராண்டிங் பேனர்",
-                "prompt": "கோலாலம்பூர் இரட்டை கோபுர பின்னணியில் எனது உருவப்பட பேட்ஜ் கொண்ட LinkedIn மற்றும் WhatsApp பிராண்டிங் பேனரை உருவாக்கவும்.",
+                "prompt": "கோலாலம்பூர் இரட்டை கோபுர பின்னணியில் எனது ஸ்டுடியோ உருவப்படத்துடன் கூடிய தனிப்பட்ட பிராண்டிங் பேனரை உருவாக்கவும்.",
             },
         ]
-        if creation_mode == "outreach_card":
-            work_options.append({
-                "group": "work",
-                "label": "✍️ சுருக்கமான WhatsApp செய்தி",
-                "prompt": f"தற்போதைய படத்தை அப்படியே வைத்து, {c_name}-க்கு அனுப்பும் WhatsApp செய்தியை 2-3 நட்பான வாக்கியங்களாக சுருக்கவும்.",
-            })
         return craft_options + work_options
 
     if lang == "ms":
@@ -1001,30 +1498,29 @@ def _default_follow_ups(
             {
                 "group": "work",
                 "label": "🤝 Kad Fokus Pelanggan",
-                "prompt": f"Jana hasil dari foto saya: hasilkan kad tanda mata kelahiran cahaya mata buat {c_name} bersama mesej WhatsApp mesra.",
+                "prompt": "Letakkan potret studio saya pada kad ucapan mewah sambutan kelahiran cahaya mata baharu.",
             },
             {
                 "group": "work",
                 "label": "🧧 Kad Tahun Baru Cina (CNY)",
-                "prompt": f"Tukar imej kepada sentuhan perniagaan: hasilkan kad ucapan Tahun Baru Cina warna merah & emas bersama Menara KLCC dan ucapan WhatsApp buat {c_name}.",
+                "prompt": "Letakkan potret studio saya pada kad ucapan Tahun Baru Cina warna merah & emas berlatarkan Menara KLCC.",
+            },
+            {
+                "group": "work",
+                "label": "🌙 Kad Hari Raya Aidilfitri",
+                "prompt": "Letakkan potret studio saya pada kad ucapan Hari Raya Aidilfitri zamrud & emas bersama pelita dan corak songket.",
             },
             {
                 "group": "work",
                 "label": "🪔 Kad Pesta Deepavali (Diwali)",
-                "prompt": f"Hasilkan kad ucapan Pesta Cahaya Deepavali mewah dengan pelita emas diyas dan corak rangoli bersama mesej WhatsApp buat {c_name}.",
+                "prompt": "Letakkan potret studio saya pada kad ucapan Pesta Cahaya Deepavali mewah dengan pelita emas diyas dan corak rangoli.",
             },
             {
                 "group": "work",
                 "label": "💼 Penjenamaan Peribadi",
-                "prompt": "Hasilkan sepanduk profil LinkedIn & WhatsApp Business berlatarkan Menara Berkembar KLCC waktu senja bersama lencana potret saya.",
+                "prompt": "Letakkan potret studio saya pada sepanduk penjenamaan peribadi eksekutif berlatarkan Menara Berkembar KLCC waktu senja.",
             },
         ]
-        if creation_mode == "outreach_card":
-            work_options.append({
-                "group": "work",
-                "label": "✍️ Pendekkan Mesej WhatsApp",
-                "prompt": f"Kekalkan imej semasa, pendekkan mesej WhatsApp kepada {c_name} supaya lebih santai dan ajak minum kopi.",
-            })
         return craft_options + work_options
 
     # Default English (`en`)
@@ -1049,30 +1545,29 @@ def _default_follow_ups(
         {
             "group": "work",
             "label": "🤝 Client Milestone Card",
-            "prompt": f"Let's put this image to work: create a warm Client-Focused milestone card for {c_name} celebrating their newborn baby, paired with a friendly WhatsApp coffee invite.",
+            "prompt": "Put my studio portrait onto a warm champagne-gold Client Milestone greeting card celebrating a newborn baby.",
         },
         {
             "group": "work",
             "label": "🧧 Chinese New Year Card",
-            "prompt": f"Put my image to work on a luxury Chinese New Year (CNY) prosperity card in imperial crimson & gold with plum blossoms, KL skyline, and warm WhatsApp wishes for {c_name}.",
+            "prompt": "Put my studio portrait onto a luxury Chinese New Year (CNY) prosperity card in imperial crimson & gold with plum blossoms and the KL skyline.",
+        },
+        {
+            "group": "work",
+            "label": "🌙 Hari Raya Aidilfitri Card",
+            "prompt": "Put my studio portrait onto an emerald & brushed-gold Hari Raya Aidilfitri greeting card with woven songket patterns and warm pelita lamps.",
         },
         {
             "group": "work",
             "label": "🪔 Deepavali Festival Card",
-            "prompt": f"Put my image to work on an opulent Deepavali Festival of Lights greeting card with glowing brass diyas, golden rangoli, and warm festive WhatsApp wishes for {c_name}.",
+            "prompt": "Put my studio portrait onto an opulent Deepavali Festival of Lights greeting card with glowing brass diyas and golden rangoli.",
         },
         {
             "group": "work",
             "label": "💼 Personal Branding Banner",
-            "prompt": "Put this portrait onto a sleek LinkedIn & WhatsApp Personal Branding banner featuring my portrait badge and the Kuala Lumpur Petronas Twin Towers at golden hour.",
+            "prompt": "Put my studio portrait onto a sleek Executive Personal Branding banner overlooking the Kuala Lumpur Petronas Twin Towers at golden hour.",
         },
     ]
-    if creation_mode == "outreach_card":
-        work_options.append({
-            "group": "work",
-            "label": "✍️ Shorter WhatsApp Copy",
-            "prompt": f"Keep my card artwork as-is, just rewrite the WhatsApp message to {c_name} to be 2–3 warm, casual sentences inviting them for a quick coffee catch-up.",
-        })
     return craft_options + work_options
 
 
@@ -1084,16 +1579,24 @@ def handle_c1_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         import traceback
         traceback.print_exc()
         lang = body.get("language", "en")
-        client = body.get("clientName") or "Dato' & Datin Tan"
-        fallback_seed = _load_seed_before_data_url(0)
+        photo_in = (body.get("photoBase64") or body.get("prevPortraitDataUrl") or "").strip() or None
+        if not photo_in and not body.get("useStudioAvatar"):
+            return {
+                "status": "photo_or_celebrity_required",
+                "photoRequired": True,
+                "assistantReply": "Please **Take a photo** or **Upload an image** first to start Step 1!",
+                "message": "Please Take a photo or Upload an image first to start Step 1!",
+            }
+        client = (body.get("clientName") or "").strip()
+        fallback_seed = photo_in or _load_seed_before_data_url(0)
         return {
             "status": "success",
             "creationMode": "executive_headshot",
             "copyOnly": False,
             "style": "mdrt_keynote",
             "occasion": "newborn",
-            "assistantReply": "Here is your executive studio portrait! Let's put this image to work with Client-Focused or Calendar-Focused outreach below.",
-            "outreachMessage": f"Warm congratulations {client} on your new milestone! As your Wealth & Legacy Advisor, I'm here to support your family's future.",
+            "assistantReply": "Here is your executive studio portrait! Step 2 is now unlocked — put this portrait onto a Festive Greeting Card or Personal Branding Banner below.",
+            "outreachMessage": "",
             "linkedinHeadline": "PRUMDA Learning Trip Leader | Protecting Families Across Generations",
             "cardHeadline": "Congratulations & Warmest Wishes",
             "clientName": client,
@@ -1136,28 +1639,38 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     prev_style = (prev_state.get("style") or body.get("style") or "mdrt_keynote").strip()
     prev_occasion = (prev_state.get("occasion") or body.get("occasion") or "newborn").strip()
     prev_visual_prompt = (prev_state.get("visualPrompt") or "").strip()
-    prev_celeb = (body.get("celebrityName") or prev_state.get("celebrityName") or "").strip()
+    prev_celeb_state = (prev_state.get("celebrityName") or "").strip()
+    body_celeb = (body.get("celebrityName") or "").strip()
+    prev_celeb = body_celeb or prev_celeb_state
     has_existing_visual = bool(prev_state.get("hasExistingVisual", False))
 
     raw_agent_name = (body.get("agentName") or "").strip()
     agent_name = _clean_advisor_display_name(raw_agent_name) or "Wealth & Legacy Advisor"
     region = (body.get("region") or "Kuala Lumpur").strip()
-    photo_base64 = body.get("photoBase64")
+    photo_base64 = (body.get("photoBase64") or "").strip() or None
     prev_portrait_url = (body.get("prevPortraitDataUrl") or "").strip() or None
-    has_custom_photo = bool(body.get("hasCustomPhoto", False) or photo_base64)
-    custom_image_mode = bool(body.get("customImageMode", False))
+    has_custom_photo = bool(photo_base64 or prev_portrait_url)
     use_studio_avatar = bool(body.get("useStudioAvatar", False))
     seed_index = int(body.get("seedIndex") or 0)
-    require_gate = bool(body.get("requirePhotoOrCelebrity", True)) and not custom_image_mode
+    has_step1_portrait = bool(prev_portrait_url)
 
     gate_msgs = {
-        "zh-CN": "我很乐意为您生成！请先选择 **拍照（Take a photo）**、**上传图片（Upload an image）** 或 **使用名人（Use a celebrity）** 开始第 1 步。",
-        "zh-TW": "我很樂意為您生成！請先選擇 **拍照（Take a photo）**、**上傳圖片（Upload an image）** 或 **使用名人（Use a celebrity）** 開始第 1 步。",
-        "yue": "好樂意幫您生成！請先揀選 **影相（Take a photo）**、**上載圖片（Upload an image）** 或 **使用名人（Use a celebrity）** 開始第 1 步。",
-        "ta": "உங்களுக்காக உருவாக்கத் தயாராக உள்ளேன் — முதலில் படி 1-ஐத் தொடங்க **புகைப்படம் எடு**, **படத்தை பதிவேற்று**, அல்லது **பிரபலத்தைப் பயன்படுத்து** என்பதைத் தேர்ந்தெடுக்கவும்!",
-        "ms": "Saya sedia membantu! Sila pilih **Ambil foto**, **Muat naik imej**, atau **Guna selebriti** untuk memulakan Langkah 1.",
-        "en": "I would love to create that for you — please choose **Take a photo**, **Upload an image**, or **Use a celebrity** first to start Step 1!",
+        "zh-CN": "请先选择 **拍照（Take a photo）** 或 **上传图片（Upload an image）** 提供一张照片，才能开始第 1 步创作！",
+        "zh-TW": "請先選擇 **影相（Take a photo）** 或 **上傳圖片（Upload an image）** 提供一張相片，才能開始第 1 步創作！",
+        "yue": "請先揀選 **影相（Take a photo）** 或 **上載圖片（Upload an image）** 提供一張相片，先可以開始第 1 步創作！",
+        "ta": "தொடங்குவதற்கு முதலில் **புகைப்படம் எடு (Take a photo)** அல்லது **படத்தைப் பதிவேற்று (Upload an image)** என்பதைத் தேர்ந்தெடுக்கவும்!",
+        "ms": "Sila pilih **Ambil foto (Take a photo)** atau **Muat naik imej (Upload an image)** terlebih dahulu sebelum memulakan Langkah 1!",
+        "en": "Please **Take a photo** or **Upload an image** first — an image is required before starting Step 1!",
     }
+
+    # Strict Gate 0: Require a real uploaded/captured image before doing anything
+    if not has_custom_photo and not use_studio_avatar:
+        return {
+            "status": "photo_or_celebrity_required",
+            "photoRequired": True,
+            "assistantReply": gate_msgs.get(lang, gate_msgs["en"]),
+            "message": gate_msgs.get(lang, gate_msgs["en"]),
+        }
 
     # Heuristic seed from user's message + previous conversation state
     heur = _detect_heuristic_intent(
@@ -1165,7 +1678,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         prev_mode=prev_mode if not body.get("creationMode") else body.get("creationMode"),
         prev_style=prev_style if not body.get("style") else body.get("style"),
         prev_occasion=prev_occasion if not body.get("occasion") else body.get("occasion"),
-        prev_celeb=prev_celeb,
+        prev_celeb="",
         has_existing_visual=has_existing_visual,
     )
 
@@ -1174,32 +1687,17 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         creation_mode = "executive_headshot"
     style_key = heur["styleKey"] if heur["styleKey"] in STYLE_META else "mdrt_keynote"
     occasion_key = heur["occasionKey"] if heur["occasionKey"] in OCCASION_META else "newborn"
-    celebrity_name = "" if has_custom_photo else heur["celebrityName"]
+    celebrity_name = ""
     copy_only = heur["copyOnly"]
 
-    # Check if an unknown celebrity might have been typed in user_message (e.g. "Use Shah Rukh Khan" / "Tom Hanks")
-    might_mention_person = False
-    if user_message and not has_custom_photo and not celebrity_name:
-        non_person_caps = {
-            "kuala lumpur", "petronas twin", "twin towers", "lunar new", "new year",
-            "chinese new", "hari raya", "raya aidilfitri", "prudential malaysia",
-            "personal brand", "personal branding", "forbes asia", "marina bay",
-            "dato tan", "datin tan", "client outreach", "brand banner",
-        }
-        for m_cap in re.finditer(r"\b([A-Z][a-zA-Z'.-]+\s+[A-Z][a-zA-Z'.-]+)\b", user_message):
-            if m_cap.group(1).lower() not in non_person_caps:
-                might_mention_person = True
-                break
+    # Strict Gate 1: Step 1 Studio Portrait MUST be generated first before Step 2 Outreach Cards / Banners / Copy unlock
+    if not has_step1_portrait:
+        creation_mode = "executive_headshot"
+        copy_only = False
 
-    # Fast Step 1 Gate if no photo, no celebrity, not in custom_image_mode, and no plausible person name in prompt
-    if require_gate and not has_custom_photo and not celebrity_name and not use_studio_avatar and not might_mention_person:
-        return {
-            "status": "photo_or_celebrity_required",
-            "assistantReply": gate_msgs.get(lang, gate_msgs["en"]),
-            "message": gate_msgs.get(lang, gate_msgs["en"]),
-        }
-
-    client_name_in = (body.get("clientName") or prev_state.get("clientName") or "").strip()
+    explicit_body_client = (body.get("clientName") or "").strip()
+    prev_state_client = (prev_state.get("clientName") or "").strip()
+    client_name_in = explicit_body_client or prev_state_client
     motto_in = (body.get("motto") or prev_state.get("motto") or "").strip()
     card_headline_in = (body.get("cardHeadline") or prev_state.get("cardHeadline") or "").strip()
 
@@ -1212,7 +1710,12 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
             history_lines.append(f"{r_label}: {t_txt[:260]}")
     history_block = "\n".join(history_lines) if history_lines else "(First turn in Studio session)"
 
-    default_client = client_name_in or DEFAULT_CLIENTS.get(lang, "Dato' & Datin Tan")
+    same_card_seed = (
+        prev_mode == "outreach_card"
+        and creation_mode == "outreach_card"
+        and prev_occasion == occasion_key
+    )
+    default_client = explicit_body_client or (prev_state_client if same_card_seed else "")
     default_motto = motto_in or ""
 
     identity_desc = (
@@ -1223,35 +1726,42 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         else "Custom AI Image Generation Mode"
     )
 
-    # Step 1: Multi-Turn Conversational Planner + PAMB Copywriter + Brand Judge (single fast Gemini call)
+    # Step 1: Multi-Turn Conversational Planner + Visual Brand Judge
     planner_prompt = (
-        "You are the **AI Image Assistant** (powered by Nano Banana) "
+        "You are the **AI Image Assistant** (powered by Nano Banana 2) "
         "for PRUMDA Learning Trip Agency Leaders.\n"
-        "You are assisting a user in an interactive multi-turn chat where they prompt, inspect the generated image, "
-        "refine details across turns, build outreach / personal branding, and share to WhatsApp or submit.\n"
-        "CRITICAL HEADSHOT TOOL RULE: Pass ONLY the wardrobe, backdrop, and lighting in the prompt parameter of the headshot generation tool — "
-        "NEVER include demographic, ethnicity, age, gender, or facial expression/smile descriptions in prompt.\n\n"
-        f"Conversation History:\n{history_block}\n\n"
+        "Challenge 1 is 100% focused on visual AI image creation and studio refinement (NO WhatsApp/chat copywriting): "
+        "users prompt, inspect the generated studio portrait, greeting card, or executive banner, refine visual details across turns, and submit.\n"
+        "CRITICAL VISUAL PROMPT RULES:\n"
+        "1. If creationMode is 'executive_headshot': pass ONLY wardrobe, backdrop, and lighting in visualPrompt — NEVER include demographic, ethnicity, age, gender, or facial expression/smile descriptions.\n"
+        "2. If creationMode is 'outreach_card' or 'brand_banner': pass ONLY pure decorative background scenery, floral/festive motifs, skyline, and color palette in visualPrompt — NEVER mention any person, celebrity, portrait, headshot, avatar, circle, frame, or badge (the portrait medallion is composited separately in post-processing).\n"
+        + (
+            "3. STEP 1 IMAGE-FIRST GATE ACTIVE: Because the user has NOT generated their Step 1 Studio Portrait yet, creationMode MUST be 'executive_headshot' and copyOnly MUST be false on this turn. Craft their executive studio portrait styling in visualPrompt, and in assistantReply celebrate their new Step 1 Studio Portrait and let them know Step 2 (VIP Greeting Cards & Personal Branding Banners) is now unlocked below!\n\n"
+            if not has_step1_portrait
+            else "\n"
+        )
+        + f"Conversation History:\n{history_block}\n\n"
         f"Previous Studio State:\n"
         f"- Previous Mode: {prev_mode}\n"
         f"- Previous Visual Styling Prompt: {prev_visual_prompt or 'None yet'}\n"
         f"- Previous Style Key: {prev_style} | Previous Occasion Key: {prev_occasion}\n"
+        f"- Previous Recipient Name (if refining same card): {default_client or 'None (generic card)'}\n"
         f"- Identity Source: {identity_desc}\n\n"
         f"NEW USER MESSAGE (Turn Input):\n\"{user_message or 'Create an executive studio portrait.'}\"\n\n"
         "Respond STRICTLY in valid JSON with these exact keys:\n"
         "{\n"
         '  "creationMode": "executive_headshot" | "outreach_card" | "brand_banner",\n'
-        '  "copyOnly": boolean (true ONLY if user explicitly wants to keep the current image and only edit text/WhatsApp message),\n'
+        '  "copyOnly": false,\n'
         '  "styleKey": "mdrt_keynote" | "forbes_studio" | "family_advisor" | "festive_vip",\n'
         '  "occasionKey": "newborn" | "sme_legacy" | "annual_review" | "cny_lunar" | "hari_raya" | "deepavali" | "festive",\n'
-        '  "celebrityName": string (ONLY non-empty if the user explicitly asked to use a famous public figure / celebrity, e.g. "Michelle Yeoh", "Henry Golding"; otherwise ""),\n'
-        '  "clientName": string (recipient name if mentioned, else "' + default_client + '"),\n'
-        '  "cardHeadline": string (short celebratory card headline in English or ' + lang_full + '),\n'
-        '  "motto": string (ONLY non-empty if user explicitly requested a tagline/motto; otherwise ""),\n'
-        '  "visualPrompt": string (Pass ONLY the wardrobe, backdrop, and lighting in the prompt parameter of the headshot generation tool — '
-        "NEVER include demographic, ethnicity, age, gender, or facial expression/smile descriptions in prompt),\n"
-        f'  "assistantReply": string (2 short, friendly sentences in {lang_full}: celebrate the generated image, then offer next steps — putting this image to work with Client-Focused or Calendar-Focused outreach, Personal Branding, or sending to WhatsApp),\n'
-        f'  "outreachMessage": string (ready-to-send 2-3 sentence WhatsApp message in {lang_full} tailored to the occasion),\n'
+        '  "celebrityName": string (if the user asked to use a famous public figure / celebrity in this message, return that celebrity\'s full English name e.g. "Michelle Yeoh", "Shah Rukh Khan", "Zendaya"; if continuing previous celebrity session without changing celebrity, return "' + celebrity_name + '"; otherwise ""),\n'
+        '  "clientName": string (ONLY if the user explicitly named a specific recipient person/couple/family in NEW USER MESSAGE — e.g. "Mr. & Mrs. Wong", "Dato\' Sri Lee", "Sarah", "林先生与夫人" — return that exact recipient name; else if refining the SAME greeting card without switching occasion, return "' + default_client + '"; otherwise return "" — NEVER invent dummy names and NEVER put the advisor\'s own name here),\n'
+        '  "cardHeadline": string (if the user requested specific custom text/words on the card, preserve their EXACT custom text verbatim; otherwise write a concise 2-5 word celebratory card headline in English or ' + lang_full + ', no double dashes),\n'
+        '  "cardSubtext": string (ONLY non-empty if the user explicitly asked for an additional custom message/subtitle printed on the card itself; otherwise ""),\n'
+        '  "motto": string (if the user requested specific custom text/tagline/motto on the banner or card, preserve their EXACT custom text verbatim; otherwise ""),\n'
+        '  "visualPrompt": string (follow CRITICAL VISUAL PROMPT RULES 1 & 2 above strictly),\n'
+        f'  "assistantReply": string (2 short, friendly sentences in {lang_full}: celebrate the generated image, then suggest visual refinements or putting this portrait onto a festive greeting card or personal branding banner — NEVER mention WhatsApp messages),\n'
+        f'  "outreachMessage": "",\n'
         f'  "linkedinHeadline": string (1-line executive headline in {lang_full}),\n'
         f'  "judgeFeedback": string (1 enthusiastic sentence in {lang_full} praising their visual & prompt craft),\n'
         '  "brandScore": integer (91-99),\n'
@@ -1260,7 +1770,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         "}"
     )
 
-    ai_text, text_model_used, text_lat = call_vertex_fn(planner_prompt)
+    ai_text, text_model_used, text_lat = _call_c1_text_model(planner_prompt, call_vertex_fn)
     parsed: dict[str, Any] | None = None
     if ai_text:
         try:
@@ -1291,15 +1801,19 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         p_occ = str(parsed.get("occasionKey") or "").strip()
         if p_occ in OCCASION_META:
             occasion_key = p_occ
-        if not has_custom_photo and parsed.get("celebrityName"):
-            celebrity_name = str(parsed["celebrityName"]).strip()
         if isinstance(parsed.get("copyOnly"), bool) and has_existing_visual and not heur.get("explicitKeep"):
             copy_only = bool(parsed["copyOnly"])
 
-    # Enforce Step 1 Gate if planner confirmed no celebrity was mentioned, no photo was uploaded, and not in custom_image_mode
-    if require_gate and not has_custom_photo and not celebrity_name and not use_studio_avatar:
+    # Enforce Step 1 Studio Portrait first before Step 2 Outreach Cards / Banners / Copy unlock
+    if not has_step1_portrait:
+        creation_mode = "executive_headshot"
+        copy_only = False
+
+    # Enforce Step 0 Gate if no photo was provided
+    if not has_custom_photo and not use_studio_avatar:
         return {
             "status": "photo_or_celebrity_required",
+            "photoRequired": True,
             "assistantReply": gate_msgs.get(lang, gate_msgs["en"]),
             "message": gate_msgs.get(lang, gate_msgs["en"]),
         }
@@ -1307,19 +1821,37 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     s_meta = STYLE_META.get(style_key, STYLE_META["mdrt_keynote"])
     o_meta = OCCASION_META.get(occasion_key, OCCASION_META["newborn"])
 
-    resolved_client = (
-        (str(parsed.get("clientName")).strip() if parsed and parsed.get("clientName") else "")
-        or client_name_in
-        or DEFAULT_CLIENTS.get(lang, "Dato' & Datin Tan")
+    same_card_refinement = (
+        prev_mode == "outreach_card"
+        and creation_mode == "outreach_card"
+        and prev_occasion == occasion_key
     )
+    fallback_client = explicit_body_client or (prev_state_client if same_card_refinement else "")
+    if parsed is not None and "clientName" in parsed:
+        parsed_client = str(parsed.get("clientName") or "").strip()
+        resolved_client = parsed_client or explicit_body_client
+    else:
+        resolved_client = fallback_client
+    if creation_mode != "outreach_card" and not explicit_body_client:
+        resolved_client = ""
+
+    # Guard against accidentally treating the advisor's own name as the recipient name
+    clean_adv_check = _clean_advisor_display_name(raw_agent_name)
+    if resolved_client and clean_adv_check and resolved_client.strip().lower() == clean_adv_check.strip().lower():
+        if resolved_client.strip().lower() not in (user_message or "").lower():
+            resolved_client = ""
     effective_motto = (
         (str(parsed.get("motto")).strip() if parsed and parsed.get("motto") else "")
-        or default_motto
+        or (default_motto if creation_mode == "brand_banner" else "")
     )
     effective_headline = (
         (str(parsed.get("cardHeadline")).strip() if parsed and parsed.get("cardHeadline") else "")
         or card_headline_in
         or o_meta["cardHeadline"]
+    )
+    effective_headline = re.sub(r"\s*[—–-]{2,}\s*", " • ", effective_headline).strip(" —–-")
+    effective_subtext = (
+        str(parsed.get("cardSubtext")).strip() if parsed and parsed.get("cardSubtext") else ""
     )
 
     planned_visual = (
@@ -1329,21 +1861,21 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     )
     if not planned_visual:
         if creation_mode == "outreach_card":
-            planned_visual = user_message or o_meta["cardArtPrompt"]
+            planned_visual = o_meta["cardArtPrompt"]
         elif creation_mode == "brand_banner":
-            planned_visual = user_message or (
-                "Sleek LinkedIn & WhatsApp corporate personal branding banner with Kuala Lumpur Petronas Twin Towers "
+            planned_visual = (
+                "Sleek Executive Personal Branding banner with Kuala Lumpur Petronas Twin Towers "
                 "golden-hour skyline and refined crimson-and-gold executive accents"
             )
         else:
-            if prev_visual_prompt and user_message:
+            if prev_visual_prompt and user_message and prev_mode == "executive_headshot":
                 planned_visual = f"{prev_visual_prompt}; updated with: {user_message}"
             else:
                 planned_visual = user_message or s_meta["wardrobePrompt"]
 
     clean_styling = _sanitize_styling_instructions(planned_visual) or s_meta["wardrobePrompt"]
 
-    # Step 2: Execute Nano Banana (`gemini-3.1-flash-image` -> `gemini-2.5-flash-image` fallback) unless copyOnly
+    # Step 2: Execute Nano Banana 2 (`gemini-3.1-flash-image` -> `gemini-3-pro-image` -> `gemini-2.5-flash-image`)
     ai_portrait_url: str | None = None
     ai_artwork_url: str | None = None
     img_lat = 0
@@ -1357,9 +1889,15 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
             if (not has_custom_photo and not celebrity_name and use_studio_avatar)
             else None
         )
-        effective_input_photo = photo_base64 if has_custom_photo else seed_input_url
+        # For uploaded photos, always anchor surgical face-lock to original raw photo (`photo_base64`).
+        # For same-celebrity headshot refinements on Turn 2+, anchor to `prev_portrait_url` so face stays locked.
+        effective_input_photo = (
+            photo_base64
+            if has_custom_photo
+            else (prev_portrait_url if (celebrity_name and prev_portrait_url and creation_mode == "executive_headshot") else seed_input_url)
+        )
         has_reference_face = bool(effective_input_photo)
-        badge_portrait_source = prev_portrait_url or effective_input_photo
+        badge_portrait_source = prev_portrait_url or (photo_base64 if has_custom_photo else seed_input_url)
 
         if creation_mode == "executive_headshot":
             img_prompt = _build_surgical_headshot_prompt(
@@ -1370,186 +1908,196 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
                 region=region,
                 raw_user_prompt=user_message,
             )
-            temp = 0.2 if has_reference_face else 0.4
+            temp = 0.2 if has_reference_face else 0.35
+            target_ar = None if has_custom_photo else "1:1"
             ai_portrait_url, img_lat, img_model_used = _call_nano_banana_or_fallback(
                 photo_data_url=effective_input_photo,
                 image_prompt=img_prompt,
                 temperature=temp,
                 call_image_fn=call_image_fn,
+                aspect_ratio=target_ar,
+                allow_seed_fallback=use_studio_avatar,
             )
 
-        elif creation_mode == "outreach_card":
-            art_prompt = planned_visual or o_meta["cardArtPrompt"]
-            card_prompt = _build_outreach_card_prompt(
-                art_prompt=art_prompt,
-                card_headline=effective_headline,
-                agent_name=raw_agent_name,
-                region=region,
-                celebrity_name=celebrity_name,
-                has_portrait_badge_source=bool(badge_portrait_source),
-            )
-            ai_artwork_url, bg_lat, bg_model_used = _call_nano_banana_or_fallback(
-                photo_data_url=None,
-                image_prompt=card_prompt,
-                temperature=0.4,
-                call_image_fn=call_image_fn,
-            )
-            if has_custom_photo and photo_base64 and not prev_portrait_url:
+        elif creation_mode in ("outreach_card", "brand_banner"):
+            if creation_mode == "outreach_card":
+                bg_prompt = _build_outreach_card_prompt(
+                    art_prompt=planned_visual or o_meta["cardArtPrompt"],
+                    card_headline=effective_headline,
+                    agent_name=raw_agent_name,
+                    region=region,
+                    celebrity_name=celebrity_name,
+                    occasion_key=occasion_key,
+                    card_subtext=effective_subtext,
+                    recipient_name=resolved_client,
+                )
+                badge_pos = "bottom-right"
+            else:
+                bg_prompt = _build_brand_banner_prompt(
+                    custom_visual=planned_visual,
+                    agent_name=raw_agent_name,
+                    region=region,
+                    tagline=effective_motto,
+                    celebrity_name=celebrity_name,
+                )
+                badge_pos = "left-center"
+
+            need_new_portrait = not prev_portrait_url and bool((has_custom_photo and photo_base64) or celebrity_name)
+            if need_new_portrait:
                 p_prompt = _build_surgical_headshot_prompt(
                     clean_styling=s_meta["wardrobePrompt"],
-                    used_uploaded_photo=True,
-                    celebrity_name="",
+                    used_uploaded_photo=bool(has_custom_photo and photo_base64),
+                    celebrity_name="" if (has_custom_photo and photo_base64) else celebrity_name,
                     agent_name=raw_agent_name,
                     region=region,
                 )
-                ai_portrait_url, img_lat, img_model_used = _call_nano_banana_or_fallback(
-                    photo_data_url=photo_base64,
-                    image_prompt=p_prompt,
-                    temperature=0.2,
+                p_input = photo_base64 if (has_custom_photo and photo_base64) else None
+                p_temp = 0.2 if p_input else 0.35
+                p_ar = None if p_input else "1:1"
+                with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+                    fut_bg = pool.submit(
+                        _call_nano_banana_or_fallback,
+                        None,
+                        bg_prompt,
+                        0.35,
+                        call_image_fn,
+                        "16:9",
+                        False,
+                    )
+                    fut_port = pool.submit(
+                        _call_nano_banana_or_fallback,
+                        p_input,
+                        p_prompt,
+                        p_temp,
+                        call_image_fn,
+                        p_ar,
+                        False,
+                    )
+                    ai_artwork_url, bg_lat, bg_model_used = fut_bg.result()
+                    ai_portrait_url, img_lat, img_model_used = fut_port.result()
+                badge_portrait_source = ai_portrait_url or badge_portrait_source
+            else:
+                ai_artwork_url, bg_lat, bg_model_used = _call_nano_banana_or_fallback(
+                    photo_data_url=None,
+                    image_prompt=bg_prompt,
+                    temperature=0.35,
                     call_image_fn=call_image_fn,
-                )
-                badge_portrait_source = ai_portrait_url or photo_base64
-            if ai_artwork_url and badge_portrait_source:
-                ai_artwork_url = _composite_portrait_badge_data_url(
-                    ai_artwork_url, badge_portrait_source, position="bottom-right"
+                    aspect_ratio="16:9",
+                    allow_seed_fallback=False,
                 )
 
-        elif creation_mode == "brand_banner":
-            banner_prompt = _build_brand_banner_prompt(
-                custom_visual=planned_visual,
-                agent_name=raw_agent_name,
-                region=region,
-                tagline=effective_motto,
-                celebrity_name=celebrity_name,
-                has_portrait_badge_source=bool(badge_portrait_source),
-            )
-            ai_artwork_url, bg_lat, bg_model_used = _call_nano_banana_or_fallback(
-                photo_data_url=None,
-                image_prompt=banner_prompt,
-                temperature=0.4,
-                call_image_fn=call_image_fn,
-            )
-            if has_custom_photo and photo_base64 and not prev_portrait_url:
-                p_prompt = _build_surgical_headshot_prompt(
-                    clean_styling=s_meta["wardrobePrompt"],
-                    used_uploaded_photo=True,
-                    celebrity_name="",
-                    agent_name=raw_agent_name,
-                    region=region,
-                )
-                ai_portrait_url, img_lat, img_model_used = _call_nano_banana_or_fallback(
-                    photo_data_url=photo_base64,
-                    image_prompt=p_prompt,
-                    temperature=0.2,
-                    call_image_fn=call_image_fn,
-                )
-                badge_portrait_source = ai_portrait_url or photo_base64
             if ai_artwork_url and badge_portrait_source:
                 ai_artwork_url = _composite_portrait_badge_data_url(
-                    ai_artwork_url, badge_portrait_source, position="left-center"
+                    ai_artwork_url, badge_portrait_source, position=badge_pos
                 )
 
     total_latency_ms = max(int((time.time() - t_start) * 1000), int(text_lat or 0), 420)
 
-    # Fallback copy & localized conversational reply when Vertex text call is unavailable
-    fb_lang = FALLBACK_OUTREACH.get(lang, FALLBACK_OUTREACH["en"])
-    default_msg = fb_lang.get(occasion_key, fb_lang["newborn"]).format(client=resolved_client)
-    if motto_in and motto_in not in default_msg:
-        default_msg = f"{default_msg}\n\n— {agent_name} | PRUMDA • 「{motto_in}」"
-    default_headline = f"{agent_name} | PRUMDA Learning Trip • {effective_motto}"
+    # Fallback localized conversational reply when Vertex text call is unavailable
+    default_msg = ""
+    default_headline = f"{agent_name} | PRUMDA Learning Trip" + (f" • {effective_motto}" if effective_motto else "")
 
     mode_names_loc = {
         "zh-CN": {
             "executive_headshot": f"「{s_meta['label']}」高管影棚形象照",
-            "outreach_card": f"致「{resolved_client}」的{o_meta['short']}尊尚贺卡（含金边头像徽章）",
-            "brand_banner": "LinkedIn & WhatsApp 个人品牌主页横幅",
+            "outreach_card": (
+                f"致「{resolved_client}」的{o_meta['short']}尊尚贺卡（含金边头像徽章）"
+                if resolved_client
+                else f"{o_meta['short']}尊尚贺卡（含金边头像徽章）"
+            ),
+            "brand_banner": "高管个人品牌横幅",
         },
         "zh-TW": {
             "executive_headshot": f"「{s_meta['label']}」高管影棚形象照",
-            "outreach_card": f"致「{resolved_client}」的{o_meta['short']}尊尚賀卡（含金邊頭像徽章）",
-            "brand_banner": "LinkedIn & WhatsApp 個人品牌主頁橫幅",
+            "outreach_card": (
+                f"致「{resolved_client}」的{o_meta['short']}尊尚賀卡（含金邊頭像徽章）"
+                if resolved_client
+                else f"{o_meta['short']}尊尚賀卡（含金邊頭像徽章）"
+            ),
+            "brand_banner": "高管個人品牌橫幅",
         },
         "yue": {
             "executive_headshot": f"「{s_meta['label']}」高管影棚形象照",
-            "outreach_card": f"致「{resolved_client}」嘅{o_meta['short']}尊尚賀卡（含金邊頭像徽章）",
-            "brand_banner": "LinkedIn & WhatsApp 個人品牌主頁橫幅",
+            "outreach_card": (
+                f"致「{resolved_client}」嘅{o_meta['short']}尊尚賀卡（含金邊頭像徽章）"
+                if resolved_client
+                else f"{o_meta['short']}尊尚賀卡（含金邊頭像徽章）"
+            ),
+            "brand_banner": "高管個人品牌橫幅",
         },
         "ta": {
             "executive_headshot": f"{s_meta['label']} எக்ஸிகியூட்டிவ் உருவப்படம்",
-            "outreach_card": f"{resolved_client}-க்கான {o_meta['short']} VIP வாழ்த்து அட்டை",
-            "brand_banner": "LinkedIn & WhatsApp தனிப்பட்ட பிராண்ட் பேனர்",
+            "outreach_card": (
+                f"{resolved_client}-க்கான {o_meta['short']} VIP வாழ்த்து அட்டை"
+                if resolved_client
+                else f"{o_meta['short']} VIP வாழ்த்து அட்டை"
+            ),
+            "brand_banner": "எக்ஸிகியூட்டிவ் தனிப்பட்ட பிராண்ட் பேனர்",
         },
         "ms": {
             "executive_headshot": f"Potret Eksekutif {s_meta['label']}",
-            "outreach_card": f"Kad VIP {o_meta['short']} untuk {resolved_client}",
-            "brand_banner": "Sepanduk Profil Jenama LinkedIn & WhatsApp",
+            "outreach_card": (
+                f"Kad VIP {o_meta['short']} untuk {resolved_client}"
+                if resolved_client
+                else f"Kad VIP {o_meta['short']}"
+            ),
+            "brand_banner": "Sepanduk Jenama Peribadi Eksekutif",
         },
         "en": {
             "executive_headshot": f"{s_meta['label']} Executive Portrait",
-            "outreach_card": f"{o_meta['short']} VIP Greeting Card for {resolved_client}",
-            "brand_banner": "LinkedIn & WhatsApp Personal Brand Banner",
+            "outreach_card": (
+                f"{o_meta['short']} VIP Greeting Card for {resolved_client}"
+                if resolved_client
+                else f"{o_meta['short']} VIP Greeting Card"
+            ),
+            "brand_banner": "Executive Personal Brand Banner",
         },
     }
     loc_artifact_name = (mode_names_loc.get(lang) or mode_names_loc["en"])[creation_mode]
 
     if lang == "zh-CN":
         default_reply = (
-            f"已为您更新针对「{resolved_client}」的 WhatsApp 专属问候话术！您可以直接修改下方文字，或点击「提交到大屏幕」参与打榜。"
-            if copy_only
-            else f"已为您生成 {loc_artifact_name} 与配套 VIP 问候语！✨ 您可以点选下方多个胶囊组合修改指令，满意后点击「提交作品到大屏幕」！"
+            f"已为您生成 {loc_artifact_name}！✨ 您可以点选下方胶囊继续微调造型或生成节日尊尚贺卡与个人品牌横幅，满意后点击「提交作品」！"
         )
-        default_judge = f"极具 {s_meta['badge']} 领袖气场！多轮提示词精准把控视觉细节与「{resolved_client}」的财富传承与关怀共鸣！"
+        default_judge = f"极具 {s_meta['badge']} 领袖气场！多轮视觉提示词精准把控影棚质感与高级构图！"
     elif lang == "zh-TW":
         default_reply = (
-            f"已為您更新針對「{resolved_client}」的專屬問候話術！滿意後可直接點擊提交到大螢幕。"
-            if copy_only
-            else f"已為您生成 {loc_artifact_name} 與配套 VIP 問候語！✨ 您可以繼續組合下方膠囊微調指令，滿意後點擊「提交作品」！"
+            f"已為您生成 {loc_artifact_name}！✨ 您可以點選下方膠囊微調造型或生成節日尊尚賀卡與個人品牌橫幅，滿意後點擊「提交作品」！"
         )
-        default_judge = f"極具 {s_meta['badge']} 領袖風範！視覺重塑與客戶財富規劃關懷完美結合！"
+        default_judge = f"極具 {s_meta['badge']} 領袖風範！影棚光影與高管視覺重塑表現出色！"
     elif lang == "yue":
         default_reply = (
-            f"已經幫您更新咗發畀「{resolved_client}」嘅 WhatsApp 專屬問候話術！您可以直接修改下面文字，或者撳「提交作品」上大銀幕。"
-            if copy_only
-            else f"已經幫您生成咗 {loc_artifact_name} 同埋配套 VIP 問候語！✨ 您可以撳下面幾個膠囊組合微調指令，滿意後撳「提交作品」！"
+            f"已經幫您生成咗 {loc_artifact_name}！✨ 您可以撳下面膠囊繼續微調造型或者生成節日尊尚賀卡同個人品牌橫幅，滿意後撳「提交作品」！"
         )
-        default_judge = f"極具 {s_meta['badge']} 團隊領袖氣場！視覺形象同「{resolved_client}」嘅財富保障關懷完美結合！"
+        default_judge = f"極具 {s_meta['badge']} 團隊領袖氣場！視覺形象重塑同構圖質感非常出色！"
     elif lang == "ta":
         default_reply = (
-            f"{resolved_client}-க்கான உங்கள் WhatsApp வாழ்த்துச் செய்தி புதுப்பிக்கப்பட்டது! கீழே திருத்தலாம் அல்லது நேரடியாக சமர்ப்பிக்கலாம்."
-            if copy_only
-            else f"உங்கள் {loc_artifact_name} மற்றும் VIP WhatsApp செய்தி தயார்! ✨ கீழே உள்ள விருப்பங்களை இணைத்து மாற்றங்களைச் செய்யலாம் அல்லது சமர்ப்பிக்கலாம்!"
+            f"உங்கள் {loc_artifact_name} தயார்! ✨ கீழே உள்ள விருப்பங்களைப் பயன்படுத்தி உருவப்படம் அல்லது வாழ்த்து அட்டையை மெருகேற்றலாம், அல்லது நேரடியாக சமர்ப்பிக்கலாம்!"
         )
-        default_judge = f"சிறப்பான {s_meta['badge']} தலைமைத்துவத் தோற்றம் மற்றும் {resolved_client} குடும்பத்திற்கான அக்கறையான நிதி ஆலோசனை அணுகுமுறை!"
+        default_judge = f"சிறப்பான {s_meta['badge']} தலைமைத்துவத் தோற்றம் மற்றும் நேர்த்தியான காட்சி வடிவமைப்பு!"
     elif lang == "ms":
         default_reply = (
-            f"Mesej WhatsApp VIP untuk {resolved_client} telah dikemas kini! Anda boleh terus menghantar ke Skrin Utama."
-            if copy_only
-            else f"{loc_artifact_name} dan skrip WhatsApp VIP anda sudah siap! ✨ Gabungkan pilihan di bawah jika mahu menambah baik imej atau nada mesej sebelum klik Hantar!"
+            f"{loc_artifact_name} anda sudah siap! ✨ Pilih kapsul di bawah untuk memperhalusi gaya potret atau menghasilkan kad perayaan VIP sebelum klik Hantar!"
         )
-        default_judge = f"Transformasi {s_meta['badge']} yang sangat eksklusif digandingkan dengan mesej perancangan kekayaan penuh empati!"
+        default_judge = f"Transformasi visual {s_meta['badge']} yang sangat eksklusif dan tajam!"
     else:
-        if copy_only:
+        if creation_mode == "executive_headshot":
             default_reply = (
-                f"Updated your WhatsApp message for **{resolved_client}** while keeping your visual! "
-                "Tap **💬 WhatsApp** to share it directly, combine pills below to refine further, or hit **Submit**."
-            )
-        elif creation_mode == "executive_headshot":
-            default_reply = (
-                f"Love how your **{loc_artifact_name}** turned out! ✨ Now let's put this image to work and build an outreach piece — "
-                "combine any **Craft** or **Work** pills below, edit your prompt freely, or share straight to **WhatsApp**!"
+                f"Love how your **{loc_artifact_name}** turned out! ✨ Step 2 is now unlocked — "
+                "refine your portrait styling or put your portrait onto a **Festive Greeting Card** or **Personal Branding Banner**, then hit **Submit**!"
             )
         elif creation_mode == "outreach_card":
             default_reply = (
-                f"Here is your **{loc_artifact_name}** and custom message! 🙌 Edit the outreach copy directly if you'd like, "
-                "send it straight to **WhatsApp**, or hit **Submit**."
+                f"Here is your **{loc_artifact_name}**! 🙌 Combine any pills below to refine the visual design, "
+                "save the image, or hit **Submit** to send it to the Arena leaderboard."
             )
         else:
             default_reply = (
-                f"Your **{loc_artifact_name}** is ready! 🚀 Share it on **WhatsApp**, submit to the Arena leaderboard, "
-                "or combine pills below to build **Client-Focused** or **Calendar-Focused** outreach."
+                f"Your **{loc_artifact_name}** is ready! 🚀 Save the image, refine the visual styling below, "
+                "or hit **Submit** to send it to the Arena leaderboard."
             )
         default_judge = (
-            f"Executive-grade {s_meta['badge']} Nano Banana craft paired with warm wealth-planning empathy for {resolved_client}!"
+            f"Executive-grade {s_meta['badge']} Nano Banana visual craft and sharp studio composition!"
         )
 
     user_hist_msgs = [m for m in chat_history if m.get("role") == "user"]
