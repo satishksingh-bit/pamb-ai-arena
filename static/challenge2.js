@@ -1861,10 +1861,10 @@ window.Challenge2ParticipantView = function ({
   const gapValue = scen?.gapAmount ? `Gap ${scen.gapAmount}` : "";
 
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl p-3.5 sm:p-5 space-y-3 shadow-sm">
+    <div className="w-full max-w-full min-w-0 overflow-hidden bg-white border border-slate-200 rounded-3xl p-3.5 sm:p-5 space-y-3 shadow-sm">
       {/* 1. Slim Top Studio Bar + Compact 🎯 Sample Button */}
-      <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-200">
-        <h2 className="text-sm sm:text-base font-extrabold text-slate-900 truncate">
+      <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-200 min-w-0">
+        <h2 className="text-sm sm:text-base font-extrabold text-slate-900 truncate min-w-0">
           {ui.studioHeader}
         </h2>
         <button
@@ -2037,11 +2037,11 @@ window.Challenge2ParticipantView = function ({
       </div>
 
       {/* Two-Step Workflow Bar (Short 1-Line Mobile Labels) */}
-      <div className="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-2xl">
+      <div className="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-2xl min-w-0">
         <button
           type="button"
           onClick={() => setActiveStep("1")}
-          className={`py-2 px-2.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all ${
+          className={`min-w-0 overflow-hidden truncate py-2 px-2 rounded-xl text-xs font-extrabold transition-all ${
             activeStep === "1"
               ? "bg-white text-slate-900 shadow-sm border border-slate-200"
               : "text-slate-600 hover:text-slate-900"
@@ -2053,7 +2053,7 @@ window.Challenge2ParticipantView = function ({
           type="button"
           onClick={() => deck && setActiveStep("2")}
           disabled={!deck}
-          className={`py-2 px-2.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all flex items-center justify-center gap-1 ${
+          className={`min-w-0 overflow-hidden py-2 px-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1 ${
             activeStep === "2"
               ? "bg-[#ed1b2e] text-white shadow-sm"
               : deck
@@ -2061,7 +2061,7 @@ window.Challenge2ParticipantView = function ({
               : "text-slate-400 cursor-not-allowed"
           }`}
         >
-          <span>{ui.step2Tab}</span>
+          <span className="truncate">{ui.step2Tab}</span>
           {deck && (
             <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[9px]">
               3/3
@@ -2104,19 +2104,19 @@ window.Challenge2ParticipantView = function ({
                       key={g.key}
                       type="button"
                       onClick={() => handleTogglePillar(g.key)}
-                      className={`${spanLast} px-2.5 py-2 rounded-xl border text-left transition-all ${
+                      className={`${spanLast} min-w-0 max-w-full overflow-hidden px-2.5 py-2 rounded-xl border text-left transition-all ${
                         isDone
                           ? "bg-emerald-50/80 border-emerald-500 shadow-2xs"
                           : "bg-slate-50 hover:bg-slate-100 border-slate-200 opacity-75"
                       }`}
                     >
-                      <div className="flex items-center justify-between gap-1">
-                        <span className="text-[11px] font-extrabold text-slate-900 truncate">
+                      <div className="flex items-center justify-between gap-1 min-w-0">
+                        <span className="block text-[11px] font-extrabold text-slate-900 truncate">
                           {isDone ? "✓ " : "+ "}
                           {shortTitle}
                         </span>
                       </div>
-                      <div className="text-[10px] text-slate-600 truncate mt-0.5">
+                      <div className="block text-[10px] text-slate-600 truncate mt-0.5">
                         {g.summary || g.tip}
                       </div>
                     </button>
@@ -2127,9 +2127,9 @@ window.Challenge2ParticipantView = function ({
           </div>
 
           {/* 2. 1-Row 3-Pill Boardroom Tone Selector */}
-          <div className="space-y-1.5">
+          <div className="space-y-1.5 min-w-0">
             <div className="text-xs font-extrabold text-slate-900">{ui.toneHeader}</div>
-            <div className="grid grid-cols-3 gap-1.5">
+            <div className="grid grid-cols-3 gap-1.5 min-w-0">
               {(ui.tones || []).map((tn) => {
                 const active = selectedToneId === tn.id;
                 return (
@@ -2137,7 +2137,7 @@ window.Challenge2ParticipantView = function ({
                     key={tn.id}
                     type="button"
                     onClick={() => handleSelectTone(tn.id)}
-                    className={`px-2 py-2 rounded-xl border text-[11px] sm:text-xs font-extrabold text-center truncate transition-all ${
+                    className={`min-w-0 max-w-full overflow-hidden px-2 py-2 rounded-xl border text-[11px] sm:text-xs font-extrabold text-center truncate transition-all ${
                       active
                         ? "bg-slate-900 text-white border-slate-900 shadow-xs"
                         : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200"
@@ -2152,9 +2152,9 @@ window.Challenge2ParticipantView = function ({
 
           {/* 3. Personal Strategic Angle Quick-Insert Chips */}
           {angleHints.length > 0 && (
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 min-w-0">
               <div className="text-xs font-extrabold text-slate-900">{ui.angleHeader}</div>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5 min-w-0">
                 {angleHints.map((hint, hi) => {
                   const hasAngleBlock = /^\s*\[Personal Strategic Angle\]:/im.test(promptText || "");
                   const selected =
@@ -2164,7 +2164,7 @@ window.Challenge2ParticipantView = function ({
                       key={hi}
                       type="button"
                       onClick={() => handlePickAngleChip(hint, hi)}
-                      className={`w-full px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left truncate transition-all ${
+                      className={`w-full min-w-0 max-w-full overflow-hidden px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left whitespace-normal break-words leading-snug transition-all ${
                         selected
                           ? "bg-amber-600 text-white border-amber-700 shadow-xs"
                           : "bg-amber-50/70 hover:bg-amber-100 text-slate-800 border-amber-300"

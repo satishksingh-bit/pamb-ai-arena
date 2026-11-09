@@ -1758,7 +1758,7 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f4f6f9] text-slate-900 pb-8">
+    <div className="min-h-screen bg-[#f4f6f9] text-slate-900 pb-8 overflow-x-hidden">
       {/* Adaptive Sticky Header (Phone, iPad & Laptop) */}
       <header className="sticky top-0 z-30 bg-white/95 backdrop-blur border-t-4 border-t-[#ed1b2e] border-b border-slate-200 px-3 sm:px-5 py-2.5 shadow-sm">
         <div className="w-full max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
@@ -2057,11 +2057,7 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <div
-          className={`${
-            cNum === "2" ? "lg:col-span-7" : "lg:col-span-5"
-          } bg-white border border-slate-200 rounded-3xl p-4 shadow-md`}
-        >
+        <div className="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-4 shadow-md min-w-0 overflow-hidden">
           <div className="text-xs font-extrabold uppercase text-[#ed1b2e] mb-3">
             📱 Participant Mobile Simulator (Challenge {cNum})
           </div>
@@ -2103,7 +2099,7 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
           )}
         </div>
 
-        <div className={`${cNum === "2" ? "lg:col-span-5" : "lg:col-span-7"} space-y-4`}>
+        <div className="lg:col-span-7 space-y-4 min-w-0">
           <div className="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 shadow-md">
             <div className="text-xs font-extrabold uppercase text-[#ed1b2e]">
               🖥️ Live Presenter Screen Render Preview (`mode=&quot;spotlight&quot;`)
