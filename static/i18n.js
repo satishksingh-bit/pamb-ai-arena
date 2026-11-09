@@ -73,7 +73,7 @@ window.PAMB_I18N = {
     c2Scenario: "实战任务：针对大马专科诊所创始人 Datin Sharifah Aleya（RM 28M 净资产、RM 4.5M 贷款担保）档案，升级一句话提示词，让 Gemini 生成贴近目标的 3页高管简报（KPI快照 + RM 6.5M 流动性缺口图表 + Takaful/Hibah 策略表）！",
     c3Title: "挑战 3 (14:35–15:05)：客户人生大事战前预热 (贺卡 + WhatsApp + 方案对比邮件)",
     c3Sub: "三步实战：生成专属祝贺卡 → 首条 WhatsApp 破冰 → 客观方案条款对比邮件",
-    c3Scenario: "实战任务：针对随机分配的现有客户人生大事（添丁、40岁心脏警钟、新居入伙、升职、扩厂贷款或50岁退休），依次生成祝贺卡、WhatsApp 问候及方案对比友邦（AIA）的客观邮件！",
+    c3Scenario: "实战任务：针对随机分配的现有客户人生大事（添丁、40岁健康里程碑、新居入伙、升职、扩厂贷款或50岁退休），依次生成祝贺卡、WhatsApp 问候及方案对比友邦（AIA）的客观邮件！",
     submitBtn: "🚀 提交作品至大屏幕并同步得分",
     submittedTitle: "作品已提交并实时投射至主屏幕！",
     submittedSub: "主持人可在 Room Bromo 大屏幕上展示您的作品与 AI 裁判评分。",

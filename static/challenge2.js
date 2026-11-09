@@ -44,7 +44,7 @@ const C2_UI_I18N = {
       {
         id: "cfo",
         label: "📊 CFO Precision & IRR Clarity",
-        clause: "[Presentation Style]: Analytical CFO tone — emphasize cost-of-capital (~2% p.a. vs 40% fire-sale loss) and statutory ring-fencing.",
+        clause: "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
       },
     ],
     angleHeader: "3. 💡 Add Your Personal Strategic Angle / Relationship Hook",
@@ -134,12 +134,12 @@ const C2_UI_I18N = {
       {
         id: "empathy",
         label: "❤️ 创办人共情与家风守护",
-        clause: "[呈现风格]：温暖共情切入——守护创业心血免遭折价变卖，保障配偶尊严与子女学业和谐。",
+        clause: "[呈现风格]：温暖共情切入——守护创业心血与100%家族股权完整，保障配偶尊严与子女学业和谐。",
       },
       {
         id: "cfo",
         label: "📊 CFO 财务量化对比",
-        clause: "[呈现风格]：严谨 CFO 财务视角——用每年约 2% 保费成本对比资产冻结 40% 折价损失与法定信托隔离。",
+        clause: "[呈现风格]：严谨 CFO 财务视角——对比每年约 2% 资金配置成本与守护 100% 企业估值完整及法定信托隔离。",
       },
     ],
     angleHeader: "3. 💡 加入您的「个人策略切入点 / 顾问式邀约钩子」",
@@ -229,12 +229,12 @@ const C2_UI_I18N = {
       {
         id: "empathy",
         label: "❤️ 創辦人共情與守護屋企",
-        clause: "[呈現風格]：窩心共情切入——守護創業心血免遭賤賣，保障另一半生活尊嚴同仔女升學和睦。",
+        clause: "[呈現風格]：窩心共情切入——守護創業心血同100%家族股權完整，保障另一半生活尊嚴同仔女升學和睦。",
       },
       {
         id: "cfo",
         label: "📊 CFO 財務量化對比",
-        clause: "[呈現風格]：嚴謹 CFO 財務視角——用每年約 2% 成本對比資產凍結 40% 折價損失同法定信託隔離。",
+        clause: "[呈現風格]：嚴謹 CFO 財務視角——對比每年約 2% 資金配置成本與守護 100% 企業估值完整同法定信託隔離。",
       },
     ],
     angleHeader: "3. 💡 加入你嘅「個人策略切入點 / 約見鉤子」",
@@ -329,7 +329,7 @@ const C2_UI_I18N = {
       {
         id: "cfo",
         label: "📊 Ketepatan Analitik CFO",
-        clause: "[Gaya Pembentangan]: Nada analitik CFO — bandingkan kos ~2% setahun lwn risiko jualan terpaksa diskaun 40%.",
+        clause: "[Gaya Pembentangan]: Nada analitik CFO — tekankan kecekapan modal (peruntukan kecairan ~2% setahun demi memelihara 100% nilai ekuiti perniagaan) serta perlindungan amanah.",
       },
     ],
     angleHeader: "3. 💡 Tambah Sudut Strategik Peribadi Anda",
@@ -424,7 +424,7 @@ const C2_UI_I18N = {
       {
         id: "cfo",
         label: "📊 CFO நிதித் துல்லியம்",
-        clause: "[Presentation Style]: Analytical CFO tone — compare ~2% annual cost vs 40% forced asset fire-sale loss.",
+        clause: "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
       },
     ],
     angleHeader: "3. 💡 உங்கள் தனிப்பட்ட உத்தி / ஆலோசனை அணுகுமுறை",

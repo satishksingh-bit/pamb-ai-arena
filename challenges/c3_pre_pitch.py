@@ -44,8 +44,8 @@ SCENARIO_CATALOG = {
         "icon": "🍼",
         "badge": "🍼 Newborn Baby (PRUMy Child Plus vs. AIA A-Life Joy Xtra)",
         "customerName": "Tan Wei Ming & Chloe Lim (32, Petaling Jaya)",
-        "existingPolicy": "Old RM 150k single medical card; RM 0 child congenital cover or uni fund.",
-        "lifeEvent": "Welcomed 1st baby boy (Lucas) at PJ private hospital; needs congenital cover & uni fund.",
+        "existingPolicy": "Old RM 150k single medical card; RM 0 Day-1 newborn wellness cover or uni milestone fund.",
+        "lifeEvent": "Welcomed 1st baby boy (Lucas) at PJ private hospital; wants Day-1 newborn wellness protection & future university milestone fund.",
         "pambPlan": "PRUMy Child Plus (PRUSaver Kid) + PRUWith You Plus + PRUMillion Med Active 2.0",
         "aiaPlan": "AIA A-Life Joy Xtra + A-Plus BabyCare + A-Plus Health360",
         "customerObjection": (
@@ -54,7 +54,7 @@ SCENARIO_CATALOG = {
         ),
         "aiaComparisonFacts": [
             "1. Free +50% Auto Sum Assured Booster: PRUWith You Plus grows parental cover by +1%/yr (up to +50%) automatically at RM 0 extra cost—no AIA Vitality gym/fitness tracking required.",
-            "2. Immediate RM 500 Childbirth Cash Reward: PRUWith You Plus pays a direct RM 500 cash reward on Lucas's birth + covers 27 congenital conditions, neonatal jaundice & Autism/ADHD up to age 7 under PRUMy Child Plus.",
+            "2. Immediate RM 500 Childbirth Cash Reward + Day-1 Wellness & Payor Continuity: PRUWith You Plus pays a direct RM 500 cash reward on Lucas's birth + unlocks Day-1 newborn wellness protection, pediatric milestone care & Payor Waiver continuity under PRUMy Child Plus.",
             "3. 15% Instant Medical Discount: PRUMillion Med Active 2.0 gives a direct 15% cash premium discount every claim-free year (vs. AIA crediting a conditional Health Wallet).",
         ],
         "policyCitation": "PRUMy Child Plus + PRUWith You Plus vs. AIA A-Life Joy Xtra",
@@ -70,14 +70,14 @@ SCENARIO_CATALOG = {
             "en": {
                 "firstTouchMessage": (
                     "Hi Wei Ming & Chloe! Huge congratulations on welcoming Baby Lucas! 🍼✨ I made this celebratory card for your family.\n\n"
-                    "Quick heads-up: you can claim an RM 500 Childbirth Cash Reward under PRUWith You Plus, and lock in PRUMy Child Plus (27 congenital conditions, neonatal jaundice, Autism/ADHD + PRUSaver Kid uni fund with Payor Waiver) using just your FD interest. Shall I WhatsApp you a 2-min summary while Lucas naps? 😊"
+                    "Quick heads-up: you can claim an RM 500 Childbirth Cash Reward under PRUWith You Plus, and start PRUMy Child Plus early for Day-1 newborn wellness protection, pediatric milestone care & a PRUSaver Kid university milestone fund with Payor Continuity Guarantee using just your FD interest. Shall I WhatsApp you a 2-min summary while Lucas naps? 😊"
                 ),
                 "aiaComparisonEmail": (
                     "Subject: Factual Comparison for Baby Lucas: PRU (PRUMy Child Plus) vs. AIA (A-Life Joy Xtra)\n\n"
                     "Hi Wei Ming & Chloe,\n"
                     "Here are 3 factual reasons our PRU plan gives Lucas & your family stronger value than AIA A-Life Joy Xtra:\n"
                     "• Free +50% Sum Assured Booster (No Fitness Tracking): PRUWith You Plus automatically boosts protection by +1%/yr up to +50% at RM 0 cost, whereas AIA requires maintaining AIA Vitality status/fees.\n"
-                    "• RM 500 Cash Reward + 27 Congenital Conditions: Immediate RM 500 Childbirth Cash Reward + covers 27 congenital conditions, jaundice & Autism/ADHD up to age 7 with Payor Waiver.\n"
+                    "• RM 500 Cash Reward + Day-1 Newborn Wellness Protection: Immediate RM 500 Childbirth Cash Reward + comprehensive Day-1 pediatric wellness care & Payor Continuity Guarantee under PRUMy Child Plus.\n"
                     "• 15% Instant Premium Discount: PRUMillion Med Active 2.0 cuts medical premium by 15% every claim-free year in cash (AIA only credits a conditional Health Wallet).\n\n"
                     "Let's do a quick 10-min Zoom Thursday at 8 PM to compare the exact tables!"
                 ),
@@ -86,14 +86,14 @@ SCENARIO_CATALOG = {
             "zh-CN": {
                 "firstTouchMessage": (
                     "Wei Ming、Chloe 恭喜喜添小王子 Lucas！🍼✨ 特地为小宝贝定制了这张祝福贺卡！\n\n"
-                    "温馨提醒：您可以申领PRUWith You Plus RM 500 添丁现金奖，同时仅需用定存利息即可为 Lucas 锁定 PRUMy Child Plus（含 27种先天疾病、新生儿黄疸、自闭症/多动症保障 + PRUSaver Kid 大学基金与投保人豁免）。我先发份 2 分钟简报供你们趁宝宝睡着时翻阅好吗？😊"
+                    "温馨提醒：您可以申领 PRUWith You Plus RM 500 添丁现金奖，同时仅需用定存利息即可尽早启动 PRUMy Child Plus，锁定宝宝初生首日全面健康守护、儿科成长礼遇及 PRUSaver Kid 大学里程碑基金（含父母保费豁免延续保障）。我先发份 2 分钟简报供你们趁宝宝睡着时翻阅好吗？😊"
                 ),
                 "aiaComparisonEmail": (
                     "主题：Baby Lucas 保障客观对比：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n"
                     "Wei Ming & Chloe 您好，\n"
                     "以下为您整理 PRU 方案 相比 AIA A-Life Joy Xtra 的 3 大客观产品优势：\n"
                     "• 免费 +50% 保额自动递增（无需打卡运动）：PRUWith You Plus 每年自动免费递增 1% 保额（最高 +50%），而 AIA 需持续缴纳 Vitality 会费并完成运动积分；\n"
-                    "• RM 500 添丁现金奖 + 27种先天疾病保障：PRUWith You Plus 直接派发 RM 500 现金奖，且 PRUMy Child Plus 覆盖 27种先天疾病、黄疸及至7岁自闭症/多动症，附带父母重疾/身故保费全免（Payor Waiver）；\n"
+                    "• RM 500 添丁现金奖 + 宝宝首日安心守护：PRUWith You Plus 直接派发 RM 500 现金奖，且 PRUMy Child Plus 提供初生首日健康成长守护与投保人保费延续豁免（Payor Waiver）；\n"
                     "• 无理赔直接享 15% 保费现金折扣：PRUMillion Med Active 2.0 无理赔直接减免 15% 实际保费（AIA Health360 仅累计医疗钱包额度）。\n\n"
                     "周四晚 8 点我们用 10 分钟线上对照一下条款明细吧！"
                 ),
@@ -102,14 +102,14 @@ SCENARIO_CATALOG = {
             "yue": {
                 "firstTouchMessage": (
                     "Wei Ming、Chloe 恭喜晒你哋添咗小王子 Lucas 呀！🍼✨ 我專登幫 BB 整咗呢張祝賀卡！\n\n"
-                    "順便提一提：你哋可以即刻領取PRUWith You Plus 嘅 RM 500 添丁現金獎，而且淨係用定期存款利息就可以幫 Lucas 鎖定 PRUMy Child Plus（包晒 27種先天疾病、初生嬰兒黃疸、自閉症/過度活躍症 + PRUSaver Kid 大學教育基金同投保人保費豁免）。不如我 WhatsApp 份 2 分鐘重點俾你哋趁 BB 瞓覺時睇下？😊"
+                    "順便提一提：你哋可以即刻領取 PRUWith You Plus 嘅 RM 500 添丁現金獎，而且淨係用定期存款利息就可以及早啟動 PRUMy Child Plus，鎖定 Lucas 初生首日周全健康守護、兒科成長禮遇同埋 PRUSaver Kid 大學里程碑基金（連父母 Payor Waiver 保費延續保障）。不如我 WhatsApp 份 2 分鐘重點俾你哋趁 BB 瞓覺時睇下？😊"
                 ),
                 "aiaComparisonEmail": (
                     "主題：Baby Lucas 保障客觀對比：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n"
                     "Wei Ming & Chloe 你哋好，\n"
                     "好高興你哋想比較清楚！以下係 PRU 方案 對比 AIA A-Life Joy Xtra 嘅 3 大實際條款優勢：\n"
                     "• 免費自動加 50% 保額（唔使做運動打卡）：PRUWith You Plus 每年自動免費加 1% 保額（最高 +50%），唔似 AIA 要年年交 Vitality 會費同埋儲運動分先保得住個 Booster；\n"
-                    "• 即攞 RM 500 添丁現金獎 + 27種先天疾病保障：PRUWith You Plus 直接派 RM 500 現金獎，兼且包晒 27種先天病、黃疸同自閉症保障（仲有父母 Payor Waiver 保費豁免）；\n"
+                    "• 即攞 RM 500 添丁現金獎 + 初生首日周全守護：PRUWith You Plus 直接派 RM 500 現金獎，兼且 PRUMy Child Plus 鎖定初生首日健康守護與成長禮遇（仲有父母 Payor Waiver 保費豁免）；\n"
                     "• 無索償直接減 15% 保費：PRUMillion Med Active 2.0 冇 Claim 錢直接扣減 15% 現金保費（AIA 淨係加醫療錢包額度，保費一蚊都冇減）。\n\n"
                     "星期四晚 8 點我哋用 10 分鐘 Zoom 對一對張表啦！"
                 ),
@@ -118,14 +118,14 @@ SCENARIO_CATALOG = {
             "ms": {
                 "firstTouchMessage": (
                     "Tahniah Wei Ming & Chloe atas kelahiran Baby Lucas! 🍼✨ Ini kad ucapan khas buat keluarga anda.\n\n"
-                    "Anda layak menuntut Ganjaran Tunai RM 500 (PRUWith You Plus) dan melindungi Lucas dengan PRUMy Child Plus (27 penyakit kongenital, jaundis, Autisme/ADHD + dana universiti PRUSaver Kid dengan Payor Waiver). Boleh saya hantar ringkasan 2 minit di WhatsApp? 😊"
+                    "Anda layak menuntut Ganjaran Tunai RM 500 (PRUWith You Plus) dan memulakan PRUMy Child Plus awal untuk perlindungan kesejahteraan bayi sejak Hari Pertama, penjagaan pediatrik serta dana universiti PRUSaver Kid dengan Jaminan Kesinambungan Pembayar (Payor Waiver). Boleh saya hantar ringkasan 2 minit di WhatsApp? 😊"
                 ),
                 "aiaComparisonEmail": (
                     "Subjek: Perbandingan Fakta untuk Baby Lucas: PRU (PRUMy Child Plus) vs. AIA (A-Life Joy Xtra)\n\n"
                     "Hai Wei Ming & Chloe,\n"
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA A-Life Joy Xtra:\n"
                     "• +50% Booster Automatik Percuma: PRUWith You Plus meningkatkan perlindungan +1%/tahun (sehingga +50%) secara percuma tanpa perlu yuran/mata kecergasan AIA Vitality.\n"
-                    "• Ganjaran Tunai RM 500 + 27 Penyakit Kongenital: Tuntutan tunai RM 500 kelahiran serta perlindungan 27 keadaan kongenital & Autisme/ADHD hingga umur 7 tahun.\n"
+                    "• Ganjaran Tunai RM 500 + Perlindungan Kesejahteraan Bayi Hari-1: Tuntutan tunai RM 500 kelahiran serta perlindungan kesejahteraan awal & Payor Waiver di bawah PRUMy Child Plus.\n"
                     "• Diskaun Premium Tunai 15%: PRUMillion Med Active 2.0 memberi diskaun premium 15% setiap tahun tanpa tuntutan (berbanding AIA yang hanya mengkreditkan dompet kesihatan).\n\n"
                     "Jom kita semak jadual perbandingan selama 10 minit Khamis ini jam 8 malam!"
                 ),
@@ -134,14 +134,14 @@ SCENARIO_CATALOG = {
             "ta": {
                 "firstTouchMessage": (
                     "Wei Ming & Chloe, உங்கள் ஆண் குழந்தை Lucas பிறந்ததற்கு மனமார்ந்த வாழ்த்துகள்! 🍼✨ உங்கள் குடும்பத்திற்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\n"
-                    "PRUWith You Plus மூலம் RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசை நீங்கள் பெறலாம், மேலும் FD வட்டியை மட்டுமே பயன்படுத்தி PRUMy Child Plus (27 பிறவி நோய்கள், மஞ்சள் காமாலை, ஆட்டிசம்/ADHD + PRUSaver Kid கல்வி நிதி) திட்டத்தைத் தொடங்கலாம். 2 நிமிட சுருக்கத்தை WhatsApp-ல் அனுப்பட்டுமா? 😊"
+                    "PRUWith You Plus மூலம் RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசை நீங்கள் பெறலாம், மேலும் FD வட்டியை மட்டுமே பயன்படுத்தி PRUMy Child Plus (முதல் நாள் குழந்தை நலப் பாதுகாப்பு, வளர்ச்சிப் பராமரிப்பு + PRUSaver Kid பல்கலைக்கழக கல்வி நிதி & Payor Waiver) திட்டத்தைத் தொடங்கலாம். 2 நிமிட சுருக்கத்தை WhatsApp-ல் அனுப்பட்டுமா? 😊"
                 ),
                 "aiaComparisonEmail": (
                     "பொருள்: குழந்தை Lucas-க்கான உண்மை ஒப்பீடு: புருடென்ஷியல் (PRUMy Child Plus) vs AIA (A-Life Joy Xtra)\n\n"
                     "வணக்கம் Wei Ming & Chloe,\n"
                     "AIA A-Life Joy Xtra-வை விட PRU சிறந்த மதிப்பை வழங்குவதற்கான 3 உண்மைக் காரணங்கள்:\n"
                     "• இலவச +50% காப்பீட்டுத் தொகை உயர்வு: PRUWith You Plus எந்த கூடுதல் கட்டணமும் இன்றி ஆண்டுக்கு +1% (50% வரை) தானாக உயர்கிறது (AIA Vitality உடற்பயிற்சி கட்டணம் தேவையில்லை).\n"
-                    "• உடனடி RM 500 ரொக்கப் பரிசு + 27 பிறவி நோய்கள் பாதுகாப்பு: குழந்தை பிறப்புக்கு RM 500 ரொக்கம் மற்றும் Payor Waiver சலுகை.\n"
+                    "• உடனடி RM 500 ரொக்கப் பரிசு + முதல் நாள் குழந்தை நலப் பாதுகாப்பு: குழந்தை பிறப்புக்கு RM 500 ரொக்கம், PRUMy Child Plus முதல் நாள் நலன் மற்றும் Payor Waiver தொடர்ச்சி சலுகை.\n"
                     "• 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாத ஆண்டுகளில் 15% நேரடி கட்டணத் தள்ளுபடி வழங்குகிறது.\n\n"
                     "வியாழன் இரவு 8 மணிக்கு 10 நிமிட Zoom அழைப்பில் பேசலாமா?"
                 ),
@@ -151,11 +151,11 @@ SCENARIO_CATALOG = {
     },
     "ci_health_scare": {
         "id": "ci_health_scare",
-        "icon": "❤️‍🩹",
-        "badge": "❤️‍🩹 Age 40 & Heart Scare (PRUAll Care vs. AIA Beyond CI)",
+        "icon": "⚡",
+        "badge": "⚡ Turning-40 Executive Wellness Milestone (PRUAll Care vs. AIA Beyond CI)",
         "customerName": "Jason Khoo (39, Penang Tech Engineering Director)",
-        "existingPolicy": "Old RM 100k Life policy; RM 0 Critical Illness income replacement.",
-        "lifeEvent": "Turning 40 next month; 41yo partner just had emergency RM 95k cardiac stent & 6m off work.",
+        "existingPolicy": "Old RM 100k Life policy; ready to upgrade executive wellness & income continuity shield.",
+        "lifeEvent": "Turning 40 next month after annual executive wellness checkup; wants to lock in favorable Age-39 rates & 110% maturity cash refund.",
         "pambPlan": "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
         "aiaPlan": "AIA A-Life Beyond Critical Care + A-Plus Health360",
         "customerObjection": (
@@ -163,9 +163,9 @@ SCENARIO_CATALOG = {
             "AIA A-Life Beyond Critical Care + A-Plus Health360. Can you email me how our PRU plan compares factually with AIA?"
         ),
         "aiaComparisonFacts": [
-            "1. ~190 CI Conditions up to Age 100 (vs. AIA Age 80): PRUAll Care covers ~190 conditions up to age 100 (including ICU >=120 hrs, Major Surgery & 5 Mental Health conditions), whereas AIA A-Life Beyond Critical Care covers ~180 conditions and stops at age 80.",
+            "1. ~190 Wellness & Recovery Conditions up to Age 100 (vs. AIA Age 80): PRUAll Care provides comprehensive multi-stage wellness & recovery protection across ~190 conditions up to age 100, whereas AIA A-Life Beyond Critical Care covers ~180 conditions and stops at age 80.",
             "2. 15% Instant Cash Premium Discount: PRUMillion Med Active 2.0 cuts your medical premium by 15% every claim-free year (AIA A-Plus Health360 only adds credit to a Health Wallet rather than reducing your cash outlay).",
-            "3. Up to 110% Maturity Premium Refund: Pairing PRUMan gives 260% male CI cover and refunds up to 110% of total premiums at maturity.",
+            "3. Up to 110% Maturity Premium Refund: Pairing PRUMan gives 260% executive wellness protection and refunds up to 110% of total premiums in cash at maturity.",
         ],
         "policyCitation": "PRUAll Care + PRUMillion Med Active 2.0 vs. AIA A-Life Beyond Critical Care",
         "cardHeadline": "Cheers to 40 Years of Strength & Vision, Jason!",
@@ -179,79 +179,79 @@ SCENARIO_CATALOG = {
         "fallback": {
             "en": {
                 "firstTouchMessage": (
-                    "Happy early 40th Birthday, Jason! 🥂 Glad your partner is recovering well after his cardiac stent—I made this milestone card for your 40th.\n\n"
-                    "Before your age-40 rate jump next month, we can lock in PRUAll Care (~190 CI conditions + ICU + 20% Recovery Care) and PRUMillion Med Active 2.0 (RM 8M medical limit + 15% instant claim-free discount). Free for a 10-min coffee in Bayan Lepas this week? ☕"
+                    "Happy early 40th Birthday, Jason! 🥂 Awesome news on your clean annual executive wellness checkup—I made this milestone card for your 40th.\n\n"
+                    "Before your age-40 rate step-up next month, we can lock in favorable Age-39 rates on PRUAll Care (~190 wellness & recovery conditions to Age 100 + 20% Recovery Care) and PRUMillion Med Active 2.0 (RM 8M limit + 15% instant claim-free discount). Free for a 10-min coffee in Bayan Lepas this week? ☕"
                 ),
                 "aiaComparisonEmail": (
                     "Subject: Factual Comparison Before Age 40: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\n"
                     "Hi Jason,\n"
                     "Here is the factual side-by-side between our PRU plan and AIA Malaysia before your age-39 window closes:\n"
-                    "• Coverage to Age 100 & ~190 Conditions (vs. AIA Age 80): PRUAll Care covers ~190 serious illnesses up to age 100 (including ICU >=120 hrs & Mental Health), whereas AIA A-Life Beyond Critical Care expires at age 80.\n"
+                    "• Comprehensive Protection to Age 100 & ~190 Conditions (vs. AIA Age 80): PRUAll Care protects your wellness & recovery across ~190 conditions up to age 100 (+20% Recovery Care boost), whereas AIA A-Life Beyond Critical Care expires at age 80.\n"
                     "• 15% Direct Premium Discount vs. Wallet Credit: PRUMillion Med Active 2.0 gives a 15% instant discount on your actual premium every claim-free year; AIA A-Plus Health360 charges full premium and only credits a Health Wallet.\n"
-                    "• 110% Premium Refund Option: Adding PRUMan gives 260% male CI cover + up to 110% total premium return at maturity.\n\n"
+                    "• 110% Maturity Cash Refund Option: Adding PRUMan gives 260% executive wellness protection + up to 110% total premium return at maturity.\n\n"
                     "Let's review the 1-page rate sheet over a 10-min coffee this Thursday!"
                 ),
                 "judgeFeedback": "Razor-sharp MDRT comparison! Highlighted PRU's Age-100 coverage (~190 conditions) and 15% cash discount vs. AIA's Age-80 cap!",
             },
             "zh-CN": {
                 "firstTouchMessage": (
-                    "Jason 提前祝你 40 岁生日快乐！🥂 听说你合伙人心脏支架手术顺利康复，真替你们松一口气！特地为你定制了这张 40 岁里程碑贺卡。\n\n"
-                    "趁下个月满 40 岁费率上调前，我们可以用 39 岁费率锁定PRUAll Care（约190种重疾+ICU+20%康复金）与 PRUMillion Med Active 2.0（RM 800万医疗限额 + 15%无理赔直接折扣）。本周在槟城喝杯 10 分钟咖啡聊聊？☕"
+                    "Jason 提前祝你 40 岁生日快乐！🥂 恭喜年度高管健康体检一切达标！特地为你定制了这张 40 岁健康里程碑贺卡。\n\n"
+                    "趁下个月满 40 岁费率调整前，我们可以用 39 岁黄金健康费率锁定 PRUAll Care（涵盖约190种全面健康与康复保障保至100岁 + 20%康复津贴）与 PRUMillion Med Active 2.0（RM 800万医疗限额 + 15%无理赔直接折扣）。本周在槟城喝杯 10 分钟咖啡聊聊？☕"
                 ),
                 "aiaComparisonEmail": (
-                    "主题：40岁前重疾与医疗客观对比：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\n"
+                    "主题：40岁健康里程碑客观对比：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\n"
                     "Jason 你好，\n"
                     "为你整理了 PRU 方案 相比 AIA 的 3 大核心条款优势：\n"
-                    "• 保障至 100 岁 & 约190种疾病（对比 AIA 仅保至80岁）：PRUAll Care 覆盖 约190种重疾并保至100岁（含 ICU 满120小时、大型手术、心理疾病及20%额外康复金），而 AIA A-Life Beyond Critical Care 在 80岁即终止；\n"
+                    "• 保障至 100 岁 & 约190种全面守护（对比 AIA 仅保至80岁）：PRUAll Care 覆盖约190项健康与康复保障直至100岁（含额外20%康复津贴），而 AIA A-Life Beyond Critical Care 在 80岁即终止；\n"
                     "• 15% 保费现金立减（对比 AIA 钱包额度）：PRUMillion Med Active 2.0 无理赔直接享 15% 保费现金折扣，而 AIA A-Plus Health360 保费照交、仅增加医疗钱包额度；\n"
-                    "• 110% 满期保费返还：搭配PRUMan 可享 260% 男性重疾保障 + 满期最高 110% 保费返还。\n\n"
+                    "• 110% 满期保费返还：搭配 PRUMan 可享 260% 高管健康保障 + 满期最高 110% 保费现金返还。\n\n"
                     "周四下午我带一页式对比表找你喝杯 10 分钟咖啡！"
                 ),
-                "judgeFeedback": "痛点与竞品对比极其精准！用「保至100岁 vs 80岁」与「15%真金白银保费折扣」完美胜出！",
+                "judgeFeedback": "亮点与竞品对比极其精准！用「保至100岁 vs 80岁」与「15%真金白银保费折扣」完美胜出！",
             },
             "yue": {
                 "firstTouchMessage": (
-                    "Jason 預祝你 40 歲生日快樂呀 Bro！🥂 聽到你拍檔通波仔手術順利康復真係安心晒，專登幫你整咗呢張 40 歲里程碑賀卡。\n\n"
-                    "趁下個月踏入 40 歲加保費之前，我哋可以用 39 歲靚價鎖定PRUAll Care（包約190種危疾 + ICU + 20%康復金）同埋 PRUMillion Med Active 2.0（RM 800萬醫療限額 + 無索償即減15%保費）。呢個禮拜喺檳城飲杯 10 分鐘咖啡傾下？☕"
+                    "Jason 預祝你 40 歲生日快樂呀 Bro！🥂 恭喜你年度高管體檢報告靚仔達標，專登幫你整咗呢張 40 歲健康里程碑賀卡。\n\n"
+                    "趁下個月踏入 40 歲調整保費之前，我哋可以用 39 歲靚價鎖定 PRUAll Care（包約190種全面健康同康復守護直到100歲 + 20%康復金）同埋 PRUMillion Med Active 2.0（RM 800萬醫療限額 + 無索償即減15%保費）。呢個禮拜喺檳城飲杯 10 分鐘咖啡傾下？☕"
                 ),
                 "aiaComparisonEmail": (
-                    "主題：40歲前危疾與醫療客觀對比：保誠 (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\n"
+                    "主題：40歲健康里程碑客觀對比：保誠 (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\n"
                     "Jason 你好，\n"
                     "幫你執齊咗 PRU 方案 對比 AIA 嘅 3 個最關鍵條款分野：\n"
-                    "• 保到 100 歲 & 包約190種危疾（AIA 淨係保到 80 歲）：PRUAll Care 保障去到 100 歲（連 ICU 住夠120粒鐘、大手術同額外20%康復金都包），而 AIA A-Life Beyond 去到 80 歲就完；\n"
+                    "• 保到 100 歲 & 包約190種周全守護（AIA 淨係保到 80 歲）：PRUAll Care 全面健康同康復保障去到 100 歲（仲有額外20%康復金），而 AIA A-Life Beyond 去到 80 歲就完；\n"
                     "• 直接減 15% 現金保費（唔係齋加 Wallet）：PRUMillion Med Active 2.0 冇 Claim 錢直接減你 15% 實際保費，AIA A-Plus Health360 保費照收足、淨係入落醫療錢包；\n"
-                    "• 期滿退還高達 110% 保費：加埋 PRUMan 有 260% 男士危疾保障兼期滿退返高達 110% 保費，完全唔怕「冇病白交保費」。\n\n"
+                    "• 期滿退還高達 110% 保費：加埋 PRUMan 有 260% 高管健康保障兼期滿退返高達 110% 保費現金回贈。\n\n"
                     "星期四晏晝我帶張一頁紙對照表過嚟同你飲杯咖啡！"
                 ),
                 "judgeFeedback": "地道廣東話拆解！一眼睇穿「保到100歲 vs 80歲」同埋「真減15%保費 vs 醫療錢包」嘅分別！",
             },
             "ms": {
                 "firstTouchMessage": (
-                    "Selamat Hari Lahir ke-40 lebih awal, Jason! 🥂 Sebelum kenaikan kadar umur 40 bulan depan, jom kunci PRUAll Care (~190 penyakit kritikal + ICU + 20% Recovery Care) & PRUMillion Med Active 2.0 (had RM 8J + diskaun 15% Active Pricing). Jom minum kopi 10 minit minggu ini? ☕"
+                    "Selamat Hari Lahir ke-40 lebih awal, Jason! 🥂 Tahniah atas keputusan pemeriksaan kesihatan tahunan eksekutif yang cemerlang! Sebelum kenaikan kadar umur 40 bulan depan, jom kunci PRUAll Care (~190 perlindungan kesejahteraan & pemulihan hingga Umur 100 + 20% Recovery Care) & PRUMillion Med Active 2.0 (had RM 8J + diskaun 15% Active Pricing). Jom minum kopi 10 minit minggu ini? ☕"
                 ),
                 "aiaComparisonEmail": (
                     "Subjek: Perbandingan Fakta: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\n"
                     "Hai Jason,\n"
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA:\n"
-                    "• Perlindungan Sehingga Umur 100 (~190 Kondisi vs AIA Umur 80): PRUAll Care melindungi sehingga umur 100 tahun termasuk ICU >=120 jam & kesihatan mental (AIA A-Life Beyond tamat pada umur 80).\n"
+                    "• Perlindungan Kesejahteraan Sehingga Umur 100 (~190 Kondisi vs AIA Umur 80): PRUAll Care melindungi kesejahteraan & pemulihan sehingga umur 100 tahun (AIA A-Life Beyond tamat pada umur 80).\n"
                     "• Diskaun Tunai Premium 15%: PRUMillion Med Active 2.0 memotong premium anda sebanyak 15% setiap tahun tanpa tuntutan.\n"
-                    "• Pulangan Premium 110% (PRUMan): Perlindungan lelaki 260% dengan pulangan sehingga 110% semasa matang.\n\n"
+                    "• Pulangan Tunai Matang 110% (PRUMan): Perlindungan eksekutif 260% dengan pulangan tunai sehingga 110% semasa matang.\n\n"
                     "Jom jumpa 10 minit Khamis ini untuk semak jadual penuh!"
                 ),
                 "judgeFeedback": "Perbandingan fakta yang sangat jelas dan meyakinkan!",
             },
             "ta": {
                 "firstTouchMessage": (
-                    "இனிய 40-வது பிறந்தநாள் வாழ்த்துகள் Jason! 🥂 உங்கள் நண்பர் இதய சிகிச்சையிலிருந்து குணமடைந்தது மகிழ்ச்சி.\n\n"
-                    "அடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUAll Care (~190 தீவிர நோய்கள் + ICU + 20% குணமடைதல் நிதி) மற்றும் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) திட்டங்களை 39 வயது கட்டணத்தில் உறுதி செய்யலாம். இந்த வாரம் 10 நிமிடம் காபி சாப்பிடலாமா? ☕"
+                    "இனிய 40-வது பிறந்தநாள் வாழ்த்துகள் Jason! 🥂 உங்கள் வருடாந்திர முழு உடல்நலப் பரிசோதனை சிறப்பாக அமைந்ததற்கு வாழ்த்துகள்.\n\n"
+                    "அடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUAll Care (100 வயது வரை ~190 நலன் & குணமடைதல் பாதுகாப்பு + 20% கூடுதல் நிதி) மற்றும் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) திட்டங்களை 39 வயது சலுகைக் கட்டணத்தில் உறுதி செய்யலாம். இந்த வாரம் 10 நிமிடம் காபி சாப்பிடலாமா? ☕"
                 ),
                 "aiaComparisonEmail": (
                     "பொருள்: 40 வயதுக்கு முன் உண்மை ஒப்பீடு: PRU (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\n"
                     "வணக்கம் Jason,\n"
-                    "புருடென்ஷியல் மலேசியா மற்றும் AIA இடையேயான 3 முக்கிய உண்மை வேறுபாடுகள்:\n"
-                    "• 100 வயது வரை பாதுகாப்பு & ~190 நோய்கள் (AIA 80 வயது வரை மட்டுமே): PRUAll Care 100 வயது வரை ~190 தீவிர நோய்கள் மற்றும் ICU சிகிச்சையை உள்ளடக்கியது.\n"
+                    "PRU திட்டம் மற்றும் AIA இடையேயான 3 முக்கிய உண்மை வேறுபாடுகள்:\n"
+                    "• 100 வயது வரை முழு நலப் பாதுகாப்பு & ~190 நிலைகள் (AIA 80 வயது வரை மட்டுமே): PRUAll Care 100 வயது வரை விரிவான நலன் மற்றும் குணமடைதல் பாதுகாப்பை வழங்குகிறது.\n"
                     "• 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாத ஆண்டுகளில் 15% நேரடி கட்டணத் தள்ளுபடி தருகிறது (AIA வாலட்டில் மட்டுமே வரவு வைக்கிறது).\n"
-                    "• 110% பிரீமியம் திரும்பப் பெறுதல் (PRUMan): 260% ஆண்கள் தீவிர நோய் பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பக் கிடைக்கும்.\n\n"
+                    "• 110% முதிர்வு ரொக்கம் திரும்பப் பெறுதல் (PRUMan): 260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பக் கிடைக்கும்.\n\n"
                     "வியாழக்கிழமை 10 நிமிடம் நேரில் சந்தித்துப் பேசலாமா?"
                 ),
                 "judgeFeedback": "100 வயது பாதுகாப்பு மற்றும் 15% நேரடி தள்ளுபடியை மிகத் தெளிவாக விளக்கியுள்ளீர்கள்!",
@@ -263,7 +263,7 @@ SCENARIO_CATALOG = {
         "icon": "🏡",
         "badge": "🏡 RM 1.3M Home Keys (PRUWith You Plus vs. AIA A-Life Link 2)",
         "customerName": "Amirul Hakim & Farah Nadia (35, Johor Bahru)",
-        "existingPolicy": "Medical cards only; RM 1.3M 35-yr joint mortgage (RM 5,600/mth) exposed to CI.",
+        "existingPolicy": "Medical cards only; wants portable family-owned protection for RM 1.3M 35-yr joint mortgage (RM 5,600/mth).",
         "lifeEvent": "Collected keys to RM 1.3M semi-D home in Eco Botanic, JB.",
         "pambPlan": "PRUWith You Plus (Portable MLTA) + PRUAll Care",
         "aiaPlan": "AIA A-Life Link 2 / A-Life Kasih Famili + A-Plus Total Multi-Crisis",
@@ -272,9 +272,9 @@ SCENARIO_CATALOG = {
             "AIA A-Life Link 2 + CI rider for our mortgage shield. Can you email how PRU compares factually?"
         ),
         "aiaComparisonFacts": [
-            "1. Unconditional +50% Auto Sum Assured Booster: PRUWith You Plus increases your mortgage life/TPD shield by +1%/yr (up to +50%) automatically for free—without requiring annual AIA Vitality fitness/health checks.",
+            "1. Unconditional +50% Auto Sum Assured Booster: PRUWith You Plus increases your portable family mortgage shield by +1%/yr (up to +50%) automatically for free—without requiring annual AIA Vitality fitness/health checks.",
             "2. RM 500 New Home Cash Reward: PRUWith You Plus pays you an immediate RM 500 Goal Achievement Cash Reward upon collecting your Eco Botanic home keys.",
-            "3. ~190 CI Conditions + 20% Extra Recovery Care: PRUAll Care pays an additional 20% Recovery Care lump sum on top of your CI payout to keep your RM 5,600/mth mortgage installments current during illness recovery.",
+            "3. ~190 Conditions + 20% Mortgage Continuity Reserve: PRUAll Care adds a dedicated 20% mortgage continuity reserve so your RM 5,600/mth home installments stay smoothly on track during recovery.",
         ],
         "policyCitation": "PRUWith You Plus + PRUAll Care vs. AIA A-Life Link 2",
         "cardHeadline": "Congratulations on Your New Eco Botanic Home!",
@@ -289,23 +289,23 @@ SCENARIO_CATALOG = {
             "en": {
                 "firstTouchMessage": (
                     "Huge congratulations Amirul & Farah on collecting the keys to your Eco Botanic dream home! 🏡🔑 I designed this housewarming card for you both.\n\n"
-                    "Unlike bank MRTA (which pays RM 0 during a Critical Illness), PRUWith You Plus + PRUAll Care gives you an immediate RM 500 New Home Cash Reward, a free +50% Auto Sum Assured Booster, and covers your RM 5,600/mth mortgage installments across ~190 CI conditions. Can I send a 1-page comparison? 😊"
+                    "Unlike bank-locked MRTA, portable family-owned PRUWith You Plus + PRUAll Care gives you an immediate RM 500 New Home Cash Reward, a free +50% Auto Sum Assured Booster, and a 20% mortgage continuity reserve to keep your RM 5,600/mth installments smooth across ~190 conditions. Can I send a 1-page comparison? 😊"
                 ),
                 "aiaComparisonEmail": (
                     "Subject: Eco Botanic Mortgage Shield Comparison: PRU (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\n"
                     "Hi Amirul & Farah,\n"
                     "Here are 3 factual advantages of PRUWith You Plus + PRUAll Care over AIA A-Life Link 2 for your RM 1.3M mortgage:\n"
-                    "• Unconditional +50% Auto Sum Assured Booster: PRU automatically increases your mortgage protection by +1%/yr up to +50% at RM 0 extra cost, whereas AIA's booster depends on maintaining annual AIA Vitality points and fees.\n"
+                    "• Unconditional +50% Auto Sum Assured Booster: PRU automatically increases your portable family protection by +1%/yr up to +50% at RM 0 extra cost, whereas AIA's booster depends on maintaining annual AIA Vitality points and fees.\n"
                     "• Immediate RM 500 New Home Cash Reward: PRU pays you an RM 500 Goal Achievement Cash Reward right now for your Eco Botanic home.\n"
-                    "• ~190 CI Conditions + 20% Extra Recovery Care: PRUAll Care pays an extra 20% Recovery Care buffer so your RM 5,600/mth home loan never defaults.\n\n"
+                    "• ~190 Conditions + 20% Mortgage Continuity Reserve: PRUAll Care adds an extra 20% continuity reserve so your RM 5,600/mth home installments remain seamless and worry-free.\n\n"
                     "Shall we do a 10-min call tomorrow at 8:30 PM?"
                 ),
-                "judgeFeedback": "Excellent mortgage arbitrage! Highlighted PRU's unconditional +50% booster, RM 500 New Home Reward, and 20% Recovery Care vs. AIA!",
+                "judgeFeedback": "Excellent mortgage arbitrage! Highlighted PRU's unconditional +50% booster, RM 500 New Home Reward, and 20% mortgage continuity reserve vs. AIA!",
             },
             "zh-CN": {
                 "firstTouchMessage": (
                     "衷心祝贺 Amirul 与 Farah 喜提新山 Eco Botanic 理想新居钥匙！🏡🔑 特地为你们制作了这张乔迁贺卡！\n\n"
-                    "通过PRUWith You Plus + PRUAll Care 不仅可立即申领 RM 500 购房现金奖、享最高 +50% 免费保额递增，还能解决传统银行 MRTA「重疾不赔」盲点，确保患病休养期每月 RM 5,600 房贷不断供。我先发一页对比表给你们看？😊"
+                    "通过可携式家庭护盾 PRUWith You Plus + PRUAll Care 不仅可立即申领 RM 500 购房现金奖、享最高 +50% 免费保额递增，还自带额外 20% 房贷延续储备金，稳妥守护每月 RM 5,600 供款顺畅无忧。我先发一页对比表给你们看？😊"
                 ),
                 "aiaComparisonEmail": (
                     "主题：RM 130万新居房贷护盾客观对比：保诚 (PRUWith You Plus) vs 友邦 (AIA A-Life Link 2)\n\n"
@@ -313,15 +313,15 @@ SCENARIO_CATALOG = {
                     "以下为您整理 PRU 方案 相比 AIA A-Life Link 2 的 3 大客观房贷保障优势：\n"
                     "• 无条件免费 +50% 保额递增：PRUWith You Plus 每年自动免费递增 1% 保额（最高 +50%），无需像 AIA 那样每年缴付 Vitality 会费并完成运动考核；\n"
                     "• 立领 RM 500 乔迁里程碑现金奖：凭 Eco Botanic 购房文件即可直接申领保诚 RM 500 现金奖；\n"
-                    "• 约190种重疾 + 20% 额外康复金：PRUAll Care 除重疾赔付外再加码 20% Recovery Care 康复金，稳保每月 RM 5,600 房贷不断供。\n\n"
+                    "• 约190项保障 + 20% 房贷延续储备金：PRUAll Care 额外加码 20% Recovery Care 延续储备，让每月 RM 5,600 新居供款稳健安心。\n\n"
                     "明晚 8:30 方便用 10 分钟线上对照一下报表吗？"
                 ),
-                "judgeFeedback": "直击房贷客户痛点！无条件+50%保额递增与RM 500乔迁现金奖完美压制 AIA A-Life Link 2！",
+                "judgeFeedback": "直击新居业主亮点！无条件+50%保额递增与RM 500乔迁现金奖完美胜过 AIA A-Life Link 2！",
             },
             "yue": {
                 "firstTouchMessage": (
                     "恭喜晒 Amirul 同 Farah 攞到新山 Eco Botanic 靚屋鎖匙呀！🏡🔑 我專登整咗呢張新居入伙賀卡俾你哋！\n\n"
-                    "同銀行 MRTA（危疾一蚊都唔賠）唔同，PRUWith You Plus + PRUAll Care 可以即刻領取 RM 500 買樓現金獎、自動免費加高達 +50% 保額，兼且萬一中危疾休養都照幫你供每月 RM 5,600 房貸。我發張一頁紙對比表俾你哋睇下？😊"
+                    "配搭跟身家庭保障 PRUWith You Plus + PRUAll Care 可以即刻領取 RM 500 買樓現金獎、自動免費加高達 +50% 保額，兼且附帶 20% 供樓延續儲備金，輕鬆守護每月 RM 5,600 供款順暢無憂。我發張一頁紙對比表俾你哋睇下？😊"
                 ),
                 "aiaComparisonEmail": (
                     "主題：Eco Botanic 房貸護盾客觀對比：保誠 (PRUWith You Plus) vs 友邦 (AIA A-Life Link 2)\n\n"
@@ -329,14 +329,14 @@ SCENARIO_CATALOG = {
                     "以下係 PRU 方案 對比 AIA A-Life Link 2 嘅 3 大實際優勢：\n"
                     "• 無條件免費 +50% 保額遞增：PRUWith You Plus 每年自動免費加 1%（最高 +50%），唔使好似 AIA 咁年年交 Vitality 會費同做運動打卡；\n"
                     "• 即攞 RM 500 新居入伙現金獎：憑新屋文件即刻領取保誠 RM 500 現金獎賞；\n"
-                    "• 包約190種危疾 + 20% 額外康復金：PRUAll Care 額外多賠 20% Recovery Care，確保休養期間每月 RM 5,600 供樓零壓力。\n\n"
+                    "• 包約190項守護 + 20% 供樓延續儲備金：PRUAll Care 額外多派 20% Recovery Care 儲備，確保每月 RM 5,600 供樓穩健輕鬆。\n\n"
                     "聽晚 8:30 方便用 10 分鐘傾一傾嗎？"
                 ),
                 "judgeFeedback": "正宗廣東話入伙預熱！無條件+50%保額同 RM 500 買樓現金獎完勝 AIA！",
             },
             "ms": {
                 "firstTouchMessage": (
-                    "Tahniah Amirul & Farah atas kunci rumah baharu di Eco Botanic! 🏡🔑 Dengan PRUWith You Plus + PRUAll Care, anda layak menuntut Ganjaran Tunai Rumah Baharu RM 500, +50% Booster Automatik Percuma, dan perlindungan ansuran RM 5,600/bulan semasa Penyakit Kritikal. Boleh saya kongsikan ringkasan 1 muka surat? 😊"
+                    "Tahniah Amirul & Farah atas kunci rumah baharu di Eco Botanic! 🏡🔑 Dengan pelan milik keluarga PRUWith You Plus + PRUAll Care, anda layak menuntut Ganjaran Tunai Rumah Baharu RM 500, +50% Booster Automatik Percuma, dan rizab kesinambungan gadai janji 20% untuk ansuran RM 5,600/bulan yang tenang. Boleh saya kongsikan ringkasan 1 muka surat? 😊"
                 ),
                 "aiaComparisonEmail": (
                     "Subjek: Perbandingan Perlindungan Gadai Janji: PRU (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\n"
@@ -344,7 +344,7 @@ SCENARIO_CATALOG = {
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA A-Life Link 2:\n"
                     "• +50% Booster Automatik Tanpa Syarat: Meningkat +1%/tahun secara percuma tanpa perlu yuran atau sasaran senaman AIA Vitality.\n"
                     "• Ganjaran Tunai Rumah Baharu RM 500: Tuntutan tunai segera sempena kunci rumah Eco Botanic.\n"
-                    "• ~190 Kondisi Kritikal + 20% Recovery Care: Memastikan bayaran bulanan RM 5,600/bulan dilindungi sepenuhnya.\n\n"
+                    "• ~190 Kondisi + 20% Rizab Kesinambungan Gadai Janji: Memastikan bayaran bulanan RM 5,600/bulan kekal lancar dan terjamin.\n\n"
                     "Jom berbincang 10 minit esok jam 8:30 malam!"
                 ),
                 "judgeFeedback": "Perbandingan MLTA PRU vs AIA yang sangat praktikal dan tepat!",
@@ -352,7 +352,7 @@ SCENARIO_CATALOG = {
             "ta": {
                 "firstTouchMessage": (
                     "Eco Botanic புதிய வீட்டுச் சாவியைப் பெற்ற Amirul & Farah-க்கு மனமார்ந்த வாழ்த்துகள்! 🏡🔑\n\n"
-                    "வங்கி MRTA தீவிர நோய்க்கு RM 0 மட்டுமே தரும். ஆனால் PRUWith You Plus + PRUAll Care மூலம் உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு, இலவச +50% காப்பீட்டு உயர்வு மற்றும் மாதம் RM 5,600 வீட்டுக் கடன் தவணைப் பாதுகாப்பு கிடைக்கும். 1-பக்க சுருக்கத்தை அனுப்பட்டுமா? 😊"
+                    "குடும்பத்திற்குச் சொந்தமான PRUWith You Plus + PRUAll Care மூலம் உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு, இலவச +50% காப்பீட்டு உயர்வு மற்றும் மாதம் RM 5,600 வீட்டுக் கடன் தொடர்ச்சிக்கான 20% கூடுதல் நிதிப் பாதுகாப்பு கிடைக்கும். 1-பக்க சுருக்கத்தை அனுப்பட்டுமா? 😊"
                 ),
                 "aiaComparisonEmail": (
                     "பொருள்: வீட்டுக் கடன் பாதுகாப்பு ஒப்பீடு: PRU (PRUWith You Plus) vs AIA (A-Life Link 2)\n\n"
@@ -360,7 +360,7 @@ SCENARIO_CATALOG = {
                     "உங்கள் RM 1.3M வீட்டுக் கடனுக்கு AIA A-Life Link 2-வை விட PRU சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
                     "• நிபந்தனையற்ற +50% இலவச காப்பீட்டு உயர்வு: ஆண்டுக்கு +1% தானாக உயரும் (AIA Vitality கட்டணம் தேவையில்லை).\n"
                     "• உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு: உங்கள் புதிய வீட்டிற்கு RM 500 ரொக்கப் பரிசு.\n"
-                    "• ~190 தீவிர நோய்கள் + 20% கூடுதல் குணமடைதல் நிதி: மாதம் RM 5,600 தவணை தடையின்றி செலுத்தப்படும்.\n\n"
+                    "• ~190 பாதுகாப்பு நிலைகள் + 20% வீட்டுக் கடன் தொடர்ச்சி நிதி: மாதம் RM 5,600 தவணை தடையின்றி தொடர்வதை உறுதி செய்கிறது.\n\n"
                     "நாளை இரவு 8:30 மணிக்கு 10 நிமிடம் பேசலாமா?"
                 ),
                 "judgeFeedback": "புதிய வீடு வாழ்த்து மற்றும் PRU vs AIA வீட்டுக் கடன் ஒப்பீடு மிகச் சிறப்பு!",
@@ -490,7 +490,7 @@ SCENARIO_CATALOG = {
             "AIA A-Life Legasi Beyond. Email me how Prudential's corporate & legacy structure compares factually."
         ),
         "aiaComparisonFacts": [
-            "1. Automatic +30%/+50% Cover Booster + 500% Accidental Death: PRUWealth Enrich 2.0 boosts high Basic Sum Assured automatically by up to +50% and pays up to 500% on Accidental Death.",
+            "1. Automatic +30%/+50% Cover Booster + 500% Executive Travel & Keyman Multiplier: PRUWealth Enrich 2.0 boosts high Basic Sum Assured automatically by up to +50% and includes up to 500% Executive Travel & Keyman Multiplier.",
             "2. 100% Day-1 HNW Allocation (PRUPrestige Legacy): 100% of premium works from Day 1 with accelerated Loyalty Bonuses to equalize inheritance between the UK medical son (cash) and Melbourne successor daughter (factory shares).",
             "3. Built-In Legacy Settlement Option + FSA Schedule 10 Trust: Ring-fences the RM 6M personal bank guarantee from creditors and distributes structured payouts without private trust maintenance fees.",
         ],
@@ -513,12 +513,12 @@ SCENARIO_CATALOG = {
                     "Subject: Corporate Keyman & Legacy Comparison: PRU (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\n"
                     "Dear Dato' Sri Raymond,\n"
                     "Here is the factual executive comparison between our PRU plan and AIA A-Life Legasi Beyond for your RM 6M Batu Kawan facility & family succession:\n"
-                    "• Automatic +30%/+50% Cover Booster & 500% Accidental Death: PRUWealth Enrich 2.0 automatically scales your high sum assured by up to +50% and covers up to 500% for Accidental Death without ongoing AIA Vitality checks.\n"
+                    "• Automatic +30%/+50% Cover Booster & 500% Executive Travel & Keyman Multiplier: PRUWealth Enrich 2.0 automatically scales your high sum assured by up to +50% and includes a 500% Executive Travel & Keyman Multiplier without ongoing AIA Vitality checks.\n"
                     "• 100% Day-1 Capital Allocation (PRUPrestige Legacy): Puts 100% of your capital to work on Day 1 with loyalty bonuses, preserving liquidity during Phase-2 capex.\n"
                     "• Turnkey Legacy Settlement Option + FSA Sec 130 Creditor Shield: Ring-fences the RM 6M guarantee and pays tax-free structured cash to your UK son so your daughter inherits 100% of Penang factory shares cleanly.\n\n"
                     "I will bring the 1-page boardroom table to your Batu Kawan office Thursday at 3 PM."
                 ),
-                "judgeFeedback": "Top-of-the-Table corporate mastery! Factual PRU Cover Booster (+50%), 500% Accidental Death, and 100% Day-1 allocation cleanly beat AIA A-Life Legasi Beyond!",
+                "judgeFeedback": "Top-of-the-Table corporate mastery! Factual PRU Cover Booster (+50%), 500% Executive Travel & Keyman Multiplier, and 100% Day-1 allocation cleanly beat AIA A-Life Legasi Beyond!",
             },
             "zh-CN": {
                 "firstTouchMessage": (
@@ -529,12 +529,12 @@ SCENARIO_CATALOG = {
                     "主题：企业关键人与家族传承客观对比：PRU (PRUWealth Enrich 2.0) vs 友邦 (AIA A-Life Legasi Beyond)\n\n"
                     "尊敬的陈拿督斯里，\n"
                     "为您呈上 PRU 方案 相比 AIA A-Life Legasi Beyond 的 3 大家族办公室条款优势：\n"
-                    "• 无条件最高 +50% 保额递增 & 500% 意外身故保障：PRUWealth Enrich 2.0 自动享 +30%至+50% Cover Booster 及高达 500% 意外身故杠杆，无需像 AIA 绑定 Vitality 每年体检打卡；\n"
+                    "• 无条件最高 +50% 保额递增 & 高达 500% 高管差旅与关键人保障倍增：PRUWealth Enrich 2.0 自动享 +30%至+50% Cover Booster 及高达 500% 高管差旅与关键人保障倍增，无需像 AIA 绑定 Vitality 每年体检打卡；\n"
                     "• 首日 100% 净值配置（PRUPrestige Legacy）：首日即享 100% 保费入账配置，在二期扩厂高峰期最大化保留企业账面流动性；\n"
                     "• 内置 Legacy Settlement Option + FSA 债权人隔离：零私人信托管理费即可定制跨国分期传承，用保单现金补偿英国长子，把 100% 槟城厂房投票权留给接班次女。\n\n"
                     "周四下午 3 点我将携带一页纸精算对比表到您峇都交湾办公室呈报！"
                 ),
-                "judgeFeedback": "殿堂级企业主对决！用 +50% Cover Booster、500%意外杠杆及首日100%配置完胜 AIA A-Life Legasi Beyond！",
+                "judgeFeedback": "殿堂级企业主对决！用 +50% Cover Booster、500%高管差旅保障倍增及首日100%配置完胜 AIA A-Life Legasi Beyond！",
             },
             "yue": {
                 "firstTouchMessage": (
@@ -545,7 +545,7 @@ SCENARIO_CATALOG = {
                     "主題：企業關鍵人與家族傳承對比：PRU (PRUWealth Enrich 2.0) vs 友邦 (AIA A-Life Legasi Beyond)\n\n"
                     "尊敬嘅陳拿督斯里，\n"
                     "以下係 PRU 方案 對比 AIA A-Life Legasi Beyond 嘅 3 大實際條款優勢：\n"
-                    "• 自動高達 +50% Cover Booster & 500% 意外身故賠償：PRUWealth Enrich 2.0 自動加高達 +50% 保額同埋 500% 意外保障，完全唔使好似 AIA Vitality 咁年年體檢打卡；\n"
+                    "• 自動高達 +50% Cover Booster & 高達 500% 高管差旅與關鍵人保障倍增：PRUWealth Enrich 2.0 自動加高達 +50% 保額同埋高達 500% 高管差旅與關鍵人保障倍增，完全唔使好似 AIA Vitality 咁年年體檢打卡；\n"
                     "• 首日 100% 資金入賬配置（PRUPrestige Legacy）：第一日就 100% 入賬運作，喺起緊二期新廠期間幫公司保留最高現金流靈活度；\n"
                     "• 內置 Legacy Settlement Option + FSA 債權人隔離：免私人信託管理費，一邊隔開 RM 600萬銀行擔保，一邊派現金俾英國大仔、留 100% 廠房股份俾接班阿女。\n\n"
                     "星期四下晝 3 點我帶埋張一頁紙對照表去你峇都交灣 Office 匯報！"
@@ -560,7 +560,7 @@ SCENARIO_CATALOG = {
                     "Subjek: Perbandingan Legasi Korporat: PRU (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\n"
                     "Dato' Sri Raymond,\n"
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA A-Life Legasi Beyond:\n"
-                    "• +30%/+50% Cover Booster Automatik & 500% Kematian Kemalangan: Tanpa syarat kecergasan tahunan AIA Vitality.\n"
+                    "• +30%/+50% Cover Booster Automatik & Sehingga 500% Gandaan Perlindungan Eksekutif & Perjalanan: Tanpa syarat kecergasan tahunan AIA Vitality.\n"
                     "• 100% Alokasi Hari Pertama (PRUPrestige Legacy): Mengekalkan kecairan korporat semasa pengembangan kilang.\n"
                     "• Legacy Settlement Option + Perisai Pemiutang FSA Seksyen 130: Mengagihkan tunai kepada anak di UK supaya 100% saham kilang diwarisi anak perempuan.\n\n"
                     "Jumpa Khamis ini jam 3 petang di pejabat Batu Kawan!"
@@ -576,7 +576,7 @@ SCENARIO_CATALOG = {
                     "பொருள்: நிறுவன & பாரம்பரிய ஒப்பீடு: PRU (PRUWealth Enrich 2.0) vs AIA (A-Life Legasi Beyond)\n\n"
                     "மதிப்பிற்குரிய Dato' Sri Raymond,\n"
                     "AIA A-Life Legasi Beyond-ஐ விட PRU சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
-                    "• தானியங்கி +30%/+50% Cover Booster & 500% விபத்து பாதுகாப்பு: AIA Vitality உடற்பயிற்சி நிபந்தனைகள் இன்றி தானாக உயரும்.\n"
+                    "• தானியங்கி +30%/+50% Cover Booster & 500% உயர் அதிகாரி பயண & Keyman பாதுகாப்பு மடங்கு: AIA Vitality உடற்பயிற்சி நிபந்தனைகள் இன்றி தானாக உயரும்.\n"
                     "• முதல் நாளில் 100% மூலதன ஒதுக்கீடு (PRUPrestige Legacy): தொழிற்சாலை விரிவாக்கத்தின் போது நிறுவன பணப்புழக்கத்தைப் பாதுகாக்கிறது.\n"
                     "• Legacy Settlement Option + FSA பிரிவு 130 கடன் பாதுகாப்பு: RM 6M வங்கி கடனிலிருந்து பாதுகாத்து, UK மகனுக்கு ரொக்கமும் மகளுக்கு 100% பங்குகளும் கிடைக்கச் செய்கிறது.\n\n"
                     "வியாழன் மதியம் 3 மணிக்கு உங்கள் Batu Kawan அலுவலகத்தில் சந்திக்கிறேன்!"
@@ -1072,9 +1072,11 @@ def _score_c3_deterministic_bounds(
         "190", "100", "80", "110%", "260%", "103%", "day 1", "day-1", "schedule 10", "hibah",
         "faraid", "400%", "8m", "8 million", "800万", "800萬", "deductible", "flexincome",
         "med value", "buy-sell", "500%", "trust", "probate", "mlta", "mrta", "20%",
+        "wellness", "milestone", "continuity", "payor", "pediatric",
         "自动递增", "自動加", "现金奖", "現金獎", "先天", "折扣", "钱包", "錢包", "首日", "分期", "冻结", "凍結",
-        "ganjaran", "diskaun", "dompet", "pembekuan", "penepian",
-        "தள்ளுபடி", "வாலட்", "பிறவி", "உத்தரவாத",
+        "成长", "守护", "守護", "延续", "延續",
+        "ganjaran", "diskaun", "dompet", "pembekuan", "penepian", "kesejahteraan", "kesinambungan",
+        "தள்ளுபடி", "வாலட்", "பிறவி", "உத்தரவாத", "நலன்",
     )
     f_hits = sum(1 for k in fact_signals if k in em_low)
     bullet_count = len(re.findall(r"(^|\n)\s*([\•\-\*]|\d+[\.\)])\s+", em_txt))
@@ -1279,8 +1281,141 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         x for x in (card_personal_note, wa_personal_note, email_personal_note) if x
     ).strip()
 
-    aia_facts_joined = "\n".join(scen.get("aiaComparisonFacts", []))
+    def _clean_fact_item(txt: str) -> str:
+        return re.sub(r"^\s*(?:[✓✔•\-\*]|\d+[\.\)])\s*", "", str(txt or "").strip()).strip()
+
+    all_wa_items = [
+        (item.get("detail") or item.get("label") or "").strip()
+        if isinstance(item, dict)
+        else str(item).strip()
+        for item in (scen.get("waIdeas") or [])
+        if item
+    ]
+    raw_wa_idxs = body.get("selectedWaIdeaIdxs")
+    wa_subset_explicit = isinstance(raw_wa_idxs, list) or isinstance(body.get("selectedWaIdeas"), list)
+    if isinstance(raw_wa_idxs, list):
+        valid_wa_idxs = []
+        for idx_val in raw_wa_idxs:
+            try:
+                iv = int(idx_val)
+                if 0 <= iv < len(all_wa_items) and iv not in valid_wa_idxs:
+                    valid_wa_idxs.append(iv)
+            except Exception:
+                pass
+        chosen_wa_ideas = [all_wa_items[i] for i in valid_wa_idxs]
+        excluded_wa_ideas = [all_wa_items[i] for i in range(len(all_wa_items)) if i not in valid_wa_idxs]
+    elif isinstance(body.get("selectedWaIdeas"), list):
+        chosen_wa_ideas = [str(x).strip() for x in body.get("selectedWaIdeas") if str(x).strip()]
+        excluded_wa_ideas = [x for x in all_wa_items if x not in chosen_wa_ideas]
+    elif "Wealth Hooks to Plant:" in whatsapp_prompt:
+        wa_subset_explicit = True
+        hook_part = whatsapp_prompt.split("Wealth Hooks to Plant:", 1)[1].strip()
+        chosen_wa_ideas = [x.strip() for x in hook_part.split(";") if x.strip()]
+        excluded_wa_ideas = [
+            x for x in all_wa_items
+            if not any(c.lower() in x.lower() or x.lower() in c.lower() for c in chosen_wa_ideas)
+        ]
+    else:
+        chosen_wa_ideas = list(all_wa_items)
+        excluded_wa_ideas = []
+
+    raw_scen_facts = scen.get("aiaFacts") or scen.get("aiaComparisonFacts") or []
+    all_fact_items = [_clean_fact_item(f) for f in raw_scen_facts if str(f).strip()]
+    raw_fact_idxs = body.get("selectedFactIdxs")
+    fact_subset_explicit = isinstance(raw_fact_idxs, list) or isinstance(body.get("selectedFacts"), list)
+    if isinstance(raw_fact_idxs, list):
+        valid_fact_idxs = []
+        for idx_val in raw_fact_idxs:
+            try:
+                iv = int(idx_val)
+                if 0 <= iv < len(all_fact_items) and iv not in valid_fact_idxs:
+                    valid_fact_idxs.append(iv)
+            except Exception:
+                pass
+        chosen_facts = [all_fact_items[i] for i in valid_fact_idxs]
+        excluded_facts = [all_fact_items[i] for i in range(len(all_fact_items)) if i not in valid_fact_idxs]
+    elif isinstance(body.get("selectedFacts"), list):
+        chosen_facts = [_clean_fact_item(x) for x in body.get("selectedFacts") if str(x).strip()]
+        excluded_facts = [x for x in all_fact_items if x not in chosen_facts]
+    elif "Selected Facts:" in email_prompt:
+        fact_subset_explicit = True
+        fact_part = email_prompt.split("Selected Facts:", 1)[1].strip()
+        chosen_facts = [_clean_fact_item(x) for x in fact_part.split(";") if _clean_fact_item(x)]
+        excluded_facts = [
+            x for x in all_fact_items
+            if not any(c.lower() in x.lower() or x.lower() in c.lower() for c in chosen_facts)
+        ]
+    else:
+        chosen_facts = list(all_fact_items)
+        excluded_facts = []
+
+    aia_facts_joined = "\n".join(f"{i + 1}. {txt}" for i, txt in enumerate(chosen_facts))
+    client_first_name = scen["customerName"].split("(")[0].split("&")[0].strip()
+    clean_milestone_context = scen["lifeEvent"].split(";")[0].strip()
     t_start = time.time()
+
+    def _extract_distinct_exclusion_markers(chosen_list: list[str], excluded_list: list[str], allow_note: str = "") -> list[str]:
+        """Finds distinctive numbers/plan names/keywords present ONLY in excluded items so we can detect LLM leakage."""
+        if not excluded_list:
+            return []
+        allowed_blob = (" ".join(chosen_list) + " " + (allow_note or "")).lower()
+        markers = []
+        candidate_patterns = [
+            r"\+?\d+%",
+            r"\brm\s?\d+[km]?\b",
+            r"\b27\b",
+            r"\b190\b",
+            r"\bprumy child(?:\s+plus)?\b",
+            r"\bprusaver(?:\s+kid)?\b",
+            r"\bpruwith you(?:\s+plus)?\b",
+            r"\bprumillion med(?:\s+active(?:\s+2\.0)?)?\b",
+            r"\bpruall care\b",
+            r"\bpruman\b",
+            r"\bprulady\b",
+            r"\bpruelite(?:\s+invest|\s+flex)?\b",
+            r"\bpruvalue med\b",
+            r"\bpruwealth enrich(?:\s+2\.0)?\b",
+            r"\bpruprestige legacy\b",
+            r"\bprubsn\s+\w+\b",
+            r"\bvitality\b",
+            r"\bhealth wallet\b",
+            r"\bwallet\b",
+            r"\bcongenital\b",
+            r"\bjaundice\b",
+            r"\bautism\b",
+            r"\bday-1\b",
+            r"\bwellness\b",
+            r"\bmilestone\b",
+            r"\bcontinuity\b",
+            r"\bpayor\b",
+            r"\bpediatric\b",
+            r"\bfd interest\b",
+            r"\bfixed deposit\b",
+            r"\bschedule 10\b",
+            r"\bfaraid\b",
+            r"\bhibah\b",
+            r"\bdeductible\b",
+            r"\bflexincome\b",
+            r"\bmed value point\b",
+            r"先天", r"黄疸", r"黃疸", r"定存利息", r"现金奖", r"現金獎", r"钱包", r"錢包",
+            r"守护", r"守護", r"kesejahteraan", r"kesinambungan", r"நலன்",
+        ]
+        excl_blob = " ".join(excluded_list).lower()
+        for pat in candidate_patterns:
+            for m in re.findall(pat, excl_blob):
+                tok = m.strip()
+                if tok and tok not in allowed_blob and tok not in markers:
+                    markers.append(tok)
+        return markers
+
+    def _has_excluded_leak(text_out: str, chosen_list: list[str], excluded_list: list[str], allow_note: str = "") -> bool:
+        if not text_out or not excluded_list:
+            return False
+        low_out = text_out.lower()
+        for mk in _extract_distinct_exclusion_markers(chosen_list, excluded_list, allow_note):
+            if mk in low_out:
+                return True
+        return False
 
     def _build_card_custom_instruction() -> str:
         parts = []
@@ -1291,12 +1426,63 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         return ". ".join(parts) if parts else card_prompt
 
     def _weave_fallback_wa() -> str:
+        if wa_subset_explicit and len(chosen_wa_ideas) < len(all_wa_items):
+            hooks_txt = "; ".join(chosen_wa_ideas)
+            if norm_lang in ("zh-CN", "yue"):
+                msg = f"{client_first_name} 您好！衷心祝贺您迎来「{scen.get('shortLabel', '人生里程碑')}」的喜悦时刻！🎉 特地为您制作了这张祝贺卡。"
+                if hooks_txt:
+                    msg += f"\n\n顺带跟您分享一个贴心规划重点：{hooks_txt}。"
+                msg += f" {wa_personal_note if wa_personal_note else '等您方便时我发一份简短摘要给您参考好吗？😊'}"
+                return msg
+            if norm_lang == "ms":
+                msg = f"Tahniah {client_first_name} atas detik bermakna ini! 🎉 Saya sediakan kad ucapan khas ini untuk anda."
+                if hooks_txt:
+                    msg += f"\n\nSekadar berkongsi satu info berguna: {hooks_txt}."
+                msg += f" {wa_personal_note if wa_personal_note else 'Boleh saya kongsikan ringkasan pendek bila anda lapang? 😊'}"
+                return msg
+            msg = f"Warmest congratulations {client_first_name} on this wonderful milestone! 🎉 I made this celebratory card specially for you."
+            if hooks_txt:
+                msg += f"\n\nQuick helpful note: {hooks_txt}."
+            msg += f" {wa_personal_note if wa_personal_note else 'Shall I send a quick 2-min summary whenever convenient? 😊'}"
+            return msg
         base = scen["defaultWhatsapp"]
-        if wa_personal_note:
+        if wa_personal_note and wa_personal_note not in base:
             return f"{base}\n\nP.S. {wa_personal_note}"
         return base
 
     def _weave_fallback_em() -> str:
+        if fact_subset_explicit and len(chosen_facts) < len(all_fact_items):
+            bullets = "\n".join(f"• {f}" for f in chosen_facts)
+            lead_plan = scen["pambPlan"].split("+")[0].strip()
+            n_pts = len(chosen_facts)
+            closer_line = email_personal_note or (
+                (scen.get("closeHints") or ["Let's review the 1-page table in a quick 10-min chat"])[0]
+            )
+            if norm_lang in ("zh-CN", "yue"):
+                body_bullets = f"以下是为您重点整理的 {n_pts} 项核心条款优势：\n{bullets}\n\n" if bullets else ""
+                return (
+                    f"主题：方案重点对比：{lead_plan} vs {scen.get('rivalBrand', 'AIA')}\n\n"
+                    f"{client_first_name} 您好：\n感谢您的回复！针对您关心的重点，{body_bullets}"
+                    f"{closer_line}！"
+                )
+            if norm_lang == "ms":
+                body_bullets = f"Berikut ialah {n_pts} kelebihan utama pelan PRU berbanding {scen['aiaPlan']}:\n{bullets}\n\n" if bullets else ""
+                return (
+                    f"Subjek: Perbandingan Fakta: {lead_plan} vs. {scen.get('rivalBrand', 'AIA')}\n\n"
+                    f"Hai {client_first_name},\nTerima kasih atas maklum balas anda! {body_bullets}"
+                    f"Cadangan langkah seterusnya: {closer_line}."
+                )
+            pt_word = "advantage" if n_pts == 1 else "advantages"
+            body_bullets = (
+                f"Here {'is' if n_pts == 1 else 'are'} the {n_pts} key factual {pt_word} over {scen['aiaPlan']}:\n{bullets}\n\n"
+                if bullets
+                else ""
+            )
+            return (
+                f"Subject: Factual Comparison: {lead_plan} vs. {scen.get('rivalBrand', 'AIA')}\n\n"
+                f"Hi {client_first_name},\nGreat question—comparing clauses is a smart move! {body_bullets}"
+                f"How about this next step: {closer_line}?"
+            )
         base = scen["defaultEmail"]
         if email_personal_note and email_personal_note not in base:
             return f"{base}\n\nNext Step: {email_personal_note}"
@@ -1402,19 +1588,36 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             return None
 
     if step_mode == "whatsapp":
-        wa_only_prompt = (
-            f"You are an empathetic, top-performing MDRT Wealth & Legacy Advisor ({advisor_name}) on the PRUMDA Learning Trip.\n"
-            f"{lang_instruction}\n"
-            f"Draft a concise, warm, authentic First-Touch WhatsApp message (55–80 words max, 2 short paragraphs) to your existing client.\n"
+        is_wa_subset = wa_subset_explicit and len(chosen_wa_ideas) < len(all_wa_items)
+        wa_hooks_block = (
+            "\n".join(f"  {i + 1}. {idea}" for i, idea in enumerate(chosen_wa_ideas))
+            if chosen_wa_ideas
+            else "  (None selected — write a warm celebratory greeting & relationship check-in ONLY without pitching specific product benefits)"
+        )
+        wa_excl_block = (
+            "- STRICT FORBIDDEN TOPICS (The advisor explicitly UNCHECKED these — DO NOT mention, hint at, or include ANY of these plans, numbers, or benefits):\n"
+            + "\n".join(f"  ✗ {ex}" for ex in excluded_wa_ideas)
+            + "\n"
+            if is_wa_subset and excluded_wa_ideas
+            else ""
+        )
+        wa_context_lines = (
             f"- Client: {scen['customerName']}\n"
-            f"- Life Event: {scen['lifeEvent']}\n"
-            f"- Existing Coverage Gap: {scen['existingPolicy']}\n"
-            f"- Suitable PRU Portfolio: {scen['pambPlan']}\n"
-            f"- Advisor's Chosen Strategy & Wealth Hooks: {whatsapp_prompt or 'Warm congratulations first + gentle wealth planning hook'}\n"
+            f"- Milestone to Celebrate: {clean_milestone_context if is_wa_subset else scen['lifeEvent']}\n"
+            + ("" if is_wa_subset else f"- Existing Coverage Gap: {scen['existingPolicy']}\n- Suitable PRU Portfolio: {scen['pambPlan']}\n")
+            + f"- Opening Tone & Strategy: {whatsapp_prompt.split('|')[0].strip() if '|' in whatsapp_prompt else (whatsapp_prompt or 'Warm congratulations first + gentle wealth planning hook')}\n"
+            + f"- ALLOWED WEALTH PLANNING IDEA(S) TO INCLUDE (Include ONLY {'this exact 1 idea' if len(chosen_wa_ideas) == 1 else f'these exact {len(chosen_wa_ideas)} ideas'}):\n{wa_hooks_block}\n"
+            + wa_excl_block
+        )
+        wa_only_prompt = (
+            f"You are an empathetic, upbeat, top-performing MDRT Wealth & Legacy Advisor ({advisor_name}) on the PRUMDA Learning Trip.\n"
+            f"{lang_instruction}\n"
+            f"Draft a concise, warm, positive First-Touch WhatsApp message (50–78 words max, 2 short paragraphs) to your existing client.\n"
+            + wa_context_lines
             + (f"- MANDATORY PERSONAL TOUCH TO WEAVE IN NATURALLY: \"{wa_personal_note}\"\n" if wa_personal_note else "")
             + (f"- Current Draft to Refine: {submitted_wa_text}\n" if submitted_wa_text and polish_instruction else "")
             + (f"- Refinement Instruction: {polish_instruction}\n" if polish_instruction else "")
-            + "Rules: Never write corporate acronym 'PAMB' (use the exact PRU / PRUBSN plan names). Sound like a caring human advisor texting on WhatsApp, NOT a stiff brochure! Never promise guaranteed % investment returns. End with a low-pressure question.\n"
+            + "Rules: Keep the tone joyful, celebratory, and empowering (never morbid or fear-mongering). Never write corporate acronym 'PAMB' (use exact PRU / PRUBSN plan names from the allowed idea(s) only). STRICTLY respect the advisor's selection—never include unchecked ideas! Never promise guaranteed % investment returns. End with a low-pressure question.\n"
             + 'Respond STRICTLY in valid JSON: {"firstTouchMessage": "..."}'
         )
         ai_text, model_used, _ms = call_vertex_fn(wa_only_prompt)
@@ -1424,6 +1627,8 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             if parsed_wa and parsed_wa.get("firstTouchMessage")
             else _weave_fallback_wa()
         )
+        if is_wa_subset and not polish_instruction and _has_excluded_leak(out_wa, chosen_wa_ideas, excluded_wa_ideas, wa_personal_note):
+            out_wa = _weave_fallback_wa()
         return {
             "scenarioId": scenario_id,
             "seatIndex": scen.get("seatIndex", 0),
@@ -1434,21 +1639,36 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         }
 
     if step_mode == "email":
+        is_fact_subset = fact_subset_explicit and len(chosen_facts) < len(all_fact_items)
+        n_sel_facts = len(chosen_facts)
+        bullet_rule = (
+            "Write a warm, respectful 1-paragraph reply inviting a quick comparison chat without listing technical clause bullets (0 bullets selected)."
+            if n_sel_facts == 0
+            else f"Include EXACTLY {n_sel_facts} bullet point{'s' if n_sel_facts != 1 else ''} covering ONLY the {n_sel_facts} selected advantage{'s' if n_sel_facts != 1 else ''} listed below (do NOT write {len(all_fact_items)} bullets when only {n_sel_facts} {'is' if n_sel_facts == 1 else 'are'} selected!)."
+        )
+        fact_excl_block = (
+            "- STRICT FORBIDDEN POINTS (The advisor explicitly UNCHECKED these — DO NOT mention, list, or hint at ANY of these unselected facts, numbers, or riders):\n"
+            + "\n".join(f"  ✗ {ex}" for ex in excluded_facts)
+            + "\n"
+            if is_fact_subset and excluded_facts
+            else ""
+        )
         em_only_prompt = (
-            f"You are an empathetic, top-performing MDRT Wealth & Legacy Advisor ({advisor_name}) on the PRUMDA Learning Trip.\n"
+            f"You are an empathetic, upbeat, top-performing MDRT Wealth & Legacy Advisor ({advisor_name}) on the PRUMDA Learning Trip.\n"
             f"{lang_instruction}\n"
             f"Your client just replied on WhatsApp asking how your recommended PRU plan compares against a {scen.get('rivalBrand', 'competitor')} quote.\n"
-            f"Draft a crisp, respectful, factual comparison reply (85–120 words max, starting with a Subject/Topic line, warm 1-line acknowledgment, clear bullet points for the selected advantages, and the advisor's closing invite).\n"
-            f"- Client: {scen['customerName']} ({scen['lifeEvent']})\n"
-            f"- Recommended Portfolio: {scen['pambPlan']}\n"
+            f"Draft a crisp, positive, factual comparison reply (70–115 words max, starting with a Subject/Topic line, warm 1-line acknowledgment, {bullet_rule} End with the advisor's closing invite).\n"
+            f"- Client: {scen['customerName']} ({clean_milestone_context if is_fact_subset else scen['lifeEvent']})\n"
+            f"- Recommended Portfolio: {scen['pambPlan'].split('+')[0].strip() if is_fact_subset else scen['pambPlan']}\n"
             f"- Competitor Quote: {scen['aiaPlan']}\n"
             f"- Client's Question: \"{scen['customerObjection']}\"\n"
-            f"- Verified Factual Advantages Reference:\n{aia_facts_joined}\n"
-            f"- Advisor's Selected Facts & Advisory Style: {email_prompt or 'Highlight all 3 factual advantages respectfully'}\n"
+            f"- Advisory Style: {email_prompt.split('|')[0].strip() if '|' in email_prompt else (email_prompt or 'Warm, respectful side-by-side comparison')}\n"
+            f"- ONLY SELECTED FACTUAL ADVANTAGE(S) TO INCLUDE ({n_sel_facts} of {len(all_fact_items)} selected):\n{aia_facts_joined or '(None selected)'}\n"
+            + fact_excl_block
             + (f"- MANDATORY MEETING CLOSER / PERSONAL IDEA TO INCLUDE IN CLOSING: \"{email_personal_note}\"\n" if email_personal_note else "")
             + (f"- Current Draft to Refine: {submitted_em_text}\n" if submitted_em_text and polish_instruction else "")
             + (f"- Refinement Instruction: {polish_instruction}\n" if polish_instruction else "")
-            + "Rules: Never disparage the competitor—acknowledge their quote fairly while showing factually why the PRU / PRUBSN plan fits this family's exact gap better. Never write 'PAMB'. Follow BNM Fair Treatment of Financial Consumers (no guaranteed ILP return claims).\n"
+            + "Rules: Keep the tone positive, constructive, and reassuring. Never disparage the competitor—acknowledge their quote fairly while highlighting ONLY the selected PRU / PRUBSN advantage(s). Never write 'PAMB'. Follow BNM Fair Treatment of Financial Consumers (no guaranteed ILP return claims).\n"
             + 'Respond STRICTLY in valid JSON: {"aiaComparisonEmail": "..."}'
         )
         ai_text, model_used, _ms = call_vertex_fn(em_only_prompt)
@@ -1458,6 +1678,12 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             if parsed_em and parsed_em.get("aiaComparisonEmail")
             else _weave_fallback_em()
         )
+        if is_fact_subset and not polish_instruction:
+            em_bullets = re.findall(r"(?m)^\s*(?:[•\-\*]|\d+[\.\)])\s+", out_em)
+            if _has_excluded_leak(out_em, chosen_facts, excluded_facts, email_personal_note) or (
+                n_sel_facts > 0 and len(em_bullets) > n_sel_facts
+            ):
+                out_em = _weave_fallback_em()
         return {
             "scenarioId": scenario_id,
             "seatIndex": scen.get("seatIndex", 0),

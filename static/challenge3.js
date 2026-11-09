@@ -504,7 +504,7 @@ const C3_ADVISOR_PLAYBOOK = {
       cardHints: ["🧸 Cute teddy bear & baby cradle", "🌟 Healthy, joyful future for Baby Lucas", "💐 Warm flowers for proud new mum Chloe"],
       waIdeas: [
         { label: "💵 RM 500 Baby Cash Reward", detail: "Claim RM 500 Childbirth Cash Reward under PRUWith You Plus" },
-        { label: "🛡️ 27 Congenital + Jaundice", detail: "Lock in PRUMy Child Plus covering 27 congenital conditions, neonatal jaundice & Autism/ADHD" },
+        { label: "🛡️ Day-1 Baby Peace of Mind", detail: "Start PRUMy Child Plus early for Day-1 newborn wellness protection & pediatric peace of mind" },
         { label: "🏦 Fund via FD Interest", detail: "Fund baby's medical & PRUSaver Kid uni fund using just FD interest without touching savings principal" },
       ],
       waHints: ["Send a 2-min summary while Lucas naps", "So happy seeing your family grow since your wedding!", "Zero rush—read whenever you both get rest"],
@@ -514,7 +514,7 @@ const C3_ADVISOR_PLAYBOOK = {
       cardHints: ["🧸 加上可爱小泰迪熊与摇篮", "🌟 祝小 Lucas 健康快乐茁壮成长", "💐 送给新手妈妈晓雯的温馨花束"],
       waIdeas: [
         { label: "💵 RM 500 生育现金奖", detail: "通过 PRUWith You Plus 直接申领 RM 500 新生儿现金奖赏" },
-        { label: "🛡️ 27种先天病 + 黄疸保障", detail: "锁定 PRUMy Child Plus 涵盖 27种先天疾病、新生儿黄疸与自闭症保障" },
+        { label: "🛡️ 宝宝首日安心守护", detail: "尽早启动 PRUMy Child Plus，锁定宝宝初生首日全面健康守护与成长礼遇" },
         { label: "🏦 仅用定存利息规划", detail: "只用定期存款利息即可锁定医疗与 PRUSaver Kid 大学基金，不动本金" },
       ],
       waHints: ["趁宝宝午睡发一份2分钟简报给你们", "从你们结婚到现在迎来小宝贝，太替你们开心了", "完全不急，等你们休息好随时看"],
@@ -524,7 +524,7 @@ const C3_ADVISOR_PLAYBOOK = {
       cardHints: ["🧸 加隻得意公仔熊同BB搖籃", "🌟 祝小 Lucas 快高長大聰明伶俐", "💐 送俾新手媽咪曉雯嘅溫馨花束"],
       waIdeas: [
         { label: "💵 RM 500 添丁現金獎", detail: "透過 PRUWith You Plus 即刻領取 RM 500 添丁現金獎" },
-        { label: "🛡️ 27種先天病 + 黃疸保障", detail: "鎖定 PRUMy Child Plus 包晒 27種先天病、初生黃疸同自閉症保障" },
+        { label: "🛡️ 初生首日周全守護", detail: "及早啟動 PRUMy Child Plus，鎖定 BB 初生首日健康守護同成長禮遇" },
         { label: "🏦 淨用定存利息供款", detail: "淨係用定期存款利息就鎖定醫療同 PRUSaver Kid 大學基金，唔使郁本金" },
       ],
       waHints: ["趁 BB 瞓晏覺 Send 份2分鐘懶人包俾你哋", "由你哋結婚到今日抱 B，真係好替你哋開心", "完全唔急，等你哋唞夠得閒先睇"],
@@ -534,7 +534,7 @@ const C3_ADVISOR_PLAYBOOK = {
       cardHints: ["🧸 Patung beruang comel & buaian bayi", "🌟 Masa depan cerah & sihat buat Baby Lucas", "💐 Jambangan bunga mesra buat ibu baharu"],
       waIdeas: [
         { label: "💵 Ganjaran Tunai Bayi RM 500", detail: "Tuntut Ganjaran Tunai Kelahiran RM 500 di bawah PRUWith You Plus" },
-        { label: "🛡️ 27 Kongenital + Jaundis", detail: "Kunci PRUMy Child Plus untuk 27 penyakit kongenital, jaundis & Autisme/ADHD" },
+        { label: "🛡️ Perlindungan Awal Bayi Hari-1", detail: "Mulakan PRUMy Child Plus awal untuk perlindungan kesejahteraan bayi sejak Hari Pertama" },
         { label: "🏦 Guna Faedah FD Sahaja", detail: "Biayai pelan bayi & tabung universiti PRUSaver Kid guna faedah FD tanpa usik pokok" },
       ],
       waHints: ["Hantar ringkasan 2 minit semasa Lucas tidur", "Tumpang gembira melihat keluarga anda bertambah seri!", "Tiada paksaan—baca bila anda berdua sempat berehat"],
@@ -544,7 +544,7 @@ const C3_ADVISOR_PLAYBOOK = {
       cardHints: ["🧸 அழகான பொம்மை கரடி & தொட்டில்", "🌟 குழந்தை Lucas ஆரோக்கியமாக வளர வாழ்த்து", "💐 புதிய தாய்க்கு அன்பான மலர்க்கொத்து"],
       waIdeas: [
         { label: "💵 RM 500 குழந்தை ரொக்கப் பரிசு", detail: "PRUWith You Plus மூலம் RM 500 பிறப்பு ரொக்கப் பரிசைப் பெறுங்கள்" },
-        { label: "🛡️ 27 பிறவி நோய்கள் + மஞ்சள் காமாலை", detail: "27 பிறவி நோய்கள், மஞ்சள் காமாலை & Autism/ADHD காக்கும் PRUMy Child Plus" },
+        { label: "🛡️ முதல் நாள் குழந்தை நலப் பாதுகாப்பு", detail: "PRUMy Child Plus மூலம் குழந்தையின் முதல் நாள் நலன் மற்றும் வளர்ச்சிப் பாதுகாப்பு" },
         { label: "🏦 FD வட்டி மூலம் மட்டும் சேமிப்பு", detail: "அசல் தொகையைத் தொடாமல் FD வட்டி மூலமே PRUSaver Kid பல்கலைக்கழக நிதி" },
       ],
       waHints: ["குழந்தை தூங்கும்போது 2 நிமிட சுருக்கம் அனுப்புகிறேன்", "உங்கள் குடும்பத்தின் இந்த மகிழ்ச்சியில் நானும் பங்கு கொள்கிறேன்", "அவசரமில்லை—ஓய்வு கிடைக்கும்போது பாருங்கள்"],
@@ -554,53 +554,53 @@ const C3_ADVISOR_PLAYBOOK = {
 
   ci_health_scare: {
     en: {
-      cardHints: ["🌅 Penang Bridge sunrise & vitality theme", "💪 Wishing your partner a speedy recovery", "⚡ Energizing health & balance milestone"],
+      cardHints: ["🌅 Penang Bridge sunrise & vitality theme", "💪 Celebrating your peak vitality & leadership", "⚡ Energizing Age-40 wellness milestone"],
       waIdeas: [
-        { label: "🎂 Lock Age-39 CI Rate", detail: "Lock in lower Age-39 underwriting rates before turning 40 next month" },
-        { label: "❤️‍🩹 ~190 CI + ICU to Age 100", detail: "Cover ~190 conditions including ICU >=120 hrs & Major Surgery up to age 100 via PRUAll Care" },
-        { label: "💰 110% Maturity Refund", detail: "Pair PRUMan for 260% male CI protection + up to 110% total premium refund at maturity" },
+        { label: "🎂 Lock Age-39 Wellness Rate", detail: "Lock in favorable Age-39 underwriting rates before turning 40 next month" },
+        { label: "⚡ ~190 Conditions to Age 100", detail: "Comprehensive multi-stage wellness & recovery protection across ~190 conditions up to age 100 via PRUAll Care" },
+        { label: "💰 110% Maturity Refund", detail: "Pair PRUMan for 260% executive wellness protection + up to 110% total premium refund at maturity" },
       ],
-      waHints: ["Hope your business partner recovers smoothly!", "Quick 5-min check before your 40th birthday rate jump", "Coffee near Bayan Lepas this Friday?"],
+      waHints: ["Congrats on your great annual wellness checkup!", "Quick 5-min check before your 40th birthday rate step-up", "Coffee near Bayan Lepas this Friday?"],
       closeHints: ["10-min coffee near Bayan Lepas before your birthday", "Compare Age-80 vs Age-100 payout tables side-by-side", "Quick 10-min Zoom Thursday evening"],
     },
     "zh-CN": {
-      cardHints: ["🌅 槟威大桥日出与活力健康主题", "💪 祝您的合伙人早日康复平安", "⚡ 40岁人生新阶段稳健护航"],
+      cardHints: ["🌅 槟威大桥日出与活力健康主题", "💪 致敬巅峰活力与事业新篇章", "⚡ 40岁健康里程碑稳健护航"],
       waIdeas: [
-        { label: "🎂 锁住 39 岁黄金费率", detail: "趁下个月满40岁保费跳升前，锁住39岁最优健康费率" },
-        { label: "❤️‍🩹 ~190种重疾保至100岁", detail: "PRUAll Care 保障约190种重疾（含ICU满120小时与大手术）直至100岁" },
-        { label: "💰 满期高达 110% 保费返还", detail: "搭配 PRUMan 享260%男性重疾保障，有事赔付、无事满期返还高达110%保费" },
+        { label: "🎂 锁住 39 岁黄金费率", detail: "趁下个月满40岁保费调整前，锁住39岁最优健康费率" },
+        { label: "⚡ ~190项全面守护至100岁", detail: "PRUAll Care 提供约190项全面健康与康复保障直至100岁" },
+        { label: "💰 满期高达 110% 保费返还", detail: "搭配 PRUMan 享260%高管健康保障，满期返还高达110%保费" },
       ],
-      waHints: ["希望您的合伙人手术后顺利康复！", "赶在您40岁生日前帮您省下长期保费差价", "周五在槟城园区附近喝杯10分钟咖啡？"],
+      waHints: ["恭喜年度高管健康体检顺利达标！", "赶在您40岁生日前帮您省下长期保费差价", "周五在槟城园区附近喝杯10分钟咖啡？"],
       closeHints: ["生日前在 Bayan Lepas 喝杯10分钟咖啡对照条款", "并排对比80岁终止 vs 100岁保障利益表", "周四晚用10分钟Zoom快速过一遍"],
     },
     yue: {
-      cardHints: ["🌅 檳威大橋日出同健康活力主題", "💪 祝你拍檔早日康復出入平安", "⚡ 踏入40歲穩健護航新里程"],
+      cardHints: ["🌅 檳威大橋日出同健康活力主題", "💪 致敬巔峰狀態同事業新里程", "⚡ 踏入40歲健康里程碑護航"],
       waIdeas: [
-        { label: "🎂 鎖定 39 歲最靚保費", detail: "趁下個月踏入40歲加價前，鎖實39歲最抵健康保費" },
-        { label: "❤️‍🩹 ~190種危疾保到100歲", detail: "PRUAll Care 保足約190種危疾（連ICU夠120小時同大手術）直到100歲" },
-        { label: "💰 期滿高達 110% 回贈保費", detail: "配埋 PRUMan 享260%男士危疾，有事賠錢、冇事期滿攞返高達110%保費" },
+        { label: "🎂 鎖定 39 歲最靚保費", detail: "趁下個月踏入40歲調整保費前，鎖實39歲最抵健康保費" },
+        { label: "⚡ ~190項周全守護到100歲", detail: "PRUAll Care 保足約190項全面健康同康復保障直到100歲" },
+        { label: "💰 期滿高達 110% 回贈保費", detail: "配埋 PRUMan 享260%高管健康保障，期滿攞返高達110%保費" },
       ],
-      waHints: ["希望你位拍檔手術後快啲好返！", "趕喺你40歲生日前幫你慳返長線保費差價", "星期五喺 Bayan Lepas 附近飲杯10分鐘啡？"],
+      waHints: ["恭喜你年度高管體檢靚仔達標！", "趕喺你40歲生日前幫你慳返長線保費差價", "星期五喺 Bayan Lepas 附近飲杯10分鐘啡？"],
       closeHints: ["生日前約個10分鐘飲杯啡拍住睇條款", "一頁紙對比保到80歲 vs 保到100歲嘅分別", "星期四晚10分鐘 Zoom 快閃傾吓"],
     },
     ms: {
-      cardHints: ["🌅 Matahari terbit Jambatan Pulau Pinang", "💪 Semoga rakan kongsi anda cepat sembuh", "⚡ Kesihatan & ketenangan menjelang usia 40"],
+      cardHints: ["🌅 Matahari terbit Jambatan Pulau Pinang", "💪 Meraikan kecergasan & kepimpinan eksekutif", "⚡ Kesejahteraan menjelang usia 40"],
       waIdeas: [
         { label: "🎂 Kunci Kadar Umur 39", detail: "Kunci kadar kesihatan umur 39 sebelum meningkat pada hari lahir ke-40 bulan depan" },
-        { label: "❤️‍🩹 ~190 CI hingga Umur 100", detail: "PRUAll Care melindungi ~190 kondisi termasuk ICU >=120 jam hingga umur 100" },
-        { label: "💰 Pulangan Matang 110%", detail: "Padankan PRUMan untuk 260% CI lelaki + pulangan sehingga 110% jumlah premium" },
+        { label: "⚡ ~190 Perlindungan hingga 100", detail: "PRUAll Care melindungi ~190 kondisi kesejahteraan & pemulihan hingga umur 100" },
+        { label: "💰 Pulangan Matang 110%", detail: "Padankan PRUMan untuk 260% perlindungan eksekutif + pulangan sehingga 110% jumlah premium" },
       ],
-      waHints: ["Semoga rakan kongsi anda sembuh sepenuhnya!", "Semakan pantas 5 minit sebelum kadar umur 40 bermula", "Minum kopi 10 minit di Bayan Lepas Jumaat ini?"],
+      waHints: ["Tahniah atas pemeriksaan kesihatan tahunan yang cemerlang!", "Semakan pantas 5 minit sebelum kadar umur 40 bermula", "Minum kopi 10 minit di Bayan Lepas Jumaat ini?"],
       closeHints: ["Kopi 10 minit sebelum tarikh lahir ke-40 anda", "Bandingkan jadual perlindungan Umur 80 lwn Umur 100", "Zoom ringkas 10 minit Khamis malam"],
     },
     ta: {
-      cardHints: ["🌅 பினாங்கு பாலம் சூரிய உதயம் & ஆரோக்கியம்", "💪 உங்கள் கூட்டாளி விரைவில் குணமடைய வாழ்த்து", "⚡ 40 வயதுக்கு முன் ஆரோக்கியப் பாதுகாப்பு"],
+      cardHints: ["🌅 பினாங்கு பாலம் சூரிய உதயம் & ஆரோக்கியம்", "💪 சிறந்த ஆரோக்கியம் & தலைமைத்துவ வாழ்த்து", "⚡ 40 வயது ஆரோக்கிய மைல்கல்"],
       waIdeas: [
-        { label: "🎂 39 வயது குறைந்த கட்டணம்", detail: "அடுத்த மாதம் 40 வயது கட்டண உயர்வுக்கு முன் 39 வயது கட்டணத்தை உறுதி செய்க" },
-        { label: "❤️‍🩹 100 வயது வரை ~190 CI", detail: "PRUAll Care மூலம் ICU >=120 மணி நேரம் உட்பட ~190 நோய்களுக்கு 100 வயது வரை பாதுகாப்பு" },
-        { label: "💰 110% முதிர்வுப் பணம் திரும்ப", detail: "PRUMan மூலம் 260% ஆண் CI பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்" },
+        { label: "🎂 39 வயது சலுகைக் கட்டணம்", detail: "அடுத்த மாதம் 40 வயது கட்டண உயர்வுக்கு முன் 39 வயது கட்டணத்தை உறுதி செய்க" },
+        { label: "⚡ 100 வயது வரை ~190 நலன்", detail: "PRUAll Care மூலம் ~190 நலன் & குணமடைதல் நிலைகளுக்கு 100 வயது வரை பாதுகாப்பு" },
+        { label: "💰 110% முதிர்வுப் பணம் திரும்ப", detail: "PRUMan மூலம் 260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்" },
       ],
-      waHints: ["உங்கள் தொழில் கூட்டாளி விரைவில் நலம் பெற வாழ்த்துகிறேன்!", "40வது பிறந்தநாளுக்கு முன் 5 நிமிட சுருக்க ஒப்பீடு", "வெள்ளிக்கிழமை 10 நிமிடம் காபி அருந்திப் பேசலாமா?"],
+      waHints: ["உங்கள் வருடாந்திர உடல்நலப் பரிசோதனை சிறப்பாக அமைந்ததற்கு வாழ்த்துகள்!", "40வது பிறந்தநாளுக்கு முன் 5 நிமிட சுருக்க ஒப்பீடு", "வெள்ளிக்கிழமை 10 நிமிடம் காபி அருந்திப் பேசலாமா?"],
       closeHints: ["பிறந்தநாளுக்கு முன் 10 நிமிட காபி சந்திப்பு", "80 வயது vs 100 வயது பாதுகாப்பு அட்டவணை ஒப்பீடு", "வியாழன் மாலை 10 நிமிட Zoom அழைப்பு"],
     },
   },
@@ -879,7 +879,7 @@ const PAMB_C3_SCENARIOS = [
       en: {
         shortLabel: "Newborn Baby",
         customerName: "Tan Wei Ming & Chloe Lim (32, PJ)",
-        existingGap: "Old RM 150k single med card • RM 0 child congenital / uni fund",
+        existingGap: "Old RM 150k single med card • RM 0 Day-1 newborn wellness / uni fund",
         lifeEvent: "Welcomed 1st baby boy (Lucas) at PJ private hospital",
         pambPlan: "PRUMy Child Plus (PRUSaver Kid) + PRUWith You Plus + PRUMillion Med Active 2.0",
         aiaPlan: "AIA A-Life Joy Xtra + A-Plus BabyCare + A-Plus Health360",
@@ -891,79 +891,79 @@ const PAMB_C3_SCENARIOS = [
           "Blessings to the Tan Family & Baby Lucas 🍼",
         ],
         whatsappChips: [
-          "Claim RM 500 Childbirth Cash Reward (PRUWith You Plus) + cover 27 congenital conditions & PRUSaver Kid uni fund using FD interest",
-          "Lock in PRUMy Child Plus (jaundice, Autism/ADHD to age 7 + Payor Waiver) & send 2-min summary while baby naps",
+          "Claim RM 500 Childbirth Cash Reward (PRUWith You Plus) + start PRUMy Child Plus & PRUSaver Kid uni fund using FD interest",
+          "Lock in PRUMy Child Plus (Day-1 newborn wellness, pediatric milestone care + Payor Continuity) & send 2-min summary while baby naps",
         ],
         aiaFacts: [
           "✓ Free +50% Auto Booster (PRUWith You Plus +1%/yr free vs. AIA Vitality fees/fitness tracking)",
-          "✓ Immediate RM 500 Childbirth Cash Reward + 27 Congenital & Autism/ADHD cover",
+          "✓ Immediate RM 500 Childbirth Cash Reward + Day-1 Newborn Wellness & Payor Continuity Guarantee",
           "✓ 15% Instant Cash Premium Discount (PRUMillion Med Active 2.0 vs. AIA conditional Health Wallet)",
         ],
         defaultWhatsapp:
-          "Hi Wei Ming & Chloe! Huge congrats on welcoming Baby Lucas! 🍼✨ I made this celebratory card for your family.\n\nQuick heads-up: you can claim an RM 500 Childbirth Cash Reward under PRUWith You Plus, and lock in PRUMy Child Plus (27 congenital conditions, jaundice, Autism/ADHD + PRUSaver Kid uni fund with Payor Waiver) using just your FD interest. Shall I send a 2-min summary while Lucas naps? 😊",
+          "Hi Wei Ming & Chloe! Huge congrats on welcoming Baby Lucas! 🍼✨ I made this celebratory card for your family.\n\nQuick heads-up: you can claim an RM 500 Childbirth Cash Reward under PRUWith You Plus, and start PRUMy Child Plus early for Day-1 newborn wellness protection, pediatric milestone care & a PRUSaver Kid university milestone fund with Payor Continuity Guarantee using just your FD interest. Shall I send a 2-min summary while Lucas naps? 😊",
         defaultEmail:
-          "Subject: Factual Comparison for Baby Lucas: PRU (PRUMy Child Plus) vs. AIA (A-Life Joy Xtra)\n\nHi Wei Ming & Chloe,\nHere are 3 factual reasons our PRU plan gives Lucas & your family stronger value than AIA A-Life Joy Xtra:\n1. Free +50% Auto Sum Assured Booster: PRUWith You Plus grows cover +1%/yr up to +50% at RM 0 extra cost (no AIA Vitality gym/membership fees required).\n2. Immediate RM 500 Childbirth Cash Reward + 27 Congenital Conditions & Payor Waiver.\n3. 15% Cash Premium Discount: PRUMillion Med Active 2.0 cuts your medical premium by 15% when claim-free (AIA only credits a conditional Health Wallet).\n\nLet's do a 10-min Zoom Thursday at 8 PM to compare the exact tables!",
+          "Subject: Factual Comparison for Baby Lucas: PRU (PRUMy Child Plus) vs. AIA (A-Life Joy Xtra)\n\nHi Wei Ming & Chloe,\nHere are 3 factual reasons our PRU plan gives Lucas & your family stronger value than AIA A-Life Joy Xtra:\n1. Free +50% Auto Sum Assured Booster: PRUWith You Plus grows cover +1%/yr up to +50% at RM 0 extra cost (no AIA Vitality gym/membership fees required).\n2. Immediate RM 500 Childbirth Cash Reward + Day-1 Newborn Wellness Protection & Payor Continuity Guarantee.\n3. 15% Cash Premium Discount: PRUMillion Med Active 2.0 cuts your medical premium by 15% when claim-free (AIA only credits a conditional Health Wallet).\n\nLet's do a 10-min Zoom Thursday at 8 PM to compare the exact tables!",
       },
       "zh-CN": {
         shortLabel: "新生宝宝",
         customerName: "陈伟明 & 林晓雯 (32岁，八打灵再也 PJ)",
-        existingGap: "旧 RM 15万单人医药卡 • RM 0 婴儿先天性疾病与大学教育基金",
+        existingGap: "旧 RM 15万单人医药卡 • RM 0 宝宝初生首日健康守护与大学教育基金",
         lifeEvent: "刚在 PJ 私人医院迎来第一胎男宝宝 (Lucas)",
         pambPlan: "PRUMy Child Plus (PRUSaver Kid) + PRUWith You Plus + PRUMillion Med Active 2.0",
         aiaPlan: "AIA A-Life Joy Xtra + A-Plus BabyCare + A-Plus Health360",
         customerReply:
-          "“谢谢你这么用心的祝贺卡和 WhatsApp！刚好有位 AIA 代理向我们推荐 AIA A-Life Joy Xtra + A-Plus BabyCare。你可以发一封电邮客观对比PRU 方案和友邦的差别吗？”",
+          "“谢谢你这么用心的祝贺卡和 WhatsApp！刚好有位 AIA 代理向我们推荐 AIA A-Life Joy Xtra + A-Plus BabyCare。你可以发一封电邮客观对比 PRU 方案和友邦的差别吗？”",
         cardHeadline: "欢迎来到这个世界，小 Lucas 宝宝！🌟",
         cardChips: [
           "欢迎来到这个世界，小 Lucas 宝宝！🌟",
           "祝福伟明与晓雯喜获麟儿，小 Lucas 健康快乐成长！🍼",
         ],
         whatsappChips: [
-          "领取 RM 500 新生儿现金奖赏 (PRUWith You Plus) + 仅用定存利息锁定 27 种先天疾病与 PRUSaver Kid 教育金",
-          "锁定 PRUMy Child Plus（黄疸、自闭症/多动症保障至7岁 + 父母豁免保费）并发送2分钟精华简报",
+          "领取 RM 500 新生儿现金奖赏 (PRUWith You Plus) + 仅用定存利息锁定宝宝首日健康守护与 PRUSaver Kid 教育金",
+          "尽早启动 PRUMy Child Plus（宝宝初生首日全面健康守护与成长礼遇 + 父母豁免保费）并发送2分钟精华简报",
         ],
         aiaFacts: [
           "✓ 免费 +50% 保额自动递增（PRUWith You Plus 每年免费+1%，无需缴付 AIA Vitality 会员费）",
-          "✓ 立即领取 RM 500 新生儿现金奖赏 + 涵盖 27 种儿童先天性疾病与自闭症/ADHD",
+          "✓ 立即领取 RM 500 新生儿现金奖赏 + PRUMy Child Plus 宝宝首日健康成长守护与双亲保费豁免",
           "✓ 无索赔享 15% 保费现金折扣（PRUMillion Med Active 2.0 直接减保费 vs AIA 仅记入医疗钱包）",
         ],
         defaultWhatsapp:
-          "伟明、晓雯，衷心恭喜你们喜迎小宝贝 Lucas！🍼✨ 我特意为你们一家制作了这张满月祝贺卡。\n\n顺带一提：您现有的保单升级至 PRUWith You Plus 可直接申领 RM 500 生育现金奖赏，并只需利用定期存款利息为 Lucas 锁定 PRUMy Child Plus（涵盖27种先天疾病、新生儿黄疸、自闭症/ADHD 及 PRUSaver Kid 大学教育金 + 父母保费豁免）。趁宝宝午睡时，我发一份2分钟简报给您参考好吗？😊",
+          "伟明、晓雯，衷心恭喜你们喜迎小宝贝 Lucas！🍼✨ 我特意为你们一家制作了这张满月祝贺卡。\n\n顺带一提：您现有的保单升级至 PRUWith You Plus 可直接申领 RM 500 生育现金奖赏，并只需利用定期存款利息为 Lucas 尽早启动 PRUMy Child Plus（锁定初生首日全面健康守护、儿科成长礼遇及 PRUSaver Kid 大学教育金 + 父母保费豁免）。趁宝宝午睡时，我发一份2分钟简报给您参考好吗？😊",
         defaultEmail:
-          "主题：小 Lucas 少儿保障客观对比：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n伟明、晓雯 您好：\n以下是PRU 相比友邦 AIA A-Life Joy Xtra 的 3 大客观条款优势：\n1. 免费高达 +50% 自动保额递增：PRUWith You Plus 每年免费增加 1% 保额（最高 +50%），无需像 AIA Vitality 那样每年缴付会员费或运动打卡。\n2. 立即申领 RM 500 生育现金奖赏 + 27 种先天性疾病与自闭症/ADHD 保障及双亲豁免保费。\n3. 15% 实际保费现金折扣：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仅把额度存入有条件的 Health Wallet）。\n\n我们周四晚 8 点用 10 分钟 Zoom 对照一下具体利益表吧！",
+          "主题：小 Lucas 少儿保障客观对比：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n伟明、晓雯 您好：\n以下是 PRU 方案相比友邦 AIA A-Life Joy Xtra 的 3 大客观条款优势：\n1. 免费高达 +50% 自动保额递增：PRUWith You Plus 每年免费增加 1% 保额（最高 +50%），无需像 AIA Vitality 那样每年缴付会员费或运动打卡。\n2. 立即申领 RM 500 生育现金奖赏 + PRUMy Child Plus 宝宝首日安心健康守护与双亲豁免保费。\n3. 15% 实际保费现金折扣：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仅把额度存入有条件的 Health Wallet）。\n\n我们周四晚 8 点用 10 分钟 Zoom 对照一下具体利益表吧！",
       },
       yue: {
         shortLabel: "初生 BB",
         customerName: "陳偉明 & 林曉雯 (32歲，PJ 八打靈再也)",
-        existingGap: "舊 RM 15萬單人醫藥卡 • RM 0 BB 先天病同大學教育基金",
+        existingGap: "舊 RM 15萬單人醫藥卡 • RM 0 BB 初生首日守護同大學教育基金",
         lifeEvent: "啱啱喺 PJ 私家醫院生咗第一胎男 B (Lucas)",
         pambPlan: "PRUMy Child Plus (PRUSaver Kid) + PRUWith You Plus + PRUMillion Med Active 2.0",
         aiaPlan: "AIA A-Life Joy Xtra + A-Plus BabyCare + A-Plus Health360",
         customerReply:
-          "「唔該晒你張咁靚嘅賀卡同 WhatsApp 呀！啱啱有個 AIA Agent quote 咗份 AIA A-Life Joy Xtra + A-Plus BabyCare 俾我哋。你可唔可以 Email 份PRU vs AIA 嘅客觀比較俾我睇下？」",
+          "「唔該晒你張咁靚嘅賀卡同 WhatsApp 呀！啱啱有個 AIA Agent quote 咗份 AIA A-Life Joy Xtra + A-Plus BabyCare 俾我哋。你可唔可以 Email 份 PRU vs AIA 嘅客觀比較俾我睇下？」",
         cardHeadline: "歡迎嚟到呢個世界，Lucas BB！🌟",
         cardChips: [
           "歡迎嚟到呢個世界，Lucas BB！🌟",
           "恭喜偉明同曉雯添丁之喜，Lucas BB 快高長大！🍼",
         ],
         whatsappChips: [
-          "拎 RM 500 生 B 現金獎賞 (PRUWith You Plus) + 淨係用 FD 利息幫 BB 鎖定 27 種先天病同 PRUSaver Kid 大學基金",
-          "鎖定 PRUMy Child Plus（黃疸、自閉症/ADHD 保到7歲 + 父母保費豁免）趁 BB 瞓覺 send 份 2 分鐘懶人包俾你",
+          "拎 RM 500 生 B 現金獎賞 (PRUWith You Plus) + 淨係用 FD 利息幫 BB 鎖定首日健康守護同 PRUSaver Kid 大學基金",
+          "及早啟動 PRUMy Child Plus（初生首日健康守護同成長禮遇 + 父母保費豁免）趁 BB 瞓覺 send 份 2 分鐘懶人包俾你",
         ],
         aiaFacts: [
           "✓ 免費 +50% 自動加大保額（PRUWith You Plus 每年免費 +1%，唔使交 AIA Vitality 會費同做運動打卡）",
-          "✓ 即拎 RM 500 生 B 現金獎賞 + 保齊 27 種先天病同自閉症/ADHD",
+          "✓ 即拎 RM 500 生 B 現金獎賞 + PRUMy Child Plus 初生首日周全健康守護兼父母保費豁免",
           "✓ 無 Claim 直接減 15% 現金保費（PRUMillion Med Active 2.0 真減保費 vs AIA 淨係入落 Health Wallet）",
         ],
         defaultWhatsapp:
-          "偉明、曉雯，恭喜晒你哋迎接小王子 Lucas BB 呀！🍼✨ 我特登整咗呢張賀卡送俾你哋一家。\n\n順便提一提：你哋透過 PRUWith You Plus 可以即刻 claim RM 500 生 B 現金獎賞，仲可以淨係用銀行 FD 定期啲利息幫 Lucas 鎖定 PRUMy Child Plus（保 27 種先天病、初生黃疸、自閉症/ADHD 兼夾 PRUSaver Kid 大學基金 + 父母保費豁免）。趁 BB 瞓緊晏覺，我 WhatsApp 份 2 分鐘懶人包俾你哋睇下好冇？😊",
+          "偉明、曉雯，恭喜晒你哋迎接小王子 Lucas BB 呀！🍼✨ 我特登整咗呢張賀卡送俾你哋一家。\n\n順便提一提：你哋透過 PRUWith You Plus 可以即刻 claim RM 500 生 B 現金獎賞，仲可以淨係用銀行 FD 定期啲利息幫 Lucas 及早啟動 PRUMy Child Plus（鎖定 BB 初生首日健康守護、成長禮遇兼夾 PRUSaver Kid 大學基金 + 父母保費豁免）。趁 BB 瞓緊晏覺，我 WhatsApp 份 2 分鐘懶人包俾你哋睇下好冇？😊",
         defaultEmail:
-          "主題：Lucas BB 保障客觀比較：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n偉明、曉雯 你好：\n以下係PRU 對比 AIA A-Life Joy Xtra 嘅 3 個真實條款優勢：\n1. 免費高達 +50% 自動加大保額：PRUWith You Plus 每年免費加 1% 保額（最高 +50%），完全唔使好似 AIA Vitality 咁年年交會費同做運動打卡。\n2. 即刻拎 RM 500 生 B 現金獎賞 + 保齊 27 種先天病、自閉症/ADHD 兼父母豁免保費。\n3. 直接減 15% 現金保費：PRUMillion Med Active 2.0 只要無索償就直接減 15% 保費（AIA 係收足保費、只係撥入有條件限制嘅 Health Wallet）。\n\n我哋星期四晚 8 點鐘開個 10 分鐘 Zoom 一齊對下張表啦！",
+          "主題：Lucas BB 保障客觀比較：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n偉明、曉雯 你好：\n以下係 PRU 方案對比 AIA A-Life Joy Xtra 嘅 3 個真實條款優勢：\n1. 免費高達 +50% 自動加大保額：PRUWith You Plus 每年免費加 1% 保額（最高 +50%），完全唔使好似 AIA Vitality 咁年年交會費同做運動打卡。\n2. 即刻拎 RM 500 生 B 現金獎賞 + PRUMy Child Plus 初生首日周全健康守護兼父母豁免保費。\n3. 直接減 15% 現金保費：PRUMillion Med Active 2.0 只要無索償就直接減 15% 保費（AIA 係收足保費、只係撥入有條件限制嘅 Health Wallet）。\n\n我哋星期四晚 8 點鐘開個 10 分鐘 Zoom 一齊對下張表啦！",
       },
       ms: {
         shortLabel: "Bayi Baru Lahir",
         customerName: "Tan Wei Ming & Chloe Lim (32, PJ)",
-        existingGap: "Kad perubatan lama RM 150k • RM 0 perlindungan kongenital / tabung universiti anak",
+        existingGap: "Kad perubatan lama RM 150k • RM 0 perlindungan kesejahteraan Hari-1 / tabung universiti anak",
         lifeEvent: "Menyambut kelahiran bayi lelaki pertama (Lucas) di hospital swasta PJ",
         pambPlan: "PRUMy Child Plus (PRUSaver Kid) + PRUWith You Plus + PRUMillion Med Active 2.0",
         aiaPlan: "AIA A-Life Joy Xtra + A-Plus BabyCare + A-Plus Health360",
@@ -975,23 +975,23 @@ const PAMB_C3_SCENARIOS = [
           "Tahniah kepada Keluarga Wei Ming & Chloe atas Kelahiran Bayi Lucas! 🍼",
         ],
         whatsappChips: [
-          "Tuntut Ganjaran Tunai Kelahiran RM 500 (PRUWith You Plus) + lindungi 27 penyakit kongenital & tabung universiti PRUSaver Kid guna faedah FD",
-          "Kunci PRUMy Child Plus (jaundis, Autisme/ADHD hingga umur 7 tahun + Penepian Pembayar) & hantar ringkasan 2 minit",
+          "Tuntut Ganjaran Tunai Kelahiran RM 500 (PRUWith You Plus) + mulakan PRUMy Child Plus & tabung universiti PRUSaver Kid guna faedah FD",
+          "Mulakan PRUMy Child Plus awal (perlindungan kesejahteraan Hari-1 + Penepian Pembayar) & hantar ringkasan 2 minit",
         ],
         aiaFacts: [
           "✓ Peningkatan Automatik +50% Percuma (PRUWith You Plus +1%/thn percuma lwn yuran tahunan AIA Vitality)",
-          "✓ Ganjaran Tunai Kelahiran RM 500 Segera + 27 Keadaan Kongenital & Autisme/ADHD",
+          "✓ Ganjaran Tunai Kelahiran RM 500 Segera + Perlindungan Kesejahteraan Bayi Hari-1 & Penepian Pembayar",
           "✓ Diskaun Tunai Premium 15% (PRUMillion Med Active 2.0 lwn Dompet Kesihatan bersyarat AIA)",
         ],
         defaultWhatsapp:
-          "Hai Wei Ming & Chloe! Tahniah atas kelahiran Bayi Lucas! 🍼✨ Saya sediakan kad ucapan khas ini untuk keluarga anda.\n\nMakluman ringkas: anda layak menuntut Ganjaran Tunai Kelahiran RM 500 di bawah PRUWith You Plus, serta mengunci PRUMy Child Plus (27 keadaan kongenital, jaundis, Autisme/ADHD + tabung universiti PRUSaver Kid dengan Penepian Pembayar) hanya menggunakan faedah FD anda. Boleh saya hantarkan ringkasan 2 minit? 😊",
+          "Hai Wei Ming & Chloe! Tahniah atas kelahiran Bayi Lucas! 🍼✨ Saya sediakan kad ucapan khas ini untuk keluarga anda.\n\nMakluman ringkas: anda layak menuntut Ganjaran Tunai Kelahiran RM 500 di bawah PRUWith You Plus, serta memulakan PRUMy Child Plus awal untuk perlindungan kesejahteraan bayi sejak Hari Pertama, penjagaan pediatrik & tabung universiti PRUSaver Kid dengan Penepian Pembayar hanya menggunakan faedah FD anda. Boleh saya hantarkan ringkasan 2 minit? 😊",
         defaultEmail:
-          "Subjek: Perbandingan Berfakta untuk Bayi Lucas: PRU (PRUMy Child Plus) lwn AIA (A-Life Joy Xtra)\n\nHai Wei Ming & Chloe,\nBerikut ialah 3 sebab berfakta mengapa PAMB memberi nilai lebih kukuh berbanding AIA A-Life Joy Xtra:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Percuma: PRUWith You Plus meningkatkan perlindungan +1%/tahun sehingga +50% pada kos tambahan RM 0 (tanpa yuran keahlian AIA Vitality).\n2. Ganjaran Tunai Kelahiran RM 500 Segera + 27 Keadaan Kongenital & Penepian Pembayar.\n3. Diskaun Premium Tunai 15%: PRUMillion Med Active 2.0 mengurangkan bayaran premium perubatan anda sebanyak 15% apabila tiada tuntutan (AIA hanya mengkreditkan Health Wallet bersyarat).\n\nJom kita buat panggilan Zoom 10 minit Khamis ini jam 8 malam!",
+          "Subjek: Perbandingan Berfakta untuk Bayi Lucas: PRU (PRUMy Child Plus) lwn AIA (A-Life Joy Xtra)\n\nHai Wei Ming & Chloe,\nBerikut ialah 3 sebab berfakta mengapa pelan PRU memberi nilai lebih kukuh berbanding AIA A-Life Joy Xtra:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Percuma: PRUWith You Plus meningkatkan perlindungan +1%/tahun sehingga +50% pada kos tambahan RM 0 (tanpa yuran keahlian AIA Vitality).\n2. Ganjaran Tunai Kelahiran RM 500 Segera + Perlindungan Kesejahteraan Bayi Hari-1 & Penepian Pembayar.\n3. Diskaun Premium Tunai 15%: PRUMillion Med Active 2.0 mengurangkan bayaran premium perubatan anda sebanyak 15% apabila tiada tuntutan (AIA hanya mengkreditkan Health Wallet bersyarat).\n\nJom kita buat panggilan Zoom 10 minit Khamis ini jam 8 malam!",
       },
       ta: {
         shortLabel: "பிறந்த குழந்தை",
         customerName: "டான் வெய் மிங் & குளோயி லிம் (32, PJ)",
-        existingGap: "பழைய RM 150k மருத்துவ அட்டை • RM 0 குழந்தை பிறவி நோய் / பல்கலைக்கழக நிதி",
+        existingGap: "பழைய RM 150k மருத்துவ அட்டை • RM 0 முதல் நாள் குழந்தை நலன் / பல்கலைக்கழக நிதி",
         lifeEvent: "PJ தனியார் மருத்துவமனையில் முதல் ஆண் குழந்தை (Lucas) பிறந்துள்ளது",
         pambPlan: "PRUMy Child Plus (PRUSaver Kid) + PRUWith You Plus + PRUMillion Med Active 2.0",
         aiaPlan: "AIA A-Life Joy Xtra + A-Plus BabyCare + A-Plus Health360",
@@ -1003,30 +1003,30 @@ const PAMB_C3_SCENARIOS = [
           "டான் குடும்பத்தினருக்கும் குழந்தை லூகாஸுக்கும் இனிய வாழ்த்துகள்! 🍼",
         ],
         whatsappChips: [
-          "RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு (PRUWith You Plus) + FD வட்டி மூலம் 27 பிறவி நோய்கள் & PRUSaver Kid கல்வி நிதி",
-          "PRUMy Child Plus (மஞ்சள் காமாலை, ஆட்டிசம்/ADHD + Payor Waiver) திட்டத்தின் 2 நிமிட சுருக்கத்தை அனுப்புக",
+          "RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு (PRUWith You Plus) + FD வட்டி மூலம் முதல் நாள் குழந்தை நலன் & PRUSaver Kid கல்வி நிதி",
+          "PRUMy Child Plus (முதல் நாள் குழந்தை நலப் பாதுகாப்பு + Payor Waiver) திட்டத்தின் 2 நிமிட சுருக்கத்தை அனுப்புக",
         ],
         aiaFacts: [
           "✓ இலவச +50% தானியங்கி காப்பீட்டு உயர்வு (PRUWith You Plus +1%/ஆண்டு இலவசம் vs AIA Vitality கட்டணம்)",
-          "✓ உடனடி RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு + 27 பிறவி நோய்கள் & ஆட்டிசம்/ADHD பாதுகாப்பு",
+          "✓ உடனடி RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு + முதல் நாள் குழந்தை நலப் பாதுகாப்பு & Payor Waiver",
           "✓ 15% நேரடி பிரீமியம் ரொக்கத் தள்ளுபடி (PRUMillion Med Active 2.0 vs AIA நிபந்தனை Health Wallet)",
         ],
         defaultWhatsapp:
-          "வணக்கம் வெய் மிங் & குளோயி! குழந்தை லூகாஸ் பிறந்ததற்கு மனமார்ந்த வாழ்த்துகள்! 🍼✨ உங்கள் குடும்பத்திற்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nமுக்கிய தகவல்: PRUWith You Plus மூலம் RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசைப் பெறலாம், மேலும் உங்கள் FD வட்டியை மட்டுமே பயன்படுத்தி PRUMy Child Plus (27 பிறவி நோய்கள், மஞ்சள் காமாலை, ஆட்டிசம்/ADHD + PRUSaver Kid கல்வி நிதி) திட்டத்தை உறுதி செய்யலாம். 2 நிமிட சுருக்கத்தை அனுப்பட்டுமா? 😊",
+          "வணக்கம் வெய் மிங் & குளோயி! குழந்தை லூகாஸ் பிறந்ததற்கு மனமார்ந்த வாழ்த்துகள்! 🍼✨ உங்கள் குடும்பத்திற்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nமுக்கிய தகவல்: PRUWith You Plus மூலம் RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசைப் பெறலாம், மேலும் உங்கள் FD வட்டியை மட்டுமே பயன்படுத்தி PRUMy Child Plus (முதல் நாள் குழந்தை நலப் பாதுகாப்பு, வளர்ச்சிப் பராமரிப்பு + PRUSaver Kid பல்கலைக்கழக கல்வி நிதி & Payor Waiver) திட்டத்தை உறுதி செய்யலாம். 2 நிமிட சுருக்கத்தை அனுப்பட்டுமா? 😊",
         defaultEmail:
-          "பொருள்: குழந்தை லூகாஸிற்கான உண்மையான ஒப்பீடு: PRU (PRUMy Child Plus) vs AIA (A-Life Joy Xtra)\n\nவணக்கம் வெய் மிங் & குளோயி,\nAIA A-Life Joy Xtra திட்டத்தை விட PRU திட்டம் சிறந்த மதிப்பை வழங்குவதற்கான 3 உண்மையான காரணங்கள்:\n1. இலவச +50% தானியங்கி காப்பீட்டு உயர்வு: PRUWith You Plus எந்த கூடுதல் கட்டணமும் இன்றி (+1%/ஆண்டு) +50% வரை காப்பீட்டை உயர்த்துகிறது (AIA Vitality உறுப்பினர் கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு + 27 பிறவி நோய்கள் மற்றும் Payor Waiver பாதுகாப்பு.\n3. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது பிரீமியத்தில் 15% நேரடித் தள்ளுபடி வழங்குகிறது.\n\nவியாழக்கிழமை இரவு 8 மணிக்கு 10 நிமிட Zoom அழைப்பில் பேசலாமா!",
+          "பொருள்: குழந்தை லூகாஸிற்கான உண்மையான ஒப்பீடு: PRU (PRUMy Child Plus) vs AIA (A-Life Joy Xtra)\n\nவணக்கம் வெய் மிங் & குளோயி,\nAIA A-Life Joy Xtra திட்டத்தை விட PRU திட்டம் சிறந்த மதிப்பை வழங்குவதற்கான 3 உண்மையான காரணங்கள்:\n1. இலவச +50% தானியங்கி காப்பீட்டு உயர்வு: PRUWith You Plus எந்த கூடுதல் கட்டணமும் இன்றி (+1%/ஆண்டு) +50% வரை காப்பீட்டை உயர்த்துகிறது (AIA Vitality உறுப்பினர் கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு + முதல் நாள் குழந்தை நலப் பாதுகாப்பு மற்றும் Payor Waiver சலுகை.\n3. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது பிரீமியத்தில் 15% நேரடித் தள்ளுபடி வழங்குகிறது.\n\nவியாழக்கிழமை இரவு 8 மணிக்கு 10 நிமிட Zoom அழைப்பில் பேசலாமா!",
       },
     },
   },
   {
     id: "ci_health_scare",
-    icon: "❤️‍🩹",
+    icon: "⚡",
     i18n: {
       en: {
-        shortLabel: "Age 40 & Heart Scare",
+        shortLabel: "Turning-40 Wellness Milestone",
         customerName: "Jason Khoo (39, Penang Tech Director)",
-        existingGap: "Old RM 100k Life policy • RM 0 Critical Illness income shield",
-        lifeEvent: "Turning 40 next month; partner had emergency RM 95k heart stent",
+        existingGap: "Old RM 100k Life policy • Ready to upgrade executive wellness & income continuity shield",
+        lifeEvent: "Turning 40 next month after annual executive wellness checkup; wants Age-39 rates & 110% refund",
         pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
         aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
         customerReply:
@@ -1037,24 +1037,24 @@ const PAMB_C3_SCENARIOS = [
           "Happy 40th Milestone Birthday, Jason Khoo! 🛡️",
         ],
         whatsappChips: [
-          "Lock in age-39 rates before next month: PRUAll Care (~190 CI conditions + ICU + 20% Recovery Care) + PRUMillion Med Active 2.0 (15% discount)",
-          "Add PRUMan (260% male CI cover + up to 110% total premium refund at maturity—zero 'dead money')",
+          "Lock in age-39 rates before next month: PRUAll Care (~190 wellness & recovery conditions to Age 100 + 20% Recovery Care) + PRUMillion Med Active 2.0 (15% discount)",
+          "Add PRUMan (260% executive wellness protection + up to 110% total premium refund at maturity)",
         ],
         aiaFacts: [
-          "✓ Covers ~190 CI Conditions to Age 100 (PRUAll Care vs. AIA A-Life Beyond expiring at Age 80)",
+          "✓ Protects ~190 Conditions to Age 100 (PRUAll Care vs. AIA A-Life Beyond expiring at Age 80)",
           "✓ 15% Instant Cash Premium Discount (PRUMillion Med Active 2.0 vs. AIA Health360 wallet credit)",
-          "✓ Up to 110% Maturity Refund (PRUMan 260% male CI + 110% refund if healthy)",
+          "✓ Up to 110% Maturity Refund (PRUMan 260% executive protection + 110% refund at maturity)",
         ],
         defaultWhatsapp:
-          "Happy early 40th Birthday, Jason! 🥂 Glad your partner is recovering well after his cardiac stent—I made this milestone card for your 40th.\n\nBefore your age-40 rate jump next month, we can lock in PRUAll Care (~190 CI conditions + ICU + 20% Recovery Care) and PRUMillion Med Active 2.0 (RM 8M medical limit + 15% claim-free discount). Free for a 10-min coffee in Bayan Lepas this week? ☕",
+          "Happy early 40th Birthday, Jason! 🥂 Awesome news on your clean annual executive wellness checkup—I made this milestone card for your 40th.\n\nBefore your age-40 rate step-up next month, we can lock in favorable Age-39 rates on PRUAll Care (~190 wellness & recovery conditions to Age 100 + 20% Recovery Care) and PRUMillion Med Active 2.0 (RM 8M limit + 15% claim-free discount). Free for a 10-min coffee in Bayan Lepas this week? ☕",
         defaultEmail:
-          "Subject: Factual Comparison Before Age 40: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\nHi Jason,\nHere is the factual side-by-side between our PRU plan and AIA before your age-39 window closes:\n1. Coverage to Age 100 & ~190 Conditions: PRUAll Care covers ~190 illnesses up to Age 100 (including ICU >=120 hrs & Mental Health), whereas AIA A-Life Beyond Critical Care expires at Age 80.\n2. 15% Direct Premium Discount: PRUMillion Med Active 2.0 cuts your cash premium by 15% when claim-free (AIA charges full premium and only credits a Health Wallet).\n3. 110% Premium Refund: PRUMan gives 260% male CI cover + up to 110% maturity refund.\n\nLet's review the 1-page rate sheet over coffee this Thursday!",
+          "Subject: Factual Comparison Before Age 40: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\nHi Jason,\nHere is the factual side-by-side between our PRU plan and AIA before your age-39 window closes:\n1. Comprehensive Protection to Age 100 & ~190 Conditions: PRUAll Care covers ~190 conditions up to Age 100 (+20% Recovery Care), whereas AIA A-Life Beyond Critical Care expires at Age 80.\n2. 15% Direct Premium Discount: PRUMillion Med Active 2.0 cuts your cash premium by 15% when claim-free (AIA charges full premium and only credits a Health Wallet).\n3. 110% Maturity Cash Refund: PRUMan gives 260% executive wellness protection + up to 110% maturity refund.\n\nLet's review the 1-page rate sheet over coffee this Thursday!",
       },
       "zh-CN": {
-        shortLabel: "40岁生日与心脏警讯",
+        shortLabel: "40岁高管健康里程碑",
         customerName: "邱家豪 Jason Khoo (39岁，槟城科技总监)",
-        existingGap: "旧 RM 10万寿险 • RM 0 重疾收入替代与高端医疗",
-        lifeEvent: "下个月满 40 岁；合伙人刚做 RM 9.5万紧急心脏支架手术",
+        existingGap: "旧 RM 10万寿险 • 计划升级高管全方位健康与收入延续护盾",
+        lifeEvent: "年度高管健康体检顺利达标，下个月即将满 40 岁；希望锁定39岁费率与110%返还",
         pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
         aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
         customerReply:
@@ -1065,52 +1065,52 @@ const PAMB_C3_SCENARIOS = [
           "祝 Jason Khoo 40 岁里程碑生日快乐，事业家庭双丰收！🛡️",
         ],
         whatsappChips: [
-          "赶在下月满40岁保费跳涨前锁定39岁费率：PRUAll Care（~190种重疾+ICU+20%康复津贴）+ PRUMillion Med Active 2.0（15%保费折扣）",
-          "搭配 PRUMan（高达260%男性危疾保障 + 满期健康退还高达110%总保费，绝不白交保费）",
+          "赶在下月满40岁调整费率前锁定39岁费率：PRUAll Care（~190项全面健康与康复守护至100岁+20%康复津贴）+ PRUMillion Med Active 2.0（15%保费折扣）",
+          "搭配 PRUMan（高达260%高管健康保障 + 满期退还高达110%总保费）",
         ],
         aiaFacts: [
-          "✓ 保障约 190 种重疾至 100 岁（PRUAll Care 保至100岁 vs AIA A-Life Beyond 仅保至80岁）",
+          "✓ 保障约 190 项健康与康复条件至 100 岁（PRUAll Care 保至100岁 vs AIA A-Life Beyond 仅保至80岁）",
           "✓ 无索赔享 15% 现金保费折扣（PRUMillion Med Active 2.0 直接扣减保费 vs AIA 仅记入钱包）",
-          "✓ 满期退还高达 110% 总保费（PRUMan 提供260%男性危疾保障 + 110%满期退费）",
+          "✓ 满期退还高达 110% 总保费（PRUMan 提供260%高管健康保障 + 110%满期退费）",
         ],
         defaultWhatsapp:
-          "Jason，提前祝你 40 岁生日快乐！🥂 听说你合伙人做完心脏支架手术恢复得不错，我特意为你制作了这张 40 岁里程碑贺卡。\n\n趁下个月满 40 岁保费跳涨前，我们可以用 39 岁健康费率锁定 PRUAll Care（涵盖约190种重疾、ICU 满120小时及额外20%康复护理金）与 PRUMillion Med Active 2.0（RM 800万年度医疗限额 + 无索赔15%现金保费折扣）。本周在 Bayan Lepas 喝杯10分钟咖啡聊聊？☕",
+          "Jason，提前祝你 40 岁生日快乐！🥂 恭喜年度高管健康体检一切顺利达标，我特意为你制作了这张 40 岁健康里程碑贺卡。\n\n趁下个月满 40 岁费率调整前，我们可以用 39 岁黄金健康费率锁定 PRUAll Care（涵盖约190项全面健康与康复保障至100岁及额外20%康复津贴）与 PRUMillion Med Active 2.0（RM 800万年度医疗限额 + 无索赔15%现金保费折扣）。本周在 Bayan Lepas 喝杯10分钟咖啡聊聊？☕",
         defaultEmail:
-          "主题：40岁前重疾与医疗客观对比：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\nJason 您好：\n赶在您 39 岁费率窗口关闭前，为您整理PRU 方案与友邦 AIA 的 3 大客观条款差异：\n1. 保至 100 岁且涵盖约 190 种疾病：PRUAll Care 保障约 190 种严重疾病至 100 岁（含 ICU >=120 小时及精神健康），而 AIA A-Life Beyond Critical Care 仅保至 80 岁。\n2. 15% 直接现金保费折扣：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仍收全额保费，仅把额度记入 Health Wallet）。\n3. 高达 110% 保费退还：PRUMan 提供高达 260% 男性危疾赔付，若平安满期可退还高达 110% 已缴总保费。\n\n这周四喝咖啡时我带一页式费率对比表给您过目！",
+          "主题：40岁健康里程碑客观对比：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\nJason 您好：\n赶在您 39 岁费率窗口关闭前，为您整理 PRU 方案与友邦 AIA 的 3 大客观条款差异：\n1. 保至 100 岁且涵盖约 190 项全面守护：PRUAll Care 全面健康与康复守护至 100 岁（含额外 20% 康复津贴），而 AIA A-Life Beyond Critical Care 仅保至 80 岁。\n2. 15% 直接现金保费折扣：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仍收全额保费，仅把额度记入 Health Wallet）。\n3. 高达 110% 保费退还：PRUMan 提供高达 260% 高管健康保障，满期可退还高达 110% 已缴总保费。\n\n这周四喝咖啡时我带一页式费率对比表给您过目！",
       },
       yue: {
-        shortLabel: "40歲生日兼心臟警號",
+        shortLabel: "40歲高管健康里程碑",
         customerName: "邱家豪 Jason Khoo (39歲，檳城 Tech 總監)",
-        existingGap: "舊 RM 10萬人壽 • RM 0 危疾收入保障",
-        lifeEvent: "下個月踏入 40 歲；生意拍檔啱啱通波仔使咗 RM 95k",
+        existingGap: "舊 RM 10萬人壽 • 計劃升級高管全面健康與收入延續保障",
+        lifeEvent: "年度高管體檢靚仔達標，下個月踏入 40 歲；想鎖定39歲靚價同110%回贈",
         pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
         aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
         customerReply:
-          "「多謝你張 40 歲生日卡呀 Bro！我有個做 AIA 嘅 friend 啱啱 sell 我 AIA A-Life Beyond Critical Care + A-Plus Health360。你可唔可以 Email 份PRU vs AIA 嘅真實比較俾我睇？」",
+          "「多謝你張 40 歲生日卡呀 Bro！我有個做 AIA 嘅 friend 啱啱 sell 我 AIA A-Life Beyond Critical Care + A-Plus Health360。你可唔可以 Email 份 PRU vs AIA 嘅真實比較俾我睇？」",
         cardHeadline: "賀 Jason 40 歲事業巔峰、身體健康！🥂",
         cardChips: [
           "賀 Jason 40 歲事業巔峰、身體健康！🥂",
           "祝 Jason Khoo 40 歲大壽快樂，健康同事業一樣咁勁！🛡️",
         ],
         whatsappChips: [
-          "趕喺下個月 40 歲加價前鎖定 39 歲保費：PRUAll Care（~190種危疾+ICU+20%康復金）+ PRUMillion Med Active 2.0（15%保費折扣）",
-          "加埋 PRUMan（高達 260% 男士危疾 + 期滿無索償退返高達 110% 總保費，一啲都唔會蝕底）",
+          "趕喺下個月 40 歲調整保費前鎖定 39 歲靚價：PRUAll Care（~190項周全健康守護到100歲+20%康復金）+ PRUMillion Med Active 2.0（15%保費折扣）",
+          "加埋 PRUMan（高達 260% 高管健康保障 + 期滿退返高達 110% 總保費）",
         ],
         aiaFacts: [
-          "✓ 保約 190 種危疾到 100 歲（PRUAll Care 保到100歲 vs AIA A-Life Beyond 80歲就滿期）",
+          "✓ 保約 190 項周全守護到 100 歲（PRUAll Care 保到100歲 vs AIA A-Life Beyond 80歲就滿期）",
           "✓ 無 Claim 直接減 15% 現金保費（PRUMillion Med Active 2.0 真係減保費 vs AIA 入落 Wallet）",
-          "✓ 期滿退返高達 110% 總保費（PRUMan 260% 男士危疾 + 110% 退費）",
+          "✓ 期滿退返高達 110% 總保費（PRUMan 260% 高管健康保障 + 110% 退費）",
         ],
         defaultWhatsapp:
-          "Jason，預祝你 40 歲生日快樂呀！🥂 聽講你拍檔通完波仔康復得幾好，我特登整咗呢張 40 歲里程碑賀卡俾你。\n\n趁下個月踏入 40 歲保費跳升之前，我哋可以用 39 歲靚價鎖定 PRUAll Care（保約190種危疾 + ICU + 20%康復津貼）同埋 PRUMillion Med Active 2.0（RM 800萬醫療額 + 無索償減 15% 保費）。今個禮拜喺 Bayan Lepas 飲杯咖啡傾 10 分鐘？☕",
+          "Jason，預祝你 40 歲生日快樂呀！🥂 恭喜你年度高管體檢靚仔達標，我特登整咗呢張 40 歲健康里程碑賀卡俾你。\n\n趁下個月踏入 40 歲保費調整之前，我哋可以用 39 歲靚價鎖定 PRUAll Care（保約190項全面健康同康復守護到100歲 + 20%康復津貼）同埋 PRUMillion Med Active 2.0（RM 800萬醫療額 + 無索償減 15% 保費）。今個禮拜喺 Bayan Lepas 飲杯咖啡傾 10 分鐘？☕",
         defaultEmail:
-          "主題：40歲前危疾醫療客觀比較：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\nHi Jason：\n趕喺你 39 歲保費窗口閂門之前，同你客觀對比PRU 方案同 AIA 嘅 3 大分別：\n1. 保到 100 歲兼包約 190 種病：PRUAll Care 保約 190 種危疾直到 100 歲（包埋 ICU >=120個鐘同埋精神健康），相反 AIA A-Life Beyond Critical Care 去到 80 歲就完。\n2. 直接減 15% 現金保費：PRUMillion Med Active 2.0 只要無 claim 就真金白銀減 15% 保費（AIA 照收全額保費，只係撥落 Health Wallet）。\n3. 高達 110% 保費退還：PRUMan 俾到 260% 男士危疾保障，平安到尾仲退返高達 110% 總保費。\n\n星期四飲咖啡嗰陣我帶埋張一頁紙對比表俾你過目！",
+          "主題：40歲健康里程碑客觀比較：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\nHi Jason：\n趕喺你 39 歲保費窗口閂門之前，同你客觀對比 PRU 方案同 AIA 嘅 3 大分別：\n1. 保到 100 歲兼包約 190 項周全守護：PRUAll Care 全面健康同康復保障直到 100 歲（仲有額外 20% 康復金），相反 AIA A-Life Beyond Critical Care 去到 80 歲就完。\n2. 直接減 15% 現金保費：PRUMillion Med Active 2.0 只要無 claim 就真金白銀減 15% 保費（AIA 照收全額保費，只係撥落 Health Wallet）。\n3. 高達 110% 保費退還：PRUMan 俾到 260% 高管健康保障，期滿仲退返高達 110% 總保費。\n\n星期四飲咖啡嗰陣我帶埋張一頁紙對比表俾你過目！",
       },
       ms: {
-        shortLabel: "Umur 40 & Kejutan Jantung",
+        shortLabel: "Mercu Kesejahteraan Umur 40",
         customerName: "Jason Khoo (39, Pengarah Teknologi Pulau Pinang)",
-        existingGap: "Polisi Hayat lama RM 100k • RM 0 perisai pendapatan Penyakit Kritikal",
-        lifeEvent: "Bakal mencecah umur 40 bulan depan; rakan kongsi jalani sten jantung RM 95k",
+        existingGap: "Polisi Hayat lama RM 100k • Sedia menaik taraf perlindungan kesejahteraan & kesinambungan pendapatan",
+        lifeEvent: "Bakal mencecah umur 40 bulan depan selepas pemeriksaan kesihatan eksekutif; mahu kadar Umur 39 & pulangan 110%",
         pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
         aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
         customerReply:
@@ -1121,24 +1121,24 @@ const PAMB_C3_SCENARIOS = [
           "Selamat Hari Jadi Ke-40, Jason Khoo! 🛡️",
         ],
         whatsappChips: [
-          "Kunci kadar umur 39 sebelum bulan depan: PRUAll Care (~190 keadaan CI + ICU + 20% Penjagaan Pemulihan) + PRUMillion Med Active 2.0 (diskaun 15%)",
-          "Tambah PRUMan (260% perlindungan CI lelaki + sehingga 110% pulangan premium semasa matang)",
+          "Kunci kadar umur 39 sebelum bulan depan: PRUAll Care (~190 perlindungan kesejahteraan hingga Umur 100 + 20% Penjagaan Pemulihan) + PRUMillion Med Active 2.0 (diskaun 15%)",
+          "Tambah PRUMan (260% perlindungan eksekutif + sehingga 110% pulangan premium semasa matang)",
         ],
         aiaFacts: [
-          "✓ Melindungi ~190 Keadaan CI hingga Umur 100 (PRUAll Care lwn AIA A-Life Beyond tamat pada Umur 80)",
+          "✓ Melindungi ~190 Kondisi Kesejahteraan hingga Umur 100 (PRUAll Care lwn AIA A-Life Beyond tamat pada Umur 80)",
           "✓ Diskaun Premium Tunai 15% (PRUMillion Med Active 2.0 lwn kredit dompet AIA Health360)",
-          "✓ Pulangan Matang Sehingga 110% (PRUMan 260% CI lelaki + 110% pulangan jika sihat)",
+          "✓ Pulangan Matang Sehingga 110% (PRUMan 260% perlindungan eksekutif + 110% pulangan matang)",
         ],
         defaultWhatsapp:
-          "Selamat menyambut Hari Jadi ke-40 awal, Jason! 🥂 Syukur rakan kongsi anda semakin pulih selepas pembedahan sten jantung—saya reka kad khas ini untuk ulang tahun ke-40 anda.\n\nSebelum kadar premium umur 40 meningkat bulan depan, kita boleh kunci PRUAll Care (~190 keadaan CI + ICU + 20% Penjagaan Pemulihan) dan PRUMillion Med Active 2.0 (had RM 8 Juta + diskaun 15% tanpa tuntutan). Jom minum kopi 10 minit di Bayan Lepas minggu ini? ☕",
+          "Selamat menyambut Hari Jadi ke-40 awal, Jason! 🥂 Tahniah atas keputusan pemeriksaan kesihatan tahunan eksekutif yang cemerlang—saya reka kad khas ini untuk ulang tahun ke-40 anda.\n\nSebelum kadar premium umur 40 meningkat bulan depan, kita boleh kunci PRUAll Care (~190 perlindungan kesejahteraan & pemulihan hingga Umur 100 + 20% Penjagaan Pemulihan) dan PRUMillion Med Active 2.0 (had RM 8 Juta + diskaun 15% tanpa tuntutan). Jom minum kopi 10 minit di Bayan Lepas minggu ini? ☕",
         defaultEmail:
-          "Subjek: Perbandingan Berfakta Sebelum Umur 40: PRU (PRUAll Care) lwn AIA (A-Life Beyond Critical Care)\n\nHai Jason,\nBerikut ialah perbandingan berfakta antara our PRU plan dan AIA sebelum tetingkap umur 39 anda ditutup:\n1. Perlindungan hingga Umur 100 & ~190 Keadaan: PRUAll Care melindungi ~190 penyakit sehingga Umur 100 (termasuk ICU >=120 jam & Kesihatan Mental), manakala AIA A-Life Beyond Critical Care tamat pada Umur 80.\n2. Diskaun Premium Langsung 15%: PRUMillion Med Active 2.0 memotong premium tunai anda sebanyak 15% apabila tiada tuntutan.\n3. Pulangan Premium 110%: PRUMan memberi 260% perlindungan CI lelaki + sehingga 110% pulangan premium semasa matang.\n\nMari kita semak jadual kadar 1 halaman sambil minum kopi Khamis ini!",
+          "Subjek: Perbandingan Berfakta Sebelum Umur 40: PRU (PRUAll Care) lwn AIA (A-Life Beyond Critical Care)\n\nHai Jason,\nBerikut ialah perbandingan berfakta antara pelan PRU dan AIA sebelum tetingkap umur 39 anda ditutup:\n1. Perlindungan hingga Umur 100 & ~190 Kondisi: PRUAll Care melindungi ~190 keadaan kesejahteraan sehingga Umur 100, manakala AIA A-Life Beyond Critical Care tamat pada Umur 80.\n2. Diskaun Premium Langsung 15%: PRUMillion Med Active 2.0 memotong premium tunai anda sebanyak 15% apabila tiada tuntutan.\n3. Pulangan Premium 110%: PRUMan memberi 260% perlindungan eksekutif + sehingga 110% pulangan premium semasa matang.\n\nMari kita semak jadual kadar 1 halaman sambil minum kopi Khamis ini!",
       },
       ta: {
-        shortLabel: "வயது 40 & இதய சிகிச்சை எச்சரிக்கை",
+        shortLabel: "40 வயது ஆரோக்கிய மைல்கல்",
         customerName: "ஜேசன் கூ (Jason Khoo, 39, பினாங்கு தொழில்நுட்ப இயக்குநர்)",
-        existingGap: "பழைய RM 100k ஆயுள் பாலிசி • RM 0 தீவிர நோய் (CI) வருமான பாதுகாப்பு",
-        lifeEvent: "அடுத்த மாதம் 40 வயது; தொழில் கூட்டாளிக்கு RM 95k அவசர இதய ஸ்டென்ட் சிகிச்சை",
+        existingGap: "பழைய RM 100k ஆயுள் பாலிசி • விரிவான நலன் மற்றும் வருமான தொடர்ச்சிப் பாதுகாப்பை மேம்படுத்தத் தயார்",
+        lifeEvent: "வருடாந்திர உடல்நலப் பரிசோதனைக்குப் பின் அடுத்த மாதம் 40 வயது; 39 வயது சலுகைக் கட்டணம் & 110% முதிர்வுப் பலன்",
         pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
         aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
         customerReply:
@@ -1149,18 +1149,18 @@ const PAMB_C3_SCENARIOS = [
           "இனிய 40வது பிறந்தநாள் நல்வாழ்த்துகள், ஜேசன் கூ! 🛡️",
         ],
         whatsappChips: [
-          "அடுத்த மாதம் 40 வயது கட்டண உயர்வுக்கு முன் 39 வயது கட்டணத்தில் PRUAll Care (~190 CI + ICU + 20% Recovery Care) உறுதி செய்க",
-          "PRUMan (260% ஆண்கள் தீவிர நோய் காப்பீடு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்) சேர்க்கவும்",
+          "அடுத்த மாதம் 40 வயது கட்டண உயர்வுக்கு முன் 39 வயது கட்டணத்தில் PRUAll Care (~190 நலன் பாதுகாப்பு + 20% Recovery Care) உறுதி செய்க",
+          "PRUMan (260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்) சேர்க்கவும்",
         ],
         aiaFacts: [
-          "✓ 100 வயது வரை ~190 தீவிர நோய்களுக்கு பாதுகாப்பு (PRUAll Care vs 80 வயதில் முடியும் AIA A-Life Beyond)",
+          "✓ 100 வயது வரை ~190 நிலைகளுக்கு பாதுகாப்பு (PRUAll Care vs 80 வயதில் முடியும் AIA A-Life Beyond)",
           "✓ 15% நேரடி பிரீமியம் ரொக்கத் தள்ளுபடி (PRUMillion Med Active 2.0 vs AIA Health360 வாலட்)",
-          "✓ முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல் (PRUMan 260% CI + 110% refund)",
+          "✓ முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல் (PRUMan 260% பாதுகாப்பு + 110% refund)",
         ],
         defaultWhatsapp:
-          "இனிய 40வது பிறந்தநாள் நல்வாழ்த்துகள் ஜேசன்! 🥂 உங்கள் தொழில் கூட்டாளி இதய சிகிச்சைக்குப் பிறகு நலமாகத் தேறி வருவது மகிழ்ச்சி—உங்களுக்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nஅடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUAll Care (~190 தீவிர நோய்கள் + ICU + 20% Recovery Care) மற்றும் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) திட்டங்களை உறுதி செய்யலாம். இந்த வாரம் Bayan Lepas-ல் 10 நிமிடம் காபி அருந்தலாமா? ☕",
+          "இனிய 40வது பிறந்தநாள் நல்வாழ்த்துகள் ஜேசன்! 🥂 உங்கள் வருடாந்திர முழு உடல்நலப் பரிசோதனை சிறப்பாக அமைந்ததற்கு வாழ்த்துகள்—உங்களுக்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nஅடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUAll Care (~190 நலன் & குணமடைதல் பாதுகாப்பு + 20% Recovery Care) மற்றும் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) திட்டங்களை உறுதி செய்யலாம். இந்த வாரம் Bayan Lepas-ல் 10 நிமிடம் காபி அருந்தலாமா? ☕",
         defaultEmail:
-          "பொருள்: 40 வயதுக்கு முன் உண்மையான ஒப்பீடு: PRU (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\nவணக்கம் ஜேசன்,\nஉங்கள் 39 வயது சலுகை முடிவதற்குள் our PRU plan மற்றும் AIA இடையேயான உண்மையான ஒப்பீடு:\n1. 100 வயது வரை பாதுகாப்பு & ~190 நோய்கள்: PRUAll Care 100 வயது வரை ~190 நோய்களை உள்ளடக்கியது (AIA A-Life Beyond Critical Care 80 வயதில் முடிவடைகிறது).\n2. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது 15% நேரடி ரொக்கத் தள்ளுபடி தருகிறது.\n3. 110% பிரீமியம் திரும்பப் பெறுதல்: PRUMan 260% ஆண்கள் CI பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பத் தருகிறது.\n\nஇந்த வியாழக்கிழமை காபி சந்திப்பில் 1 பக்க அட்டவணையைப் பார்ப்போம்!",
+          "பொருள்: 40 வயதுக்கு முன் உண்மையான ஒப்பீடு: PRU (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\nவணக்கம் ஜேசன்,\nஉங்கள் 39 வயது சலுகை முடிவதற்குள் PRU திட்டம் மற்றும் AIA இடையேயான உண்மையான ஒப்பீடு:\n1. 100 வயது வரை பாதுகாப்பு & ~190 நிலைகள்: PRUAll Care 100 வயது வரை விரிவான நலப் பாதுகாப்பை வழங்குகிறது (AIA A-Life Beyond Critical Care 80 வயதில் முடிவடைகிறது).\n2. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது 15% நேரடி ரொக்கத் தள்ளுபடி தருகிறது.\n3. 110% பிரீமியம் திரும்பப் பெறுதல்: PRUMan 260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பத் தருகிறது.\n\nஇந்த வியாழக்கிழமை காபி சந்திப்பில் 1 பக்க அட்டவணையைப் பார்ப்போம்!",
       },
     },
   },
@@ -1171,35 +1171,35 @@ const PAMB_C3_SCENARIOS = [
       en: {
         shortLabel: "New RM 1.3M Home",
         customerName: "Amirul Hakim & Farah Nadia (35, JB)",
-        existingGap: "Medical cards only • RM 1.3M 35-yr mortgage exposed to CI",
+        existingGap: "Medical cards only • Wants portable family-owned protection + 20% mortgage continuity reserve",
         lifeEvent: "Collected keys to RM 1.3M semi-D home in Eco Botanic, JB",
         pambPlan: "PRUWith You Plus (Portable MLTA) + PRUAll Care",
         aiaPlan: "AIA A-Life Link 2 / A-Life Kasih Famili + CI Rider",
         customerReply:
-          "\"Terima kasih for the housewarming card! An AIA planner quoted us AIA A-Life Link 2 + CI rider for our mortgage. Can you email how PAMB compares factually?\"",
+          "\"Terima kasih for the housewarming card! An AIA planner quoted us AIA A-Life Link 2 + CI rider for our mortgage. Can you email how PRU compares factually?\"",
         cardHeadline: "Congratulations on Your New Eco Botanic Home! 🏡🔑",
         cardChips: [
           "Congratulations on Your New Eco Botanic Home! 🏡🔑",
           "Warmest Housewarming Wishes to Amirul & Farah! ✨",
         ],
         whatsappChips: [
-          "Claim RM 500 New Home Cash Reward (PRUWith You Plus) + portable MLTA (+50% free Booster) + PRUAll Care to cover RM 5,600/mth installments during CI",
-          "Explain why Bank MRTA pays RM 0 on Critical Illness while PAMB pays cash directly to spouse under FSA Statutory Trust",
+          "Claim RM 500 New Home Cash Reward (PRUWith You Plus) + portable MLTA (+50% free Booster) + PRUAll Care 20% mortgage continuity reserve",
+          "Explain why Bank MRTA locks value to the bank while PRU pays directly to spouse under FSA Statutory Trust",
         ],
         aiaFacts: [
           "✓ Unconditional +50% Auto Booster (PRUWith You Plus +1%/yr free vs. AIA Vitality fitness checks)",
           "✓ Immediate RM 500 New Home Goal Achievement Cash Reward upon collecting keys",
-          "✓ ~190 CI Conditions + 20% Extra Recovery Care to pay RM 5,600/mth loan installments",
+          "✓ ~190 Conditions + 20% Mortgage Continuity Reserve for RM 5,600/mth loan installments",
         ],
         defaultWhatsapp:
-          "Huge congratulations Amirul & Farah on collecting the keys to your Eco Botanic dream home! 🏡🔑 I designed this housewarming card for you both.\n\nUnlike bank MRTA (which pays RM 0 during Critical Illness), PRUWith You Plus + PRUAll Care gives you an immediate RM 500 New Home Cash Reward, a free +50% Auto Sum Assured Booster, and covers your RM 5,600/mth installments across ~190 CI conditions. Can I send a 1-page summary? 😊",
+          "Huge congratulations Amirul & Farah on collecting the keys to your Eco Botanic dream home! 🏡🔑 I designed this housewarming card for you both.\n\nUnlike bank-locked MRTA, portable family-owned PRUWith You Plus + PRUAll Care gives you an immediate RM 500 New Home Cash Reward, a free +50% Auto Sum Assured Booster, and a 20% mortgage continuity reserve across ~190 conditions. Can I send a 1-page summary? 😊",
         defaultEmail:
-          "Subject: Eco Botanic Mortgage Shield Comparison: PRU (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\nHi Amirul & Farah,\nHere are 3 factual advantages of PRUWith You Plus + PRUAll Care over AIA A-Life Link 2 for your RM 1.3M mortgage:\n1. Unconditional +50% Auto Sum Assured Booster: Grows +1%/yr up to +50% at RM 0 extra cost without needing annual AIA Vitality fitness/membership fees.\n2. Immediate RM 500 New Home Cash Reward: Direct RM 500 cash payout upon buying your Eco Botanic home.\n3. ~190 CI Conditions + 20% Extra Recovery Care: Pays an extra 20% buffer on top of CI sum assured so your RM 5,600/mth loan never defaults.\n\nShall we do a 10-min call tomorrow at 8:30 PM?",
+          "Subject: Eco Botanic Mortgage Shield Comparison: PRU (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\nHi Amirul & Farah,\nHere are 3 factual advantages of PRUWith You Plus + PRUAll Care over AIA A-Life Link 2 for your RM 1.3M mortgage:\n1. Unconditional +50% Auto Sum Assured Booster: Grows +1%/yr up to +50% at RM 0 extra cost without needing annual AIA Vitality fitness/membership fees.\n2. Immediate RM 500 New Home Cash Reward: Direct RM 500 cash payout upon buying your Eco Botanic home.\n3. ~190 Conditions + 20% Mortgage Continuity Reserve: Adds an extra 20% continuity reserve so your RM 5,600/mth installments stay smoothly on track.\n\nShall we do a 10-min call tomorrow at 8:30 PM?",
       },
       "zh-CN": {
         shortLabel: "新居 RM 130万房贷",
         customerName: "Amirul Hakim & Farah Nadia (35岁，新山 JB)",
-        existingGap: "仅有医药卡 • RM 130万 35年期房贷缺乏重疾断供保障",
+        existingGap: "仅有医药卡 • 希望配置可携式家庭护盾与 20% 房贷延续储备金",
         lifeEvent: "刚拿到新山 Eco Botanic RM 130万半独立式洋房钥匙",
         pambPlan: "PRUWith You Plus (可携式 MLTA) + PRUAll Care",
         aiaPlan: "AIA A-Life Link 2 / A-Life Kasih Famili + CI Rider",
@@ -1211,23 +1211,23 @@ const PAMB_C3_SCENARIOS = [
           "祝 Amirul 与 Farah 新居入伙大吉，幸福美满！✨",
         ],
         whatsappChips: [
-          "申领 RM 500 购屋现金奖赏 (PRUWith You Plus) + 免费+50%保额递增 MLTA + PRUAll Care 保障患重疾时每月 RM 5,600 房贷不断供",
-          "解析为何银行 MRTA 在患重疾时赔付 RM 0，而保诚通过 FSA 法定信托直接赔付现金给配偶",
+          "申领 RM 500 购屋现金奖赏 (PRUWith You Plus) + 免费+50%保额递增 MLTA + PRUAll Care 20% 房贷延续储备金",
+          "解析可携式 MLTA 如何通过 FSA 法定信托直接把保障权益留给家人",
         ],
         aiaFacts: [
           "✓ 无条件免费 +50% 保额自动递增（PRUWith You Plus 每年免费+1%，无需 AIA Vitality 年费）",
           "✓ 拿到新房钥匙即可申领 RM 500 购屋里程碑现金奖赏",
-          "✓ 涵盖约 190 种重疾 + 额外 20% 康复津贴，确保每月 RM 5,600 房贷绝不断供",
+          "✓ 涵盖约 190 项保障 + 20% 房贷延续储备金，稳妥守护每月 RM 5,600 房贷顺畅",
         ],
         defaultWhatsapp:
-          "衷心恭喜 Amirul 与 Farah 喜获新山 Eco Botanic 梦想新居钥匙！🏡🔑 我特意为你们设计了这张乔迁祝贺卡。\n\n不同于银行 MRTA（罹患重疾时赔付 RM 0），PRUWith You Plus + PRUAll Care 不仅让您立即申领 RM 500 购屋现金奖赏、享有免费高达 +50% 保额递增，还能在发生约 190 种重疾时替您偿还每月 RM 5,600 的房贷供期。我发一份 1 页式对比图给您看看好吗？😊",
+          "衷心恭喜 Amirul 与 Farah 喜获新山 Eco Botanic 梦想新居钥匙！🏡🔑 我特意为你们设计了这张乔迁祝贺卡。\n\n不同于绑定银行的 MRTA，可携式家庭护盾 PRUWith You Plus + PRUAll Care 不仅让您立即申领 RM 500 购屋现金奖赏、享有免费高达 +50% 保额递增，还附带 20% 房贷延续储备金守护每月 RM 5,600 供期。我发一份 1 页式对比图给您看看好吗？😊",
         defaultEmail:
-          "主题：Eco Botanic RM 130万房贷保障对比：PRU (PRUWith You Plus) vs 友邦 (AIA A-Life Link 2)\n\nAmirul 与 Farah 您好：\n针对您 RM 130 万的新居房贷，以下是PRU 方案相比 AIA A-Life Link 2 的 3 大客观优势：\n1. 无条件免费 +50% 保额自动递增：每年自动增长 1% 至最高 +50%，零额外保费，也无需缴付 AIA Vitality 健身会员费。\n2. 立即申领 RM 500 购屋现金奖赏：购买 Eco Botanic 新居即可直接获得 RM 500 现金祝贺金。\n3. 约 190 种重疾 + 额外 20% 康复护理金：在重疾保额之上额外赔付 20% 现金缓冲，确保每月 RM 5,600 房贷绝不逾期。\n\n我们明晚 8:30 通个 10 分钟电话细聊好吗？",
+          "主题：Eco Botanic RM 130万房贷保障对比：PRU (PRUWith You Plus) vs 友邦 (AIA A-Life Link 2)\n\nAmirul 与 Farah 您好：\n针对您 RM 130 万的新居房贷，以下是 PRU 方案相比 AIA A-Life Link 2 的 3 大客观优势：\n1. 无条件免费 +50% 保额自动递增：每年自动增长 1% 至最高 +50%，零额外保费，也无需缴付 AIA Vitality 健身会员费。\n2. 立即申领 RM 500 购屋现金奖赏：购买 Eco Botanic 新居即可直接获得 RM 500 现金祝贺金。\n3. 约 190 项保障 + 20% 房贷延续储备金：额外加码 20% 房贷延续储备，让每月 RM 5,600 新居供款稳健无忧。\n\n我们明晚 8:30 通个 10 分钟电话细聊好吗？",
       },
       yue: {
         shortLabel: "新樓 RM 130萬按揭",
         customerName: "Amirul Hakim & Farah Nadia (35歲，新山 JB)",
-        existingGap: "得張醫藥卡 • RM 130萬 35年供樓按揭無危疾斷供保障",
+        existingGap: "得張醫藥卡 • 想配置跟身家庭保障同埋 20% 供樓延續儲備金",
         lifeEvent: "啱啱收鎖匙入伙新山 Eco Botanic RM 130萬半獨立屋",
         pambPlan: "PRUWith You Plus (可攜式 MLTA) + PRUAll Care",
         aiaPlan: "AIA A-Life Link 2 / A-Life Kasih Famili + CI Rider",
@@ -1239,23 +1239,23 @@ const PAMB_C3_SCENARIOS = [
           "祝 Amirul 同 Farah 新居入伙大吉、安居樂業！✨",
         ],
         whatsappChips: [
-          "拎 RM 500 買樓現金獎賞 (PRUWith You Plus) + 免費+50%加大保額 MLTA + PRUAll Care 頂住每月 RM 5,600 供樓唔怕斷供",
-          "解釋點解銀行 MRTA 中危疾係賠 RM 0，而保誠透過 FSA 法定信託直接賠現金俾另一半",
+          "拎 RM 500 買樓現金獎賞 (PRUWith You Plus) + 免費+50%加大保額 MLTA + PRUAll Care 20% 供樓延續儲備金",
+          "解釋跟身 MLTA 點樣透過 FSA 法定信託將保障權益留返俾屋企人",
         ],
         aiaFacts: [
           "✓ 無條件免費 +50% 自動加大保額（PRUWith You Plus 每年免費+1%，唔使交 AIA Vitality 年費）",
           "✓ 收鎖匙即拎 RM 500 買樓里程碑現金獎賞",
-          "✓ 保約 190 種危疾 + 額外 20% 康復金，確保每月 RM 5,600 供樓唔會斷供",
+          "✓ 保約 190 項守護 + 20% 供樓延續儲備金，確保每月 RM 5,600 供樓穩健輕鬆",
         ],
         defaultWhatsapp:
-          "恭喜晒 Amirul 同 Farah 收到新山 Eco Botanic 新屋鎖匙呀！🏡🔑 我特登整咗呢張入伙賀卡送俾你哋。\n\n銀行 MRTA 萬一中危疾係賠 RM 0 㗎；相反PRUWith You Plus + PRUAll Care 一收鎖匙即送 RM 500 買樓現金獎賞、免費高達 +50% 自動加大保額，仲包約 190 種危疾幫你頂住每個月 RM 5,600 供樓。我 WhatsApp 份一頁紙懶人包俾你哋睇下？😊",
+          "恭喜晒 Amirul 同 Farah 收到新山 Eco Botanic 新屋鎖匙呀！🏡🔑 我特登整咗呢張入伙賀卡送俾你哋。\n\n配搭跟身家庭保障 PRUWith You Plus + PRUAll Care 一收鎖匙即送 RM 500 買樓現金獎賞、免費高達 +50% 自動加大保額，仲附帶 20% 供樓延續儲備金守護每個月 RM 5,600 供樓。我 WhatsApp 份一頁紙懶人包俾你哋睇下？😊",
         defaultEmail:
-          "主題：Eco Botanic RM 130萬按揭保障比較：PRU (PRUWith You Plus) vs 友邦 (AIA A-Life Link 2)\n\nHi Amirul & Farah：\n針對你哋 RM 130 萬新屋按揭，以下係PRU 方案對比 AIA A-Life Link 2 嘅 3 個真實優勢：\n1. 無條件免費 +50% 自動加大保額：每年自動加 1% 去到 +50%，唔使加保費，亦唔使交 AIA Vitality 會費。\n2. 即拎 RM 500 買樓現金獎賞：買 Eco Botanic 新屋即刻有 RM 500 現金獎賞。\n3. 保約 190 種危疾 + 額外 20% 康復護理金：危疾保額之上再多賠 20% 現金緩衝，保證每個月 RM 5,600 供樓絕對唔會斷供。\n\n聽晚 8 點半鐘傾個 10 分鐘電話好嗎？",
+          "主題：Eco Botanic RM 130萬按揭保障比較：PRU (PRUWith You Plus) vs 友邦 (AIA A-Life Link 2)\n\nHi Amirul & Farah：\n針對你哋 RM 130 萬新屋按揭，以下係 PRU 方案對比 AIA A-Life Link 2 嘅 3 個真實優勢：\n1. 無條件免費 +50% 自動加大保額：每年自動加 1% 去到 +50%，唔使加保費，亦唔使交 AIA Vitality 會費。\n2. 即拎 RM 500 買樓現金獎賞：買 Eco Botanic 新屋即刻有 RM 500 現金獎賞。\n3. 保約 190 項守護 + 20% 供樓延續儲備金：額外加碼 20% 儲備金，確保每個月 RM 5,600 供樓順暢安心。\n\n聽晚 8 點半鐘傾個 10 分鐘電話好嗎？",
       },
       ms: {
         shortLabel: "Rumah Baru RM 1.3J",
         customerName: "Amirul Hakim & Farah Nadia (35, JB)",
-        existingGap: "Kad perubatan sahaja • Pinjaman rumah RM 1.3J (35 thn) terdedah kepada risiko CI",
+        existingGap: "Kad perubatan sahaja • Mahu perlindungan mudah alih milik keluarga + rizab kesinambungan gadai janji 20%",
         lifeEvent: "Baru mengambil kunci rumah semi-D RM 1.3J di Eco Botanic, JB",
         pambPlan: "PRUWith You Plus (MLTA Mudah Alih) + PRUAll Care",
         aiaPlan: "AIA A-Life Link 2 / A-Life Kasih Famili + CI Rider",
@@ -1267,46 +1267,46 @@ const PAMB_C3_SCENARIOS = [
           "Selamat Masuk Rumah Baru kepada Amirul & Farah! ✨",
         ],
         whatsappChips: [
-          "Tuntut Ganjaran Tunai Rumah Baru RM 500 (PRUWith You Plus) + MLTA mudah alih (+50% Booster percuma) + PRUAll Care lindungi ansuran RM 5,600/bln",
-          "Terangkan mengapa MRTA Bank membayar RM 0 semasa Penyakit Kritikal manakala PAMB membayar tunai terus kepada pasangan di bawah Amanah Berkanun FSA",
+          "Tuntut Ganjaran Tunai Rumah Baru RM 500 (PRUWith You Plus) + MLTA mudah alih (+50% Booster percuma) + rizab kesinambungan gadai janji 20%",
+          "Terangkan kelebihan MLTA milik keluarga di bawah Amanah Berkanun FSA berbanding MRTA bank",
         ],
         aiaFacts: [
           "✓ Peningkatan Automatik +50% Tanpa Syarat (PRUWith You Plus +1%/thn percuma lwn yuran AIA Vitality)",
           "✓ Ganjaran Tunai Pencapaian Rumah Baru RM 500 Segera apabila mengambil kunci",
-          "✓ ~190 Keadaan CI + 20% Penjagaan Pemulihan Tambahan untuk bayar ansuran RM 5,600/bln",
+          "✓ ~190 Kondisi + 20% Rizab Kesinambungan Gadai Janji untuk ansuran RM 5,600/bln",
         ],
         defaultWhatsapp:
-          "Tahniah Amirul & Farah kerana menerima kunci rumah impian Eco Botanic anda! 🏡🔑 Saya reka kad ucapan masuk rumah baru ini khas untuk anda berdua.\n\nBerbeza dengan MRTA bank (yang membayar RM 0 semasa Penyakit Kritikal), PRUWith You Plus + PRUAll Care memberi anda Ganjaran Tunai Rumah Baru RM 500 serta-merta, Peningkatan Perlindungan Automatik +50% percuma, dan melindungi ansuran RM 5,600/bulan anda merentasi ~190 keadaan CI. Boleh saya hantarkan ringkasan 1 halaman? 😊",
+          "Tahniah Amirul & Farah kerana menerima kunci rumah impian Eco Botanic anda! 🏡🔑 Saya reka kad ucapan masuk rumah baru ini khas untuk anda berdua.\n\nDengan pelan milik keluarga PRUWith You Plus + PRUAll Care, anda menikmati Ganjaran Tunai Rumah Baru RM 500 serta-merta, Peningkatan Perlindungan Automatik +50% percuma, dan rizab kesinambungan gadai janji 20% untuk ansuran RM 5,600/bulan anda. Boleh saya hantarkan ringkasan 1 halaman? 😊",
         defaultEmail:
-          "Subjek: Perbandingan Perisai Gadai Janji Eco Botanic: PRU (PRUWith You Plus) lwn AIA (A-Life Link 2)\n\nHai Amirul & Farah,\nBerikut ialah 3 kelebihan berfakta PRUWith You Plus + PRUAll Care berbanding AIA A-Life Link 2 untuk gadai janji RM 1.3J anda:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Tanpa Syarat: Meningkat +1%/tahun sehingga +50% pada kos tambahan RM 0 tanpa yuran tahunan AIA Vitality.\n2. Ganjaran Tunai Rumah Baru RM 500 Segera: Bayaran tunai terus RM 500 apabila membeli rumah Eco Botanic anda.\n3. ~190 Keadaan CI + 20% Penjagaan Pemulihan Tambahan: Membayar penimbal tambahan 20% supaya pinjaman RM 5,600/bulan anda tidak pernah tertunggak.\n\nBoleh kita berbual 10 minit esok jam 8:30 malam?",
+          "Subjek: Perbandingan Perisai Gadai Janji Eco Botanic: PRU (PRUWith You Plus) lwn AIA (A-Life Link 2)\n\nHai Amirul & Farah,\nBerikut ialah 3 kelebihan berfakta PRUWith You Plus + PRUAll Care berbanding AIA A-Life Link 2 untuk gadai janji RM 1.3J anda:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Tanpa Syarat: Meningkat +1%/tahun sehingga +50% pada kos tambahan RM 0 tanpa yuran tahunan AIA Vitality.\n2. Ganjaran Tunai Rumah Baru RM 500 Segera: Bayaran tunai terus RM 500 apabila membeli rumah Eco Botanic anda.\n3. ~190 Kondisi + 20% Rizab Kesinambungan Gadai Janji: Menambah rizab kesinambungan 20% supaya bayaran RM 5,600/bulan anda kekal lancar.\n\nBoleh kita berbual 10 minit esok jam 8:30 malam?",
       },
       ta: {
         shortLabel: "புதிய RM 1.3M வீடு",
         customerName: "அமிருல் ஹக்கீம் & ஃபரா நதியா (35, JB)",
-        existingGap: "மருத்துவ அட்டை மட்டும் • RM 1.3M வீட்டுக் கடனுக்கு தீவிர நோய் (CI) பாதுகாப்பு இல்லை",
+        existingGap: "மருத்துவ அட்டை மட்டும் • குடும்பத்திற்குச் சொந்தமான பாதுகாப்பு + 20% வீட்டுக் கடன் தொடர்ச்சி நிதி தேவை",
         lifeEvent: "ஜோகூர் பாரு Eco Botanic-ல் RM 1.3M மதிப்புள்ள புதிய வீட்டின் சாவியைப் பெற்றுள்ளனர்",
         pambPlan: "PRUWith You Plus (Portable MLTA) + PRUAll Care",
         aiaPlan: "AIA A-Life Link 2 / A-Life Kasih Famili + CI Rider",
         customerReply:
-          "\"புதுமனை புகுவிழா வாழ்த்து அட்டைக்கு நன்றி! எங்கள் வீட்டுக் கடனுக்காக AIA A-Life Link 2 + CI rider திட்டத்தை ஒரு AIA முகவர் பரிந்துரைத்தார். PAMB உடன் உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்ய முடியுமா?\"",
+          "\"புதுமனை புகுவிழா வாழ்த்து அட்டைக்கு நன்றி! எங்கள் வீட்டுக் கடனுக்காக AIA A-Life Link 2 + CI rider திட்டத்தை ஒரு AIA முகவர் பரிந்துரைத்தார். PRU திட்டத்துடனான உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்ய முடியுமா?\"",
         cardHeadline: "உங்கள் புதிய Eco Botanic இல்லத்திற்கு மனமார்ந்த வாழ்த்துகள்! 🏡🔑",
         cardChips: [
           "உங்கள் புதிய Eco Botanic இல்லத்திற்கு மனமார்ந்த வாழ்த்துகள்! 🏡🔑",
           "அமிருல் & ஃபரா தம்பதியருக்கு இனிய புதுமனை புகுவிழா வாழ்த்துகள்! ✨",
         ],
         whatsappChips: [
-          "RM 500 புதிய வீடு ரொக்கப் பரிசு (PRUWith You Plus) + இலவச +50% Booster MLTA + மாதம் RM 5,600 தவணையைப் பாதுகாக்கும் PRUAll Care",
-          "வங்கி MRTA தீவிர நோய்க்கு RM 0 தரும் நிலையில், PAMB FSA சட்டப்பூர்வ அறக்கட்டளை மூலம் நேரடி ரொக்கம் தருவதை விளக்குக",
+          "RM 500 புதிய வீடு ரொக்கப் பரிசு (PRUWith You Plus) + இலவச +50% Booster MLTA + 20% வீட்டுக் கடன் தொடர்ச்சி நிதி",
+          "FSA சட்டப்பூர்வ அறக்கட்டளை மூலம் PRU நேரடியாக குடும்பத்திற்குப் பலன் அளிப்பதை விளக்குக",
         ],
         aiaFacts: [
           "✓ நிபந்தனையற்ற +50% தானியங்கி காப்பீட்டு உயர்வு (PRUWith You Plus +1%/ஆண்டு இலவசம் vs AIA Vitality கட்டணம்)",
           "✓ புதிய வீட்டு சாவி பெற்றவுடன் உடனடி RM 500 ரொக்கப் பரிசு",
-          "✓ ~190 தீவிர நோய்கள் + 20% கூடுதல் Recovery Care மூலம் மாதம் RM 5,600 வீட்டுக் கடன் பாதுகாப்பு",
+          "✓ ~190 நிலைகள் + 20% வீட்டுக் கடன் தொடர்ச்சி நிதி மூலம் மாதம் RM 5,600 தவணைப் பாதுகாப்பு",
         ],
         defaultWhatsapp:
-          "உங்கள் Eco Botanic கனவு இல்லத்தின் சாவியைப் பெற்ற அமிருல் & ஃபராவிற்கு மனமார்ந்த வாழ்த்துகள்! 🏡🔑 உங்கள் இருவருக்காகவும் இந்த வாழ்த்து அட்டையை வடிவமைத்தேன்.\n\nவங்கி MRTA போலன்றி (அது தீவிர நோயின் போது RM 0 மட்டுமே தரும்), PRUWith You Plus + PRUAll Care உங்களுக்கு உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு, இலவச +50% காப்பீட்டு உயர்வு மற்றும் ~190 தீவிர நோய்களின் போதும் மாதம் RM 5,600 கடனை அடைக்கும் பாதுகாப்பை வழங்குகிறது. 1 பக்க சுருக்கத்தை அனுப்பட்டுமா? 😊",
+          "உங்கள் Eco Botanic கனவு இல்லத்தின் சாவியைப் பெற்ற அமிருல் & ஃபராவிற்கு மனமார்ந்த வாழ்த்துகள்! 🏡🔑 உங்கள் இருவருக்காகவும் இந்த வாழ்த்து அட்டையை வடிவமைத்தேன்.\n\nPRUWith You Plus + PRUAll Care உங்களுக்கு உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு, இலவச +50% காப்பீட்டு உயர்வு மற்றும் மாதம் RM 5,600 கடனைத் தடையின்றித் தொடர 20% கூடுதல் தொடர்ச்சி நிதியையும் வழங்குகிறது. 1 பக்க சுருக்கத்தை அனுப்பட்டுமா? 😊",
         defaultEmail:
-          "பொருள்: Eco Botanic வீட்டுக் கடன் பாதுகாப்பு ஒப்பீடு: PRU (PRUWith You Plus) vs AIA (A-Life Link 2)\n\nவணக்கம் அமிருல் & ஃபரா,\nஉங்கள் RM 1.3M வீட்டுக் கடனுக்கு AIA A-Life Link 2-ஐ விட PRU திட்டம் சிறந்ததாக இருப்பதற்கான 3 உண்மையான காரணங்கள்:\n1. நிபந்தனையற்ற +50% தானியங்கி காப்பீட்டு உயர்வு: ஆண்டுக்கு +1% வீதம் +50% வரை இலவசமாக உயரும் (AIA Vitality கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு: உங்கள் புதிய வீட்டிற்கு RM 500 நேரடி ரொக்கப் பரிசு.\n3. ~190 தீவிர நோய்கள் + 20% கூடுதல் Recovery Care: உங்கள் RM 5,600 மாதத் தவணை தடையின்றி செலுத்தப்படுவதை உறுதி செய்கிறது.\n\nநாளை இரவு 8:30 மணிக்கு 10 நிமிடம் தொலைபேசியில் பேசலாமா?",
+          "பொருள்: Eco Botanic வீட்டுக் கடன் பாதுகாப்பு ஒப்பீடு: PRU (PRUWith You Plus) vs AIA (A-Life Link 2)\n\nவணக்கம் அமிருல் & ஃபரா,\nஉங்கள் RM 1.3M வீட்டுக் கடனுக்கு AIA A-Life Link 2-ஐ விட PRU திட்டம் சிறந்ததாக இருப்பதற்கான 3 உண்மையான காரணங்கள்:\n1. நிபந்தனையற்ற +50% தானியங்கி காப்பீட்டு உயர்வு: ஆண்டுக்கு +1% வீதம் +50% வரை இலவசமாக உயரும் (AIA Vitality கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு: உங்கள் புதிய வீட்டிற்கு RM 500 நேரடி ரொக்கப் பரிசு.\n3. ~190 நிலைகள் + 20% வீட்டுக் கடன் தொடர்ச்சி நிதி: உங்கள் RM 5,600 மாதத் தவணை தடையின்றி செலுத்தப்படுவதை உறுதி செய்கிறது.\n\nநாளை இரவு 8:30 மணிக்கு 10 நிமிடம் தொலைபேசியில் பேசலாமா?",
       },
     },
   },
@@ -1322,7 +1322,7 @@ const PAMB_C3_SCENARIOS = [
         pambPlan: "PRULady + PRUElite Invest + PRUValue Med",
         aiaPlan: "AIA A-Life Lady360 + A-Life Wealth Builder",
         customerReply:
-          "\"Thank you for the promotion card! A fellow consultant recommended AIA A-Life Lady360 + A-Life Wealth Builder. Could you email me a factual comparison with PAMB?\"",
+          "\"Thank you for the promotion card! A fellow consultant recommended AIA A-Life Lady360 + A-Life Wealth Builder. Could you email me a factual comparison with PRU?\"",
         cardHeadline: "Congratulations on Leading the Department, Dr. Kavitha! 🌟",
         cardChips: [
           "Congratulations on Leading the Department, Dr. Kavitha! 🌟",
@@ -1463,7 +1463,7 @@ const PAMB_C3_SCENARIOS = [
       en: {
         shortLabel: "SME RM 6M Loan",
         customerName: "Dato' Sri Raymond Tan (49, Penang Founder)",
-        existingGap: "RM 18M illiquid factory • RM 5.2M bank guarantee exposure",
+        existingGap: "RM 18M illiquid factory • RM 5.2M corporate guarantee to ring-fence",
         lifeEvent: "Signed RM 6M personal guarantee for Phase-2 plant; UK son & Melbourne daughter",
         pambPlan: "PRUWealth Enrich 2.0 + PRUPrestige Legacy + PRUAll Care",
         aiaPlan: "AIA A-Life Legasi Beyond + A-Life Wealth Prestige",
@@ -1476,22 +1476,22 @@ const PAMB_C3_SCENARIOS = [
         ],
         whatsappChips: [
           "Use <2.5% working capital in PRUWealth Enrich 2.0 (+50% Cover Booster) to ring-fence RM 6M bank guarantee under FSA Schedule 10 Trust",
-          "Equalize UK medical son (PAMB tax-free cash) & Melbourne successor daughter (100% Penang factory shares) via PRUPrestige Legacy",
+          "Equalize UK medical son (PRU tax-free cash) & Melbourne successor daughter (100% Penang factory shares) via PRUPrestige Legacy",
         ],
         aiaFacts: [
-          "✓ Automatic +30%/+50% Cover Booster & 500% Accidental Death (PRUWealth Enrich 2.0 without AIA Vitality checks)",
+          "✓ Automatic +30%/+50% Cover Booster & 500% Executive Travel & Keyman Multiplier (PRUWealth Enrich 2.0 without AIA Vitality checks)",
           "✓ 100% Day-1 Capital Allocation (PRUPrestige Legacy preserves corporate liquidity during Phase-2 capex)",
           "✓ Built-In Legacy Settlement Option + FSA Sec 130 Statutory Creditor Shield (zero private trust fees)",
         ],
         defaultWhatsapp:
           "Heartiest congratulations, Dato' Sri Raymond, on breaking ground on your Phase-2 Batu Kawan plant! 🏭🚀 I created this corporate milestone card for your group.\n\nWith <2.5% of working capital, PRUWealth Enrich 2.0 + PRUPrestige Legacy ring-fences your RM 6M personal bank guarantee under FSA Schedule 10 Statutory Trust while equalizing inheritance between your UK son (cash) and Melbourne daughter (100% factory shares). Free for a 15-min brief Thursday at 3 PM? 🤝",
         defaultEmail:
-          "Subject: Corporate Keyman & Legacy Comparison: PRU (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\nDear Dato' Sri Raymond,\nHere is the factual comparison between PAMB and AIA A-Life Legasi Beyond for your RM 6M Batu Kawan facility & family succession:\n1. Automatic +30%/+50% Cover Booster & 500% Accidental Death: PRUWealth Enrich 2.0 automatically scales your high sum assured by up to +50% and covers 500% Accidental Death without annual AIA Vitality fitness checks.\n2. 100% Day-1 Capital Allocation (PRUPrestige Legacy): Puts 100% of premium to work on Day 1, preserving cashflow liquidity during factory expansion.\n3. Legacy Settlement Option + FSA Sec 130 Creditor Shield: Protects against the RM 6M guarantee and pays structured cash to your UK son so your daughter inherits 100% of factory shares cleanly.\n\nSee you Thursday at 3 PM at your Batu Kawan office!",
+          "Subject: Corporate Keyman & Legacy Comparison: PRU (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\nDear Dato' Sri Raymond,\nHere is the factual comparison between PRU and AIA A-Life Legasi Beyond for your RM 6M Batu Kawan facility & family succession:\n1. Automatic +30%/+50% Cover Booster & 500% Executive Travel & Keyman Multiplier: PRUWealth Enrich 2.0 automatically scales your high sum assured by up to +50% and includes a 500% Executive Travel & Keyman Multiplier without annual AIA Vitality fitness checks.\n2. 100% Day-1 Capital Allocation (PRUPrestige Legacy): Puts 100% of premium to work on Day 1, preserving cashflow liquidity during factory expansion.\n3. Legacy Settlement Option + FSA Sec 130 Creditor Shield: Ring-fences the RM 6M guarantee and pays structured cash to your UK son so your daughter inherits 100% of factory shares cleanly.\n\nSee you Thursday at 3 PM at your Batu Kawan office!",
       },
       "zh-CN": {
         shortLabel: "企业 RM 600万担保",
         customerName: "拿督斯里陈耀明 Dato' Sri Raymond Tan (49岁，槟城精密制造创办人)",
-        existingGap: "RM 1800万厂房股权缺乏流动性 • RM 600万个人银行担保敞口",
+        existingGap: "RM 1800万厂房股权缺乏流动性 • RM 600万个人银行担保待隔离",
         lifeEvent: "刚签下槟城 Batu Kawan 二期厂房 RM 600万个人担保；儿子在英国学医、女儿在墨尔本准备接班",
         pambPlan: "PRUWealth Enrich 2.0 + PRUPrestige Legacy + PRUAll Care",
         aiaPlan: "AIA A-Life Legasi Beyond + A-Life Wealth Prestige",
@@ -1507,19 +1507,19 @@ const PAMB_C3_SCENARIOS = [
           "通过 PRUPrestige Legacy 平衡英国学医儿子（保诚免税现金）与墨尔本接班女儿（100%槟城厂房股权）的家业分配",
         ],
         aiaFacts: [
-          "✓ 自动 +30%/+50% 保额倍增 & 500% 意外身故赔付（PRUWealth Enrich 2.0 无需 AIA Vitality 体检打卡）",
+          "✓ 自动 +30%/+50% 保额倍增 & 高达 500% 高管差旅与关键人保障倍增（PRUWealth Enrich 2.0 无需 AIA Vitality 体检打卡）",
           "✓ 首日 100% 资本配置率（PRUPrestige Legacy 在二期扩厂期间保留高现金流价值）",
           "✓ 内置分期传承给付 (Legacy Settlement) + FSA 第130条债权人隔离保护（免高额私人信托年费）",
         ],
         defaultWhatsapp:
-          "拿督斯里陈耀明，诚挚祝贺贵集团 Batu Kawan 二期厂房隆重动土！🏭🚀 我特意为贵公司制作了这张企业里程碑祝贺卡。\n\n只需动用不到 2.5% 的营运资金，PRUWealth Enrich 2.0 + PRUPrestige Legacy 即可在《2013年金融服务法令》(FSA) 第10附表法定信托下为您隔离 RM 600万银行个人担保风险，同时让英国学医的公子获得免税现金、墨尔本千金完整继承 100% 厂房股权。周四下午 3 点方便用 15 分钟向您汇报吗？🤝",
+          "拿督斯里陈耀明，诚挚祝贺贵集团 Batu Kawan 二期厂房隆重动土！🏭🚀 我特意为贵公司制作了这张企业里程碑祝贺卡。\n\n只需动用不到 2.5% 的营运资金，PRUWealth Enrich 2.0 + PRUPrestige Legacy 即可在《2013年金融服务法令》(FSA) 第10附表法定信托下为您隔离 RM 600万银行个人担保，同时让英国学医的公子获得免税现金、墨尔本千金完整继承 100% 厂房股权。周四下午 3 点方便用 15 分钟向您汇报吗？🤝",
         defaultEmail:
-          "主题：企业关键人物与家族传承客观对比：PRU (PRUWealth Enrich 2.0) vs 友邦 (AIA A-Life Legasi Beyond)\n\n尊敬的拿督斯里陈耀明：\n针对您 Batu Kawan 二期厂房 RM 600万银行担保与子女股权传承，以下是PRU 方案与 AIA A-Life Legasi Beyond 的 3 大客观优势：\n1. 自动 +30%/+50% 保额倍增与 500% 意外赔付：PRUWealth Enrich 2.0 自动提升高额保障高达 +50% 并涵盖高达 500% 意外身故，无需像 AIA Vitality 那样每年做健康打卡。\n2. 首日 100% 资本配置率 (PRUPrestige Legacy)：第 1 天即 100% 投入保单价值，在二期扩厂资本支出期间为您保留高额企业现金流。\n3. 内置分期传承给付 + FSA 法定债权人隔离：有效隔离 RM 600万个人担保，将免税现金分期拨付给英国公子，让接班千金完整持有 100% 厂房股份。\n\n周四下午 3 点在您 Batu Kawan 办公室见！",
+          "主题：企业关键人物与家族传承客观对比：PRU (PRUWealth Enrich 2.0) vs 友邦 (AIA A-Life Legasi Beyond)\n\n尊敬的拿督斯里陈耀明：\n针对您 Batu Kawan 二期厂房 RM 600万银行担保与子女股权传承，以下是 PRU 方案与 AIA A-Life Legasi Beyond 的 3 大客观优势：\n1. 自动 +30%/+50% 保额倍增与高达 500% 高管差旅与关键人保障倍增：PRUWealth Enrich 2.0 自动提升高额保障高达 +50% 并涵盖高达 500% 高管差旅与关键人保障倍增，无需像 AIA Vitality 那样每年做健康打卡。\n2. 首日 100% 资本配置率 (PRUPrestige Legacy)：第 1 天即 100% 投入保单价值，在二期扩厂资本支出期间为您保留高额企业现金流。\n3. 内置分期传承给付 + FSA 法定债权人隔离：有效隔离 RM 600万个人担保，将免税现金分期拨付给英国公子，让接班千金完整持有 100% 厂房股份。\n\n周四下午 3 点在您 Batu Kawan 办公室见！",
       },
       yue: {
         shortLabel: "廠家 RM 600萬擔保",
         customerName: "拿督斯里陳耀明 Dato' Sri Raymond Tan (49歲，檳城廠家老闆)",
-        existingGap: "RM 1800萬廠房股份無流動現金 • 簽咗 RM 600萬銀行個人擔保",
+        existingGap: "RM 1800萬廠房股份無流動現金 • 簽咗 RM 600萬銀行個人擔保待隔離",
         lifeEvent: "啱啱簽咗檳城 Batu Kawan 二期廠房 RM 600萬個人擔保；個仔喺英國讀醫、個女喺墨爾本準備接班",
         pambPlan: "PRUWealth Enrich 2.0 + PRUPrestige Legacy + PRUAll Care",
         aiaPlan: "AIA A-Life Legasi Beyond + A-Life Wealth Prestige",
@@ -1535,19 +1535,19 @@ const PAMB_C3_SCENARIOS = [
           "用 PRUPrestige Legacy 平衡英國讀醫個仔（保誠免稅現金）同墨爾本接班個女（100%檳城廠房股份）公平分家",
         ],
         aiaFacts: [
-          "✓ 自動 +30%/+50% 保額倍增 & 500% 意外身故（PRUWealth Enrich 2.0 唔使做 AIA Vitality 運動打卡）",
+          "✓ 自動 +30%/+50% 保額倍增 & 高達 500% 高管差旅與關鍵人保障倍增（PRUWealth Enrich 2.0 唔使做 AIA Vitality 運動打卡）",
           "✓ Day 1 即有 100% 資本配置（PRUPrestige Legacy 喺擴建廠房期間保留高現金流價值）",
           "✓ 內置分期傳承派發 (Legacy Settlement) + FSA 債權人隔離保護（慳返私家信託貴年費）",
         ],
         defaultWhatsapp:
-          "拿督斯里陳生，恭喜晒貴集團 Batu Kawan 二期新廠房動土大吉！🏭🚀 我特登整咗呢張企業里程碑賀卡送俾你。\n\n只要用少過 2.5% 營運資金，PRUWealth Enrich 2.0 + PRUPrestige Legacy 就可以透過 FSA 法定信託幫你隔離 RM 600萬銀行個人擔保風險，仲可以俾免稅現金英國讀醫個仔、等墨爾本個女可以 100% 完整接班揸晒廠房股份。星期四下晝 3 點鐘方唔方便傾 15 分鐘？🤝",
+          "拿督斯里陳生，恭喜晒貴集團 Batu Kawan 二期新廠房動土大吉！🏭🚀 我特登整咗呢張企業里程碑賀卡送俾你。\n\n只要用少過 2.5% 營運資金，PRUWealth Enrich 2.0 + PRUPrestige Legacy 就可以透過 FSA 法定信託幫你隔離 RM 600萬銀行個人擔保，仲可以俾免稅現金英國讀醫個仔、等墨爾本個女可以 100% 完整接班揸晒廠房股份。星期四下晝 3 點鐘方唔方便傾 15 分鐘？🤝",
         defaultEmail:
-          "主題：企業要員與家族傳承客觀比較：PRU (PRUWealth Enrich 2.0) vs 友邦 (AIA A-Life Legasi Beyond)\n\n尊敬嘅拿督斯里陳耀明：\n針對你 Batu Kawan 二期廠房 RM 600萬銀行擔保同埋仔女接班傳承，以下係PRU 方案對比 AIA A-Life Legasi Beyond 嘅 3 大真實優勢：\n1. 自動 +30%/+50% 保額倍增兼 500% 意外保障：PRUWealth Enrich 2.0 自動加大保額高達 +50% 同埋包 500% 意外身故，唔使好似 AIA Vitality 咁每年打卡。\n2. Day 1 即享 100% 資本配置 (PRUPrestige Legacy)：第一日就 100% 擺落保單價值，喺起新廠期間保留最高企業現金流。\n3. 內置分期傳承派發 + FSA 債權人隔離：保護屋企唔受 RM 600萬擔保牽連，直接派免稅現金俾英國個仔，等你個女乾手淨腳繼承 100% 廠房股份。\n\n星期四下晝 3 點喺你 Batu Kawan Office 見！",
+          "主題：企業要員與家族傳承客觀比較：PRU (PRUWealth Enrich 2.0) vs 友邦 (AIA A-Life Legasi Beyond)\n\n尊敬嘅拿督斯里陳耀明：\n針對你 Batu Kawan 二期廠房 RM 600萬銀行擔保同埋仔女接班傳承，以下係 PRU 方案對比 AIA A-Life Legasi Beyond 嘅 3 大真實優勢：\n1. 自動 +30%/+50% 保額倍增兼高達 500% 高管差旅與關鍵人保障倍增：PRUWealth Enrich 2.0 自動加大保額高達 +50% 同埋包高達 500% 高管差旅與關鍵人保障倍增，唔使好似 AIA Vitality 咁每年打卡。\n2. Day 1 即享 100% 資本配置 (PRUPrestige Legacy)：第一日就 100% 擺落保單價值，喺起新廠期間保留最高企業現金流。\n3. 內置分期傳承派發 + FSA 債權人隔離：保護屋企唔受 RM 600萬擔保牽連，直接派免稅現金俾英國個仔，等你個女乾手淨腳繼承 100% 廠房股份。\n\n星期四下晝 3 點喺你 Batu Kawan Office 見！",
       },
       ms: {
         shortLabel: "Pinjaman PKS RM 6J",
         customerName: "Dato' Sri Raymond Tan (49, Pengasas Kilang Pulau Pinang)",
-        existingGap: "Kilang RM 18J tidak cair • Pendedahan jaminan bank RM 5.2J",
+        existingGap: "Kilang RM 18J tidak cair • Jaminan bank RM 5.2J untuk diasingkan",
         lifeEvent: "Menandatangani jaminan peribadi RM 6J untuk kilang Fasa-2; anak lelaki di UK & anak perempuan di Melbourne",
         pambPlan: "PRUWealth Enrich 2.0 + PRUPrestige Legacy + PRUAll Care",
         aiaPlan: "AIA A-Life Legasi Beyond + A-Life Wealth Prestige",
@@ -1560,22 +1560,22 @@ const PAMB_C3_SCENARIOS = [
         ],
         whatsappChips: [
           "Guna <2.5% modal kerja dalam PRUWealth Enrich 2.0 (+50% Booster) untuk lindungi jaminan bank RM 6J di bawah Amanah Berkanun Jadual 10 FSA",
-          "Seimbangkan warisan anak lelaki di UK (tunai bebas cukai PAMB) & anak perempuan pengganti (100% saham kilang) melalui PRUPrestige Legacy",
+          "Seimbangkan warisan anak lelaki di UK (tunai bebas cukai PRU) & anak perempuan pengganti (100% saham kilang) melalui PRUPrestige Legacy",
         ],
         aiaFacts: [
-          "✓ Peningkatan Perlindungan Automatik +30%/+50% & 500% Kematian Kemalangan (PRUWealth Enrich 2.0 tanpa semakan AIA Vitality)",
+          "✓ Peningkatan Perlindungan Automatik +30%/+50% & Sehingga 500% Gandaan Perlindungan Eksekutif & Perjalanan (PRUWealth Enrich 2.0 tanpa semakan AIA Vitality)",
           "✓ Peruntukan Modal Hari-1 100% (PRUPrestige Legacy mengekalkan kecairan korporat semasa capex Fasa-2)",
           "✓ Pilihan Penyelesaian Legasi Terbina Dalam + Perisai Pemiutang Berkanun Sek 130 FSA (sifar yuran amanah swasta)",
         ],
         defaultWhatsapp:
           "Setinggi-tinggi tahniah, Dato' Sri Raymond, atas majlis pecah tanah kilang Fasa-2 Batu Kawan anda! 🏭🚀 Saya sediakan kad pencapaian korporat ini untuk kumpulan anda.\n\nDengan <2.5% modal kerja, PRUWealth Enrich 2.0 + PRUPrestige Legacy melindungi jaminan bank peribadi RM 6J anda di bawah Amanah Berkanun Jadual 10 FSA sambil menyeimbangkan warisan antara anak lelaki anda di UK (tunai) dan anak perempuan di Melbourne (100% saham kilang). Lapang untuk taklimat 15 minit Khamis jam 3 petang? 🤝",
         defaultEmail:
-          "Subjek: Perbandingan Keyman Korporat & Legasi: PRU (PRUWealth Enrich 2.0) lwn AIA (A-Life Legasi Beyond)\n\nDato' Sri Raymond yang dihormati,\nBerikut ialah perbandingan berfakta antara PAMB dan AIA A-Life Legasi Beyond untuk kemudahan RM 6J Batu Kawan & pewarisan keluarga anda:\n1. Peningkatan Perlindungan Automatik +30%/+50% & 500% Kematian Kemalangan: PRUWealth Enrich 2.0 meningkatkan jumlah diinsuranskan sehingga +50% secara automatik tanpa pemeriksaan tahunan AIA Vitality.\n2. Peruntukan Modal Hari-1 100% (PRUPrestige Legacy): Memasukkan 100% premium untuk bekerja pada Hari Pertama, mengekalkan kecairan aliran tunai semasa pengembangan kilang.\n3. Pilihan Penyelesaian Legasi + Perisai Pemiutang Sek 130 FSA: Melindungi daripada jaminan RM 6J dan membayar tunai berstruktur kepada anak lelaki anda supaya anak perempuan anda mewarisi 100% saham kilang.\n\nJumpa anda Khamis jam 3 petang di pejabat Batu Kawan anda!",
+          "Subjek: Perbandingan Keyman Korporat & Legasi: PRU (PRUWealth Enrich 2.0) lwn AIA (A-Life Legasi Beyond)\n\nDato' Sri Raymond yang dihormati,\nBerikut ialah perbandingan berfakta antara PRU dan AIA A-Life Legasi Beyond untuk kemudahan RM 6J Batu Kawan & pewarisan keluarga anda:\n1. Peningkatan Perlindungan Automatik +30%/+50% & Sehingga 500% Gandaan Perlindungan Eksekutif & Perjalanan: PRUWealth Enrich 2.0 meningkatkan jumlah diinsuranskan sehingga +50% secara automatik tanpa pemeriksaan tahunan AIA Vitality.\n2. Peruntukan Modal Hari-1 100% (PRUPrestige Legacy): Memasukkan 100% premium untuk bekerja pada Hari Pertama, mengekalkan kecairan aliran tunai semasa pengembangan kilang.\n3. Pilihan Penyelesaian Legasi + Perisai Pemiutang Sek 130 FSA: Melindungi daripada jaminan RM 6J dan membayar tunai berstruktur kepada anak lelaki anda supaya anak perempuan anda mewarisi 100% saham kilang.\n\nJumpa anda Khamis jam 3 petang di pejabat Batu Kawan anda!",
       },
       ta: {
         shortLabel: "நிறுவன RM 6M கடன் பாதுகாப்பு",
         customerName: "டத்தோ ஸ்ரீ ரேமண்ட் டான் (49, பினாங்கு தொழிற்சாலை நிறுவனர்)",
-        existingGap: "RM 18M தொழிற்சாலை பங்குகள் • RM 6M தனிப்பட்ட வங்கி உத்தரவாத அபாயம்",
+        existingGap: "RM 18M தொழிற்சாலை பங்குகள் • RM 6M தனிப்பட்ட வங்கி உத்தரவாதப் பாதுகாப்பு தேவை",
         lifeEvent: "Batu Kawan இரண்டாம் கட்ட ஆலைக்காக RM 6M தனிப்பட்ட வங்கி உத்தரவாதம்; UK-வில் மகன் & மெல்போர்னில் மகள்",
         pambPlan: "PRUWealth Enrich 2.0 + PRUPrestige Legacy + PRUAll Care",
         aiaPlan: "AIA A-Life Legasi Beyond + A-Life Wealth Prestige",
@@ -1591,14 +1591,14 @@ const PAMB_C3_SCENARIOS = [
           "PRUPrestige Legacy மூலம் UK மகனுக்கு ரொக்கமும் மெல்போர்ன் மகளுக்கு 100% தொழிற்சாலை பங்குகளும் சமமாகக் கிடைக்கச் செய்க",
         ],
         aiaFacts: [
-          "✓ தானியங்கி +30%/+50% Cover Booster & 500% விபத்து காப்பீடு (PRUWealth Enrich 2.0 - AIA Vitality நிபந்தனை இல்லை)",
+          "✓ தானியங்கி +30%/+50% Cover Booster & 500% உயர் அதிகாரி பயண & Keyman பாதுகாப்பு மடங்கு (PRUWealth Enrich 2.0 - AIA Vitality நிபந்தனை இல்லை)",
           "✓ முதல் நாளில் 100% மூலதன ஒதுக்கீடு (PRUPrestige Legacy ஆலை விரிவாக்கத்தின் போது பணப்புழக்கத்தைப் பாதுகாக்கிறது)",
           "✓ உள்ளமைக்கப்பட்ட Legacy Settlement Option + FSA பிரிவு 130 கடன் பாதுகாப்பு",
         ],
         defaultWhatsapp:
           "Batu Kawan இரண்டாம் கட்ட தொழிற்சாலையைத் தொடங்கும் டத்தோ ஸ்ரீ ரேமண்ட் அவர்களுக்கு மனமார்ந்த வாழ்த்துகள்! 🏭🚀 உங்கள் நிறுவனத்திற்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nவெறும் <2.5% மூலதனத்தில், PRUWealth Enrich 2.0 + PRUPrestige Legacy உங்கள் RM 6M வங்கி உத்தரவாதத்தை FSA Schedule 10 சட்டப்பூர்வ அறக்கட்டளையின் கீழ் பாதுகாக்கிறது; மேலும் UK மகனுக்கு வரியில்லா ரொக்கமும், மகளுக்கு 100% ஆலை பங்குகளும் கிடைக்கச் செய்கிறது. வியாழன் மதியம் 3 மணிக்கு 15 நிமிடம் பேசலாமா? 🤝",
         defaultEmail:
-          "பொருள்: நிறுவன Keyman & வாரிசு ஒப்பீடு: PRU (PRUWealth Enrich 2.0) vs AIA (A-Life Legasi Beyond)\n\nமதிப்பிற்குரிய டத்தோ ஸ்ரீ ரேமண்ட்,\nஉங்கள் RM 6M Batu Kawan ஆலை மற்றும் குடும்ப வாரிசுத் திட்டத்திற்கான PRU vs AIA A-Life Legasi Beyond உண்மையான ஒப்பீடு:\n1. தானியங்கி +30%/+50% Cover Booster & 500% விபத்து காப்பீடு: PRUWealth Enrich 2.0 எந்த AIA Vitality நிபந்தனையும் இன்றி காப்பீட்டை +50% வரை உயர்த்துகிறது.\n2. முதல் நாளில் 100% மூலதன ஒதுக்கீடு (PRUPrestige Legacy): ஆலை விரிவாக்கத்தின் போது உங்கள் நிறுவன பணப்புழக்கத்தைப் பாதுகாக்கிறது.\n3. Legacy Settlement Option + FSA பிரிவு 130 பாதுகாப்பு: RM 6M கடன் உத்தரவாதத்திலிருந்து பாதுகாத்து, மகளுக்கு 100% ஆலை பங்குகளையும் மகனுக்கு ரொக்கத்தையும் வழங்குகிறது.\n\nவியாழக்கிழமை மதியம் 3 மணிக்கு உங்கள் Batu Kawan அலுவலகத்தில் சந்திப்போம்!",
+          "பொருள்: நிறுவன Keyman & வாரிசு ஒப்பீடு: PRU (PRUWealth Enrich 2.0) vs AIA (A-Life Legasi Beyond)\n\nமதிப்பிற்குரிய டத்தோ ஸ்ரீ ரேமண்ட்,\nஉங்கள் RM 6M Batu Kawan ஆலை மற்றும் குடும்ப வாரிசுத் திட்டத்திற்கான PRU vs AIA A-Life Legasi Beyond உண்மையான ஒப்பீடு:\n1. தானியங்கி +30%/+50% Cover Booster & 500% உயர் அதிகாரி பயண & Keyman பாதுகாப்பு மடங்கு: PRUWealth Enrich 2.0 எந்த AIA Vitality நிபந்தனையும் இன்றி காப்பீட்டை +50% வரை உயர்த்துகிறது.\n2. முதல் நாளில் 100% மூலதன ஒதுக்கீடு (PRUPrestige Legacy): ஆலை விரிவாக்கத்தின் போது உங்கள் நிறுவன பணப்புழக்கத்தைப் பாதுகாக்கிறது.\n3. Legacy Settlement Option + FSA பிரிவு 130 பாதுகாப்பு: RM 6M கடன் உத்தரவாதத்திலிருந்து பாதுகாத்து, மகளுக்கு 100% ஆலை பங்குகளையும் மகனுக்கு ரொக்கத்தையும் வழங்குகிறது.\n\nவியாழக்கிழமை மதியம் 3 மணிக்கு உங்கள் Batu Kawan அலுவலகத்தில் சந்திப்போம்!",
       },
     },
   },
@@ -1614,7 +1614,7 @@ const PAMB_C3_SCENARIOS = [
         pambPlan: "PRUValue Med (Smart Deductible) + PRUElite Flex",
         aiaPlan: "AIA A-Plus Health360 (Deductible) + A-Life Wealth Venture",
         customerReply:
-          "\"Lovely 50th birthday card! An AIA advisor showed us AIA A-Plus Health360 + A-Life Wealth Venture for retirement. Can you email how PAMB compares factually?\"",
+          "\"Lovely 50th birthday card! An AIA advisor showed us AIA A-Plus Health360 + A-Life Wealth Venture for retirement. Can you email how PRU compares factually?\"",
         cardHeadline: "Cheers to 50 Years & Melbourne Uni Pride! 🎓🥂",
         cardChips: [
           "Cheers to 50 Years & Melbourne Uni Pride! 🎓🥂",
@@ -1883,7 +1883,7 @@ const PAMB_C3_SCENARIOS = [
 ];
 
 // Curated Top-5 Malaysian Advisor Playbook Cases (hiding crowded multi-dozen rosters on mobile)
-const C3_TOP5_SEATS = [0, 1, 4, 6, 5];
+const C3_TOP5_SEATS = [0, 3, 4, 6, 5];
 
 const C3_TOP5_CASES_META = [
   {
@@ -1900,16 +1900,16 @@ const C3_TOP5_CASES_META = [
     },
   },
   {
-    seat: 1,
-    id: "ci_health_scare",
-    icon: "❤️‍🩹",
-    clientName: "Jason Khoo",
+    seat: 3,
+    id: "career_promotion",
+    icon: "🌟",
+    clientName: "Dr. Kavitha Pillai",
     labels: {
-      en: "Age-39 CI Wake-Up",
-      "zh-CN": "39岁重疾警钟",
-      yue: "39歲危疾警鐘",
-      ms: "Kejutan CI Umur 39",
-      ta: "வயது 39 CI எச்சரிக்கை",
+      en: "Executive Promotion",
+      "zh-CN": "高管晋升加薪",
+      yue: "高管升職加薪",
+      ms: "Kenaikan Pangkat",
+      ta: "பதவி உயர்வு",
     },
   },
   {
@@ -2428,9 +2428,69 @@ window.Challenge3ParticipantView = function ({
     setIsBusy(false);
   };
 
+  const buildLocalSubsetWhatsappFallback = () => {
+    const chosenIdeas = (pb.waIdeas || [])
+      .filter((_, idx) => selectedWaIdeaIdxs.includes(idx))
+      .map((item) => item.detail);
+    if (chosenIdeas.length >= (pb.waIdeas || []).length) {
+      return sc.defaultWhatsapp;
+    }
+    const firstName = String(sc.customerName || "Friend").split("(")[0].split("&")[0].trim();
+    const note = waPersonalNote.trim();
+    if (normLang === "zh-CN" || normLang === "yue") {
+      return (
+        `${firstName} 您好！衷心祝贺您迎来「${sc.shortLabel}」的喜悦时刻！🎉 特地为您制作了这张祝贺卡。` +
+        (chosenIdeas.length ? `\n\n顺带分享一个贴心规划重点：${chosenIdeas.join("；")}。` : "") +
+        ` ${note || "等您方便时我发一份 2 分钟简报给您参考好吗？😊"}`
+      );
+    }
+    return (
+      `Warmest congratulations ${firstName} on this wonderful milestone! 🎉 I made this celebratory card specially for you.` +
+      (chosenIdeas.length ? `\n\nQuick helpful note: ${chosenIdeas.join("; ")}.` : "") +
+      ` ${note || "Shall I send a quick 2-min summary whenever convenient? 😊"}`
+    );
+  };
+
+  const buildLocalSubsetEmailFallback = () => {
+    const chosenFacts = (sc.aiaFacts || []).filter((_, idx) =>
+      selectedFactIdxs.includes(idx)
+    );
+    if (chosenFacts.length >= (sc.aiaFacts || []).length) {
+      return sc.defaultEmail;
+    }
+    const firstName = String(sc.customerName || "Friend").split("(")[0].split("&")[0].trim();
+    const leadPlan = String(sc.pambPlan || "PRU Plan").split("+")[0].trim();
+    const cleanBullets = chosenFacts
+      .map((f) => `• ${String(f).replace(/^\s*[✓✔•\-\*]\s*/, "").trim()}`)
+      .join("\n");
+    const closer = emailPersonalNote.trim() || (pb.closeHints && pb.closeHints[0]) || "Let's compare the 1-page summary in a quick 10-min chat";
+    if (normLang === "zh-CN" || normLang === "yue") {
+      return (
+        `主题：方案重点对比：${leadPlan} vs ${rivalShort}\n\n` +
+        `${firstName} 您好：\n感谢您的回复！` +
+        (cleanBullets ? `以下是为您重点整理的 ${chosenFacts.length} 项核心优势：\n${cleanBullets}\n\n` : "\n\n") +
+        `${closer}！`
+      );
+    }
+    return (
+      `Subject: Factual Comparison: ${leadPlan} vs. ${rivalShort}\n\n` +
+      `Hi ${firstName},\nGreat question—comparing options is a smart move! ` +
+      (cleanBullets
+        ? `Here ${chosenFacts.length === 1 ? "is the 1 key advantage" : `are the ${chosenFacts.length} key advantages`} over ${sc.aiaPlan}:\n${cleanBullets}\n\n`
+        : "\n\n") +
+      `Next step: ${closer}?`
+    );
+  };
+
   const handleGenerateWhatsapp = async (polishInst = "") => {
     setIsBusy(true);
     setLangChangedBanner(false);
+    const chosenIdeas = (pb.waIdeas || [])
+      .filter((_, idx) => selectedWaIdeaIdxs.includes(idx))
+      .map((item) => item.detail);
+    const excludedIdeas = (pb.waIdeas || [])
+      .filter((_, idx) => !selectedWaIdeaIdxs.includes(idx))
+      .map((item) => item.detail);
     try {
       const res = await fetch("/api/ai", {
         method: "POST",
@@ -2446,6 +2506,9 @@ window.Challenge3ParticipantView = function ({
           stepMode: "whatsapp",
           cardPrompt: activeHeadline,
           whatsappPrompt: buildWhatsappStrategySummary(),
+          selectedWaIdeaIdxs,
+          selectedWaIdeas: chosenIdeas,
+          excludedWaIdeas: excludedIdeas,
           waPersonalNote: waPersonalNote.trim(),
           whatsappText: polishInst ? whatsappText.trim() : "",
           polishInstruction: polishInst,
@@ -2458,12 +2521,12 @@ window.Challenge3ParticipantView = function ({
         setWhatsappText(data.firstTouchMessage.trim());
         setShowStep2Pickers(false);
       } else if (!whatsappText) {
-        setWhatsappText(sc.defaultWhatsapp);
+        setWhatsappText(buildLocalSubsetWhatsappFallback());
         setShowStep2Pickers(false);
       }
     } catch (e) {
       if (!whatsappText) {
-        setWhatsappText(sc.defaultWhatsapp);
+        setWhatsappText(buildLocalSubsetWhatsappFallback());
         setShowStep2Pickers(false);
       }
     }
@@ -2473,6 +2536,12 @@ window.Challenge3ParticipantView = function ({
   const handleGenerateEmail = async (polishInst = "") => {
     setIsBusy(true);
     setLangChangedBanner(false);
+    const chosenFacts = (sc.aiaFacts || []).filter((_, idx) =>
+      selectedFactIdxs.includes(idx)
+    );
+    const excludedFacts = (sc.aiaFacts || []).filter(
+      (_, idx) => !selectedFactIdxs.includes(idx)
+    );
     try {
       const res = await fetch("/api/ai", {
         method: "POST",
@@ -2488,6 +2557,9 @@ window.Challenge3ParticipantView = function ({
           stepMode: "email",
           cardPrompt: activeHeadline,
           emailPrompt: buildEmailStrategySummary(),
+          selectedFactIdxs,
+          selectedFacts: chosenFacts,
+          excludedFacts,
           emailPersonalNote: emailPersonalNote.trim(),
           emailText: polishInst ? emailText.trim() : "",
           polishInstruction: polishInst,
@@ -2500,12 +2572,12 @@ window.Challenge3ParticipantView = function ({
         setEmailText(data.aiaComparisonEmail.trim());
         setShowStep3Pickers(false);
       } else if (!emailText) {
-        setEmailText(sc.defaultEmail);
+        setEmailText(buildLocalSubsetEmailFallback());
         setShowStep3Pickers(false);
       }
     } catch (e) {
       if (!emailText) {
-        setEmailText(sc.defaultEmail);
+        setEmailText(buildLocalSubsetEmailFallback());
         setShowStep3Pickers(false);
       }
     }

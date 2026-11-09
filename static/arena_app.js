@@ -192,7 +192,7 @@ function ChallengeStageBriefBoard({
           num: "1",
           icon: "🎯",
           title: "Inspect Your Assigned Customer X Life Event",
-          desc: "Newborn Baby, Colleague CI Heart Scare, New Home Mortgage, Career Promotion, SME RM 6M Loan, or Turning 50.",
+          desc: "Newborn Baby, Shariah Hibah Milestone, New Home Mortgage, Career Promotion, SME RM 6M Loan, or Turning 50.",
         },
         {
           num: "2",

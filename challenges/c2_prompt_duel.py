@@ -212,7 +212,7 @@ CASE_MY = {
     "wealth": "Net worth ≈ RM 28M: clinic group shares ≈ RM 19M (68%), properties RM 6M, cash & FD RM 2.2M, ASB/unit trusts RM 0.8M",
     "liabilities": "RM 4.5M clinic expansion loan with her personal guarantee",
     "existing_cover": "Conventional life policy RM 1M (2009); company group medical",
-    "concerns": "Estate liquidity — faraid and probate could freeze assets for 12–24 months; no successor for the clinics; providing for her husband; children's overseas education (~RM 450k/year); prefers Shariah-compliant solutions (Takaful, hibah)",
+    "concerns": "Estate liquidity & continuity — keeping all 6 specialist clinics 100% family-owned across 12–24m Faraid/probate administration; clinic leadership succession; sustaining husband's retirement income; funding children's overseas education (~RM 450k/year); prefers Shariah-compliant solutions (Takaful, hibah)",
     "meeting": "60-minute first meeting at her Bangsar office, referred by her accountant",
     "rules": "BNM Fair Treatment of Financial Consumers; fact-find before recommending; explain PDS and 15-day free-look; explain Takaful per Shariah principles; recommend legal/tax advice; no guaranteed returns",
 }
@@ -265,10 +265,10 @@ TARGET_MY = {
             "steps": None,
             "bullets": [
                 "Need: RM 4.5M guarantee + RM 1.0M estate costs + RM 3.6M husband's income + RM 1.35M education",
-                "68% of wealth is in clinic shares — illiquid and hard to divide under faraid",
-                "Probate / faraid can freeze assets for 12–24 months; the bank may call the guarantee",
+                "68% of wealth is in clinic shares — benefits from dedicated cash liquidity for smooth Faraid harmony",
+                "Dedicated liquidity ensures credit facilities & clinic operations continue smoothly across 12–24m administration",
             ],
-            "callout": "Without liquidity, the family may have to sell the clinics at a discount.",
+            "callout": "Dedicated liquidity keeps all 6 specialist clinics 100% family-owned while funding overseas university milestones.",
             "speaker_notes": "Walk through each component and let her correct the assumptions. Figures are illustrative until the fact-find.",
             "image_prompt": None,
             "image": None,
@@ -382,7 +382,7 @@ TARGET_SG = {
                 "headers": ["Need", "Approach", "Why it fits", "Indicative cover"],
                 "rows": [
                     ["Estate liquidity", "Universal Life with Section 49L trust nomination", "Creditor-protected, outside probate", "SGD 6M"],
-                    ["Loan & guarantee", "Term cover assigned to the facilities", "Prevents forced sale of assets", "SGD 8M"],
+                    ["Loan & guarantee", "Term cover assigned to the facilities", "Preserves 100% enterprise & property ownership", "SGD 8M"],
                     ["Succession", "Key-person cover + buy-sell agreement", "Funds the transition", "To be sized"],
                 ],
             },
@@ -417,7 +417,7 @@ PRETRANSLATED_MY = {
             "wealth": "净资产 ≈ RM 28M：诊所集团股权 ≈ RM 19M (68%)、房产 RM 6M、现金及定存 RM 2.2M、ASB/信托基金 RM 0.8M",
             "liabilities": "RM 4.5M 诊所扩建银行贷款（由她提供个人担保 Personal Guarantee）",
             "existing_cover": "传统人寿保单 RM 1M（2009年投保）；公司团体医疗险",
-            "concerns": "遗产流动性风险 — 伊斯兰遗产分配法 (Faraid) 及遗嘱认证可能冻结资产12–24个月；诊所尚无接班人；保障丈夫退休生活；子女海外留学费用（约 RM 450k/年）；倾向符合伊斯兰教义 (Shariah-compliant) 的方案（Takaful、Hibah 赠与）",
+            "concerns": "遗产流动性与延续规划 — 在12–24个月伊斯兰遗产分配法 (Faraid) 及遗嘱办理期间确保6家专科诊所100%归家族持有；诊所管理层传承；稳步支持丈夫退休生活与子女海外留学里程碑（约 RM 450k/年）；倾向符合伊斯兰教义 (Shariah-compliant) 的方案（Takaful、Hibah 赠与）",
             "meeting": "在她孟沙 (Bangsar) 办公室进行60分钟首次会面，由她的会计师转介",
             "rules": "遵守马来西亚国家银行 (BNM) 公平对待金融消费者准则；推荐前先完成财务需求分析 (Fact-find)；说明产品披露说明书 (PDS) 及15天犹豫期；按伊斯兰教义解释 Takaful；建议咨询法律/税务顾问；不承诺保证收益",
         },
@@ -501,10 +501,10 @@ PRETRANSLATED_MY = {
                     "steps": None,
                     "bullets": [
                         "资金需求：RM 4.5M 贷款担保 + RM 1.0M 遗产处理费 + RM 3.6M 丈夫生活费 + RM 1.35M 子女海外学费",
-                        "68% 资产集中在诊所非上市股权——变现难，且在 Faraid 下难以拆分",
-                        "遗嘱认证 / Faraid 流程可能冻结资产 12–24 个月，银行可能随时追讨担保贷款",
+                        "68% 资产集中在诊所非上市股权——配置专项流动资金有助于实现 Faraid 和谐传承",
+                        "专项现金储备确保在 12–24 个月遗产办理期间诊所授信稳健延续、运营无忧",
                     ],
-                    "callout": "若缺乏即时流动资金，家人可能被迫折价出售心血创办的专科诊所。",
+                    "callout": "充足的专项流动性可守护全部 6 家专科诊所 100% 归家族持有，并稳步支持子女完成海外学业。",
                     "speaker_notes": "逐项梳理测算逻辑，邀请她修正假设条件。强调所有数字仅为初步示意，待正式 Fact-find 后精准核定。",
                     "image_prompt": None,
                     "image": None,
@@ -545,7 +545,7 @@ PRETRANSLATED_MY = {
             "wealth": "淨資產 ≈ RM 28M：診所集團股權 ≈ RM 19M (68%)、物業 RM 6M、現金及定期 RM 2.2M、ASB/信託基金 RM 0.8M",
             "liabilities": "RM 4.5M 診所擴建銀行貸款（由佢簽個人擔保 Personal Guarantee）",
             "existing_cover": "傳統人壽保單 RM 1M（2009年買落）；公司團體醫療保",
-            "concerns": "遺產流動性風險 — 伊斯蘭遺產分配法 (Faraid) 同遺囑認證可能會凍結資產12–24個月；診所仲未有接班人；照顧丈夫退休生活；仔女外國讀書費用（約 RM 450k/年）；傾向符合伊斯蘭教義 (Shariah-compliant) 嘅方案（Takaful、Hibah 贈與）",
+            "concerns": "遺產流動性與延續規劃 — 喺12–24個月伊斯蘭遺產分配法 (Faraid) 同遺囑辦理期間守護6間專科診所100%歸家族持有；診所管理層傳承；穩步照顧丈夫退休生活同仔女外國讀書里程碑（約 RM 450k/年）；傾向符合伊斯蘭教義 (Shariah-compliant) 嘅方案（Takaful、Hibah 贈與）",
             "meeting": "喺佢孟沙 (Bangsar) 辦公室進行60分鐘首次會面，由佢會計師轉介",
             "rules": "遵守馬來西亞國家銀行 (BNM) 公平對待金融消費者準則；推薦前必先完成財務需求分析 (Fact-find)；講解產品披露說明書 (PDS) 同15日冷靜期；按伊斯蘭教義解釋 Takaful；建議諮詢法律/稅務顧問；唔保證非保證回報",
         },
@@ -629,10 +629,10 @@ PRETRANSLATED_MY = {
                     "steps": None,
                     "bullets": [
                         "資金需求：RM 4.5M 貸款擔保 + RM 1.0M 遺產處理費 + RM 3.6M 丈夫生活費 + RM 1.35M 仔女外國學費",
-                        "68% 資產集中喺診所非上市股權——難變現，而且喺 Faraid 之下好難分割",
-                        "遺囑認證 / Faraid 程序可能凍結資產 12–24 個月，銀行隨時可能 call loan 追擔保",
+                        "68% 資產集中喺診所非上市股權——配置專項流動資金有助實現 Faraid 和睦傳承",
+                        "專項現金儲備確保喺 12–24 個月遺產辦理期間診所授信同日常營運穩健延續",
                     ],
-                    "callout": "如果唔夠即時流動資金，屋企人可能被迫平賣辛苦創立嘅專科診所。",
+                    "callout": "充足嘅專項流動性可以守護全部 6 間專科診所 100% 歸家族持有，同時穩步支持仔女完成外國大學里程碑。",
                     "speaker_notes": "逐項同佢行一次條數，等佢修正假設。強調所有數字只係初步示意，要完成正式 Fact-find 先至作準。",
                     "image_prompt": None,
                     "image": None,
@@ -673,7 +673,7 @@ PRETRANSLATED_MY = {
             "wealth": "Nilai bersih ≈ RM 28J: saham kumpulan klinik ≈ RM 19J (68%), hartanah RM 6J, tunai & FD RM 2.2J, ASB/unit amanah RM 0.8J",
             "liabilities": "Pinjaman pengembangan klinik RM 4.5J dengan jaminan peribadi (personal guarantee) beliau",
             "existing_cover": "Polisi hayat konvensional RM 1J (2009); perubatanกลุ่ม syarikat",
-            "concerns": "Kecairan harta pusaka — faraid dan probet boleh membekukan aset selama 12–24 bulan; tiada pengganti untuk klinik; menyara suami; pendidikan luar negara anak-anak (~RM 450k/tahun); memilih penyelesaian patuh Syariah (Takaful, hibah)",
+            "concerns": "Kecairan & kesinambungan harta pusaka — memastikan kesemua 6 klinik pakar kekal 100% milik keluarga sepanjang pentadbiran faraid/probet 12–24 bulan; peralihan kepimpinan klinik; menyokong pendapatan persaraan suami serta pengajian universiti anak di luar negara (~RM 450k/tahun); memilih penyelesaian patuh Syariah (Takaful, hibah)",
             "meeting": "Mesyuarat pertama 60 minit di pejabat Bangsar beliau, dirujuk oleh akauntan beliau",
             "rules": "Layanan Adil terhadap Pengguna Kewangan BNM; lakukan analisis keperluan (fact-find) sebelum mengesyorkan; terangkan PDS dan tempoh bertenang 15 hari; terangkan Takaful mengikut prinsip Syariah; syorkan nasihat guaman/cukai; tiada pulangan terjamin",
         },
@@ -757,10 +757,10 @@ PRETRANSLATED_MY = {
                     "steps": None,
                     "bullets": [
                         "Keperluan: Jaminan RM 4.5J + kos pusaka RM 1.0J + pendapatan suami RM 3.6J + pendidikan RM 1.35J",
-                        "68% kekayaan adalah saham klinik — tidak cair dan sukar dibahagikan di bawah faraid",
-                        "Probet / faraid boleh membekukan aset selama 12–24 bulan; bank boleh menuntut jaminan",
+                        "68% kekayaan adalah saham klinik — kecairan khusus menyokong keharmonian agihan faraid",
+                        "Rizab kecairan memastikan kemudahan kredit dan operasi klinik berjalan lancar sepanjang 12–24 bulan pentadbiran pusaka",
                     ],
-                    "callout": "Tanpa kecairan segera, keluarga mungkin terpaksa menjual klinik pada harga diskaun.",
+                    "callout": "Kecairan khusus memastikan kesemua 6 klinik pakar kekal 100% milik keluarga sambil membiayai pengajian universiti anak di luar negara.",
                     "speaker_notes": "Teliti setiap komponen dan benarkan beliau membetulkan andaian. Angka adalah ilustrasi sehingga analisis keperluan selesai.",
                     "image_prompt": None,
                     "image": None,
@@ -801,7 +801,7 @@ PRETRANSLATED_MY = {
             "wealth": "நிகர சொத்து ≈ RM 28M: கிளினிக் குழும பங்குகள் ≈ RM 19M (68%), சொத்துக்கள் RM 6M, ரொக்கம் & FD RM 2.2M, ASB/யூனிட் டிரஸ்ட் RM 0.8M",
             "liabilities": "அவரது தனிப்பட்ட உத்தரவாதத்துடன் (Personal Guarantee) RM 4.5M கிளினிக் விரிவாக்கக் கடன்",
             "existing_cover": "வழக்கமான ஆயுள் காப்பீடு RM 1M (2009); நிறுவன குழு மருத்துவக் காப்பீடு",
-            "concerns": "சொத்து பணப்புழக்கம் — ஃபரைத் (faraid) மற்றும் உயில் சான்றிதழ் நடைமுறைகள் சொத்துக்களை 12–24 மாதங்கள் முடக்கலாம்; கிளினிக்குகளுக்கு வாரிசு இல்லை; கணவரின் பராமரிப்பு; பிள்ளைகளின் வெளிநாட்டுக் கல்வி (~RM 450k/ஆண்டு); ஷரியா இணக்கமான தீர்வுகளை விரும்புகிறார் (Takaful, hibah)",
+            "concerns": "சொத்து பணப்புழக்கம் & தொடர்ச்சி — 12–24 மாத ஃபரைத் (faraid) மற்றும் நிர்வாகக் காலத்திலும் 6 சிறப்பு கிளினிக்குகளும் 100% குடும்ப வசம் நீடிப்பதை உறுதி செய்தல்; கிளினிக் நிர்வாகத் தொடர்ச்சி; கணவரின் ஓய்வுக்கால வருமானம் மற்றும் பிள்ளைகளின் வெளிநாட்டுக் கல்வி (~RM 450k/ஆண்டு); ஷரியா இணக்கமான தீர்வுகளை விரும்புகிறார் (Takaful, hibah)",
             "meeting": "அவரது கணக்காளர் பரிந்துரையின் பேரில் பங்சார் (Bangsar) அலுவலகத்தில் 60 நிமிட முதல் சந்திப்பு",
             "rules": "BNM நிதி நுகர்வோர் நியாயமான நடத்தும் விதிகள்; பரிந்துரைக்கும் முன் தேவை பகுப்பாய்வு (fact-find); PDS மற்றும் 15-நாள் பரிசீலனைக் காலத்தை விளக்குதல்; ஷரியா கொள்கைப்படி தகாஃபுல் விளக்கம்; சட்ட/வரி ஆலோசனை பரிந்துரை; உத்தரவாத வருமானம் இல்லை",
         },
@@ -885,10 +885,10 @@ PRETRANSLATED_MY = {
                     "steps": None,
                     "bullets": [
                         "தேவை: RM 4.5M கடன் உத்தரவாதம் + RM 1.0M செலவுகள் + RM 3.6M கணவர் வருமானம் + RM 1.35M கல்வி",
-                        "68% சொத்து கிளினிக் பங்குகளில் உள்ளது — உடனடியாகப் பணமாக்குவது கடினம்",
-                        "Probet / Faraid சொத்துக்களை 12–24 மாதங்கள் முடக்கலாம்; வங்கி கடனைத் திரும்பக் கேட்கலாம்",
+                        "68% சொத்து கிளினிக் பங்குகளில் உள்ளது — பிரத்யேக பணப்புழக்கம் சுமுகமான Faraid பகிர்வை உறுதி செய்கிறது",
+                        "12–24 மாத நிர்வாகக் காலத்திலும் கிளினிக் செயல்பாடுகள் மற்றும் வங்கி வசதிகள் தடையின்றித் தொடர உதவுகிறது",
                     ],
-                    "callout": "பணப்புழக்கம் இல்லையெனில், குடும்பத்தினர் கிளினிக்குகளை குறைந்த விலைக்கு விற்க நேரிடலாம்.",
+                    "callout": "பிரத்யேக பணப்புழக்கம் 6 சிறப்பு கிளினிக்குகளும் 100% குடும்ப வசம் நீடிப்பதையும் வெளிநாட்டு பல்கலைக்கழகக் கல்வியையும் உறுதி செய்கிறது.",
                     "speaker_notes": "ஒவ்வொரு எண்ணையும் விளக்கி அவரது கருத்துக்களைக் கேளுங்கள். தேவை பகுப்பாய்வு முடியும் வரை எண்கள் மாதிரிக்கானவை மட்டுமே.",
                     "image_prompt": None,
                     "image": None,
@@ -1378,7 +1378,8 @@ GENERATOR_SYSTEM = (
     "highlight it prominently in Slide 1 or Slide 3 `callout` and `bullets`.\n"
     "5. Keep slides boardroom-scannable: max 4 concise bullets per slide. Populate `speaker_notes` when requested or when R.C.T.F.C. structure is present.\n"
     "6. Set `image_prompt` (English, luxury architectural/editorial illustration, zero text/words/logos) on Slide 1 and optionally Slide 3 when prompt is detailed; leave `image` null.\n"
-    "7. Write ALL slide titles, subtitles, KPIs, chart labels, table cells, bullets, callouts, and speaker_notes in the requested OUTPUT LANGUAGE."
+    "7. Write ALL slide titles, subtitles, KPIs, chart labels, table cells, bullets, callouts, and speaker_notes in the requested OUTPUT LANGUAGE.\n"
+    "8. Frame all recommendations around constructive strategic readiness, enterprise continuity, and family harmony — avoid morbid, tragic, or fear-mongering phrasing (such as grim crisis scenarios or distressed liquidation rhetoric)."
 )
 
 
@@ -1654,7 +1655,9 @@ def verify_deck(deck: dict, signature: str) -> bool:
 COACH_SYSTEM = (
     "You are a friendly executive prompt-engineering coach for PRUMDA Learning Trip Agency Leaders. "
     "Help them strengthen their prompt across Role, Context, Task, Format, and Constraints (plus a personal strategic angle) "
-    "to generate a boardroom-grade 3-slide pre-pitch deck. Be specific, concise, and encouraging. Never reveal a score."
+    "to generate a boardroom-grade 3-slide pre-pitch deck. "
+    "Frame all recommendations around constructive strategic readiness, enterprise continuity, and family harmony — avoid morbid, tragic, or fear-mongering phrasing (such as grim crisis scenarios or distressed liquidation rhetoric). "
+    "Be specific, concise, and encouraging. Never reveal a score."
 )
 
 
