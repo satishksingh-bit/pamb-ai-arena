@@ -56,6 +56,7 @@ def verify_frontend_no_stacking() -> None:
     assert "${cur}\\n${clean}" not in js, "Newline prompt stacking logic still present in challenge1.js!"
     assert '.includes(fup.prompt)' not in js, "Substring .includes(fup.prompt) multi-active check still present!"
     assert "load or combine" not in js.lower(), "Legacy 'load or combine' hint still present in challenge1.js!"
+    assert "Use This Portrait" in js, "Missing 0ms 'Use This Portrait' button to re-select an earlier Stage 1 portrait without regenerating!"
 
 
 def audit_card_ocr(image_path: str, project_id: str) -> dict:
@@ -171,7 +172,8 @@ def main() -> None:
     ).json()
     save_data_url(t2.get("aiCardArtworkDataUrl"), args.out_dir, "t2_cny_wong_card.jpg")
     assert t2.get("creationMode") == "outreach_card" and "wong" in str(t2.get("clientName") or "").lower()
-    print(f"✓ [Turn 2] Generated Named CNY Card (client={t2.get('clientName')!r}, headline={t2.get('cardHeadline')!r}).")
+    assert t2.get("aiPortraitDataUrl") is None, "Stage 2 card must NOT regenerate Stage 1 portrait!"
+    print(f"✓ [Turn 2] Generated Named CNY Card without regenerating Stage 1 (client={t2.get('clientName')!r}).")
 
     # Turn 3: Go Back & Redo Step 1 Portrait (Warm Beige Blazer in sunlit lounge) — must NOT leak CNY/crimson/Wong!
     p3 = "Keep my exact face, create a warm, approachable portrait in a smart-casual beige blazer in a sunlit private wealth client lounge."

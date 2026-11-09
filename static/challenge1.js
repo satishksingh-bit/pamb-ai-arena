@@ -95,6 +95,13 @@ window.PAMBChatShell = function PAMBChatShell({
   };
 
   const dynamicRows = inputText && inputText.length > 80 ? 4 : 3;
+  let latestFollowUpMsgId = null;
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role !== "user" && messages[i].followUps && messages[i].followUps.length > 0) {
+      latestFollowUpMsgId = messages[i].id;
+      break;
+    }
+  }
 
   return (
     <div className="space-y-3">
@@ -219,8 +226,8 @@ window.PAMBChatShell = function PAMBChatShell({
                   {/* Clean Generated Image + Optional Outreach Copy + Share/Submit */}
                   {renderAssistantArtifact && msg.artifact && renderAssistantArtifact(msg)}
 
-                  {/* Compact Small Prompt Pills — Grouped into: 1. Craft Your Image & 2. Put Your Image to Work */}
-                  {msg.followUps && msg.followUps.length > 0 && (() => {
+                  {/* Compact Small Prompt Pills — Shown only on the latest assistant message */}
+                  {msg.id === latestFollowUpMsgId && msg.followUps && msg.followUps.length > 0 && (() => {
                     const isWorkPill = (p) => {
                       if (p.group === "work" || p.category === "work") return true;
                       if (p.group === "craft" || p.category === "craft") return false;
@@ -1584,7 +1591,28 @@ window.Challenge1ParticipantView = function ({
               alt="Generated AI Image"
               className="w-full rounded-2xl border-2 border-slate-200 shadow-lg block"
             />
-            <div className="flex items-center justify-end gap-1.5 mt-2">
+            <div className="flex flex-wrap items-center justify-end gap-1.5 mt-2">
+              {art.creationMode === "executive_headshot" &&
+                art.cleanImageUrl &&
+                (studioState.aiPortraitDataUrl === art.cleanImageUrl ? (
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-400">
+                    ✓ Active Portrait
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setStudioState((prev) => ({
+                        ...prev,
+                        aiPortraitDataUrl: art.cleanImageUrl,
+                        style: art.styleKey || prev.style,
+                      }))
+                    }
+                    className="px-3 py-1 rounded-full text-[10px] font-bold bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-500 shadow-sm"
+                  >
+                    ✓ Use This Portrait
+                  </button>
+                ))}
               {art.beforeUrl && (
                 <button
                   type="button"

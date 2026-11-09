@@ -2121,10 +2121,10 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
             if (not has_custom_photo and not celebrity_name and use_studio_avatar)
             else None
         )
-        # For uploaded photos, always anchor surgical face-lock to original raw photo (`photo_base64`).
-        # For same-celebrity headshot refinements on Turn 2+, anchor to `prev_portrait_url` so face stays locked.
+        # For uploaded photos, ALWAYS anchor surgical face-lock to original raw photo (`photo_base64`)
+        # so redoing Stage 1 never feeds an earlier Stage 1 AI portrait back through generation.
         effective_input_photo = (
-            photo_base64
+            (photo_base64 or prev_portrait_url)
             if has_custom_photo
             else (prev_portrait_url if (celebrity_name and prev_portrait_url and creation_mode == "executive_headshot") else seed_input_url)
         )
