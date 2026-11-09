@@ -8,11 +8,11 @@ Welcome! You are assisting a developer working on the **11th November PRUMDA Lea
 
 This codebase is split into **3 isolated Challenge modules** so 3 developers can work in parallel using Jetski, test in their own **Argolis Cloud Run** projects, and merge back cleanly without conflicts:
 
-| Role / Owner | Challenge & Session Time | ONLY Edit These 2 Files | Isolated Sandbox Route |
+| Role / Owner | Challenge & Session Time | Primary Module Files | Isolated Sandbox Route |
 |---|---|---|---|
-| **Colleague 1** | **Challenge 1 (14:00 – 14:20)**: *Reinvent Your Professional Image & Customer Outreach* (Camera Selfie -> Gemini Image AI Studio Headshot -> VIP Outreach) | 1. `challenges/c1_image_outreach.py`<br>2. `static/challenge1.js` | `http://localhost:8095/sandbox/1` |
-| **Colleague 2** | **Challenge 2 (14:20 – 14:35)**: *Master the Art of AI Dialogue* (4-Pillar Prompting Duel: Persona + Context + Task + Format/Tone -> AI Prompt Judge) | 1. `challenges/c2_prompt_duel.py`<br>2. `static/challenge2.js` | `http://localhost:8095/sandbox/2` |
-| **Satish (Lead)** | **Challenge 3 (14:35 – 15:05)**: *Drive Faster Pipeline, Sharpen Your Strategic Proposal — Pre-Pitch* (Dato' Sri Raymond Tan Dossier -> Gemini Grounded Synthesis -> Agent Assist Co-Creation) | 1. `challenges/c3_pre_pitch.py`<br>2. `static/challenge3.js` | `http://localhost:8095/sandbox/3` |
+| **Colleague 1** | **Challenge 1 (14:00 – 14:20)**: *Reinvent Your Professional Image & Customer Outreach* (Camera Selfie -> Face-Locked Studio Portrait -> Client Milestone/Festive Cards & Brand Banners) | 1. `challenges/c1_image_outreach.py`<br>2. `static/challenge1.js` | `http://localhost:8095/sandbox/1` |
+| **Colleague 2** | **Challenge 2 (14:20 – 14:35)**: *Master the Art of AI Dialogue* (72-Seat / 6-Case R.C.T.F.C. Live Prompt Studio -> Strictly 3-Slide Executive Deck + `.pptx` Export + 6-Dim Hybrid Judge) | 1. `challenges/c2_prompt_duel.py`<br>2. `challenges/c2_scenarios_bank.py`<br>3. `static/challenge2.js` | `http://localhost:8095/sandbox/2` |
+| **Satish (Lead)** | **Challenge 3 (14:35 – 15:05)**: *Drive Faster Pipeline, Sharpen Your Strategic Proposal — Pre-Pitch* (72-Seat / 6-Case Positive Life-Milestone Advisor Playbook: Greeting Card -> First-Touch WhatsApp -> Grounded Comparison Reply) | 1. `challenges/c3_pre_pitch.py`<br>2. `challenges/c3_scenarios_bank.py`<br>3. `static/challenge3.js` | `http://localhost:8095/sandbox/3` |
 
 > **IMPORTANT RULE FOR COLLEAGUE 1 & COLLEAGUE 2:**
 > Do **NOT** modify `server.py`, `static/arena_app.js`, `static/showcases.js`, or other challenges' files unless explicitly coordinating with Satish. Keep all backend logic inside your `challenges/cX_*.py` file and all frontend UI inside your `static/challengeX.js` file so your module can be merged into the master repository in one command.
@@ -21,24 +21,21 @@ This codebase is split into **3 isolated Challenge modules** so 3 developers can
 
 ## 🔌 2. How Your Challenge Plugs Into the Main Arena
 
-### A. Backend API Hook (`challenges/cX_*.py`)
-`server.py` delegates `POST /api/c1-generate`, `POST /api/c2-evaluate`, and `POST /api/c3-assist` directly to:
+### A. Backend API Hooks (`challenges/cX_*.py`)
+`server.py` delegates Challenge 1, 2, and 3 endpoints across all **5 workshop languages** (`"en"` default, `"zh-CN"`, `"yue"` / `"zh-TW"`, `"ms"`, `"ta"`):
 - **Challenge 1 (`challenges/c1_image_outreach.py`)**:
-  - `handle_c1_generate(body, call_gemini_fn, call_imagen_fn, call_gemini_image_fn=None) -> (dict, int)`
-  - Uses `call_gemini_image_fn(prompt, raw_image_data_url)` (`gemini-2.5-flash-image`) to transform a participant's real camera selfie into a studio-grade executive portrait while preserving facial identity, and `call_gemini_fn(prompt)` (`gemini-2.5-flash`) to generate personalized PAMB Malaysia client outreach and score the submission.
-- **Challenge 2 (`challenges/c2_prompt_duel.py`)**:
-  - `handle_c2_evaluate(body, call_gemini_fn) -> (dict, int)`
-  - Evaluates the participant's 4-Pillar prompt (*Persona, Context, Task, Format/Tone*), generates the AI response in the participant's chosen language (`zh-CN`, `zh-TW`, `en`, `ms`), and scores each pillar out of 25 (`total` out of 100).
-- **Challenge 3 (`challenges/c3_pre_pitch.py`)**:
-  - `handle_c3_assist(body, call_gemini_fn) -> (dict, int)`
-  - Handles multi-step Pre-Pitch synthesis (`action="synthesize"` or `action="evaluate"`) on Dato' Sri Raymond Tan's Penang HNW dossier and scores grounding (`Clause 4.2.a`), empathy, and commercial close.
+  - `handle_c1_ai(...)` — Uses `gemini-3.1-flash-image` (fallback `gemini-3-pro-image` -> `gemini-2.5-flash-image`) to transform a participant's selfie into a studio-grade portrait in Step 1, then unlocks Step 2 client greeting cards & personal brand banners with strict multi-turn isolation.
+- **Challenge 2 (`challenges/c2_prompt_duel.py` & `challenges/c2_scenarios_bank.py`)**:
+  - `handle_c2_get_challenge`, `handle_c2_generate_deck`, `handle_c2_submit_deck`, `build_pptx_bytes` — Serves **72 unique HNW seats** (`6 curated cases × 12 personas`), evaluates R.C.T.F.C. + Tone + Personal Strategic Angle prompts, enforces a strict 3-slide deck schema, and scores across 6 dimensions (`/10` mapped to `/100` Arena points).
+- **Challenge 3 (`challenges/c3_pre_pitch.py` & `challenges/c3_scenarios_bank.py`)**:
+  - `handle_c3_ai(...)` + `/api/c3/scenario` — Serves **72 unique positive life-milestone seats** (`6 curated cases × 12 personas`), synthesizes Step 1 Door-Opener Greeting Cards, Step 2 First-Touch WhatsApp messages, and Step 3 selection-isolated Plan Comparison Emails, and scores across 4 pillars (`/100`).
 
 ### B. Frontend Component Contract (`static/challengeX.js`)
-Your frontend file registers a global React component (`window.Challenge1View`, `window.Challenge2View`, or `window.Challenge3View`) receiving these props from `static/arena_app.js`:
+Your frontend file registers global React participant views (`window.Challenge1ParticipantView`, `window.Challenge2ParticipantView`, `window.Challenge3ParticipantView`) receiving props from `static/arena_app.js`:
 
 ```javascript
-function ChallengeXView({
-  lang,               // "zh-CN" | "zh-TW" | "en" | "ms"
+function ChallengeXParticipantView({
+  lang,               // "en" (default) | "zh-CN" | "yue" | "zh-TW" | "ms" | "ta"
   participant,        // { id, name, region, regionBadge, language }
   completed,          // boolean (true if already submitted in this session)
   scoreObj,           // previous score object if completed
