@@ -1063,6 +1063,7 @@ def _build_outreach_card_prompt(
     occasion_key: str = "newborn",
     card_subtext: str = "",
     recipient_name: str = "",
+    lang: str = "en",
 ) -> str:
     """Build a 100% person-free, circle-free luxury 16:9 greeting card background with dedicated
     left-side typography breathing room and clean open space on the bottom-right for the portrait badge."""
@@ -1077,7 +1078,16 @@ def _build_outreach_card_prompt(
         and clean_recip.lower() not in (card_subtext or "").lower()
     ):
         has_cjk = any("\u4e00" <= ch <= "\u9fff" for ch in clean_recip)
-        salutation = clean_recip if clean_recip.startswith("致") else (f"致 {clean_recip}" if has_cjk else f"For {clean_recip}")
+        has_tamil = any("\u0b80" <= ch <= "\u0bff" for ch in clean_recip)
+        low_recip = clean_recip.lower()
+        if has_tamil or lang == "ta":
+            salutation = clean_recip
+        elif has_cjk or lang in ("zh-CN", "zh-TW", "yue"):
+            salutation = clean_recip if clean_recip.startswith(("致", "敬致", "送给", "送給", "送畀")) else f"致 {clean_recip}"
+        elif lang == "ms":
+            salutation = clean_recip if low_recip.startswith(("buat ", "untuk ", "kepada ")) else f"Buat {clean_recip}"
+        else:
+            salutation = clean_recip if low_recip.startswith(("for ", "to ", "dear ")) else f"For {clean_recip}"
         recip_clause = f'a small dedication line "{salutation}" directly above '
     sub_clause = (
         f' and directly beneath it the subtitle "{card_subtext}"'
@@ -1085,7 +1095,7 @@ def _build_outreach_card_prompt(
         else ""
     )
     sig_line = (
-        f'\n- Corner Signature: Place ONLY the small cursive name "{clean_adv}" in the bottom-left corner.'
+        f'\n- Corner Signature: Place ONLY the small refined signature "{clean_adv}" in the bottom-left corner.'
         if clean_adv
         else ""
     )
@@ -1180,7 +1190,15 @@ def _detect_heuristic_intent(
 
     # 2. Detect creation mode (`executive_headshot`, `outreach_card`, `brand_banner`)
     mode = prev_mode or "executive_headshot"
-    if any(k in low for k in ("banner", "linkedin", "header", "profile cover", "横幅", "橫幅", "主页", "sepanduk", "பேனர்")):
+    if any(
+        k in low
+        for k in (
+            "banner", "linkedin", "header", "profile cover",
+            "横幅", "橫幅", "主页", "主頁",
+            "sepanduk", "penjenamaan peribadi",
+            "பேனர்", "பேனர", "பிராண்டிங்",
+        )
+    ):
         mode = "brand_banner"
     elif any(
         k in low
@@ -1198,51 +1216,67 @@ def _detect_heuristic_intent(
             "baby",
             "贺卡",
             "賀卡",
+            "纪念卡",
+            "紀念卡",
+            "关怀卡",
+            "關懷卡",
             "新春",
             "开斋",
+            "開齋",
             "屠妖",
+            "排灯",
+            "排燈",
             "喜添新丁",
+            "新生儿",
+            "新生兒",
+            "新生bb",
             "kad ",
+            "kad ucapan",
             "வாழ்த்து",
-            "அட்டை",
+            "வாழ்த்து அட்டை",
             "தீபாவளி",
             "புத்தாண்டு",
             "குழந்தை",
+            "ஹரி ராயா",
         )
     ):
         mode = "outreach_card"
     elif any(
         k in low
-        for k in ("headshot", "portrait", "suit", "blazer", "studio", "形象照", "肖像", "西装", "西裝", "potret", "உருவப்படம்", "சூட்", "பிளேசர்")
+        for k in (
+            "headshot", "portrait", "suit", "blazer", "studio",
+            "形象照", "肖像", "西装", "西裝",
+            "potret", "உருவப்படம்", "சூட்", "பிளேசர்", "கோட்",
+        )
     ):
         mode = "executive_headshot"
 
     # 3. Detect occasion
     occ = prev_occasion or "newborn"
-    if any(k in low for k in ("lunar new year", "cny", "gong xi", "plum blossom", "mandarin orange", "新春", "新年", "春节", "tahun baru cina", "சீனப் புத்தாண்டு")):
+    if any(k in low for k in ("lunar new year", "cny", "gong xi", "plum blossom", "mandarin orange", "新春", "新年", "春节", "春節", "tahun baru cina", "சீனப் புத்தாண்டு")):
         occ = "cny_lunar"
+    elif any(k in low for k in ("deepavali", "diwali", "diya", "rangoli", "屠妖", "排灯", "排燈", "தீபாவளி", "அகல் விளக்கு")):
+        occ = "deepavali"
     elif any(k in low for k in ("hari raya", "aidilfitri", "syawal", "songket", "开斋", "開齋", "ஹரி ராயா")):
         occ = "hari_raya"
-    elif any(k in low for k in ("deepavali", "diwali", "diya", "rangoli", "屠妖", "தீபாவளி")):
-        occ = "deepavali"
-    elif any(k in low for k in ("newborn", "baby", "prumy child", "education", "新生儿", "新丁", "宝宝", "BB", "cahaya mata", "bayi", "குழந்தை")):
+    elif any(k in low for k in ("newborn", "baby", "prumy child", "education", "新生儿", "新生兒", "新丁", "宝宝", "寶寶", "bb", "cahaya mata", "bayi", "குழந்தை")):
         occ = "newborn"
     elif any(k in low for k in ("sme", "factory", "plant", "keyman", "pruwealth", "企业", "企業", "厂房", "廠房", "kilang", "தொழிற்சாலை")):
         occ = "sme_legacy"
-    elif any(k in low for k in ("medical", "hospital", "log ", "(log)", "cashless", "annual review", "policy review", "医疗", "醫療", "保单检视", "மருத்துவ")):
+    elif any(k in low for k in ("medical", "hospital", "log ", "(log)", "cashless", "annual review", "policy review", "医疗", "醫療", "保单检视", "保單檢視", "மருத்துவ")):
         occ = "annual_review"
     elif any(k in low for k in ("appreciation", "year-end", "year end", "gratitude", "thank you", "感恩", "答谢", "答謝", "penghargaan")):
         occ = "festive"
 
     # 4. Detect style preset
     style = prev_style or "mdrt_keynote"
-    if any(k in low for k in ("navy", "forbes", "boardroom", "petronas", "twin towers", "klcc", "trx", "深蓝", "深藍", "双峰塔", "雙峰塔")):
+    if any(k in low for k in ("navy", "forbes", "boardroom", "petronas", "twin towers", "klcc", "trx", "深蓝", "深藍", "双峰塔", "雙峰塔", "福布斯", "biru diraja", "ஃபோர்ப்ஸ்", "நீல நிற")):
         style = "forbes_studio"
-    elif any(k in low for k in ("beige", "linen", "wood", "lounge", "warm", "casual", "family office", "休闲", "木质", "温暖")):
+    elif any(k in low for k in ("beige", "linen", "wood", "lounge", "warm", "casual", "family office", "休闲", "休閒", "米色", "亲和", "親和", "温暖", "溫暖", "mesra", "அன்பான", "நட்பான")):
         style = "family_advisor"
-    elif any(k in low for k in ("crimson", "festive", "lantern", "red silk", "prosperity", "喜庆", "红金", "紅金")):
+    elif any(k in low for k in ("crimson", "festive", "lantern", "red silk", "prosperity", "喜庆", "喜慶", "红金", "紅金")):
         style = "festive_vip"
-    elif any(k in low for k in ("charcoal", "mdrt", "gala", "golden hour", "marina bay", "炭灰")):
+    elif any(k in low for k in ("charcoal", "mdrt", "gala", "golden hour", "marina bay", "炭灰", "kelabu gelap", "சாம்பல் நிற")):
         style = "mdrt_keynote"
 
     # 5. Detect copy-only refinement ("keep the photo/card, just make the message shorter")
@@ -1726,6 +1760,16 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         else "Custom AI Image Generation Mode"
     )
 
+    headline_lang_rules = {
+        "zh-CN": "concise 4-8 character auspicious Simplified Chinese (简体中文) greeting card headline (e.g. 新春大吉 阖家安康, 喜迎新丁 幸福满堂, 开斋节快乐, 屠妖节快乐)",
+        "zh-TW": "concise 4-8 character auspicious Traditional Chinese (繁體中文) greeting card headline (e.g. 恭賀新禧 闔家安康, 喜迎新丁 幸福滿堂, 開齋節快樂, 屠妖節快樂)",
+        "yue": "concise 4-8 character auspicious Traditional Chinese (繁體中文) greeting card headline suitable for Malaysian Cantonese VIPs (e.g. 恭賀新禧 財源廣進, 喜迎新丁 幸福滿堂, 開齋節快樂, 屠妖節快樂)",
+        "ms": "concise 2-5 word celebratory Bahasa Melayu greeting card headline (e.g. Selamat Hari Raya Aidilfitri, Tahniah Cahaya Mata Baharu, Selamat Tahun Baru Cina, Selamat Hari Deepavali)",
+        "ta": "concise 2-5 word celebratory Tamil script (தமிழ்) greeting card headline (e.g. இனிய தீபாவளி நல்வாழ்த்துகள், இனிய புத்தாண்டு நல்வாழ்த்துகள், புதிய வரவிற்கு நல்வாழ்த்துகள்)",
+        "en": "concise 2-5 word celebratory English greeting card headline",
+    }
+    headline_rule = headline_lang_rules.get(lang, headline_lang_rules["en"])
+
     # Step 1: Multi-Turn Conversational Planner + Visual Brand Judge
     planner_prompt = (
         "You are the **AI Image Assistant** (powered by Nano Banana 2) "
@@ -1755,8 +1799,8 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         '  "styleKey": "mdrt_keynote" | "forbes_studio" | "family_advisor" | "festive_vip",\n'
         '  "occasionKey": "newborn" | "sme_legacy" | "annual_review" | "cny_lunar" | "hari_raya" | "deepavali" | "festive",\n'
         '  "celebrityName": string (if the user asked to use a famous public figure / celebrity in this message, return that celebrity\'s full English name e.g. "Michelle Yeoh", "Shah Rukh Khan", "Zendaya"; if continuing previous celebrity session without changing celebrity, return "' + celebrity_name + '"; otherwise ""),\n'
-        '  "clientName": string (ONLY if the user explicitly named a specific recipient person/couple/family in NEW USER MESSAGE — e.g. "Mr. & Mrs. Wong", "Dato\' Sri Lee", "Sarah", "林先生与夫人" — return that exact recipient name; else if refining the SAME greeting card without switching occasion, return "' + default_client + '"; otherwise return "" — NEVER invent dummy names and NEVER put the advisor\'s own name here),\n'
-        '  "cardHeadline": string (if the user requested specific custom text/words on the card, preserve their EXACT custom text verbatim; otherwise write a concise 2-5 word celebratory card headline in English or ' + lang_full + ', no double dashes),\n'
+        '  "clientName": string (ONLY if the user explicitly named a specific recipient person/couple/family in NEW USER MESSAGE — e.g. "Mr. & Mrs. Wong", "Encik Farid & Puan Aishah", "林先生与夫人", "陳生陳太", "திரு & திருமதி குமார்" — return that exact recipient name; else if refining the SAME greeting card without switching occasion, return "' + default_client + '"; otherwise return "" — NEVER invent dummy names and NEVER put the advisor\'s own name here),\n'
+        '  "cardHeadline": string (if the user requested specific custom text/words on the card, preserve their EXACT custom text verbatim; otherwise write a ' + headline_rule + ', no double dashes),\n'
         '  "cardSubtext": string (ONLY non-empty if the user explicitly asked for an additional custom message/subtitle printed on the card itself; otherwise ""),\n'
         '  "motto": string (if the user requested specific custom text/tagline/motto on the banner or card, preserve their EXACT custom text verbatim; otherwise ""),\n'
         '  "visualPrompt": string (follow CRITICAL VISUAL PROMPT RULES 1 & 2 above strictly),\n'
@@ -1930,6 +1974,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
                     occasion_key=occasion_key,
                     card_subtext=effective_subtext,
                     recipient_name=resolved_client,
+                    lang=lang,
                 )
                 badge_pos = "bottom-right"
             else:

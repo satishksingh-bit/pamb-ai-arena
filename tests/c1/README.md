@@ -39,3 +39,14 @@ python3 tests/c1/test_c1_adversarial.py \
   --project <YOUR_GCP_PROJECT_ID>
 ```
 Stress-tests explicit bottom-right/left-side text collision traps, dense multi-line text walls, Traditional Chinese couplets, wide-wrapping Tamil script, mixed bilingual strings, ghost-circle prompt injections, extreme off-center (`x=82%, y=26%`) `16:9` portraits, low-contrast champagne script, and 3-turn `headshot -> banner -> card` mode flips.
+
+## 3. Run the Full 6-Language Coverage Suite (`en`, `zh-CN`, `yue`, `zh-TW`, `ms`, `ta`)
+```bash
+python3 tests/c1/test_c1_multilingual.py \
+  --api-url http://localhost:8095/api/ai \
+  --project <YOUR_GCP_PROJECT_ID>
+```
+Verifies all 6 Arena languages (`English`, `简体中文 Mandarin`, `廣東話 Cantonese`, `繁體中文 Traditional Chinese`, `Bahasa Melayu`, and `தமிழ் Tamil`):
+- **Static & Heuristic Parity**: All 8 pills (`3 craft` + `5 work`) localized, generic, and deterministically routed in every language
+- **Localized Gate 0**: Missing photo returns `photoRequired=True` with script-matched localized instructions in all 6 languages
+- **18 Live Visual Turns (`6 languages × 3 turns`)**: Step 1 Studio Portrait → Step 2 Generic (Unnamed) Card → Step 2 Explicitly Named Recipient Card, audited via Gemini Vision OCR for script fidelity, recipient presence/absence, and `0.0%` text-badge overlap.
