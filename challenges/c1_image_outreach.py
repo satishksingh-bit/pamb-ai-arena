@@ -47,8 +47,9 @@ except ImportError:  # pragma: no cover - optional in slim container
 NANO_BANANA_MODEL = os.environ.get("NANO_BANANA_MODEL", "gemini-3.1-flash-image")
 NANO_BANANA_PRO_FALLBACK = os.environ.get("NANO_BANANA_PRO_FALLBACK", "gemini-3-pro-image")
 C1_TEXT_MODELS = [
-    os.environ.get("C1_PLANNER_MODEL", "gemini-3-flash-preview"),
+    os.environ.get("C1_PLANNER_MODEL", "gemini-3.5-flash-lite"),
     "gemini-3.1-flash-lite",
+    "gemini-3-flash-preview",
 ]
 _FACE_BOX_CACHE: dict[str, tuple[float, float, float, float]] = {}
 _TEXT_BOX_CACHE: dict[str, list[tuple[float, float, float, float]]] = {}
@@ -449,7 +450,7 @@ def _call_c1_text_model(prompt: str, call_vertex_fn: Any) -> tuple[str | None, s
                 "temperature": 0.3,
                 "maxOutputTokens": 900,
             }
-            if "gemini-3-flash" in model_id:
+            if model_id.startswith("gemini-3"):
                 gen_cfg["thinkingConfig"] = {"thinkingBudget": 0}
             payload = {
                 "contents": [{"role": "user", "parts": [{"text": prompt}]}],
@@ -608,7 +609,7 @@ def _detect_face_box_norm(port_bytes: bytes) -> tuple[float, float, float, float
 
         url = (
             f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
-            "/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent"
+            "/locations/global/publishers/google/models/gemini-3.5-flash-lite:generateContent"
         )
         payload = {
             "contents": [
@@ -629,7 +630,8 @@ def _detect_face_box_norm(port_bytes: bytes) -> tuple[float, float, float, float
             "generationConfig": {
                 "responseMimeType": "application/json",
                 "temperature": 0.0,
-                "maxOutputTokens": 80,
+                "maxOutputTokens": 120,
+                "thinkingConfig": {"thinkingBudget": 0},
             },
         }
         resp = requests.post(
@@ -681,7 +683,7 @@ def _detect_text_boxes_norm(card_bytes: bytes) -> list[tuple[float, float, float
 
         url = (
             f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
-            "/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent"
+            "/locations/global/publishers/google/models/gemini-3.5-flash-lite:generateContent"
         )
         payload = {
             "contents": [

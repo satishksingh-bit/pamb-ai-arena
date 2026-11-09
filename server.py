@@ -68,9 +68,15 @@ MEDIA_DIR = os.environ.get("PAMB_MEDIA_DIR", "/tmp/pamb_arena_media")
 os.makedirs(MEDIA_DIR, exist_ok=True)
 
 MODEL_CANDIDATES = [
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-flash-lite",
     "gemini-2.5-flash",
-    "gemini-2.5-flash-lite",
-    "gemini-2.0-flash",
+]
+
+IMAGE_MODEL_CANDIDATES = [
+    "gemini-3.1-flash-image",
+    "gemini-3-pro-image",
+    "gemini-2.5-flash-image",
 ]
 
 # All participants are visiting for PRUMDA Learning Trip 🇲🇾
@@ -146,11 +152,28 @@ def get_access_token(force_refresh: bool = False) -> str:
     return ""
 
 
-def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-2.5-flash") -> tuple[str | None, str, int]:
+def _vertex_generate_url(model_id: str) -> str:
+    """Routes Gemini 3.x models to Vertex AI `locations/global` and 2.x models to regional/global."""
+    if model_id.startswith("gemini-3"):
+        return (
+            f"https://aiplatform.googleapis.com/v1/projects/{PROJECT_ID}"
+            f"/locations/global/publishers/google/models/{model_id}:generateContent"
+        )
+    return (
+        f"https://{LOCATION}-aiplatform.googleapis.com/v1/projects/{PROJECT_ID}"
+        f"/locations/{LOCATION}/publishers/google/models/{model_id}:generateContent"
+    )
+
+
+def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-3.5-flash-lite") -> tuple[str | None, str, int]:
     t0 = time.time()
     token = get_access_token()
     if not token:
         return None, f"{preferred_model}", int((time.time() - t0) * 1000) + 410
+
+    # Upgrade legacy saved state default ("gemini-2.5-flash") to gemini-3.5-flash-lite
+    if not preferred_model or preferred_model == "gemini-2.5-flash":
+        preferred_model = "gemini-3.5-flash-lite"
 
     candidates = [preferred_model] + [m for m in MODEL_CANDIDATES if m != preferred_model]
 
@@ -161,10 +184,7 @@ def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-2.5-flash") -
             "X-Goog-User-Project": PROJECT_ID,
         }
         for model_id in candidates:
-            url = (
-                f"https://{LOCATION}-aiplatform.googleapis.com/v1/projects/{PROJECT_ID}"
-                f"/locations/{LOCATION}/publishers/google/models/{model_id}:generateContent"
-            )
+            url = _vertex_generate_url(model_id)
             payload = {
                 "contents": [{"role": "user", "parts": [{"text": prompt}]}],
                 "generationConfig": {
@@ -172,7 +192,7 @@ def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-2.5-flash") -
                     "maxOutputTokens": 1400,
                 },
             }
-            if model_id.startswith("gemini-2.5"):
+            if model_id.startswith(("gemini-2.5", "gemini-3")):
                 payload["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
             try:
                 resp = requests.post(url, headers=headers, json=payload, timeout=14)
@@ -183,7 +203,7 @@ def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-2.5-flash") -
                         .get("content", {})
                         .get("parts", [])
                     )
-                    text = "".join(p.get("text", "") for p in parts).strip()
+                    text = "".join(p.get("text", "") for p in parts if not p.get("thought")).strip()
                     if text:
                         ms = int((time.time() - t0) * 1000)
                         return text, model_id, ms
@@ -200,8 +220,8 @@ def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-2.5-flash") -
 
 
 def call_vertex_gemini_image(photo_data_url: str | None, image_prompt: str) -> tuple[str | None, int]:
-    """Transforms a raw camera selfie (or generates a studio portrait) into a photorealistic
-    Executive Studio Headshot using Vertex AI gemini-2.5-flash-image."""
+    """Generates or edits images using Vertex AI `gemini-3.1-flash-image` (primary on `locations/global`),
+    with automatic fallback to `gemini-3-pro-image` and `gemini-2.5-flash-image`."""
     t0 = time.time()
     token = get_access_token()
     if not token:
@@ -221,46 +241,57 @@ def call_vertex_gemini_image(photo_data_url: str | None, image_prompt: str) -> t
             pass
     parts.append({"text": image_prompt})
 
-    for attempt in range(3):
-        headers = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-            "X-Goog-User-Project": PROJECT_ID,
+    for img_model in IMAGE_MODEL_CANDIDATES:
+        url = _vertex_generate_url(img_model)
+        gen_cfg: dict = {
+            "responseModalities": ["TEXT", "IMAGE"],
+            "temperature": 0.2 if photo_data_url else 0.4,
         }
-        url = (
-            f"https://{LOCATION}-aiplatform.googleapis.com/v1/projects/{PROJECT_ID}"
-            f"/locations/{LOCATION}/publishers/google/models/gemini-2.5-flash-image:generateContent"
-        )
+        if not photo_data_url and img_model.startswith("gemini-3"):
+            gen_cfg["imageConfig"] = {"aspectRatio": "16:9"}
         payload = {
             "contents": [{"role": "user", "parts": parts}],
-            "generationConfig": {
-                "responseModalities": ["TEXT", "IMAGE"],
-                "temperature": 0.2 if photo_data_url else 0.4,
-            },
+            "generationConfig": gen_cfg,
         }
-        try:
-            resp = requests.post(url, headers=headers, json=payload, timeout=22)
-            if resp.status_code == 200:
-                data = resp.json()
-                c_parts = (
-                    data.get("candidates", [{}])[0]
-                    .get("content", {})
-                    .get("parts", [])
-                )
-                for p in c_parts:
-                    inline = p.get("inlineData")
-                    if inline and inline.get("data"):
+        req_timeout = 28 if img_model == "gemini-3-pro-image" else 24
+
+        for attempt in range(2):
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+                "X-Goog-User-Project": PROJECT_ID,
+            }
+            try:
+                resp = requests.post(url, headers=headers, json=payload, timeout=req_timeout)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    c_parts = (
+                        data.get("candidates", [{}])[0]
+                        .get("content", {})
+                        .get("parts", [])
+                    )
+                    img_inlines = [
+                        p["inlineData"]
+                        for p in c_parts
+                        if not p.get("thought")
+                        and isinstance(p.get("inlineData"), dict)
+                        and p["inlineData"].get("data")
+                    ]
+                    if img_inlines:
+                        inline = img_inlines[-1]
                         out_mime = inline.get("mimeType", "image/png")
                         ms = int((time.time() - t0) * 1000)
                         return f"data:{out_mime};base64,{inline['data']}", ms
-            elif resp.status_code in (401, 403) and attempt == 0:
-                token = get_access_token(force_refresh=True)
-                continue
-            elif resp.status_code == 429 and attempt < 2:
-                time.sleep(0.8 * (attempt + 1))
-                continue
-        except Exception:
-            pass
+                    break
+                elif resp.status_code in (401, 403) and attempt == 0:
+                    token = get_access_token(force_refresh=True)
+                    continue
+                elif resp.status_code == 429 and attempt == 0:
+                    time.sleep(0.8)
+                    continue
+                break
+            except Exception:
+                break
 
     return None, int((time.time() - t0) * 1000)
 
@@ -884,8 +915,8 @@ def _default_state(with_demo: bool = False, initial_phase: str = "LOBBY", simula
         ],
         "canvasState": CANVAS_BLUEPRINTS["mdrt_sprint"],
         "coachState": {},
-        "preferredModel": "gemini-2.5-flash",
-        "lastModelUsed": "gemini-2.5-flash",
+        "preferredModel": "gemini-3.5-flash-lite",
+        "lastModelUsed": "gemini-3.5-flash-lite",
         "simulateDemo": False,
         "aiCallsCount": 24,
         "avgLatencyMs": 740,
@@ -1148,8 +1179,8 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     "events": st.get("events", []),
                     "canvasState": st.get("canvasState", CANVAS_BLUEPRINTS["mdrt_sprint"]),
                     "coachState": st.get("coachState", {}),
-                    "preferredModel": st.get("preferredModel", "gemini-2.5-flash"),
-                    "lastModelUsed": st.get("lastModelUsed", "gemini-2.5-flash"),
+                    "preferredModel": st.get("preferredModel", "gemini-3.5-flash-lite"),
+                    "lastModelUsed": st.get("lastModelUsed", "gemini-3.5-flash-lite"),
                     "simulateDemo": st.get("simulateDemo", False),
                     "aiCallsCount": st.get("aiCallsCount", 24),
                     "avgLatencyMs": st.get("avgLatencyMs", 740),
@@ -1792,7 +1823,9 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
             pid = body.get("id", "")
             with _STATE_LOCK:
                 st = load_state()
-                pref_model = body.get("model") or st.get("preferredModel", "gemini-2.5-flash")
+                pref_model = body.get("model") or st.get("preferredModel", "gemini-3.5-flash-lite")
+                if pref_model == "gemini-2.5-flash":
+                    pref_model = "gemini-3.5-flash-lite"
                 if challenge == "3" and body.get("seatIndex") is None and pid and pid in st["participants"]:
                     if "c3Seat" in st["participants"][pid]:
                         body = dict(body)

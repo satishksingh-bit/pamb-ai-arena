@@ -44,7 +44,7 @@ logger = logging.getLogger("deck-challenge")
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
 SECRET = (os.environ.get("DECK_SECRET") or "pamb-deck-challenge-secret-2026").encode()
-IMAGE_MODEL = os.environ.get("DECK_IMAGE_MODEL", "gemini-2.5-flash-image")
+IMAGE_MODEL = os.environ.get("DECK_IMAGE_MODEL", "gemini-3.1-flash-image")
 
 # Supported deck / content languages (Arena join codes zh-TW -> yue are mapped automatically).
 LANGS = {
@@ -1158,7 +1158,7 @@ def call_vertex_structured(
     if not token:
         raise RuntimeError("No GCP access token available for Vertex AI.")
 
-    models = ["gemini-2.5-flash", "gemini-2.5-flash-lite"]
+    models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-2.5-flash"]
     last_err = None
     for attempt in range(2):
         headers = {
@@ -1167,10 +1167,16 @@ def call_vertex_structured(
             "X-Goog-User-Project": project_id,
         }
         for model_id in models:
-            url = (
-                f"https://{location}-aiplatform.googleapis.com/v1/projects/{project_id}"
-                f"/locations/{location}/publishers/google/models/{model_id}:generateContent"
-            )
+            if model_id.startswith("gemini-3"):
+                url = (
+                    f"https://aiplatform.googleapis.com/v1/projects/{project_id}"
+                    f"/locations/global/publishers/google/models/{model_id}:generateContent"
+                )
+            else:
+                url = (
+                    f"https://{location}-aiplatform.googleapis.com/v1/projects/{project_id}"
+                    f"/locations/{location}/publishers/google/models/{model_id}:generateContent"
+                )
             payload: dict = {
                 "contents": [{"role": "user", "parts": [{"text": prompt}]}],
                 "generationConfig": {
@@ -1182,7 +1188,7 @@ def call_vertex_structured(
             }
             if system_instruction:
                 payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
-            if model_id.startswith("gemini-2.5"):
+            if model_id.startswith(("gemini-2.5", "gemini-3")):
                 payload["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
             try:
                 resp = requests.post(url, headers=headers, json=payload, timeout=28)
@@ -1193,7 +1199,7 @@ def call_vertex_structured(
                         .get("content", {})
                         .get("parts", [])
                     )
-                    text = "".join(p.get("text", "") for p in parts).strip()
+                    text = "".join(p.get("text", "") for p in parts if not p.get("thought")).strip()
                     if text:
                         return json.loads(text), model_id
                 elif resp.status_code in (401, 403) and attempt == 0:
@@ -1861,7 +1867,7 @@ def handle_c2_get_challenge(market: str, lang: str, get_access_token_fn, project
         "target": _with_target_images(target_out, market),
         "rubric": RUBRIC_I18N.get(lang, RUBRIC),
         "scoring": {"rubric": 6.0, "coverage": 2.5, "checks": 1.5, "max": 10},
-        "text_model": "gemini-2.5-flash",
+        "text_model": "gemini-3.5-flash-lite",
         "image_model": IMAGE_MODEL,
     }
 

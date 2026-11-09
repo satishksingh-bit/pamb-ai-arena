@@ -887,7 +887,7 @@ def _generate_c3_greeting_card(
                 ai_data_url = f"data:image/png;base64,{b64_raw}" if b64_raw and not str(b64_raw).startswith("data:") else b64_raw
 
             if ai_data_url and str(ai_data_url).startswith("data:image"):
-                img_model = "gemini-2.5-flash-image"
+                img_model = "gemini-3.1-flash-image"
                 if HAS_PIL and "," in ai_data_url:
                     try:
                         _, b64_part = ai_data_url.split(",", 1)
@@ -1346,7 +1346,7 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             "synthesisScore": total_q,
             "strategyScore": total_q,
             "judgeFeedback": verdict,
-            "modelUsed": f"gemini-2.5-flash + {img_model}",
+            "modelUsed": f"gemini-3.5-flash-lite + {img_model}",
             "latencyMs": int((time.time() - t_start) * 1000),
         }
 
@@ -1496,6 +1496,6 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         "synthesisScore": total_quality,
         "strategyScore": total_quality,
         "judgeFeedback": scored_verdict,
-        "modelUsed": f"gemini-2.5-flash + {img_model}",
+        "modelUsed": f"gemini-3.5-flash-lite + {img_model}",
         "latencyMs": int((time.time() - t_start) * 1000),
     }
