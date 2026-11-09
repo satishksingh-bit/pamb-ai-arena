@@ -21,7 +21,15 @@ import base64
 import concurrent.futures
 import io
 import json
+import re
 import time
+from challenges.c3_scenarios_bank import (
+    ARCHETYPE_ORDER,
+    SEAT_ROSTER_56,
+    get_total_unique_seats,
+    list_all_archetype_summaries,
+    resolve_seat_scenario,
+)
 
 try:
     from PIL import Image, ImageDraw, ImageFont
@@ -175,7 +183,7 @@ SCENARIO_CATALOG = {
                     "Before your age-40 rate jump next month, we can lock in PRUAll Care (~190 CI conditions + ICU + 20% Recovery Care) and PRUMillion Med Active 2.0 (RM 8M medical limit + 15% instant claim-free discount). Free for a 10-min coffee in Bayan Lepas this week? ☕"
                 ),
                 "aiaComparisonEmail": (
-                    "Subject: Factual Comparison Before Age 40: PAMB (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\n"
+                    "Subject: Factual Comparison Before Age 40: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\n"
                     "Hi Jason,\n"
                     "Here is the factual side-by-side between our PRU plan and AIA Malaysia before your age-39 window closes:\n"
                     "• Coverage to Age 100 & ~190 Conditions (vs. AIA Age 80): PRUAll Care covers ~190 serious illnesses up to age 100 (including ICU >=120 hrs & Mental Health), whereas AIA A-Life Beyond Critical Care expires at age 80.\n"
@@ -222,7 +230,7 @@ SCENARIO_CATALOG = {
                     "Selamat Hari Lahir ke-40 lebih awal, Jason! 🥂 Sebelum kenaikan kadar umur 40 bulan depan, jom kunci PRUAll Care (~190 penyakit kritikal + ICU + 20% Recovery Care) & PRUMillion Med Active 2.0 (had RM 8J + diskaun 15% Active Pricing). Jom minum kopi 10 minit minggu ini? ☕"
                 ),
                 "aiaComparisonEmail": (
-                    "Subjek: Perbandingan Fakta: PAMB (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\n"
+                    "Subjek: Perbandingan Fakta: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\n"
                     "Hai Jason,\n"
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA:\n"
                     "• Perlindungan Sehingga Umur 100 (~190 Kondisi vs AIA Umur 80): PRUAll Care melindungi sehingga umur 100 tahun termasuk ICU >=120 jam & kesihatan mental (AIA A-Life Beyond tamat pada umur 80).\n"
@@ -238,7 +246,7 @@ SCENARIO_CATALOG = {
                     "அடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUAll Care (~190 தீவிர நோய்கள் + ICU + 20% குணமடைதல் நிதி) மற்றும் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) திட்டங்களை 39 வயது கட்டணத்தில் உறுதி செய்யலாம். இந்த வாரம் 10 நிமிடம் காபி சாப்பிடலாமா? ☕"
                 ),
                 "aiaComparisonEmail": (
-                    "பொருள்: 40 வயதுக்கு முன் உண்மை ஒப்பீடு: PAMB (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\n"
+                    "பொருள்: 40 வயதுக்கு முன் உண்மை ஒப்பீடு: PRU (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\n"
                     "வணக்கம் Jason,\n"
                     "புருடென்ஷியல் மலேசியா மற்றும் AIA இடையேயான 3 முக்கிய உண்மை வேறுபாடுகள்:\n"
                     "• 100 வயது வரை பாதுகாப்பு & ~190 நோய்கள் (AIA 80 வயது வரை மட்டுமே): PRUAll Care 100 வயது வரை ~190 தீவிர நோய்கள் மற்றும் ICU சிகிச்சையை உள்ளடக்கியது.\n"
@@ -261,7 +269,7 @@ SCENARIO_CATALOG = {
         "aiaPlan": "AIA A-Life Link 2 / A-Life Kasih Famili + A-Plus Total Multi-Crisis",
         "customerObjection": (
             "Terima kasih for the housewarming card & message! An AIA planner also quoted us "
-            "AIA A-Life Link 2 + CI rider for our mortgage shield. Can you email how PAMB compares factually?"
+            "AIA A-Life Link 2 + CI rider for our mortgage shield. Can you email how PRU compares factually?"
         ),
         "aiaComparisonFacts": [
             "1. Unconditional +50% Auto Sum Assured Booster: PRUWith You Plus increases your mortgage life/TPD shield by +1%/yr (up to +50%) automatically for free—without requiring annual AIA Vitality fitness/health checks.",
@@ -284,11 +292,11 @@ SCENARIO_CATALOG = {
                     "Unlike bank MRTA (which pays RM 0 during a Critical Illness), PRUWith You Plus + PRUAll Care gives you an immediate RM 500 New Home Cash Reward, a free +50% Auto Sum Assured Booster, and covers your RM 5,600/mth mortgage installments across ~190 CI conditions. Can I send a 1-page comparison? 😊"
                 ),
                 "aiaComparisonEmail": (
-                    "Subject: Eco Botanic Mortgage Shield Comparison: PAMB (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\n"
+                    "Subject: Eco Botanic Mortgage Shield Comparison: PRU (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\n"
                     "Hi Amirul & Farah,\n"
                     "Here are 3 factual advantages of PRUWith You Plus + PRUAll Care over AIA A-Life Link 2 for your RM 1.3M mortgage:\n"
-                    "• Unconditional +50% Auto Sum Assured Booster: PAMB automatically increases your mortgage protection by +1%/yr up to +50% at RM 0 extra cost, whereas AIA's booster depends on maintaining annual AIA Vitality points and fees.\n"
-                    "• Immediate RM 500 New Home Cash Reward: PAMB pays you an RM 500 Goal Achievement Cash Reward right now for your Eco Botanic home.\n"
+                    "• Unconditional +50% Auto Sum Assured Booster: PRU automatically increases your mortgage protection by +1%/yr up to +50% at RM 0 extra cost, whereas AIA's booster depends on maintaining annual AIA Vitality points and fees.\n"
+                    "• Immediate RM 500 New Home Cash Reward: PRU pays you an RM 500 Goal Achievement Cash Reward right now for your Eco Botanic home.\n"
                     "• ~190 CI Conditions + 20% Extra Recovery Care: PRUAll Care pays an extra 20% Recovery Care buffer so your RM 5,600/mth home loan never defaults.\n\n"
                     "Shall we do a 10-min call tomorrow at 8:30 PM?"
                 ),
@@ -331,7 +339,7 @@ SCENARIO_CATALOG = {
                     "Tahniah Amirul & Farah atas kunci rumah baharu di Eco Botanic! 🏡🔑 Dengan PRUWith You Plus + PRUAll Care, anda layak menuntut Ganjaran Tunai Rumah Baharu RM 500, +50% Booster Automatik Percuma, dan perlindungan ansuran RM 5,600/bulan semasa Penyakit Kritikal. Boleh saya kongsikan ringkasan 1 muka surat? 😊"
                 ),
                 "aiaComparisonEmail": (
-                    "Subjek: Perbandingan Perlindungan Gadai Janji: PAMB (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\n"
+                    "Subjek: Perbandingan Perlindungan Gadai Janji: PRU (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\n"
                     "Hai Amirul & Farah,\n"
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA A-Life Link 2:\n"
                     "• +50% Booster Automatik Tanpa Syarat: Meningkat +1%/tahun secara percuma tanpa perlu yuran atau sasaran senaman AIA Vitality.\n"
@@ -347,9 +355,9 @@ SCENARIO_CATALOG = {
                     "வங்கி MRTA தீவிர நோய்க்கு RM 0 மட்டுமே தரும். ஆனால் PRUWith You Plus + PRUAll Care மூலம் உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு, இலவச +50% காப்பீட்டு உயர்வு மற்றும் மாதம் RM 5,600 வீட்டுக் கடன் தவணைப் பாதுகாப்பு கிடைக்கும். 1-பக்க சுருக்கத்தை அனுப்பட்டுமா? 😊"
                 ),
                 "aiaComparisonEmail": (
-                    "பொருள்: வீட்டுக் கடன் பாதுகாப்பு ஒப்பீடு: PAMB (PRUWith You Plus) vs AIA (A-Life Link 2)\n\n"
+                    "பொருள்: வீட்டுக் கடன் பாதுகாப்பு ஒப்பீடு: PRU (PRUWith You Plus) vs AIA (A-Life Link 2)\n\n"
                     "வணக்கம் Amirul & Farah,\n"
-                    "உங்கள் RM 1.3M வீட்டுக் கடனுக்கு AIA A-Life Link 2-வை விட PAMB சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
+                    "உங்கள் RM 1.3M வீட்டுக் கடனுக்கு AIA A-Life Link 2-வை விட PRU சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
                     "• நிபந்தனையற்ற +50% இலவச காப்பீட்டு உயர்வு: ஆண்டுக்கு +1% தானாக உயரும் (AIA Vitality கட்டணம் தேவையில்லை).\n"
                     "• உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு: உங்கள் புதிய வீட்டிற்கு RM 500 ரொக்கப் பரிசு.\n"
                     "• ~190 தீவிர நோய்கள் + 20% கூடுதல் குணமடைதல் நிதி: மாதம் RM 5,600 தவணை தடையின்றி செலுத்தப்படும்.\n\n"
@@ -374,7 +382,7 @@ SCENARIO_CATALOG = {
         ),
         "aiaComparisonFacts": [
             "1. Up to 260% Female CI + 110% Maturity Refund: PRULady provides up to 260% female CI coverage and refunds up to 110% of total premiums paid at maturity (plus a Career Promotion Milestone Cash Reward!).",
-            "2. 103% Day-1 Investment Allocation: PAMB PRUElite Invest allocates 103% of your single premium into wealth funds on Day 1 (an immediate +3% boost vs. standard ILP/unit trust charges).",
+            "2. 103% Day-1 Investment Allocation: PRU PRUElite Invest allocates 103% of your single premium into wealth funds on Day 1 (an immediate +3% boost vs. standard ILP/unit trust charges).",
             "3. Guaranteed Annual Med Value Point Increase: PRUValue Med grows its Med Value Point every year automatically and still pays 80% of eligible bills beyond the limit.",
         ],
         "policyCitation": "PRULady + PRUElite Invest vs. AIA A-Life Lady360",
@@ -393,7 +401,7 @@ SCENARIO_CATALOG = {
                     "Your promotion unlocks a Career Promotion Cash Reward under PRULady (260% female CI cover + up to 110% maturity premium refund), paired with PRUElite Invest (103% Day-1 wealth allocation). Free for a 10-min coffee near your hospital next Tuesday? ☕"
                 ),
                 "aiaComparisonEmail": (
-                    "Subject: Executive Comparison for Dr. Kavitha: PAMB (PRULady & PRUElite Invest) vs. AIA (A-Life Lady360)\n\n"
+                    "Subject: Executive Comparison for Dr. Kavitha: PRU (PRULady & PRUElite Invest) vs. AIA (A-Life Lady360)\n\n"
                     "Dear Dr. Kavitha,\n"
                     "Here is a concise, factual comparison between our PRU plan and AIA Malaysia for your executive portfolio:\n"
                     "• 260% Female CI Cover + Up to 110% Maturity Refund: PRULady delivers up to 260% coverage, 10 Life Milestone Cash Rewards (including Career Promotion!), and refunds up to 110% of total premiums at maturity.\n"
@@ -440,7 +448,7 @@ SCENARIO_CATALOG = {
                     "Tahniah Dr. Kavitha atas pelantikan sebagai Ketua Jabatan! 🌟🩺 Pelantikan ini melayakkan anda menuntut Ganjaran Kenaikan Pangkat PRULady (260% perlindungan wanita + 110% pulangan matang) bersama PRUElite Invest (103% alokasi Hari-1). Jom minum kopi 10 minit Selasa depan? ☕"
                 ),
                 "aiaComparisonEmail": (
-                    "Subjek: Perbandingan Eksekutif: PAMB (PRULady & PRUElite Invest) vs. AIA (A-Life Lady360)\n\n"
+                    "Subjek: Perbandingan Eksekutif: PRU (PRULady & PRUElite Invest) vs. AIA (A-Life Lady360)\n\n"
                     "Salam Dr. Kavitha,\n"
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA A-Life Lady360:\n"
                     "• 260% Perlindungan Wanita + 110% Pulangan Matang: Termasuk 10 Ganjaran Peristiwa Penting (Kenaikan Pangkat!).\n"
@@ -456,7 +464,7 @@ SCENARIO_CATALOG = {
                     "உங்கள் பதவி உயர்வுக்கு PRULady திட்டத்தின் கீழ் ரொக்கப் பரிசு, 260% பெண்கள் தீவிர நோய் பாதுகாப்பு + முதிர்வில் 110% பிரீமியம் திரும்பப் பெறுதல் மற்றும் PRUElite Invest (முதல் நாளிலேயே 103% முதலீட்டு ஒதுக்கீடு) கிடைக்கிறது. செவ்வாய்க்கிழமை 10 நிமிடம் காபி சாப்பிடலாமா? ☕"
                 ),
                 "aiaComparisonEmail": (
-                    "பொருள்: Dr. Kavitha-க்கான உண்மை ஒப்பீடு: PAMB (PRULady & PRUElite Invest) vs AIA (A-Life Lady360)\n\n"
+                    "பொருள்: Dr. Kavitha-க்கான உண்மை ஒப்பீடு: PRU (PRULady & PRUElite Invest) vs AIA (A-Life Lady360)\n\n"
                     "அன்புள்ள Dr. Kavitha,\n"
                     "புருடென்ஷியல் மலேசியா மற்றும் AIA A-Life Lady360 இடையேயான 3 முக்கிய உண்மை ஒப்பீடுகள்:\n"
                     "• 260% பெண்கள் பாதுகாப்பு + 110% பிரீமியம் திரும்பப் பெறுதல்: PRULady 260% பாதுகாப்பு, பதவி உயர்வு ரொக்கப் பரிசு மற்றும் முதிர்வில் 110% பிரீமியம் திரும்பத் தருகிறது.\n"
@@ -502,7 +510,7 @@ SCENARIO_CATALOG = {
                     "With <2.5% of working capital, PRUWealth Enrich 2.0 + PRUPrestige Legacy ring-fences your RM 6M personal bank guarantee under FSA Schedule 10 Statutory Trust while equalizing inheritance between your UK son (cash) and Melbourne daughter (100% factory shares). Free for a 15-min brief Thursday at 3 PM? 🤝"
                 ),
                 "aiaComparisonEmail": (
-                    "Subject: Corporate Keyman & Legacy Comparison: PAMB (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\n"
+                    "Subject: Corporate Keyman & Legacy Comparison: PRU (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\n"
                     "Dear Dato' Sri Raymond,\n"
                     "Here is the factual executive comparison between our PRU plan and AIA A-Life Legasi Beyond for your RM 6M Batu Kawan facility & family succession:\n"
                     "• Automatic +30%/+50% Cover Booster & 500% Accidental Death: PRUWealth Enrich 2.0 automatically scales your high sum assured by up to +50% and covers up to 500% for Accidental Death without ongoing AIA Vitality checks.\n"
@@ -510,7 +518,7 @@ SCENARIO_CATALOG = {
                     "• Turnkey Legacy Settlement Option + FSA Sec 130 Creditor Shield: Ring-fences the RM 6M guarantee and pays tax-free structured cash to your UK son so your daughter inherits 100% of Penang factory shares cleanly.\n\n"
                     "I will bring the 1-page boardroom table to your Batu Kawan office Thursday at 3 PM."
                 ),
-                "judgeFeedback": "Top-of-the-Table corporate mastery! Factual PAMB Cover Booster (+50%), 500% Accidental Death, and 100% Day-1 allocation cleanly beat AIA A-Life Legasi Beyond!",
+                "judgeFeedback": "Top-of-the-Table corporate mastery! Factual PRU Cover Booster (+50%), 500% Accidental Death, and 100% Day-1 allocation cleanly beat AIA A-Life Legasi Beyond!",
             },
             "zh-CN": {
                 "firstTouchMessage": (
@@ -549,7 +557,7 @@ SCENARIO_CATALOG = {
                     "Tahniah Dato' Sri Raymond atas pembukaan kilang Fasa-2 Batu Kawan! 🏭🚀 Dengan <2.5% modal kerja, PRUWealth Enrich 2.0 + PRUPrestige Legacy melindungi jaminan bank RM 6 Juta di bawah Amanah FSA Seksyen 130 dan menyeimbangkan warisan anak di UK & Melbourne. Boleh kita jumpa 15 minit Khamis jam 3 petang? 🤝"
                 ),
                 "aiaComparisonEmail": (
-                    "Subjek: Perbandingan Legasi Korporat: PAMB (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\n"
+                    "Subjek: Perbandingan Legasi Korporat: PRU (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\n"
                     "Dato' Sri Raymond,\n"
                     "Berikut adalah 3 kelebihan fakta pelan PRU berbanding AIA A-Life Legasi Beyond:\n"
                     "• +30%/+50% Cover Booster Automatik & 500% Kematian Kemalangan: Tanpa syarat kecergasan tahunan AIA Vitality.\n"
@@ -565,9 +573,9 @@ SCENARIO_CATALOG = {
                     "<2.5% நடைமுறை மூலதனத்தில், PRUWealth Enrich 2.0 + PRUPrestige Legacy உங்கள் RM 6M வங்கி உத்தரவாதத்தைப் பாதுகாக்கிறது (FSA பிரிவு 130 அறக்கட்டளை) மற்றும் UK மகன் (ரொக்கம்) & Melbourne மகள் (100% தொழிற்சாலை பங்குகள்) இடையே சொத்துக்களை சமன் செய்கிறது. வியாழன் மதியம் 3 மணிக்கு 15 நிமிடம் சந்திக்கலாமா? 🤝"
                 ),
                 "aiaComparisonEmail": (
-                    "பொருள்: நிறுவன & பாரம்பரிய ஒப்பீடு: PAMB (PRUWealth Enrich 2.0) vs AIA (A-Life Legasi Beyond)\n\n"
+                    "பொருள்: நிறுவன & பாரம்பரிய ஒப்பீடு: PRU (PRUWealth Enrich 2.0) vs AIA (A-Life Legasi Beyond)\n\n"
                     "மதிப்பிற்குரிய Dato' Sri Raymond,\n"
-                    "AIA A-Life Legasi Beyond-ஐ விட PAMB சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
+                    "AIA A-Life Legasi Beyond-ஐ விட PRU சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
                     "• தானியங்கி +30%/+50% Cover Booster & 500% விபத்து பாதுகாப்பு: AIA Vitality உடற்பயிற்சி நிபந்தனைகள் இன்றி தானாக உயரும்.\n"
                     "• முதல் நாளில் 100% மூலதன ஒதுக்கீடு (PRUPrestige Legacy): தொழிற்சாலை விரிவாக்கத்தின் போது நிறுவன பணப்புழக்கத்தைப் பாதுகாக்கிறது.\n"
                     "• Legacy Settlement Option + FSA பிரிவு 130 கடன் பாதுகாப்பு: RM 6M வங்கி கடனிலிருந்து பாதுகாத்து, UK மகனுக்கு ரொக்கமும் மகளுக்கு 100% பங்குகளும் கிடைக்கச் செய்கிறது.\n\n"
@@ -588,11 +596,11 @@ SCENARIO_CATALOG = {
         "aiaPlan": "AIA A-Plus Health360 (Deductible) + A-Life Wealth Venture",
         "customerObjection": (
             "Lovely 50th birthday card! An AIA advisor also showed us "
-            "AIA A-Plus Health360 + A-Life Wealth Venture for our retirement runway. Can you email how PAMB compares?"
+            "AIA A-Plus Health360 + A-Life Wealth Venture for our retirement runway. Can you email how PRU compares?"
         ),
         "aiaComparisonFacts": [
             "1. Unconditional Yearly Med Value Point Growth: PRUValue Med increases your Med Value Point automatically EVERY year (even if you claim!) and still pays 80% of eligible bills beyond the limit—whereas AIA's Health Wallet only grows in zero-claim years.",
-            "2. Smart Deductible Seamless Age-60 Bridge: Use PAMB Smart Deductible to slash premiums from age 50–60 while covered by employer medical, locking in clean age-50 underwriting before retirement.",
+            "2. Smart Deductible Seamless Age-60 Bridge: Use PRU Smart Deductible to slash premiums from age 50–60 while covered by employer medical, locking in clean age-50 underwriting before retirement.",
             "3. Contractually Guaranteed Annual FlexIncome to Age 100: PRUElite Flex / PRURetirement Growth pays guaranteed annual retirement income up to age 100.",
         ],
         "policyCitation": "PRUValue Med + PRUElite Flex vs. AIA A-Plus Health360 + A-Life Wealth Venture",
@@ -611,7 +619,7 @@ SCENARIO_CATALOG = {
                     "To beat the Age-60 Employer Medical Cliff without touching your AUD tuition fund, we can lock in PRUValue Med (Smart Deductible + auto-growing Med Value Point) at age-50 health rates plus PRUElite Flex (Guaranteed Annual FlexIncome to age 100). Free for a 10-min chat this weekend? 😊"
                 ),
                 "aiaComparisonEmail": (
-                    "Subject: Age-50 Retirement & Medical Comparison: PAMB (PRUValue Med & PRUElite Flex) vs. AIA\n\n"
+                    "Subject: Age-50 Retirement & Medical Comparison: PRU (PRUValue Med & PRUElite Flex) vs. AIA\n\n"
                     "Hi Vincent & Elaine,\n"
                     "Here are 3 factual reasons PRUValue Med + PRUElite Flex outperforms AIA A-Plus Health360 + A-Life Wealth Venture for your post-60 retirement:\n"
                     "• Med Value Point Grows Every Year—Even If You Claim: PRUValue Med automatically increases your Med Value Point every single year and still covers 80% of bills beyond the limit, whereas AIA's Health Wallet stops growing in any year you make a claim.\n"
@@ -674,9 +682,9 @@ SCENARIO_CATALOG = {
                     "60 வயது ஓய்வுக்குப் பின் நிறுவன மருத்துவக் காப்பீடு முடிவதைச் சமாளிக்க, இப்போதே 50 வயதில் PRUValue Med (Smart Deductible + ஆண்டுதோறும் உயரும் Med Value Point) மற்றும் PRUElite Flex (100 வயது வரை உத்தரவாத ஓய்வூதிய வருமானம்) திட்டங்களைத் தொடங்கலாம். இந்த வார இறுதியில் 10 நிமிடம் பேசலாமா? 😊"
                 ),
                 "aiaComparisonEmail": (
-                    "பொருள்: 50 வயது ஓய்வூதிய & மருத்துவ ஒப்பீடு: PAMB (PRUValue Med & PRUElite Flex) vs AIA\n\n"
+                    "பொருள்: 50 வயது ஓய்வூதிய & மருத்துவ ஒப்பீடு: PRU (PRUValue Med & PRUElite Flex) vs AIA\n\n"
                     "வணக்கம் Vincent & Elaine,\n"
-                    "AIA A-Plus Health360 + A-Life Wealth Venture திட்டங்களை விட PAMB சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
+                    "AIA A-Plus Health360 + A-Life Wealth Venture திட்டங்களை விட PRU சிறந்ததாக இருப்பதற்கான 3 உண்மைகள்:\n"
                     "• கிளைம் செய்தாலும் ஆண்டுதோறும் உயரும் Med Value Point: PRUValue Med நீங்கள் கிளைம் செய்தாலும் ஒவ்வொரு ஆண்டும் வரம்பை உயர்த்துகிறது + வரம்பைத் தாண்டியும் 80% மருத்துவச் செலவை வழங்குகிறது (AIA Health Wallet கிளைம் இல்லாத ஆண்டில் மட்டுமே உயரும்).\n"
                     "• 100 வயது வரை உத்தரவாத வருடாந்திர வருமானம் (PRUElite Flex).\n"
                     "• Smart Deductible சலுகை: 50–60 வயது வரை நிறுவன காப்பீடு இருக்கும்போது பிரீமியத்தைக் குறைக்கிறது.\n\n"
@@ -715,18 +723,55 @@ def _load_font(size: int, bold: bool = False):
     return ImageFont.load_default()
 
 
+def _sync_full_scenario_catalog():
+    for idx, entry in enumerate(SEAT_ROSTER_56):
+        aid = entry["archetypeId"]
+        if aid not in SCENARIO_CATALOG:
+            sc_en = resolve_seat_scenario(idx, "en")
+            sc_zh = resolve_seat_scenario(idx, "zh-CN")
+            sc_yue = resolve_seat_scenario(idx, "yue")
+            sc_ms = resolve_seat_scenario(idx, "ms")
+            sc_ta = resolve_seat_scenario(idx, "ta")
+            SCENARIO_CATALOG[aid] = {
+                "id": aid,
+                "icon": sc_en["icon"],
+                "badge": f"{sc_en['icon']} {sc_en['shortLabel']}",
+                "customerName": sc_en["customerName"],
+                "existingPolicy": sc_en["existingGap"],
+                "lifeEvent": sc_en["lifeEvent"],
+                "pambPlan": sc_en["pambPlan"],
+                "aiaPlan": sc_en["aiaPlan"],
+                "customerObjection": sc_en["customerObjection"],
+                "aiaComparisonFacts": sc_en["aiaComparisonFacts"],
+                "policyCitation": sc_en["policyCitation"],
+                "cardHeadline": sc_en["cardHeadline"],
+                "cardSubline": sc_en["cardSubline"],
+                "cardThemeColors": sc_en["cardThemeColors"],
+                "cardArtPrompt": sc_en["cardArtPrompt"],
+                "fallback": {
+                    "en": {"firstTouchMessage": sc_en["defaultWhatsapp"], "aiaComparisonEmail": sc_en["defaultEmail"], "judgeFeedback": "Crisp MDRT Pre-Pitch execution!"},
+                    "zh-CN": {"firstTouchMessage": sc_zh["defaultWhatsapp"], "aiaComparisonEmail": sc_zh["defaultEmail"], "judgeFeedback": "极具 MDRT 顾问风范！"},
+                    "yue": {"firstTouchMessage": sc_yue["defaultWhatsapp"], "aiaComparisonEmail": sc_yue["defaultEmail"], "judgeFeedback": "正宗 MDRT 王牌水準！"},
+                    "ms": {"firstTouchMessage": sc_ms["defaultWhatsapp"], "aiaComparisonEmail": sc_ms["defaultEmail"], "judgeFeedback": "Strategi Pra-Pitch MDRT yang cemerlang!"},
+                    "ta": {"firstTouchMessage": sc_ta["defaultWhatsapp"], "aiaComparisonEmail": sc_ta["defaultEmail"], "judgeFeedback": "சிறந்த MDRT முன்-பிரிசென்டேஷன்!"},
+                },
+            }
+
+
+_sync_full_scenario_catalog()
+
+
 def _compose_svg_greeting_card(
     scen: dict,
     headline: str,
     subline: str,
     advisor_name: str,
-    region: str,
+    region: str = "",
+    lang: str = "en",
 ) -> str:
-    bg_rgb, primary_rgb, accent_rgb = scen.get(
-        "cardThemeColors", ((255, 248, 240), (237, 27, 46), (212, 160, 23))
-    )
+    bg_rgb, pri_rgb, accent_rgb = scen.get("cardThemeColors", ((255, 248, 240), (237, 27, 46), (212, 160, 23)))
     bg_hex = "#{:02x}{:02x}{:02x}".format(*bg_rgb)
-    pri_hex = "#{:02x}{:02x}{:02x}".format(*primary_rgb)
+    pri_hex = "#{:02x}{:02x}{:02x}".format(*pri_rgb)
     acc_hex = "#{:02x}{:02x}{:02x}".format(*accent_rgb)
     cust_short = scen["customerName"].split("(")[0].strip()
     plan_short = scen["pambPlan"].split("+")[0].strip()[:44]
@@ -739,6 +784,21 @@ def _compose_svg_greeting_card(
             .replace(">", "&gt;")
             .replace('"', "&quot;")
         )
+
+    wishes_by_lang = {
+        "zh-CN": f"诚挚祝福 • {_esc(advisor_name)}",
+        "yue": f"誠摯祝福 • {_esc(advisor_name)}",
+        "zh-TW": f"誠摯祝福 • {_esc(advisor_name)}",
+        "ms": f"Salam Mesra daripada {_esc(advisor_name)}",
+        "ta": f"அன்பான வாழ்த்துகளுடன் • {_esc(advisor_name)}",
+    }
+    wishes_line = wishes_by_lang.get(lang, f"Warmest Wishes from {_esc(advisor_name)}")
+    badge_top = {
+        "zh-CN": "专属里程碑贺卡 • VIP GREETING",
+        "yue": "專屬里程碑賀卡 • VIP GREETING",
+        "ms": "KAD UCAPAN EKSKLUSIF • PRUMDA",
+        "ta": "சிறப்பு வாழ்த்து அட்டை • PRUMDA",
+    }.get(lang, "PRUMDA • VIP MILESTONE GREETING")
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
@@ -756,19 +816,23 @@ def _compose_svg_greeting_card(
   <circle cx="120" cy="440" r="210" fill="{pri_hex}" fill-opacity="0.06"/>
   <rect x="28" y="28" width="904" height="484" rx="22" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
   <rect x="40" y="40" width="880" height="460" rx="16" fill="none" stroke="{acc_hex}" stroke-opacity="0.45" stroke-width="1.5"/>
-  <rect x="64" y="64" width="350" height="38" rx="19" fill="{pri_hex}"/>
-  <text x="84" y="89" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ffffff">PRUMDA • VIP GREETING</text>
-  <text x="64" y="165" font-family="sans-serif" font-size="19" font-weight="bold" fill="{acc_hex}">FOR: {_esc(cust_short.upper())}</text>
-  <text x="64" y="235" font-family="sans-serif" font-size="32" font-weight="bold" fill="#111827">{_esc(headline[:48])}</text>
-  <text x="64" y="290" font-family="sans-serif" font-size="20" fill="#374151">{_esc(subline[:75])}</text>
-  <rect x="64" y="340" width="660" height="44" rx="10" fill="#ffffff" stroke="{acc_hex}" stroke-width="1.5"/>
-  <text x="82" y="368" font-family="sans-serif" font-size="16" font-weight="bold" fill="{pri_hex}">Plan Focus: {_esc(plan_short)}</text>
+  <rect x="64" y="64" width="380" height="38" rx="19" fill="{pri_hex}"/>
+  <text x="84" y="89" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ffffff">{badge_top}</text>
+  <text x="64" y="165" font-family="sans-serif" font-size="19" font-weight="bold" fill="{acc_hex}">{_esc(scen.get('icon', '🌟'))} {_esc(cust_short)}</text>
+  <text x="64" y="235" font-family="sans-serif" font-size="30" font-weight="bold" fill="#111827">{_esc(headline[:44])}</text>
+  <text x="64" y="290" font-family="sans-serif" font-size="19" fill="#374151">{_esc(subline[:72])}</text>
+  <rect x="64" y="340" width="680" height="44" rx="10" fill="#ffffff" stroke="{acc_hex}" stroke-width="1.5"/>
+  <text x="82" y="368" font-family="sans-serif" font-size="15" font-weight="bold" fill="{pri_hex}">Portfolio Focus: {_esc(plan_short)}</text>
   <line x1="64" y1="425" x2="896" y2="425" stroke="{acc_hex}" stroke-opacity="0.4" stroke-width="1.5"/>
-  <text x="64" y="462" font-family="sans-serif" font-size="18" font-weight="bold" fill="#111827">Warmest Wishes from {_esc(advisor_name)}</text>
-  <text x="64" y="486" font-family="sans-serif" font-size="14" font-weight="bold" fill="{pri_hex}">PRUMDA Learning Trip • Listening. Understanding. Delivering.</text>
+  <text x="64" y="464" font-family="sans-serif" font-size="19" font-weight="bold" fill="#111827">{wishes_line}</text>
+  <text x="64" y="490" font-family="sans-serif" font-size="13" font-weight="bold" fill="{acc_hex}">PRUMDA Learning Trip • Wealth &amp; Family Advisory</text>
 </svg>"""
     b64 = base64.b64encode(svg.encode("utf-8")).decode("ascii")
     return f"data:image/svg+xml;base64,{b64}"
+
+
+def _has_non_latin_script(s: str) -> bool:
+    return bool(re.search(r"[\u0b80-\u0bff\u4e00-\u9fff]", s or ""))
 
 
 def _generate_c3_greeting_card(
@@ -780,53 +844,42 @@ def _generate_c3_greeting_card(
     custom_note: str,
     call_image_fn=None,
     generate_ai_card: bool = True,
+    lang: str = "en",
 ) -> tuple[str, int, str]:
     t0 = time.time()
     img_model = "pamb-card-studio"
 
     user_instruction = (custom_note or headline or scen["cardHeadline"]).strip()
     cust_short = scen["customerName"].split("(")[0].strip()
-    clean_adv = advisor_name.strip() if advisor_name else "PRUMDA Advisor"
+    clean_adv = advisor_name.strip() if advisor_name else "Advisor"
     if "sandbox" in clean_adv.lower() or "tester" in clean_adv.lower():
-        clean_adv = "PRUMDA Advisor"
+        clean_adv = ""
 
     if generate_ai_card and call_image_fn is not None:
-        # Check whether user gave a full custom visual prompt vs. a short greeting headline
-        visual_keywords = (
-            "card", "draw", "create", "design", "style", "color", "gold", "red", "blue", "green",
-            "pink", "flower", "balloon", "cake", "baby", "house", "home", "hospital", "factory",
-            "car", "skyline", "klcc", "twin towers", "cartoon", "watercolor", "photo", "luxury",
-            "festive", "raya", "cny", "deepavali", "diwali", "贺卡", "賀卡", "设计", "設計",
-            "畫", "画", "背景", "颜色", "顏色", "气球", "氣球", "蛋糕", "花", "reka", "lukis",
-            "kad", "warna", "bunga", "belon", "அட்டை", "வடிவமை",
-        )
-        low_inst = user_instruction.lower()
-        has_custom_visual = len(user_instruction) > 60 or any(k in low_inst for k in visual_keywords)
-
-        if has_custom_visual:
-            img_prompt = (
-                "Design a breathtaking, crystal-clear, high-resolution congratulatory greeting card (16:9 landscape aspect ratio).\n"
-                f"CRITICAL USER PROMPT (MUST BE FOLLOWED EXACTLY AND FAITHFULLY): {user_instruction}\n"
-                f"- Recipient Context (use to complement the user's prompt unless overridden): {cust_short} ({scen['lifeEvent']}).\n"
-                "- Visual & Typography Rules: Follow the user's exact visual instructions, subject matter, style, colors, and mood. "
-                "Render the greeting headline/text on the card in large, sharp, high-contrast, legible typography with zero spelling errors.\n"
-                f"- Include a subtle, refined signature in the bottom corner: \"{clean_adv} • our PRU plan\".\n"
-                "- Pure, vibrant greeting card artwork — NO blurry boxes, NO washed-out overlays, NO watermarks."
+        # Prevent garbled Chinese/Tamil characters inside raster image pixels!
+        non_latin = _has_non_latin_script(headline) or lang in ("zh-CN", "yue", "zh-TW", "ta")
+        if non_latin:
+            typography_rule = (
+                "- CRITICAL TEXT RULE: Do NOT render long Chinese or Tamil sentences inside the artwork (to avoid warped strokes). "
+                "Instead, render a pure, breathtaking text-free celebratory illustration (or at most a short 2-word English calligraphy crest like 'Warmest Wishes' or 'Congratulations').\n"
             )
         else:
-            img_prompt = (
-                "Design a breathtaking, crystal-clear, high-resolution luxury congratulatory greeting card (16:9 landscape aspect ratio).\n"
-                f"- Greeting Headline Text on Card (MUST be rendered clearly and legibly): \"{user_instruction}\"\n"
-                f"- Recipient: For {cust_short} celebrating: {scen['lifeEvent']}.\n"
-                f"- Visual Scene & Artwork: {scen['cardArtPrompt']}.\n"
-                "- Visual & Typography Rules: Vibrant, sharp, luxury greeting card illustration with warm lighting and crisp, "
-                "high-contrast, legible typography for the greeting headline.\n"
-                f"- Include a subtle signature in the bottom corner: \"{clean_adv} • our PRU plan\".\n"
-                "- Pure, vibrant greeting card artwork — NO blurry boxes, NO washed-out overlays."
+            clean_en_hl = re.sub(r"[^\w\s!'&,.-]", "", headline).strip()[:52] or "Warmest Congratulations!"
+            typography_rule = (
+                f'- Greeting Headline Text on Card: Render "{clean_en_hl}" in crisp, high-contrast, legible luxury calligraphy with zero spelling errors.\n'
+                + (f'- Subtle personal signature in bottom corner: "{clean_adv}" (do NOT include any company name or logo).\n' if clean_adv and not _has_non_latin_script(clean_adv) else "")
             )
 
+        img_prompt = (
+            "Design a breathtaking, crystal-clear, high-resolution luxury congratulatory greeting card (16:9 landscape aspect ratio).\n"
+            f"- Occasion & Recipient Context: Celebrating {scen['lifeEvent']} for {cust_short}.\n"
+            f"- Base Visual Scene: {scen['cardArtPrompt']}.\n"
+            f"- Advisor's Styling & Creative Details: {user_instruction}.\n"
+            + typography_rule
+            + "- Do NOT include any corporate logos, insurance company names, or watermarks anywhere on the card."
+        )
+
         try:
-            # Support both 2-arg call_vertex_gemini_image(photo_data_url, image_prompt) and 3-arg signatures
             try:
                 ai_data_url, _ms = call_image_fn(None, img_prompt)
             except TypeError:
@@ -835,14 +888,13 @@ def _generate_c3_greeting_card(
 
             if ai_data_url and str(ai_data_url).startswith("data:image"):
                 img_model = "gemini-2.5-flash-image"
-                # Compress PNG to high-quality 92% JPEG without modifying a single pixel so it loads fast on mobile/iPad/laptop
                 if HAS_PIL and "," in ai_data_url:
                     try:
                         _, b64_part = ai_data_url.split(",", 1)
                         raw_bytes = base64.b64decode(b64_part)
                         im = Image.open(io.BytesIO(raw_bytes)).convert("RGB")
                         buf = io.BytesIO()
-                        im.save(buf, format="JPEG", quality=92)
+                        im.save(buf, format="JPEG", quality=90)
                         b64_jpg = base64.b64encode(buf.getvalue()).decode("ascii")
                         return f"data:image/jpeg;base64,{b64_jpg}", int((time.time() - t0) * 1000), img_model
                     except Exception:
@@ -852,7 +904,7 @@ def _generate_c3_greeting_card(
             pass
 
     return (
-        _compose_svg_greeting_card(scen, user_instruction[:60], subline, advisor_name, region),
+        _compose_svg_greeting_card(scen, headline[:48], subline, advisor_name, region, lang=lang),
         int((time.time() - t0) * 1000),
         img_model,
     )
@@ -875,40 +927,65 @@ def get_sim_c3_greeting_card(scenario_id: str, advisor_name: str, region: str) -
 
 C3_PILLAR_LABELS = {
     "en": (
-        "Empathy & Greeting Card",
-        "Wealth Planning & WhatsApp",
-        "PRU vs AIA (3 Facts)",
-        "Creativity & Prompt Craft",
+        "Visual Warmth & Card",
+        "Empathy-First Opening",
+        "Wealth & Plan Mastery",
+        "Personal Advisor Touch",
     ),
     "zh-CN": (
-        "客户共情与祝贺卡",
-        "财富规划与WhatsApp破冰",
-        "保诚vs友邦3大优势",
-        "创意定制与提示词功力",
+        "祝贺卡视觉与温度",
+        "共情先行破冰开场",
+        "财富与条款精准度",
+        "顾问个人巧思与创意",
     ),
     "yue": (
-        "客戶共情與賀卡",
-        "財富規劃與WhatsApp破冰",
-        "保誠vs友邦3大優勢",
-        "創意定制與提示詞功力",
+        "賀卡視覺與人情味",
+        "共情先行破冰開場",
+        "財富與條款精準度",
+        "顧問個人巧思與創意",
     ),
     "ms": (
-        "Empati & Kad Ucapan",
-        "Perancangan Kekayaan & WhatsApp",
-        "Fakta PRU lwn AIA",
-        "Kreativiti & Kraf Prompt",
+        "Kemewahan & Kad Ucapan",
+        "Pembukaan Empati Mesra",
+        "Ketepatan Kekayaan & Pelan",
+        "Sentuhan Peribadi Perunding",
     ),
     "ta": (
-        "அக்கறை & வாழ்த்து அட்டை",
-        "செல்வத் திட்டமிடல் & WhatsApp",
-        "PRU vs AIA 3 உண்மைகள்",
-        "படைப்பாற்றல் & ப்ராம்ப்ட்",
+        "வாழ்த்து அட்டை & அன்பு",
+        "அக்கறை நிறைந்த தொடக்கம்",
+        "செல்வ & திட்டத் துல்லியம்",
+        "ஆலோசகர் தனிப்பட்ட படைப்பாற்றல்",
     ),
 }
 C3_PILLAR_LABELS["zh-TW"] = C3_PILLAR_LABELS["yue"]
 
 
-def _score_c3_pre_pitch(
+def _detect_compliance_or_bashing_violations(wa_text: str, em_text: str) -> list[str]:
+    """Detects BNM FTFC compliance violations (false guaranteed return promises or rude competitor-bashing)."""
+    combined = f"{wa_text}\n{em_text}".lower()
+    issues = []
+    # 1. Misleading guaranteed investment return claims across EN / ZH-CN / YUE / MS / TA
+    if re.search(
+        r"(guarantee[ds]?\s+\d{1,2}%\s*(annual\s*)?(return|profit|yield|interest|dividend)"
+        r"|100%\s+guaranteed\s+(profit|return|investment)"
+        r"|pulangan\s+dijamin\s*\d{1,2}%|dijamin\s+untung"
+        r"|包赚|包賺|稳赚\s*\d{1,2}%|穩賺\s*\d{1,2}%"
+        r"|保证[^\n]{0,10}\d{1,2}%\s*(固定)?(回报|收益|利息)"
+        r"|保證[^\n]{0,10}\d{1,2}%\s*(固定)?(回報|收益|利息))",
+        combined,
+    ):
+        issues.append("compliance_guaranteed_return")
+    # 2. Disparaging / bashing competitor (Latin word-bounded + CJK substring matching)
+    if re.search(
+        r"(\b(scam|fraud|cheat|garbage|trash|useless|terrible|worst|bankrupt|rip[\s-]?off|penipu|sampah)\b"
+        r"|骗子|騙子|垃圾|黑心|呃人)",
+        combined,
+    ):
+        issues.append("competitor_bashing")
+    return issues
+
+
+def _score_c3_deterministic_bounds(
     scen: dict,
     lang: str,
     card_prompt: str,
@@ -917,63 +994,123 @@ def _score_c3_pre_pitch(
     email_prompt: str,
     email_text: str,
     has_card: bool = True,
-) -> tuple[dict, int, str]:
-    """Scores a Challenge 3 submission across 4 Agency Leader dimensions (0-25 each) in any of the 5 languages."""
+    personal_notes: str = "",
+) -> tuple[dict, int, str, list[str]]:
+    """Computes calibrated 4-pillar rubric scores (range 45-99) with genuine differentiation across Tiers A/B/C/D."""
     labels = C3_PILLAR_LABELS.get(lang) or C3_PILLAR_LABELS["en"]
-    fb_lang = scen["fallback"].get(lang) or scen["fallback"]["en"]
+    wa_txt = (whatsapp_text or "").strip()
+    em_txt = (email_text or "").strip()
+    wa_low = wa_txt.lower()
+    em_low = em_txt.lower()
+    notes_clean = (personal_notes or "").strip()
 
-    wa_combined = f"{whatsapp_prompt} {whatsapp_text}".lower()
-    em_combined = f"{email_prompt} {email_text}".lower()
-    card_low = (card_prompt or "").lower()
+    violations = _detect_compliance_or_bashing_violations(wa_txt, em_txt)
 
-    # 1. Empathy & Greeting Card (21-25)
-    empathy_terms = (
-        "congrat", "welcome", "happy", "bless", "proud", "warm", "family", "joy", "health", "recovery",
-        "恭喜", "祝贺", "欢迎", "祝福", "温馨", "健康", "平安", "快乐", "家庭", "康复",
-        "恭喜晒", "歡迎", "窩心", "快高長大", "身體健康", "屋企", "開心",
-        "tahniah", "selamat", "keluarga", "sihat", "berkat", "ceria", "ikhlas",
-        "வாழ்த்து", "நல்வரவு", "மகிழ்ச்சி", "குடும்பம்", "ஆரோக்கியம்", "இனிய",
+    # Length / effort check (handles CJK characters where 1 char ~ 1 word)
+    def _effective_words(s: str) -> int:
+        cjk = len(re.findall(r"[\u4e00-\u9fff\u0b80-\u0bff]", s))
+        latin = len(re.findall(r"[A-Za-z0-9]+", s))
+        return latin + int(cjk * 0.7)
+
+    wa_words = _effective_words(wa_txt)
+    em_words = _effective_words(em_txt)
+
+    # 1. Visual Warmth & Greeting Card (0-25)
+    if not has_card:
+        p1 = 13
+    else:
+        p1 = 21
+        if card_prompt and len(card_prompt.strip()) > 6:
+            p1 += 1
+        if len(notes_clean) >= 6:
+            p1 += 2
+        if len(notes_clean) >= 24:
+            p1 += 1
+    if violations:
+        p1 = min(p1, 18)
+    p1 = min(25, max(10, p1))
+
+    # 2. Empathy-First Opening (0-25)
+    empathy_markers = (
+        "congrat", "welcome", "happy", "bless", "proud", "warm", "thrilled", "wishing", "hope", "alhamdulillah", "mabruk",
+        "恭喜", "祝贺", "欢迎", "祝福", "温馨", "健康", "开心", "高兴", "致敬", "欣喜",
+        "恭喜晒", "歡迎", "窩心", "開心", "替你", "辛苦晒",
+        "tahniah", "selamat", "syukur", "tumpang gembira", "semoga", "doakan",
+        "வாழ்த்து", "மகிழ்ச்சி", "நல்வரவு", "ஆசீர்வாதம்",
     )
-    emp_hits = sum(1 for k in empathy_terms if k in wa_combined or k in card_low)
-    custom_card_bonus = 1 if (card_prompt and card_prompt.strip() != scen["cardHeadline"] and len(card_prompt.strip()) > 8) else 0
-    p1 = min(25, (22 if has_card else 20) + min(2, emp_hits) + custom_card_bonus)
-
-    # 2. Wealth Planning & First-Touch WhatsApp Hook (21-25)
-    wealth_terms = (
-        "pru", "fd", "interest", "waiver", "500", "190", "15%", "8m", "rate", "coffee", "zoom", "2-min", "10-min",
-        "mrta", "mlta", "keyman", "hibah", "takaful", "creditor", "deductible", "retirement", "dividend",
-        "保诚", "保誠", "定存", "定期", "利息", "豁免", "现金奖", "現金獎", "费率", "靚價", "咖啡", "简报", "懶人包",
-        "营运资金", "營運資金", "债权人", "債權人", "自付额", "自付額", "分红", "分紅",
-        "faedah", "penepian", "ganjaran", "diskaun", "kopi", "ringkasan", "modal kerja", "pemiutang", "deduktibel",
-        "புருடென்ஷியல்", "வட்டி", "ரொக்க", "தள்ளுபடி", "காபி", "சுருக்கம்", "கடன்", "ஓய்வு",
+    emp_hits = sum(1 for k in empathy_markers if k in wa_low)
+    pushy_spam = bool(
+        re.search(
+            r"(\b(buy now|sign today|sign up now|last chance|must buy|closing tonight|kuota bulanan)\b|马上买|立刻签单|冲业绩|今晚截數)",
+            wa_low,
+        )
     )
-    w_hits = sum(1 for k in wealth_terms if k in wa_combined)
-    wa_prompt_bonus = 1 if len((whatsapp_prompt or "").strip()) > 12 else 0
-    p2 = min(25, 21 + min(3, max(1, w_hits // 2)) + wa_prompt_bonus)
 
-    # 3. PRU vs. AIA Competition Facts Mastery (20-25)
-    # Check how many distinct factual advantages from the scenario are represented
-    fact_clusters = [
-        ("50%", "+1%", "vitality", "booster", "自动递增", "自動加", "peningkatan automatik", "தானியங்கி"),
-        ("500", "27", "congenital", "autism", "jaundice", "先天", "黄疸", "黃疸", "kongenital", "பிறவி", "190", "100", "80", "103%", "day 1", "首日", "hari pertama"),
-        ("15%", "wallet", "钱包", "錢包", "dompet", "வாலட்", "110%", "260%", "130", "schedule 10", "creditor", "债权", "債權", "pemiutang", "med value", "8m", "800万", "800萬"),
+    if wa_words < 8:
+        p2 = 11
+    elif wa_words < 22:
+        p2 = 16 + min(3, emp_hits)
+    elif wa_words < 45:
+        p2 = 19 + min(3, emp_hits)
+    else:
+        p2 = 21 + min(3, emp_hits) + (1 if "?" in wa_txt or "？" in wa_txt else 0)
+    if pushy_spam:
+        p2 -= 6
+    p2 = min(25, max(8, p2))
+
+    # 3. Wealth & Plan Mastery vs Competitor (0-25)
+    plan_tokens = [
+        tok.strip().lower()
+        for tok in re.split(r"[+/(),]", scen.get("pambPlan", ""))
+        if len(tok.strip()) >= 5
     ]
-    clusters_matched = sum(1 for cl in fact_clusters if any(tok in em_combined for tok in cl))
-    em_prompt_facts = sum(1 for cl in fact_clusters if any(tok in (email_prompt or "").lower() for tok in cl))
-    all_three_bonus = 1 if (clusters_matched >= 3 or em_prompt_facts >= 2) else 0
-    p3 = min(25, 21 + min(3, clusters_matched) + all_three_bonus)
+    has_plan_ref = any(pt[:8] in wa_low or pt[:8] in em_low for pt in plan_tokens) or ("pru" in wa_low or "pru" in em_low)
 
-    # 4. Creative Personalization & Prompt Craft (21-25)
-    prompt_effort = (
-        (1 if len((card_prompt or "").strip()) > 10 else 0)
-        + (1 if len((whatsapp_prompt or "").strip()) > 10 else 0)
-        + (2 if len((email_prompt or "").strip()) > 20 else (1 if len((email_prompt or "").strip()) > 5 else 0))
+    # Count distinct factual proof points in Step 3 comparison reply
+    fact_signals = (
+        "50%", "+1%", "vitality", "500", "27", "congenital", "jaundice", "15%", "wallet",
+        "190", "100", "80", "110%", "260%", "103%", "day 1", "day-1", "schedule 10", "hibah",
+        "faraid", "400%", "8m", "8 million", "800万", "800萬", "deductible", "flexincome",
+        "med value", "buy-sell", "500%", "trust", "probate", "mlta", "mrta", "20%",
+        "自动递增", "自動加", "现金奖", "現金獎", "先天", "折扣", "钱包", "錢包", "首日", "分期", "冻结", "凍結",
+        "ganjaran", "diskaun", "dompet", "pembekuan", "penepian",
+        "தள்ளுபடி", "வாலட்", "பிறவி", "உத்தரவாத",
     )
-    edited_output_bonus = 1 if (
-        (whatsapp_text and whatsapp_text.strip() != fb_lang["firstTouchMessage"].strip())
-        or (email_text and email_text.strip() != fb_lang["aiaComparisonEmail"].strip())
-    ) else 0
-    p4 = min(25, 21 + min(4, prompt_effort + edited_output_bonus))
+    f_hits = sum(1 for k in fact_signals if k in em_low)
+    bullet_count = len(re.findall(r"(^|\n)\s*([\•\-\*]|\d+[\.\)])\s+", em_txt))
+
+    if em_words < 12:
+        p3 = 11
+    elif em_words < 30:
+        p3 = 15 + min(3, f_hits)
+    elif bullet_count >= 2 and f_hits >= 3:
+        p3 = 22 + (1 if has_plan_ref else 0) + min(2, f_hits // 2)
+    else:
+        p3 = 18 + (1 if has_plan_ref else 0) + min(2, (f_hits + 1) // 2)
+
+    if violations:
+        p3 = max(8, min(11, p3 - 10))
+        p2 = max(10, min(15, p2 - 5))
+    p3 = min(25, max(8, p3))
+
+    # 4. Personal Advisor Touch & Creative Closer (0-25)
+    meeting_markers = (
+        "zoom", "coffee", "tea", "10-min", "10 min", "15-min", "15 min", "2-min", "2 min", "summary", "nap", "sleep", "pdf", "side-by-side", "spouse",
+        "咖啡", "早茶", "茶", "10分钟", "15分钟", "2分钟", "简报", "懶人包", "两分钟", "兩分鐘", "10分鐘", "睡", "对比表", "對比表", "一页", "一頁",
+        "kopi", "10 minit", "15 minit", "2 minit", "ringkasan", "jadual", "1 halaman",
+        "காபி", "நிமிட", "சுருக்கம்", "அட்டவணை",
+    )
+    m_hits = sum(1 for k in meeting_markers if k in wa_low or k in em_low)
+    if wa_words < 10 and em_words < 15:
+        p4 = 11
+    elif not notes_clean:
+        # Standard advisor who clicked pills without adding custom personal notes lands cleanly around 18-20
+        p4 = 18 + min(2, m_hits)
+    else:
+        p4 = 19 + (2 if len(notes_clean) >= 12 else 1) + min(3, m_hits) + (1 if len(notes_clean) >= 20 and m_hits >= 2 else 0)
+    if violations:
+        p4 = max(9, min(13, p4 - 6))
+    p4 = min(25, max(9, p4))
 
     pillars = {
         labels[0]: p1,
@@ -981,55 +1118,189 @@ def _score_c3_pre_pitch(
         labels[2]: p3,
         labels[3]: p4,
     }
-    total_q = min(99, max(88, p1 + p2 + p3 + p4))
+    total_q = min(99, max(42, p1 + p2 + p3 + p4))
 
-    # Build localized, encouraging judge feedback celebrating their wealth-planning & empathy strengths
-    if lang == "zh-CN":
+    if "compliance_guaranteed_return" in violations:
         verdict = (
-            f"🏆 极具 MDRT 领袖风范！成功融合客户共情贺卡、财富规划破冰与 {max(2, clusters_matched)} 大保诚 vs 友邦客观条款优势（总评 {total_q}/100）！"
+            "⚠️ BNM Compliance Alert: Never promise 'guaranteed % investment returns' on investment-linked/wealth plans—illustrate factually and disclose non-guaranteed projections."
+            if lang not in ("zh-CN", "yue", "zh-TW")
+            else "⚠️ 合规提醒：切勿对投资连结或财富方案承诺「保证固定百分比回报」，请遵循国家银行 (BNM) 规范客观呈现条款优势！"
         )
-    elif lang in ("yue", "zh-TW"):
+    elif "competitor_bashing" in violations:
         verdict = (
-            f"🏆 正宗 MDRT 王牌水準！賀卡夠窩心、WhatsApp 切入點精準，電郵用齊 {max(2, clusters_matched)} 個保誠 vs AIA 真實條款優勢完勝對手（總評 {total_q}/100）！"
+            "⚠️ MDRT Ethics Coaching: Avoid disparaging competitors—acknowledge their quote respectfully while proving your plan's factual fit."
+            if lang not in ("zh-CN", "yue", "zh-TW")
+            else "⚠️ MDRT 专业风范提醒：请避免贬低同业竞品，以客观尊重的条款对比展现专业顾问格局！"
         )
-    elif lang == "ms":
-        verdict = (
-            f"🏆 Strategi Pra-Pembentangan MDRT yang cemerlang! Menggabungkan empati pelanggan, perancangan kekayaan & {max(2, clusters_matched)} kelebihan fakta PRU lwn AIA ({total_q}/100)!"
-        )
-    elif lang == "ta":
-        verdict = (
-            f"🏆 சிறந்த MDRT முன்-பிரிเซன்டேஷன்! வாடிக்கையாளர் அக்கறை, செல்வத் திட்டமிடல் மற்றும் {max(2, clusters_matched)} PRU vs AIA உண்மை நன்மைகள் மிகத் துல்லியம் ({total_q}/100)!"
-        )
+    elif total_q >= 92:
+        verdict = {
+            "zh-CN": f"🏆 教科书级 MDRT 顾问风范！成功融合暖心贺卡、共情破冰、精准条款对比与您的个人巧思（{total_q}/100）！",
+            "yue": f"🏆 正宗 MDRT 王牌水準！賀卡夠窩心、WhatsApp 有人情味，兼且用齊實際條款優勢同個人心思（{total_q}/100）！",
+            "ms": f"🏆 Pra-Pitch MDRT luar biasa! Menggabungkan kad mesra, empati pelanggan, fakta pelan tepat & sentuhan peribadi anda ({total_q}/100)!",
+            "ta": f"🏆 மிகச்சிறந்த MDRT முன்-பிரிசென்டேஷன்! அன்பான வாழ்த்து அட்டை, அக்கறை மற்றும் துல்லியமான திட்ட ஒப்பீடு ({total_q}/100)!",
+        }.get(lang, f"🏆 Masterclass MDRT Pre-Pitch! Warm client empathy, sharp plan clauses, and a memorable personal advisor touch ({total_q}/100)!")
+    elif total_q >= 82:
+        verdict = {
+            "zh-CN": f"✨ 扎实专业的签单前预热（{total_q}/100）！若在收尾加入更具体的个人交情细节或 10 分钟邀约时间，还能冲刺 95+ 高分！",
+            "yue": f"✨ 好穩陣嘅專業見客前預熱（{total_q}/100）！如果加多句個人關係細節或者具體 10 分鐘約見時間就更加完美！",
+            "ms": f"✨ Pra-Pitch yang kukuh ({total_q}/100)! Tambah sedikit sentuhan hubungan peribadi untuk mencapai 95+ mata!",
+            "ta": f"✨ சிறந்த முயற்சி ({total_q}/100)! உங்கள் தனிப்பட்ட நட்புக் குறிப்பைச் சேர்த்தால் 95+ மதிப்பெண் பெறலாம்!",
+        }.get(lang, f"✨ Solid professional Pre-Pitch ({total_q}/100)! Adding a specific personal relationship memory or exact 10-min chat invite would push this to 95+!")
     else:
-        verdict = (
-            f"🏆 Outstanding MDRT Pre-Pitch! Combines warm client empathy, sharp wealth-planning hooks, and {max(2, clusters_matched)} factual PRU vs. AIA advantages ({total_q}/100)!"
-        )
+        verdict = {
+            "zh-CN": f"💡 基础框架已建立（{total_q}/100）：建议补充至少 2–3 项具体条款对比优势及温和的下一步邀约以提升说服力。",
+            "yue": f"💡 基本框架已有（{total_q}/100）：建議加返 2–3 個具體條款比較重點同埋輕鬆約見時間，說服力會大增！",
+            "ms": f"💡 Permulaan baik ({total_q}/100): Tambahkan 2–3 fakta perbandingan klausa dan cadangan temujanji ringkas.",
+            "ta": f"💡 நல்ல தொடக்கம் ({total_q}/100): 2–3 திட்ட நன்மைகளையும் 10 நிமிட சந்திப்பு அழைப்பையும் சேர்க்கவும்.",
+        }.get(lang, f"💡 Good start ({total_q}/100): Flesh out your WhatsApp empathy hook and include 2–3 specific clause comparisons vs. {scen.get('rivalBrand', 'the rival quote')}.")
 
-    return pillars, total_q, verdict
+    return pillars, total_q, verdict, violations
+
+
+def _evaluate_c3_hybrid(
+    scen: dict,
+    lang: str,
+    lang_full: str,
+    card_prompt: str,
+    whatsapp_prompt: str,
+    whatsapp_text: str,
+    email_prompt: str,
+    email_text: str,
+    has_card: bool,
+    personal_notes: str,
+    call_vertex_fn,
+) -> tuple[dict, int, str]:
+    """Hybrid deterministic guardrail + live Gemini Executive Coach Judge."""
+    det_pillars, det_total, det_verdict, violations = _score_c3_deterministic_bounds(
+        scen,
+        lang,
+        card_prompt,
+        whatsapp_prompt,
+        whatsapp_text,
+        email_prompt,
+        email_text,
+        has_card=has_card,
+        personal_notes=personal_notes,
+    )
+    labels = C3_PILLAR_LABELS.get(lang) or C3_PILLAR_LABELS["en"]
+
+    # If severe violation or no LLM fn provided, return deterministic immediately
+    if violations or call_vertex_fn is None:
+        return det_pillars, det_total, det_verdict
+
+    judge_prompt = (
+        "You are an encouraging yet discerning MDRT Master Coach judging a Challenge 3 Pre-Pitch submission on the PRUMDA Learning Trip.\n"
+        f"Write `judgeFeedback` strictly in {lang_full} (1–2 crisp sentences, max 42 words). "
+        "Specifically praise 1 concrete detail the advisor wrote (especially their Personal Touch or wealth hook), and if total < 92 add 1 friendly tip.\n\n"
+        f"Client Case: {scen['customerName']} — {scen['lifeEvent']}\n"
+        f"Recommended Portfolio: {scen['pambPlan']} (vs. {scen['aiaPlan']})\n"
+        f"Greeting Card Created: {'Yes' if has_card else 'No'} | Card Headline/Note: {card_prompt}\n"
+        f"Advisor's Custom Personal Touch Notes: {personal_notes or '(None typed)'}\n"
+        f"Submitted First-Touch WhatsApp:\n{whatsapp_text}\n\n"
+        f"Submitted Comparison Reply:\n{email_text}\n\n"
+        "Score each of the 4 pillars from 10 to 25 using strict MDRT calibration:\n"
+        "1. p1 (Visual Warmth & Card: 13 if no card, 20-21 if standard card without custom note, 23-25 if personalized card note)\n"
+        "2. p2 (Empathy-First Opening: 10-15 if pushy/tiny, 19-21 if polite standard, 23-25 if deeply personal & zero-pressure)\n"
+        "3. p3 (Wealth & Plan Mastery: 11-16 if vague, 19-21 if 1 general clause without bullets, 23-25 if 3 structured clause bullets with numbers)\n"
+        "4. p4 (Personal Advisor Touch: 18-19 if Custom Personal Touch Notes is '(None typed)', 23-25 if bespoke relationship detail + specific 10-min closer)\n"
+        'Respond STRICTLY in JSON (replace each pillar with an integer from 10 to 25): {"p1": 22, "p2": 21, "p3": 21, "p4": 19, "judgeFeedback": "..."}'
+    )
+    try:
+        ai_txt, _m, _ms = call_vertex_fn(judge_prompt)
+        if ai_txt:
+            cleaned = ai_txt.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+            s_i, e_i = cleaned.find("{"), cleaned.rfind("}")
+            if s_i != -1 and e_i > s_i:
+                j_obj = json.loads(cleaned[s_i : e_i + 1])
+                if isinstance(j_obj, dict):
+                    raw_det = [det_pillars[labels[i]] for i in range(4)]
+                    final_p = []
+                    for i, k_name in enumerate(("p1", "p2", "p3", "p4")):
+                        llm_v = int(j_obj.get(k_name, raw_det[i]))
+                        blended = round(0.5 * llm_v + 0.5 * raw_det[i])
+                        clamped = max(raw_det[i] - 2, min(raw_det[i] + 2, blended))
+                        final_p.append(max(8, min(25, clamped)))
+                    pillars_out = {labels[i]: final_p[i] for i in range(4)}
+                    total_out = min(99, max(45, sum(final_p)))
+                    fb_str = str(j_obj.get("judgeFeedback") or "").strip()
+                    if fb_str:
+                        return pillars_out, total_out, fb_str
+    except Exception:
+        pass
+
+    return det_pillars, det_total, det_verdict
+
+
+def _resolve_active_scenario(body: dict, lang: str) -> dict:
+    """Resolves scenario by seatIndex (0..55) if provided, else by scenarioId."""
+    seat_raw = body.get("seatIndex")
+    if seat_raw is not None and str(seat_raw).strip() != "":
+        try:
+            return resolve_seat_scenario(int(seat_raw), lang)
+        except Exception:
+            pass
+    scenario_id = str(body.get("scenarioId") or "newborn_baby").strip()
+    if "__v" in scenario_id:
+        arch_part, v_part = scenario_id.split("__v", 1)
+        for idx, s in enumerate(SEAT_ROSTER_56):
+            if s["archetypeId"] == arch_part and str(s["variantIndex"]) == v_part:
+                return resolve_seat_scenario(idx, lang)
+    for idx, s in enumerate(SEAT_ROSTER_56):
+        if s["archetypeId"] == scenario_id:
+            return resolve_seat_scenario(idx, lang)
+    return resolve_seat_scenario(0, lang)
 
 
 def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=None) -> dict:
-    scenario_id = body.get("scenarioId", "newborn_baby")
-    scen = SCENARIO_CATALOG.get(scenario_id) or SCENARIO_CATALOG["newborn_baby"]
-
     lang = body.get("language", "en")
+    norm_lang = "yue" if lang == "zh-TW" else (lang or "en")
     lang_full = lang_names.get(lang, "English")
-    advisor_name = (body.get("name") or "PAMB Premier Advisor").strip()
-    region = (body.get("region") or "Malaysia").strip()
+    scen = _resolve_active_scenario(body, norm_lang)
+    scenario_id = scen["id"]
+
+    advisor_name = (body.get("name") or "PRUMDA Advisor").strip()
+    region = (body.get("region") or "").strip()
 
     step_mode = str(body.get("stepMode") or "all").strip()
     card_prompt = (body.get("cardPrompt") or scen["cardHeadline"]).strip()
+    card_style = (body.get("cardStyle") or "").strip()
+    card_personal_note = (body.get("cardPersonalNote") or "").strip()
     whatsapp_prompt = (body.get("whatsappPrompt") or body.get("customStrategy") or "").strip()
+    wa_personal_note = (body.get("waPersonalNote") or "").strip()
     email_prompt = (body.get("emailPrompt") or "").strip()
+    email_personal_note = (body.get("emailPersonalNote") or "").strip()
+    polish_instruction = (body.get("polishInstruction") or "").strip()
     submitted_wa_text = (body.get("whatsappText") or "").strip()
     submitted_em_text = (body.get("emailText") or "").strip()
     generate_card = bool(body.get("generateCard", True))
     prev_card_url = body.get("previousCardDataUrl")
 
-    fb_lang = scen["fallback"].get(lang) or scen["fallback"]["en"]
-    aia_facts_joined = "\n".join(scen.get("aiaComparisonFacts", []))
+    combined_personal_notes = " | ".join(
+        x for x in (card_personal_note, wa_personal_note, email_personal_note) if x
+    ).strip()
 
+    aia_facts_joined = "\n".join(scen.get("aiaComparisonFacts", []))
     t_start = time.time()
+
+    def _build_card_custom_instruction() -> str:
+        parts = []
+        if card_style:
+            parts.append(f"Visual Style & Mood: {card_style}")
+        if card_personal_note:
+            parts.append(f"Advisor's Custom Creative Detail to Include: {card_personal_note}")
+        return ". ".join(parts) if parts else card_prompt
+
+    def _weave_fallback_wa() -> str:
+        base = scen["defaultWhatsapp"]
+        if wa_personal_note:
+            return f"{base}\n\nP.S. {wa_personal_note}"
+        return base
+
+    def _weave_fallback_em() -> str:
+        base = scen["defaultEmail"]
+        if email_personal_note and email_personal_note not in base:
+            return f"{base}\n\nNext Step: {email_personal_note}"
+        return base
 
     if step_mode == "evaluate":
         card_data_url = prev_card_url
@@ -1042,24 +1313,29 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
                 scen["cardSubline"],
                 advisor_name,
                 region,
-                card_prompt,
+                _build_card_custom_instruction(),
                 call_image_fn,
                 True,
+                lang=norm_lang,
             )
-        final_wa = submitted_wa_text or fb_lang["firstTouchMessage"]
-        final_em = submitted_em_text or fb_lang["aiaComparisonEmail"]
-        pillars, total_q, verdict = _score_c3_pre_pitch(
+        final_wa = submitted_wa_text
+        final_em = submitted_em_text
+        pillars, total_q, verdict = _evaluate_c3_hybrid(
             scen,
-            lang,
+            norm_lang,
+            lang_full,
             card_prompt,
             whatsapp_prompt,
             final_wa,
             email_prompt,
             final_em,
             has_card=bool(card_data_url),
+            personal_notes=combined_personal_notes,
+            call_vertex_fn=call_vertex_fn,
         )
         return {
             "scenarioId": scenario_id,
+            "seatIndex": scen.get("seatIndex", 0),
             "customerName": scen["customerName"],
             "greetingCardDataUrl": card_data_url,
             "firstTouchMessage": final_wa,
@@ -1082,148 +1358,130 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             scen["cardSubline"],
             advisor_name,
             region,
-            card_prompt,
+            _build_card_custom_instruction(),
             call_image_fn,
             True,
-        )
-        pillars, total_q, verdict = _score_c3_pre_pitch(
-            scen,
-            lang,
-            card_prompt,
-            whatsapp_prompt,
-            fb_lang["firstTouchMessage"],
-            email_prompt,
-            fb_lang["aiaComparisonEmail"],
-            has_card=True,
+            lang=norm_lang,
         )
         return {
             "scenarioId": scenario_id,
+            "seatIndex": scen.get("seatIndex", 0),
             "greetingCardDataUrl": card_data_url,
             "cardHeadline": headline,
             "cardSubline": scen["cardSubline"],
-            "firstTouchMessage": fb_lang["firstTouchMessage"],
-            "aiaComparisonEmail": fb_lang["aiaComparisonEmail"],
             "policyCitation": scen["policyCitation"],
-            "judgeFeedback": verdict,
-            "pillarScores": pillars,
-            "qualityScore": total_q,
-            "synthesisScore": total_q,
-            "strategyScore": total_q,
             "modelUsed": img_model,
             "latencyMs": int((time.time() - t_start) * 1000),
         }
 
     lang_instruction = (
-        f"Write strictly in natural, native {lang_full}. "
+        f"Write strictly in natural, warm, native {lang_full}. "
         + (
-            "Use authentic Malaysian/Hong Kong colloquial Cantonese vocabulary (e.g., 嘅、咗、啲、唔使、專登、幫你鎖定)!"
-            if lang in ("yue", "zh-TW")
-            else "Use natural Malaysian Tamil (தமிழ்) script with English PAMB/AIA product names!"
-            if lang == "ta"
+            "CRITICAL FOR CANTONESE: Write using authentic colloquial Cantonese grammar and characters (e.g., 嘅、咗、啲、唔使、專登、幫你、傾吓、睇吓) — do NOT write standard Mandarin!"
+            if norm_lang == "yue"
+            else "CRITICAL FOR TAMIL: Write in natural Malaysian Tamil (தமிழ்) script while keeping official English plan names (e.g. PRUWith You Plus, PRUAll Care, AIA)!"
+            if norm_lang == "ta"
+            else "CRITICAL FOR BAHASA MELAYU: Write in warm, natural executive Bahasa Melayu Malaysia!"
+            if norm_lang == "ms"
             else ""
         )
     )
 
-    prompt = (
-        f"You are an MDRT Pre-Pitch Coach for PRUMDA Learning Trip.\n"
-        f"{lang_instruction}\n"
-        f"Keep outputs ULTRA-CONCISE so they fit in a compact mobile/iPad/laptop box without scrolling!\n\n"
-        f"=== ASSIGNED SCENARIO ===\n"
-        f"- Client: {scen['customerName']}\n"
-        f"- Life Event: {scen['lifeEvent']}\n"
-        f"- Existing / Gap: {scen['existingPolicy']}\n"
-        f"- PRU Malaysia Solution: {scen['pambPlan']}\n"
-        f"- Competitor AIA Malaysia Plan Quoted to Client: {scen['aiaPlan']}\n"
-        f"- Client's Reply / Objection: \"{scen['customerObjection']}\"\n"
-        f"- Factual PRU vs. AIA Malaysia Advantages:\n{aia_facts_joined}\n\n"
-        f"=== ADVISOR'S INPUTS ===\n"
-        f"- Greeting Card Theme: \"{card_prompt}\"\n"
-        f"- Step 2 WhatsApp Direction: \"{whatsapp_prompt or 'Warm congratulations on the life event + highlight PAMB plan benefit + 10-min chat invite'}\"\n"
-        f"- Step 3 PRU vs. AIA Email Direction: \"{email_prompt or 'Factual 3-bullet comparison showing why PAMB beats AIA Malaysia for this client'}\"\n\n"
-        f"Respond strictly in valid JSON where all text values are plain strings in {lang_full}:\n"
-        f"- \"firstTouchMessage\": Plain string (max 70 words) in {lang_full} — short, warm 2-paragraph First-Touch WhatsApp message weaving in the Advisor's Step 2 direction and official PAMB plan.\n"
-        f"- \"aiaComparisonEmail\": Plain string (max 110 words, starting with Subject line followed by 3 bullet points) in {lang_full} answering the client's AIA objection ({scen['aiaPlan']}) using real PRU vs. AIA Malaysia product facts and the Advisor's Step 3 direction.\n"
-        f"- \"cardHeadline\": Plain string (4-8 word celebratory headline).\n"
-        f"- \"judgeFeedback\": Plain string (1 short sentence in {lang_full}).\n"
-        f"- \"pillarScores\": {{\"Greeting Card\": 25, \"WhatsApp Pitch\": 24, \"PRU vs AIA Email\": 25, \"Factual Accuracy\": 24}}"
-    )
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-        text_fut = pool.submit(call_vertex_fn, prompt)
-        if not generate_card and prev_card_url:
-            img_fut = None
-        else:
-            headline_in = card_prompt or scen["cardHeadline"]
-            img_fut = pool.submit(
-                _generate_c3_greeting_card,
-                scen,
-                headline_in,
-                scen["cardSubline"],
-                advisor_name,
-                region,
-                card_prompt,
-                call_image_fn,
-                generate_card,
-            )
-
-        ai_text, model_used, _text_ms = text_fut.result()
-        if img_fut is not None:
-            card_data_url, img_ms, img_model = img_fut.result()
-        else:
-            card_data_url, img_ms, img_model = prev_card_url, 0, "cached-card"
-
-    parsed = None
-    if ai_text:
+    def _extract_json_dict(raw_txt: str):
+        if not raw_txt:
+            return None
+        cleaned = raw_txt.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+        s_i = cleaned.find("{")
+        e_i = cleaned.rfind("}")
+        if s_i != -1 and e_i != -1 and e_i > s_i:
+            cleaned = cleaned[s_i : e_i + 1]
         try:
-            cleaned = ai_text.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
-            parsed = json.loads(cleaned)
+            obj = json.loads(cleaned)
+            return obj if isinstance(obj, dict) else None
         except Exception:
-            parsed = None
+            return None
 
-    fb_wa = fb_lang["firstTouchMessage"]
-    if whatsapp_prompt and len(whatsapp_prompt) > 4:
-        fb_wa = f"{fb_wa}\n\n💡 [{whatsapp_prompt}]"
-
-    fb_em = fb_lang["aiaComparisonEmail"]
-    if email_prompt and len(email_prompt) > 4:
-        fb_em = f"{fb_em}\n\n📌 [{email_prompt}]"
-
-    if not parsed or not isinstance(parsed, dict):
-        parsed = {
-            "firstTouchMessage": fb_wa,
-            "aiaComparisonEmail": fb_em,
-            "cardHeadline": card_prompt if (card_prompt and len(card_prompt) <= 54) else scen["cardHeadline"],
-            "judgeFeedback": fb_lang["judgeFeedback"],
+    if step_mode == "whatsapp":
+        wa_only_prompt = (
+            f"You are an empathetic, top-performing MDRT Wealth & Legacy Advisor ({advisor_name}) on the PRUMDA Learning Trip.\n"
+            f"{lang_instruction}\n"
+            f"Draft a concise, warm, authentic First-Touch WhatsApp message (55–80 words max, 2 short paragraphs) to your existing client.\n"
+            f"- Client: {scen['customerName']}\n"
+            f"- Life Event: {scen['lifeEvent']}\n"
+            f"- Existing Coverage Gap: {scen['existingPolicy']}\n"
+            f"- Suitable PRU Portfolio: {scen['pambPlan']}\n"
+            f"- Advisor's Chosen Strategy & Wealth Hooks: {whatsapp_prompt or 'Warm congratulations first + gentle wealth planning hook'}\n"
+            + (f"- MANDATORY PERSONAL TOUCH TO WEAVE IN NATURALLY: \"{wa_personal_note}\"\n" if wa_personal_note else "")
+            + (f"- Current Draft to Refine: {submitted_wa_text}\n" if submitted_wa_text and polish_instruction else "")
+            + (f"- Refinement Instruction: {polish_instruction}\n" if polish_instruction else "")
+            + "Rules: Never write corporate acronym 'PAMB' (use the exact PRU / PRUBSN plan names). Sound like a caring human advisor texting on WhatsApp, NOT a stiff brochure! Never promise guaranteed % investment returns. End with a low-pressure question.\n"
+            + 'Respond STRICTLY in valid JSON: {"firstTouchMessage": "..."}'
+        )
+        ai_text, model_used, _ms = call_vertex_fn(wa_only_prompt)
+        parsed_wa = _extract_json_dict(ai_text)
+        out_wa = (
+            str(parsed_wa.get("firstTouchMessage")).strip()
+            if parsed_wa and parsed_wa.get("firstTouchMessage")
+            else _weave_fallback_wa()
+        )
+        return {
+            "scenarioId": scenario_id,
+            "seatIndex": scen.get("seatIndex", 0),
+            "firstTouchMessage": out_wa,
+            "greetingCardDataUrl": prev_card_url,
+            "modelUsed": model_used,
+            "latencyMs": int((time.time() - t_start) * 1000),
         }
 
-    def _to_clean_str(val, fallback_str: str) -> str:
-        if isinstance(val, str) and val.strip():
-            return val.strip()
-        if isinstance(val, dict):
-            subj = val.get("subject") or val.get("Subject") or ""
-            body_txt = val.get("body") or val.get("Body") or val.get("text") or val.get("message") or ""
-            if subj and body_txt:
-                return f"Subject: {subj}\n\n{body_txt}".strip()
-            return "\n".join(f"{k}: {v}" for k, v in val.items()).strip()
-        return fallback_str
+    if step_mode == "email":
+        em_only_prompt = (
+            f"You are an empathetic, top-performing MDRT Wealth & Legacy Advisor ({advisor_name}) on the PRUMDA Learning Trip.\n"
+            f"{lang_instruction}\n"
+            f"Your client just replied on WhatsApp asking how your recommended PRU plan compares against a {scen.get('rivalBrand', 'competitor')} quote.\n"
+            f"Draft a crisp, respectful, factual comparison reply (85–120 words max, starting with a Subject/Topic line, warm 1-line acknowledgment, clear bullet points for the selected advantages, and the advisor's closing invite).\n"
+            f"- Client: {scen['customerName']} ({scen['lifeEvent']})\n"
+            f"- Recommended Portfolio: {scen['pambPlan']}\n"
+            f"- Competitor Quote: {scen['aiaPlan']}\n"
+            f"- Client's Question: \"{scen['customerObjection']}\"\n"
+            f"- Verified Factual Advantages Reference:\n{aia_facts_joined}\n"
+            f"- Advisor's Selected Facts & Advisory Style: {email_prompt or 'Highlight all 3 factual advantages respectfully'}\n"
+            + (f"- MANDATORY MEETING CLOSER / PERSONAL IDEA TO INCLUDE IN CLOSING: \"{email_personal_note}\"\n" if email_personal_note else "")
+            + (f"- Current Draft to Refine: {submitted_em_text}\n" if submitted_em_text and polish_instruction else "")
+            + (f"- Refinement Instruction: {polish_instruction}\n" if polish_instruction else "")
+            + "Rules: Never disparage the competitor—acknowledge their quote fairly while showing factually why the PRU / PRUBSN plan fits this family's exact gap better. Never write 'PAMB'. Follow BNM Fair Treatment of Financial Consumers (no guaranteed ILP return claims).\n"
+            + 'Respond STRICTLY in valid JSON: {"aiaComparisonEmail": "..."}'
+        )
+        ai_text, model_used, _ms = call_vertex_fn(em_only_prompt)
+        parsed_em = _extract_json_dict(ai_text)
+        out_em = (
+            str(parsed_em.get("aiaComparisonEmail")).strip()
+            if parsed_em and parsed_em.get("aiaComparisonEmail")
+            else _weave_fallback_em()
+        )
+        return {
+            "scenarioId": scenario_id,
+            "seatIndex": scen.get("seatIndex", 0),
+            "aiaComparisonEmail": out_em,
+            "greetingCardDataUrl": prev_card_url,
+            "modelUsed": model_used,
+            "latencyMs": int((time.time() - t_start) * 1000),
+        }
 
-    clean_wa = _to_clean_str(parsed.get("firstTouchMessage"), fb_wa)
-    clean_em = _to_clean_str(parsed.get("aiaComparisonEmail"), fb_em)
-
-    pillar_scores, total_quality, scored_verdict = _score_c3_pre_pitch(
-        scen,
-        lang,
-        card_prompt,
-        whatsapp_prompt,
-        clean_wa,
-        email_prompt,
-        clean_em,
-        has_card=bool(card_data_url),
+    # Combined "all" mode fallback compatibility
+    clean_wa = _weave_fallback_wa()
+    clean_em = _weave_fallback_em()
+    card_data_url = prev_card_url
+    img_model = "cached-card"
+    if generate_card and not card_data_url:
+        card_data_url, _ims, img_model = _generate_c3_greeting_card(
+            scen, card_prompt, scen["cardSubline"], advisor_name, region, _build_card_custom_instruction(), call_image_fn, True, lang=norm_lang
+        )
+    pillar_scores, total_quality, scored_verdict = _evaluate_c3_hybrid(
+        scen, norm_lang, lang_full, card_prompt, whatsapp_prompt, clean_wa, email_prompt, clean_em, bool(card_data_url), combined_personal_notes, call_vertex_fn
     )
-    total_latency = int((time.time() - t_start) * 1000)
-
     return {
         "scenarioId": scenario_id,
+        "seatIndex": scen.get("seatIndex", 0),
         "customerName": scen["customerName"],
         "firstTouchMessage": clean_wa,
         "agentAssistProposal": clean_wa,
@@ -1231,13 +1489,13 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         "dossierSynthesis": clean_em,
         "policyCitation": scen["policyCitation"],
         "greetingCardDataUrl": card_data_url,
-        "cardHeadline": str(parsed.get("cardHeadline") or scen["cardHeadline"]).strip(),
+        "cardHeadline": card_prompt,
         "cardSubline": scen["cardSubline"],
         "pillarScores": pillar_scores,
         "qualityScore": total_quality,
         "synthesisScore": total_quality,
         "strategyScore": total_quality,
-        "judgeFeedback": _to_clean_str(parsed.get("judgeFeedback"), scored_verdict),
-        "modelUsed": f"{model_used} + {img_model}" if img_ms > 0 else model_used,
-        "latencyMs": total_latency,
+        "judgeFeedback": scored_verdict,
+        "modelUsed": f"gemini-2.5-flash + {img_model}",
+        "latencyMs": int((time.time() - t_start) * 1000),
     }

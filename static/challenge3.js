@@ -1,329 +1,767 @@
 /* ============================================================================
-   CHALLENGE 3 MODULE (14:35 - 15:05 | 30 min)
+   CHALLENGE 3 MODULE (14:35 - 15:05 | 30 min) — ADVISOR PLAYBOOK EDITION
    "Drive faster pipeline, sharpen your strategic proposal to sales close - Pre-pitch"
-   — Adaptive Phone / iPad / Laptop Single-Screen Workbench:
-     • 5 Native Malaysian Languages: English (en), Mandarin (zh-CN), Cantonese (yue),
+   — Designed for Business Leaders (Zero Raw Prompt Clutter, Quiet-Room Friendly):
+     • 5 Native Languages: English (en), Mandarin (zh-CN), Cantonese (yue),
        Bahasa Melayu (ms), Tamil (ta)
-     • 1 Assigned Scenario per Participant (4 Crisp Key Data Points)
-     • Step 1: Create Life-Event Greeting Card (Large Prompt Box)
-     • Step 2: Create First-Touch WhatsApp Message (Large Prompt + Editable Output Box)
-     • Step 3: Customer Replies ("Compare with AIA Malaysia!") -> Factual PRU vs. AIA Email
-     • Final Submit: Score + Greeting Card at Top + WhatsApp & Email in 1 Visible Box
+     • Clean 3-Point Client Story Strip (AIA objection stays hidden until Step 3!)
+     • Step 1: Door-Opener Greeting Card (Visual Style + Vibe + Hint-Guided Creative Touch)
+     • Step 2: First-Touch WhatsApp (Empathy Tone + Short Wealth Pills + Hint-Guided Personal Touch -> Live WhatsApp Bubble)
+     • Step 3: Live Incoming Client Reply ("AIA Quoted Us!") -> Check Winning Facts + Advisory Style + Hint-Guided Meeting Closer -> Clean Email Card
 ============================================================================ */
 
-const C3_UI_I18N = {
+const C3_PLAYBOOK_UI = {
   en: {
-    badge: "CHALLENGE 3 • MDRT PRE-PITCH",
-    assignedCase: "Assigned Case:",
+    badge: "CHALLENGE 3 • ADVISOR PLAYBOOK",
+    assignedCase: "Client Case:",
     switchCase: "🎲 Switch Case",
-    lifeEventLabel: "🎉 Life Event:",
-    gapLabel: "⚠️ Current Gap:",
-    pambOfferLabel: "🇲🇾 Recommended PRU Plan:",
-    aiaRivalLabel: "⚔️ AIA Rival (Step 3):",
-    step1Tab: "Step 1: 🎨 Greeting Card",
-    step2Tab: "Step 2: 💬 WhatsApp Pitch",
-    step3Tab: "Step 3: 📧 PRU vs. AIA Email",
-    step1Title: "🎨 Step 1 of 3: Create Personalized Life-Event Greeting Card",
-    themeChip: "💡 Theme",
-    cardStyleBoostersLabel: "✨ Empathy & Creative Visual Boosters (tap to combine into prompt):",
-    cardStyleBoosters: [
-      "❤️ Warm Family Milestone & Heartfelt Empathy",
-      "🌟 Crimson Red & Gold MDRT Prestige Border",
-      "🇲🇾 Authentic Malaysian Cultural & Family Warmth",
+    lifeEventLabel: "🎉 Life Moment",
+    gapLabel: "⚠️ Coverage Gap",
+    offerLabel: "🇲🇾 Suitable PRU Portfolio",
+    step1Tab: "1. 🎨 Greeting Card",
+    step2Tab: "2. 💬 First WhatsApp",
+    step3Tab: "3. 📧 Win vs. AIA",
+
+    step1Title: "Step 1: Warm Door-Opener Greeting Card",
+    pickVisualStyle: "1. Choose Card Visual Style:",
+    visualStyles: [
+      { id: "watercolor", label: "🎨 Warm Family Watercolor", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
+      { id: "prestige", label: "✨ Crimson & Gold Prestige", prompt: "Luxury executive stationery card with refined crimson-red and brushed-gold accents, crisp modern typography" },
+      { id: "malaysian", label: "🇲🇾 Malaysian Lifestyle Warmth", prompt: "Authentic modern Malaysian home & skyline warmth, joyful celebratory atmosphere, vibrant sunlight" },
     ],
-    cardPromptLabel: "✏️ Greeting Card Prompt / Headline (Combine themes above & edit freely):",
-    cardPromptPlaceholder: "Type your warm celebratory greeting card headline or visual prompt...",
-    generatingCard: "🎨 Generating Card...",
-    redrawCard: "↻ Redraw Card",
-    generateCardBtn: "🎨 Generate Greeting Card",
-    cardReadyMsg: "✓ Greeting Card Ready! Now craft your First-Touch WhatsApp message.",
-    nextStep2Btn: "Confirm Card & Next: Step 2 (WhatsApp) →",
-    cardAttachedBadge: "✓ Step 1 Greeting Card Attached",
-    editCardBtn: "Edit Card",
-    step2Title: "💬 Step 2 of 3: First-Touch WhatsApp Message",
-    pambAngleChip: "⚡ PRU Angle",
-    combineBothWaBtn: "✨ Use All Wealth & Empathy Angles + Edit Prompt",
-    waEmpathyBoosters: [
-      "❤️ Warm Empathy First: Celebrate life milestone sincerely with zero sales pressure",
-      "💎 Wealth Planning Angle: Protect family cashflow & ring-fence existing savings",
+    pickHeadline: "2. Choose Greeting Headline:",
+    cardTouchLabel: "3. 💡 Add Your Own Creative Touch (Optional — type a few words):",
+    cardTouchHint: "Hint: Mention a warm visual detail (e.g. teddy bear, house keys, flowers) or a special family blessing — tap an example below to edit, or type your own!",
+    cardTouchPlaceholder: "e.g. Add a cute teddy bear & warm family blessing...",
+    generatingCard: "🎨 Designing Your Card...",
+    redrawCard: "↻ Regenerate Card",
+    generateCardBtn: "🎨 Create Greeting Card",
+    cardReadyMsg: "✓ Greeting Card ready! Now let's craft your warm First-Touch WhatsApp.",
+    nextStep2Btn: "Next: Craft First WhatsApp →",
+    cardAttachedBadge: "✓ Step 1 Card Attached",
+    editCardBtn: "Change Card",
+
+    step2Title: "Step 2: First-Touch WhatsApp (Empathy + Wealth Idea)",
+    pickOpeningTone: "1. How will you open the conversation?",
+    openingTones: [
+      { id: "warm_zero_push", label: "❤️ Celebrate First (Zero Push)", prompt: "Open with 100% genuine celebration and warmth, zero sales pressure" },
+      { id: "casual_checkin", label: "☕ Casual 2-Min Check-In", prompt: "Warm, friendly check-in like a trusted longtime family advisor" },
+      { id: "card_gift", label: "🎁 Pair with Card Gift", prompt: "Lead with the custom greeting card made specially for their milestone" },
     ],
-    waPromptLabel: "✏️ AI Prompt Box — Combine angles above & edit in your own words before clicking AI Generate:",
-    waPromptPlaceholder: "Tap 1 or all angles above, customize with your wealth planning & empathy touch, then click AI Generate...",
-    waDrafting: "⚡ Drafting...",
-    aiRefineBtn: "✨ AI Generate / Refine",
-    waOutputLabel: "📱 Final First-Touch WhatsApp Message (Editable before sending):",
+    pickWealthHooks: "2. Which Wealth Planning Ideas will you plant? (Tap 1 or more):",
+    selectAllIdeas: "✓ Select All Ideas",
+    waTouchLabel: "3. 💡 Add Your Personal Relationship Touch (Optional — type 5–10 words):",
+    waTouchHint: "Hint: Mention how you know them, a caring family thought, or an easy coffee/summary offer — tap a hint to customize or type your own!",
+    waTouchPlaceholder: "e.g. Offer a 2-min summary while baby naps, no rush at all...",
+    waGenerateBtn: "✨ Draft My WhatsApp Message",
+    waRegenerateBtn: "↻ Re-Draft with My Changes",
+    waDrafting: "⚡ Drafting WhatsApp...",
+    waPreviewHeader: "📱 Live WhatsApp Preview (Tap text to tweak any word):",
+    waEmptyHint: "👆 Pick your opening tone & wealth ideas above, add an optional personal touch, then tap 'Draft My WhatsApp Message'!",
+    quickPolishLabel: "Quick 1-Tap Polish:",
+    waPolishes: [
+      { label: "↻ Shorter & Punchier", inst: "Make it 25% shorter, punchier, and effortless to read on a phone" },
+      { label: "↻ Warmer & More Caring", inst: "Make the tone even warmer, more personal, and more empathetic" },
+      { label: "↻ Clearer Wealth Hook", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
+    ],
     backBtn: "← Back",
-    nextStep3Btn: "Send WhatsApp & Next: Step 3 (Customer Replies!) →",
-    objectionHeader: "📲 Incoming Customer WhatsApp Reply — AIA Malaysia Comparison Objection!",
-    tapFactHint: "👇 Tap 1, 2, or ALL 3 factual PRU vs. AIA advantages to build your prompt, then edit freely below:",
-    useAll3FactsBtn: "✨ Use All 3 PRU vs. AIA Advantages + Edit Prompt",
-    emailLeaderBoosters: [
-      "🤝 Respectful MDRT Tone: Acknowledge AIA fairly while proving why our PRU plan protects family wealth better",
-      "📊 Side-by-Side Clarity: Present all 3 PRU vs. AIA clauses clearly for easy family decision-making",
+    nextStep3Btn: "Send WhatsApp & See Client Reply →",
+
+    incomingBubbleTag: "📲 Incoming Client WhatsApp Reply • Just now",
+    pickWinningFacts: "1. Pick Winning PRU Advantages vs. AIA (Tap cards or Select All 3):",
+    selectAll3Facts: "✓ Select All 3 Advantages",
+    pickAdvisoryStyle: "2. Choose Your Advisory Tone:",
+    advisoryStyles: [
+      { id: "respectful", label: "🤝 Respectful & Fair", prompt: "Acknowledge AIA respectfully while showing factually why PRU fits their family gap better" },
+      { id: "crisp_bullets", label: "📊 Crisp 3-Bullet Summary", prompt: "Ultra-clear side-by-side 3-bullet executive comparison for fast decision-making" },
+      { id: "peace_of_mind", label: "👨‍👩‍👦 Family Peace-of-Mind", prompt: "Connect each policy clause back to protecting their family's long-term peace of mind" },
     ],
-    emailPromptLabel: "✏️ AI Prompt Box — Combine all 3 facts & edit your strategy before clicking AI Generate:",
-    emailPromptPlaceholder: "Click 'Use All 3 PRU vs. AIA Advantages' or tap individual facts above, edit freely, then click AI Generate...",
-    emailOutputLabel: "📧 Final Factual PRU vs. AIA Malaysia Comparison Email (Editable before final submit):",
-    clearPromptBtn: "✕ Clear Prompt",
-    promptEditHint: "💡 Tip: Tap multiple options above to combine them into the prompt box, edit in your own words, then click ✨ AI Generate / Refine!",
-    submittingBtn: "⚡ Finalizing & Scoring...",
-    finalSubmitBtn: "✅ Final Submit Pre-Pitch & Score",
+    closeTouchLabel: "3. 💡 How Will You Close the Meeting? (Optional — type your idea):",
+    closeTouchHint: "Hint: Suggest an easy 10-min Zoom/coffee time, offer to compare both PDFs side-by-side, or invite their spouse — tap a hint or type your own!",
+    closeTouchPlaceholder: "e.g. Suggest a 10-min Zoom at 8:30pm to compare both tables...",
+    emailGenerateBtn: "✨ Draft Winning Comparison Reply",
+    emailRegenerateBtn: "↻ Re-Draft Comparison Reply",
+    emailDrafting: "⚡ Crafting Reply...",
+    emailPreviewHeader: "📧 Your Winning Comparison Email (Editable before submit):",
+    emailEmptyHint: "👆 Select your PRU advantages & closing idea above, then tap 'Draft Winning Comparison Reply'!",
+    emailPolishes: [
+      { label: "↻ More Concise", inst: "Tighten into a crisp, skimmable 90-word executive email" },
+      { label: "↻ Softer MDRT Tone", inst: "Make the tone extra gracious, consultative, and zero-pressure" },
+      { label: "↻ Sharper Clause Contrast", inst: "Make the exact clause differences between PRU and AIA stand out clearly" },
+    ],
+    submittingBtn: "⚡ Scoring Your Pre-Pitch...",
+    finalSubmitBtn: "🚀 Submit Pre-Pitch & See Score",
     submittedBadge: "✓ SUBMITTED",
     scoreLabel: "🏆 Score:",
-    pillarsHeader: "📊 MDRT Pre-Pitch 4-Pillar Evaluation",
     waFinalHeader: "💬 1. First-Touch WhatsApp Message",
-    emailFinalHeader: "📧 2. Factual PRU vs. AIA Malaysia Comparison Email",
+    emailFinalHeader: "📧 2. Winning Plan Comparison Email (vs. AIA)",
   },
+
   "zh-CN": {
-    badge: "挑战 3 • MDRT 绩优签单前预热 (PRE-PITCH)",
-    assignedCase: "分配客户案例：",
+    badge: "挑战 3 • 绩优顾问实战手册",
+    assignedCase: "客户案例：",
     switchCase: "🎲 切换案例",
-    lifeEventLabel: "🎉 人生大事：",
-    gapLabel: "⚠️ 现有保障缺口：",
-    pambOfferLabel: "🇲🇾 推荐 PRU 方案：",
-    aiaRivalLabel: "⚔️ 友邦 (AIA) 竞品 (第3步)：",
-    step1Tab: "第1步：🎨 祝贺卡设计",
-    step2Tab: "第2步：💬 WhatsApp 破冰",
-    step3Tab: "第3步：📧 PRU vs 友邦电邮",
-    step1Title: "🎨 第 1 / 3 步：制作专属人生大事祝贺卡 (Greeting Card)",
-    themeChip: "💡 主题",
-    cardStyleBoostersLabel: "✨ 客户共情与创意视觉加分项（点击可叠加至提示词框）：",
-    cardStyleBoosters: [
-      "❤️ 温馨家庭里程碑与真挚客户共情",
-      "🌟 尊尚红金 MDRT 质感边框",
-      "🇲🇾 大马本土家庭温情与祝福氛围",
+    lifeEventLabel: "🎉 人生重要时刻",
+    gapLabel: "⚠️ 现有保障缺口",
+    offerLabel: "🇲🇾 推荐 PRU 方案组合",
+    step1Tab: "1. 🎨 暖心祝贺卡",
+    step2Tab: "2. 💬 首条 WhatsApp",
+    step3Tab: "3. 📧 应对 AIA 对比",
+
+    step1Title: "第 1 步：制作专属开门红祝贺卡",
+    pickVisualStyle: "1. 选择祝贺卡视觉风格：",
+    visualStyles: [
+      { id: "watercolor", label: "🎨 温馨手绘水彩风", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
+      { id: "prestige", label: "✨ 尊尚红金高管风", prompt: "Luxury executive stationery card with refined crimson-red and brushed-gold accents, crisp modern typography" },
+      { id: "malaysian", label: "🇲🇾 大马本土家庭温情", prompt: "Authentic modern Malaysian home & skyline warmth, joyful celebratory atmosphere, vibrant sunlight" },
     ],
-    cardPromptLabel: "✏️ 祝贺卡提示词 / 贺词标题（可叠加主题并自由修改）：",
-    cardPromptPlaceholder: "输入温馨的祝贺卡标题或画面提示词...",
-    generatingCard: "🎨 正在生成祝贺卡...",
+    pickHeadline: "2. 选择贺卡主标题：",
+    cardTouchLabel: "3. 💡 加入您的专属创意巧思（选填 — 简单输入几个字即可）：",
+    cardTouchHint: "提示：可补充温馨画面细节（如小泰迪熊、新居钥匙、鲜花）或一句专属祝福 — 点击下方灵感词可直接修改，或输入您自己的想法！",
+    cardTouchPlaceholder: "例如：加上可爱的小泰迪熊与温馨家庭祝福...",
+    generatingCard: "🎨 正在设计祝贺卡...",
     redrawCard: "↻ 重新生成祝贺卡",
     generateCardBtn: "🎨 生成专属祝贺卡",
-    cardReadyMsg: "✓ 祝贺卡已生成！接下来请撰写首条 WhatsApp 破冰信息。",
-    nextStep2Btn: "确认祝贺卡并进入第 2 步 (WhatsApp) →",
+    cardReadyMsg: "✓ 祝贺卡已就绪！接下来构思您的首条破冰 WhatsApp。",
+    nextStep2Btn: "下一步：撰写首条 WhatsApp →",
     cardAttachedBadge: "✓ 已附上第1步祝贺卡",
-    editCardBtn: "修改祝贺卡",
-    step2Title: "💬 第 2 / 3 步：撰写首条 WhatsApp 破冰信息",
-    pambAngleChip: "⚡ 方案切入点",
-    combineBothWaBtn: "✨ 一键全选财富与共情切入点（可自由编辑提示词）",
-    waEmpathyBoosters: [
-      "❤️ 共情先行：先真诚祝贺客户人生大事，零推销压力",
-      "💎 财富规划视角：守护家庭现金流，避免动用现有储蓄",
+    editCardBtn: "修改贺卡",
+
+    step2Title: "第 2 步：首条 WhatsApp 破冰（共情开场 + 财富规划亮点）",
+    pickOpeningTone: "1. 您想用什么方式开场？",
+    openingTones: [
+      { id: "warm_zero_push", label: "❤️ 真诚祝贺（零推销压力）", prompt: "Open with 100% genuine celebration and warmth, zero sales pressure" },
+      { id: "casual_checkin", label: "☕ 老朋友式轻松问候", prompt: "Warm, friendly check-in like a trusted longtime family advisor" },
+      { id: "card_gift", label: "🎁 结合专属贺卡送祝福", prompt: "Lead with the custom greeting card made specially for their milestone" },
     ],
-    waPromptLabel: "✏️ AI 提示词框 (Prompt Box) — 点击上方多个切入点组合并自由修改后，再点击 AI 生成：",
-    waPromptPlaceholder: "点击上方切入点组合提示词，加入您的财富规划与共情巧思，再点击「✨ AI 生成 / 优化话术」...",
-    waDrafting: "⚡ AI 撰写中...",
-    aiRefineBtn: "✨ AI 生成 / 优化话术",
-    waOutputLabel: "📱 最终 WhatsApp 破冰信息（发送前可直接编辑修改）：",
-    backBtn: "← 返回上一步",
-    nextStep3Btn: "发送 WhatsApp 并进入第 3 步（客户回复异议！）→",
-    objectionHeader: "📲 收到客户 WhatsApp 回复 — 提出友邦 (AIA Malaysia) 货比三家异议！",
-    tapFactHint: "👇 可点击 1 个或一键全选 3 大PRU vs 友邦客观优势加入提示词框，自由编辑后再生成电邮：",
-    useAll3FactsBtn: "✨ 一键全选 3 大PRU vs 友邦优势 + 自由编辑提示词",
-    emailLeaderBoosters: [
-      "🤝 尊重专业 MDRT 语调：客观肯定友邦，同时用条款证明为何 PRU 方案更能守护家庭长期财富",
-      "📊 清晰对比总结：将PRU vs 友邦 3 大关键条款整理成一目了然的对比方便客户决策",
+    pickWealthHooks: "2. 想埋下哪几个财富规划亮点？（点击选择 1 个或多个）：",
+    selectAllIdeas: "✓ 全选亮点",
+    waTouchLabel: "3. 💡 加入您的个人温度 / 关系巧思（选填 — 输入简短一句话）：",
+    waTouchHint: "提示：可提一句过往交情、贴心的家庭关怀，或轻松的 2 分钟简报/喝咖啡邀约 — 点击下方灵感词可修改，或输入您的巧思！",
+    waTouchPlaceholder: "例如：趁宝宝午睡发一份2分钟简报给您，完全不急...",
+    waGenerateBtn: "✨ 生成我的 WhatsApp 破冰信息",
+    waRegenerateBtn: "↻ 按最新想法重新生成",
+    waDrafting: "⚡ 正在撰写 WhatsApp...",
+    waPreviewHeader: "📱 WhatsApp 实时预览（点击文字可直接微调）：",
+    waEmptyHint: "👆 请先在上方点选开场方式与财富亮点（可加上您的个人巧思），然后点击「生成我的 WhatsApp 破冰信息」！",
+    quickPolishLabel: "一键润色：",
+    waPolishes: [
+      { label: "↻ 更精炼简短", inst: "Make it 25% shorter, punchier, and effortless to read on a phone" },
+      { label: "↻ 更有温度与共情", inst: "Make the tone even warmer, more personal, and more empathetic" },
+      { label: "↻ 突出财富数字亮点", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
-    emailPromptLabel: "✏️ AI 提示词框 (Prompt Box) — 组合全部 3 大优势并自由编辑您的对比策略：",
-    emailPromptPlaceholder: "点击「一键全选 3 大PRU vs 友邦优势」或逐个点击上方要点，自由修改补充后点击 AI 生成...",
-    emailOutputLabel: "📧 最终PRU 方案 vs 友邦 (AIA) 客观对比电邮（提交前可编辑）：",
-    clearPromptBtn: "✕ 清空提示词",
-    promptEditHint: "💡 提示：可点击多个选项组合进提示词框，用您自己的话自由修改补充后，再点击右侧「✨ AI 生成 / 优化话术」！",
-    submittingBtn: "⚡ 正在提交并智能评分...",
-    finalSubmitBtn: "✅ 最终提交 Pre-Pitch 并获取评分",
-    submittedBadge: "✓ 已完成提交",
-    scoreLabel: "🏆 最终得分：",
-    pillarsHeader: "📊 MDRT 签单前预热 4 大维度评分",
+    backBtn: "← 上一步",
+    nextStep3Btn: "发送 WhatsApp 查看客户回复 →",
+
+    incomingBubbleTag: "📲 客户刚刚回复了您的 WhatsApp • 刚刚",
+    pickWinningFacts: "1. 点选胜出友邦 (AIA) 的核心条款优势（可单选或一键全选 3 项）：",
+    selectAll3Facts: "✓ 全选 3 大优势",
+    pickAdvisoryStyle: "2. 选择您的专业沟通风格：",
+    advisoryStyles: [
+      { id: "respectful", label: "🤝 尊重对手 · 客观专业", prompt: "Acknowledge AIA respectfully while showing factually why PRU fits their family gap better" },
+      { id: "crisp_bullets", label: "📊 3点清晰高管摘要", prompt: "Ultra-clear side-by-side 3-bullet executive comparison for fast decision-making" },
+      { id: "peace_of_mind", label: "👨‍👩‍👦 聚焦家庭长远安心", prompt: "Connect each policy clause back to protecting their family's long-term peace of mind" },
+    ],
+    closeTouchLabel: "3. 💡 您想如何邀约促成面谈？（选填 — 输入您的收尾巧思）：",
+    closeTouchHint: "提示：可提议方便的 10 分钟 Zoom 时间、并排对比两份计划书 PDF、或邀请另一半一起听 — 点击下方灵感或自己输入！",
+    closeTouchPlaceholder: "例如：周四晚8点半宝宝睡后用10分钟Zoom并排对照两份利益表...",
+    emailGenerateBtn: "✨ 生成专业对比回复电邮",
+    emailRegenerateBtn: "↻ 按最新想法重新生成电邮",
+    emailDrafting: "⚡ 正在撰写对比电邮...",
+    emailPreviewHeader: "📧 您的专业方案对比电邮（提交前可直接修改）：",
+    emailEmptyHint: "👆 请在上方点选条款优势与收尾方式，然后点击「生成专业对比回复电邮」！",
+    emailPolishes: [
+      { label: "↻ 更精炼易读", inst: "Tighten into a crisp, skimmable 90-word executive email" },
+      { label: "↻ 更温和顾问口吻", inst: "Make the tone extra gracious, consultative, and zero-pressure" },
+      { label: "↻ 强化条款差异对比", inst: "Make the exact clause differences between PRU and AIA stand out clearly" },
+    ],
+    submittingBtn: "⚡ 正在评分并同步大屏...",
+    finalSubmitBtn: "🚀 提交完整 Pre-Pitch 并查看得分",
+    submittedBadge: "✓ 已提交",
+    scoreLabel: "🏆 得分：",
     waFinalHeader: "💬 1. 首条 WhatsApp 破冰信息",
-    emailFinalHeader: "📧 2. PRU 方案 vs 友邦 (AIA) 客观对比电邮",
+    emailFinalHeader: "📧 2. 方案对比回复电邮 (vs. AIA)",
   },
+
   yue: {
-    badge: "挑戰 3 • MDRT 王牌見客前預熱 (PRE-PITCH)",
-    assignedCase: "派定客戶個案：",
+    badge: "挑戰 3 • 王牌顧問實戰手冊",
+    assignedCase: "客戶個案：",
     switchCase: "🎲 轉另一個案",
-    lifeEventLabel: "🎉 人生大事：",
-    gapLabel: "⚠️ 現有保障缺口：",
-    pambOfferLabel: "🇲🇾 推薦 PRU 方案：",
-    aiaRivalLabel: "⚔️ 友邦 (AIA) 對手 (第3步)：",
-    step1Tab: "第1步：🎨 賀卡設計",
-    step2Tab: "第2步：💬 WhatsApp 破冰",
-    step3Tab: "第3步：📧 PRU vs AIA 電郵",
-    step1Title: "🎨 第 1 / 3 步：整張專屬人生大事賀卡 (Greeting Card)",
-    themeChip: "💡 主題",
-    cardStyleBoostersLabel: "✨ 人情味同創意視覺加分項（撳一下即可加落提示詞框）：",
-    cardStyleBoosters: [
-      "❤️ 窩心屋企里程碑同真摯人情味",
-      "🌟 尊尚紅金 MDRT 邊框設計",
-      "🇲🇾 大馬本土屋企溫情同祝福氣氛",
+    lifeEventLabel: "🎉 人生重要時刻",
+    gapLabel: "⚠️ 現有保障缺口",
+    offerLabel: "🇲🇾 推薦 PRU 方案組合",
+    step1Tab: "1. 🎨 窩心賀卡",
+    step2Tab: "2. 💬 首條 WhatsApp",
+    step3Tab: "3. 📧 應對 AIA 比較",
+
+    step1Title: "第 1 步：整張專屬開門紅賀卡",
+    pickVisualStyle: "1. 揀賀卡視覺風格：",
+    visualStyles: [
+      { id: "watercolor", label: "🎨 溫馨手繪水彩風", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
+      { id: "prestige", label: "✨ 尊尚紅金高管風", prompt: "Luxury executive stationery card with refined crimson-red and brushed-gold accents, crisp modern typography" },
+      { id: "malaysian", label: "🇲🇾 大馬本土屋企溫情", prompt: "Authentic modern Malaysian home & skyline warmth, joyful celebratory atmosphere, vibrant sunlight" },
     ],
-    cardPromptLabel: "✏️ 賀卡提示詞 / 賀詞標題（可以組合上面主題再自由改）：",
-    cardPromptPlaceholder: "輸入窩心嘅賀卡標題或者畫面提示詞...",
+    pickHeadline: "2. 揀賀卡主標題：",
+    cardTouchLabel: "3. 💡 加少少你個人創意細節（選填 — 打幾個字就得）：",
+    cardTouchHint: "貼士：可以加個畫面細節（例如公仔熊、新屋鎖匙、鮮花）或者一句窩心祝福 — 撳下面靈感詞即刻改，或者打你自己諗法！",
+    cardTouchPlaceholder: "例如：加隻得意公仔熊同埋屋企祝福...",
     generatingCard: "🎨 緊係幫緊你畫賀卡...",
     redrawCard: "↻ 重新畫過張卡",
     generateCardBtn: "🎨 生成專屬賀卡",
-    cardReadyMsg: "✓ 賀卡搞掂！跟住寫第一條 WhatsApp 暖場信息啦。",
-    nextStep2Btn: "確認賀卡，去第 2 步 (WhatsApp) →",
+    cardReadyMsg: "✓ 賀卡搞掂！跟住構思你第一條破冰 WhatsApp。",
+    nextStep2Btn: "下一步：寫首條 WhatsApp →",
     cardAttachedBadge: "✓ 已連埋第1步賀卡",
     editCardBtn: "改返張卡",
-    step2Title: "💬 第 2 / 3 步：寫第一條 WhatsApp 破冰信息",
-    pambAngleChip: "⚡ 方案切入點",
-    combineBothWaBtn: "✨ 一鍵全選財富同人情味切入點（可自由改提示詞）",
-    waEmpathyBoosters: [
-      "❤️ 人情味先行：先真心祝賀個客人生大事，零 Hard Sell 壓力",
-      "💎 財富規劃角度：守住屋企現金流，唔使郁到現有儲蓄",
+
+    step2Title: "第 2 步：首條 WhatsApp 破冰（人情味開場 + 財富規劃亮點）",
+    pickOpeningTone: "1. 你想點樣開場？",
+    openingTones: [
+      { id: "warm_zero_push", label: "❤️ 真心祝賀先（零 Hard Sell）", prompt: "Open with 100% genuine celebration and warmth, zero sales pressure" },
+      { id: "casual_checkin", label: "☕ 老朋友輕鬆問候", prompt: "Warm, friendly check-in like a trusted longtime family advisor" },
+      { id: "card_gift", label: "🎁 連埋專屬賀卡送祝福", prompt: "Lead with the custom greeting card made specially for their milestone" },
     ],
-    waPromptLabel: "✏️ AI 提示詞框 (Prompt Box) — 撳上面幾個切入點組合兼自己執靚後，再撳 AI 生成：",
-    waPromptPlaceholder: "撳上面嘅切入點組合提示詞，加埋你嘅財富規劃心法，再撳「✨ AI 生成 / 執靚段字」...",
-    waDrafting: "⚡ AI 寫緊...",
-    aiRefineBtn: "✨ AI 生成 / 執靚段字",
-    waOutputLabel: "📱 最終 WhatsApp 破冰信息（Send 之前可以自己改）：",
-    backBtn: "← 返上一步",
-    nextStep3Btn: "Send WhatsApp 去第 3 步（個客覆機問 AIA！）→",
-    objectionHeader: "📲 收到個客 WhatsApp 覆機 — 想同大馬友邦 (AIA Malaysia) 格價比較！",
-    tapFactHint: "👇 可撳 1 個或者一鍵全選 3 大PRU vs AIA 真實條款優勢加落提示詞框，自由改完再生成電郵：",
-    useAll3FactsBtn: "✨ 一鍵全選 3 大PRU vs AIA 優勢 + 自由改提示詞",
-    emailLeaderBoosters: [
-      "🤝 專業得體 MDRT 語氣：客觀尊重 AIA，同時用條款證明點解 PRU 方案更能守住屋企長遠財富",
-      "📊 清晰對比總結：將PRU vs AIA 3 大關鍵條款整理到一目了然方便屋企人傾",
+    pickWealthHooks: "2. 想輕輕帶出邊幾個財富規劃亮點？（撳 1 個或多個）：",
+    selectAllIdeas: "✓ 全選亮點",
+    waTouchLabel: "3. 💡 加一句你嘅人情味 / 關係心思（選填 — 打短短一句）：",
+    waTouchHint: "貼士：提下以前點識、屋企貼心問候，或者約飲杯啡 / Send 份兩分鐘懶人包 — 撳下面靈感詞或者自己寫！",
+    waTouchPlaceholder: "例如：趁 BB 瞓晏覺 Send 份兩分鐘懶人包俾你睇，完全唔急...",
+    waGenerateBtn: "✨ 生成我嘅 WhatsApp 破冰信息",
+    waRegenerateBtn: "↻ 按最新諗法重新生成",
+    waDrafting: "⚡ 寫緊 WhatsApp...",
+    waPreviewHeader: "📱 WhatsApp 即時預覽（撳入去可以直接執字眼）：",
+    waEmptyHint: "👆 先喺上面揀開場方式同財富亮點（可加埋個人心思），再撳「生成我嘅 WhatsApp 破冰信息」！",
+    quickPolishLabel: "一撳執靚：",
+    waPolishes: [
+      { label: "↻ 再短啲精警啲", inst: "Make it 25% shorter, punchier, and effortless to read on a phone" },
+      { label: "↻ 更加窩心有人情味", inst: "Make the tone even warmer, more personal, and more empathetic" },
+      { label: "↻ 突出財富數字亮點", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
-    emailPromptLabel: "✏️ AI 提示詞框 (Prompt Box) — 組合晒 3 大優勢兼自由改你嘅比較策略：",
-    emailPromptPlaceholder: "撳「一鍵全選 3 大PRU vs AIA 優勢」或者逐個撳上面重點，自由改完再撳 AI 生成...",
-    emailOutputLabel: "📧 最終PRU 方案 vs 友邦 (AIA) 客觀比較電郵（交之前可以改）：",
-    clearPromptBtn: "✕ 清空提示詞",
-    promptEditHint: "💡 貼士：可以撳多個選項組合落提示詞框，加埋你自己嘅見解之後，再撳右邊「✨ AI 生成 / 執靚段字」！",
-    submittingBtn: "⚡ 交緊卷同智能計緊分...",
-    finalSubmitBtn: "✅ 最終提交 Pre-Pitch 兼睇分",
-    submittedBadge: "✓ 已經交咗",
-    scoreLabel: "🏆 最終得分：",
-    pillarsHeader: "📊 MDRT 見客前預熱 4 大維度評分",
-    waFinalHeader: "💬 1. 第一條 WhatsApp 破冰信息",
-    emailFinalHeader: "📧 2. PRU 方案 vs 友邦 (AIA) 客觀比較電郵",
+    backBtn: "← 上一步",
+    nextStep3Btn: "Send WhatsApp 睇個客點覆 →",
+
+    incomingBubbleTag: "📲 個客啱啱覆咗你 WhatsApp • 剛剛",
+    pickWinningFacts: "1. 揀贏過 AIA 嘅實際條款優勢（單選或一撳全選 3 項）：",
+    selectAll3Facts: "✓ 全選 3 大優勢",
+    pickAdvisoryStyle: "2. 揀你嘅專業溝通風格：",
+    advisoryStyles: [
+      { id: "respectful", label: "🤝 大方尊重 · 客觀專業", prompt: "Acknowledge AIA respectfully while showing factually why PRU fits their family gap better" },
+      { id: "crisp_bullets", label: "📊 3點清晰重點對比", prompt: "Ultra-clear side-by-side 3-bullet executive comparison for fast decision-making" },
+      { id: "peace_of_mind", label: "👨‍👩‍👦 守護屋企長遠安心", prompt: "Connect each policy clause back to protecting their family's long-term peace of mind" },
+    ],
+    closeTouchLabel: "3. 💡 你想點樣約實下一步傾？（選填 — 打你嘅收尾心思）：",
+    closeTouchHint: "貼士：提議 10 分鐘 Zoom 時間、拍住兩份 PDF 一齊睇，或者叫埋另一半一齊聽 — 撳下面靈感或者自己打！",
+    closeTouchPlaceholder: "例如：星期四晚8點半 BB 瞓咗之後用10分鐘 Zoom 拍住兩份表睇...",
+    emailGenerateBtn: "✨ 生成專業對比回覆電郵",
+    emailRegenerateBtn: "↻ 重新生成對比電郵",
+    emailDrafting: "⚡ 寫緊對比電郵...",
+    emailPreviewHeader: "📧 你嘅專業方案對比電郵（交之前可以隨時改）：",
+    emailEmptyHint: "👆 喺上面揀好條款優勢同約見方式，再撳「生成專業對比回覆電郵」！",
+    emailPolishes: [
+      { label: "↻ 再精簡易睇", inst: "Tighten into a crisp, skimmable 90-word executive email" },
+      { label: "↻ 更溫和顧問語氣", inst: "Make the tone extra gracious, consultative, and zero-pressure" },
+      { label: "↻ 強化條款分野", inst: "Make the exact clause differences between PRU and AIA stand out clearly" },
+    ],
+    submittingBtn: "⚡ 計緊分並同步去大螢幕...",
+    finalSubmitBtn: "🚀 提交完整 Pre-Pitch 兼睇分",
+    submittedBadge: "✓ 已經提交",
+    scoreLabel: "🏆 得分：",
+    waFinalHeader: "💬 1. 首條 WhatsApp 破冰信息",
+    emailFinalHeader: "📧 2. 方案對比回覆電郵 (vs. AIA)",
   },
+
   ms: {
-    badge: "CABARAN 3 • PRA-PEMBENTANGAN MDRT (PRE-PITCH)",
-    assignedCase: "Kes Pelanggan Anda:",
+    badge: "CABARAN 3 • BUKU PANDUAN PERUNDING",
+    assignedCase: "Kes Pelanggan:",
     switchCase: "🎲 Tukar Kes",
-    lifeEventLabel: "🎉 Peristiwa Hidup:",
-    gapLabel: "⚠️ Jurang Semasa:",
-    pambOfferLabel: "🇲🇾 Cadangan Pelan PRU Anda:",
-    aiaRivalLabel: "⚔️ Pesaing AIA (Langkah 3):",
-    step1Tab: "Langkah 1: 🎨 Kad Ucapan",
-    step2Tab: "Langkah 2: 💬 Mesej WhatsApp",
-    step3Tab: "Langkah 3: 📧 E-mel PRU lwn AIA",
-    step1Title: "🎨 Langkah 1 daripada 3: Cipta Kad Ucapan Peristiwa Hidup Peribadi",
-    themeChip: "💡 Tema",
-    cardStyleBoostersLabel: "✨ Penggalak Empati & Visual Kreatif (tekan untuk gabung ke dalam prompt):",
-    cardStyleBoosters: [
-      "❤️ Empati Keluarga Mesra & Detik Bermakna",
-      "🌟 Bingkai Prestij MDRT Merah & Emas",
-      "🇲🇾 Sentuhan Budaya & Kekeluargaan Malaysia Asli",
+    lifeEventLabel: "🎉 Detik Kehidupan",
+    gapLabel: "⚠️ Jurang Perlindungan",
+    offerLabel: "🇲🇾 Portfolio PRU Sesuai",
+    step1Tab: "1. 🎨 Kad Ucapan",
+    step2Tab: "2. 💬 WhatsApp Pertama",
+    step3Tab: "3. 📧 Banding lwn AIA",
+
+    step1Title: "Langkah 1: Kad Ucapan Pembuka Bicara Mesra",
+    pickVisualStyle: "1. Pilih Gaya Visual Kad:",
+    visualStyles: [
+      { id: "watercolor", label: "🎨 Cat Air Keluarga Mesra", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
+      { id: "prestige", label: "✨ Prestij Merah & Emas", prompt: "Luxury executive stationery card with refined crimson-red and brushed-gold accents, crisp modern typography" },
+      { id: "malaysian", label: "🇲🇾 Kehangatan Keluarga Malaysia", prompt: "Authentic modern Malaysian home & skyline warmth, joyful celebratory atmosphere, vibrant sunlight" },
     ],
-    cardPromptLabel: "✏️ Kotak Prompt / Tajuk Kad Ucapan (Gabung tema di atas & sunting bebas):",
-    cardPromptPlaceholder: "Taipkan tajuk kad ucapan mesra atau prompt visual anda...",
-    generatingCard: "🎨 Menjana Kad...",
-    redrawCard: "↻ Lukis Semula Kad",
-    generateCardBtn: "🎨 Jana Kad Ucapan",
-    cardReadyMsg: "✓ Kad Ucapan Siap! Sekarang rangka mesej WhatsApp sentuhan pertama anda.",
-    nextStep2Btn: "Sahkan Kad & Seterusnya: Langkah 2 (WhatsApp) →",
-    cardAttachedBadge: "✓ Kad Ucapan Langkah 1 Dilampirkan",
-    editCardBtn: "Sunting Kad",
-    step2Title: "💬 Langkah 2 daripada 3: Mesej WhatsApp Sentuhan Pertama",
-    pambAngleChip: "⚡ Sudut Pelan",
-    combineBothWaBtn: "✨ Gunakan Semua Sudut Kekayaan & Empati + Sunting Prompt",
-    waEmpathyBoosters: [
-      "❤️ Empati Dahulu: Raikan detik bermakna pelanggan secara ikhlas tanpa tekanan jualan",
-      "💎 Sudut Perancangan Kekayaan: Lindungi aliran tunai keluarga & simpanan sedia ada",
+    pickHeadline: "2. Pilih Tajuk Ucapan:",
+    cardTouchLabel: "3. 💡 Tambah Sentuhan Kreatif Anda (Pilihan — taip beberapa patah perkataan):",
+    cardTouchHint: "Tip: Nyatakan perincian mesra (cth. patung beruang, kunci rumah, bunga) atau doa keluarga — tekan contoh di bawah atau taip idea anda!",
+    cardTouchPlaceholder: "cth. Tambah patung beruang comel & doa kesejahteraan keluarga...",
+    generatingCard: "🎨 Mencipta Kad Anda...",
+    redrawCard: "↻ Jana Semula Kad",
+    generateCardBtn: "🎨 Cipta Kad Ucapan",
+    cardReadyMsg: "✓ Kad Ucapan siap! Sekarang rangka WhatsApp sentuhan pertama anda.",
+    nextStep2Btn: "Seterusnya: Rangka WhatsApp Pertama →",
+    cardAttachedBadge: "✓ Kad Langkah 1 Dilampirkan",
+    editCardBtn: "Tukar Kad",
+
+    step2Title: "Langkah 2: WhatsApp Pertama (Empati + Idea Kekayaan)",
+    pickOpeningTone: "1. Bagaimana anda mahu memulakan perbualan?",
+    openingTones: [
+      { id: "warm_zero_push", label: "❤️ Raikan Dahulu (Tanpa Tekanan)", prompt: "Open with 100% genuine celebration and warmth, zero sales pressure" },
+      { id: "casual_checkin", label: "☕ Sapaan Santai 2 Minit", prompt: "Warm, friendly check-in like a trusted longtime family advisor" },
+      { id: "card_gift", label: "🎁 Sertakan Hadiah Kad", prompt: "Lead with the custom greeting card made specially for their milestone" },
     ],
-    waPromptLabel: "✏️ Kotak Prompt AI — Gabungkan sudut di atas & sunting mengikut ayat anda sebelum klik AI:",
-    waPromptPlaceholder: "Tekan 1 atau semua sudut di atas, tambah sentuhan perancangan kekayaan anda, kemudian klik Jana AI...",
-    waDrafting: "⚡ Merangka...",
-    aiRefineBtn: "✨ Jana / Halusi dengan AI",
-    waOutputLabel: "📱 Mesej WhatsApp Sentuhan Pertama Akhir (Boleh disunting sebelum hantar):",
+    pickWealthHooks: "2. Idea Perancangan Kekayaan untuk dikongsi (Tekan 1 atau lebih):",
+    selectAllIdeas: "✓ Pilih Semua Idea",
+    waTouchLabel: "3. 💡 Tambah Sentuhan Hubungan Peribadi Anda (Pilihan — taip 5–10 perkataan):",
+    waTouchHint: "Tip: Sebut kenangan bersama, ucapan prihatin keluarga, atau tawaran ringkasan 2 minit — tekan contoh di bawah atau taip sendiri!",
+    waTouchPlaceholder: "cth. Hantar ringkasan 2 minit semasa bayi tidur, tiada paksaan...",
+    waGenerateBtn: "✨ Rangka Mesej WhatsApp Saya",
+    waRegenerateBtn: "↻ Rangka Semula dengan Idea Baharu",
+    waDrafting: "⚡ Merangka WhatsApp...",
+    waPreviewHeader: "📱 Pratonton WhatsApp (Boleh sunting terus jika mahu):",
+    waEmptyHint: "👆 Pilih nada pembukaan & idea kekayaan di atas, tambah sentuhan peribadi, kemudian tekan 'Rangka Mesej WhatsApp Saya'!",
+    quickPolishLabel: "Gilap Pantas 1-Tekan:",
+    waPolishes: [
+      { label: "↻ Lebih Ringkas & Padat", inst: "Make it 25% shorter, punchier, and effortless to read on a phone" },
+      { label: "↻ Lebih Mesra & Prihatin", inst: "Make the tone even warmer, more personal, and more empathetic" },
+      { label: "↻ Jelas Angka Manfaat", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
+    ],
     backBtn: "← Kembali",
-    nextStep3Btn: "Hantar WhatsApp & Seterusnya: Langkah 3 (Pelanggan Balas!) →",
-    objectionHeader: "📲 Balasan WhatsApp Pelanggan Masuk — Bantahan Perbandingan AIA Malaysia!",
-    tapFactHint: "👇 Tekan 1, 2, atau KETIGA-TIGA (3/3) fakta kelebihan PRU lwn AIA untuk dimasukkan ke dalam prompt & sunting bebas:",
-    useAll3FactsBtn: "✨ Gunakan Ketiga-tiga (3/3) Kelebihan PRU lwn AIA + Sunting Prompt",
-    emailLeaderBoosters: [
-      "🤝 Nada Profesional MDRT: Hormati AIA secara adil sambil membuktikan bagaimana pelan PRU lebih melindungi kekayaan keluarga",
-      "📊 Ringkasan Perbandingan Jelas: Susun 3 klausa utama PRU lwn AIA supaya mudah dibaca oleh keluarga",
+    nextStep3Btn: "Hantar WhatsApp & Lihat Balasan Pelanggan →",
+
+    incomingBubbleTag: "📲 Balasan WhatsApp Pelanggan • Sebentar tadi",
+    pickWinningFacts: "1. Pilih Kelebihan Fakta PRU lwn AIA (Tekan kad atau Pilih Semua 3):",
+    selectAll3Facts: "✓ Pilih Ketiga-tiga Kelebihan",
+    pickAdvisoryStyle: "2. Pilih Gaya Nasihat Anda:",
+    advisoryStyles: [
+      { id: "respectful", label: "🤝 Profesional & Adil", prompt: "Acknowledge AIA respectfully while showing factually why PRU fits their family gap better" },
+      { id: "crisp_bullets", label: "📊 Ringkasan 3 Poin Jelas", prompt: "Ultra-clear side-by-side 3-bullet executive comparison for fast decision-making" },
+      { id: "peace_of_mind", label: "👨‍👩‍👦 Ketenangan Keluarga", prompt: "Connect each policy clause back to protecting their family's long-term peace of mind" },
     ],
-    emailPromptLabel: "✏️ Kotak Prompt AI — Gabungkan ketiga-tiga fakta & sunting strategi anda sebelum klik Jana AI:",
-    emailPromptPlaceholder: "Klik 'Gunakan Ketiga-tiga Kelebihan PRU lwn AIA' atau tekan fakta di atas, sunting bebas, kemudian klik Jana AI...",
-    emailOutputLabel: "📧 E-mel Perbandingan Berfakta PRU lwn AIA Malaysia Akhir (Boleh disunting):",
-    clearPromptBtn: "✕ Kosongkan Prompt",
-    promptEditHint: "💡 Tip: Tekan beberapa pilihan di atas untuk menggabungkannya ke dalam kotak prompt, sunting mengikut kreativiti anda, kemudian klik ✨ Jana / Halusi dengan AI!",
-    submittingBtn: "⚡ Menghantar & Mengira Skor...",
-    finalSubmitBtn: "✅ Hantar Akhir Pra-Pitch & Kira Skor",
+    closeTouchLabel: "3. 💡 Bagaimana Anda Mahu Menutup Temujanji? (Pilihan — taip idea anda):",
+    closeTouchHint: "Tip: Cadangkan Zoom/kopi 10 minit, semak kedua-dua PDF bersebelahan, atau jemput pasangan — tekan contoh atau taip sendiri!",
+    closeTouchPlaceholder: "cth. Zoom 10 minit jam 8:30 malam untuk bandingkan kedua-dua jadual...",
+    emailGenerateBtn: "✨ Rangka E-mel Perbandingan",
+    emailRegenerateBtn: "↻ Rangka Semula E-mel",
+    emailDrafting: "⚡ Merangka E-mel...",
+    emailPreviewHeader: "📧 E-mel Perbandingan Anda (Boleh disunting sebelum hantar):",
+    emailEmptyHint: "👆 Pilih kelebihan PRU & cara penutup di atas, kemudian tekan 'Rangka E-mel Perbandingan'!",
+    emailPolishes: [
+      { label: "↻ Lebih Padat", inst: "Tighten into a crisp, skimmable 90-word executive email" },
+      { label: "↻ Nada MDRT Lembut", inst: "Make the tone extra gracious, consultative, and zero-pressure" },
+      { label: "↻ Kontras Klausa Jelas", inst: "Make the exact clause differences between PRU and AIA stand out clearly" },
+    ],
+    submittingBtn: "⚡ Mengira Skor Pra-Pitch...",
+    finalSubmitBtn: "🚀 Hantar Pra-Pitch & Lihat Skor",
     submittedBadge: "✓ DIHANTAR",
     scoreLabel: "🏆 Skor:",
-    pillarsHeader: "📊 Penilaian 4-Tunjang Pra-Pitch MDRT",
-    waFinalHeader: "💬 1. Mesej WhatsApp Sentuhan Pertama",
-    emailFinalHeader: "📧 2. E-mel Perbandingan Berfakta PRU lwn AIA Malaysia",
+    waFinalHeader: "💬 1. Mesej WhatsApp Pertama",
+    emailFinalHeader: "📧 2. E-mel Perbandingan Pelan (lwn AIA)",
   },
+
   ta: {
-    badge: "சவால் 3 • MDRT முன்-பிரிזेंटेஷன் (PRE-PITCH)",
-    assignedCase: "ஒதுக்கப்பட்ட வாடிக்கையாளர்:",
-    switchCase: "🎲 வேறு கேஸ் மாற்று",
-    lifeEventLabel: "🎉 வாழ்க்கை நிகழ்வு:",
-    gapLabel: "⚠️ தற்போதைய இடைவெளி:",
-    pambOfferLabel: "🇲🇾 பரிந்துரைக்கப்பட்ட PRU திட்டம்:",
-    aiaRivalLabel: "⚔️ AIA போட்டித் திட்டம் (படி 3):",
-    step1Tab: "படி 1: 🎨 வாழ்த்து அட்டை",
-    step2Tab: "படி 2: 💬 WhatsApp செய்தி",
-    step3Tab: "படி 3: 📧 PRU vs AIA மின்னஞ்சல்",
-    step1Title: "🎨 படி 1 / 3: தனிப்பயன் வாழ்க்கை நிகழ்வு வாழ்த்து அட்டையை உருவாக்குக",
-    themeChip: "💡 தீம்",
-    cardStyleBoostersLabel: "✨ அக்கறை & படைப்பாற்றல் காட்சி ஊக்கிகள் (Prompt-ல் சேர்க்க அழுத்தவும்):",
-    cardStyleBoosters: [
-      "❤️ குடும்ப அன்பும் மனமார்ந்த வாழ்த்தும்",
-      "🌟 சிவப்பு & தங்க MDRT பிரீமியம் வடிவமைப்பு",
-      "🇲🇾 மலேசிய குடும்ப கலாச்சார உணர்வு",
+    badge: "சவால் 3 • ஆலோசகர் வழிகாட்டி",
+    assignedCase: "வாடிக்கையாளர்:",
+    switchCase: "🎲 வேறு கேஸ்",
+    lifeEventLabel: "🎉 வாழ்க்கை நிகழ்வு",
+    gapLabel: "⚠️ பாதுகாப்பு இடைவெளி",
+    offerLabel: "🇲🇾 பரிந்துரைக்கப்பட்ட PRU திட்டம்",
+    step1Tab: "1. 🎨 வாழ்த்து அட்டை",
+    step2Tab: "2. 💬 முதல் WhatsApp",
+    step3Tab: "3. 📧 AIA ஒப்பீடு",
+
+    step1Title: "படி 1: அன்பான வாழ்த்து அட்டையை உருவாக்குங்கள்",
+    pickVisualStyle: "1. அட்டையின் காட்சி பாணியைத் தேர்ந்தெடுக்கவும்:",
+    visualStyles: [
+      { id: "watercolor", label: "🎨 குடும்ப நீர்வண்ண ஓவியம்", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
+      { id: "prestige", label: "✨ சிவப்பு & தங்க பிரீமியம்", prompt: "Luxury executive stationery card with refined crimson-red and brushed-gold accents, crisp modern typography" },
+      { id: "malaysian", label: "🇲🇾 மலேசிய இல்லற அன்பு", prompt: "Authentic modern Malaysian home & skyline warmth, joyful celebratory atmosphere, vibrant sunlight" },
     ],
-    cardPromptLabel: "✏️ வாழ்த்து அட்டை Prompt / தலைப்பு (மேலே உள்ள தீம்களைச் சேர்த்து சுதந்திரமாகத் திருத்தவும்):",
-    cardPromptPlaceholder: "உங்கள் வாழ்த்து அட்டை தலைப்பு அல்லது காட்சி குறிப்பை உள்ளிடவும்...",
+    pickHeadline: "2. வாழ்த்துத் தலைப்பைத் தேர்ந்தெடுக்கவும்:",
+    cardTouchLabel: "3. 💡 உங்கள் சொந்த படைப்புத் தொடலைச் சேர்க்கவும் (விருப்பத்தேர்வு — சில சொற்கள்):",
+    cardTouchHint: "குறிப்பு: அழகான காட்சி விவரம் (பொம்மை கரடி, வீட்டு சாவி, பூக்கள்) அல்லது குடும்ப வாழ்த்தைச் சேர்க்கலாம் — கீழே உள்ள குறிப்பைத் தட்டவும் அல்லது தட்டச்சு செய்யவும்!",
+    cardTouchPlaceholder: "எ.கா. அழகான பொம்மை கரடி மற்றும் குடும்ப ஆசீர்வாதம்...",
     generatingCard: "🎨 அட்டை தயாராகிறது...",
     redrawCard: "↻ மீண்டும் உருவாக்கு",
     generateCardBtn: "🎨 வாழ்த்து அட்டையை உருவாக்கு",
-    cardReadyMsg: "✓ வாழ்த்து அட்டை தயார்! இப்போது உங்கள் முதல் WhatsApp செய்தியை உருவாக்குங்கள்.",
-    nextStep2Btn: "அட்டையை உறுதிசெய்து படி 2-க்குச் செல்க (WhatsApp) →",
-    cardAttachedBadge: "✓ படி 1 வாழ்த்து அட்டை இணைக்கப்பட்டது",
-    editCardBtn: "அட்டையை மாற்று",
-    step2Title: "💬 படி 2 / 3: முதல்-தொடர்பு WhatsApp செய்தி",
-    pambAngleChip: "⚡ திட்டக் கோணம்",
-    combineBothWaBtn: "✨ அனைத்து செல்வ & அக்கறை கோணங்களையும் சேர் + Prompt திருத்து",
-    waEmpathyBoosters: [
-      "❤️ அக்கறை முதலில்: விற்பனை அழுத்தமின்றி மனமார்ந்த வாழ்த்துக்களைப் பகிரவும்",
-      "💎 செல்வத் திட்டமிடல்: குடும்ப சேமிப்பு மற்றும் பணப்புழக்கத்தைப் பாதுகாத்தல்",
+    cardReadyMsg: "✓ வாழ்த்து அட்டை தயார்! இப்போது முதல் WhatsApp செய்தியை உருவாக்குவோம்.",
+    nextStep2Btn: "அடுத்து: முதல் WhatsApp →",
+    cardAttachedBadge: "✓ படி 1 அட்டை இணைக்கப்பட்டது",
+    editCardBtn: "மாற்று",
+
+    step2Title: "படி 2: முதல் WhatsApp செய்தி (அக்கறை + செல்வ யோசனை)",
+    pickOpeningTone: "1. உரையாடலை எவ்வாறு தொடங்க விரும்புகிறீர்கள்?",
+    openingTones: [
+      { id: "warm_zero_push", label: "❤️ முதலில் வாழ்த்து (விற்பனை அழுத்தமின்றி)", prompt: "Open with 100% genuine celebration and warmth, zero sales pressure" },
+      { id: "casual_checkin", label: "☕ நட்பான 2-நிமிட நலம் விசாரிப்பு", prompt: "Warm, friendly check-in like a trusted longtime family advisor" },
+      { id: "card_gift", label: "🎁 வாழ்த்து அட்டை பரிசுடன் தொடங்கு", prompt: "Lead with the custom greeting card made specially for their milestone" },
     ],
-    waPromptLabel: "✏️ AI Prompt பெட்டி — மேலே உள்ள கோணங்களை இணைத்து உங்கள் சொந்த நடையில் திருத்திய பின் AI-ஐ அழுத்தவும்:",
-    waPromptPlaceholder: "மேலே உள்ள கோணங்களை அழுத்தி Prompt-ல் சேர்த்து, உங்கள் செல்வத் திட்டமிடல் கருத்துக்களைச் சேர்த்து AI பொத்தானை அழுத்தவும்...",
+    pickWealthHooks: "2. எந்த செல்வத் திட்டமிடல் கருத்துக்களைப் பகிர்வீர்கள்? (1 அல்லது அதற்கு மேல்):",
+    selectAllIdeas: "✓ அனைத்தையும் தேர்ந்தெடு",
+    waTouchLabel: "3. 💡 உங்கள் தனிப்பட்ட நட்புத் தொடலைச் சேர்க்கவும் (விருப்பத்தேர்வு — 5–10 சொற்கள்):",
+    waTouchHint: "குறிப்பு: பழைய நட்பு நினைவு, குடும்ப அக்கறை அல்லது எளிய காபி/சுருக்க அழைப்பைக் குறிப்பிடலாம் — கீழே உள்ள குறிப்பைத் தட்டவும் அல்லது எழுதவும்!",
+    waTouchPlaceholder: "எ.கா. குழந்தை தூங்கும்போது 2 நிமிட சுருக்கத்தை அனுப்புகிறேன்...",
+    waGenerateBtn: "✨ எனது WhatsApp செய்தியை உருவாக்கு",
+    waRegenerateBtn: "↻ மீண்டும் உருவாக்கு",
     waDrafting: "⚡ உருவாக்குகிறது...",
-    aiRefineBtn: "✨ AI மூலம் உருவாக்கு / மேம்படுத்து",
-    waOutputLabel: "📱 இறுதி WhatsApp செய்தி (அனுப்பும் முன் திருத்தலாம்):",
-    backBtn: "← பின்செல்",
-    nextStep3Btn: "WhatsApp அனுப்பி படி 3-க்குச் செல்க (வாடிக்கையாளர் பதில்!) →",
-    objectionHeader: "📲 வாடிக்கையாளர் WhatsApp பதில் — AIA Malaysia உடன் ஒப்பிடக் கோரிக்கை!",
-    tapFactHint: "👇 1, 2 அல்லது அனைத்து 3 PRU vs AIA நன்மைகளையும் Prompt-ல் சேர்த்து சுதந்திரமாகத் திருத்தவும்:",
-    useAll3FactsBtn: "✨ அனைத்து 3 PRU vs AIA நன்மைகளையும் சேர் + Prompt திருத்து",
-    emailLeaderBoosters: [
-      "🤝 மரியாதையான MDRT அணுகுமுறை: AIA-வை மதித்து, PRU திட்டம் எவ்வாறு குடும்ப செல்வத்தை சிறப்பாகப் பாதுகாக்கிறது என்பதை விளக்குக",
-      "📊 தெளிவான ஒப்பீட்டு சுருக்கம்: 3 முக்கிய PRU vs AIA நன்மைகளை எளிதாகப் புரியும்படி வரிசைப்படுத்துக",
+    waPreviewHeader: "📱 நேரடி WhatsApp முன்னோட்டம் (விரும்பினால் திருத்தலாம்):",
+    waEmptyHint: "👆 மேலே தொடக்க முறை & செல்வ கருத்துக்களைத் தேர்ந்தெடுத்து, 'எனது WhatsApp செய்தியை உருவாக்கு' என்பதை அழுத்தவும்!",
+    quickPolishLabel: "1-தட்டல் மெருகூட்டல்:",
+    waPolishes: [
+      { label: "↻ சுருக்கமாக மாற்று", inst: "Make it 25% shorter, punchier, and effortless to read on a phone" },
+      { label: "↻ மேலும் அன்பாக மாற்று", inst: "Make the tone even warmer, more personal, and more empathetic" },
+      { label: "↻ எண்களைத் தெளிவாக்கு", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
-    emailPromptLabel: "✏️ AI Prompt பெட்டி — 3 உண்மைகளையும் இணைத்து உங்கள் உத்தியைத் திருத்திய பின் AI-ஐ அழுத்தவும்:",
-    emailPromptPlaceholder: "'அனைத்து 3 PRU vs AIA நன்மைகளையும் சேர்' என்பதை அழுத்தி, திருத்திய பின் AI மூலம் உருவாக்கவும்...",
-    emailOutputLabel: "📧 இறுதி PRU vs AIA Malaysia ஒப்பீட்டு மின்னஞ்சல் (சமர்ப்பிக்கும் முன் திருத்தலாம்):",
-    clearPromptBtn: "✕ Prompt-ஐ அழி",
-    promptEditHint: "💡 குறிப்பு: மேலே உள்ள பல விருப்பங்களை அழுத்தி Prompt பெட்டியில் சேர்த்து, உங்கள் விருப்பப்படி திருத்திய பின் ✨ AI பொத்தானை அழுத்தவும்!",
-    submittingBtn: "⚡ சமர்ப்பித்து மதிப்பெண் கணக்கிடுகிறது...",
-    finalSubmitBtn: "✅ இறுதி சமர்ப்பிப்பு & மதிப்பெண் பெறுக",
+    backBtn: "← பின்செல்",
+    nextStep3Btn: "WhatsApp அனுப்பி வாடிக்கையாளர் பதிலைப் பார் →",
+
+    incomingBubbleTag: "📲 வாடிக்கையாளரின் WhatsApp பதில் • இப்போது",
+    pickWinningFacts: "1. AIA-வை வெல்லும் PRU நன்மைகளைத் தேர்ந்தெடுக்கவும் (அனைத்து 3-ம் சேர்க்கலாம்):",
+    selectAll3Facts: "✓ அனைத்து 3 நன்மைகளையும் தேர்ந்தெடு",
+    pickAdvisoryStyle: "2. உங்கள் ஆலோசனை பாணியைத் தேர்ந்தெடுக்கவும்:",
+    advisoryStyles: [
+      { id: "respectful", label: "🤝 மரியாதையான & நேர்மையான", prompt: "Acknowledge AIA respectfully while showing factually why PRU fits their family gap better" },
+      { id: "crisp_bullets", label: "📊 தெளிவான 3-புள்ளி சுருக்கம்", prompt: "Ultra-clear side-by-side 3-bullet executive comparison for fast decision-making" },
+      { id: "peace_of_mind", label: "👨‍👩‍👦 குடும்ப மன அமைதி", prompt: "Connect each policy clause back to protecting their family's long-term peace of mind" },
+    ],
+    closeTouchLabel: "3. 💡 சந்திப்பை எவ்வாறு உறுதி செய்வீர்கள்? (விருப்பத்தேர்வு — உங்கள் யோசனை):",
+    closeTouchHint: "குறிப்பு: 10 நிமிட Zoom நேரம், இரண்டு PDF அட்டவணைகளையும் ஒப்பிடுதல் அல்லது வாழ்க்கைத் துணையை அழைத்தல் — கீழே தட்டவும் அல்லது எழுதவும்!",
+    closeTouchPlaceholder: "எ.கா. இரவு 8:30 மணிக்கு 10 நிமிட Zoom-ல் இரண்டு அட்டவணைகளையும் ஒப்பிடுவோம்...",
+    emailGenerateBtn: "✨ ஒப்பீட்டு மின்னஞ்சலை உருவாக்கு",
+    emailRegenerateBtn: "↻ மீண்டும் உருவாக்கு",
+    emailDrafting: "⚡ உருவாக்குகிறது...",
+    emailPreviewHeader: "📧 உங்கள் ஒப்பீட்டு மின்னஞ்சல் (சமர்ப்பிக்கும் முன் திருத்தலாம்):",
+    emailEmptyHint: "👆 மேலே PRU நன்மைகளைத் தேர்ந்தெடுத்து, 'ஒப்பீட்டு மின்னஞ்சலை உருவாக்கு' என்பதை அழுத்தவும்!",
+    emailPolishes: [
+      { label: "↻ சுருக்கமாக", inst: "Tighten into a crisp, skimmable 90-word executive email" },
+      { label: "↻ மென்மையான MDRT தொனி", inst: "Make the tone extra gracious, consultative, and zero-pressure" },
+      { label: "↻ விதிமுறை வேறுபாட்டைக் காட்டு", inst: "Make the exact clause differences between PRU and AIA stand out clearly" },
+    ],
+    submittingBtn: "⚡ மதிப்பெண் கணக்கிடுகிறது...",
+    finalSubmitBtn: "🚀 சமர்ப்பித்து மதிப்பெண் பார்",
     submittedBadge: "✓ சமர்ப்பிக்கப்பட்டது",
     scoreLabel: "🏆 மதிப்பெண்:",
-    pillarsHeader: "📊 MDRT முன்-பிரிזेंटेஷன் 4-தூண் மதிப்பீடு",
-    waFinalHeader: "💬 1. முதல்-தொடர்பு WhatsApp செய்தி",
-    emailFinalHeader: "📧 2. உண்மையான PRU vs AIA Malaysia ஒப்பீட்டு மின்னஞ்சல்",
+    waFinalHeader: "💬 1. முதல் WhatsApp செய்தி",
+    emailFinalHeader: "📧 2. திட்ட ஒப்பீட்டு மின்னஞ்சல் (vs. AIA)",
   },
 };
-C3_UI_I18N["zh-TW"] = C3_UI_I18N.yue;
+C3_PLAYBOOK_UI["zh-TW"] = C3_PLAYBOOK_UI.yue;
+
+const C3_ADVISOR_PLAYBOOK = {
+  newborn_baby: {
+    en: {
+      cardHints: ["🧸 Cute teddy bear & baby cradle", "🌟 Healthy, joyful future for Baby Lucas", "💐 Warm flowers for proud new mum Chloe"],
+      waIdeas: [
+        { label: "💵 RM 500 Baby Cash Reward", detail: "Claim RM 500 Childbirth Cash Reward under PRUWith You Plus" },
+        { label: "🛡️ 27 Congenital + Jaundice", detail: "Lock in PRUMy Child Plus covering 27 congenital conditions, neonatal jaundice & Autism/ADHD" },
+        { label: "🏦 Fund via FD Interest", detail: "Fund baby's medical & PRUSaver Kid uni fund using just FD interest without touching savings principal" },
+      ],
+      waHints: ["Send a 2-min summary while Lucas naps", "So happy seeing your family grow since your wedding!", "Zero rush—read whenever you both get rest"],
+      closeHints: ["10-min Zoom at 8:30pm after baby sleeps", "Compare both quotation PDFs side-by-side in 10 mins", "Send a 1-page comparison table on WhatsApp first"],
+    },
+    "zh-CN": {
+      cardHints: ["🧸 加上可爱小泰迪熊与摇篮", "🌟 祝小 Lucas 健康快乐茁壮成长", "💐 送给新手妈妈晓雯的温馨花束"],
+      waIdeas: [
+        { label: "💵 RM 500 生育现金奖", detail: "通过 PRUWith You Plus 直接申领 RM 500 新生儿现金奖赏" },
+        { label: "🛡️ 27种先天病 + 黄疸保障", detail: "锁定 PRUMy Child Plus 涵盖 27种先天疾病、新生儿黄疸与自闭症保障" },
+        { label: "🏦 仅用定存利息规划", detail: "只用定期存款利息即可锁定医疗与 PRUSaver Kid 大学基金，不动本金" },
+      ],
+      waHints: ["趁宝宝午睡发一份2分钟简报给你们", "从你们结婚到现在迎来小宝贝，太替你们开心了", "完全不急，等你们休息好随时看"],
+      closeHints: ["周四晚8点半宝宝睡后10分钟Zoom对照利益表", "把两份计划书PDF重点做成1页对比表发您", "周末喝杯咖啡10分钟轻松聊聊"],
+    },
+    yue: {
+      cardHints: ["🧸 加隻得意公仔熊同BB搖籃", "🌟 祝小 Lucas 快高長大聰明伶俐", "💐 送俾新手媽咪曉雯嘅溫馨花束"],
+      waIdeas: [
+        { label: "💵 RM 500 添丁現金獎", detail: "透過 PRUWith You Plus 即刻領取 RM 500 添丁現金獎" },
+        { label: "🛡️ 27種先天病 + 黃疸保障", detail: "鎖定 PRUMy Child Plus 包晒 27種先天病、初生黃疸同自閉症保障" },
+        { label: "🏦 淨用定存利息供款", detail: "淨係用定期存款利息就鎖定醫療同 PRUSaver Kid 大學基金，唔使郁本金" },
+      ],
+      waHints: ["趁 BB 瞓晏覺 Send 份2分鐘懶人包俾你哋", "由你哋結婚到今日抱 B，真係好替你哋開心", "完全唔急，等你哋唞夠得閒先睇"],
+      closeHints: ["星期四晚8點半 BB 瞓咗用10分鐘 Zoom 拍住睇", "幫你整張1頁紙重點對比表 Send 俾你先", "週末飲杯啡10分鐘輕鬆傾吓"],
+    },
+    ms: {
+      cardHints: ["🧸 Patung beruang comel & buaian bayi", "🌟 Masa depan cerah & sihat buat Baby Lucas", "💐 Jambangan bunga mesra buat ibu baharu"],
+      waIdeas: [
+        { label: "💵 Ganjaran Tunai Bayi RM 500", detail: "Tuntut Ganjaran Tunai Kelahiran RM 500 di bawah PRUWith You Plus" },
+        { label: "🛡️ 27 Kongenital + Jaundis", detail: "Kunci PRUMy Child Plus untuk 27 penyakit kongenital, jaundis & Autisme/ADHD" },
+        { label: "🏦 Guna Faedah FD Sahaja", detail: "Biayai pelan bayi & tabung universiti PRUSaver Kid guna faedah FD tanpa usik pokok" },
+      ],
+      waHints: ["Hantar ringkasan 2 minit semasa Lucas tidur", "Tumpang gembira melihat keluarga anda bertambah seri!", "Tiada paksaan—baca bila anda berdua sempat berehat"],
+      closeHints: ["Zoom 10 minit jam 8:30 malam selepas bayi tidur", "Bandingkan kedua-dua jadual PDF sebelah-menyebelah", "Saya hantarkan jadual 1 muka surat di WhatsApp dahulu"],
+    },
+    ta: {
+      cardHints: ["🧸 அழகான பொம்மை கரடி & தொட்டில்", "🌟 குழந்தை Lucas ஆரோக்கியமாக வளர வாழ்த்து", "💐 புதிய தாய்க்கு அன்பான மலர்க்கொத்து"],
+      waIdeas: [
+        { label: "💵 RM 500 குழந்தை ரொக்கப் பரிசு", detail: "PRUWith You Plus மூலம் RM 500 பிறப்பு ரொக்கப் பரிசைப் பெறுங்கள்" },
+        { label: "🛡️ 27 பிறவி நோய்கள் + மஞ்சள் காமாலை", detail: "27 பிறவி நோய்கள், மஞ்சள் காமாலை & Autism/ADHD காக்கும் PRUMy Child Plus" },
+        { label: "🏦 FD வட்டி மூலம் மட்டும் சேமிப்பு", detail: "அசல் தொகையைத் தொடாமல் FD வட்டி மூலமே PRUSaver Kid பல்கலைக்கழக நிதி" },
+      ],
+      waHints: ["குழந்தை தூங்கும்போது 2 நிமிட சுருக்கம் அனுப்புகிறேன்", "உங்கள் குடும்பத்தின் இந்த மகிழ்ச்சியில் நானும் பங்கு கொள்கிறேன்", "அவசரமில்லை—ஓய்வு கிடைக்கும்போது பாருங்கள்"],
+      closeHints: ["இரவு 8:30 மணிக்கு 10 நிமிட Zoom-ல் ஒப்பிடுவோம்", "இரண்டு PDF அட்டவணைகளையும் 1 பக்கத்தில் ஒப்பிட்டுக் காட்டுகிறேன்", "WhatsApp-ல் 1 பக்க சுருக்கத்தை முதலில் அனுப்புகிறேன்"],
+    },
+  },
+
+  ci_health_scare: {
+    en: {
+      cardHints: ["🌅 Penang Bridge sunrise & vitality theme", "💪 Wishing your partner a speedy recovery", "⚡ Energizing health & balance milestone"],
+      waIdeas: [
+        { label: "🎂 Lock Age-39 CI Rate", detail: "Lock in lower Age-39 underwriting rates before turning 40 next month" },
+        { label: "❤️‍🩹 ~190 CI + ICU to Age 100", detail: "Cover ~190 conditions including ICU >=120 hrs & Major Surgery up to age 100 via PRUAll Care" },
+        { label: "💰 110% Maturity Refund", detail: "Pair PRUMan for 260% male CI protection + up to 110% total premium refund at maturity" },
+      ],
+      waHints: ["Hope your business partner recovers smoothly!", "Quick 5-min check before your 40th birthday rate jump", "Coffee near Bayan Lepas this Friday?"],
+      closeHints: ["10-min coffee near Bayan Lepas before your birthday", "Compare Age-80 vs Age-100 payout tables side-by-side", "Quick 10-min Zoom Thursday evening"],
+    },
+    "zh-CN": {
+      cardHints: ["🌅 槟威大桥日出与活力健康主题", "💪 祝您的合伙人早日康复平安", "⚡ 40岁人生新阶段稳健护航"],
+      waIdeas: [
+        { label: "🎂 锁住 39 岁黄金费率", detail: "趁下个月满40岁保费跳升前，锁住39岁最优健康费率" },
+        { label: "❤️‍🩹 ~190种重疾保至100岁", detail: "PRUAll Care 保障约190种重疾（含ICU满120小时与大手术）直至100岁" },
+        { label: "💰 满期高达 110% 保费返还", detail: "搭配 PRUMan 享260%男性重疾保障，有事赔付、无事满期返还高达110%保费" },
+      ],
+      waHints: ["希望您的合伙人手术后顺利康复！", "赶在您40岁生日前帮您省下长期保费差价", "周五在槟城园区附近喝杯10分钟咖啡？"],
+      closeHints: ["生日前在 Bayan Lepas 喝杯10分钟咖啡对照条款", "并排对比80岁终止 vs 100岁保障利益表", "周四晚用10分钟Zoom快速过一遍"],
+    },
+    yue: {
+      cardHints: ["🌅 檳威大橋日出同健康活力主題", "💪 祝你拍檔早日康復出入平安", "⚡ 踏入40歲穩健護航新里程"],
+      waIdeas: [
+        { label: "🎂 鎖定 39 歲最靚保費", detail: "趁下個月踏入40歲加價前，鎖實39歲最抵健康保費" },
+        { label: "❤️‍🩹 ~190種危疾保到100歲", detail: "PRUAll Care 保足約190種危疾（連ICU夠120小時同大手術）直到100歲" },
+        { label: "💰 期滿高達 110% 回贈保費", detail: "配埋 PRUMan 享260%男士危疾，有事賠錢、冇事期滿攞返高達110%保費" },
+      ],
+      waHints: ["希望你位拍檔手術後快啲好返！", "趕喺你40歲生日前幫你慳返長線保費差價", "星期五喺 Bayan Lepas 附近飲杯10分鐘啡？"],
+      closeHints: ["生日前約個10分鐘飲杯啡拍住睇條款", "一頁紙對比保到80歲 vs 保到100歲嘅分別", "星期四晚10分鐘 Zoom 快閃傾吓"],
+    },
+    ms: {
+      cardHints: ["🌅 Matahari terbit Jambatan Pulau Pinang", "💪 Semoga rakan kongsi anda cepat sembuh", "⚡ Kesihatan & ketenangan menjelang usia 40"],
+      waIdeas: [
+        { label: "🎂 Kunci Kadar Umur 39", detail: "Kunci kadar kesihatan umur 39 sebelum meningkat pada hari lahir ke-40 bulan depan" },
+        { label: "❤️‍🩹 ~190 CI hingga Umur 100", detail: "PRUAll Care melindungi ~190 kondisi termasuk ICU >=120 jam hingga umur 100" },
+        { label: "💰 Pulangan Matang 110%", detail: "Padankan PRUMan untuk 260% CI lelaki + pulangan sehingga 110% jumlah premium" },
+      ],
+      waHints: ["Semoga rakan kongsi anda sembuh sepenuhnya!", "Semakan pantas 5 minit sebelum kadar umur 40 bermula", "Minum kopi 10 minit di Bayan Lepas Jumaat ini?"],
+      closeHints: ["Kopi 10 minit sebelum tarikh lahir ke-40 anda", "Bandingkan jadual perlindungan Umur 80 lwn Umur 100", "Zoom ringkas 10 minit Khamis malam"],
+    },
+    ta: {
+      cardHints: ["🌅 பினாங்கு பாலம் சூரிய உதயம் & ஆரோக்கியம்", "💪 உங்கள் கூட்டாளி விரைவில் குணமடைய வாழ்த்து", "⚡ 40 வயதுக்கு முன் ஆரோக்கியப் பாதுகாப்பு"],
+      waIdeas: [
+        { label: "🎂 39 வயது குறைந்த கட்டணம்", detail: "அடுத்த மாதம் 40 வயது கட்டண உயர்வுக்கு முன் 39 வயது கட்டணத்தை உறுதி செய்க" },
+        { label: "❤️‍🩹 100 வயது வரை ~190 CI", detail: "PRUAll Care மூலம் ICU >=120 மணி நேரம் உட்பட ~190 நோய்களுக்கு 100 வயது வரை பாதுகாப்பு" },
+        { label: "💰 110% முதிர்வுப் பணம் திரும்ப", detail: "PRUMan மூலம் 260% ஆண் CI பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்" },
+      ],
+      waHints: ["உங்கள் தொழில் கூட்டாளி விரைவில் நலம் பெற வாழ்த்துகிறேன்!", "40வது பிறந்தநாளுக்கு முன் 5 நிமிட சுருக்க ஒப்பீடு", "வெள்ளிக்கிழமை 10 நிமிடம் காபி அருந்திப் பேசலாமா?"],
+      closeHints: ["பிறந்தநாளுக்கு முன் 10 நிமிட காபி சந்திப்பு", "80 வயது vs 100 வயது பாதுகாப்பு அட்டவணை ஒப்பீடு", "வியாழன் மாலை 10 நிமிட Zoom அழைப்பு"],
+    },
+  },
+
+  new_home_mortgage: {
+    en: {
+      cardHints: ["🔑 Golden house keys & lush garden terrace", "🏡 Warm 'Selamat Masuk Rumah Baru' blessing", "🌿 Cozy family living room sunlight"],
+      waIdeas: [
+        { label: "🔑 RM 500 New Home Reward", detail: "Claim an immediate RM 500 New Home Goal Achievement Cash Reward under PRUWith You Plus" },
+        { label: "🏠 Portable MLTA (Keep Surplus)", detail: "Protect the RM 1.3M mortgage with portable family-owned MLTA instead of bank-locked MRTA" },
+        { label: "🛡️ +20% CI Mortgage Buffer", detail: "PRUAll Care adds +20% Recovery Care cash to cover RM 5,600/mth installments during illness" },
+      ],
+      waHints: ["Congrats on your beautiful Eco Botanic semi-D!", "Celebrate housewarming first—happy to share a 2-min MRTA vs MLTA tip", "Coffee near Eco Botanic this weekend?"],
+      closeHints: ["10-min coffee near Eco Botanic with you & Farah", "Side-by-side bank MRTA vs portable MLTA + AIA comparison", "Quick 10-min Zoom Sunday afternoon"],
+    },
+    "zh-CN": {
+      cardHints: ["🔑 金色新居钥匙与花园洋房插画", "🏡 祝贺新居入伙阖家平安兴旺", "🌿 温馨阳光客厅与幸福家庭氛围"],
+      waIdeas: [
+        { label: "🔑 RM 500 新居现金奖", detail: "凭新屋拿钥匙直接申领 PRUWith You Plus RM 500 人生目标现金奖赏" },
+        { label: "🏠 可携式 MLTA 胜过银行 MRTA", detail: "用可随身携带、盈余归家人的 MLTA 守护 RM 130万房贷，而非只赔银行的 MRTA" },
+        { label: "🛡️ 额外 +20% 重疾供楼缓冲金", detail: "PRUAll Care 额外赔付 +20% 康复津贴，确保患病休养期间不断供 RM 5,600 月供" },
+      ],
+      waHints: ["恭喜喜提 Eco Botanic 新居金钥匙！", "先开心布置新家，顺手发您一份2分钟房贷护盾对比", "周末在 Eco Botanic 附近请你们喝杯咖啡？"],
+      closeHints: ["周末在 Eco Botanic 喝杯10分钟咖啡和太太一起看", "一页纸看清银行MRTA、AIA与PRU可携式护盾差别", "周日晚8点10分钟Zoom轻松聊"],
+    },
+    yue: {
+      cardHints: ["🔑 金色新屋鎖匙同花園洋房插畫", "🏡 恭喜新居入伙風生水起闔家平安", "🌿 陽光客廳同溫馨屋企氣氛"],
+      waIdeas: [
+        { label: "🔑 RM 500 新居現金獎", detail: "攞新屋鎖匙即刻領取 PRUWith You Plus RM 500 人生目標現金獎" },
+        { label: "🏠 可攜式 MLTA 贏銀行 MRTA", detail: "用跟身兼餘額歸屋企人嘅 MLTA 守住 RM 130萬按揭，唔使綁死銀行 MRTA" },
+        { label: "🛡️ 額外 +20% 危疾供樓緩衝金", detail: "PRUAll Care 額外賠多 +20% 康復現金，休養期間照樣輕鬆供 RM 5,600 月供" },
+      ],
+      waHints: ["恭喜晒攞到 Eco Botanic 靚屋鎖匙！", "先開心執靚間新屋，順手 Send 份2分鐘按揭比較俾你", "週末喺 Eco Botanic 附近請你哋飲杯啡？"],
+      closeHints: ["週末喺 Eco Botanic 同太太一齊飲杯啡睇10分鐘", "一頁紙拍住睇清銀行 MRTA、AIA 同 PRU 分別", "星期日晚8點10分鐘 Zoom 輕鬆傾"],
+    },
+    ms: {
+      cardHints: ["🔑 Kunci emas rumah baharu & laman hijau", "🏡 Doa keberkatan 'Selamat Masuk Rumah Baharu'", "🌿 Suasana ruang tamu keluarga yang nyaman"],
+      waIdeas: [
+        { label: "🔑 Ganjaran Rumah Baharu RM 500", detail: "Tuntut Ganjaran Tunai Pencapaian RM 500 sempena kunci rumah baharu (PRUWith You Plus)" },
+        { label: "🏠 MLTA Mudah Alih (Milik Keluarga)", detail: "Lindungi gadai janji RM 1.3J dengan MLTA milik keluarga berbanding MRTA terkunci bank" },
+        { label: "🛡️ +20% Penampan Ansuran CI", detail: "PRUAll Care membayar tambahan +20% tunai pemulihan untuk menampung ansuran RM 5,600/bln" },
+      ],
+      waHints: ["Tahniah atas kunci rumah Semi-D Eco Botanic yang indah!", "Selamat mengemas rumah baharu—saya kongsikan tip 2 minit MRTA lwn MLTA", "Jom minum kopi di Eco Botanic hujung minggu ini?"],
+      closeHints: ["Kopi 10 minit di Eco Botanic bersama Farah", "Jadual ringkas 1 halaman MRTA Bank lwn AIA lwn PRU", "Zoom santai 10 minit Ahad petang"],
+    },
+    ta: {
+      cardHints: ["🔑 தங்க வீட்டு சாவிகள் & அழகான தோட்டம்", "🏡 புதிய இல்லம் மகிழ்ச்சியும் வளமும் பெற வாழ்த்து", "🌿 ஒளிமயமான குடும்ப வரவேற்பறை"],
+      waIdeas: [
+        { label: "🔑 RM 500 புது வீடு ரொக்கப் பரிசு", detail: "புதிய வீட்டு சாவி பெற்றதற்கு PRUWith You Plus மூலம் RM 500 ரொக்கப் பரிசு" },
+        { label: "🏠 குடும்பத்திற்கான Portable MLTA", detail: "வங்கி MRTA-க்கு பதில் குடும்பத்திற்கு உபரித் தொகை தரும் Portable MLTA பாதுகாப்பு" },
+        { label: "🛡️ +20% கூடுதல் CI தவணை நிதி", detail: "நோயிலிருந்து மீளும்போது RM 5,600 மாதத் தவணையைக் கட்ட PRUAll Care +20% கூடுதல் நிதி" },
+      ],
+      waHints: ["Eco Botanic புதிய வீட்டு சாவிகள் பெற்றதற்கு மனமார்ந்த வாழ்த்துகள்!", "புது வீட்டு வேலைகளுக்கு நடுவே 2 நிமிட சுருக்கம் அனுப்புகிறேன்", "இந்த வார இறுதியில் Eco Botanic அருகே காபி அருந்தலாமா?"],
+      closeHints: ["மனைவியுடன் 10 நிமிட காபி சந்திப்பில் ஒப்பிட்டுப் பார்ப்போம்", "வங்கி MRTA vs AIA vs PRU 1 பக்க ஒப்பீட்டு அட்டவணை", "ஞாயிறு மாலை 10 நிமிட Zoom அழைப்பு"],
+    },
+  },
+
+  career_promotion: {
+    en: {
+      cardHints: ["🩺 Executive specialist office overlooking KLCC", "🌟 Celebrating leadership & medical excellence", "💐 Elegant orchids & gold prestige motif"],
+      waIdeas: [
+        { label: "🌟 Promotion Cash Reward", detail: "Unlock Career Milestone Cash Reward + up to 260% female CI cover under PRULady" },
+        { label: "📈 103% Day-1 Wealth Boost", detail: "Deploy surplus income via PRUElite Invest with 103% Day-1 premium allocation (+3% instant boost)" },
+        { label: "🏥 Growing Med Value Point", detail: "Upgrade executive medical shield via PRUValue Med with automatic annual limit growth" },
+      ],
+      waHints: ["Huge congrats on leading the department, Dr. Kavitha!", "Designed for busy specialists—2-min read between clinic rounds", "Quick coffee at the hospital lounge this week?"],
+      closeHints: ["10-min coffee at hospital lounge between your clinic sessions", "1-page executive yield & female CI comparison table", "Brief 10-min Zoom Friday after 6pm"],
+    },
+    "zh-CN": {
+      cardHints: ["🩺 俯瞰双峰塔的高管专科诊室", "🌟 祝贺荣升科室主任医术仁心", "💐 典雅兰花与红金尊尚贺卡"],
+      waIdeas: [
+        { label: "🌟 升职里程碑奖 + 260%女性重疾", detail: "PRULady 专属女性重疾高达260%赔付 + 满期高达110%返还及升职现金奖" },
+        { label: "📈 首日 103% 财富配置加码", detail: "PRUElite Invest 首日即享 103% 保费投入基金运作（立享额外+3%起跑优势）" },
+        { label: "🏥 医疗保额每年自动递增", detail: "PRUValue Med 医疗额度每年自动增长，超限仍可报销80%" },
+      ],
+      waHints: ["衷心祝贺 Dr. Kavitha 荣升科室主任！", "深知您门诊繁忙，特意浓缩成2分钟高管简报", "这周在医院咖啡厅用10分钟请您喝杯咖啡？"],
+      closeHints: ["门诊间隙在医院咖啡厅10分钟快速对照", "整理1页高管收益与女性重疾条款对比表发您", "周五傍晚6点后10分钟Zoom简报"],
+    },
+    yue: {
+      cardHints: ["🩺 望住雙子塔嘅高級專科診室", "🌟 恭喜榮升部門主管仁心仁術", "💐 高貴蘭花配紅金尊尚設計"],
+      waIdeas: [
+        { label: "🌟 升職現金獎 + 260%女士危疾", detail: "PRULady 高達260%女士危疾保障 + 期滿高達110%保費回贈兼升職獎賞" },
+        { label: "📈 首日 103% 財富投資配置", detail: "PRUElite Invest 首日即有 103% 保費落場投資（即賺額外+3%起步優勢）" },
+        { label: "🏥 醫療額度年年自動加碼", detail: "PRUValue Med 每年自動調高醫療額度，爆額仲保多80%" },
+      ],
+      waHints: ["恭喜晒 Dr. Kavitha 榮升部門主管！", "知你巡房睇症好忙，專登撮要成2分鐘精華", "呢個禮拜喺醫院 Cafe 飲杯10分鐘啡？"],
+      closeHints: ["巡房空檔喺醫院 Cafe 用10分鐘拍住睇", "整張1頁紙行政回報同女士危疾對比表俾你", "星期五放工後10分鐘 Zoom 快閃傾"],
+    },
+    ms: {
+      cardHints: ["🩺 Pejabat pakar menghadap KLCC", "🌟 Meraikan kepimpinan & kecemerlangan perubatan", "💐 Orkid elegan & motif emas"],
+      waIdeas: [
+        { label: "🌟 Ganjaran Kenaikan Pangkat", detail: "PRULady menawarkan sehingga 260% CI wanita + pulangan matang 110% & ganjaran kerjaya" },
+        { label: "📈 103% Peruntukan Hari Pertama", detail: "PRUElite Invest melaburkan 103% premium pada Hari Pertama (+3% lonjakan serta-merta)" },
+        { label: "🏥 Med Value Point Meningkat", detail: "PRUValue Med menggandakan had perubatan setiap tahun secara automatik" },
+      ],
+      waHints: ["Tahniah Dr. Kavitha atas pelantikan Ketua Jabatan!", "Ringkasan padat 2 minit khas untuk jadual klinik anda yang sibuk", "Minum kopi 10 minit di kafe hospital minggu ini?"],
+      closeHints: ["Kopi 10 minit di lobi hospital antara sesi klinik", "Jadual 1 halaman perbandingan PRULady + PRUElite Invest lwn AIA", "Zoom ringkas 10 minit Jumaat petang"],
+    },
+    ta: {
+      cardHints: ["🩺 KLCC காட்சி தரும் சிறப்பு மருத்துவர் அறை", "🌟 துறைத் தலைவர் பதவி உயர்வுக்கு வாழ்த்து", "💐 அழகிய ஆர்க்கிட் மலர்கள் & தங்க வடிவமைப்பு"],
+      waIdeas: [
+        { label: "🌟 பதவி உயர்வு பரிசு + 260% பெண் CI", detail: "PRULady மூலம் 260% பெண் CI பாதுகாப்பு + முதிர்வில் 110% பிரீமியம் திரும்பப் பெறுதல்" },
+        { label: "📈 முதல் நாளே 103% முதலீட்டு உயர்வு", detail: "PRUElite Invest முதல் நாளிலேயே 103% முதலீட்டு ஒதுக்கீட்டை வழங்குகிறது (+3% உடனடி கூடுதல்)" },
+        { label: "🏥 ஆண்டுதோறும் உயரும் Med Value", detail: "PRUValue Med ஒவ்வொரு ஆண்டும் மருத்துவ வரம்பை தானாக உயர்த்துகிறது" },
+      ],
+      waHints: ["துறைத் தலைவராகப் பதவியேற்றதற்கு வாழ்த்துகள் Dr. Kavitha!", "உங்கள் பணி நேரத்திற்கு ஏற்ப 2 நிமிட சுருக்கம்", "இந்த வாரம் மருத்துவமனை கஃபேவில் 10 நிமிட காபி?"],
+      closeHints: ["மருத்துவமனை இடைவேளையில் 10 நிமிட நேரில் சந்திப்பு", "1 பக்க சுருக்க ஒப்பீட்டு அட்டவணை அனுப்புகிறேன்", "வெள்ளி மாலை 6 மணிக்கு 10 நிமிட Zoom"],
+    },
+  },
+
+  sme_expansion: {
+    en: {
+      cardHints: ["🏭 Modern Batu Kawan Phase-2 plant & sunrise", "🏛️ Multi-generational family legacy emblem", "🤝 Celebrating industrial leadership in Penang"],
+      waIdeas: [
+        { label: "🏭 Ring-Fence RM 6M Bank Loan", detail: "Ring-fence the RM 6M personal bank guarantee from family assets via FSA Schedule 10 trust" },
+        { label: "⚖️ Equalize Son & Daughter", detail: "Give UK doctor son tax-free cash via PRUPrestige Legacy while daughter inherits 100% plant shares" },
+        { label: "📈 +50% Auto High-Cover Boost", detail: "PRUWealth Enrich 2.0 automatically boosts large Sum Assured up to +50% + 100% Day-1 legacy allocation" },
+      ],
+      waHints: ["Congrats on breaking ground for Batu Kawan Phase 2, Dato' Sri!", "Happy to walk through this with you and your CFO/company secretary", "15-min tea at your Penang office this week?"],
+      closeHints: ["15-min briefing at your Batu Kawan office with your CFO", "Compare bank guarantee protection & trust fee savings side-by-side", "Private 10-min Zoom before your board meeting"],
+    },
+    "zh-CN": {
+      cardHints: ["🏭 槟城 Batu Kawan 二期现代化新厂日出", "🏛️ 家族企业基业长青传承徽章", "🤝 祝贺实业版图再创高峰"],
+      waIdeas: [
+        { label: "🏭 隔离 RM 600万银行担保", detail: "运用金融服务法令 Schedule 10 信托隔离 RM 600万个人担保债务，守护家族资产" },
+        { label: "⚖️ 兄妹公平传承不伤股权", detail: "女儿完整继承槟城厂房股权，英国行医儿子获等值免税现金（PRUPrestige Legacy 首日100%配置）" },
+        { label: "📈 自动高达 +50% 保额递增", detail: "PRUWealth Enrich 2.0 大额保单自动递增高达+50%保额，内建分期传承无需私人信托年费" },
+      ],
+      waHints: ["祝贺拿督斯里 Batu Kawan 二期新厂顺利扩建！", "非常乐意配合您的财务总监或公司秘书一起审阅架构", "这周四去您槟城办公室敬茶聊15分钟？"],
+      closeHints: ["周四到您厂房办公室与CFO用15分钟并排审阅条款", "对比免私人信托管理费与债权隔离的实际优势", "董事会前安排10分钟私密Zoom汇报"],
+    },
+    yue: {
+      cardHints: ["🏭 檳城 Batu Kawan 二期現代化新廠日出", "🏛️ 家族企業基業長青傳承徽章", "🤝 恭喜集團版圖再創高峰"],
+      waIdeas: [
+        { label: "🏭 隔離 RM 600萬銀行擔保", detail: "用 FSA Schedule 10 法定信託隔離 RM 600萬個人銀行擔保，保護屋企資產" },
+        { label: "⚖️ 兄妹公平分配唔散股權", detail: "阿女完整接班廠房股權，英國做醫生嘅阿仔攞等值免稅現金（首日100%配置）" },
+        { label: "📈 自動高達 +50% 保額遞增", detail: "PRUWealth Enrich 2.0 大額保單自動加碼高達+50%，內置分期傳承慳返私人信託年費" },
+      ],
+      waHints: ["恭喜拿督斯里 Batu Kawan 二期新廠大展鴻圖！", "好樂意同你位 CFO 或者公司秘書一齊傾個架構", "呢個禮拜四過嚟你檳城 Office 飲杯茶傾15分鐘？"],
+      closeHints: ["星期四上你 Office 同 CFO 用15分鐘拍住睇條款", "一頁紙對比慳返私人信託年費同債權隔離優勢", "開會前約個10分鐘私密 Zoom 簡報"],
+    },
+    ms: {
+      cardHints: ["🏭 Kilang moden Fasa-2 Batu Kawan waktu pagi", "🏛️ Lambang legasi perniagaan keluarga", "🤝 Meraikan kejayaan industri di Pulau Pinang"],
+      waIdeas: [
+        { label: "🏭 Asingkan Jaminan Bank RM 6J", detail: "Lindungi aset keluarga daripada jaminan peribadi bank RM 6J melalui amanah Jadual 10 FSA" },
+        { label: "⚖️ Seimbangkan Warisan Anak", detail: "Anak perempuan warisi 100% saham kilang, anak lelaki di UK terima tunai setara (100% Hari-1)" },
+        { label: "📈 +50% Lonjakan Perlindungan", detail: "PRUWealth Enrich 2.0 meningkatkan perlindungan tinggi sehingga +50% tanpa yuran amanah tahunan" },
+      ],
+      waHints: ["Tahniah Dato' Sri atas pembesaran kilang Fasa 2 Batu Kawan!", "Boleh dibincangkan bersama CFO atau setiausaha syarikat Dato' Sri", "Minum petang 15 minit di pejabat Dato' Sri minggu ini?"],
+      closeHints: ["Taklimat 15 minit di pejabat Batu Kawan bersama CFO", "Bandingkan penjimatan yuran amanah & perlindungan pemiutang", "Zoom peribadi 10 minit sebelum mesyuarat lembaga"],
+    },
+    ta: {
+      cardHints: ["🏭 Batu Kawan புதிய தொழிற்சாலை உதய காட்சி", "🏛️ தலைமுறை குடும்பத் தொழில் பாரம்பரிய சின்னம்", "🤝 தொழில்துறை விரிவாக்க வெற்றி வாழ்த்து"],
+      waIdeas: [
+        { label: "🏭 RM 6M வங்கி உத்தரவாதப் பாதுகாப்பு", detail: "FSA Schedule 10 டிரஸ்ட் மூலம் RM 6M தனிப்பட்ட வங்கி கடன் பொறுப்பிலிருந்து குடும்பச் சொத்தைப் பாதுகாத்தல்" },
+        { label: "⚖️ மகன் & மகளுக்கு சமமான பங்கு", detail: "மகளுக்கு முழு தொழிற்சாலை பங்குகள், UK மருத்துவர் மகனுக்கு சமமான ரொக்க நிதி (முதல் நாளே 100% ஒதுக்கீடு)" },
+        { label: "📈 +50% தானியங்கி காப்பீட்டு உயர்வு", detail: "PRUWealth Enrich 2.0 மூலம் தனிப்பட்ட டிரஸ்ட் கட்டணமின்றி +50% வரை கூடுதல் பாதுகாப்பு" },
+      ],
+      waHints: ["Batu Kawan இரண்டாம் கட்ட விரிவாக்கத்திற்கு வாழ்த்துகள் Dato' Sri!", "உங்கள் CFO உடன் இணைந்து 15 நிமிடம் ஆய்வு செய்யத் தயார்", "இந்த வாரம் உங்கள் அலுவலகத்தில் 15 நிமிடம் சந்திக்கலாமா?"],
+      closeHints: ["உங்கள் அலுவலகத்தில் CFO உடன் 15 நிமிட ஒப்பீட்டுச் சந்திப்பு", "டிரஸ்ட் கட்டண சேமிப்பு & கடன் பாதுகாப்பு ஒப்பீடு", "10 நிமிட தனிப்பட்ட Zoom ஆலோசனை"],
+    },
+  },
+
+  uni_retirement_50: {
+    en: {
+      cardHints: ["🎓 Melbourne Uni archway & golden 50th toast", "🥂 Double milestone celebration for Vincent & Elaine", "🌏 Smooth transition into golden retirement"],
+      waIdeas: [
+        { label: "🏥 Beat Age-60 Med Cliff", detail: "Bridge the Age-60 employer medical cutoff now at clean Age-50 health rates via Smart Deductible" },
+        { label: "📈 Med Limit Grows Even After Claim", detail: "PRUValue Med grows Med Value Point every year unconditionally—even in years you claim!" },
+        { label: "🥂 Guaranteed Income to Age 100", detail: "Protect AUD Melbourne tuition reserve & build guaranteed annual FlexIncome to age 100 (PRUElite Flex)" },
+      ],
+      waHints: ["Happy 50th Vincent & huge congrats on Melbourne Uni!", "Keep your AUD tuition reserve untouched while bridging Age 60", "Weekend brunch/coffee with you & Elaine?"],
+      closeHints: ["10-min Zoom Saturday 11am with you & Elaine", "Compare post-claim medical growth vs AIA conditional wallet", "Share a 1-page Age-50 to Age-100 retirement bridge chart"],
+    },
+    "zh-CN": {
+      cardHints: ["🎓 墨尔本大学校门与50岁金禧举杯同庆", "🥂 祝贺 Vincent 知天命之喜与爱女金榜题名", "🌏 稳健迈向无忧退休黄金十年"],
+      waIdeas: [
+        { label: "🏥 化解 60 岁公司断保悬崖", detail: "趁50岁健康体搭配 Smart Deductible 低保费锁定衔接60岁退休后的终身医疗" },
+        { label: "📈 理赔后保额依然年年涨", detail: "PRUValue Med 医疗额度每年无条件递增（即使发生理赔照涨不误！）" },
+        { label: "🥂 保证终身年金领至100岁", detail: "不动用澳币学费储备，以 PRUElite Flex 建立保证派发至100岁的退休被动收入" },
+      ],
+      waHints: ["祝 Vincent 50岁生日快乐，更恭喜千金考入墨尔本大学！", "帮您护住澳币学费专款，同时提前填平60岁医疗缺口", "这周末和太太 Elaine 一起喝杯早茶聊10分钟？"],
+      closeHints: ["周六上午11点与您和 Elaine 用10分钟Zoom对照", "并排看清「理赔后额度照涨」vs 友邦无理赔限制的差别", "先发您一张50至100岁医疗与年金衔接图"],
+    },
+    yue: {
+      cardHints: ["🎓 墨爾本大學校門配50歲金禧舉杯賀圖", "🥂 雙喜臨門：Vincent 50大壽兼阿女入讀名校", "🌏 輕鬆銜接無憂嘆世界退休生活"],
+      waIdeas: [
+        { label: "🏥 拆解 60 歲公司斷保懸崖", detail: "趁50歲健康體用 Smart Deductible 平保費鎖定60歲退休後嘅終身醫療" },
+        { label: "📈 Claim 完錢保額照樣年年加", detail: "PRUValue Med 醫療額度每年無條件自動加碼（就算 Claim 過錢都照加！）" },
+        { label: "🥂 保證長俸派到 100 歲", detail: "唔使郁到澳幣學費儲備，用 PRUElite Flex 鎖定保證派到100歲嘅退休現金流" },
+      ],
+      waHints: ["祝 Vincent 50歲生日快樂，仲要恭喜阿女考入墨爾本大學！", "幫你守住筆澳幣學費，同時預早鋪好60歲後醫療後路", "呢個週末同嫂夫人 Elaine 飲杯茶傾10分鐘？"],
+      closeHints: ["星期六朝11點同你和 Elaine 用10分鐘 Zoom 拍住睇", "一頁紙睇清「Claim 完照加保額」贏過 AIA 錢包條款", "Send 張 50 至 100 歲醫療同長俸銜接圖俾你睇先"],
+    },
+    ms: {
+      cardHints: ["🎓 Gerbang Universiti Melbourne & sambutan ke-50", "🥂 Dwi-kejayaan bermakna buat Vincent & Elaine", "🌏 Persaraan tenang & penuh bermaruah"],
+      waIdeas: [
+        { label: "🏥 Atasi Jurang Perubatan Umur 60", detail: "Kunci kelayakan sihat umur 50 dengan Smart Deductible sebelum perlindungan majikan tamat pada umur 60" },
+        { label: "📈 Had Naik Walaupun Selepas Tuntutan", detail: "PRUValue Med menaikkan Med Value Point setiap tahun walaupun selepas membuat tuntutan" },
+        { label: "🥂 Pendapatan Terjamin hingga 100", detail: "Lindungi tabung AUD Melbourne & bina FlexIncome tahunan terjamin sehingga umur 100 (PRUElite Flex)" },
+      ],
+      waHints: ["Selamat Hari Jadi ke-50 Vincent & tahniah tawaran Melbourne Uni!", "Pastikan tabung yuran AUD kekal utuh sambil menutup jurang umur 60", "Minum pagi santai hujung minggu ini bersama Elaine?"],
+      closeHints: ["Zoom 10 minit Sabtu 11 pagi bersama anda & Elaine", "Bandingkan kenaikan had selepas tuntutan lwn dompet bersyarat AIA", "Saya kongsikan carta jambatan persaraan Umur 50–100"],
+    },
+    ta: {
+      cardHints: ["🎓 மெல்போர்ன் பல்கலைக்கழக வளைவு & 50வது பிறந்தநாள்", "🥂 வின்சென்ட் & எலைன் குடும்ப இரட்டை மகிழ்ச்சி", "🌏 நிம்மதியான ஓய்வுக்காலப் பயணம்"],
+      waIdeas: [
+        { label: "🏥 60 வயது மருத்துவ இடைவெளி தீர்வு", detail: "நிறுவன காப்பீடு 60 வயதில் முடியும் முன் Smart Deductible மூலம் 50 வயது கட்டணத்தை உறுதி செய்க" },
+        { label: "📈 கிளைம் செய்தாலும் வரம்பு உயரும்", detail: "PRUValue Med கிளைம் செய்த ஆண்டிலும் Med Value Point வரம்பை ஆண்டுதோறும் உயர்த்துகிறது" },
+        { label: "🥂 100 வயது வரை உத்தரவாத வருமானம்", detail: "AUD கல்வி நிதியைப் பாதுகாத்து 100 வயது வரை உத்தரவாதமான வருடாந்திர FlexIncome (PRUElite Flex)" },
+      ],
+      waHints: ["50வது பிறந்தநாள் & மகளின் மெல்போர்ன் பல்கலைக்கழக வெற்றிக்கு வாழ்த்துகள்!", "AUD கல்வி நிதியைத் தொடாமல் 60 வயது மருத்துவப் பாதுகாப்பை உறுதி செய்யலாம்", "இந்த வார இறுதியில் எலைனுடன் 10 நிமிடம் காபி?"],
+      closeHints: ["சனிக்கிழமை காலை 11 மணிக்கு எலைனுடன் 10 நிமிட Zoom", "கிளைம் பிறகும் உயரும் வரம்பு vs AIA நிபந்தனை வாலட் ஒப்பீடு", "50–100 வயது ஓய்வூதியப் பால அட்டவணையை அனுப்புகிறேன்"],
+    },
+  },
+};
 
 const PAMB_C3_SCENARIOS = [
   {
@@ -356,7 +794,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Hi Wei Ming & Chloe! Huge congrats on welcoming Baby Lucas! 🍼✨ I made this celebratory card for your family.\n\nQuick heads-up: you can claim an RM 500 Childbirth Cash Reward under PRUWith You Plus, and lock in PRUMy Child Plus (27 congenital conditions, jaundice, Autism/ADHD + PRUSaver Kid uni fund with Payor Waiver) using just your FD interest. Shall I send a 2-min summary while Lucas naps? 😊",
         defaultEmail:
-          "Subject: Factual Comparison for Baby Lucas: PAMB (PRUMy Child Plus) vs. AIA (A-Life Joy Xtra)\n\nHi Wei Ming & Chloe,\nHere are 3 factual reasons PAMB gives Lucas & your family stronger value than AIA A-Life Joy Xtra:\n1. Free +50% Auto Sum Assured Booster: PRUWith You Plus grows cover +1%/yr up to +50% at RM 0 extra cost (no AIA Vitality gym/membership fees required).\n2. Immediate RM 500 Childbirth Cash Reward + 27 Congenital Conditions & Payor Waiver.\n3. 15% Cash Premium Discount: PRUMillion Med Active 2.0 cuts your medical premium by 15% when claim-free (AIA only credits a conditional Health Wallet).\n\nLet's do a 10-min Zoom Thursday at 8 PM to compare the exact tables!",
+          "Subject: Factual Comparison for Baby Lucas: PRU (PRUMy Child Plus) vs. AIA (A-Life Joy Xtra)\n\nHi Wei Ming & Chloe,\nHere are 3 factual reasons our PRU plan gives Lucas & your family stronger value than AIA A-Life Joy Xtra:\n1. Free +50% Auto Sum Assured Booster: PRUWith You Plus grows cover +1%/yr up to +50% at RM 0 extra cost (no AIA Vitality gym/membership fees required).\n2. Immediate RM 500 Childbirth Cash Reward + 27 Congenital Conditions & Payor Waiver.\n3. 15% Cash Premium Discount: PRUMillion Med Active 2.0 cuts your medical premium by 15% when claim-free (AIA only credits a conditional Health Wallet).\n\nLet's do a 10-min Zoom Thursday at 8 PM to compare the exact tables!",
       },
       "zh-CN": {
         shortLabel: "新生宝宝",
@@ -384,7 +822,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "伟明、晓雯，衷心恭喜你们喜迎小宝贝 Lucas！🍼✨ 我特意为你们一家制作了这张满月祝贺卡。\n\n顺带一提：您现有的保单升级至 PRUWith You Plus 可直接申领 RM 500 生育现金奖赏，并只需利用定期存款利息为 Lucas 锁定 PRUMy Child Plus（涵盖27种先天疾病、新生儿黄疸、自闭症/ADHD 及 PRUSaver Kid 大学教育金 + 父母保费豁免）。趁宝宝午睡时，我发一份2分钟简报给您参考好吗？😊",
         defaultEmail:
-          "主题：小 Lucas 少儿保障客观对比：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n伟明、晓雯 您好：\n以下是PRU (PAMB) 相比友邦 AIA A-Life Joy Xtra 的 3 大客观条款优势：\n1. 免费高达 +50% 自动保额递增：PRUWith You Plus 每年免费增加 1% 保额（最高 +50%），无需像 AIA Vitality 那样每年缴付会员费或运动打卡。\n2. 立即申领 RM 500 生育现金奖赏 + 27 种先天性疾病与自闭症/ADHD 保障及双亲豁免保费。\n3. 15% 实际保费现金折扣：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仅把额度存入有条件的 Health Wallet）。\n\n我们周四晚 8 点用 10 分钟 Zoom 对照一下具体利益表吧！",
+          "主题：小 Lucas 少儿保障客观对比：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n伟明、晓雯 您好：\n以下是PRU 相比友邦 AIA A-Life Joy Xtra 的 3 大客观条款优势：\n1. 免费高达 +50% 自动保额递增：PRUWith You Plus 每年免费增加 1% 保额（最高 +50%），无需像 AIA Vitality 那样每年缴付会员费或运动打卡。\n2. 立即申领 RM 500 生育现金奖赏 + 27 种先天性疾病与自闭症/ADHD 保障及双亲豁免保费。\n3. 15% 实际保费现金折扣：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仅把额度存入有条件的 Health Wallet）。\n\n我们周四晚 8 点用 10 分钟 Zoom 对照一下具体利益表吧！",
       },
       yue: {
         shortLabel: "初生 BB",
@@ -412,7 +850,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "偉明、曉雯，恭喜晒你哋迎接小王子 Lucas BB 呀！🍼✨ 我特登整咗呢張賀卡送俾你哋一家。\n\n順便提一提：你哋透過 PRUWith You Plus 可以即刻 claim RM 500 生 B 現金獎賞，仲可以淨係用銀行 FD 定期啲利息幫 Lucas 鎖定 PRUMy Child Plus（保 27 種先天病、初生黃疸、自閉症/ADHD 兼夾 PRUSaver Kid 大學基金 + 父母保費豁免）。趁 BB 瞓緊晏覺，我 WhatsApp 份 2 分鐘懶人包俾你哋睇下好冇？😊",
         defaultEmail:
-          "主題：Lucas BB 保障客觀比較：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n偉明、曉雯 你好：\n以下係PRU (PAMB) 對比 AIA A-Life Joy Xtra 嘅 3 個真實條款優勢：\n1. 免費高達 +50% 自動加大保額：PRUWith You Plus 每年免費加 1% 保額（最高 +50%），完全唔使好似 AIA Vitality 咁年年交會費同做運動打卡。\n2. 即刻拎 RM 500 生 B 現金獎賞 + 保齊 27 種先天病、自閉症/ADHD 兼父母豁免保費。\n3. 直接減 15% 現金保費：PRUMillion Med Active 2.0 只要無索償就直接減 15% 保費（AIA 係收足保費、只係撥入有條件限制嘅 Health Wallet）。\n\n我哋星期四晚 8 點鐘開個 10 分鐘 Zoom 一齊對下張表啦！",
+          "主題：Lucas BB 保障客觀比較：PRU (PRUMy Child Plus) vs 友邦 (AIA A-Life Joy Xtra)\n\n偉明、曉雯 你好：\n以下係PRU 對比 AIA A-Life Joy Xtra 嘅 3 個真實條款優勢：\n1. 免費高達 +50% 自動加大保額：PRUWith You Plus 每年免費加 1% 保額（最高 +50%），完全唔使好似 AIA Vitality 咁年年交會費同做運動打卡。\n2. 即刻拎 RM 500 生 B 現金獎賞 + 保齊 27 種先天病、自閉症/ADHD 兼父母豁免保費。\n3. 直接減 15% 現金保費：PRUMillion Med Active 2.0 只要無索償就直接減 15% 保費（AIA 係收足保費、只係撥入有條件限制嘅 Health Wallet）。\n\n我哋星期四晚 8 點鐘開個 10 分鐘 Zoom 一齊對下張表啦！",
       },
       ms: {
         shortLabel: "Bayi Baru Lahir",
@@ -440,7 +878,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Hai Wei Ming & Chloe! Tahniah atas kelahiran Bayi Lucas! 🍼✨ Saya sediakan kad ucapan khas ini untuk keluarga anda.\n\nMakluman ringkas: anda layak menuntut Ganjaran Tunai Kelahiran RM 500 di bawah PRUWith You Plus, serta mengunci PRUMy Child Plus (27 keadaan kongenital, jaundis, Autisme/ADHD + tabung universiti PRUSaver Kid dengan Penepian Pembayar) hanya menggunakan faedah FD anda. Boleh saya hantarkan ringkasan 2 minit? 😊",
         defaultEmail:
-          "Subjek: Perbandingan Berfakta untuk Bayi Lucas: PAMB (PRUMy Child Plus) lwn AIA (A-Life Joy Xtra)\n\nHai Wei Ming & Chloe,\nBerikut ialah 3 sebab berfakta mengapa PAMB memberi nilai lebih kukuh berbanding AIA A-Life Joy Xtra:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Percuma: PRUWith You Plus meningkatkan perlindungan +1%/tahun sehingga +50% pada kos tambahan RM 0 (tanpa yuran keahlian AIA Vitality).\n2. Ganjaran Tunai Kelahiran RM 500 Segera + 27 Keadaan Kongenital & Penepian Pembayar.\n3. Diskaun Premium Tunai 15%: PRUMillion Med Active 2.0 mengurangkan bayaran premium perubatan anda sebanyak 15% apabila tiada tuntutan (AIA hanya mengkreditkan Health Wallet bersyarat).\n\nJom kita buat panggilan Zoom 10 minit Khamis ini jam 8 malam!",
+          "Subjek: Perbandingan Berfakta untuk Bayi Lucas: PRU (PRUMy Child Plus) lwn AIA (A-Life Joy Xtra)\n\nHai Wei Ming & Chloe,\nBerikut ialah 3 sebab berfakta mengapa PAMB memberi nilai lebih kukuh berbanding AIA A-Life Joy Xtra:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Percuma: PRUWith You Plus meningkatkan perlindungan +1%/tahun sehingga +50% pada kos tambahan RM 0 (tanpa yuran keahlian AIA Vitality).\n2. Ganjaran Tunai Kelahiran RM 500 Segera + 27 Keadaan Kongenital & Penepian Pembayar.\n3. Diskaun Premium Tunai 15%: PRUMillion Med Active 2.0 mengurangkan bayaran premium perubatan anda sebanyak 15% apabila tiada tuntutan (AIA hanya mengkreditkan Health Wallet bersyarat).\n\nJom kita buat panggilan Zoom 10 minit Khamis ini jam 8 malam!",
       },
       ta: {
         shortLabel: "பிறந்த குழந்தை",
@@ -468,7 +906,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "வணக்கம் வெய் மிங் & குளோயி! குழந்தை லூகாஸ் பிறந்ததற்கு மனமார்ந்த வாழ்த்துகள்! 🍼✨ உங்கள் குடும்பத்திற்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nமுக்கிய தகவல்: PRUWith You Plus மூலம் RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசைப் பெறலாம், மேலும் உங்கள் FD வட்டியை மட்டுமே பயன்படுத்தி PRUMy Child Plus (27 பிறவி நோய்கள், மஞ்சள் காமாலை, ஆட்டிசம்/ADHD + PRUSaver Kid கல்வி நிதி) திட்டத்தை உறுதி செய்யலாம். 2 நிமிட சுருக்கத்தை அனுப்பட்டுமா? 😊",
         defaultEmail:
-          "பொருள்: குழந்தை லூகாஸிற்கான உண்மையான ஒப்பீடு: PAMB (PRUMy Child Plus) vs AIA (A-Life Joy Xtra)\n\nவணக்கம் வெய் மிங் & குளோயி,\nAIA A-Life Joy Xtra திட்டத்தை விட PRU திட்டம் சிறந்த மதிப்பை வழங்குவதற்கான 3 உண்மையான காரணங்கள்:\n1. இலவச +50% தானியங்கி காப்பீட்டு உயர்வு: PRUWith You Plus எந்த கூடுதல் கட்டணமும் இன்றி (+1%/ஆண்டு) +50% வரை காப்பீட்டை உயர்த்துகிறது (AIA Vitality உறுப்பினர் கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு + 27 பிறவி நோய்கள் மற்றும் Payor Waiver பாதுகாப்பு.\n3. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது பிரீமியத்தில் 15% நேரடித் தள்ளுபடி வழங்குகிறது.\n\nவியாழக்கிழமை இரவு 8 மணிக்கு 10 நிமிட Zoom அழைப்பில் பேசலாமா!",
+          "பொருள்: குழந்தை லூகாஸிற்கான உண்மையான ஒப்பீடு: PRU (PRUMy Child Plus) vs AIA (A-Life Joy Xtra)\n\nவணக்கம் வெய் மிங் & குளோயி,\nAIA A-Life Joy Xtra திட்டத்தை விட PRU திட்டம் சிறந்த மதிப்பை வழங்குவதற்கான 3 உண்மையான காரணங்கள்:\n1. இலவச +50% தானியங்கி காப்பீட்டு உயர்வு: PRUWith You Plus எந்த கூடுதல் கட்டணமும் இன்றி (+1%/ஆண்டு) +50% வரை காப்பீட்டை உயர்த்துகிறது (AIA Vitality உறுப்பினர் கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு + 27 பிறவி நோய்கள் மற்றும் Payor Waiver பாதுகாப்பு.\n3. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது பிரீமியத்தில் 15% நேரடித் தள்ளுபடி வழங்குகிறது.\n\nவியாழக்கிழமை இரவு 8 மணிக்கு 10 நிமிட Zoom அழைப்பில் பேசலாமா!",
       },
     },
   },
@@ -502,7 +940,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Happy early 40th Birthday, Jason! 🥂 Glad your partner is recovering well after his cardiac stent—I made this milestone card for your 40th.\n\nBefore your age-40 rate jump next month, we can lock in PRUAll Care (~190 CI conditions + ICU + 20% Recovery Care) and PRUMillion Med Active 2.0 (RM 8M medical limit + 15% claim-free discount). Free for a 10-min coffee in Bayan Lepas this week? ☕",
         defaultEmail:
-          "Subject: Factual Comparison Before Age 40: PAMB (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\nHi Jason,\nHere is the factual side-by-side between our PRU plan and AIA before your age-39 window closes:\n1. Coverage to Age 100 & ~190 Conditions: PRUAll Care covers ~190 illnesses up to Age 100 (including ICU >=120 hrs & Mental Health), whereas AIA A-Life Beyond Critical Care expires at Age 80.\n2. 15% Direct Premium Discount: PRUMillion Med Active 2.0 cuts your cash premium by 15% when claim-free (AIA charges full premium and only credits a Health Wallet).\n3. 110% Premium Refund: PRUMan gives 260% male CI cover + up to 110% maturity refund.\n\nLet's review the 1-page rate sheet over coffee this Thursday!",
+          "Subject: Factual Comparison Before Age 40: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\nHi Jason,\nHere is the factual side-by-side between our PRU plan and AIA before your age-39 window closes:\n1. Coverage to Age 100 & ~190 Conditions: PRUAll Care covers ~190 illnesses up to Age 100 (including ICU >=120 hrs & Mental Health), whereas AIA A-Life Beyond Critical Care expires at Age 80.\n2. 15% Direct Premium Discount: PRUMillion Med Active 2.0 cuts your cash premium by 15% when claim-free (AIA charges full premium and only credits a Health Wallet).\n3. 110% Premium Refund: PRUMan gives 260% male CI cover + up to 110% maturity refund.\n\nLet's review the 1-page rate sheet over coffee this Thursday!",
       },
       "zh-CN": {
         shortLabel: "40岁生日与心脏警讯",
@@ -586,7 +1024,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Selamat menyambut Hari Jadi ke-40 awal, Jason! 🥂 Syukur rakan kongsi anda semakin pulih selepas pembedahan sten jantung—saya reka kad khas ini untuk ulang tahun ke-40 anda.\n\nSebelum kadar premium umur 40 meningkat bulan depan, kita boleh kunci PRUAll Care (~190 keadaan CI + ICU + 20% Penjagaan Pemulihan) dan PRUMillion Med Active 2.0 (had RM 8 Juta + diskaun 15% tanpa tuntutan). Jom minum kopi 10 minit di Bayan Lepas minggu ini? ☕",
         defaultEmail:
-          "Subjek: Perbandingan Berfakta Sebelum Umur 40: PAMB (PRUAll Care) lwn AIA (A-Life Beyond Critical Care)\n\nHai Jason,\nBerikut ialah perbandingan berfakta antara our PRU plan dan AIA sebelum tetingkap umur 39 anda ditutup:\n1. Perlindungan hingga Umur 100 & ~190 Keadaan: PRUAll Care melindungi ~190 penyakit sehingga Umur 100 (termasuk ICU >=120 jam & Kesihatan Mental), manakala AIA A-Life Beyond Critical Care tamat pada Umur 80.\n2. Diskaun Premium Langsung 15%: PRUMillion Med Active 2.0 memotong premium tunai anda sebanyak 15% apabila tiada tuntutan.\n3. Pulangan Premium 110%: PRUMan memberi 260% perlindungan CI lelaki + sehingga 110% pulangan premium semasa matang.\n\nMari kita semak jadual kadar 1 halaman sambil minum kopi Khamis ini!",
+          "Subjek: Perbandingan Berfakta Sebelum Umur 40: PRU (PRUAll Care) lwn AIA (A-Life Beyond Critical Care)\n\nHai Jason,\nBerikut ialah perbandingan berfakta antara our PRU plan dan AIA sebelum tetingkap umur 39 anda ditutup:\n1. Perlindungan hingga Umur 100 & ~190 Keadaan: PRUAll Care melindungi ~190 penyakit sehingga Umur 100 (termasuk ICU >=120 jam & Kesihatan Mental), manakala AIA A-Life Beyond Critical Care tamat pada Umur 80.\n2. Diskaun Premium Langsung 15%: PRUMillion Med Active 2.0 memotong premium tunai anda sebanyak 15% apabila tiada tuntutan.\n3. Pulangan Premium 110%: PRUMan memberi 260% perlindungan CI lelaki + sehingga 110% pulangan premium semasa matang.\n\nMari kita semak jadual kadar 1 halaman sambil minum kopi Khamis ini!",
       },
       ta: {
         shortLabel: "வயது 40 & இதய சிகிச்சை எச்சரிக்கை",
@@ -614,7 +1052,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "இனிய 40வது பிறந்தநாள் நல்வாழ்த்துகள் ஜேசன்! 🥂 உங்கள் தொழில் கூட்டாளி இதய சிகிச்சைக்குப் பிறகு நலமாகத் தேறி வருவது மகிழ்ச்சி—உங்களுக்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nஅடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUAll Care (~190 தீவிர நோய்கள் + ICU + 20% Recovery Care) மற்றும் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) திட்டங்களை உறுதி செய்யலாம். இந்த வாரம் Bayan Lepas-ல் 10 நிமிடம் காபி அருந்தலாமா? ☕",
         defaultEmail:
-          "பொருள்: 40 வயதுக்கு முன் உண்மையான ஒப்பீடு: PAMB (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\nவணக்கம் ஜேசன்,\nஉங்கள் 39 வயது சலுகை முடிவதற்குள் our PRU plan மற்றும் AIA இடையேயான உண்மையான ஒப்பீடு:\n1. 100 வயது வரை பாதுகாப்பு & ~190 நோய்கள்: PRUAll Care 100 வயது வரை ~190 நோய்களை உள்ளடக்கியது (AIA A-Life Beyond Critical Care 80 வயதில் முடிவடைகிறது).\n2. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது 15% நேரடி ரொக்கத் தள்ளுபடி தருகிறது.\n3. 110% பிரீமியம் திரும்பப் பெறுதல்: PRUMan 260% ஆண்கள் CI பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பத் தருகிறது.\n\nஇந்த வியாழக்கிழமை காபி சந்திப்பில் 1 பக்க அட்டவணையைப் பார்ப்போம்!",
+          "பொருள்: 40 வயதுக்கு முன் உண்மையான ஒப்பீடு: PRU (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\nவணக்கம் ஜேசன்,\nஉங்கள் 39 வயது சலுகை முடிவதற்குள் our PRU plan மற்றும் AIA இடையேயான உண்மையான ஒப்பீடு:\n1. 100 வயது வரை பாதுகாப்பு & ~190 நோய்கள்: PRUAll Care 100 வயது வரை ~190 நோய்களை உள்ளடக்கியது (AIA A-Life Beyond Critical Care 80 வயதில் முடிவடைகிறது).\n2. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது 15% நேரடி ரொக்கத் தள்ளுபடி தருகிறது.\n3. 110% பிரீமியம் திரும்பப் பெறுதல்: PRUMan 260% ஆண்கள் CI பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பத் தருகிறது.\n\nஇந்த வியாழக்கிழமை காபி சந்திப்பில் 1 பக்க அட்டவணையைப் பார்ப்போம்!",
       },
     },
   },
@@ -648,7 +1086,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Huge congratulations Amirul & Farah on collecting the keys to your Eco Botanic dream home! 🏡🔑 I designed this housewarming card for you both.\n\nUnlike bank MRTA (which pays RM 0 during Critical Illness), PRUWith You Plus + PRUAll Care gives you an immediate RM 500 New Home Cash Reward, a free +50% Auto Sum Assured Booster, and covers your RM 5,600/mth installments across ~190 CI conditions. Can I send a 1-page summary? 😊",
         defaultEmail:
-          "Subject: Eco Botanic Mortgage Shield Comparison: PAMB (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\nHi Amirul & Farah,\nHere are 3 factual advantages of PRUWith You Plus + PRUAll Care over AIA A-Life Link 2 for your RM 1.3M mortgage:\n1. Unconditional +50% Auto Sum Assured Booster: Grows +1%/yr up to +50% at RM 0 extra cost without needing annual AIA Vitality fitness/membership fees.\n2. Immediate RM 500 New Home Cash Reward: Direct RM 500 cash payout upon buying your Eco Botanic home.\n3. ~190 CI Conditions + 20% Extra Recovery Care: Pays an extra 20% buffer on top of CI sum assured so your RM 5,600/mth loan never defaults.\n\nShall we do a 10-min call tomorrow at 8:30 PM?",
+          "Subject: Eco Botanic Mortgage Shield Comparison: PRU (PRUWith You Plus) vs. AIA (A-Life Link 2)\n\nHi Amirul & Farah,\nHere are 3 factual advantages of PRUWith You Plus + PRUAll Care over AIA A-Life Link 2 for your RM 1.3M mortgage:\n1. Unconditional +50% Auto Sum Assured Booster: Grows +1%/yr up to +50% at RM 0 extra cost without needing annual AIA Vitality fitness/membership fees.\n2. Immediate RM 500 New Home Cash Reward: Direct RM 500 cash payout upon buying your Eco Botanic home.\n3. ~190 CI Conditions + 20% Extra Recovery Care: Pays an extra 20% buffer on top of CI sum assured so your RM 5,600/mth loan never defaults.\n\nShall we do a 10-min call tomorrow at 8:30 PM?",
       },
       "zh-CN": {
         shortLabel: "新居 RM 130万房贷",
@@ -714,7 +1152,7 @@ const PAMB_C3_SCENARIOS = [
         pambPlan: "PRUWith You Plus (MLTA Mudah Alih) + PRUAll Care",
         aiaPlan: "AIA A-Life Link 2 / A-Life Kasih Famili + CI Rider",
         customerReply:
-          "\"Terima kasih atas kad ucapan rumah baru! Perancang AIA memberi sebut harga AIA A-Life Link 2 + rider CI untuk gadai janji kami. Boleh e-melkan perbandingan berfakta dengan PAMB?\"",
+          "\"Terima kasih atas kad ucapan rumah baru! Perancang AIA memberi sebut harga AIA A-Life Link 2 + rider CI untuk gadai janji kami. Boleh e-melkan perbandingan berfakta dengan pelan PRU?\"",
         cardHeadline: "Tahniah atas Rumah Impian Eco Botanic Baru Anda! 🏡🔑",
         cardChips: [
           "Tahniah atas Rumah Impian Eco Botanic Baru Anda! 🏡🔑",
@@ -732,7 +1170,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Tahniah Amirul & Farah kerana menerima kunci rumah impian Eco Botanic anda! 🏡🔑 Saya reka kad ucapan masuk rumah baru ini khas untuk anda berdua.\n\nBerbeza dengan MRTA bank (yang membayar RM 0 semasa Penyakit Kritikal), PRUWith You Plus + PRUAll Care memberi anda Ganjaran Tunai Rumah Baru RM 500 serta-merta, Peningkatan Perlindungan Automatik +50% percuma, dan melindungi ansuran RM 5,600/bulan anda merentasi ~190 keadaan CI. Boleh saya hantarkan ringkasan 1 halaman? 😊",
         defaultEmail:
-          "Subjek: Perbandingan Perisai Gadai Janji Eco Botanic: PAMB (PRUWith You Plus) lwn AIA (A-Life Link 2)\n\nHai Amirul & Farah,\nBerikut ialah 3 kelebihan berfakta PRUWith You Plus + PRUAll Care berbanding AIA A-Life Link 2 untuk gadai janji RM 1.3J anda:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Tanpa Syarat: Meningkat +1%/tahun sehingga +50% pada kos tambahan RM 0 tanpa yuran tahunan AIA Vitality.\n2. Ganjaran Tunai Rumah Baru RM 500 Segera: Bayaran tunai terus RM 500 apabila membeli rumah Eco Botanic anda.\n3. ~190 Keadaan CI + 20% Penjagaan Pemulihan Tambahan: Membayar penimbal tambahan 20% supaya pinjaman RM 5,600/bulan anda tidak pernah tertunggak.\n\nBoleh kita berbual 10 minit esok jam 8:30 malam?",
+          "Subjek: Perbandingan Perisai Gadai Janji Eco Botanic: PRU (PRUWith You Plus) lwn AIA (A-Life Link 2)\n\nHai Amirul & Farah,\nBerikut ialah 3 kelebihan berfakta PRUWith You Plus + PRUAll Care berbanding AIA A-Life Link 2 untuk gadai janji RM 1.3J anda:\n1. Peningkatan Jumlah Diinsuranskan Automatik +50% Tanpa Syarat: Meningkat +1%/tahun sehingga +50% pada kos tambahan RM 0 tanpa yuran tahunan AIA Vitality.\n2. Ganjaran Tunai Rumah Baru RM 500 Segera: Bayaran tunai terus RM 500 apabila membeli rumah Eco Botanic anda.\n3. ~190 Keadaan CI + 20% Penjagaan Pemulihan Tambahan: Membayar penimbal tambahan 20% supaya pinjaman RM 5,600/bulan anda tidak pernah tertunggak.\n\nBoleh kita berbual 10 minit esok jam 8:30 malam?",
       },
       ta: {
         shortLabel: "புதிய RM 1.3M வீடு",
@@ -760,7 +1198,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "உங்கள் Eco Botanic கனவு இல்லத்தின் சாவியைப் பெற்ற அமிருல் & ஃபராவிற்கு மனமார்ந்த வாழ்த்துகள்! 🏡🔑 உங்கள் இருவருக்காகவும் இந்த வாழ்த்து அட்டையை வடிவமைத்தேன்.\n\nவங்கி MRTA போலன்றி (அது தீவிர நோயின் போது RM 0 மட்டுமே தரும்), PRUWith You Plus + PRUAll Care உங்களுக்கு உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு, இலவச +50% காப்பீட்டு உயர்வு மற்றும் ~190 தீவிர நோய்களின் போதும் மாதம் RM 5,600 கடனை அடைக்கும் பாதுகாப்பை வழங்குகிறது. 1 பக்க சுருக்கத்தை அனுப்பட்டுமா? 😊",
         defaultEmail:
-          "பொருள்: Eco Botanic வீட்டுக் கடன் பாதுகாப்பு ஒப்பீடு: PAMB (PRUWith You Plus) vs AIA (A-Life Link 2)\n\nவணக்கம் அமிருல் & ஃபரா,\nஉங்கள் RM 1.3M வீட்டுக் கடனுக்கு AIA A-Life Link 2-ஐ விட PRU திட்டம் சிறந்ததாக இருப்பதற்கான 3 உண்மையான காரணங்கள்:\n1. நிபந்தனையற்ற +50% தானியங்கி காப்பீட்டு உயர்வு: ஆண்டுக்கு +1% வீதம் +50% வரை இலவசமாக உயரும் (AIA Vitality கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு: உங்கள் புதிய வீட்டிற்கு RM 500 நேரடி ரொக்கப் பரிசு.\n3. ~190 தீவிர நோய்கள் + 20% கூடுதல் Recovery Care: உங்கள் RM 5,600 மாதத் தவணை தடையின்றி செலுத்தப்படுவதை உறுதி செய்கிறது.\n\nநாளை இரவு 8:30 மணிக்கு 10 நிமிடம் தொலைபேசியில் பேசலாமா?",
+          "பொருள்: Eco Botanic வீட்டுக் கடன் பாதுகாப்பு ஒப்பீடு: PRU (PRUWith You Plus) vs AIA (A-Life Link 2)\n\nவணக்கம் அமிருல் & ஃபரா,\nஉங்கள் RM 1.3M வீட்டுக் கடனுக்கு AIA A-Life Link 2-ஐ விட PRU திட்டம் சிறந்ததாக இருப்பதற்கான 3 உண்மையான காரணங்கள்:\n1. நிபந்தனையற்ற +50% தானியங்கி காப்பீட்டு உயர்வு: ஆண்டுக்கு +1% வீதம் +50% வரை இலவசமாக உயரும் (AIA Vitality கட்டணம் தேவையில்லை).\n2. உடனடி RM 500 புதிய வீடு ரொக்கப் பரிசு: உங்கள் புதிய வீட்டிற்கு RM 500 நேரடி ரொக்கப் பரிசு.\n3. ~190 தீவிர நோய்கள் + 20% கூடுதல் Recovery Care: உங்கள் RM 5,600 மாதத் தவணை தடையின்றி செலுத்தப்படுவதை உறுதி செய்கிறது.\n\nநாளை இரவு 8:30 மணிக்கு 10 நிமிடம் தொலைபேசியில் பேசலாமா?",
       },
     },
   },
@@ -794,7 +1232,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Warmest congratulations, Dr. Kavitha, on your appointment as Head of Department! 🌟🩺 I designed this executive card to celebrate your milestone.\n\nYour promotion unlocks a Career Promotion Cash Reward under PRULady (260% female CI cover + up to 110% maturity premium refund), paired with PRUElite Invest (103% Day-1 wealth allocation). Free for a 10-min coffee near your hospital next Tuesday? ☕",
         defaultEmail:
-          "Subject: Executive Comparison for Dr. Kavitha: PAMB (PRULady & PRUElite Invest) vs. AIA (A-Life Lady360)\n\nDear Dr. Kavitha,\nHere is the factual comparison between our PRU plan and AIA Malaysia for your executive portfolio:\n1. 260% Female CI + Up to 110% Maturity Refund: PRULady delivers up to 260% cover, a Career Promotion Cash Reward, and refunds up to 110% of total premiums at maturity.\n2. 103% Day-1 Wealth Allocation (PRUElite Invest): Invests 103% of your single premium on Day 1 (+3% immediate bonus), beating standard ILP/unit trust front-end charges.\n3. Auto-Increasing Med Value Point (PRUValue Med): Grows your medical limit every year + 80% continuous coverage beyond the limit.\n\nI can bring the 1-page table to your clinic lounge Tuesday at 2 PM!",
+          "Subject: Executive Comparison for Dr. Kavitha: PRU (PRULady & PRUElite Invest) vs. AIA (A-Life Lady360)\n\nDear Dr. Kavitha,\nHere is the factual comparison between our PRU plan and AIA Malaysia for your executive portfolio:\n1. 260% Female CI + Up to 110% Maturity Refund: PRULady delivers up to 260% cover, a Career Promotion Cash Reward, and refunds up to 110% of total premiums at maturity.\n2. 103% Day-1 Wealth Allocation (PRUElite Invest): Invests 103% of your single premium on Day 1 (+3% immediate bonus), beating standard ILP/unit trust front-end charges.\n3. Auto-Increasing Med Value Point (PRUValue Med): Grows your medical limit every year + 80% continuous coverage beyond the limit.\n\nI can bring the 1-page table to your clinic lounge Tuesday at 2 PM!",
       },
       "zh-CN": {
         shortLabel: "高管晋升",
@@ -860,7 +1298,7 @@ const PAMB_C3_SCENARIOS = [
         pambPlan: "PRULady + PRUElite Invest + PRUValue Med",
         aiaPlan: "AIA A-Life Lady360 + A-Life Wealth Builder",
         customerReply:
-          "\"Terima kasih atas kad ucapan kenaikan pangkat! Rakan pakar mengesyorkan AIA A-Life Lady360 + A-Life Wealth Builder. Boleh e-melkan perbandingan berfakta dengan PAMB?\"",
+          "\"Terima kasih atas kad ucapan kenaikan pangkat! Rakan pakar mengesyorkan AIA A-Life Lady360 + A-Life Wealth Builder. Boleh e-melkan perbandingan berfakta dengan pelan PRU?\"",
         cardHeadline: "Tahniah atas Pelantikan sebagai Ketua Jabatan, Dr. Kavitha! 🌟",
         cardChips: [
           "Tahniah atas Pelantikan sebagai Ketua Jabatan, Dr. Kavitha! 🌟",
@@ -878,7 +1316,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Setinggi-tinggi tahniah, Dr. Kavitha, atas pelantikan anda sebagai Ketua Jabatan! 🌟🩺 Saya reka kad eksekutif ini untuk meraikan pencapaian anda.\n\nKenaikan pangkat anda melayakkan anda menerima Ganjaran Tunai Kenaikan Pangkat di bawah PRULady (260% perlindungan CI wanita + sehingga 110% pulangan premium matang), digandingkan dengan PRUElite Invest (103% peruntukan pelaburan Hari Pertama). Lapang untuk minum kopi 10 minit berhampiran hospital anda Selasa depan? ☕",
         defaultEmail:
-          "Subjek: Perbandingan Eksekutif untuk Dr. Kavitha: PAMB (PRULady & PRUElite Invest) lwn AIA (A-Life Lady360)\n\nDr. Kavitha yang dihormati,\nBerikut ialah perbandingan berfakta antara our PRU plan dan AIA Malaysia untuk portfolio eksekutif anda:\n1. 260% CI Wanita + Pulangan Matang Sehingga 110%: PRULady memberikan perlindungan sehingga 260%, Ganjaran Tunai Kenaikan Pangkat, dan memulangkan sehingga 110% jumlah premium semasa matang.\n2. Peruntukan Kekayaan Hari-1 103% (PRUElite Invest): Melaburkan 103% daripada premium tunggal anda pada Hari Pertama (+3% bonus segera).\n3. Med Value Point Meningkat Automatik (PRUValue Med): Meningkatkan had perubatan anda setiap tahun + 80% perlindungan berterusan melebihi had.\n\nSaya boleh bawakan jadual 1 halaman ke ruang istirahat klinik anda Selasa jam 2 petang!",
+          "Subjek: Perbandingan Eksekutif untuk Dr. Kavitha: PRU (PRULady & PRUElite Invest) lwn AIA (A-Life Lady360)\n\nDr. Kavitha yang dihormati,\nBerikut ialah perbandingan berfakta antara our PRU plan dan AIA Malaysia untuk portfolio eksekutif anda:\n1. 260% CI Wanita + Pulangan Matang Sehingga 110%: PRULady memberikan perlindungan sehingga 260%, Ganjaran Tunai Kenaikan Pangkat, dan memulangkan sehingga 110% jumlah premium semasa matang.\n2. Peruntukan Kekayaan Hari-1 103% (PRUElite Invest): Melaburkan 103% daripada premium tunggal anda pada Hari Pertama (+3% bonus segera).\n3. Med Value Point Meningkat Automatik (PRUValue Med): Meningkatkan had perubatan anda setiap tahun + 80% perlindungan berterusan melebihi had.\n\nSaya boleh bawakan jadual 1 halaman ke ruang istirahat klinik anda Selasa jam 2 petang!",
       },
       ta: {
         shortLabel: "பதவி உயர்வு (Promotion)",
@@ -888,7 +1326,7 @@ const PAMB_C3_SCENARIOS = [
         pambPlan: "PRULady + PRUElite Invest + PRUValue Med",
         aiaPlan: "AIA A-Life Lady360 + A-Life Wealth Builder",
         customerReply:
-          "\"பதவி உயர்வு வாழ்த்து அட்டைக்கு நன்றி! சக மருத்துவர் ஒருவர் AIA A-Life Lady360 + A-Life Wealth Builder திட்டத்தை பரிந்துரைத்தார். PAMB உடனான உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்ய முடியுமா?\"",
+          "\"பதவி உயர்வு வாழ்த்து அட்டைக்கு நன்றி! சக மருத்துவர் ஒருவர் AIA A-Life Lady360 + A-Life Wealth Builder திட்டத்தை பரிந்துரைத்தார். PRU திட்டத்துடனான உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்ய முடியுமா?\"",
         cardHeadline: "துறைத் தலைவராகப் பொறுப்பேற்ற டாக்டர் கவிதாவுக்கு வாழ்த்துகள்! 🌟",
         cardChips: [
           "துறைத் தலைவராகப் பொறுப்பேற்ற டாக்டர் கவிதாவுக்கு வாழ்த்துகள்! 🌟",
@@ -906,7 +1344,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "துறைத் தலைவராகப் பதவி உயர்வு பெற்ற டாக்டர் கவிதா அவர்களுக்கு மனமார்ந்த வாழ்த்துகள்! 🌟🩺 உங்கள் சாதனையைக் கொண்டாட இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nஉங்கள் பதவி உயர்வு மூலம் PRULady திட்டத்தில் Career Promotion ரொக்கப் பரிசு (260% பெண்கள் CI பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்) மற்றும் PRUElite Invest (முதல் நாளிலேயே 103% முதலீட்டு ஒதுக்கீடு) பெறலாம். அடுத்த செவ்வாயன்று மருத்துவமனை அருகே 10 நிமிடம் சந்திக்கலாமா? ☕",
         defaultEmail:
-          "பொருள்: டாக்டர் கவிதாவுக்கான உண்மையான ஒப்பீடு: PAMB (PRULady & PRUElite Invest) vs AIA (A-Life Lady360)\n\nஅன்புள்ள டாக்டர் கவிதா,\nour PRU plan மற்றும் AIA Malaysia இடையேயான 3 உண்மையான ஒப்பீடுகள்:\n1. 260% பெண்கள் CI + 110% முதிர்வுத் தொகை: PRULady 260% வரை பாதுகாப்பும், பதவி உயர்வு ரொக்கப் பரிசும், முதிர்வில் 110% வரை பிரீமியத்தையும் திரும்ப வழங்குகிறது.\n2. முதல் நாளில் 103% முதலீட்டு ஒதுக்கீடு (PRUElite Invest): முதல் நாளிலேயே 103% முதலீடு செய்யப்படுகிறது (+3% உடனடி போனஸ்).\n3. தானாக உயரும் Med Value Point (PRUValue Med): ஒவ்வொரு ஆண்டும் உங்கள் மருத்துவ வரம்பு உயர்கிறது + வரம்பிற்கு மேலும் 80% தொடர் பாதுகாப்பு.\n\nசெவ்வாய்க்கிழமை மதியம் 2 மணிக்கு உங்கள் கிளினிக்கில் 1 பக்க ஒப்பீட்டைக் காட்டுகிறேன்!",
+          "பொருள்: டாக்டர் கவிதாவுக்கான உண்மையான ஒப்பீடு: PRU (PRULady & PRUElite Invest) vs AIA (A-Life Lady360)\n\nஅன்புள்ள டாக்டர் கவிதா,\nour PRU plan மற்றும் AIA Malaysia இடையேயான 3 உண்மையான ஒப்பீடுகள்:\n1. 260% பெண்கள் CI + 110% முதிர்வுத் தொகை: PRULady 260% வரை பாதுகாப்பும், பதவி உயர்வு ரொக்கப் பரிசும், முதிர்வில் 110% வரை பிரீமியத்தையும் திரும்ப வழங்குகிறது.\n2. முதல் நாளில் 103% முதலீட்டு ஒதுக்கீடு (PRUElite Invest): முதல் நாளிலேயே 103% முதலீடு செய்யப்படுகிறது (+3% உடனடி போனஸ்).\n3. தானாக உயரும் Med Value Point (PRUValue Med): ஒவ்வொரு ஆண்டும் உங்கள் மருத்துவ வரம்பு உயர்கிறது + வரம்பிற்கு மேலும் 80% தொடர் பாதுகாப்பு.\n\nசெவ்வாய்க்கிழமை மதியம் 2 மணிக்கு உங்கள் கிளினிக்கில் 1 பக்க ஒப்பீட்டைக் காட்டுகிறேன்!",
       },
     },
   },
@@ -940,7 +1378,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Heartiest congratulations, Dato' Sri Raymond, on breaking ground on your Phase-2 Batu Kawan plant! 🏭🚀 I created this corporate milestone card for your group.\n\nWith <2.5% of working capital, PRUWealth Enrich 2.0 + PRUPrestige Legacy ring-fences your RM 6M personal bank guarantee under FSA Schedule 10 Statutory Trust while equalizing inheritance between your UK son (cash) and Melbourne daughter (100% factory shares). Free for a 15-min brief Thursday at 3 PM? 🤝",
         defaultEmail:
-          "Subject: Corporate Keyman & Legacy Comparison: PAMB (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\nDear Dato' Sri Raymond,\nHere is the factual comparison between PAMB and AIA A-Life Legasi Beyond for your RM 6M Batu Kawan facility & family succession:\n1. Automatic +30%/+50% Cover Booster & 500% Accidental Death: PRUWealth Enrich 2.0 automatically scales your high sum assured by up to +50% and covers 500% Accidental Death without annual AIA Vitality fitness checks.\n2. 100% Day-1 Capital Allocation (PRUPrestige Legacy): Puts 100% of premium to work on Day 1, preserving cashflow liquidity during factory expansion.\n3. Legacy Settlement Option + FSA Sec 130 Creditor Shield: Protects against the RM 6M guarantee and pays structured cash to your UK son so your daughter inherits 100% of factory shares cleanly.\n\nSee you Thursday at 3 PM at your Batu Kawan office!",
+          "Subject: Corporate Keyman & Legacy Comparison: PRU (PRUWealth Enrich 2.0) vs. AIA (A-Life Legasi Beyond)\n\nDear Dato' Sri Raymond,\nHere is the factual comparison between PAMB and AIA A-Life Legasi Beyond for your RM 6M Batu Kawan facility & family succession:\n1. Automatic +30%/+50% Cover Booster & 500% Accidental Death: PRUWealth Enrich 2.0 automatically scales your high sum assured by up to +50% and covers 500% Accidental Death without annual AIA Vitality fitness checks.\n2. 100% Day-1 Capital Allocation (PRUPrestige Legacy): Puts 100% of premium to work on Day 1, preserving cashflow liquidity during factory expansion.\n3. Legacy Settlement Option + FSA Sec 130 Creditor Shield: Protects against the RM 6M guarantee and pays structured cash to your UK son so your daughter inherits 100% of factory shares cleanly.\n\nSee you Thursday at 3 PM at your Batu Kawan office!",
       },
       "zh-CN": {
         shortLabel: "企业 RM 600万担保",
@@ -1024,7 +1462,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Setinggi-tinggi tahniah, Dato' Sri Raymond, atas majlis pecah tanah kilang Fasa-2 Batu Kawan anda! 🏭🚀 Saya sediakan kad pencapaian korporat ini untuk kumpulan anda.\n\nDengan <2.5% modal kerja, PRUWealth Enrich 2.0 + PRUPrestige Legacy melindungi jaminan bank peribadi RM 6J anda di bawah Amanah Berkanun Jadual 10 FSA sambil menyeimbangkan warisan antara anak lelaki anda di UK (tunai) dan anak perempuan di Melbourne (100% saham kilang). Lapang untuk taklimat 15 minit Khamis jam 3 petang? 🤝",
         defaultEmail:
-          "Subjek: Perbandingan Keyman Korporat & Legasi: PAMB (PRUWealth Enrich 2.0) lwn AIA (A-Life Legasi Beyond)\n\nDato' Sri Raymond yang dihormati,\nBerikut ialah perbandingan berfakta antara PAMB dan AIA A-Life Legasi Beyond untuk kemudahan RM 6J Batu Kawan & pewarisan keluarga anda:\n1. Peningkatan Perlindungan Automatik +30%/+50% & 500% Kematian Kemalangan: PRUWealth Enrich 2.0 meningkatkan jumlah diinsuranskan sehingga +50% secara automatik tanpa pemeriksaan tahunan AIA Vitality.\n2. Peruntukan Modal Hari-1 100% (PRUPrestige Legacy): Memasukkan 100% premium untuk bekerja pada Hari Pertama, mengekalkan kecairan aliran tunai semasa pengembangan kilang.\n3. Pilihan Penyelesaian Legasi + Perisai Pemiutang Sek 130 FSA: Melindungi daripada jaminan RM 6J dan membayar tunai berstruktur kepada anak lelaki anda supaya anak perempuan anda mewarisi 100% saham kilang.\n\nJumpa anda Khamis jam 3 petang di pejabat Batu Kawan anda!",
+          "Subjek: Perbandingan Keyman Korporat & Legasi: PRU (PRUWealth Enrich 2.0) lwn AIA (A-Life Legasi Beyond)\n\nDato' Sri Raymond yang dihormati,\nBerikut ialah perbandingan berfakta antara PAMB dan AIA A-Life Legasi Beyond untuk kemudahan RM 6J Batu Kawan & pewarisan keluarga anda:\n1. Peningkatan Perlindungan Automatik +30%/+50% & 500% Kematian Kemalangan: PRUWealth Enrich 2.0 meningkatkan jumlah diinsuranskan sehingga +50% secara automatik tanpa pemeriksaan tahunan AIA Vitality.\n2. Peruntukan Modal Hari-1 100% (PRUPrestige Legacy): Memasukkan 100% premium untuk bekerja pada Hari Pertama, mengekalkan kecairan aliran tunai semasa pengembangan kilang.\n3. Pilihan Penyelesaian Legasi + Perisai Pemiutang Sek 130 FSA: Melindungi daripada jaminan RM 6J dan membayar tunai berstruktur kepada anak lelaki anda supaya anak perempuan anda mewarisi 100% saham kilang.\n\nJumpa anda Khamis jam 3 petang di pejabat Batu Kawan anda!",
       },
       ta: {
         shortLabel: "நிறுவன RM 6M கடன் பாதுகாப்பு",
@@ -1052,7 +1490,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Batu Kawan இரண்டாம் கட்ட தொழிற்சாலையைத் தொடங்கும் டத்தோ ஸ்ரீ ரேமண்ட் அவர்களுக்கு மனமார்ந்த வாழ்த்துகள்! 🏭🚀 உங்கள் நிறுவனத்திற்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nவெறும் <2.5% மூலதனத்தில், PRUWealth Enrich 2.0 + PRUPrestige Legacy உங்கள் RM 6M வங்கி உத்தரவாதத்தை FSA Schedule 10 சட்டப்பூர்வ அறக்கட்டளையின் கீழ் பாதுகாக்கிறது; மேலும் UK மகனுக்கு வரியில்லா ரொக்கமும், மகளுக்கு 100% ஆலை பங்குகளும் கிடைக்கச் செய்கிறது. வியாழன் மதியம் 3 மணிக்கு 15 நிமிடம் பேசலாமா? 🤝",
         defaultEmail:
-          "பொருள்: நிறுவன Keyman & வாரிசு ஒப்பீடு: PAMB (PRUWealth Enrich 2.0) vs AIA (A-Life Legasi Beyond)\n\nமதிப்பிற்குரிய டத்தோ ஸ்ரீ ரேமண்ட்,\nஉங்கள் RM 6M Batu Kawan ஆலை மற்றும் குடும்ப வாரிசுத் திட்டத்திற்கான PRU vs AIA A-Life Legasi Beyond உண்மையான ஒப்பீடு:\n1. தானியங்கி +30%/+50% Cover Booster & 500% விபத்து காப்பீடு: PRUWealth Enrich 2.0 எந்த AIA Vitality நிபந்தனையும் இன்றி காப்பீட்டை +50% வரை உயர்த்துகிறது.\n2. முதல் நாளில் 100% மூலதன ஒதுக்கீடு (PRUPrestige Legacy): ஆலை விரிவாக்கத்தின் போது உங்கள் நிறுவன பணப்புழக்கத்தைப் பாதுகாக்கிறது.\n3. Legacy Settlement Option + FSA பிரிவு 130 பாதுகாப்பு: RM 6M கடன் உத்தரவாதத்திலிருந்து பாதுகாத்து, மகளுக்கு 100% ஆலை பங்குகளையும் மகனுக்கு ரொக்கத்தையும் வழங்குகிறது.\n\nவியாழக்கிழமை மதியம் 3 மணிக்கு உங்கள் Batu Kawan அலுவலகத்தில் சந்திப்போம்!",
+          "பொருள்: நிறுவன Keyman & வாரிசு ஒப்பீடு: PRU (PRUWealth Enrich 2.0) vs AIA (A-Life Legasi Beyond)\n\nமதிப்பிற்குரிய டத்தோ ஸ்ரீ ரேமண்ட்,\nஉங்கள் RM 6M Batu Kawan ஆலை மற்றும் குடும்ப வாரிசுத் திட்டத்திற்கான PRU vs AIA A-Life Legasi Beyond உண்மையான ஒப்பீடு:\n1. தானியங்கி +30%/+50% Cover Booster & 500% விபத்து காப்பீடு: PRUWealth Enrich 2.0 எந்த AIA Vitality நிபந்தனையும் இன்றி காப்பீட்டை +50% வரை உயர்த்துகிறது.\n2. முதல் நாளில் 100% மூலதன ஒதுக்கீடு (PRUPrestige Legacy): ஆலை விரிவாக்கத்தின் போது உங்கள் நிறுவன பணப்புழக்கத்தைப் பாதுகாக்கிறது.\n3. Legacy Settlement Option + FSA பிரிவு 130 பாதுகாப்பு: RM 6M கடன் உத்தரவாதத்திலிருந்து பாதுகாத்து, மகளுக்கு 100% ஆலை பங்குகளையும் மகனுக்கு ரொக்கத்தையும் வழங்குகிறது.\n\nவியாழக்கிழமை மதியம் 3 மணிக்கு உங்கள் Batu Kawan அலுவலகத்தில் சந்திப்போம்!",
       },
     },
   },
@@ -1086,7 +1524,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Happy 50th Birthday Vincent & huge congrats on your daughter's University of Melbourne offer! 🎓🥂 I made this dual-celebration card for you and Elaine.\n\nTo beat the Age-60 Employer Medical Cliff without touching your AUD tuition fund, we can lock in PRUValue Med (Smart Deductible + auto-growing Med Value Point) at age-50 health rates plus PRUElite Flex (Guaranteed Annual FlexIncome to age 100). Free for a 10-min chat this weekend? 😊",
         defaultEmail:
-          "Subject: Age-50 Retirement & Medical Comparison: PAMB (PRUValue Med & PRUElite Flex) vs. AIA\n\nHi Vincent & Elaine,\nHere are 3 factual reasons PRUValue Med + PRUElite Flex outperforms AIA A-Plus Health360 + A-Life Wealth Venture for your retirement:\n1. Med Value Point Grows Every Year—Even If You Claim: PRUValue Med increases your limit every single year and pays 80% of bills beyond the limit (AIA's Health Wallet stops growing in any year you claim).\n2. Guaranteed Annual FlexIncome to Age 100: PRUElite Flex locks in guaranteed annual retirement income to age 100.\n3. Smart Deductible Age-60 Bridge: Slashes premiums from age 50–60 while covered by employer medical, locking in clean age-50 underwriting now.\n\nLet's review the 1-page bridge on Zoom this Saturday at 11 AM!",
+          "Subject: Age-50 Retirement & Medical Comparison: PRU (PRUValue Med & PRUElite Flex) vs. AIA\n\nHi Vincent & Elaine,\nHere are 3 factual reasons PRUValue Med + PRUElite Flex outperforms AIA A-Plus Health360 + A-Life Wealth Venture for your retirement:\n1. Med Value Point Grows Every Year—Even If You Claim: PRUValue Med increases your limit every single year and pays 80% of bills beyond the limit (AIA's Health Wallet stops growing in any year you claim).\n2. Guaranteed Annual FlexIncome to Age 100: PRUElite Flex locks in guaranteed annual retirement income to age 100.\n3. Smart Deductible Age-60 Bridge: Slashes premiums from age 50–60 while covered by employer medical, locking in clean age-50 underwriting now.\n\nLet's review the 1-page bridge on Zoom this Saturday at 11 AM!",
       },
       "zh-CN": {
         shortLabel: "50岁退休与女儿留学",
@@ -1152,7 +1590,7 @@ const PAMB_C3_SCENARIOS = [
         pambPlan: "PRUValue Med (Smart Deductible) + PRUElite Flex",
         aiaPlan: "AIA A-Plus Health360 (Deductible) + A-Life Wealth Venture",
         customerReply:
-          "\"Kad hari jadi ke-50 yang sangat cantik! Penasihat AIA menunjukkan kami AIA A-Plus Health360 + A-Life Wealth Venture untuk persaraan. Boleh e-melkan perbandingan berfakta dengan PAMB?\"",
+          "\"Kad hari jadi ke-50 yang sangat cantik! Penasihat AIA menunjukkan kami AIA A-Plus Health360 + A-Life Wealth Venture untuk persaraan. Boleh e-melkan perbandingan berfakta dengan pelan PRU?\"",
         cardHeadline: "Tahniah Ulang Tahun Ke-50 & Kejayaan Universiti Melbourne! 🎓🥂",
         cardChips: [
           "Tahniah Ulang Tahun Ke-50 & Kejayaan Universiti Melbourne! 🎓🥂",
@@ -1170,7 +1608,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "Selamat Hari Jadi ke-50 Vincent & tahniah atas tawaran Universiti Melbourne anak perempuan anda! 🎓🥂 Saya sediakan kad dwi-sambutan ini untuk anda dan Elaine.\n\nUntuk mengatasi Jurang Perubatan Majikan Umur 60 tanpa menyentuh tabung yuran AUD anda, kita boleh kunci PRUValue Med (Smart Deductible + Med Value Point meningkat automatik) pada kadar kesihatan umur 50 serta PRUElite Flex (FlexIncome Tahunan Terjamin hingga umur 100). Lapang untuk berbual 10 minit hujung minggu ini? 😊",
         defaultEmail:
-          "Subjek: Perbandingan Persaraan & Perubatan Umur 50: PAMB (PRUValue Med & PRUElite Flex) lwn AIA\n\nHai Vincent & Elaine,\nBerikut ialah 3 sebab berfakta mengapa PRUValue Med + PRUElite Flex mengatasi AIA A-Plus Health360 + A-Life Wealth Venture untuk persaraan anda:\n1. Med Value Point Meningkat Setiap Tahun—Walaupun Anda Membuat Tuntutan: PRUValue Med meningkatkan had anda setiap tahun dan membayar 80% bil melebihi had (Health Wallet AIA berhenti meningkat pada tahun anda membuat tuntutan).\n2. FlexIncome Tahunan Terjamin hingga Umur 100: PRUElite Flex mengunci pendapatan persaraan tahunan terjamin sehingga umur 100.\n3. Jambatan Smart Deductible Umur 60: Mengurangkan premium dari umur 50–60 semasa dilindungi majikan sambil mengunci pengunderaitan bersih umur 50 sekarang.\n\nMari kita semak jadual 1 halaman di Zoom Sabtu ini jam 11 pagi!",
+          "Subjek: Perbandingan Persaraan & Perubatan Umur 50: PRU (PRUValue Med & PRUElite Flex) lwn AIA\n\nHai Vincent & Elaine,\nBerikut ialah 3 sebab berfakta mengapa PRUValue Med + PRUElite Flex mengatasi AIA A-Plus Health360 + A-Life Wealth Venture untuk persaraan anda:\n1. Med Value Point Meningkat Setiap Tahun—Walaupun Anda Membuat Tuntutan: PRUValue Med meningkatkan had anda setiap tahun dan membayar 80% bil melebihi had (Health Wallet AIA berhenti meningkat pada tahun anda membuat tuntutan).\n2. FlexIncome Tahunan Terjamin hingga Umur 100: PRUElite Flex mengunci pendapatan persaraan tahunan terjamin sehingga umur 100.\n3. Jambatan Smart Deductible Umur 60: Mengurangkan premium dari umur 50–60 semasa dilindungi majikan sambil mengunci pengunderaitan bersih umur 50 sekarang.\n\nMari kita semak jadual 1 halaman di Zoom Sabtu ini jam 11 pagi!",
       },
       ta: {
         shortLabel: "வயது 50 & மகள் பல்கலைக்கழகம்",
@@ -1180,7 +1618,7 @@ const PAMB_C3_SCENARIOS = [
         pambPlan: "PRUValue Med (Smart Deductible) + PRUElite Flex",
         aiaPlan: "AIA A-Plus Health360 (Deductible) + A-Life Wealth Venture",
         customerReply:
-          "\"அழகான 50வது பிறந்தநாள் வாழ்த்து அட்டை! ஒரு AIA ஆலோசகர் ஓய்வூதியத்திற்காக AIA A-Plus Health360 + A-Life Wealth Venture திட்டத்தைக் காட்டினார். PAMB உடனான உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்ய முடியுமா?\"",
+          "\"அழகான 50வது பிறந்தநாள் வாழ்த்து அட்டை! ஒரு AIA ஆலோசகர் ஓய்வூதியத்திற்காக AIA A-Plus Health360 + A-Life Wealth Venture திட்டத்தைக் காட்டினார். PRU திட்டத்துடனான உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்ய முடியுமா?\"",
         cardHeadline: "50வது பிறந்தநாள் & மெல்போர்ன் பல்கலைக்கழக வெற்றிக்கு வாழ்த்துகள்! 🎓🥂",
         cardChips: [
           "50வது பிறந்தநாள் & மெல்போர்ன் பல்கலைக்கழக வெற்றிக்கு வாழ்த்துகள்! 🎓🥂",
@@ -1198,7 +1636,7 @@ const PAMB_C3_SCENARIOS = [
         defaultWhatsapp:
           "இனிய 50வது பிறந்தநாள் வாழ்த்துகள் வின்சென்ட் & உங்கள் மகளுக்கு மெல்போர்ன் பல்கலைக்கழகத்தில் இடம் கிடைத்ததற்கு பாராட்டுகள்! 🎓🥂 உங்களுக்கும் எலைனுக்கும் இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nஉங்கள் AUD கல்வி நிதியைத் தொடாமல் 60 வயது மருத்துவ இடைவெளியைச் சமாளிக்க, 50 வயது கட்டணத்தில் PRUValue Med (Smart Deductible + ஆண்டுதோறும் உயரும் Med Value Point) மற்றும் PRUElite Flex (100 வயது வரை உத்தரவாதமான FlexIncome) திட்டத்தை உறுதி செய்யலாம். இந்த வார இறுதியில் 10 நிமிடம் பேசலாமா? 😊",
         defaultEmail:
-          "பொருள்: 50 வயது ஓய்வூதியம் & மருத்துவ ஒப்பீடு: PAMB (PRUValue Med & PRUElite Flex) vs AIA\n\nவணக்கம் வின்சென்ட் & எலைன்,\nAIA A-Plus Health360 + A-Life Wealth Venture திட்டத்தை விட PRU திட்டம் சிறந்து விளங்குவதற்கான 3 உண்மையான காரணங்கள்:\n1. கிளைம் செய்தாலும் Med Value Point ஆண்டுதோறும் உயரும்: PRUValue Med ஒவ்வொரு ஆண்டும் உங்கள் வரம்பை உயர்த்துகிறது மற்றும் வரம்பிற்கு மேல் 80% வழங்குகிறது (AIA Health Wallet நீங்கள் கிளைம் செய்யும் ஆண்டில் உயராது).\n2. 100 வயது வரை உத்தரவாதமான வருடாந்திர FlexIncome: PRUElite Flex 100 வயது வரை உத்தரவாதமான ஓய்வூதிய வருமானத்தை வழங்குகிறது.\n3. Smart Deductible சலுகை: 50–60 வயது வரை நிறுவன காப்பீடு இருக்கும்போது பிரீமியத்தைக் குறைத்து, 50 வயது ஆரோக்கிய தகுதியை இப்போதே உறுதி செய்கிறது.\n\nஇந்த சனிக்கிழமை காலை 11 மணிக்கு Zoom-ல் 1 பக்க ஒப்பீட்டைப் பார்ப்போம்!",
+          "பொருள்: 50 வயது ஓய்வூதியம் & மருத்துவ ஒப்பீடு: PRU (PRUValue Med & PRUElite Flex) vs AIA\n\nவணக்கம் வின்சென்ட் & எலைன்,\nAIA A-Plus Health360 + A-Life Wealth Venture திட்டத்தை விட PRU திட்டம் சிறந்து விளங்குவதற்கான 3 உண்மையான காரணங்கள்:\n1. கிளைம் செய்தாலும் Med Value Point ஆண்டுதோறும் உயரும்: PRUValue Med ஒவ்வொரு ஆண்டும் உங்கள் வரம்பை உயர்த்துகிறது மற்றும் வரம்பிற்கு மேல் 80% வழங்குகிறது (AIA Health Wallet நீங்கள் கிளைம் செய்யும் ஆண்டில் உயராது).\n2. 100 வயது வரை உத்தரவாதமான வருடாந்திர FlexIncome: PRUElite Flex 100 வயது வரை உத்தரவாதமான ஓய்வூதிய வருமானத்தை வழங்குகிறது.\n3. Smart Deductible சலுகை: 50–60 வயது வரை நிறுவன காப்பீடு இருக்கும்போது பிரீமியத்தைக் குறைத்து, 50 வயது ஆரோக்கிய தகுதியை இப்போதே உறுதி செய்கிறது.\n\nஇந்த சனிக்கிழமை காலை 11 மணிக்கு Zoom-ல் 1 பக்க ஒப்பீட்டைப் பார்ப்போம்!",
       },
     },
   },
@@ -1223,6 +1661,7 @@ function _getLocalizedScenario(scObj, lang) {
   };
 }
 
+
 window.Challenge3ParticipantView = function ({
   t,
   lang,
@@ -1230,58 +1669,249 @@ window.Challenge3ParticipantView = function ({
   agentName,
   agentRegion,
   onNext,
+  existingSubmission,
+  existingScore,
+  isCompleted,
   fetchArenaState,
   onSandboxPreview,
 }) {
-  const { useState, useEffect } = React;
+  const { useState, useEffect, useRef } = React;
 
   const normLang = lang === "zh-TW" ? "yue" : lang || "en";
-  const ui = C3_UI_I18N[normLang] || C3_UI_I18N.en;
+  const ui = C3_PLAYBOOK_UI[normLang] || C3_PLAYBOOK_UI.en;
+  const storageKey = `prumda_c3_v3_${agentId || "guest"}`;
 
-  // 1 Fixed Scenario randomly/deterministically assigned per participant
-  const [scenarioIdx, setScenarioIdx] = useState(() => _pickAssignedScenarioIdx(agentId));
-  const rawSc = PAMB_C3_SCENARIOS[scenarioIdx] || PAMB_C3_SCENARIOS[0];
-  const sc = _getLocalizedScenario(rawSc, normLang);
+  // Load persisted mobile draft state so phone lock / refresh / tab switch never loses work
+  const [savedInit] = useState(() => {
+    try {
+      const raw = localStorage.getItem(storageKey);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  });
 
-  // Step-by-Step Wizard: 1 = Greeting Card, 2 = WhatsApp Message, 3 = AIA Objection Email
-  const [step, setStep] = useState(1);
+  const [scenarioIdx, setScenarioIdx] = useState(() =>
+    typeof savedInit.scenarioIdx === "number"
+      ? savedInit.scenarioIdx
+      : _pickAssignedScenarioIdx(agentId)
+  );
+  const [seatOverride, setSeatOverride] = useState(() =>
+    typeof savedInit.seatOverride === "number" ? savedInit.seatOverride : null
+  );
+  const [serverScenario, setServerScenario] = useState(null);
+  const [archetypeList, setArchetypeList] = useState([]);
+  const [showCasePicker, setShowCasePicker] = useState(false);
 
-  // Step 1 state: Greeting Card
-  const [cardPrompt, setCardPrompt] = useState(() => sc.cardHeadline);
-  const [cardUrl, setCardUrl] = useState(null);
+  const rawFallbackSc = PAMB_C3_SCENARIOS[scenarioIdx % PAMB_C3_SCENARIOS.length] || PAMB_C3_SCENARIOS[0];
+  const fallbackSc = _getLocalizedScenario(rawFallbackSc, normLang);
+  const sc = serverScenario || fallbackSc;
+
+  const fallbackPb =
+    (C3_ADVISOR_PLAYBOOK[sc.id] &&
+      (C3_ADVISOR_PLAYBOOK[sc.id][normLang] || C3_ADVISOR_PLAYBOOK[sc.id].en)) ||
+    C3_ADVISOR_PLAYBOOK.newborn_baby.en;
+  const pb = {
+    cardHints: (sc.cardHints && sc.cardHints.length ? sc.cardHints : fallbackPb.cardHints) || [],
+    waIdeas: (sc.waIdeas && sc.waIdeas.length ? sc.waIdeas : fallbackPb.waIdeas) || [],
+    waHints: (sc.waHints && sc.waHints.length ? sc.waHints : fallbackPb.waHints) || [],
+    closeHints: (sc.closeHints && sc.closeHints.length ? sc.closeHints : fallbackPb.closeHints) || [],
+  };
+
+  // Dynamic rival insurer label (AIA Malaysia, AIA Public Takaful, Great Eastern Malaysia)
+  const rivalRaw = String(sc.rivalBrand || "AIA Malaysia");
+  const rivalShort = rivalRaw.includes("Great Eastern")
+    ? normLang === "zh-CN"
+      ? "大东方 (GE)"
+      : normLang === "yue"
+      ? "大東方 (GE)"
+      : "Great Eastern"
+    : rivalRaw.includes("Takaful")
+    ? "AIA Takaful"
+    : "AIA";
+
+  const adaptRivalLabel = (str) => {
+    if (!str || rivalShort === "AIA") return str;
+    return str
+      .replace(/友邦\s*\(AIA\)/g, rivalShort)
+      .replace(/\bAIA\b/g, rivalShort);
+  };
+
+  const [step, setStep] = useState(() => savedInit.step || 1);
   const [isBusy, setIsBusy] = useState(false);
+  const [cardStageIdx, setCardStageIdx] = useState(0);
+  const [langChangedBanner, setLangChangedBanner] = useState(false);
+  const [copyToast, setCopyToast] = useState("");
 
-  // Step 2 state: First-Touch WhatsApp Message
-  const [whatsappPrompt, setWhatsappPrompt] = useState("");
-  const [whatsappText, setWhatsappText] = useState(() => sc.defaultWhatsapp);
+  // Step 1 State
+  const [cardStyleId, setCardStyleId] = useState(() => savedInit.cardStyleId || "watercolor");
+  const [selectedHeadlineIdx, setSelectedHeadlineIdx] = useState(() => savedInit.selectedHeadlineIdx || 0);
+  const [cardPersonalNote, setCardPersonalNote] = useState(() => savedInit.cardPersonalNote || "");
+  const [cardUrl, setCardUrl] = useState(() => savedInit.cardUrl || existingSubmission?.imageAfter || null);
 
-  // Step 3 state: Customer AIA Objection -> PRU vs. AIA Comparison Email
-  const [emailPrompt, setEmailPrompt] = useState("");
-  const [emailText, setEmailText] = useState(() => sc.defaultEmail);
+  // Step 2 State
+  const [openingToneId, setOpeningToneId] = useState(() => savedInit.openingToneId || "warm_zero_push");
+  const [selectedWaIdeaIdxs, setSelectedWaIdeaIdxs] = useState(() =>
+    Array.isArray(savedInit.selectedWaIdeaIdxs) ? savedInit.selectedWaIdeaIdxs : [0, 1]
+  );
+  const [waPersonalNote, setWaPersonalNote] = useState(() => savedInit.waPersonalNote || "");
+  const [whatsappText, setWhatsappText] = useState(
+    () => savedInit.whatsappText || existingSubmission?.whatsappMessage || ""
+  );
 
-  // Final Submit state
-  const [submitted, setSubmitted] = useState(false);
-  const [submittedData, setSubmittedData] = useState(null);
-  const [startTime] = useState(Date.now());
+  // Step 3 State
+  const [selectedFactIdxs, setSelectedFactIdxs] = useState(() =>
+    Array.isArray(savedInit.selectedFactIdxs) ? savedInit.selectedFactIdxs : [0, 1, 2]
+  );
+  const [advisoryStyleId, setAdvisoryStyleId] = useState(() => savedInit.advisoryStyleId || "respectful");
+  const [emailPersonalNote, setEmailPersonalNote] = useState(() => savedInit.emailPersonalNote || "");
+  const [emailText, setEmailText] = useState(
+    () => savedInit.emailText || existingSubmission?.aiaComparisonEmail || ""
+  );
 
-  // Automatically translate all default prompts & texts when language or scenario changes
+  // Final Submit State (restored from server submission or localStorage if already completed)
+  const [submitted, setSubmitted] = useState(() => Boolean(isCompleted && existingSubmission));
+  const [submittedData, setSubmittedData] = useState(() => {
+    if (existingSubmission) {
+      return {
+        total: existingScore?.total || existingSubmission.total || 92,
+        speed: existingScore?.speed || 94,
+        accuracy: existingScore?.accuracy || existingSubmission.total || 90,
+        timeSec: existingScore?.timeSec || existingSubmission.timeSec || 25,
+        cardUrl: existingSubmission.imageAfter || null,
+        whatsappText: existingSubmission.whatsappMessage || "",
+        emailText: existingSubmission.aiaComparisonEmail || "",
+        personalTouch: existingSubmission.personalTouch || "",
+        pillarScores: existingScore?.criteria || existingSubmission.pillarScores || {},
+        judgeFeedback: existingScore?.judgeFeedback || existingSubmission.judgeFeedback || "",
+      };
+    }
+    return savedInit.submittedData || null;
+  });
+  const [startTime] = useState(() => savedInit.startTime || Date.now());
+
+  // Sync if existingSubmission arrives asynchronously from /api/state poll
   useEffect(() => {
-    const localized = _getLocalizedScenario(
-      PAMB_C3_SCENARIOS[scenarioIdx] || PAMB_C3_SCENARIOS[0],
-      normLang
-    );
-    setCardPrompt(localized.cardHeadline);
-    setWhatsappPrompt("");
-    setWhatsappText(localized.defaultWhatsapp);
-    setEmailPrompt("");
-    setEmailText(localized.defaultEmail);
-  }, [normLang, scenarioIdx]);
+    if (isCompleted && existingSubmission && !submittedData) {
+      setSubmittedData({
+        total: existingScore?.total || existingSubmission.total || 92,
+        speed: existingScore?.speed || 94,
+        accuracy: existingScore?.accuracy || existingSubmission.total || 90,
+        timeSec: existingScore?.timeSec || existingSubmission.timeSec || 25,
+        cardUrl: existingSubmission.imageAfter || cardUrl || null,
+        whatsappText: existingSubmission.whatsappMessage || whatsappText || "",
+        emailText: existingSubmission.aiaComparisonEmail || emailText || "",
+        personalTouch: existingSubmission.personalTouch || "",
+        pillarScores: existingScore?.criteria || existingSubmission.pillarScores || {},
+        judgeFeedback: existingScore?.judgeFeedback || existingSubmission.judgeFeedback || "",
+      });
+      setSubmitted(true);
+    }
+  }, [isCompleted, existingSubmission]);
+
+  // Persist working draft to localStorage (safe against QuotaExceededError)
+  useEffect(() => {
+    try {
+      const safeCardUrl =
+        typeof cardUrl === "string" && cardUrl.length < 32000 ? cardUrl : null;
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify({
+          scenarioIdx,
+          seatOverride,
+          step,
+          cardStyleId,
+          selectedHeadlineIdx,
+          cardPersonalNote,
+          cardUrl: safeCardUrl,
+          openingToneId,
+          selectedWaIdeaIdxs,
+          waPersonalNote,
+          whatsappText,
+          selectedFactIdxs,
+          advisoryStyleId,
+          emailPersonalNote,
+          emailText,
+          startTime,
+        })
+      );
+    } catch (e) {}
+  }, [
+    storageKey,
+    scenarioIdx,
+    seatOverride,
+    step,
+    cardStyleId,
+    selectedHeadlineIdx,
+    cardPersonalNote,
+    cardUrl,
+    openingToneId,
+    selectedWaIdeaIdxs,
+    waPersonalNote,
+    whatsappText,
+    selectedFactIdxs,
+    advisoryStyleId,
+    emailPersonalNote,
+    emailText,
+    startTime,
+  ]);
+
+  // Fetch assigned unique seat scenario (out of 56 unique seats across 16 archetypes)
+  useEffect(() => {
+    let active = true;
+    const qs = new URLSearchParams({
+      id: agentId || "guest",
+      lang: normLang,
+    });
+    if (seatOverride !== null && seatOverride !== undefined) {
+      qs.set("seat", String(seatOverride));
+      qs.set("persist", "1");
+    }
+    fetch(`/api/c3/scenario?${qs.toString()}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (!active || !data || !data.scenario) return;
+        setServerScenario(data.scenario);
+        if (Array.isArray(data.archetypes)) {
+          setArchetypeList(data.archetypes);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, [agentId, normLang, seatOverride]);
+
+  // Preserve user's drafted messages on language toggle instead of wiping them silently
+  const prevLangRef = useRef(normLang);
+  useEffect(() => {
+    if (prevLangRef.current !== normLang) {
+      prevLangRef.current = normLang;
+      if (whatsappText.trim() || emailText.trim()) {
+        setLangChangedBanner(true);
+      }
+    }
+  }, [normLang]);
+
+  // Animated 3-stage progress bar while Step 1 Greeting Card renders
+  useEffect(() => {
+    if (!isBusy || step !== 1) {
+      setCardStageIdx(0);
+      return;
+    }
+    const t1 = setTimeout(() => setCardStageIdx(1), 2200);
+    const t2 = setTimeout(() => setCardStageIdx(2), 4800);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [isBusy, step]);
 
   useEffect(() => {
     const stepLabels = {
-      1: "Step 1/3: Creating Life-Event Greeting Card",
-      2: "Step 2/3: Drafting First-Touch WhatsApp",
-      3: "Step 3/3: Countering AIA Malaysia Objection via Email",
+      1: "Step 1/3: Designing Door-Opener Greeting Card",
+      2: "Step 2/3: Crafting First-Touch WhatsApp",
+      3: `Step 3/3: Answering Client's ${rivalShort} Comparison Reply`,
     };
     fetch("/api/activity", {
       method: "POST",
@@ -1295,16 +1925,87 @@ window.Challenge3ParticipantView = function ({
         agenticStep: stepLabels[step] || "Pre-Pitch",
       }),
     }).catch(() => {});
-  }, [step, scenarioIdx, lang]);
+  }, [step, sc.shortLabel, lang]);
 
-  const handleRotateScenario = () => {
-    const nextIdx = (scenarioIdx + 1) % PAMB_C3_SCENARIOS.length;
-    setScenarioIdx(nextIdx);
-    setStep(1);
+  const resetDraftsForNewCase = () => {
+    setSelectedHeadlineIdx(0);
+    setCardPersonalNote("");
     setCardUrl(null);
+    setSelectedWaIdeaIdxs([0, 1]);
+    setWaPersonalNote("");
+    setWhatsappText("");
+    setSelectedFactIdxs([0, 1, 2]);
+    setEmailPersonalNote("");
+    setEmailText("");
+    setLangChangedBanner(false);
+    setStep(1);
   };
 
-  // Step 1: Generate Greeting Card
+  const handleSelectSeat = (targetSeat) => {
+    setSeatOverride(targetSeat);
+    setScenarioIdx(targetSeat % PAMB_C3_SCENARIOS.length);
+    setShowCasePicker(false);
+    resetDraftsForNewCase();
+  };
+
+  const handleRotateScenario = () => {
+    const curSeat =
+      seatOverride !== null
+        ? seatOverride
+        : typeof sc.seatIndex === "number"
+        ? sc.seatIndex
+        : scenarioIdx;
+    const totalSeats = sc.totalUniqueSeats || 56;
+    // Jump +1 seat (interleaved across all 16 archetypes!)
+    handleSelectSeat((curSeat + 1) % totalSeats);
+  };
+
+  const activeHeadline =
+    (sc.cardChips && sc.cardChips[selectedHeadlineIdx]) || sc.cardHeadline;
+  const activeStyleObj =
+    ui.visualStyles.find((s) => s.id === cardStyleId) || ui.visualStyles[0];
+  const activeOpeningObj =
+    ui.openingTones.find((o) => o.id === openingToneId) || ui.openingTones[0];
+  const activeAdvisoryObj =
+    ui.advisoryStyles.find((a) => a.id === advisoryStyleId) || ui.advisoryStyles[0];
+
+  const buildWhatsappStrategySummary = () => {
+    const chosenIdeas = (pb.waIdeas || [])
+      .filter((_, idx) => selectedWaIdeaIdxs.includes(idx))
+      .map((item) => item.detail);
+    return [
+      `Opening Approach: ${activeOpeningObj.prompt}`,
+      chosenIdeas.length > 0 ? `Wealth Hooks to Plant: ${chosenIdeas.join("; ")}` : "",
+    ]
+      .filter(Boolean)
+      .join(" | ");
+  };
+
+  const buildEmailStrategySummary = () => {
+    const chosenFacts = (sc.aiaFacts || []).filter((_, idx) =>
+      selectedFactIdxs.includes(idx)
+    );
+    return [
+      `Advisory Style: ${activeAdvisoryObj.prompt}`,
+      chosenFacts.length > 0 ? `Selected Facts: ${chosenFacts.join(" ; ")}` : "",
+    ]
+      .filter(Boolean)
+      .join(" | ");
+  };
+
+  const buildPersonalTouchSummary = () => {
+    return [
+      cardPersonalNote.trim() ? `🎨 Card: ${cardPersonalNote.trim()}` : "",
+      waPersonalNote.trim() ? `💬 WhatsApp: ${waPersonalNote.trim()}` : "",
+      emailPersonalNote.trim() ? `🤝 Closer: ${emailPersonalNote.trim()}` : "",
+    ]
+      .filter(Boolean)
+      .join("  •  ");
+  };
+
+  const toggleIdxInList = (list, idx) =>
+    list.includes(idx) ? list.filter((x) => x !== idx) : [...list, idx].sort();
+
   const handleGenerateCard = async () => {
     setIsBusy(true);
     try {
@@ -1318,8 +2019,11 @@ window.Challenge3ParticipantView = function ({
           challenge: "3",
           language: lang,
           scenarioId: sc.id,
+          seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "card",
-          cardPrompt: cardPrompt.trim() || sc.cardHeadline,
+          cardPrompt: activeHeadline,
+          cardStyle: activeStyleObj.prompt,
+          cardPersonalNote: cardPersonalNote.trim(),
           generateCard: true,
         }),
       });
@@ -1327,52 +2031,13 @@ window.Challenge3ParticipantView = function ({
       if (data.greetingCardDataUrl) {
         setCardUrl(data.greetingCardDataUrl);
       }
-      if (typeof data.firstTouchMessage === "string" && data.firstTouchMessage.trim()) {
-        setWhatsappText(data.firstTouchMessage);
-      }
-      if (typeof data.aiaComparisonEmail === "string" && data.aiaComparisonEmail.trim()) {
-        setEmailText(data.aiaComparisonEmail);
-      }
     } catch (e) {}
     setIsBusy(false);
   };
 
-  // Helper: Toggle or append a snippet into a prompt without overwriting custom edits or auto-firing AI
-  const toggleSnippetInPrompt = (currentText, snippet) => {
-    const cleanSnippet = (snippet || "").trim();
-    if (!cleanSnippet) return currentText;
-    const cur = (currentText || "").trim();
-    if (!cur) return cleanSnippet;
-    if (cur.includes(cleanSnippet)) {
-      const removed = cur
-        .split("\n")
-        .map((line) => line.replace(cleanSnippet, "").trim())
-        .filter((line) => line && !/^[\d\.\)\-\•]+$/.test(line))
-        .join("\n")
-        .trim();
-      return removed;
-    }
-    return `${cur}\n• ${cleanSnippet}`;
-  };
-
-  // Helper: Combine multiple snippets into the prompt while preserving any custom user lines
-  const combineSnippetsIntoPrompt = (currentText, snippetsList) => {
-    let result = (currentText || "").trim();
-    (snippetsList || []).forEach((s, idx) => {
-      const clean = (s || "").trim();
-      if (clean && !result.includes(clean)) {
-        const prefix = `${idx + 1}) `;
-        result = result ? `${result}\n${prefix}${clean}` : `${prefix}${clean}`;
-      }
-    });
-    return result;
-  };
-
-  // Step 2: Generate / Refine WhatsApp Message
-  const handleGenerateWhatsapp = async (overrideAngle) => {
-    const angle = overrideAngle !== undefined ? overrideAngle : whatsappPrompt;
-    if (overrideAngle !== undefined) setWhatsappPrompt(overrideAngle);
+  const handleGenerateWhatsapp = async (polishInst = "") => {
     setIsBusy(true);
+    setLangChangedBanner(false);
     try {
       const res = await fetch("/api/ai", {
         method: "POST",
@@ -1384,31 +2049,32 @@ window.Challenge3ParticipantView = function ({
           challenge: "3",
           language: lang,
           scenarioId: sc.id,
+          seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "whatsapp",
-          cardPrompt: cardPrompt.trim() || sc.cardHeadline,
-          whatsappPrompt: angle,
-          emailPrompt,
-          generateCard: !cardUrl,
+          cardPrompt: activeHeadline,
+          whatsappPrompt: buildWhatsappStrategySummary(),
+          waPersonalNote: waPersonalNote.trim(),
+          whatsappText: polishInst ? whatsappText.trim() : "",
+          polishInstruction: polishInst,
+          generateCard: false,
           previousCardDataUrl: cardUrl,
         }),
       });
       const data = await res.json();
-      if (data.greetingCardDataUrl && !cardUrl) setCardUrl(data.greetingCardDataUrl);
       if (typeof data.firstTouchMessage === "string" && data.firstTouchMessage.trim()) {
-        setWhatsappText(data.firstTouchMessage);
+        setWhatsappText(data.firstTouchMessage.trim());
+      } else if (!whatsappText) {
+        setWhatsappText(sc.defaultWhatsapp);
       }
-      if (typeof data.aiaComparisonEmail === "string" && data.aiaComparisonEmail.trim()) {
-        setEmailText(data.aiaComparisonEmail);
-      }
-    } catch (e) {}
+    } catch (e) {
+      if (!whatsappText) setWhatsappText(sc.defaultWhatsapp);
+    }
     setIsBusy(false);
   };
 
-  // Step 3: Generate / Refine PRU vs. AIA Comparison Email
-  const handleGenerateEmail = async (overrideAngle) => {
-    const angle = overrideAngle !== undefined ? overrideAngle : emailPrompt;
-    if (overrideAngle !== undefined) setEmailPrompt(overrideAngle);
+  const handleGenerateEmail = async (polishInst = "") => {
     setIsBusy(true);
+    setLangChangedBanner(false);
     try {
       const res = await fetch("/api/ai", {
         method: "POST",
@@ -1420,27 +2086,40 @@ window.Challenge3ParticipantView = function ({
           challenge: "3",
           language: lang,
           scenarioId: sc.id,
+          seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "email",
-          cardPrompt: cardPrompt.trim() || sc.cardHeadline,
-          whatsappPrompt,
-          emailPrompt: angle,
-          generateCard: !cardUrl,
+          cardPrompt: activeHeadline,
+          emailPrompt: buildEmailStrategySummary(),
+          emailPersonalNote: emailPersonalNote.trim(),
+          emailText: polishInst ? emailText.trim() : "",
+          polishInstruction: polishInst,
+          generateCard: false,
           previousCardDataUrl: cardUrl,
         }),
       });
       const data = await res.json();
-      if (data.greetingCardDataUrl && !cardUrl) setCardUrl(data.greetingCardDataUrl);
       if (typeof data.aiaComparisonEmail === "string" && data.aiaComparisonEmail.trim()) {
-        setEmailText(data.aiaComparisonEmail);
+        setEmailText(data.aiaComparisonEmail.trim());
+      } else if (!emailText) {
+        setEmailText(sc.defaultEmail);
       }
-    } catch (e) {}
+    } catch (e) {
+      if (!emailText) setEmailText(sc.defaultEmail);
+    }
     setIsBusy(false);
   };
 
-  // Final Submit (Evaluates dynamically via /api/ai stepMode="evaluate" & locks into compact view)
+  const readyToSubmit = Boolean(whatsappText.trim() && emailText.trim());
+
   const handleFinalSubmit = async () => {
+    if (!readyToSubmit) return;
     setIsBusy(true);
     let finalCardUrl = cardUrl;
+    const finalWaText = whatsappText.trim();
+    const finalEmText = emailText.trim();
+    const waStrat = buildWhatsappStrategySummary();
+    const emStrat = buildEmailStrategySummary();
+    const personalTouchSummary = buildPersonalTouchSummary();
     let evalData = null;
 
     try {
@@ -1454,12 +2133,17 @@ window.Challenge3ParticipantView = function ({
           challenge: "3",
           language: lang,
           scenarioId: sc.id,
+          seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "evaluate",
-          cardPrompt: cardPrompt.trim() || sc.cardHeadline,
-          whatsappPrompt,
-          whatsappText,
-          emailPrompt,
-          emailText,
+          cardPrompt: activeHeadline,
+          cardStyle: activeStyleObj.prompt,
+          cardPersonalNote: cardPersonalNote.trim(),
+          whatsappPrompt: waStrat,
+          waPersonalNote: waPersonalNote.trim(),
+          whatsappText: finalWaText,
+          emailPrompt: emStrat,
+          emailPersonalNote: emailPersonalNote.trim(),
+          emailText: finalEmText,
           generateCard: !finalCardUrl,
           previousCardDataUrl: finalCardUrl,
         }),
@@ -1472,35 +2156,37 @@ window.Challenge3ParticipantView = function ({
     } catch (e) {}
 
     const elapsedSec = Math.max(10, Math.round((Date.now() - startTime) / 1000));
-    const speedScore = Math.max(90, Math.min(99, 100 - Math.floor(elapsedSec / 10)));
+    const speedScore = Math.max(85, Math.min(99, 100 - Math.floor(elapsedSec / 18)));
     const pillarScores =
       evalData && evalData.pillarScores && Object.keys(evalData.pillarScores).length > 0
         ? evalData.pillarScores
         : {
-            "Empathy & Greeting Card": 24,
-            "Wealth Planning & WhatsApp": 24,
-            "PRU vs AIA (3 Facts)": 24,
-            "Creativity & Prompt Craft": 24,
+            "Visual Warmth & Card": 22,
+            "Empathy-First Opening": 22,
+            "Wealth & Plan Mastery": 22,
+            "Personal Advisor Touch": personalTouchSummary ? 22 : 18,
           };
     const accuracyScore =
       evalData && typeof evalData.qualityScore === "number"
         ? evalData.qualityScore
-        : Object.values(pillarScores).reduce((acc, v) => acc + Number(v || 0), 0) || 96;
-    const totalScore = Math.round((speedScore + accuracyScore) / 2);
+        : Object.values(pillarScores).reduce((acc, v) => acc + Number(v || 0), 0) || 88;
+    const totalScore = Math.round(speedScore * 0.25 + accuracyScore * 0.75);
     const judgeFeedback =
       (evalData && evalData.judgeFeedback) ||
-      "Complete 3-step MDRT Pre-Pitch! Warm Life-Event Greeting Card + concise First-Touch WhatsApp + factual PRU vs. AIA Malaysia comparison email.";
+      `Strong Pre-Pitch! Warm Greeting Card + empathetic WhatsApp + factual PRU vs. ${rivalShort} comparison.`;
 
-    const combinedMessages = `💬 [WHATSAPP]:\n${whatsappText}\n\n📧 [PRU vs. AIA EMAIL]:\n${emailText}`;
+    const combinedMessages = `💬 [WHATSAPP]:\n${finalWaText}\n\n📧 [PRU vs. ${rivalShort}]:\n${finalEmText}`;
 
     const subPayload = {
       challenge: "3",
-      title: `${sc.icon} ${sc.customerName.split("(")[0].trim()} • PRU vs. AIA`,
+      title: `${sc.icon} ${sc.customerName.split("(")[0].trim()} • PRU vs. ${rivalShort}`,
       styleBadge: `${sc.icon} ${sc.shortLabel}`,
+      rivalBrand: rivalShort,
+      personalTouch: personalTouchSummary,
       userInput: `${sc.customerName} (${sc.lifeEvent}) | PRU: ${sc.pambPlan} vs. ${sc.aiaPlan}`,
       aiOutput: combinedMessages,
-      whatsappMessage: whatsappText,
-      aiaComparisonEmail: emailText,
+      whatsappMessage: finalWaText,
+      aiaComparisonEmail: finalEmText,
       imageAfter: finalCardUrl,
       policyCitation: `${sc.pambPlan} vs. ${sc.aiaPlan}`,
       pillarScores,
@@ -1541,8 +2227,9 @@ window.Challenge3ParticipantView = function ({
       accuracy: accuracyScore,
       timeSec: elapsedSec,
       cardUrl: finalCardUrl,
-      whatsappText,
-      emailText,
+      whatsappText: finalWaText,
+      emailText: finalEmText,
+      personalTouch: personalTouchSummary,
       pillarScores,
       judgeFeedback,
     });
@@ -1550,16 +2237,34 @@ window.Challenge3ParticipantView = function ({
     setSubmitted(true);
   };
 
-  /* ==========================================================================
-     FINAL SUBMITTED VIEW — SINGLE VISIBLE BOX (NO SCROLLING DOWN!)
-     Shows: Score + 4 Pillar Breakdown + Greeting Card + WhatsApp & Email
-  ========================================================================== */
+  const handleCopyPrePitch = (textToCopy, toastMsg) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        setCopyToast(toastMsg);
+        setTimeout(() => setCopyToast(""), 2400);
+      });
+    }
+  };
+
+  const cardProgressStages =
+    normLang === "zh-CN"
+      ? ["1/3 构思大马温馨场景构图...", "2/3 绘制您的专属家庭祝福细节...", "3/3 润色高质感祝贺卡排版..."]
+      : normLang === "yue"
+      ? ["1/3 構思大馬溫馨場景構圖...", "2/3 畫緊你揀嘅專屬祝福細節...", "3/3 執靚高質感賀卡排版..."]
+      : normLang === "ms"
+      ? ["1/3 Menyusun suasana mesra Malaysia...", "2/3 Melukis sentuhan kreatif anda...", "3/3 Kemasan akhir kad eksklusif..."]
+      : normLang === "ta"
+      ? ["1/3 இனிய மலேசிய காட்சி அமைப்பு...", "2/3 உங்கள் சிறப்பு வாழ்த்து ஓவியம்...", "3/3 வாழ்த்து அட்டை இறுதி வடிவமைப்பு..."]
+      : ["1/3 Composing warm Malaysian scene...", "2/3 Painting your personal creative touch...", "3/3 Finishing executive greeting card..."];
+
   if (submitted && submittedData) {
     const pillarEntries = Object.entries(submittedData.pillarScores || {});
+    const fullSharePack = `${submittedData.whatsappText}\n\n---\n\n${submittedData.emailText}`;
+    const waDeepLink = `https://wa.me/?text=${encodeURIComponent(submittedData.whatsappText || "")}`;
+
     return (
-      <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-4 shadow-lg space-y-2.5">
-        {/* Top Row: Score Badge + Customer Name + Next Button */}
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
+      <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-4 shadow-lg space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-extrabold">
               {ui.submittedBadge}
@@ -1568,21 +2273,27 @@ window.Challenge3ParticipantView = function ({
               {sc.icon} {sc.customerName}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#ed1b2e] text-xs sm:text-sm font-black">
               {ui.scoreLabel} {submittedData.total} / 100 pts ({submittedData.timeSec}s)
             </span>
             <button
               type="button"
+              onClick={() => setSubmitted(false)}
+              className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-extrabold border border-slate-300"
+            >
+              ✎ Refine
+            </button>
+            <button
+              type="button"
               onClick={onNext}
               className="px-4 py-1.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-xs sm:text-sm font-extrabold shadow"
             >
-              {t.viewMyCard} →
+              {t.viewMyCard}
             </button>
           </div>
         </div>
 
-        {/* 4-Pillar Score Breakdown + AI Judge Verdict */}
         {pillarEntries.length > 0 && (
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -1596,15 +2307,38 @@ window.Challenge3ParticipantView = function ({
                 </div>
               ))}
             </div>
+            {submittedData.personalTouch && (
+              <div className="text-[11px] font-bold text-amber-950 bg-amber-50 border border-amber-200 rounded-lg px-2.5 py-1.5">
+                💡 {submittedData.personalTouch}
+              </div>
+            )}
             {submittedData.judgeFeedback && (
               <div className="text-xs font-bold text-slate-800 bg-red-50/60 border border-red-200 rounded-lg px-2.5 py-1.5">
-                {submittedData.judgeFeedback}
+                🏅 {submittedData.judgeFeedback}
               </div>
             )}
           </div>
         )}
 
-        {/* 1. Greeting Card at the Top */}
+        {/* Real-World Advisor Takeaway Actions: Copy Full Pre-Pitch or Open in WhatsApp */}
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => handleCopyPrePitch(fullSharePack, "✓ Pre-Pitch Copied!")}
+            className="flex-1 py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold shadow-sm"
+          >
+            {copyToast || "📋 Copy Full Pre-Pitch Pack"}
+          </button>
+          <a
+            href={waDeepLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold text-center shadow-sm"
+          >
+            📲 Send First-Touch via WhatsApp
+          </a>
+        </div>
+
         {submittedData.cardUrl && (
           <div className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-2.5">
             <img
@@ -1615,7 +2349,6 @@ window.Challenge3ParticipantView = function ({
           </div>
         )}
 
-        {/* 2. WhatsApp Message & PRU vs. AIA Email Side-by-Side Inside Same Visible Box */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="bg-emerald-50/50 border border-emerald-200 rounded-xl p-2.5">
             <div className="text-xs font-extrabold text-emerald-900 mb-1">
@@ -1627,8 +2360,8 @@ window.Challenge3ParticipantView = function ({
           </div>
 
           <div className="bg-blue-50/50 border border-blue-200 rounded-xl p-2.5">
-            <div className="text-xs font-extrabold text-blue-900 mb-1">
-              {ui.emailFinalHeader}
+            <div className="text-xs font-extrabold text-blue-950 mb-1">
+              {adaptRivalLabel(ui.emailFinalHeader)}
             </div>
             <div className="text-xs sm:text-sm text-slate-900 whitespace-pre-line leading-snug max-h-36 overflow-y-auto bg-white p-2.5 rounded-lg border border-blue-200">
               {submittedData.emailText}
@@ -1639,32 +2372,88 @@ window.Challenge3ParticipantView = function ({
     );
   }
 
-  /* ==========================================================================
-     ACTIVE WORKBENCH — ADAPTIVE PHONE / IPAD / LAPTOP 3-STEP WIZARD
-  ========================================================================== */
   return (
-    <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-4 md:p-5 shadow-md space-y-3">
-      {/* Compact Header + Assigned Customer X Key Data Points */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="px-2.5 py-1 rounded-full bg-red-50 text-[#ed1b2e] border border-red-200 text-xs font-extrabold">
-            {ui.badge}
-          </span>
-          <span className="text-sm sm:text-base font-extrabold text-slate-900">
-            {sc.icon} {ui.assignedCase} {sc.customerName}
-          </span>
+    <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-4 md:p-5 shadow-md space-y-3.5">
+      {/* Top Client Header + Unique Seat Badge + Case Switcher */}
+      <div className="space-y-2 border-b border-slate-200 pb-2.5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="px-2.5 py-1 rounded-full bg-red-50 text-[#ed1b2e] border border-red-200 text-xs font-extrabold">
+              {ui.badge}
+            </span>
+            {typeof sc.seatIndex === "number" && (
+              <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-900 border border-amber-300 text-[11px] font-extrabold">
+                Case #{sc.seatIndex + 1}/{sc.totalUniqueSeats || 56}
+              </span>
+            )}
+            <span className="text-sm sm:text-base font-extrabold text-slate-900">
+              {sc.icon} {ui.assignedCase} {sc.customerName}
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            {archetypeList.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setShowCasePicker((v) => !v)}
+                className="px-2.5 py-1.5 rounded-xl bg-white hover:bg-red-50 text-slate-700 hover:text-[#ed1b2e] border border-slate-300 text-xs font-extrabold transition-all"
+              >
+                📂 16 Scenarios {showCasePicker ? "▲" : "▼"}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={handleRotateScenario}
+              className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-xs font-extrabold transition-all"
+            >
+              {ui.switchCase}
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={handleRotateScenario}
-          className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-xs font-extrabold transition-all"
-        >
-          {ui.switchCase}
-        </button>
+
+        {/* Optional 16-Archetype Quick Case Picker */}
+        {showCasePicker && archetypeList.length > 0 && (
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1.5 max-h-56 overflow-y-auto">
+            {archetypeList.map((item) => {
+              const isCurrent = item.id === sc.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleSelectSeat(item.seatIndex)}
+                  className={`p-2 rounded-lg border text-left text-xs font-bold transition-all ${
+                    isCurrent
+                      ? "bg-[#ed1b2e] text-white border-[#ed1b2e]"
+                      : "bg-white hover:bg-red-50 text-slate-800 border-slate-200"
+                  }`}
+                >
+                  <div className="truncate font-extrabold">
+                    {item.icon} {item.shortLabel}
+                  </div>
+                  <div className={`text-[10px] truncate ${isCurrent ? "text-red-100" : "text-slate-500"}`}>
+                    {item.customerName.split("(")[0].trim()} • vs {item.rivalBrand.replace(" Malaysia", "")}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
-      {/* 4 Crisp Key Data Points — Adaptive Grid: 1 col Phone, 2 cols iPad, 4 cols Laptop */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
+      {langChangedBanner && (
+        <div className="bg-amber-50 border border-amber-300 rounded-xl px-3 py-2 flex items-center justify-between gap-2 text-xs font-bold text-amber-950">
+          <span>🌐 Language switched — your current draft was safely kept! Tap Re-Draft anytime to regenerate in this language.</span>
+          <button
+            type="button"
+            onClick={() => setLangChangedBanner(false)}
+            className="text-amber-800 font-extrabold px-1.5"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
+      {/* Clean 3-Point Client Story Strip (No Step 3 Rival Spoiler!) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
           <span className="font-extrabold text-[#ed1b2e] block mb-0.5">{ui.lifeEventLabel}</span>
           <span className="text-slate-900 font-semibold leading-snug">{sc.lifeEvent}</span>
@@ -1674,21 +2463,17 @@ window.Challenge3ParticipantView = function ({
           <span className="text-slate-800 leading-snug">{sc.existingGap}</span>
         </div>
         <div className="bg-red-50/60 border border-red-200 rounded-xl p-2.5">
-          <span className="font-extrabold text-[#ed1b2e] block mb-0.5">{ui.pambOfferLabel}</span>
+          <span className="font-extrabold text-[#ed1b2e] block mb-0.5">{ui.offerLabel}</span>
           <span className="text-slate-900 font-bold leading-snug">{sc.pambPlan}</span>
-        </div>
-        <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-2.5">
-          <span className="font-extrabold text-amber-900 block mb-0.5">{ui.aiaRivalLabel}</span>
-          <span className="text-slate-800 font-semibold leading-snug">{sc.aiaPlan}</span>
         </div>
       </div>
 
-      {/* 3-Step Guided Stepper Bar — Adaptive across Phone / iPad / Laptop */}
+      {/* 3-Step Navigation Bar */}
       <div className="grid grid-cols-3 gap-2">
         {[
           { n: 1, label: ui.step1Tab, done: !!cardUrl },
-          { n: 2, label: ui.step2Tab, done: step > 2 },
-          { n: 3, label: ui.step3Tab, done: false },
+          { n: 2, label: ui.step2Tab, done: !!whatsappText.trim() },
+          { n: 3, label: adaptRivalLabel(ui.step3Tab), done: !!emailText.trim() },
         ].map((s) => {
           const active = step === s.n;
           return (
@@ -1711,108 +2496,126 @@ window.Challenge3ParticipantView = function ({
         })}
       </div>
 
-      {/* ====================================================================
-          STEP 1: CREATE LIFE-EVENT GREETING CARD (FULL CHIPS + EMPATHY BOOSTERS)
-      ==================================================================== */}
+      {/* STEP 1: DOOR-OPENER GREETING CARD */}
       {step === 1 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-3">
-          <div className="space-y-2">
-            <span className="text-xs sm:text-sm font-extrabold text-slate-900 block">
-              {ui.step1Title}
-            </span>
-            {/* Full Headline Theme Chips (No truncation!) */}
-            <div className="flex flex-wrap gap-1.5">
-              {sc.cardChips.map((c, i) => {
-                const isSelected = (cardPrompt || "").includes(c);
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
+          <div className="text-sm sm:text-base font-extrabold text-slate-900">
+            {ui.step1Title}
+          </div>
+
+          <div className="space-y-1.5">
+            <div className="text-xs font-extrabold text-slate-700">{ui.pickVisualStyle}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {ui.visualStyles.map((vs) => {
+                const active = cardStyleId === vs.id;
                 return (
                   <button
+                    key={vs.id}
                     type="button"
-                    key={i}
-                    onClick={() => setCardPrompt(c)}
-                    className={`px-3 py-1.5 rounded-lg border text-xs font-bold shadow-sm transition-all text-left ${
-                      isSelected
-                        ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e]"
-                        : "bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border-slate-300"
+                    onClick={() => setCardStyleId(vs.id)}
+                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
+                      active
+                        ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
+                        : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
                     }`}
                   >
-                    {isSelected ? "✓ " : ""}{ui.themeChip} {i + 1}: {c}
+                    {vs.label}
                   </button>
                 );
               })}
             </div>
-            {/* Combinable Empathy & Creative Visual Boosters */}
-            {ui.cardStyleBoosters && (
-              <div className="pt-1 space-y-1">
-                <span className="text-[11px] font-bold text-slate-600 block">
-                  {ui.cardStyleBoostersLabel}
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {ui.cardStyleBoosters.map((booster, idx) => {
-                    const active = (cardPrompt || "").includes(booster);
-                    return (
-                      <button
-                        type="button"
-                        key={idx}
-                        onClick={() =>
-                          setCardPrompt((prev) => toggleSnippetInPrompt(prev, booster))
-                        }
-                        className={`px-2.5 py-1 rounded-lg border text-xs font-bold transition-all ${
-                          active
-                            ? "bg-emerald-50 border-emerald-400 text-emerald-900"
-                            : "bg-white hover:bg-red-50 text-slate-700 border-slate-300"
-                        }`}
-                      >
-                        {active ? "✓ " : "+ "}{booster}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
           </div>
 
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between gap-2">
-              <label className="block text-xs sm:text-sm font-extrabold text-slate-800">
-                {ui.cardPromptLabel}
-              </label>
-              {cardPrompt && (
-                <button
-                  type="button"
-                  onClick={() => setCardPrompt("")}
-                  className="text-[11px] font-bold text-slate-500 hover:text-[#ed1b2e]"
-                >
-                  {ui.clearPromptBtn}
-                </button>
-              )}
-            </div>
-            <div className="flex flex-col md:flex-row gap-2.5 items-stretch">
-              <textarea
-                rows={3}
-                value={cardPrompt}
-                onChange={(e) => setCardPrompt(e.target.value)}
-                placeholder={ui.cardPromptPlaceholder}
-                className="flex-1 bg-white border-2 border-slate-300 rounded-xl p-3 text-sm sm:text-base text-slate-900 font-semibold leading-snug focus:outline-none focus:border-[#ed1b2e] shadow-inner"
-              />
-              <button
-                type="button"
-                onClick={handleGenerateCard}
-                disabled={isBusy}
-                className="px-5 py-3 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-sm sm:text-base font-extrabold shadow-md shrink-0 flex items-center justify-center"
-              >
-                {isBusy ? ui.generatingCard : cardUrl ? ui.redrawCard : ui.generateCardBtn}
-              </button>
+            <div className="text-xs font-extrabold text-slate-700">{ui.pickHeadline}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {(sc.cardChips || [sc.cardHeadline]).map((hl, idx) => {
+                const active = selectedHeadlineIdx === idx;
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setSelectedHeadlineIdx(idx)}
+                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-bold transition-all ${
+                      active
+                        ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
+                        : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
+                    }`}
+                  >
+                    {active ? "✓ " : ""}{hl}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
+          <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
+            <label className="block text-xs font-extrabold text-slate-900">
+              {ui.cardTouchLabel}
+            </label>
+            <div className="text-[11px] text-slate-600 leading-relaxed">
+              💡 {ui.cardTouchHint}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {(pb.cardHints || []).map((hintTxt, hIdx) => {
+                const isUsed = cardPersonalNote === hintTxt;
+                return (
+                  <button
+                    key={hIdx}
+                    type="button"
+                    onClick={() => setCardPersonalNote(isUsed ? "" : hintTxt)}
+                    className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
+                      isUsed
+                        ? "bg-amber-100 border-amber-400 text-amber-950"
+                        : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
+                    }`}
+                  >
+                    {isUsed ? "✓ " : "+ "}{hintTxt}
+                  </button>
+                );
+              })}
+            </div>
+            <input
+              type="text"
+              value={cardPersonalNote}
+              onChange={(e) => setCardPersonalNote(e.target.value)}
+              placeholder={ui.cardTouchPlaceholder}
+              className="w-full bg-slate-50 focus:bg-white border-2 border-slate-200 focus:border-[#ed1b2e] rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:outline-none"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={handleGenerateCard}
+            disabled={isBusy}
+            className="w-full py-3.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+          >
+            {isBusy ? ui.generatingCard : cardUrl ? ui.redrawCard : ui.generateCardBtn}
+          </button>
+
+          {isBusy && (
+            <div className="bg-white border border-red-200 rounded-xl p-3 space-y-2">
+              <div className="flex items-center justify-between text-xs font-extrabold text-[#ed1b2e]">
+                <span>{cardProgressStages[cardStageIdx] || cardProgressStages[0]}</span>
+                <span>{cardStageIdx === 0 ? "35%" : cardStageIdx === 1 ? "72%" : "92%"}</span>
+              </div>
+              <div className="w-full h-2 bg-red-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#ed1b2e] transition-all duration-700 rounded-full"
+                  style={{ width: cardStageIdx === 0 ? "35%" : cardStageIdx === 1 ? "72%" : "92%" }}
+                />
+              </div>
+            </div>
+          )}
+
           {cardUrl && (
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white border-2 border-emerald-200 rounded-xl p-3.5">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white border-2 border-emerald-300 rounded-2xl p-3.5 shadow-sm">
               <img
                 src={cardUrl}
                 alt="Generated Greeting Card"
-                className="h-48 sm:h-60 md:h-64 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md mx-auto md:mx-0"
+                className="h-48 sm:h-56 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md mx-auto md:mx-0"
               />
-              <div className="flex flex-col gap-2.5 w-full md:w-auto md:flex-1 md:pl-3">
+              <div className="flex flex-col gap-2.5 w-full md:flex-1">
                 <div className="text-xs sm:text-sm font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-3.5 py-2.5 rounded-xl">
                   {ui.cardReadyMsg}
                 </div>
@@ -1829,147 +2632,169 @@ window.Challenge3ParticipantView = function ({
         </div>
       )}
 
-      {/* ====================================================================
-          STEP 2: CRAFT FIRST-TOUCH WHATSAPP MESSAGE (COMBINABLE + EDITABLE PROMPT)
-      ==================================================================== */}
+      {/* STEP 2: FIRST-TOUCH WHATSAPP */}
       {step === 2 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-3">
-          {/* Keep Greeting Card Visible at the Top */}
-          <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
-            <div className="flex items-center gap-2.5 min-w-0">
-              {cardUrl && (
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
+          {cardUrl && (
+            <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
+              <div className="flex items-center gap-2.5 min-w-0">
                 <img
                   src={cardUrl}
                   alt="Card Thumbnail"
-                  className="h-11 w-auto rounded border border-[#ed1b2e] shrink-0"
+                  className="h-10 w-auto rounded border border-[#ed1b2e] shrink-0"
                 />
-              )}
-              <div className="text-xs truncate">
-                <span className="font-extrabold text-emerald-700">{ui.cardAttachedBadge}</span>
-                <span className="text-slate-600 ml-2 hidden sm:inline">({cardPrompt})</span>
+                <span className="text-xs font-extrabold text-emerald-700 truncate">
+                  {ui.cardAttachedBadge}
+                </span>
               </div>
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="text-xs font-extrabold text-[#ed1b2e] hover:underline shrink-0"
+              >
+                {ui.editCardBtn}
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => setStep(1)}
-              className="text-xs font-extrabold text-[#ed1b2e] hover:underline shrink-0"
-            >
-              {ui.editCardBtn}
-            </button>
+          )}
+
+          <div className="text-sm sm:text-base font-extrabold text-slate-900">
+            {ui.step2Title}
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
+            <div className="text-xs font-extrabold text-slate-700">{ui.pickOpeningTone}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {ui.openingTones.map((ot) => {
+                const active = openingToneId === ot.id;
+                return (
+                  <button
+                    key={ot.id}
+                    type="button"
+                    onClick={() => setOpeningToneId(ot.id)}
+                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
+                      active
+                        ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
+                        : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
+                    }`}
+                  >
+                    {ot.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="text-xs sm:text-sm font-extrabold text-slate-900">
-                {ui.step2Title} ({sc.pambPlan})
-              </span>
+              <span className="text-xs font-extrabold text-slate-700">{ui.pickWealthHooks}</span>
               <button
                 type="button"
-                onClick={() =>
-                  setWhatsappPrompt((prev) =>
-                    combineSnippetsIntoPrompt(prev, [
-                      ...(sc.whatsappChips || []),
-                      ...(ui.waEmpathyBoosters || []),
-                    ])
-                  )
-                }
-                className="px-3 py-1.5 rounded-lg bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-xs font-extrabold shadow-sm transition-all"
+                onClick={() => setSelectedWaIdeaIdxs((pb.waIdeas || []).map((_, i) => i))}
+                className="text-xs font-extrabold text-[#ed1b2e] hover:underline"
               >
-                {ui.combineBothWaBtn}
+                {ui.selectAllIdeas}
               </button>
             </div>
-
-            {/* Full readable PAMB Angles + Empathy/Wealth Boosters (Tap to combine into prompt without auto-firing!) */}
-            <div className="flex flex-wrap gap-1.5">
-              {sc.whatsappChips.map((chip, idx) => {
-                const active = (whatsappPrompt || "").includes(chip);
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {(pb.waIdeas || []).map((idea, idx) => {
+                const active = selectedWaIdeaIdxs.includes(idx);
                 return (
                   <button
-                    type="button"
                     key={idx}
+                    type="button"
                     onClick={() =>
-                      setWhatsappPrompt((prev) => toggleSnippetInPrompt(prev, chip))
+                      setSelectedWaIdeaIdxs((prev) => toggleIdxInList(prev, idx))
                     }
-                    className={`text-left px-3 py-1.5 rounded-lg border text-xs font-bold shadow-sm transition-all ${
+                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
                       active
-                        ? "bg-emerald-50 border-emerald-400 text-emerald-950"
-                        : "bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border-slate-300"
+                        ? "bg-emerald-50 border-emerald-500 text-emerald-950 shadow-sm"
+                        : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
                     }`}
                   >
-                    {active ? "✓ " : "+ "}{ui.pambAngleChip} {idx + 1}: {chip}
+                    {active ? "✓ " : "+ "}{idea.label}
                   </button>
                 );
               })}
-              {(ui.waEmpathyBoosters || []).map((booster, bIdx) => {
-                const active = (whatsappPrompt || "").includes(booster);
+            </div>
+          </div>
+
+          <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
+            <label className="block text-xs font-extrabold text-slate-900">
+              {ui.waTouchLabel}
+            </label>
+            <div className="text-[11px] text-slate-600 leading-relaxed">
+              💡 {ui.waTouchHint}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {(pb.waHints || []).map((hTxt, hIdx) => {
+                const isUsed = waPersonalNote === hTxt;
                 return (
                   <button
+                    key={hIdx}
                     type="button"
-                    key={`wb-${bIdx}`}
-                    onClick={() =>
-                      setWhatsappPrompt((prev) => toggleSnippetInPrompt(prev, booster))
-                    }
-                    className={`text-left px-3 py-1.5 rounded-lg border text-xs font-bold shadow-sm transition-all ${
-                      active
-                        ? "bg-emerald-50 border-emerald-400 text-emerald-950"
-                        : "bg-white hover:bg-red-50 text-slate-700 hover:text-[#ed1b2e] border-slate-300"
+                    onClick={() => setWaPersonalNote(isUsed ? "" : hTxt)}
+                    className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
+                      isUsed
+                        ? "bg-amber-100 border-amber-400 text-amber-950"
+                        : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
                     }`}
                   >
-                    {active ? "✓ " : "+ "}{booster}
+                    {isUsed ? "✓ " : "+ "}{hTxt}
                   </button>
                 );
               })}
             </div>
-          </div>
-
-          {/* Larger AI Prompt Box for Step 2 */}
-          <div className="space-y-1">
-            <div className="flex items-center justify-between gap-2">
-              <label className="block text-xs sm:text-sm font-extrabold text-slate-800">
-                {ui.waPromptLabel}
-              </label>
-              {whatsappPrompt && (
-                <button
-                  type="button"
-                  onClick={() => setWhatsappPrompt("")}
-                  className="text-[11px] font-bold text-slate-500 hover:text-[#ed1b2e]"
-                >
-                  {ui.clearPromptBtn}
-                </button>
-              )}
-            </div>
-            <div className="text-[11px] text-slate-600 font-semibold">{ui.promptEditHint}</div>
-            <div className="flex flex-col md:flex-row gap-2 items-stretch">
-              <textarea
-                rows={3}
-                value={whatsappPrompt}
-                onChange={(e) => setWhatsappPrompt(e.target.value)}
-                placeholder={ui.waPromptPlaceholder}
-                className="flex-1 bg-white border-2 border-slate-300 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-snug focus:outline-none focus:border-[#ed1b2e] shadow-inner"
-              />
-              <button
-                type="button"
-                onClick={() => handleGenerateWhatsapp()}
-                disabled={isBusy}
-                className="px-5 py-2.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-sm sm:text-base font-extrabold shadow shrink-0 flex items-center justify-center"
-              >
-                {isBusy ? ui.waDrafting : ui.aiRefineBtn}
-              </button>
-            </div>
-          </div>
-
-          {/* Larger Editable WhatsApp Message Box */}
-          <div className="space-y-1">
-            <label className="block text-xs sm:text-sm font-extrabold text-emerald-900">
-              {ui.waOutputLabel}
-            </label>
-            <textarea
-              rows={4}
-              value={whatsappText}
-              onChange={(e) => setWhatsappText(e.target.value)}
-              className="w-full bg-white border-2 border-emerald-400 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-snug focus:outline-none focus:border-[#ed1b2e] shadow-sm"
+            <input
+              type="text"
+              value={waPersonalNote}
+              onChange={(e) => setWaPersonalNote(e.target.value)}
+              placeholder={ui.waTouchPlaceholder}
+              className="w-full bg-slate-50 focus:bg-white border-2 border-slate-200 focus:border-[#ed1b2e] rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:outline-none"
             />
           </div>
+
+          <button
+            type="button"
+            onClick={() => handleGenerateWhatsapp("")}
+            disabled={isBusy}
+            className="w-full py-3.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+          >
+            {isBusy ? ui.waDrafting : whatsappText ? ui.waRegenerateBtn : ui.waGenerateBtn}
+          </button>
+
+          {whatsappText ? (
+            <div className="bg-[#e7f8ee] border-2 border-emerald-400 rounded-2xl p-3.5 space-y-2.5 shadow-sm">
+              <div className="text-xs font-extrabold text-emerald-950">
+                {ui.waPreviewHeader}
+              </div>
+              <textarea
+                rows={4}
+                value={whatsappText}
+                onChange={(e) => setWhatsappText(e.target.value)}
+                className="w-full bg-white border border-emerald-300 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
+              />
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="text-[11px] font-extrabold text-emerald-900 mr-1">
+                  {ui.quickPolishLabel}
+                </span>
+                {ui.waPolishes.map((pol, pIdx) => (
+                  <button
+                    key={pIdx}
+                    type="button"
+                    disabled={isBusy}
+                    onClick={() => handleGenerateWhatsapp(pol.inst)}
+                    className="px-2.5 py-1 rounded-full bg-white hover:bg-emerald-100 border border-emerald-400 text-[11px] font-extrabold text-emerald-900 transition-all"
+                  >
+                    {pol.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="bg-white/80 border border-dashed border-slate-300 rounded-xl p-3 text-center text-xs text-slate-500 font-semibold">
+              {ui.waEmptyHint}
+            </div>
+          )}
 
           <div className="flex flex-wrap justify-between items-center gap-2 pt-1">
             <button
@@ -1979,150 +2804,195 @@ window.Challenge3ParticipantView = function ({
             >
               {ui.backBtn}
             </button>
-            <button
-              type="button"
-              onClick={() => setStep(3)}
-              className="py-2.5 px-5 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-xs sm:text-sm font-extrabold shadow-md transition-all"
-            >
-              {ui.nextStep3Btn}
-            </button>
+            {whatsappText.trim() && (
+              <button
+                type="button"
+                onClick={() => setStep(3)}
+                className="py-3 px-5 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-xs sm:text-sm font-extrabold shadow-md transition-all"
+              >
+                {ui.nextStep3Btn}
+              </button>
+            )}
           </div>
         </div>
       )}
 
-      {/* ====================================================================
-          STEP 3: CUSTOMER REPLIES ("COMPARE WITH AIA MALAYSIA!") -> EMAIL
-          SUPPORTS "USE ALL 3 ADVANTAGES + EDIT PROMPT" BEFORE GENERATING!
-      ==================================================================== */}
+      {/* STEP 3: PLOT TWIST! CLIENT REPLIES ("COMPETITOR QUOTED US!") -> WINNING REPLY */}
       {step === 3 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-3">
-          {/* Incoming Customer Objection Banner + Factual PRU vs. AIA Cheat Pills */}
-          <div className="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 space-y-2.5">
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
+          <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5 space-y-1.5 shadow-sm">
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs sm:text-sm font-extrabold uppercase text-amber-950">
-                {ui.objectionHeader}
+              <span className="text-xs font-extrabold uppercase text-amber-900">
+                {ui.incomingBubbleTag}
               </span>
-              {cardUrl && (
-                <img
-                  src={cardUrl}
-                  alt="Card Thumbnail"
-                  className="h-10 w-auto rounded border border-[#ed1b2e] shrink-0"
-                />
-              )}
+              <span className="text-[11px] font-bold text-amber-800">
+                {sc.customerName.split("(")[0].trim()}
+              </span>
             </div>
-            <div className="text-xs sm:text-sm font-bold text-slate-900 italic bg-white/80 p-2.5 rounded-lg border border-amber-200">
+            <div className="bg-white border border-amber-200 rounded-2xl rounded-tl-none p-3 text-xs sm:text-sm font-bold text-slate-900 leading-relaxed shadow-sm">
               {sc.customerReply}
             </div>
+          </div>
+
+          <div className="space-y-1.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="text-[11px] sm:text-xs font-extrabold text-amber-900">
-                {ui.tapFactHint}
+              <span className="text-xs font-extrabold text-slate-800">
+                {adaptRivalLabel(ui.pickWinningFacts)}
               </span>
               <button
                 type="button"
-                onClick={() =>
-                  setEmailPrompt((prev) =>
-                    combineSnippetsIntoPrompt(prev, sc.aiaFacts || [])
-                  )
-                }
-                className="px-3.5 py-1.5 rounded-lg bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-xs font-extrabold shadow transition-all"
+                onClick={() => setSelectedFactIdxs([0, 1, 2])}
+                className="px-3 py-1 rounded-lg bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-xs font-extrabold shadow-sm"
               >
-                {ui.useAll3FactsBtn}
+                {ui.selectAll3Facts}
               </button>
             </div>
-            <div className="flex flex-wrap gap-1.5">
-              {sc.aiaFacts.map((fact, i) => {
-                const active = (emailPrompt || "").includes(fact);
+            <div className="space-y-1.5">
+              {(sc.aiaFacts || []).map((fact, idx) => {
+                const active = selectedFactIdxs.includes(idx);
                 return (
                   <button
+                    key={idx}
                     type="button"
-                    key={i}
                     onClick={() =>
-                      setEmailPrompt((prev) => toggleSnippetInPrompt(prev, fact))
+                      setSelectedFactIdxs((prev) => toggleIdxInList(prev, idx))
                     }
-                    className={`text-left px-3 py-1.5 rounded-lg border text-xs font-bold shadow-sm transition-all ${
+                    className={`w-full p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-bold transition-all flex items-start gap-2 ${
                       active
-                        ? "bg-emerald-50 border-emerald-500 text-emerald-950"
-                        : "bg-white hover:bg-red-50 text-slate-900 hover:text-[#ed1b2e] border-amber-300"
+                        ? "bg-emerald-50 border-emerald-500 text-emerald-950 shadow-sm"
+                        : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-700"
                     }`}
                   >
-                    {active ? "✓ " : "+ "}{fact}
+                    <span className="font-black text-sm shrink-0">
+                      {active ? "☑️" : "⬜"}
+                    </span>
+                    <span className="leading-snug">{fact.replace(/^✓\s*/, "")}</span>
                   </button>
                 );
               })}
             </div>
-            {(ui.emailLeaderBoosters || []).length > 0 && (
-              <div className="flex flex-wrap gap-1.5 pt-1 border-t border-amber-200/80">
-                {ui.emailLeaderBoosters.map((booster, bIdx) => {
-                  const active = (emailPrompt || "").includes(booster);
-                  return (
-                    <button
-                      type="button"
-                      key={`eb-${bIdx}`}
-                      onClick={() =>
-                        setEmailPrompt((prev) => toggleSnippetInPrompt(prev, booster))
-                      }
-                      className={`text-left px-2.5 py-1 rounded-lg border text-xs font-bold transition-all ${
-                        active
-                          ? "bg-emerald-50 border-emerald-500 text-emerald-950"
-                          : "bg-white/90 hover:bg-red-50 text-slate-800 border-amber-300"
-                      }`}
-                    >
-                      {active ? "✓ " : "+ "}{booster}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
           </div>
 
-          {/* Larger AI Prompt Box for Step 3 */}
-          <div className="space-y-1">
-            <div className="flex items-center justify-between gap-2">
-              <label className="block text-xs sm:text-sm font-extrabold text-slate-800">
-                {ui.emailPromptLabel}
-              </label>
-              {emailPrompt && (
+          <div className="space-y-1.5">
+            <div className="text-xs font-extrabold text-slate-700">{ui.pickAdvisoryStyle}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {ui.advisoryStyles.map((as) => {
+                const active = advisoryStyleId === as.id;
+                return (
+                  <button
+                    key={as.id}
+                    type="button"
+                    onClick={() => setAdvisoryStyleId(as.id)}
+                    className={`p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-extrabold transition-all ${
+                      active
+                        ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
+                        : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
+                    }`}
+                  >
+                    {as.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
+            <label className="block text-xs font-extrabold text-slate-900">
+              {ui.closeTouchLabel}
+            </label>
+            <div className="text-[11px] text-slate-600 leading-relaxed">
+              💡 {ui.closeTouchHint}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {(pb.closeHints || []).map((cTxt, cIdx) => {
+                const isUsed = emailPersonalNote === cTxt;
+                return (
+                  <button
+                    key={cIdx}
+                    type="button"
+                    onClick={() => setEmailPersonalNote(isUsed ? "" : cTxt)}
+                    className={`px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all ${
+                      isUsed
+                        ? "bg-amber-100 border-amber-400 text-amber-950"
+                        : "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-700"
+                    }`}
+                  >
+                    {isUsed ? "✓ " : "+ "}{cTxt}
+                  </button>
+                );
+              })}
+            </div>
+            <input
+              type="text"
+              value={emailPersonalNote}
+              onChange={(e) => setEmailPersonalNote(e.target.value)}
+              placeholder={ui.closeTouchPlaceholder}
+              className="w-full bg-slate-50 focus:bg-white border-2 border-slate-200 focus:border-[#ed1b2e] rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:outline-none"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={() => handleGenerateEmail("")}
+            disabled={isBusy}
+            className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+          >
+            {isBusy ? ui.emailDrafting : emailText ? ui.emailRegenerateBtn : ui.emailGenerateBtn}
+          </button>
+
+          {emailText ? (
+            <div className="bg-blue-50/60 border-2 border-blue-400 rounded-2xl p-3.5 space-y-2.5 shadow-sm">
+              <div className="text-xs font-extrabold text-blue-950">
+                {ui.emailPreviewHeader}
+              </div>
+              <textarea
+                rows={5}
+                value={emailText}
+                onChange={(e) => setEmailText(e.target.value)}
+                className="w-full bg-white border border-blue-300 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
+              />
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="text-[11px] font-extrabold text-blue-950 mr-1">
+                  {ui.quickPolishLabel}
+                </span>
+                {ui.emailPolishes.map((pol, pIdx) => (
+                  <button
+                    key={pIdx}
+                    type="button"
+                    disabled={isBusy}
+                    onClick={() => handleGenerateEmail(pol.inst)}
+                    className="px-2.5 py-1 rounded-full bg-white hover:bg-blue-100 border border-blue-400 text-[11px] font-extrabold text-blue-950 transition-all"
+                  >
+                    {pol.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="bg-white/80 border border-dashed border-slate-300 rounded-xl p-3 text-center text-xs text-slate-500 font-semibold">
+              {ui.emailEmptyHint}
+            </div>
+          )}
+
+          {/* Readiness Gate Checklist so nobody submits blank drafts by accident */}
+          {!readyToSubmit && (
+            <div className="bg-amber-50 border border-amber-300 rounded-xl p-2.5 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-amber-950">
+              <span>
+                {!whatsappText.trim()
+                  ? "⚠️ Step 2 First-Touch WhatsApp is still empty — tap Step 2 to generate it before submitting!"
+                  : "⚠️ Tap 'Draft Winning Comparison Reply' above so your Step 3 reply is ready before submitting!"}
+              </span>
+              {!whatsappText.trim() && (
                 <button
                   type="button"
-                  onClick={() => setEmailPrompt("")}
-                  className="text-[11px] font-bold text-slate-500 hover:text-[#ed1b2e]"
+                  onClick={() => setStep(2)}
+                  className="px-3 py-1 rounded-lg bg-amber-600 text-white font-extrabold"
                 >
-                  {ui.clearPromptBtn}
+                  Go to Step 2 →
                 </button>
               )}
             </div>
-            <div className="text-[11px] text-slate-600 font-semibold">{ui.promptEditHint}</div>
-            <div className="flex flex-col md:flex-row gap-2 items-stretch">
-              <textarea
-                rows={4}
-                value={emailPrompt}
-                onChange={(e) => setEmailPrompt(e.target.value)}
-                placeholder={ui.emailPromptPlaceholder}
-                className="flex-1 bg-white border-2 border-slate-300 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-snug focus:outline-none focus:border-[#ed1b2e] shadow-inner"
-              />
-              <button
-                type="button"
-                onClick={() => handleGenerateEmail()}
-                disabled={isBusy}
-                className="px-5 py-2.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-sm sm:text-base font-extrabold shadow shrink-0 flex items-center justify-center"
-              >
-                {isBusy ? ui.waDrafting : ui.aiRefineBtn}
-              </button>
-            </div>
-          </div>
-
-          {/* Larger Editable PRU vs. AIA Comparison Email Box */}
-          <div className="space-y-1">
-            <label className="block text-xs sm:text-sm font-extrabold text-blue-950">
-              {ui.emailOutputLabel}
-            </label>
-            <textarea
-              rows={5}
-              value={emailText}
-              onChange={(e) => setEmailText(e.target.value)}
-              className="w-full bg-white border-2 border-blue-400 rounded-xl p-3 text-sm sm:text-base text-slate-900 leading-snug focus:outline-none focus:border-[#ed1b2e] shadow-sm"
-            />
-          </div>
+          )}
 
           <div className="flex flex-wrap justify-between items-center gap-2 pt-1">
             <button
@@ -2135,8 +3005,12 @@ window.Challenge3ParticipantView = function ({
             <button
               type="button"
               onClick={handleFinalSubmit}
-              disabled={isBusy}
-              className="py-3 px-6 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-sm sm:text-base font-extrabold shadow-lg transition-all"
+              disabled={isBusy || !readyToSubmit}
+              className={`py-3.5 px-6 rounded-xl text-sm sm:text-base font-extrabold shadow-lg transition-all ${
+                readyToSubmit
+                  ? "bg-[#ed1b2e] hover:bg-[#c8102e] text-white"
+                  : "bg-slate-200 text-slate-400 cursor-not-allowed"
+              }`}
             >
               {isBusy ? ui.submittingBtn : ui.finalSubmitBtn}
             </button>

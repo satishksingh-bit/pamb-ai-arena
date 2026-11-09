@@ -106,7 +106,7 @@ window.SubmissionCardRenderer = function ({
         </div>
       </div>
 
-      {/* Challenge 3 Compact Single-Box Layout: Greeting Card at Top + WhatsApp & Plan Comparison Email Below */}
+      {/* Challenge 3 Compact Single-Box Layout: Greeting Card at Top + Leader's Personal Touch + WhatsApp & Plan Comparison Email + Rubric */}
       {cNum === "3" ? (
         <div className="space-y-2.5">
           {displayPortrait && (
@@ -118,6 +118,15 @@ window.SubmissionCardRenderer = function ({
                   mode === "spotlight" ? "h-40 sm:h-44" : "h-32"
                 } w-auto object-contain rounded-lg border-2 border-[#ed1b2e] shadow-sm`}
               />
+            </div>
+          )}
+
+          {submission.personalTouch && (
+            <div className="bg-amber-50 border border-amber-300 rounded-xl px-3 py-2 text-xs font-bold text-amber-950">
+              <span className="uppercase tracking-wider text-[10px] font-extrabold text-amber-800 mr-1.5">
+                💡 Leader&apos;s Personal Touch:
+              </span>
+              {submission.personalTouch}
             </div>
           )}
 
@@ -133,13 +142,32 @@ window.SubmissionCardRenderer = function ({
 
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
               <div className="text-[11px] font-extrabold text-[#ed1b2e] mb-1">
-                📧 2. Factual Plan Comparison Email (vs. AIA)
+                📧 2. Factual Plan Comparison Email (vs. {submission.rivalBrand || "Competing Quote"})
               </div>
               <div className="text-[11px] text-slate-800 whitespace-pre-line leading-snug max-h-36 overflow-y-auto bg-white p-2 rounded-lg border border-slate-200">
                 {submission.aiaComparisonEmail || submission.dossierSynthesis || submission.aiOutput}
               </div>
             </div>
           </div>
+
+          {Object.keys(criteria).length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {Object.entries(criteria).map(([k, v]) => (
+                <span
+                  key={k}
+                  className="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 text-[10px] font-bold text-slate-700"
+                >
+                  {k}: <strong className="text-[#ed1b2e]">{v}/25</strong>
+                </span>
+              ))}
+            </div>
+          )}
+
+          {submission.judgeFeedback && (
+            <div className="text-[11px] text-slate-800 bg-red-50/70 px-2.5 py-1.5 rounded-lg border border-red-200">
+              🏅 <strong className="text-[#ed1b2e]">AI Judge:</strong> {submission.judgeFeedback}
+            </div>
+          )}
 
           {onSendToCanvas && (
             <div className="flex justify-end">

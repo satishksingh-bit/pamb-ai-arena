@@ -16,12 +16,15 @@ Aligned 1:1 with the 11 November PAMB Agenda (13:45 - 15:30):
 - Stage 5 ("PODIUM"): 15:27 - 15:30 | Champions Podium & 11 Nov Bootcamp Takeaways
 """
 
+import base64
+import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import io
 import json
 import mimetypes
 import os
 import random
+import re
 import subprocess
 import tarfile
 import threading
@@ -47,6 +50,11 @@ from challenges.c2_prompt_duel import (
     norm_lang,
 )
 from challenges.c3_pre_pitch import SCENARIO_CATALOG, get_sim_c3_greeting_card, handle_c3_ai
+from challenges.c3_scenarios_bank import (
+    get_total_unique_seats,
+    list_all_archetype_summaries,
+    resolve_seat_scenario,
+)
 from challenges.stage_demos import CANVAS_BLUEPRINTS, handle_canvas_ai, handle_coach_ai
 
 PROJECT_ID = os.environ.get("PROJECT_ID", "argolis-sandbox-main")
@@ -55,7 +63,9 @@ PORT = int(os.environ.get("PORT", "8095"))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATIC_HTML = os.path.join(STATIC_DIR, "index.html")
-STATE_FILE = "/tmp/pamb_agency_ai_arena_state_v1.json"
+STATE_FILE = os.environ.get("PAMB_STATE_FILE", "/tmp/pamb_agency_ai_arena_state_v1.json")
+MEDIA_DIR = os.environ.get("PAMB_MEDIA_DIR", "/tmp/pamb_arena_media")
+os.makedirs(MEDIA_DIR, exist_ok=True)
 
 MODEL_CANDIDATES = [
     "gemini-2.5-flash",
@@ -159,13 +169,13 @@ def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-2.5-flash") -
                 "contents": [{"role": "user", "parts": [{"text": prompt}]}],
                 "generationConfig": {
                     "temperature": 0.35,
-                    "maxOutputTokens": 650,
+                    "maxOutputTokens": 1400,
                 },
             }
             if model_id.startswith("gemini-2.5"):
                 payload["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
             try:
-                resp = requests.post(url, headers=headers, json=payload, timeout=7)
+                resp = requests.post(url, headers=headers, json=payload, timeout=14)
                 if resp.status_code == 200:
                     data = resp.json()
                     parts = (
@@ -180,6 +190,9 @@ def call_vertex_gemini(prompt: str, preferred_model: str = "gemini-2.5-flash") -
                 elif resp.status_code in (401, 403) and attempt == 0:
                     token = get_access_token(force_refresh=True)
                     break
+                elif resp.status_code == 429:
+                    time.sleep(0.5 * (attempt + 1))
+                    continue
             except Exception:
                 continue
 
@@ -208,7 +221,7 @@ def call_vertex_gemini_image(photo_data_url: str | None, image_prompt: str) -> t
             pass
     parts.append({"text": image_prompt})
 
-    for attempt in range(2):
+    for attempt in range(3):
         headers = {
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
@@ -242,6 +255,9 @@ def call_vertex_gemini_image(photo_data_url: str | None, image_prompt: str) -> t
                         return f"data:{out_mime};base64,{inline['data']}", ms
             elif resp.status_code in (401, 403) and attempt == 0:
                 token = get_access_token(force_refresh=True)
+                continue
+            elif resp.status_code == 429 and attempt < 2:
+                time.sleep(0.8 * (attempt + 1))
                 continue
         except Exception:
             pass
@@ -862,7 +878,7 @@ def _default_state(with_demo: bool = False, initial_phase: str = "LOBBY", simula
             {
                 "id": "evt-init-1",
                 "time": time.strftime("%H:%M:%S"),
-                "text": "🇲🇾 PAMB Joining Arena Open! Scan the QR code, enter your Name & Language, and read the briefs for Challenges 1, 2 & 3.",
+                "text": "🇲🇾 PRUMDA Learning Trip Arena Open! Scan the QR code, enter your Name & Language, and read the briefs for Challenges 1, 2 & 3.",
                 "type": "info",
             },
         ],
@@ -873,14 +889,86 @@ def _default_state(with_demo: bool = False, initial_phase: str = "LOBBY", simula
         "simulateDemo": False,
         "aiCallsCount": 24,
         "avgLatencyMs": 740,
+        "nextC3Seat": 0,
     }
 
 
+_MEM_STATE: dict | None = None
+
+
+def _offload_media_if_data_url(val):
+    """Offloads large data:image/... strings (> 4 KB) to /tmp/pamb_arena_media/<sha20>.<ext>
+    and returns '/api/media/<fname>' so GET /api/state stays < 80 KB across 50+ mobile phones."""
+    if not isinstance(val, str) or not val.startswith("data:image/") or len(val) <= 4096:
+        return val
+    if "," not in val:
+        return val
+    try:
+        header, payload = val.split(",", 1)
+        h_low = header.lower()
+        if "svg+xml" in h_low:
+            ext = ".svg"
+        elif "png" in h_low:
+            ext = ".png"
+        elif "webp" in h_low:
+            ext = ".webp"
+        else:
+            ext = ".jpg"
+        if ";base64" in h_low:
+            raw_bytes = base64.b64decode(payload.strip())
+        else:
+            raw_bytes = urllib.parse.unquote(payload).encode("utf-8")
+        digest = hashlib.sha256(raw_bytes).hexdigest()[:20]
+        fname = f"{digest}{ext}"
+        os.makedirs(MEDIA_DIR, exist_ok=True)
+        fpath = os.path.join(MEDIA_DIR, fname)
+        if not os.path.exists(fpath):
+            tmp_f = f"{fpath}.tmp"
+            with open(tmp_f, "wb") as f:
+                f.write(raw_bytes)
+            os.replace(tmp_f, fpath)
+        return f"/api/media/{fname}"
+    except Exception:
+        return val
+
+
+def _offload_submission_media(sub: dict):
+    if not isinstance(sub, dict):
+        return
+    for k in ("imageAfter", "imageBefore", "rawPortraitUrl", "greetingCardDataUrl"):
+        if k in sub and isinstance(sub[k], str):
+            sub[k] = _offload_media_if_data_url(sub[k])
+    deck = sub.get("deck")
+    if isinstance(deck, dict) and isinstance(deck.get("slides"), list):
+        for sl in deck["slides"]:
+            if isinstance(sl, dict) and isinstance(sl.get("image"), str):
+                sl["image"] = _offload_media_if_data_url(sl["image"])
+
+
+def _offload_state_media(st: dict):
+    if not isinstance(st, dict):
+        return
+    parts = st.get("participants")
+    if isinstance(parts, dict):
+        for p in parts.values():
+            subs = p.get("submissions")
+            if isinstance(subs, dict):
+                for sub in subs.values():
+                    _offload_submission_media(sub)
+
+
 def load_state() -> dict:
+    global _MEM_STATE
+    if _MEM_STATE is not None:
+        return _MEM_STATE
     if os.path.exists(STATE_FILE):
         try:
             with open(STATE_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+                loaded = json.load(f)
+                if isinstance(loaded, dict):
+                    _offload_state_media(loaded)
+                    _MEM_STATE = loaded
+                    return _MEM_STATE
         except Exception:
             pass
     st = _default_state(with_demo=True, initial_phase="LOBBY")
@@ -889,9 +977,14 @@ def load_state() -> dict:
 
 
 def save_state(st: dict):
+    global _MEM_STATE
+    _offload_state_media(st)
+    _MEM_STATE = st
     try:
-        with open(STATE_FILE, "w", encoding="utf-8") as f:
+        tmp_path = f"{STATE_FILE}.tmp"
+        with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(st, f)
+        os.replace(tmp_path, STATE_FILE)
     except Exception:
         pass
 
@@ -1062,6 +1155,76 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     "avgLatencyMs": st.get("avgLatencyMs", 740),
                     "projectId": PROJECT_ID,
                 })
+
+        if path.startswith("/api/media/"):
+            fname = path.removeprefix("/api/media/").strip("/")
+            if not re.fullmatch(r"[A-Za-z0-9._-]+", fname) or ".." in fname:
+                self.send_response(400)
+                self.end_headers()
+                return
+            fpath = os.path.join(MEDIA_DIR, fname)
+            if not os.path.isfile(fpath):
+                self.send_response(404)
+                self.end_headers()
+                return
+            ctype, _ = mimetypes.guess_type(fpath)
+            if not ctype:
+                ctype = "image/svg+xml" if fpath.endswith(".svg") else "application/octet-stream"
+            with open(fpath, "rb") as f:
+                raw = f.read()
+            self.send_response(200)
+            self.send_header("Content-Type", ctype)
+            self.send_header("Cache-Control", "public, max-age=86400, immutable")
+            self.send_header("Content-Length", str(len(raw)))
+            self.end_headers()
+            self.wfile.write(raw)
+            return
+
+        if path == "/api/c3/scenario":
+            qs = urllib.parse.parse_qs(parsed.query)
+            pid = (qs.get("id", [""])[0] or "").strip()
+            lang = (qs.get("lang", ["en"])[0] or "en").strip()
+            explicit_seat = qs.get("seat", [None])[0]
+            total_seats = get_total_unique_seats()
+
+            seat_idx = None
+            if explicit_seat is not None and str(explicit_seat).strip() != "":
+                try:
+                    seat_idx = int(explicit_seat) % total_seats
+                except Exception:
+                    seat_idx = None
+
+            with _STATE_LOCK:
+                st = load_state()
+                if seat_idx is None:
+                    if pid and pid in st["participants"]:
+                        p_rec = st["participants"][pid]
+                        if "c3Seat" not in p_rec or p_rec.get("c3Seat") is None:
+                            nxt = int(st.get("nextC3Seat", 0))
+                            p_rec["c3Seat"] = nxt % total_seats
+                            st["nextC3Seat"] = nxt + 1
+                            save_state(st)
+                        seat_idx = int(p_rec["c3Seat"]) % total_seats
+                    elif pid:
+                        h = 0
+                        for idx_c, ch in enumerate(pid):
+                            h = (h * 31 + ord(ch) + idx_c) & 0x7FFFFFFF
+                        seat_idx = h % total_seats
+                    else:
+                        seat_idx = 0
+                elif pid and pid in st["participants"] and qs.get("persist", ["0"])[0] == "1":
+                    st["participants"][pid]["c3Seat"] = seat_idx
+                    save_state(st)
+
+            scen = resolve_seat_scenario(seat_idx, lang)
+            archetypes = list_all_archetype_summaries(lang)
+            return self._send_json({
+                "ok": True,
+                "seatIndex": seat_idx,
+                "totalUniqueSeats": total_seats,
+                "scenario": scen,
+                "archetypes": archetypes,
+            })
 
         if path == "/api/challenge":
             qs = urllib.parse.parse_qs(parsed.query)
@@ -1235,6 +1398,13 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                 st = load_state()
                 existing = st["participants"].get(pid, {})
                 is_new = not bool(existing)
+                total_seats = get_total_unique_seats()
+                if "c3Seat" in existing and existing.get("c3Seat") is not None:
+                    assigned_c3_seat = int(existing["c3Seat"]) % total_seats
+                else:
+                    nxt_seat = int(st.get("nextC3Seat", 0))
+                    assigned_c3_seat = nxt_seat % total_seats
+                    st["nextC3Seat"] = nxt_seat + 1
                 p = {
                     "id": pid,
                     "name": name,
@@ -1242,6 +1412,7 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                     "regionBadge": r_meta["badge"],
                     "countryFlag": "🇲🇾",
                     "language": lang,
+                    "c3Seat": assigned_c3_seat,
                     "speed": existing.get("speed", 0),
                     "accuracy": existing.get("accuracy", 0),
                     "total": existing.get("total", 0),
@@ -1622,6 +1793,10 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
             with _STATE_LOCK:
                 st = load_state()
                 pref_model = body.get("model") or st.get("preferredModel", "gemini-2.5-flash")
+                if challenge == "3" and body.get("seatIndex") is None and pid and pid in st["participants"]:
+                    if "c3Seat" in st["participants"][pid]:
+                        body = dict(body)
+                        body["seatIndex"] = st["participants"][pid]["c3Seat"]
 
             fn = lambda prompt: call_vertex_gemini(prompt, pref_model)
             if challenge == "1":
@@ -1630,6 +1805,8 @@ class PAMBArenaHTTPHandler(BaseHTTPRequestHandler):
                 result = handle_c2_ai(body, fn, LANG_NAMES)
             elif challenge == "3":
                 result = handle_c3_ai(body, fn, LANG_NAMES, call_vertex_gemini_image)
+                if isinstance(result, dict) and result.get("greetingCardDataUrl"):
+                    result["greetingCardDataUrl"] = _offload_media_if_data_url(result["greetingCardDataUrl"])
             elif challenge == "canvas":
                 result = handle_canvas_ai(body, fn, LANG_NAMES)
             elif challenge == "coach":

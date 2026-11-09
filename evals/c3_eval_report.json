@@ -1,0 +1,417 @@
+{
+  "timestamp": "2026-11-09T06:33:27Z",
+  "elapsedSeconds": 39.58,
+  "totalChecks": 40,
+  "passedChecks": 40,
+  "failedChecks": 0,
+  "passRatePct": 100.0,
+  "calibrationSummary": {
+    "Tier_A_Master_MDRT": 92,
+    "Tier_B_Solid_Standard": 82,
+    "Tier_C_Minimal_Pushy": 55.5,
+    "Tier_D_BNM_NonCompliant": 53,
+    "Pairwise_Accuracy_Pct": 100.0
+  },
+  "checks": [
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "Clean Real-Event Reset",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "280-Payload Schema Completeness (56 Seats × 5 Langs)",
+      "passed": true,
+      "detail": "total_seats=56, missing=0"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "Zero 'PAMB' / 'Prudential Malaysia' Leaks Across 280 Payloads",
+      "passed": true,
+      "detail": "leaks=[]"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "54-Leader Zero-Collision Unique Case Assignment",
+      "passed": true,
+      "detail": "unique_seats=54/54, unique_persona_keys=54/54"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "Interleaved 16-Archetype Coverage (First 16 Leaders Get 16 Distinct Topics)",
+      "passed": true,
+      "detail": "first_16_unique=16/16, total_archetypes=16/16"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "Multi-Competitor Variety (AIA, AIA Public Takaful, Great Eastern)",
+      "passed": true,
+      "detail": "rivals=['AIA Malaysia', 'AIA Public Takaful', 'Great Eastern Malaysia']"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "Seat Persistence Across Refreshes & Language Switches",
+      "passed": true,
+      "detail": "expected seat=6, got=6"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "50-Phone Wi-Fi State Payload < 120 KB After 25 Image Submissions",
+      "passed": true,
+      "detail": "/api/state=59.2 KB (2,000+ KB raw base64 offloaded to /api/media/191beacb726422bd88a5.png)"
+    },
+    {
+      "suite": "S1_Scale_Uniqueness",
+      "name": "Offloaded /api/media/<hash> Serves Valid Cached Image Bytes",
+      "passed": true,
+      "detail": "HTTP 200, bytes=60007, Cache-Control=public, max-age=86400, immutable"
+    },
+    {
+      "suite": "S2_Greeting_Cards",
+      "name": "5-Language Localized SVG Fallback Cards Valid & Brand-Clean",
+      "passed": true,
+      "detail": "en:2186B, zh-CN:2093B, yue:2129B, ms:2150B, ta:2174B"
+    },
+    {
+      "suite": "S2_Greeting_Cards",
+      "name": "Live Step 1 Card Generation (en, seat=0, model=gemini-2.5-flash-image)",
+      "passed": true,
+      "detail": "1431KB via /api/media/10e1159222df11928dcc.png in 8.8s"
+    },
+    {
+      "suite": "S2_Greeting_Cards",
+      "name": "Live Step 1 Card Generation (zh-CN, seat=6, model=gemini-2.5-flash-image)",
+      "passed": true,
+      "detail": "1928KB via /api/media/ba541b92aff51519acbf.png in 8.6s"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live en (newborn_baby vs AIA Malaysia)",
+      "passed": true,
+      "detail": "wa=379c, em=936c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live en (hospital_bill_shock vs Great Eastern Malaysia)",
+      "passed": true,
+      "detail": "wa=516c, em=898c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live ms (new_home_mortgage vs AIA Malaysia)",
+      "passed": true,
+      "detail": "wa=397c, em=1079c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live ms (takaful_hibah_estate vs AIA Public Takaful)",
+      "passed": true,
+      "detail": "wa=372c, em=1073c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live ta (career_promotion vs AIA Malaysia)",
+      "passed": true,
+      "detail": "wa=321c, em=798c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live ta (overseas_med_student vs Great Eastern Malaysia)",
+      "passed": true,
+      "detail": "wa=477c, em=1119c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live yue (ci_health_scare vs AIA Malaysia)",
+      "passed": true,
+      "detail": "wa=158c, em=360c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live yue (fd_maturing_wealth vs Great Eastern Malaysia)",
+      "passed": true,
+      "detail": "wa=179c, em=361c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live zh-CN (sme_expansion vs AIA Malaysia)",
+      "passed": true,
+      "detail": "wa=113c, em=399c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S3_Live_Multilingual_Gen",
+      "name": "Live zh-CN (sandwich_gen_parents vs AIA Malaysia)",
+      "passed": true,
+      "detail": "wa=167c, em=356c, script=True, pru=True, noPAMB=True, waTouch=True, emTouch=True"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case A1_Master_EN_Baby (Tier A, en)",
+      "passed": true,
+      "detail": "score=93 (target 90..99), pillars={'Visual Warmth & Card': 24, 'Empathy-First Opening': 23, 'Wealth & Plan Mastery': 23, 'Personal Advisor Touch': 23}, feedback='Your FD interest hook is excellent! Consider varying your custom personal t...'",
+      "meta": {
+        "tier": "A",
+        "score": 93,
+        "pillars": {
+          "Visual Warmth & Card": 24,
+          "Empathy-First Opening": 23,
+          "Wealth & Plan Mastery": 23,
+          "Personal Advisor Touch": 23
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case A2_Master_ZH_SME (Tier A, zh-CN)",
+      "passed": true,
+      "detail": "score=92 (target 90..99), pillars={'祝贺卡视觉与温度': 24, '共情先行破冰开场': 22, '财富与条款精准度': 23, '顾问个人巧思与创意': 23}, feedback='恭喜您精准抓住了拿督斯里扩建新厂的财富钩子！建议您在比较回复中，可更精简地突出PRU方案如何直接解决其RM600万担保的痛点。...'",
+      "meta": {
+        "tier": "A",
+        "score": 92,
+        "pillars": {
+          "祝贺卡视觉与温度": 24,
+          "共情先行破冰开场": 22,
+          "财富与条款精准度": 23,
+          "顾问个人巧思与创意": 23
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case A3_Master_YUE_CI (Tier A, yue)",
+      "passed": true,
+      "detail": "score=91 (target 90..99), pillars={'賀卡視覺與人情味': 24, '共情先行破冰開場': 22, '財富與條款精準度': 23, '顧問個人巧思與創意': 22}, feedback='你個「檳城日出賀卡」好有心思，好貼地！下次可以試下將「趁39歲鎖定保費」呢個財富鉤放喺開頭，會更搶眼。...'",
+      "meta": {
+        "tier": "A",
+        "score": 91,
+        "pillars": {
+          "賀卡視覺與人情味": 24,
+          "共情先行破冰開場": 22,
+          "財富與條款精準度": 23,
+          "顧問個人巧思與創意": 22
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case A4_Master_MS_Hibah (Tier A, ms)",
+      "passed": true,
+      "detail": "score=92 (target 90..99), pillars={'Kemewahan & Kad Ucapan': 24, 'Pembukaan Empati Mesra': 22, 'Ketepatan Kekayaan & Pelan': 23, 'Sentuhan Peribadi Perunding': 23}, feedback='Tahniah atas sentuhan peribadi 'motif geometri zamrud & doa keberkatan' yan...'",
+      "meta": {
+        "tier": "A",
+        "score": 92,
+        "pillars": {
+          "Kemewahan & Kad Ucapan": 24,
+          "Pembukaan Empati Mesra": 22,
+          "Ketepatan Kekayaan & Pelan": 23,
+          "Sentuhan Peribadi Perunding": 23
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case B1_Standard_EN (Tier B, en)",
+      "passed": true,
+      "detail": "score=82 (target 78..90), pillars={'Visual Warmth & Card': 22, 'Empathy-First Opening': 22, 'Wealth & Plan Mastery': 20, 'Personal Advisor Touch': 18}, feedback='Your comparison reply effectively highlights a key benefit: 'automatic sum ...'",
+      "meta": {
+        "tier": "B",
+        "score": 82,
+        "pillars": {
+          "Visual Warmth & Card": 22,
+          "Empathy-First Opening": 22,
+          "Wealth & Plan Mastery": 20,
+          "Personal Advisor Touch": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case B2_Standard_ZH (Tier B, zh-CN)",
+      "passed": true,
+      "detail": "score=82 (target 78..90), pillars={'祝贺卡视觉与温度': 22, '共情先行破冰开场': 22, '财富与条款精准度': 20, '顾问个人巧思与创意': 18}, feedback='恭贺卡标题很棒，直接点出客户痛点！下次可尝试在WhatsApp中加入更多个人化细节，拉近距离。...'",
+      "meta": {
+        "tier": "B",
+        "score": 82,
+        "pillars": {
+          "祝贺卡视觉与温度": 22,
+          "共情先行破冰开场": 22,
+          "财富与条款精准度": 20,
+          "顾问个人巧思与创意": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case B3_Standard_MS (Tier B, ms)",
+      "passed": true,
+      "detail": "score=82 (target 78..90), pillars={'Kemewahan & Kad Ucapan': 22, 'Pembukaan Empati Mesra': 21, 'Ketepatan Kekayaan & Pelan': 21, 'Sentuhan Peribadi Perunding': 18}, feedback='Tahniah atas penggunaan kad ucapan yang relevan! Ia menunjukkan perhatian. ...'",
+      "meta": {
+        "tier": "B",
+        "score": 82,
+        "pillars": {
+          "Kemewahan & Kad Ucapan": 22,
+          "Pembukaan Empati Mesra": 21,
+          "Ketepatan Kekayaan & Pelan": 21,
+          "Sentuhan Peribadi Perunding": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case B4_Standard_TA (Tier B, ta)",
+      "passed": true,
+      "detail": "score=82 (target 78..90), pillars={'வாழ்த்து அட்டை & அன்பு': 22, 'அக்கறை நிறைந்த தொடக்கம்': 22, 'செல்வ & திட்டத் துல்லியம்': 20, 'ஆலோசகர் தனிப்பட்ட படைப்பாற்றல்': 18}, feedback='Dr. Kavitha-வின் பதவி உயர்வு வாழ்த்து அருமை! ஆனால், தனிப்பட்ட தொடுதலை (Pers...'",
+      "meta": {
+        "tier": "B",
+        "score": 82,
+        "pillars": {
+          "வாழ்த்து அட்டை & அன்பு": 22,
+          "அக்கறை நிறைந்த தொடக்கம்": 22,
+          "செல்வ & திட்டத் துல்லியம்": 20,
+          "ஆலோசகர் தனிப்பட்ட படைப்பாற்றல்": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case C1_Minimal_Pushy_EN (Tier C, en)",
+      "passed": true,
+      "detail": "score=54 (target 45..74), pillars={'Visual Warmth & Card': 13, 'Empathy-First Opening': 10, 'Wealth & Plan Mastery': 13, 'Personal Advisor Touch': 18}, feedback='The 'Welcome to the World, Baby Lucas!' headline is a nice touch. For futur...'",
+      "meta": {
+        "tier": "C",
+        "score": 54,
+        "pillars": {
+          "Visual Warmth & Card": 13,
+          "Empathy-First Opening": 10,
+          "Wealth & Plan Mastery": 13,
+          "Personal Advisor Touch": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case C2_Minimal_Pushy_ZH (Tier C, zh-CN)",
+      "passed": true,
+      "detail": "score=54 (target 45..74), pillars={'祝贺卡视觉与温度': 13, '共情先行破冰开场': 10, '财富与条款精准度': 13, '顾问个人巧思与创意': 18}, feedback='恭贺新厂的标题很棒，但您的开场白过于直接，缺乏对客户的了解和尊重。下次可尝试先建立信任，再谈保单。...'",
+      "meta": {
+        "tier": "C",
+        "score": 54,
+        "pillars": {
+          "祝贺卡视觉与温度": 13,
+          "共情先行破冰开场": 10,
+          "财富与条款精准度": 13,
+          "顾问个人巧思与创意": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case C3_Minimal_YUE (Tier C, yue)",
+      "passed": true,
+      "detail": "score=54 (target 45..74), pillars={'賀卡視覺與人情味': 13, '共情先行破冰開場': 10, '財富與條款精準度': 13, '顧問個人巧思與創意': 18}, feedback='你個Greeting Card headline幾好，有心思！不過，下次試吓用多啲同理心，唔好咁Chur。...'",
+      "meta": {
+        "tier": "C",
+        "score": 54,
+        "pillars": {
+          "賀卡視覺與人情味": 13,
+          "共情先行破冰開場": 10,
+          "財富與條款精準度": 13,
+          "顧問個人巧思與創意": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case C4_Minimal_MS (Tier C, ms)",
+      "passed": true,
+      "detail": "score=60 (target 45..74), pillars={'Kemewahan & Kad Ucapan': 15, 'Pembukaan Empati Mesra': 10, 'Ketepatan Kekayaan & Pelan': 17, 'Sentuhan Peribadi Perunding': 18}, feedback='Tahniah atas ucapan 'Tahniah & Mabruk' yang sesuai dengan kejayaan klien! N...'",
+      "meta": {
+        "tier": "C",
+        "score": 60,
+        "pillars": {
+          "Kemewahan & Kad Ucapan": 15,
+          "Pembukaan Empati Mesra": 10,
+          "Ketepatan Kekayaan & Pelan": 17,
+          "Sentuhan Peribadi Perunding": 18
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case D1_NonCompliant_GuaranteedReturn_EN (Tier D, en)",
+      "passed": true,
+      "detail": "score=55 (target 40..68), pillars={'Visual Warmth & Card': 18, 'Empathy-First Opening': 15, 'Wealth & Plan Mastery': 9, 'Personal Advisor Touch': 13}, feedback='⚠️ BNM Compliance Alert: Never promise 'guaranteed % investment returns' on...'",
+      "meta": {
+        "tier": "D",
+        "score": 55,
+        "pillars": {
+          "Visual Warmth & Card": 18,
+          "Empathy-First Opening": 15,
+          "Wealth & Plan Mastery": 9,
+          "Personal Advisor Touch": 13
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case D2_NonCompliant_Bashing_ZH (Tier D, zh-CN)",
+      "passed": true,
+      "detail": "score=54 (target 40..68), pillars={'祝贺卡视觉与温度': 18, '共情先行破冰开场': 15, '财富与条款精准度': 8, '顾问个人巧思与创意': 13}, feedback='⚠️ 合规提醒：切勿对投资连结或财富方案承诺「保证固定百分比回报」，请遵循国家银行 (BNM) 规范客观呈现条款优势！...'",
+      "meta": {
+        "tier": "D",
+        "score": 54,
+        "pillars": {
+          "祝贺卡视觉与温度": 18,
+          "共情先行破冰开场": 15,
+          "财富与条款精准度": 8,
+          "顾问个人巧思与创意": 13
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case D3_NonCompliant_Bashing_MS (Tier D, ms)",
+      "passed": true,
+      "detail": "score=51 (target 40..68), pillars={'Kemewahan & Kad Ucapan': 18, 'Pembukaan Empati Mesra': 12, 'Ketepatan Kekayaan & Pelan': 8, 'Sentuhan Peribadi Perunding': 13}, feedback='⚠️ BNM Compliance Alert: Never promise 'guaranteed % investment returns' on...'",
+      "meta": {
+        "tier": "D",
+        "score": 51,
+        "pillars": {
+          "Kemewahan & Kad Ucapan": 18,
+          "Pembukaan Empati Mesra": 12,
+          "Ketepatan Kekayaan & Pelan": 8,
+          "Sentuhan Peribadi Perunding": 13
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Golden Case D4_NonCompliant_GuaranteedReturn_YUE (Tier D, yue)",
+      "passed": true,
+      "detail": "score=52 (target 40..68), pillars={'賀卡視覺與人情味': 18, '共情先行破冰開場': 13, '財富與條款精準度': 8, '顧問個人巧思與創意': 13}, feedback='⚠️ 合规提醒：切勿对投资连结或财富方案承诺「保证固定百分比回报」，请遵循国家银行 (BNM) 规范客观呈现条款优势！...'",
+      "meta": {
+        "tier": "D",
+        "score": 52,
+        "pillars": {
+          "賀卡視覺與人情味": 18,
+          "共情先行破冰開場": 13,
+          "財富與條款精準度": 8,
+          "顧問個人巧思與創意": 13
+        }
+      }
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "4-Tier Mean Score Separation (Mean A > B > C & Non-Compliant D Penalized)",
+      "passed": true,
+      "detail": "Mean A=92.0, Mean B=82.0, Mean C=55.5, Mean D=53.0"
+    },
+    {
+      "suite": "S4_Judge_Calibration",
+      "name": "Pairwise Rank-Order Discrimination Accuracy == 100%",
+      "passed": true,
+      "detail": "80/80 pairs (100.0%)"
+    }
+  ]
+}

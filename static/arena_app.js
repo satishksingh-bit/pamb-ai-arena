@@ -1939,6 +1939,9 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
                 agentName={agentName}
                 agentRegion={agentRegion}
                 onNext={() => setActiveTab("card")}
+                existingSubmission={myRecord?.submissions?.["3"] || null}
+                existingScore={myRecord?.scores?.["3"] || null}
+                isCompleted={Boolean(myRecord?.completed?.["3"])}
                 fetchArenaState={fetchArenaState}
               />
             )}
