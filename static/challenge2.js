@@ -2,90 +2,156 @@
    CHALLENGE 2 MODULE (14:20 - 14:35 | 15 Mins)
    "Executive Pre-Pitch 3-Slide Deck Studio (R.C.T.F.C. + Personal Touch)"
    - Strictly 3 Slides Only (Slide 1 KPI Snapshot · Slide 2 Gap Chart · Slide 3 Strategy Matrix)
-   - 56 Unique HNW Malaysian Client Scenarios (14 Archetypes × 4 Personas)
-   - Clean Visual R.C.T.F.C. Builder + Boardroom Tone + Personal Strategic Angle
+   - 72 Evenly Distributed HNW Malaysian Client Seats (6 Curated Cases × 12 Personas)
+   - Streamlined 390×844 Mobile R.C.T.F.C. Builder + Boardroom Tone + Personal Strategic Angle
    - Full 5-Language Native Localization (EN, ZH-CN, YUE, MS, TA)
    - Mobile localStorage Persistence + Strict One-Time Final Submission Lock
 ============================================================================ */
 
+const C2_CURATED_CASES_META = [
+  {
+    slot: 0,
+    id: "glc_cfo_golden_bridge",
+    icon: "🏛️",
+    labels: {
+      en: "Age-60 CFO Health Bridge",
+      "zh-CN": "上市CFO 60岁医疗桥",
+      yue: "上市CFO 60歲醫療橋",
+      ms: "Jambatan Kesihatan CFO 60",
+      ta: "60 வயது CFO மருத்துவப் பாலம்",
+    },
+  },
+  {
+    slot: 1,
+    id: "kl_surgeon_practice",
+    icon: "🩺",
+    labels: {
+      en: "Specialist Premier Health",
+      "zh-CN": "专科名医高端医疗储备",
+      yue: "專科名醫高端醫療儲備",
+      ms: "Perubatan Premier Pakar",
+      ta: "மருத்துவ நிபுணர் பிரீமியர் நலன்",
+    },
+  },
+  {
+    slot: 2,
+    id: "clinic_founder_takaful",
+    icon: "🏥",
+    labels: {
+      en: "Clinic Takaful & Hibah",
+      "zh-CN": "专科诊所 Takaful & Hibah",
+      yue: "專科診所 Takaful & Hibah",
+      ms: "Takaful & Hibah Klinik",
+      ta: "கிளினிக் தகாஃபுல் & Hibah",
+    },
+  },
+  {
+    slot: 3,
+    id: "tech_exit_family_office",
+    icon: "🚀",
+    labels: {
+      en: "Post-Exit Tech Trust",
+      "zh-CN": "科技套现家族信托",
+      yue: "科技套現家族信託",
+      ms: "Amanah Pengasas Tech",
+      ta: "டெக் நிறுவனர் குடும்ப அறக்கட்டளை",
+    },
+  },
+  {
+    slot: 4,
+    id: "ipoh_pharma_matriarch",
+    icon: "🌿",
+    labels: {
+      en: "3-Gen Longevity & Grandkids",
+      "zh-CN": "三代长寿康养与孙辈池",
+      yue: "三代長壽康養與孫輩池",
+      ms: "Penjagaan 3-Gen & Cucu",
+      ta: "3-தலைமுறை நலன் & பேரப்பிள்ளைகள்",
+    },
+  },
+  {
+    slot: 5,
+    id: "penang_semicon_keyman",
+    icon: "🏭",
+    labels: {
+      en: "Semicon Heir Harmony",
+      "zh-CN": "半导体扩厂与传承和谐",
+      yue: "半導體擴廠與傳承和睦",
+      ms: "Harmoni Waris Semikonduktor",
+      ta: "செமிகண்டக்டர் வாரிசு நல்லிணக்கம்",
+    },
+  },
+];
+
 const C2_UI_I18N = {
   en: {
-    badge: "🧠 CHALLENGE 2 • R.C.T.F.C. 3-SLIDE DECK STUDIO",
-    title: "Executive Pre-Pitch 3-Slide Studio",
-    subtitle:
-      "Every leader receives a unique HNW client case. Activate the 5 R.C.T.F.C. pillars, add your Personal Strategic Angle, and generate a strictly 3-slide boardroom pre-pitch deck.",
-    step1Tab: "1️⃣ Architect Prompt & Angle",
-    step2Tab: "2️⃣ Review 3-Slide Deck & Submit",
-    targetBtn: "🎯 Benchmark Deck",
-    hideTargetBtn: "✕ Hide Benchmark",
-    browseCasesBtn: "📂 14 Cases",
-    switchCaseBtn: "🎲 Switch Case",
-    casePickerTitle: "Choose an HNW Executive Scenario (14 Archetypes • 56 Unique Seats)",
-    targetGoalBanner: "🎯 3-SLIDE BENCHMARK REFERENCE DECK (FOR YOUR CLIENT)",
-    assignedCaseLabel: "ASSIGNED HNW CLIENT BRIEF",
-    moreCaseBtn: "Full Dossier ▾",
-    lessCaseBtn: "Compact ▴",
-    pillarsHeader: "1. Activate the 5 R.C.T.F.C. Prompt Pillars",
-    pillarsSub: "Tap individual pillars to toggle, or activate all 5 and focus on your personal angle below.",
-    insertAllBtn: "✨ Activate All 5 Pillars",
-    weakPromptBtn: "🧪 Try Weak 1-Line Prompt",
-    toneHeader: "2. Choose Boardroom Presentation Style",
+    studioHeader: "🧠 3-Slide Pre-Pitch Studio",
+    sampleBtn: "🎯 Sample",
+    closeSampleBtn: "✕ Close",
+    targetGoalBanner: "🎯 3-SLIDE SAMPLE BENCHMARK DECK",
+    caseInfoBtn: "Case Info ▾",
+    hideCaseBtn: "Hide ▴",
+    switchCaseFmt: "Switch Case",
+    switchShortFmt: "Switch",
+    switchConfirmMsg: "Switch client case and start a fresh 3-slide deck?",
+    step1Tab: "1. 🧩 Build Prompt",
+    step2Tab: "2. 📊 3-Slide Deck",
+    pillarsHeader: "1. R.C.T.F.C. Prompt Pillars",
+    activateAllShort: "✨ All 5 On",
+    pillarTitles: {
+      role: "R · Role",
+      context: "C · Context",
+      task: "T · Task",
+      format: "F · Format",
+      constraints: "C · Constraints",
+    },
+    toneHeader: "2. Boardroom Style",
     tones: [
       {
         id: "boardroom",
-        label: "🏛️ Family-Office Boardroom",
-        clause: "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales fluff.",
+        shortLabel: "🏛️ Boardroom",
+        clause:
+          "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales fluff.",
       },
       {
         id: "empathy",
-        label: "❤️ Founder & Family Empathy",
-        clause: "[Presentation Style]: Warm founder & family-dignity tone — protect family harmony, spouse security, and children's dreams.",
+        shortLabel: "❤️ Empathy",
+        clause:
+          "[Presentation Style]: Warm founder & family-dignity tone — protect family harmony, spouse security, and children's dreams.",
       },
       {
         id: "cfo",
-        label: "📊 CFO Precision & IRR Clarity",
-        clause: "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
+        shortLabel: "📊 CFO",
+        clause:
+          "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
       },
     ],
-    angleHeader: "3. 💡 Add Your Personal Strategic Angle / Relationship Hook",
-    angleSub: "What makes YOUR advisory approach stand out? Tap an idea below or write your own custom angle:",
-    anglePlaceholder: "e.g., Propose a 30-min joint review with their tax accountant & company secretary—zero product push...",
-    promptDrawerShow: "🔍 Inspect / Edit Full Assembled Prompt",
-    promptDrawerHide: "▴ Collapse Prompt Editor",
-    pillarsActiveLabel: "R.C.T.F.C. Active",
-    strictly3Badge: "STRICTLY 3 SLIDES",
+    angleHeader: "3. 💡 Personal Strategic Angle",
+    anglePlaceholder:
+      "Tap a quick angle above or write your bespoke hook (e.g., 30-min co-review with accountant)...",
+    inspectPromptShow: "Inspect Full Prompt ▾",
+    inspectPromptHide: "Hide Full Prompt ▴",
+    pillarsReadySuffix: "Pillars Ready",
+    unlockEditBtn: "✏️ Unlock Manual Edit",
+    lockAutoSyncBtn: "🔒 Re-Sync Pillars",
     generateBtn: "⚡ Generate 3-Slide Executive Deck",
     regenerateBtn: "🔄 Regenerate 3-Slide Deck",
     genStages: [
-      "1/3 · Structuring Slide 1 Client & Balance-Sheet KPIs...",
-      "2/3 · Modeling Slide 2 Liquidity Gap Bar Chart...",
-      "3/3 · Synthesizing Slide 3 Strategy Matrix & Speaker Notes...",
+      "1/3 · Structuring Slide 1 Client & KPIs...",
+      "2/3 · Modeling Slide 2 Liquidity Gap Chart...",
+      "3/3 · Synthesizing Slide 3 Strategy Matrix...",
     ],
-    generatingImgText: "🎨 Rendering bespoke 16:9 boardroom slide visuals...",
-    finishingImgBeforeSubmit: "🎨 Attaching slide visuals before locking your final deck...",
-    slideTabPrefix: "Slide ",
-    slideTabSuffix: "",
-    slideShortLabels: ["Snapshot & KPIs", "Liquidity Gap", "Strategy Matrix"],
-    slidesCountBadge: "3 Slides Locked ✓",
-    compareToggleOn: "🔀 Side-by-Side Benchmark: ON",
-    compareToggleOff: "🔀 Compare vs Benchmark",
+    generatingImgBadge: "🎨 Rendering visuals...",
+    finishingImgBeforeSubmit: "🎨 Attaching slide visuals...",
+    slideTabs: ["1. KPIs", "2. Gap Chart", "3. Strategy"],
     downloadPptxBtn: "⬇ Export .pptx",
-    yourSlideLabel: "📊 YOUR GENERATED SLIDE",
-    targetSlideLabel: "🎯 BENCHMARK SLIDE",
-    speakerNotesLabel: "🎙️ Presenter Notes",
-    qualityChecksHeader: "✅ Pre-Submit 3-Slide Readiness Checklist",
-    checkLabels: {
-      slides3: "Strictly 3 Slides",
-      clientFacts: "Client Balance-Sheet Numbers",
-      visuals: "KPIs + Gap Chart + Strategy Table",
-      personalTouch: "Personal Strategic Angle",
-      compliance: "BNM & Trust/Hibah Guardrails",
-    },
-    backToPromptBtn: "✏️ Refine Prompt / Angle",
-    finalSubmitBtn: "🏆 Finalize & Submit 3-Slide Deck to Arena",
-    finalSubmittingText: "⚖️ Executive Judge Scoring Your 3-Slide Deck & Personal Angle...",
-    oneTimeNotice:
-      "🔒 Regenerate freely while drafting. Clicking Finalize & Submit locks your 3-slide deck onto the Live Arena Leaderboard.",
+    yourSlideLabel: "📊 YOUR SLIDE",
+    targetSlideLabel: "🎯 SAMPLE SLIDE",
+    speakerNotesToggle: "🎙️ Speaker Notes",
+    readyStatusBar: "✅ 3-Slide Deck Ready • Final Submit Locks Score",
+    backToPromptBtn: "✏️ Refine Prompt",
+    finalSubmitBtn: "🏆 Finalize & Submit Deck",
+    finalSubmittingText: "⚖️ Scoring Your 3-Slide Deck...",
     jobDoneBadge: "✅ CHALLENGE 2 COMPLETE — LOCKED ON LEADERBOARD",
     jobDoneTitle: "Your 3-Slide Executive Pre-Pitch Deck is Live in the Arena",
     arenaScoreLabel: "Arena Score",
@@ -102,89 +168,78 @@ const C2_UI_I18N = {
     viewMainScoreBtn: "🏆 View Live Leaderboard",
     proceedC3Btn: "🚀 Proceed to Challenge 3 →",
     waitingC3Text: "⏳ Score recorded on the Big Screen! Waiting for Presenter to launch Challenge 3...",
-    promptUsedLabel: "📝 Your Submitted R.C.T.F.C. Prompt & Strategic Angle",
   },
   "zh-CN": {
-    badge: "🧠 挑战 2 • R.C.T.F.C. 三页高管简报工作室",
-    title: "高管战前 3 页简报工作室",
-    subtitle:
-      "每位团队长均获分配专属高净值客户案例。激活 R.C.T.F.C. 五大维度并融入您的「个人策略切入点」，生成严格限定 3 页的家族办公室级提案简报。",
-    step1Tab: "1️⃣ 构建五维策略与个人切入点",
-    step2Tab: "2️⃣ 预览 3 页简报并最终提交",
-    targetBtn: "🎯 参考标杆简报",
-    hideTargetBtn: "✕ 收起标杆",
-    browseCasesBtn: "📂 14类案例",
-    switchCaseBtn: "🎲 切换客户",
-    casePickerTitle: "选择高净值客户实战案例（14 大行业原型 • 全场 56 席独立案例）",
-    targetGoalBanner: "🎯 3 页标杆参考简报（对应您当前客户）",
-    assignedCaseLabel: "您的专属高净值客户档案",
-    moreCaseBtn: "完整背景 ▾",
-    lessCaseBtn: "收起 ▴",
-    pillarsHeader: "1. 激活 R.C.T.F.C. 五维提示词积木",
-    pillarsSub: "点击点亮各维度，或一键激活全部 5 个维度后专注打磨下方的个人策略切入点。",
-    insertAllBtn: "✨ 一键激活全部 5 个维度",
-    weakPromptBtn: "🧪 体验普通一句话提示词对比",
-    toneHeader: "2. 选择简报呈现风格",
+    studioHeader: "🧠 3页战前简报工作室",
+    sampleBtn: "🎯 标杆样例",
+    closeSampleBtn: "✕ 关闭",
+    targetGoalBanner: "🎯 3页标杆参考简报（对应当前客户）",
+    caseInfoBtn: "客户详情 ▾",
+    hideCaseBtn: "收起 ▴",
+    switchCaseFmt: "切换案例",
+    switchShortFmt: "切换",
+    switchConfirmMsg: "确认切换客户案例并重新生成 3 页简报吗？",
+    step1Tab: "1. 🧩 构建提示词",
+    step2Tab: "2. 📊 3页简报",
+    pillarsHeader: "1. R.C.T.F.C. 五维积木",
+    activateAllShort: "✨ 全选5维",
+    pillarTitles: {
+      role: "R · 角色",
+      context: "C · 背景",
+      task: "T · 任务",
+      format: "F · 格式",
+      constraints: "C · 合规",
+    },
+    toneHeader: "2. 董事会呈现风格",
     tones: [
       {
         id: "boardroom",
-        label: "🏛️ 家族办公室尊尚风",
-        clause: "[呈现风格]：采用资深家族办公室董事会风格——聚焦资产负债表与传承结构，零推销感。",
+        shortLabel: "🏛️ 董事会",
+        clause:
+          "[呈现风格]：采用资深家族办公室董事会风格——聚焦资产负债表与传承结构，零推销感。",
       },
       {
         id: "empathy",
-        label: "❤️ 创办人共情与家风守护",
-        clause: "[呈现风格]：温暖共情切入——守护创业心血与100%家族股权完整，保障配偶尊严与子女学业和谐。",
+        shortLabel: "❤️ 共情家风",
+        clause:
+          "[呈现风格]：温暖共情切入——守护创业心血与100%家族股权完整，保障配偶尊严与子女学业和谐。",
       },
       {
         id: "cfo",
-        label: "📊 CFO 财务量化对比",
-        clause: "[呈现风格]：严谨 CFO 财务视角——对比每年约 2% 资金配置成本与守护 100% 企业估值完整及法定信托隔离。",
+        shortLabel: "📊 CFO量化",
+        clause:
+          "[呈现风格]：严谨 CFO 财务视角——对比每年约 2% 资金配置成本与守护 100% 企业估值完整及法定信托隔离。",
       },
     ],
-    angleHeader: "3. 💡 加入您的「个人策略切入点 / 顾问式邀约钩子」",
-    angleSub: "展现您独特的团队长破局思路！可点击下方灵感胶囊，或用自己的话输入：",
-    anglePlaceholder: "例如：提议与客户的公司秘书及税务会计师进行30分钟三方联合审视，零推销压力...",
-    promptDrawerShow: "🔍 查看 / 自由编辑完整提示词原文",
-    promptDrawerHide: "▴ 收起提示词编辑器",
-    pillarsActiveLabel: "已激活 R.C.T.F.C.",
-    strictly3Badge: "严格限定 3 页",
-    generateBtn: "⚡ 生成严格 3 页高管战前简报",
-    regenerateBtn: "🔄 更新并重新生成 3 页简报",
+    angleHeader: "3. 💡 个人策略切入点",
+    anglePlaceholder: "点击上方灵感胶囊，或输入您的专属顾问邀约切入点...",
+    inspectPromptShow: "查看完整提示词 ▾",
+    inspectPromptHide: "收起完整提示词 ▴",
+    pillarsReadySuffix: "维已就绪",
+    unlockEditBtn: "✏️ 解锁手动编辑",
+    lockAutoSyncBtn: "🔒 恢复自动同步",
+    generateBtn: "⚡ 生成 3 页高管战前简报",
+    regenerateBtn: "🔄 重新生成 3 页简报",
     genStages: [
-      "1/3 · 正在构建第 1 页：客户资产快照与 4 大 KPI 指标卡...",
-      "2/3 · 正在测算第 2 页：流动性缺口量化对比柱状图...",
-      "3/3 · 正在生成第 3 页：定制传承策略矩阵表与演讲备注...",
+      "1/3 · 构建第 1 页：客户快照与 KPI 卡...",
+      "2/3 · 测算第 2 页：流动性缺口柱状图...",
+      "3/3 · 生成第 3 页：定制策略矩阵表...",
     ],
-    generatingImgText: "🎨 正在绘制 16:9 高管简报尊尚配图...",
-    finishingImgBeforeSubmit: "🎨 正在合成简报视觉配图并锁定最终成绩...",
-    slideTabPrefix: "第 ",
-    slideTabSuffix: " 页",
-    slideShortLabels: ["全景与KPI", "流动性缺口图", "策略矩阵表"],
-    slidesCountBadge: "严格 3 页已就绪 ✓",
-    compareToggleOn: "🔀 对标标杆简报：开启",
-    compareToggleOff: "🔀 与标杆简报并排对比",
-    downloadPptxBtn: "⬇ 下载 .pptx",
-    yourSlideLabel: "📊 您生成的简报页",
-    targetSlideLabel: "🎯 标杆参考简报页",
-    speakerNotesLabel: "🎙️ 演讲者备注",
-    qualityChecksHeader: "✅ 提交前 3 页简报质量自检",
-    checkLabels: {
-      slides3: "严格限定 3 页结构",
-      clientFacts: "精准引用客户财务数据",
-      visuals: "KPI卡 + 缺口柱状图 + 策略表",
-      personalTouch: "融入个人策略切入点",
-      compliance: "BNM 与信托/Hibah合规护栏",
-    },
-    backToPromptBtn: "✏️ 返回调整策略或切入点",
-    finalSubmitBtn: "🏆 最终确认并提交 3 页简报至主赛场",
-    finalSubmittingText: "⚖️ AI 评审团正在为您的 3 页简报与个人策略打分...",
-    oneTimeNotice:
-      "🔒 定稿前可无限次调整并重新生成 3 页简报；点击「最终确认并提交」后成绩即锁定上榜！",
+    generatingImgBadge: "🎨 绘制配图中...",
+    finishingImgBeforeSubmit: "🎨 正在合成配图...",
+    slideTabs: ["1. 全景KPI", "2. 缺口图", "3. 策略表"],
+    downloadPptxBtn: "⬇ 导出 .pptx",
+    yourSlideLabel: "📊 您的简报页",
+    targetSlideLabel: "🎯 标杆样例页",
+    speakerNotesToggle: "🎙️ 演讲备注",
+    readyStatusBar: "✅ 3页简报已就绪 • 提交后锁定上榜成绩",
+    backToPromptBtn: "✏️ 返回微调",
+    finalSubmitBtn: "🏆 最终确认并提交简报",
+    finalSubmittingText: "⚖️ AI 评审团正在打分...",
     jobDoneBadge: "✅ 挑战 2 已完成 — 已锁定上榜",
     jobDoneTitle: "您的 3 页高管战前提案简报已同步至主赛场大屏",
     arenaScoreLabel: "主赛场得分",
-    deckScoreLabel: "简报专业评级",
+    deckScoreLabel: "简报评级",
     rubricHeader: "🏅 6 维高管简报评审详情",
     rubricDims: [
       "结构与完整度",
@@ -197,89 +252,78 @@ const C2_UI_I18N = {
     viewMainScoreBtn: "🏆 查看主赛场总积分榜",
     proceedC3Btn: "🚀 进入挑战 3 →",
     waitingC3Text: "⏳ 分数已计入大屏总榜！请等待主持人开启挑战 3...",
-    promptUsedLabel: "📝 您最终提交的提示词与个人策略切入点",
   },
   yue: {
-    badge: "🧠 挑戰 2 • R.C.T.F.C. 三頁高管簡報工作室",
-    title: "高管戰前 3 頁簡報工作室",
-    subtitle:
-      "每位團隊長都會獲派專屬高淨值客戶個案。激活 R.C.T.F.C. 五大維度並加入你嘅「個人策略切入點」，生成嚴格限定 3 頁嘅董事會級簡報。",
-    step1Tab: "1️⃣ 構建五維策略與個人切入點",
-    step2Tab: "2️⃣ 預覽 3 頁簡報並最終提交",
-    targetBtn: "🎯 參考標竿簡報",
-    hideTargetBtn: "✕ 收起標竿",
-    browseCasesBtn: "📂 14類個案",
-    switchCaseBtn: "🎲 轉另一個案",
-    casePickerTitle: "揀選高淨值客戶實戰個案（14 大行業原型 • 全場 56 席獨立個案）",
-    targetGoalBanner: "🎯 3 頁標竿參考簡報（對應你當前客戶）",
-    assignedCaseLabel: "你嘅專屬高淨值客戶檔案",
-    moreCaseBtn: "完整背景 ▾",
-    lessCaseBtn: "收起 ▴",
-    pillarsHeader: "1. 激活 R.C.T.F.C. 五維提示詞積木",
-    pillarsSub: "撳一下點亮各個維度，或者一鍵激活晒 5 個維度再專注寫下面嘅個人策略切入點。",
-    insertAllBtn: "✨ 一鍵激活全部 5 個維度",
-    weakPromptBtn: "🧪 試下普通一句話提示詞對比",
-    toneHeader: "2. 揀選簡報呈現風格",
+    studioHeader: "🧠 3頁戰前簡報工作室",
+    sampleBtn: "🎯 標竿範例",
+    closeSampleBtn: "✕ 關閉",
+    targetGoalBanner: "🎯 3頁標竿參考簡報（對應當前客戶）",
+    caseInfoBtn: "客戶詳情 ▾",
+    hideCaseBtn: "收起 ▴",
+    switchCaseFmt: "切換個案",
+    switchShortFmt: "切換",
+    switchConfirmMsg: "確認切換客戶個案並重新生成 3 頁簡報嗎？",
+    step1Tab: "1. 🧩 構建提示詞",
+    step2Tab: "2. 📊 3頁簡報",
+    pillarsHeader: "1. R.C.T.F.C. 五維積木",
+    activateAllShort: "✨ 全選5維",
+    pillarTitles: {
+      role: "R · 角色",
+      context: "C · 背景",
+      task: "T · 任務",
+      format: "F · 格式",
+      constraints: "C · 合規",
+    },
+    toneHeader: "2. 董事會呈現風格",
     tones: [
       {
         id: "boardroom",
-        label: "🏛️ 家族辦公室尊尚風",
-        clause: "[呈現風格]：採用資深家族辦公室董事會風格——聚焦資產負債表同傳承架構，零 Hard Sell。",
+        shortLabel: "🏛️ 董事會",
+        clause:
+          "[呈現風格]：採用資深家族辦公室董事會風格——聚焦資產負債表同傳承架構，零 Hard Sell。",
       },
       {
         id: "empathy",
-        label: "❤️ 創辦人共情與守護屋企",
-        clause: "[呈現風格]：窩心共情切入——守護創業心血同100%家族股權完整，保障另一半生活尊嚴同仔女升學和睦。",
+        shortLabel: "❤️ 共情護家",
+        clause:
+          "[呈現風格]：窩心共情切入——守護創業心血同100%家族股權完整，保障另一半生活尊嚴同仔女升學和睦。",
       },
       {
         id: "cfo",
-        label: "📊 CFO 財務量化對比",
-        clause: "[呈現風格]：嚴謹 CFO 財務視角——對比每年約 2% 資金配置成本與守護 100% 企業估值完整同法定信託隔離。",
+        shortLabel: "📊 CFO量化",
+        clause:
+          "[呈現風格]：嚴謹 CFO 財務視角——對比每年約 2% 資金配置成本與守護 100% 企業估值完整同法定信託隔離。",
       },
     ],
-    angleHeader: "3. 💡 加入你嘅「個人策略切入點 / 約見鉤子」",
-    angleSub: "騷出你獨門嘅團隊長破局心法！可以撳下面靈感膠囊，或者用自己說話輸入：",
-    anglePlaceholder: "例如：提議同客戶嘅公司秘書及稅務會計師開個30分鐘三方聯合審視，零推銷壓力...",
-    promptDrawerShow: "🔍 查看 / 自由修改完整提示詞原文",
-    promptDrawerHide: "▴ 收起提示詞編輯器",
-    pillarsActiveLabel: "已激活 R.C.T.F.C.",
-    strictly3Badge: "嚴格限定 3 頁",
-    generateBtn: "⚡ 生成嚴格 3 頁高管戰前簡報",
-    regenerateBtn: "🔄 更新並重新生成 3 頁簡報",
+    angleHeader: "3. 💡 個人策略切入點",
+    anglePlaceholder: "撳上面靈感膠囊，或者輸入你嘅專屬約見切入點...",
+    inspectPromptShow: "查看完整提示詞 ▾",
+    inspectPromptHide: "收起完整提示詞 ▴",
+    pillarsReadySuffix: "維已就緒",
+    unlockEditBtn: "✏️ 解鎖手動修改",
+    lockAutoSyncBtn: "🔒 恢復自動同步",
+    generateBtn: "⚡ 生成 3 頁高管戰前簡報",
+    regenerateBtn: "🔄 重新生成 3 頁簡報",
     genStages: [
-      "1/3 · 緊係度構建第 1 頁：客戶資產快照同 4 大 KPI 指標卡...",
-      "2/3 · 緊係度測算第 2 頁：流動性缺口量化對比柱狀圖...",
-      "3/3 · 緊係度生成第 3 頁：定制傳承策略矩陣表同演講備註...",
+      "1/3 · 構建第 1 頁：客戶快照同 KPI 卡...",
+      "2/3 · 測算第 2 頁：流動性缺口柱狀圖...",
+      "3/3 · 生成第 3 頁：定制策略矩陣表...",
     ],
-    generatingImgText: "🎨 緊係度繪製 16:9 高管簡報配圖...",
-    finishingImgBeforeSubmit: "🎨 緊係度附上簡報配圖並鎖定最終成績...",
-    slideTabPrefix: "第 ",
-    slideTabSuffix: " 頁",
-    slideShortLabels: ["全景與KPI", "流動性缺口圖", "策略矩陣表"],
-    slidesCountBadge: "嚴格 3 頁已就緒 ✓",
-    compareToggleOn: "🔀 對比標竿簡報：開啟",
-    compareToggleOff: "🔀 與標竿簡報並排對比",
-    downloadPptxBtn: "⬇ 下載 .pptx",
-    yourSlideLabel: "📊 你生成嘅簡報頁",
-    targetSlideLabel: "🎯 標竿參考簡報頁",
-    speakerNotesLabel: "🎙️ 演講者備註",
-    qualityChecksHeader: "✅ 提交前 3 頁簡報質量自檢",
-    checkLabels: {
-      slides3: "嚴格限定 3 頁結構",
-      clientFacts: "精準引用客戶財務數據",
-      visuals: "KPI卡 + 缺口柱狀圖 + 策略表",
-      personalTouch: "融入個人策略切入點",
-      compliance: "BNM 與信託/Hibah合規護欄",
-    },
-    backToPromptBtn: "✏️ 返回調整策略或切入點",
-    finalSubmitBtn: "🏆 最終確認並提交 3 頁簡報至主賽場",
-    finalSubmittingText: "⚖️ AI 評審團緊係度為你份 3 頁簡報同個人策略評分...",
-    oneTimeNotice:
-      "🔒 定稿前可以無限次調整並重新生成 3 頁簡報；撳咗「最終確認並提交」之後成績即刻鎖定上榜！",
+    generatingImgBadge: "🎨 繪製配圖中...",
+    finishingImgBeforeSubmit: "🎨 緊係度附上配圖...",
+    slideTabs: ["1. 全景KPI", "2. 缺口圖", "3. 策略表"],
+    downloadPptxBtn: "⬇ 匯出 .pptx",
+    yourSlideLabel: "📊 你嘅簡報頁",
+    targetSlideLabel: "🎯 標竿範例頁",
+    speakerNotesToggle: "🎙️ 演講備註",
+    readyStatusBar: "✅ 3頁簡報已就緒 • 提交後鎖定上榜成績",
+    backToPromptBtn: "✏️ 返回微調",
+    finalSubmitBtn: "🏆 最終確認並提交簡報",
+    finalSubmittingText: "⚖️ AI 評審團緊係度評分...",
     jobDoneBadge: "✅ 挑戰 2 已完成 — 已鎖定上榜",
     jobDoneTitle: "你份 3 頁高管戰前提案簡報已同步上主賽場大屏",
     arenaScoreLabel: "主賽場得分",
-    deckScoreLabel: "簡報專業評級",
+    deckScoreLabel: "簡報評級",
     rubricHeader: "🏅 6 維高管簡報評審詳情",
     rubricDims: [
       "結構同完整度",
@@ -292,85 +336,74 @@ const C2_UI_I18N = {
     viewMainScoreBtn: "🏆 查看主賽場總積分榜",
     proceedC3Btn: "🚀 進入挑戰 3 →",
     waitingC3Text: "⏳ 分數已計入大屏總榜！請等待主持人開啟挑戰 3...",
-    promptUsedLabel: "📝 你最終提交嘅提示詞同個人策略切入點",
   },
   ms: {
-    badge: "🧠 CABARAN 2 • STUDIO DEK 3-SLAID R.C.T.F.C.",
-    title: "Studio Dek Pra-Pembentangan 3-Slaid",
-    subtitle:
-      "Setiap pemimpin menerima kes pelanggan HNW unik. Aktifkan 5 tiang R.C.T.F.C., tambah Sudut Strategik Peribadi anda, dan jana dek tepat 3-slaid bertaraf bilik lembaga.",
-    step1Tab: "1️⃣ Bina Strategi & Sudut Peribadi",
-    step2Tab: "2️⃣ Semak Dek 3-Slaid & Hantar",
-    targetBtn: "🎯 Dek Penanda Aras",
-    hideTargetBtn: "✕ Tutup Penanda Aras",
-    browseCasesBtn: "📂 14 Kes",
-    switchCaseBtn: "🎲 Tukar Kes",
-    casePickerTitle: "Pilih Senario Pelanggan HNW (14 Arketaip • 56 Kerusi Unik)",
-    targetGoalBanner: "🎯 DEK PENANDA ARAS 3-SLAID (UNTUK PELANGGAN ANDA)",
-    assignedCaseLabel: "PROFIL PELANGGAN HNW ANDA",
-    moreCaseBtn: "Butiran Penuh ▾",
-    lessCaseBtn: "Ringkas ▴",
-    pillarsHeader: "1. Aktifkan 5 Tiang Prompt R.C.T.F.C.",
-    pillarsSub: "Ketik setiap tiang atau aktifkan kesemua 5 tiang dan fokus pada sudut peribadi anda di bawah.",
-    insertAllBtn: "✨ Aktifkan Kesemua 5 Tiang",
-    weakPromptBtn: "🧪 Cuba Prompt Lemah 1-Baris",
-    toneHeader: "2. Pilih Gaya Pembentangan",
+    studioHeader: "🧠 Studio Pra-Pitch 3-Slaid",
+    sampleBtn: "🎯 Contoh",
+    closeSampleBtn: "✕ Tutup",
+    targetGoalBanner: "🎯 DEK CONTOH PENANDA ARAS 3-SLAID",
+    caseInfoBtn: "Info Kes ▾",
+    hideCaseBtn: "Tutup ▴",
+    switchCaseFmt: "Tukar Kes",
+    switchShortFmt: "Tukar",
+    switchConfirmMsg: "Tukar kes pelanggan dan mulakan dek 3-slaid baharu?",
+    step1Tab: "1. 🧩 Bina Prompt",
+    step2Tab: "2. 📊 Dek 3-Slaid",
+    pillarsHeader: "1. Tiang Prompt R.C.T.F.C.",
+    activateAllShort: "✨ Aktif Semua 5",
+    pillarTitles: {
+      role: "R · Peranan",
+      context: "C · Konteks",
+      task: "T · Tugasan",
+      format: "F · Format",
+      constraints: "C · Kekangan",
+    },
+    toneHeader: "2. Gaya Bilik Lembaga",
     tones: [
       {
         id: "boardroom",
-        label: "🏛️ Bilik Lembaga Pejabat Keluarga",
-        clause: "[Gaya Pembentangan]: Nada eksekutif Pejabat Keluarga yang berwibawa — fokus kunci kira-kira tanpa tekanan jualan.",
+        shortLabel: "🏛️ Lembaga",
+        clause:
+          "[Gaya Pembentangan]: Nada eksekutif Pejabat Keluarga yang berwibawa — fokus kunci kira-kira tanpa tekanan jualan.",
       },
       {
         id: "empathy",
-        label: "❤️ Empati Pengasas & Keluarga",
-        clause: "[Gaya Pembentangan]: Nada empati hangat — lindungi maruah keluarga, kesinambungan perniagaan dan pendidikan anak.",
+        shortLabel: "❤️ Empati",
+        clause:
+          "[Gaya Pembentangan]: Nada empati hangat — lindungi maruah keluarga, kesinambungan perniagaan dan pendidikan anak.",
       },
       {
         id: "cfo",
-        label: "📊 Ketepatan Analitik CFO",
-        clause: "[Gaya Pembentangan]: Nada analitik CFO — tekankan kecekapan modal (peruntukan kecairan ~2% setahun demi memelihara 100% nilai ekuiti perniagaan) serta perlindungan amanah.",
+        shortLabel: "📊 CFO",
+        clause:
+          "[Gaya Pembentangan]: Nada analitik CFO — tekankan kecekapan modal (peruntukan kecairan ~2% setahun demi memelihara 100% nilai ekuiti perniagaan) serta perlindungan amanah.",
       },
     ],
-    angleHeader: "3. 💡 Tambah Sudut Strategik Peribadi Anda",
-    angleSub: "Apakah sentuhan peribadi anda untuk memikat pelanggan ini? Ketik cadangan atau tulis sendiri:",
-    anglePlaceholder: "cth: Cadangkan semakan 30 minit bersama setiausaha syarikat & akauntan cukai tanpa tekanan jualan...",
-    promptDrawerShow: "🔍 Lihat / Sunting Prompt Penuh",
-    promptDrawerHide: "▴ Tutup Penyunting Prompt",
-    pillarsActiveLabel: "Tiang R.C.T.F.C. Aktif",
-    strictly3Badge: "TEPAT 3 SLAID",
+    angleHeader: "3. 💡 Sudut Strategik Peribadi",
+    anglePlaceholder: "Ketik cadangan di atas atau tulis pendekatan peribadi anda...",
+    inspectPromptShow: "Lihat Prompt Penuh ▾",
+    inspectPromptHide: "Sembunyi Prompt ▴",
+    pillarsReadySuffix: "Tiang Sedia",
+    unlockEditBtn: "✏️ Sunting Manual",
+    lockAutoSyncBtn: "🔒 Segerak Semula",
     generateBtn: "⚡ Jana Dek Eksekutif 3-Slaid",
     regenerateBtn: "🔄 Jana Semula Dek 3-Slaid",
     genStages: [
-      "1/3 · Membina Slaid 1 Gambaran Pelanggan & 4 Kad KPI...",
-      "2/3 · Memodelkan Slaid 2 Carta Palang Jurang Kecairan...",
-      "3/3 · Menyusun Slaid 3 Jadual Strategi & Nota Pembentang...",
+      "1/3 · Membina Slaid 1 KPI Pelanggan...",
+      "2/3 · Memodelkan Slaid 2 Carta Jurang...",
+      "3/3 · Menyusun Slaid 3 Strategi...",
     ],
-    generatingImgText: "🎨 Menjana visual slaid eksekutif 16:9...",
-    finishingImgBeforeSubmit: "🎨 Melampirkan visual slaid sebelum mengunci penghantaran...",
-    slideTabPrefix: "Slaid ",
-    slideTabSuffix: "",
-    slideShortLabels: ["Ringkasan KPI", "Carta Jurang", "Jadual Strategi"],
-    slidesCountBadge: "3 Slaid Sedia ✓",
-    compareToggleOn: "🔀 Banding Penanda Aras: AKTIF",
-    compareToggleOff: "🔀 Banding dengan Penanda Aras",
-    downloadPptxBtn: "⬇ Muat Turun .pptx",
-    yourSlideLabel: "📊 SLAID JANAAN ANDA",
-    targetSlideLabel: "🎯 SLAID PENANDA ARAS",
-    speakerNotesLabel: "🎙️ Nota Pembentang",
-    qualityChecksHeader: "✅ Senarai Semak Kualiti Dek 3-Slaid",
-    checkLabels: {
-      slides3: "Tepat 3 Slaid",
-      clientFacts: "Angka Kunci Kira-kira Pelanggan",
-      visuals: "KPI + Carta Jurang + Jadual",
-      personalTouch: "Sudut Strategik Peribadi",
-      compliance: "Pematuhan BNM & Amanah/Hibah",
-    },
-    backToPromptBtn: "✏️ Kemas Kini Strategi / Sudut",
-    finalSubmitBtn: "🏆 Muktamadkan & Hantar Dek 3-Slaid ke Arena",
-    finalSubmittingText: "⚖️ Hakim AI Menilai Dek 3-Slaid & Sudut Strategik Anda...",
-    oneTimeNotice:
-      "🔒 Jana semula seberapa kerap semasa draf. Klik Muktamadkan & Hantar akan mengunci markah ke Papan Pendahulu.",
+    generatingImgBadge: "🎨 Menjana visual...",
+    finishingImgBeforeSubmit: "🎨 Melampirkan visual...",
+    slideTabs: ["1. KPI", "2. Carta Jurang", "3. Strategi"],
+    downloadPptxBtn: "⬇ Eksport .pptx",
+    yourSlideLabel: "📊 SLAID ANDA",
+    targetSlideLabel: "🎯 SLAID CONTOH",
+    speakerNotesToggle: "🎙️ Nota Pembentang",
+    readyStatusBar: "✅ Dek 3-Slaid Sedia • Hantar Akhir Mengunci Markah",
+    backToPromptBtn: "✏️ Kemas Kini",
+    finalSubmitBtn: "🏆 Muktamadkan & Hantar",
+    finalSubmittingText: "⚖️ Hakim AI Menilai Dek Anda...",
     jobDoneBadge: "✅ CABARAN 2 SELESAI — DIKUNCI",
     jobDoneTitle: "Dek Pra-Pembentangan Eksekutif 3-Slaid Anda Kini Di Arena Utama",
     arenaScoreLabel: "Markah Arena",
@@ -387,85 +420,74 @@ const C2_UI_I18N = {
     viewMainScoreBtn: "🏆 Lihat Papan Pendahulu Utama",
     proceedC3Btn: "🚀 Teruskan ke Cabaran 3 →",
     waitingC3Text: "⏳ Markah direkodkan! Menunggu Penyampai membuka Cabaran 3...",
-    promptUsedLabel: "📝 Prompt R.C.T.F.C. & Sudut Strategik Anda",
   },
   ta: {
-    badge: "🧠 சவால் 2 • R.C.T.F.C. 3-ஸ்லைடு ஸ்டுடியோ",
-    title: "நிர்வாக முன்-முன்மொழிவு 3-ஸ்லைடு ஸ்டுடியோ",
-    subtitle:
-      "ஒவ்வொரு தலைவருக்கும் தனித்துவமான HNW வாடிக்கையாளர் வழக்கு வழங்கப்படுகிறது. 5 R.C.T.F.C. தூண்கள் மற்றும் உங்கள் தனிப்பட்ட உத்தியை இணைத்து சரியாக 3-ஸ்லைடு விளக்கக்காட்சியை உருவாக்குங்கள்.",
-    step1Tab: "1️⃣ உத்தி & தனிப்பட்ட கோணம்",
-    step2Tab: "2️⃣ 3-ஸ்லைடு ஆய்வு & சமர்ப்பிப்பு",
-    targetBtn: "🎯 மாதிரி டெக்",
-    hideTargetBtn: "✕ மாதிரியை மறை",
-    browseCasesBtn: "📂 14 வழக்குகள்",
-    switchCaseBtn: "🎲 வழக்கை மாற்று",
-    casePickerTitle: "HNW வாடிக்கையாளர் வழக்கைத் தேர்ந்தெடுக்கவும் (14 வகைகள் • 56 இடங்கள்)",
+    studioHeader: "🧠 3-ஸ்லைடு முன்-முன்மொழிவு ஸ்டுடியோ",
+    sampleBtn: "🎯 மாதிரி",
+    closeSampleBtn: "✕ மூடு",
     targetGoalBanner: "🎯 3-ஸ்லைடு மாதிரி விளக்கக்காட்சி",
-    assignedCaseLabel: "உங்கள் HNW வாடிக்கையாளர் விவரம்",
-    moreCaseBtn: "முழு விவரம் ▾",
-    lessCaseBtn: "சுருக்கு ▴",
-    pillarsHeader: "1. 5 R.C.T.F.C. தூண்களைச் செயல்படுத்தவும்",
-    pillarsSub: "ஒவ்வொரு தூணையும் தட்டவும் அல்லது அனைத்தையும் இயக்கி கீழே உங்கள் தனிப்பட்ட உத்தியைச் சேர்க்கவும்.",
-    insertAllBtn: "✨ அனைத்து 5 தூண்களையும் இயக்கு",
-    weakPromptBtn: "🧪 எளிய 1-வரி ப்ராம்ப்ட் சோதனை",
-    toneHeader: "2. விளக்கக்காட்சி பாணியைத் தேர்ந்தெடுக்கவும்",
+    caseInfoBtn: "வழக்கு விவரம் ▾",
+    hideCaseBtn: "சுருக்கு ▴",
+    switchCaseFmt: "வழக்கை மாற்று",
+    switchShortFmt: "மாற்று",
+    switchConfirmMsg: "வாடிக்கையாளர் வழக்கை மாற்றி புதிய 3-ஸ்லைடு டெக்கை உருவாக்கவா?",
+    step1Tab: "1. 🧩 ப்ராம்ப்ட்",
+    step2Tab: "2. 📊 3-ஸ்லைடு டெக்",
+    pillarsHeader: "1. R.C.T.F.C. 5 தூண்கள்",
+    activateAllShort: "✨ 5-ம் இயக்கு",
+    pillarTitles: {
+      role: "R · பங்கு",
+      context: "C · பின்னணி",
+      task: "T · பணி",
+      format: "F · வடிவம்",
+      constraints: "C · விதிகள்",
+    },
+    toneHeader: "2. போர்டுரூம் பாணி",
     tones: [
       {
         id: "boardroom",
-        label: "🏛️ குடும்ப அலுவலக போர்டுரூம்",
-        clause: "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales pressure.",
+        shortLabel: "🏛️ போர்டுரூம்",
+        clause:
+          "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales pressure.",
       },
       {
         id: "empathy",
-        label: "❤️ நிறுவனர் & குடும்ப அக்கறை",
-        clause: "[Presentation Style]: Warm founder empathy — protect family harmony, spouse security, and children's education.",
+        shortLabel: "❤️ அக்கறை",
+        clause:
+          "[Presentation Style]: Warm founder empathy — protect family harmony, spouse security, and children's education.",
       },
       {
         id: "cfo",
-        label: "📊 CFO நிதித் துல்லியம்",
-        clause: "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
+        shortLabel: "📊 CFO",
+        clause:
+          "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
       },
     ],
-    angleHeader: "3. 💡 உங்கள் தனிப்பட்ட உத்தி / ஆலோசனை அணுகுமுறை",
-    angleSub: "உங்கள் தனித்துவமான ஆலோசனைக் கோணத்தைத் தட்டவும் அல்லது எழுதவும்:",
-    anglePlaceholder: "எ.கா: கணக்காளர் மற்றும் நிறுவனச் செயலாளருடன் 30 நிமிட கூட்டு ஆய்வுக்கு அழைப்பு...",
-    promptDrawerShow: "🔍 முழு ப்ராம்ப்ட்டை பார்க்க / திருத்த",
-    promptDrawerHide: "▴ ப்ராம்ப்ட் பெட்டியை மூடு",
-    pillarsActiveLabel: "R.C.T.F.C. தூண்கள்",
-    strictly3Badge: "சரியாக 3 ஸ்லைடுகள்",
-    generateBtn: "⚡ 3-ஸ்லைடு விளக்கக்காட்சியை உருவாக்கு",
+    angleHeader: "3. 💡 தனிப்பட்ட உத்தி கோணம்",
+    anglePlaceholder: "மேலுள்ள குறிப்பைத் தட்டவும் அல்லது உங்கள் அணுகுமுறையை எழுதவும்...",
+    inspectPromptShow: "முழு ப்ராம்ப்ட்டை பார்க்க ▾",
+    inspectPromptHide: "ப்ராம்ப்ட்டை மறை ▴",
+    pillarsReadySuffix: "தூண்கள் தயார்",
+    unlockEditBtn: "✏️ திருத்த திறக்கவும்",
+    lockAutoSyncBtn: "🔒 தானியங்கு இணைப்பு",
+    generateBtn: "⚡ 3-ஸ்லைடு டெக்கை உருவாக்கு",
     regenerateBtn: "🔄 மீண்டும் 3-ஸ்லைடு உருவாக்கு",
     genStages: [
-      "1/3 · ஸ்லைடு 1 வாடிக்கையாளர் சுருக்கம் & KPI அட்டைகள்...",
-      "2/3 · ஸ்லைடு 2 பணப்புழக்க இடைவெளி வரைபடம்...",
-      "3/3 · ஸ்லைடு 3 தீர்வு அட்டவணை & பேச்சாளர் குறிப்புகள்...",
+      "1/3 · ஸ்லைடு 1 வாடிக்கையாளர் KPI...",
+      "2/3 · ஸ்லைடு 2 இடைவெளி வரைபடம்...",
+      "3/3 · ஸ்லைடு 3 தீர்வு அட்டவணை...",
     ],
-    generatingImgText: "🎨 16:9 ஸ்லைடு காட்சிகளை உருவாக்குகிறது...",
-    finishingImgBeforeSubmit: "🎨 ஸ்லைடு படங்களை இணைத்து இறுதி செய்கிறது...",
-    slideTabPrefix: "ஸ்லைடு ",
-    slideTabSuffix: "",
-    slideShortLabels: ["KPI சுருக்கம்", "இடைவெளி வரைபடம்", "தீர்வு அட்டவணை"],
-    slidesCountBadge: "3 ஸ்லைடுகள் தயார் ✓",
-    compareToggleOn: "🔀 மாதிரியுடன் ஒப்பீடு: இயக்கத்தில்",
-    compareToggleOff: "🔀 மாதிரியுடன் ஒப்பிடுக",
+    generatingImgBadge: "🎨 படங்கள் உருவாகின்றன...",
+    finishingImgBeforeSubmit: "🎨 படங்களை இணைக்கிறது...",
+    slideTabs: ["1. KPI", "2. வரைபடம்", "3. உத்தி"],
     downloadPptxBtn: "⬇ .pptx பதிவிறக்கம்",
     yourSlideLabel: "📊 உங்கள் ஸ்லைடு",
     targetSlideLabel: "🎯 மாதிரி ஸ்லைடு",
-    speakerNotesLabel: "🎙️ பேச்சாளர் குறிப்புகள்",
-    qualityChecksHeader: "✅ சமர்ப்பிக்கும் முன் 3-ஸ்லைடு தர சரிபார்ப்பு",
-    checkLabels: {
-      slides3: "சரியாக 3 ஸ்லைடுகள்",
-      clientFacts: "வாடிக்கையாளர் நிதி எண்கள்",
-      visuals: "KPI + வரைபடம் + அட்டவணை",
-      personalTouch: "தனிப்பட்ட உத்தி கோணம்",
-      compliance: "BNM & அறக்கட்டளை/Hibah விதிகள்",
-    },
-    backToPromptBtn: "✏️ உத்தியை மாற்றி உருவாக்கு",
-    finalSubmitBtn: "🏆 3-ஸ்லைடு டெக்கை அரங்கிற்கு சமர்ப்பிக்கவும்",
-    finalSubmittingText: "⚖️ AI நடுவர் உங்கள் 3-ஸ்லைடு டெக்கை மதிப்பிடுகிறார்...",
-    oneTimeNotice:
-      "🔒 வரைவு செய்யும்போது பலமுறை உருவாக்கலாம். இறுதி சமர்ப்பிப்பை அழுத்தியவுடன் மதிப்பெண் பூட்டப்படும்.",
+    speakerNotesToggle: "🎙️ பேச்சாளர் குறிப்பு",
+    readyStatusBar: "✅ 3-ஸ்லைடு டெக் தயார் • இறுதி சமர்ப்பிப்பு மதிப்பெண்ணைப் பூட்டும்",
+    backToPromptBtn: "✏️ மாற்றி அமை",
+    finalSubmitBtn: "🏆 இறுதி செய்து சமர்ப்பி",
+    finalSubmittingText: "⚖️ AI நடுவர் மதிப்பிடுகிறார்...",
     jobDoneBadge: "✅ சவால் 2 முடிந்தது — பூட்டப்பட்டது",
     jobDoneTitle: "உங்கள் 3-ஸ்லைடு விளக்கக்காட்சி பிரதான அரங்கில் பதிவானது",
     arenaScoreLabel: "அரங்க மதிப்பெண்",
@@ -482,16 +504,7 @@ const C2_UI_I18N = {
     viewMainScoreBtn: "🏆 பிரதான தரவரிசைப் பட்டியல்",
     proceedC3Btn: "🚀 சவால் 3-க்குச் செல்லவும் →",
     waitingC3Text: "⏳ மதிப்பெண் பதிவானது! சவால் 3 திறக்கப்படும் வரை காத்திருக்கவும்...",
-    promptUsedLabel: "📝 நீங்கள் சமர்ப்பித்த ப்ராம்ப்ட் & தனிப்பட்ட உத்தி",
   },
-};
-
-const PILLAR_META = {
-  role: { icon: "🎭", code: "R" },
-  context: { icon: "📋", code: "C" },
-  task: { icon: "🎯", code: "T" },
-  format: { icon: "📐", code: "F" },
-  constraints: { icon: "⚖️", code: "C" },
 };
 
 const PILLAR_HEURISTICS = {
@@ -551,6 +564,12 @@ function ExecutiveSlideCard({
   generatingImages = false,
   compact = false,
 }) {
+  const [showNotesMobile, setShowNotesMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    setShowNotesMobile(false);
+  }, [slideIndex, slide?.title]);
+
   if (!slide) return null;
   const clampedTotal = Math.min(3, Math.max(1, totalSlides || 3));
   const maxChartVal =
@@ -563,9 +582,9 @@ function ExecutiveSlideCard({
       <div>
         {/* Executive Dark Navy + Crimson Keynote Banner */}
         <div className="h-1.5 bg-gradient-to-r from-[#ed1b2e] via-red-500 to-amber-500" />
-        <div className="bg-slate-900 text-white px-4 py-3 sm:px-5 sm:py-3.5 flex items-start justify-between gap-3">
+        <div className="bg-slate-900 text-white px-3.5 py-2.5 sm:px-5 sm:py-3.5 flex items-start justify-between gap-2.5">
           <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2 mb-1">
+            <div className="flex flex-wrap items-center gap-1.5 mb-1">
               <span className="px-2 py-0.5 rounded bg-[#ed1b2e] text-white text-[10px] font-extrabold uppercase tracking-wider">
                 SLIDE {slideIndex + 1} / {clampedTotal}
               </span>
@@ -592,10 +611,10 @@ function ExecutiveSlideCard({
         </div>
 
         {/* Slide Body */}
-        <div className={`${compact ? "p-3 space-y-2.5" : "p-4 sm:p-5 space-y-3.5"}`}>
+        <div className={`${compact ? "p-3 space-y-2.5" : "p-3.5 sm:p-5 space-y-3"}`}>
           {/* KPI Metric Cards */}
           {Array.isArray(slide.kpis) && slide.kpis.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {slide.kpis.slice(0, 4).map((k, ki) => (
                 <div
                   key={ki}
@@ -617,12 +636,12 @@ function ExecutiveSlideCard({
 
           {/* Semantic Liquidity Gap Bar Chart */}
           {slide.chart && Array.isArray(slide.chart.series) && slide.chart.series.length > 0 && (
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2">
               <div className="flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                 <span>Quantified Exposure Stress-Test</span>
                 {slide.chart.unit && <span>{slide.chart.unit}</span>}
               </div>
-              <div className="flex items-end gap-4 h-28 pt-5 px-3 border-b-2 border-slate-300">
+              <div className="flex items-end gap-3 sm:gap-4 h-28 pt-5 px-2 sm:px-3 border-b-2 border-slate-300">
                 {slide.chart.series.map((pt, pi) => {
                   const pct = Math.max(12, Math.round(((Number(pt.value) || 0) / maxChartVal) * 100));
                   const st = getSemanticBarStyle(pt.label, pi, slide.chart.series.length);
@@ -639,7 +658,7 @@ function ExecutiveSlideCard({
                   );
                 })}
               </div>
-              <div className="flex gap-4 px-3">
+              <div className="flex gap-3 sm:gap-4 px-2 sm:px-3">
                 {slide.chart.series.map((pt, pi) => (
                   <div
                     key={pi}
@@ -652,40 +671,78 @@ function ExecutiveSlideCard({
             </div>
           )}
 
-          {/* Executive Strategy Matrix Table */}
+          {/* Executive Strategy Matrix: Mobile Stacked Cards (<640px) + Desktop Table (>=640px) */}
           {slide.table && Array.isArray(slide.table.headers) && slide.table.headers.length > 0 && (
-            <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
-              <table className="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr className="bg-slate-900 text-white">
-                    {slide.table.headers.map((h, hi) => (
-                      <th key={hi} className="px-2.5 py-2 font-extrabold text-[11px] tracking-wide">
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {(slide.table.rows || []).map((row, ri) => (
-                    <tr key={ri} className={ri % 2 === 1 ? "bg-slate-50/90" : "bg-white"}>
-                      {slide.table.headers.map((_, ci) => (
-                        <td
-                          key={ci}
-                          className={`px-2.5 py-2 border-t border-slate-200 text-[11px] align-top ${
-                            ci === 0
-                              ? "font-extrabold text-slate-900"
-                              : ci === slide.table.headers.length - 1
-                              ? "font-extrabold text-[#ed1b2e] whitespace-nowrap"
-                              : "text-slate-700"
-                          }`}
-                        >
-                          {row[ci] || ""}
-                        </td>
+            <div>
+              {/* Mobile-Native Strategy Cards */}
+              <div className="sm:hidden space-y-2">
+                {(slide.table.rows || []).map((row, ri) => {
+                  const needTxt = row[0] || "";
+                  const approachTxt = row[1] || "";
+                  const fitTxt = row[2] || "";
+                  const coverTxt = row.length > 3 ? row[row.length - 1] : "";
+                  return (
+                    <div
+                      key={ri}
+                      className="bg-slate-50 border border-slate-200 border-l-4 border-l-[#ed1b2e] rounded-xl p-2.5 space-y-1 shadow-sm"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-900 text-white text-[10px] font-extrabold leading-tight">
+                          {needTxt}
+                        </span>
+                        {coverTxt && (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-red-50 border border-red-200 text-[#ed1b2e] text-[10px] font-extrabold shrink-0">
+                            {coverTxt}
+                          </span>
+                        )}
+                      </div>
+                      {approachTxt && (
+                        <div className="text-xs font-extrabold text-slate-900 leading-snug">
+                          {approachTxt}
+                        </div>
+                      )}
+                      {fitTxt && (
+                        <div className="text-[11px] text-slate-600 leading-snug">{fitTxt}</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Desktop / Tablet HTML Table */}
+              <div className="hidden sm:block overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
+                <table className="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr className="bg-slate-900 text-white">
+                      {slide.table.headers.map((h, hi) => (
+                        <th key={hi} className="px-2.5 py-2 font-extrabold text-[11px] tracking-wide">
+                          {h}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {(slide.table.rows || []).map((row, ri) => (
+                      <tr key={ri} className={ri % 2 === 1 ? "bg-slate-50/90" : "bg-white"}>
+                        {slide.table.headers.map((_, ci) => (
+                          <td
+                            key={ci}
+                            className={`px-2.5 py-2 border-t border-slate-200 text-[11px] align-top ${
+                              ci === 0
+                                ? "font-extrabold text-slate-900"
+                                : ci === slide.table.headers.length - 1
+                                ? "font-extrabold text-[#ed1b2e] whitespace-nowrap"
+                                : "text-slate-700"
+                            }`}
+                          >
+                            {row[ci] || ""}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
 
@@ -776,20 +833,37 @@ function ExecutiveSlideCard({
 
           {/* Executive Callout Strip */}
           {slide.callout && (
-            <div className="bg-gradient-to-r from-red-50 to-amber-50/50 border-l-4 border-l-[#ed1b2e] px-3.5 py-2 rounded-r-xl text-xs font-bold text-slate-900">
+            <div className="bg-gradient-to-r from-red-50 to-amber-50/50 border-l-4 border-l-[#ed1b2e] px-3 py-2 rounded-r-xl text-xs font-bold text-slate-900">
               {slide.callout}
             </div>
           )}
         </div>
       </div>
 
-      {/* Presenter Speaker Notes Footer */}
+      {/* Collapsible Speaker Notes on Mobile + Visible on Desktop */}
       {slide.speaker_notes && (
-        <div className="bg-slate-50 border-t border-slate-200 px-4 py-2 text-[11px] text-slate-600 leading-snug">
-          <span className="font-extrabold text-slate-800 mr-1.5">
-            {speakerNotesLabel || "🎙️ Presenter Notes"}:
-          </span>
-          {slide.speaker_notes}
+        <div className="bg-slate-50 border-t border-slate-200">
+          <div className="sm:hidden">
+            <button
+              type="button"
+              onClick={() => setShowNotesMobile((v) => !v)}
+              className="w-full px-3.5 py-2 flex items-center justify-between text-[11px] font-extrabold text-slate-700"
+            >
+              <span>{speakerNotesLabel || "🎙️ Speaker Notes"}</span>
+              <span className="text-slate-400">{showNotesMobile ? "▴" : "▾"}</span>
+            </button>
+            {showNotesMobile && (
+              <div className="px-3.5 pb-2.5 text-[11px] text-slate-600 leading-snug">
+                {slide.speaker_notes}
+              </div>
+            )}
+          </div>
+          <div className="hidden sm:block px-4 py-2 text-[11px] text-slate-600 leading-snug">
+            <span className="font-extrabold text-slate-800 mr-1.5">
+              {speakerNotesLabel || "🎙️ Speaker Notes"}:
+            </span>
+            {slide.speaker_notes}
+          </div>
         </div>
       )}
     </div>
@@ -816,7 +890,7 @@ window.Challenge2ParticipantView = function ({
   const { useState, useEffect, useRef } = React;
   const normLang = lang === "zh-TW" || lang === "zh-HK" ? "yue" : lang || "en";
   const ui = C2_UI_I18N[normLang] || C2_UI_I18N.en;
-  const storageKey = `prumda_c2_v3_${agentId || "anon"}`;
+  const storageKey = `prumda_c2_v4_${agentId || "anon"}`;
 
   // Restore saved draft from localStorage if available
   const savedDraftRef = useRef(null);
@@ -832,20 +906,24 @@ window.Challenge2ParticipantView = function ({
 
   const [challengeData, setChallengeData] = useState(null);
   const [loadingChallenge, setLoadingChallenge] = useState(true);
+  // Only restore explicit seatOverride if the participant manually switched cases!
   const [seatOverride, setSeatOverride] = useState(
-    typeof initDraft.seatIndex === "number" ? initDraft.seatIndex : null
+    initDraft.userPickedSeat === true && typeof initDraft.seatOverride === "number"
+      ? initDraft.seatOverride
+      : null
   );
   const [showCasePicker, setShowCasePicker] = useState(false);
-  const [showFullCase, setShowFullCase] = useState(false);
-  const [showTargetModal, setShowTargetModal] = useState(false);
+  const [showBenchmark, setShowBenchmark] = useState(false);
   const [targetSlideIdx, setTargetSlideIdx] = useState(0);
 
-  // Step & Prompt Builder State
+  // Step & Brief Collapse State
   const [activeStep, setActiveStep] = useState(initDraft.deck ? "2" : "1");
+  const [showBrief, setShowBrief] = useState(initDraft.deck ? false : true);
   const [selectedToneId, setSelectedToneId] = useState(initDraft.selectedToneId || "boardroom");
   const [personalAngle, setPersonalAngle] = useState(initDraft.personalAngle || "");
   const [promptText, setPromptText] = useState(initDraft.promptText || "");
   const [manualPromptEdited, setManualPromptEdited] = useState(Boolean(initDraft.manualPromptEdited));
+  const [manualEditUnlocked, setManualEditUnlocked] = useState(Boolean(initDraft.manualPromptEdited));
   const [activePillarsMap, setActivePillarsMap] = useState(
     initDraft.activePillarsMap || {
       role: true,
@@ -861,10 +939,9 @@ window.Challenge2ParticipantView = function ({
   const [deck, setDeck] = useState(initDraft.deck || null);
   const [deckSignature, setDeckSignature] = useState(initDraft.deckSignature || "");
   const [slideIdx, setSlideIdx] = useState(0);
-  const [compareMode, setCompareMode] = useState(false);
   const [generatingDeck, setGeneratingDeck] = useState(false);
   const [genStageIdx, setGenStageIdx] = useState(0);
-  const [generatingImages, setGeneratingImages] = useState(false);
+  const [imagesLoading, setImagesLoading] = useState(false);
   const [waitingImagesForSubmit, setWaitingImagesForSubmit] = useState(false);
   const [genError, setGenError] = useState(null);
   const [history, setHistory] = useState(initDraft.history || []);
@@ -883,14 +960,25 @@ window.Challenge2ParticipantView = function ({
     latestDeckRef.current = deck;
   }, [deck]);
 
-  // Persist draft in localStorage
+  // Auto-collapse client brief on Step 2, expand on Step 1
+  useEffect(() => {
+    if (activeStep === "2") {
+      setShowBrief(false);
+      setShowCasePicker(false);
+    } else {
+      setShowBrief(true);
+    }
+  }, [activeStep]);
+
+  // Persist draft in localStorage (preserving userPickedSeat vs server-assigned seat)
   useEffect(() => {
     if (lockedSubmission) return;
     try {
       localStorage.setItem(
         storageKey,
         JSON.stringify({
-          seatIndex: challengeData?.seatIndex ?? seatOverride,
+          userPickedSeat: seatOverride !== null && seatOverride !== undefined,
+          seatOverride: seatOverride,
           selectedToneId,
           personalAngle,
           promptText,
@@ -904,7 +992,6 @@ window.Challenge2ParticipantView = function ({
     } catch (e) {}
   }, [
     storageKey,
-    challengeData?.seatIndex,
     seatOverride,
     selectedToneId,
     personalAngle,
@@ -981,6 +1068,7 @@ window.Challenge2ParticipantView = function ({
   };
 
   // Load localized, per-seat Challenge 2 scenario (/api/challenge)
+  // WITHOUT seat= on initial load so server-assigned 72-seat distribution is preserved!
   const loadScenarioSeat = (explicitSeat = null, resetDeckOnSwitch = false) => {
     setLoadingChallenge(true);
     const params = new URLSearchParams({
@@ -1004,9 +1092,11 @@ window.Challenge2ParticipantView = function ({
           setActivePillarsMap(allOn);
           setPersonalAngle(defaultHint);
           setManualPromptEdited(false);
+          setManualEditUnlocked(false);
           setDeck(null);
           setDeckSignature("");
           setActiveStep("1");
+          setShowBrief(true);
           setPromptText(
             buildAssembledPrompt(gList, allOn, selectedToneId, defaultHint, data.simple_prompt)
           );
@@ -1038,10 +1128,11 @@ window.Challenge2ParticipantView = function ({
     loadScenarioSeat(seatOverride, false);
   }, [normLang, agentId]);
 
-  // Re-assemble prompt automatically when structured controls change (unless manually overridden)
+  // Re-assemble prompt automatically when structured controls change
   const syncStructuredPrompt = (nextMap, nextTone, nextAngle) => {
     if (!challengeData) return;
     setManualPromptEdited(false);
+    setManualEditUnlocked(false);
     const built = buildAssembledPrompt(
       challengeData.guide || [],
       nextMap,
@@ -1071,14 +1162,6 @@ window.Challenge2ParticipantView = function ({
     syncStructuredPrompt(allOn, selectedToneId, nextAngle);
   };
 
-  const handleTryWeakPrompt = () => {
-    const allOff = { role: false, context: false, task: false, format: false, constraints: false };
-    setActivePillarsMap(allOff);
-    setPersonalAngle("");
-    setManualPromptEdited(false);
-    setPromptText(challengeData?.simple_prompt || "Create a presentation for my client about insurance.");
-  };
-
   const handleSelectTone = (toneId) => {
     setSelectedToneId(toneId);
     syncStructuredPrompt(activePillarsMap, toneId, personalAngle);
@@ -1089,7 +1172,6 @@ window.Challenge2ParticipantView = function ({
     if (!manualPromptEdited) {
       syncStructuredPrompt(activePillarsMap, selectedToneId, val);
     } else {
-      // Update or append [Personal Strategic Angle] line inside custom prompt
       setPromptText((prev) => {
         const cleaned = String(prev || "")
           .replace(/\n*\[Personal Strategic Angle\]:[^\n]*/gi, "")
@@ -1101,15 +1183,25 @@ window.Challenge2ParticipantView = function ({
     }
   };
 
-  const handleSwitchSeat = (targetSeat) => {
-    const total = challengeData?.totalUniqueSeats || 56;
-    const nextS =
-      typeof targetSeat === "number"
-        ? targetSeat % total
-        : ((challengeData?.seatIndex || 0) + 1) % total;
-    setSeatOverride(nextS);
+  // Current 72-seat coordinates: caseSlot (0..5) + personaRound (0..11)
+  const currentSeat = typeof challengeData?.seatIndex === "number" ? challengeData.seatIndex : 0;
+  const currentCaseSlot = ((currentSeat % 6) + 6) % 6;
+  const currentPersonaRound = Math.floor(currentSeat / 6);
+
+  const handlePickCaseSlot = (targetSlot) => {
+    const k = ((targetSlot % 6) + 6) % 6;
+    if (k === currentCaseSlot) {
+      setShowCasePicker(false);
+      return;
+    }
+    if (deck && !window.confirm(ui.switchConfirmMsg)) {
+      return;
+    }
+    const total = challengeData?.totalUniqueSeats || 72;
+    const nextSeat = (currentPersonaRound * 6 + k) % total;
+    setSeatOverride(nextSeat);
     setShowCasePicker(false);
-    loadScenarioSeat(nextS, true);
+    loadScenarioSeat(nextSeat, true);
   };
 
   // Ping Arena activity
@@ -1169,7 +1261,12 @@ window.Challenge2ParticipantView = function ({
       latestDeckRef.current = newDeck;
       setDeckSignature(data.signature || "");
       setSlideIdx(0);
+      setShowBrief(false);
       setActiveStep("2");
+      try {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {}
+
       setHistory((prev) => [
         ...prev,
         {
@@ -1190,14 +1287,14 @@ window.Challenge2ParticipantView = function ({
         },
       ]);
 
-      // Generate 16:9 boardroom visuals in background & store promise so Submit can await if still running
+      // Generate 16:9 boardroom visuals in background
       const slidesWithPrompts = clampedSlides
         .map((s, idx) => ({ idx, prompt: s.image_prompt }))
         .filter((x) => Boolean(x.prompt))
         .slice(0, 2);
 
       if (slidesWithPrompts.length > 0) {
-        setGeneratingImages(true);
+        setImagesLoading(true);
         const imgJob = fetch("/api/deck/images", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -1222,7 +1319,7 @@ window.Challenge2ParticipantView = function ({
           })
           .catch(() => {})
           .finally(() => {
-            setGeneratingImages(false);
+            setImagesLoading(false);
             imagePromiseRef.current = null;
           });
         imagePromiseRef.current = imgJob;
@@ -1234,7 +1331,7 @@ window.Challenge2ParticipantView = function ({
     }
   };
 
-  // Export .pptx
+  // Export .pptx (Exclusively offered on Post-Submit Locked screen)
   const handleDownloadPptx = async (targetDeckObj) => {
     const deckToExport = targetDeckObj || latestDeckRef.current || deck;
     if (!deckToExport) return;
@@ -1257,7 +1354,7 @@ window.Challenge2ParticipantView = function ({
     } catch (e) {}
   };
 
-  // Dynamic Scenario-Aware Pre-Submit Readiness Checks
+  // Dynamic Scenario-Aware Pre-Submit Readiness Checks (used for fallback scoring)
   const computePreSubmitChecks = (d) => {
     if (!d || !Array.isArray(d.slides)) {
       return {
@@ -1277,8 +1374,12 @@ window.Challenge2ParticipantView = function ({
       matchedKeyNums.length >= 2 ||
       (scen?.clientShort && rawJson.includes(scen.clientShort.split(" ")[0].toLowerCase()));
     const hasKpi = slides.some((s) => Array.isArray(s.kpis) && s.kpis.length >= 2);
-    const hasChart = slides.some((s) => s.chart && Array.isArray(s.chart.series) && s.chart.series.length >= 2);
-    const hasTable = slides.some((s) => s.table && Array.isArray(s.table.rows) && s.table.rows.length >= 2);
+    const hasChart = slides.some(
+      (s) => s.chart && Array.isArray(s.chart.series) && s.chart.series.length >= 2
+    );
+    const hasTable = slides.some(
+      (s) => s.table && Array.isArray(s.table.rows) && s.table.rows.length >= 2
+    );
     const visuals = [hasKpi, hasChart, hasTable].filter(Boolean).length >= 2;
     const personalTouch = Boolean(
       (personalAngle && personalAngle.trim().length >= 10) ||
@@ -1291,19 +1392,17 @@ window.Challenge2ParticipantView = function ({
     return { slides3, clientFacts, visuals, personalTouch, compliance };
   };
 
-  const preChecks = computePreSubmitChecks(deck);
-
   // ONE-TIME FINAL SUBMIT
   const handleFinalSubmitOnce = async () => {
     if (!deck || submittingFinal || lockedSubmission) return;
     setSubmittingFinal(true);
 
-    // Briefly await in-flight slide visual generation (up to 5.5s) so Big Screen card has slide artwork
+    // Briefly await in-flight slide visual generation (capped at 1500ms so submit stays snappy!)
     if (imagePromiseRef.current) {
       setWaitingImagesForSubmit(true);
       await Promise.race([
         imagePromiseRef.current,
-        new Promise((resolve) => setTimeout(resolve, 5500)),
+        new Promise((resolve) => setTimeout(resolve, 1500)),
       ]);
       setWaitingImagesForSubmit(false);
     }
@@ -1383,13 +1482,13 @@ window.Challenge2ParticipantView = function ({
       fallbackVerdictByLang.en;
 
     const slideSummary = (finalDeckToSubmit.slides || [])
-      .map((s, i) => `${ui.slideTabPrefix}${i + 1}${ui.slideTabSuffix || ""}: ${s.title}`)
+      .map((s, i) => `Slide ${i + 1}: ${s.title}`)
       .join(" • ");
 
     const submissionPayload = {
       challenge: "2",
       seatIndex: challengeData?.seatIndex ?? 0,
-      scenarioId: scen?.id || "clinic_founder_takaful",
+      scenarioId: scen?.id || "glc_cfo_golden_bridge",
       clientName: scen?.clientName || "",
       personalAngle: personalAngle || "",
       title: `${finalDeckToSubmit.title || `Pre-Pitch: ${scen?.clientShort || "HNW Client"}`} (${total10}/10)`,
@@ -1466,7 +1565,7 @@ window.Challenge2ParticipantView = function ({
 
     return (
       <div className="bg-white border-2 border-emerald-500 rounded-3xl p-4 sm:p-6 space-y-4 shadow-lg">
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 sm:p-4">
           <div className="space-y-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-extrabold tracking-wide">
               {ui.jobDoneBadge}
@@ -1481,7 +1580,7 @@ window.Challenge2ParticipantView = function ({
             )}
           </div>
 
-          <div className="flex items-center gap-3 bg-white border-2 border-emerald-400 rounded-2xl px-4 py-2.5 shadow-sm shrink-0">
+          <div className="flex items-center gap-3 bg-white border-2 border-emerald-400 rounded-2xl px-4 py-2 shadow-sm shrink-0">
             <div className="text-center pr-3 border-r border-slate-200">
               <div className="text-[10px] font-extrabold uppercase text-slate-500">
                 {ui.deckScoreLabel}
@@ -1511,18 +1610,19 @@ window.Challenge2ParticipantView = function ({
           </div>
         )}
 
+        {/* Untruncated 6-Dimension Rubric Breakdown */}
         {criteriaEntries.length > 0 && (
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2">
             <div className="text-xs font-extrabold uppercase tracking-wider text-slate-700">
               {ui.rubricHeader}
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {criteriaEntries.map(([dim, val]) => (
                 <div
                   key={dim}
-                  className="bg-white border border-slate-200 rounded-xl px-2.5 py-2 flex items-center justify-between gap-2"
+                  className="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center justify-between gap-2"
                 >
-                  <span className="text-[11px] font-bold text-slate-700 truncate">{dim}</span>
+                  <span className="text-[11px] font-bold text-slate-700 leading-snug">{dim}</span>
                   <span className="text-xs font-extrabold text-[#ed1b2e] shrink-0">{val}</span>
                 </div>
               ))}
@@ -1545,9 +1645,7 @@ window.Challenge2ParticipantView = function ({
                         : "bg-slate-100 hover:bg-slate-200 text-slate-700"
                     }`}
                   >
-                    {ui.slideTabPrefix}
-                    {idx + 1}
-                    {ui.slideTabSuffix} · {(ui.slideShortLabels || [])[idx] || ""}
+                    {(ui.slideTabs || [])[idx] || `Slide ${idx + 1}`}
                   </button>
                 ))}
               </div>
@@ -1564,7 +1662,7 @@ window.Challenge2ParticipantView = function ({
               slideIndex={safeIdx}
               totalSlides={3}
               badgeLabel={ui.yourSlideLabel}
-              speakerNotesLabel={ui.speakerNotesLabel}
+              speakerNotesLabel={ui.speakerNotesToggle}
             />
           </div>
         )}
@@ -1598,191 +1696,198 @@ window.Challenge2ParticipantView = function ({
   }
 
   /* ============================================================================
-     RENDER 2: ACTIVE CHALLENGE 2 EXECUTIVE 3-SLIDE STUDIO
+     RENDER 2: ACTIVE CHALLENGE 2 EXECUTIVE 3-SLIDE STUDIO (STREAMLINED MOBILE UX)
   ============================================================================ */
   const targetDeck = challengeData?.target || null;
   const targetSlides = (targetDeck?.slides || []).slice(0, 3);
   const currentSlides = (deck?.slides || []).slice(0, 3);
   const safeSlideIdx = Math.min(slideIdx, Math.max(0, currentSlides.length - 1));
   const safeTargetIdx = Math.min(targetSlideIdx, Math.max(0, targetSlides.length - 1));
+  const clientShort = scen?.clientShort || "HNW Client";
+  const gapValue = scen?.gapAmount ? `Gap ${scen.gapAmount}` : "";
 
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 space-y-4 shadow-sm">
-      {/* Top Studio Header + Strictly 3 Slides Pill + Benchmark Toggle */}
-      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-200 pb-3.5">
-        <div className="space-y-1 max-w-2xl">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-red-50 text-[#ed1b2e] border border-red-200 text-[11px] font-extrabold">
-              {ui.badge}
-            </span>
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-slate-900 text-amber-300 text-[10px] font-extrabold tracking-wider">
-              📐 {ui.strictly3Badge}
-            </span>
-          </div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">{ui.title}</h2>
-          <p className="text-xs text-slate-600 leading-relaxed">{ui.subtitle}</p>
-        </div>
-
+    <div className="bg-white border border-slate-200 rounded-3xl p-3.5 sm:p-5 space-y-3 shadow-sm">
+      {/* 1. Slim Top Studio Bar + Compact 🎯 Sample Button */}
+      <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-200">
+        <h2 className="text-sm sm:text-base font-extrabold text-slate-900 truncate">
+          {ui.studioHeader}
+        </h2>
         <button
           type="button"
-          onClick={() => setShowTargetModal((v) => !v)}
-          className={`px-3.5 py-2 rounded-xl text-xs font-extrabold border-2 transition-all shrink-0 ${
-            showTargetModal
-              ? "bg-slate-900 text-white border-slate-900"
-              : "bg-white hover:bg-red-50 text-[#ed1b2e] border-[#ed1b2e]"
-          }`}
+          onClick={() => setShowBenchmark(true)}
+          className="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-red-50 hover:bg-red-100 text-[#ed1b2e] border border-red-200 transition-all shrink-0"
         >
-          {showTargetModal ? ui.hideTargetBtn : ui.targetBtn}
+          {ui.sampleBtn}
         </button>
       </div>
 
-      {/* Collapsible 3-Slide Benchmark Reference Deck */}
-      {showTargetModal && targetSlides.length > 0 && (
-        <div className="bg-slate-900 text-white rounded-2xl p-3.5 sm:p-4 space-y-3 shadow-inner">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="text-xs font-extrabold uppercase tracking-wider text-amber-300">
-              {ui.targetGoalBanner}
+      {/* Dismissible Sample / Benchmark 3-Slide Modal Overlay */}
+      {showBenchmark && targetSlides.length > 0 && (
+        <div
+          className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5 overflow-y-auto"
+          onClick={() => setShowBenchmark(false)}
+        >
+          <div
+            className="bg-slate-900 text-white border border-slate-700 rounded-2xl w-full max-w-2xl p-3.5 sm:p-4 space-y-3 shadow-2xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-2">
+              <div className="text-xs font-extrabold uppercase tracking-wider text-amber-300 truncate">
+                {ui.targetGoalBanner}
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowBenchmark(false)}
+                className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-extrabold text-white shrink-0"
+              >
+                {ui.closeSampleBtn}
+              </button>
             </div>
-            <div className="flex items-center gap-1.5">
+
+            <div className="grid grid-cols-3 gap-1.5 bg-slate-800 p-1 rounded-xl">
               {targetSlides.map((_, ti) => (
                 <button
                   key={ti}
                   type="button"
                   onClick={() => setTargetSlideIdx(ti)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all ${
+                  className={`py-1.5 px-2 rounded-lg text-xs font-extrabold transition-all ${
                     safeTargetIdx === ti
-                      ? "bg-[#ed1b2e] text-white"
-                      : "bg-slate-800 hover:bg-slate-700 text-slate-200"
+                      ? "bg-[#ed1b2e] text-white shadow-sm"
+                      : "text-slate-300 hover:text-white"
                   }`}
                 >
-                  {ui.slideTabPrefix}
-                  {ti + 1}
-                  {ui.slideTabSuffix}
+                  {(ui.slideTabs || [])[ti] || `Slide ${ti + 1}`}
                 </button>
               ))}
             </div>
+
+            <ExecutiveSlideCard
+              slide={targetSlides[safeTargetIdx]}
+              slideIndex={safeTargetIdx}
+              totalSlides={3}
+              badgeLabel={ui.targetSlideLabel}
+              speakerNotesLabel={ui.speakerNotesToggle}
+              compact={true}
+            />
           </div>
-          <ExecutiveSlideCard
-            slide={targetSlides[safeTargetIdx]}
-            slideIndex={safeTargetIdx}
-            totalSlides={3}
-            badgeLabel={ui.targetSlideLabel}
-            speakerNotesLabel={ui.speakerNotesLabel}
-            compact={true}
-          />
         </div>
       )}
 
-      {/* Assigned Unique Client Scenario Card + 14-Archetype Case Picker */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-2xl p-3.5 sm:p-4 space-y-3 shadow-md">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-[#ed1b2e] text-white text-[10px] font-extrabold uppercase tracking-wider">
-              Case #{(challengeData?.seatIndex ?? 0) + 1}/{challengeData?.totalUniqueSeats || 56}
-            </span>
-            <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wide">
-              {scen?.icon || "🏛️"} {scen?.shortLabel || ui.assignedCaseLabel}
-            </span>
+      {/* 2. Unified Auto-Collapsing Client Brief Card + 6-Case Switcher (72-Seat Preserving) */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-2xl p-3 space-y-2.5 shadow-md">
+        {!showBrief ? (
+          /* Sleek 1-Line Collapsed Client Bar */
+          <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0 flex items-center gap-1.5 text-xs font-extrabold truncate">
+              <span>{scen?.icon || "🏛️"}</span>
+              <span className="truncate">{clientShort}</span>
+              {gapValue && (
+                <span className="text-amber-300 font-mono text-[11px] shrink-0">• {gapValue}</span>
+              )}
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => setShowBrief(true)}
+                className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-bold text-slate-200"
+              >
+                {ui.caseInfoBtn}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowCasePicker((v) => !v)}
+                className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300"
+              >
+                {ui.switchShortFmt} ({currentCaseSlot + 1}/6) ▾
+              </button>
+            </div>
           </div>
-
-          <div className="flex flex-wrap items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => setShowCasePicker((v) => !v)}
-              className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-extrabold text-white"
-            >
-              {ui.browseCasesBtn}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSwitchSeat()}
-              className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-extrabold text-amber-300"
-            >
-              {ui.switchCaseBtn}
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowFullCase((v) => !v)}
-              className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] font-bold text-slate-300"
-            >
-              {showFullCase ? ui.lessCaseBtn : ui.moreCaseBtn}
-            </button>
-          </div>
-        </div>
-
-        {/* 14-Archetype Case Picker Drawer */}
-        {showCasePicker && Array.isArray(challengeData?.archetypes) && (
-          <div className="bg-slate-800/95 border border-slate-700 rounded-xl p-3 space-y-2">
-            <div className="text-[11px] font-extrabold text-amber-300">{ui.casePickerTitle}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-56 overflow-y-auto pr-1">
-              {challengeData.archetypes.map((arch) => {
-                const isCur = scen?.id === arch.id;
-                return (
-                  <button
-                    key={arch.id}
-                    type="button"
-                    onClick={() => handleSwitchSeat(arch.seatIndex)}
-                    className={`text-left p-2 rounded-lg border text-xs transition-all flex items-center justify-between gap-2 ${
-                      isCur
-                        ? "bg-[#ed1b2e]/20 border-[#ed1b2e] text-white"
-                        : "bg-slate-900/70 hover:bg-slate-900 border-slate-700 text-slate-200"
-                    }`}
-                  >
-                    <div className="min-w-0">
-                      <div className="font-extrabold truncate">
-                        {arch.icon} {arch.shortLabel}
-                      </div>
-                      <div className="text-[10px] text-slate-400 truncate">{arch.clientName}</div>
-                    </div>
-                    <span className="text-[10px] font-mono font-bold text-amber-300 shrink-0">
-                      Gap {arch.gapAmount}
-                    </span>
-                  </button>
-                );
-              })}
+        ) : (
+          /* Expanded Client Card Header */
+          <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0 flex items-center gap-1.5">
+              <span className="text-base leading-none shrink-0">{scen?.icon || "🏛️"}</span>
+              <span className="text-xs font-extrabold text-amber-300 truncate">
+                {scen?.shortLabel || clientShort}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0">
+              {activeStep === "2" && (
+                <button
+                  type="button"
+                  onClick={() => setShowBrief(false)}
+                  className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] font-bold text-slate-300"
+                >
+                  {ui.hideCaseBtn}
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setShowCasePicker((v) => !v)}
+                className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300"
+              >
+                {ui.switchCaseFmt} ({currentCaseSlot + 1}/6) ▾
+              </button>
             </div>
           </div>
         )}
 
-        {/* 4 Crisp Balance-Sheet Snapshot Tiles */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-          {caseCards.map((c, ci) => (
-            <div
-              key={ci}
-              className="bg-slate-800/90 border border-slate-700 rounded-xl px-3 py-2 flex items-start gap-2"
-            >
-              <span className="text-base leading-none mt-0.5">{c.icon}</span>
-              <div className="min-w-0">
-                <div className="text-[11px] font-extrabold text-amber-300 leading-tight">
-                  {c.label}
-                </div>
-                <div className="text-[11px] text-slate-200 leading-snug mt-0.5">{c.value}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Sleek 6-Item Curated Case Picker */}
+        {showCasePicker && (
+          <div className="bg-slate-800/95 border border-slate-700 rounded-xl p-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            {C2_CURATED_CASES_META.map((cm) => {
+              const isCur = cm.slot === currentCaseSlot;
+              const lbl = cm.labels[normLang] || cm.labels.en;
+              return (
+                <button
+                  key={cm.id}
+                  type="button"
+                  onClick={() => handlePickCaseSlot(cm.slot)}
+                  className={`text-left px-2.5 py-2 rounded-lg border text-xs font-extrabold transition-all flex items-center justify-between gap-2 ${
+                    isCur
+                      ? "bg-[#ed1b2e]/25 border-[#ed1b2e] text-white"
+                      : "bg-slate-900/80 hover:bg-slate-900 border-slate-700 text-slate-200"
+                  }`}
+                >
+                  <span className="truncate">
+                    {cm.icon} {lbl}
+                  </span>
+                  <span className="text-[10px] font-mono text-amber-300 shrink-0">
+                    {cm.slot + 1}/6
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
 
-        {/* Expanded Case File Details */}
-        {showFullCase && challengeData?.case_file && (
-          <div className="bg-slate-950/70 border border-slate-700 rounded-xl p-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-200">
-            {Object.entries(challengeData.case_file).map(([k, v]) => (
-              <div key={k}>
-                <span className="font-extrabold uppercase text-amber-400 mr-1">
-                  {k.replace("_", " ")}:
-                </span>
-                <span>{v}</span>
+        {/* Compact 2×2 Mobile Balance-Sheet Grid (~130px height on mobile) */}
+        {showBrief && (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+            {caseCards.map((c, ci) => (
+              <div
+                key={ci}
+                className="bg-slate-800/90 border border-slate-700 rounded-xl p-2 min-w-0"
+              >
+                <div className="text-[10px] font-extrabold text-amber-300 truncate">
+                  {c.icon} {c.label}
+                </div>
+                <div className="text-[11px] text-slate-200 leading-snug mt-0.5 line-clamp-2">
+                  {c.value}
+                </div>
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {/* Two-Step Workflow Bar */}
-      <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1.5 rounded-2xl">
+      {/* Two-Step Workflow Bar (Short 1-Line Mobile Labels) */}
+      <div className="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-2xl">
         <button
           type="button"
           onClick={() => setActiveStep("1")}
-          className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all ${
+          className={`py-2 px-2.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all ${
             activeStep === "1"
               ? "bg-white text-slate-900 shadow-sm border border-slate-200"
               : "text-slate-600 hover:text-slate-900"
@@ -1794,7 +1899,7 @@ window.Challenge2ParticipantView = function ({
           type="button"
           onClick={() => deck && setActiveStep("2")}
           disabled={!deck}
-          className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 ${
+          className={`py-2 px-2.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all flex items-center justify-center gap-1 ${
             activeStep === "2"
               ? "bg-[#ed1b2e] text-white shadow-sm"
               : deck
@@ -1804,7 +1909,7 @@ window.Challenge2ParticipantView = function ({
         >
           <span>{ui.step2Tab}</span>
           {deck && (
-            <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[10px]">
+            <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[9px]">
               3/3
             </span>
           )}
@@ -1812,70 +1917,52 @@ window.Challenge2ParticipantView = function ({
       </div>
 
       {/* ========================================================================
-         STEP 1: CLEAN VISUAL R.C.T.F.C. ARCHITECT + PERSONAL STRATEGIC ANGLE
+         STEP 1: COMPACT R.C.T.F.C. PILLARS + 3-PILL TONE + PERSONAL ANGLE
       ======================================================================== */}
       {activeStep === "1" && (
-        <div className="space-y-4">
-          {/* 1. 5 Visual R.C.T.F.C. Toggle Cards */}
-          <div className="space-y-2.5">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div>
-                <div className="text-xs sm:text-sm font-extrabold text-slate-900">
-                  {ui.pillarsHeader}
-                </div>
-                <div className="text-[11px] text-slate-500">{ui.pillarsSub}</div>
-              </div>
-              <div className="flex flex-wrap items-center gap-1.5">
+        <div className="space-y-3">
+          {/* 1. Compact 2-Col / 5-Col R.C.T.F.C. Pill Toggles */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between gap-2">
+              <div className="text-xs font-extrabold text-slate-900">{ui.pillarsHeader}</div>
+              {activePillarCount < 5 && (
                 <button
                   type="button"
                   onClick={handleActivateAllPillars}
-                  className="px-3 py-1.5 rounded-xl bg-[#ed1b2e] hover:bg-[#c81526] text-white text-xs font-extrabold shadow-sm"
+                  className="px-2.5 py-1 rounded-lg bg-[#ed1b2e] text-white text-[11px] font-extrabold"
                 >
-                  {ui.insertAllBtn}
+                  {ui.activateAllShort}
                 </button>
-                <button
-                  type="button"
-                  onClick={handleTryWeakPrompt}
-                  className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold"
-                >
-                  {ui.weakPromptBtn}
-                </button>
-              </div>
+              )}
             </div>
 
             {loadingChallenge ? (
-              <div className="text-xs text-slate-500 py-4 text-center">Loading scenario...</div>
+              <div className="text-xs text-slate-500 py-3 text-center">Loading scenario...</div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
-                {guideSteps.map((g) => {
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
+                {guideSteps.map((g, gi) => {
                   const isDone = pillarStatuses[g.key] === "done";
-                  const meta = PILLAR_META[g.key] || { icon: "•", code: "•" };
+                  const shortTitle =
+                    (ui.pillarTitles && ui.pillarTitles[g.key]) || g.label;
+                  const spanLast = gi === 4 ? "col-span-2 sm:col-span-1" : "";
                   return (
                     <button
                       key={g.key}
                       type="button"
                       onClick={() => handleTogglePillar(g.key)}
-                      className={`p-3 rounded-2xl border-2 text-left transition-all flex flex-col justify-between gap-1.5 ${
+                      className={`${spanLast} px-2.5 py-2 rounded-xl border text-left transition-all ${
                         isDone
-                          ? "bg-emerald-50/70 border-emerald-500 shadow-sm"
+                          ? "bg-emerald-50/80 border-emerald-500 shadow-2xs"
                           : "bg-slate-50 hover:bg-slate-100 border-slate-200 opacity-75"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-1">
-                        <span className="text-xs font-extrabold text-slate-900">
-                          {meta.icon} {g.label}
-                        </span>
-                        <span
-                          className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-extrabold shrink-0 ${
-                            isDone
-                              ? "bg-emerald-600 text-white"
-                              : "bg-white border border-slate-300 text-slate-400"
-                          }`}
-                        >
-                          {isDone ? "✓" : "+"}
+                        <span className="text-[11px] font-extrabold text-slate-900 truncate">
+                          {isDone ? "✓ " : "+ "}
+                          {shortTitle}
                         </span>
                       </div>
-                      <div className="text-[11px] text-slate-600 font-medium leading-snug line-clamp-2">
+                      <div className="text-[10px] text-slate-600 truncate mt-0.5">
                         {g.summary || g.tip}
                       </div>
                     </button>
@@ -1885,10 +1972,10 @@ window.Challenge2ParticipantView = function ({
             )}
           </div>
 
-          {/* 2. Boardroom Presentation Tone Selector */}
-          <div className="space-y-2">
-            <div className="text-xs sm:text-sm font-extrabold text-slate-900">{ui.toneHeader}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          {/* 2. 1-Row 3-Pill Boardroom Tone Selector */}
+          <div className="space-y-1.5">
+            <div className="text-xs font-extrabold text-slate-900">{ui.toneHeader}</div>
+            <div className="grid grid-cols-3 gap-1.5">
               {(ui.tones || []).map((tn) => {
                 const active = selectedToneId === tn.id;
                 return (
@@ -1896,30 +1983,25 @@ window.Challenge2ParticipantView = function ({
                     key={tn.id}
                     type="button"
                     onClick={() => handleSelectTone(tn.id)}
-                    className={`px-3 py-2.5 rounded-xl border-2 text-xs font-extrabold text-left transition-all ${
+                    className={`px-2 py-2 rounded-xl border text-[11px] sm:text-xs font-extrabold text-center truncate transition-all ${
                       active
-                        ? "bg-slate-900 text-white border-slate-900 shadow-sm"
+                        ? "bg-slate-900 text-white border-slate-900 shadow-xs"
                         : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200"
                     }`}
                   >
-                    {tn.label}
+                    {tn.shortLabel}
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* 3. Personal Strategic Angle / Relationship Hook */}
-          <div className="bg-amber-50/80 border-2 border-amber-300 rounded-2xl p-3.5 space-y-2.5">
-            <div>
-              <div className="text-xs sm:text-sm font-extrabold text-slate-900">
-                {ui.angleHeader}
-              </div>
-              <div className="text-[11px] text-slate-600">{ui.angleSub}</div>
-            </div>
+          {/* 3. Personal Strategic Angle (Compact 1-Line Chips + 2-Row Textarea) */}
+          <div className="bg-amber-50/80 border border-amber-300 rounded-2xl p-3 space-y-2">
+            <div className="text-xs font-extrabold text-slate-900">{ui.angleHeader}</div>
 
             {angleHints.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-col gap-1.5">
                 {angleHints.map((hint, hi) => {
                   const selected = personalAngle.trim() === hint.trim();
                   return (
@@ -1927,9 +2009,9 @@ window.Challenge2ParticipantView = function ({
                       key={hi}
                       type="button"
                       onClick={() => handleAngleChange(hint)}
-                      className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left transition-all ${
+                      className={`w-full px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left truncate transition-all ${
                         selected
-                          ? "bg-amber-600 text-white border-amber-700 shadow-sm"
+                          ? "bg-amber-600 text-white border-amber-700 shadow-xs"
                           : "bg-white hover:bg-amber-100 text-slate-800 border-amber-300"
                       }`}
                     >
@@ -1945,48 +2027,77 @@ window.Challenge2ParticipantView = function ({
               value={personalAngle}
               onChange={(e) => handleAngleChange(e.target.value)}
               placeholder={ui.anglePlaceholder}
-              className="w-full rounded-xl border border-amber-300 focus:border-[#ed1b2e] focus:outline-none p-2.5 text-xs sm:text-sm text-slate-900 bg-white leading-relaxed"
+              className="w-full rounded-xl border border-amber-300 focus:border-[#ed1b2e] focus:outline-none p-2 text-xs text-slate-900 bg-white leading-relaxed"
             />
           </div>
 
-          {/* 4. Collapsible Master Prompt Inspector / Editor */}
-          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50">
+          {/* 4. Subtle Read-Only Master Prompt Footer (with Optional Manual Edit Unlock) */}
+          <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
             <button
               type="button"
               onClick={() => setShowPromptDrawer((v) => !v)}
-              className="w-full px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs font-extrabold text-slate-700 hover:bg-slate-100"
+              className="w-full px-3 py-2 flex items-center justify-between gap-2 text-[11px] font-extrabold text-slate-600 hover:bg-slate-100"
             >
-              <span>{showPromptDrawer ? ui.promptDrawerHide : ui.promptDrawerShow}</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold">
-                {ui.pillarsActiveLabel}: {activePillarCount}/5
+              <span>
+                ✓ {activePillarCount}/5 {ui.pillarsReadySuffix} ·{" "}
+                {showPromptDrawer ? ui.inspectPromptHide : ui.inspectPromptShow}
               </span>
             </button>
             {showPromptDrawer && (
-              <div className="p-3 border-t border-slate-200 bg-white">
+              <div className="p-2.5 border-t border-slate-200 bg-white space-y-2">
+                <div className="flex items-center justify-end">
+                  {!manualEditUnlocked ? (
+                    <button
+                      type="button"
+                      onClick={() => setManualEditUnlocked(true)}
+                      className="text-[10px] font-extrabold text-slate-600 hover:text-slate-900 px-2 py-0.5 rounded bg-slate-100"
+                    >
+                      {ui.unlockEditBtn}
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        syncStructuredPrompt(activePillarsMap, selectedToneId, personalAngle)
+                      }
+                      className="text-[10px] font-extrabold text-emerald-700 hover:text-emerald-900 px-2 py-0.5 rounded bg-emerald-50"
+                    >
+                      {ui.lockAutoSyncBtn}
+                    </button>
+                  )}
+                </div>
                 <textarea
-                  rows={6}
+                  rows={5}
+                  readOnly={!manualEditUnlocked}
                   value={promptText}
                   onChange={(e) => {
+                    if (!manualEditUnlocked) return;
                     setManualPromptEdited(true);
                     setPromptText(e.target.value);
                   }}
-                  className="w-full rounded-xl border border-slate-300 focus:border-[#ed1b2e] focus:outline-none p-3 text-xs text-slate-900 leading-relaxed font-mono"
+                  className={`w-full rounded-xl border p-2.5 text-xs leading-relaxed font-mono ${
+                    manualEditUnlocked
+                      ? "border-[#ed1b2e] bg-white text-slate-900 focus:outline-none"
+                      : "border-slate-200 bg-slate-50 text-slate-600 cursor-default focus:outline-none"
+                  }`}
                 />
               </div>
             )}
           </div>
 
           {genError && (
-            <div className="bg-red-50 border border-red-200 text-[#ed1b2e] text-xs font-bold px-3.5 py-2.5 rounded-xl">
+            <div className="bg-red-50 border border-red-200 text-[#ed1b2e] text-xs font-bold px-3 py-2 rounded-xl">
               ⚠️ {genError}
             </div>
           )}
 
           {/* Animated 3-Stage Deck Build Progress or Primary Generate CTA */}
           {generatingDeck ? (
-            <div className="bg-slate-900 text-white rounded-2xl p-4 space-y-2.5 shadow-md">
+            <div className="bg-slate-900 text-white rounded-2xl p-3.5 space-y-2 shadow-md">
               <div className="flex items-center justify-between text-xs font-extrabold text-amber-300">
-                <span>{(ui.genStages || [])[genStageIdx] || ui.genStages[0]}</span>
+                <span className="truncate mr-2">
+                  {(ui.genStages || [])[genStageIdx] || ui.genStages[0]}
+                </span>
                 <span>{Math.min(95, (genStageIdx + 1) * 32)}%</span>
               </div>
               <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
@@ -2001,7 +2112,7 @@ window.Challenge2ParticipantView = function ({
               type="button"
               onClick={handleGenerateDeck}
               disabled={!promptText || promptText.trim().length < 3}
-              className="w-full py-3.5 px-5 rounded-2xl bg-[#ed1b2e] hover:bg-[#c81526] disabled:opacity-50 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
+              className="w-full py-3.5 px-4 rounded-2xl bg-[#ed1b2e] hover:bg-[#c81526] disabled:opacity-50 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
             >
               {deck ? ui.regenerateBtn : ui.generateBtn}
             </button>
@@ -2010,126 +2121,58 @@ window.Challenge2ParticipantView = function ({
       )}
 
       {/* ========================================================================
-         STEP 2: 3-SLIDE KEYNOTE PREVIEW, CHECKLIST & ONE-TIME FINAL SUBMIT
+         STEP 2: CLEAN 3-TAB SLIDE DECK PREVIEW & SNAPPY FINAL SUBMIT
       ======================================================================== */}
       {activeStep === "2" && deck && (
-        <div className="space-y-4">
-          {/* 3-Slide Keynote Filmstrip Switcher + Compare & Export Controls */}
-          <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-100 border border-slate-200 rounded-2xl p-2.5">
-            <div className="flex flex-wrap items-center gap-1.5">
+        <div className="space-y-3">
+          {/* Crisp 3-Tab Segmented Slide Switcher + Subtle Visuals Rendering Badge */}
+          <div className="space-y-1.5">
+            <div className="grid grid-cols-3 gap-1.5 bg-slate-100 border border-slate-200 rounded-2xl p-1">
               {currentSlides.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setSlideIdx(idx)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all ${
+                  className={`py-2 px-2 rounded-xl text-xs font-extrabold truncate transition-all ${
                     safeSlideIdx === idx
                       ? "bg-slate-900 text-white shadow-sm"
-                      : "bg-white hover:bg-red-50 text-slate-700 border border-slate-200"
+                      : "text-slate-700 hover:bg-white"
                   }`}
                 >
-                  {ui.slideTabPrefix}
-                  {idx + 1}
-                  {ui.slideTabSuffix} · {(ui.slideShortLabels || [])[idx] || ""}
+                  {(ui.slideTabs || [])[idx] || `Slide ${idx + 1}`}
                 </button>
               ))}
-              <span className="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
-                {ui.slidesCountBadge}
-              </span>
-              {generatingImages && (
-                <span className="text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg animate-pulse">
-                  {ui.generatingImgText}
+            </div>
+            {imagesLoading && (
+              <div className="flex justify-end">
+                <span className="text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full animate-pulse">
+                  {ui.generatingImgBadge}
                 </span>
-              )}
-            </div>
-
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => setCompareMode((v) => !v)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-extrabold border transition-all ${
-                  compareMode
-                    ? "bg-slate-900 text-white border-slate-900"
-                    : "bg-white hover:bg-slate-50 text-slate-700 border-slate-300"
-                }`}
-              >
-                {compareMode ? ui.compareToggleOn : ui.compareToggleOff}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDownloadPptx(deck)}
-                className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs font-extrabold"
-              >
-                {ui.downloadPptxBtn}
-              </button>
-            </div>
+              </div>
+            )}
           </div>
 
-          {/* Slide Canvas (Single or Side-by-Side vs Benchmark) */}
-          {compareMode && targetSlides.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-              <ExecutiveSlideCard
-                slide={currentSlides[safeSlideIdx]}
-                slideIndex={safeSlideIdx}
-                totalSlides={3}
-                badgeLabel={ui.yourSlideLabel}
-                speakerNotesLabel={ui.speakerNotesLabel}
-                generatingImages={generatingImages}
-              />
-              <ExecutiveSlideCard
-                slide={targetSlides[Math.min(safeSlideIdx, targetSlides.length - 1)]}
-                slideIndex={Math.min(safeSlideIdx, targetSlides.length - 1)}
-                totalSlides={3}
-                badgeLabel={ui.targetSlideLabel}
-                speakerNotesLabel={ui.speakerNotesLabel}
-              />
-            </div>
-          ) : (
-            <ExecutiveSlideCard
-              slide={currentSlides[safeSlideIdx]}
-              slideIndex={safeSlideIdx}
-              totalSlides={3}
-              badgeLabel={ui.yourSlideLabel}
-              speakerNotesLabel={ui.speakerNotesLabel}
-              generatingImages={generatingImages}
-            />
-          )}
+          {/* Slide Canvas */}
+          <ExecutiveSlideCard
+            slide={currentSlides[safeSlideIdx]}
+            slideIndex={safeSlideIdx}
+            totalSlides={3}
+            badgeLabel={ui.yourSlideLabel}
+            speakerNotesLabel={ui.speakerNotesToggle}
+            generatingImages={imagesLoading}
+          />
 
-          {/* Pre-Submit 5-Point Readiness Bar */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2">
-            <div className="text-xs font-extrabold uppercase tracking-wider text-slate-700">
-              {ui.qualityChecksHeader}
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-              {Object.entries(ui.checkLabels).map(([ckKey, ckLabel]) => {
-                const ok = preChecks[ckKey];
-                return (
-                  <div
-                    key={ckKey}
-                    className={`px-2.5 py-2 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 ${
-                      ok
-                        ? "bg-emerald-50 border-emerald-300 text-emerald-900"
-                        : "bg-white border-slate-200 text-slate-500"
-                    }`}
-                  >
-                    <span className="font-extrabold">{ok ? "✅" : "⚪"}</span>
-                    <span className="leading-tight">{ckLabel}</span>
-                  </div>
-                );
-              })}
-            </div>
+          {/* Compact 1-Line Pre-Submit Status Bar */}
+          <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 text-xs font-extrabold text-emerald-900 text-center">
+            {ui.readyStatusBar}
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-2.5 text-xs text-amber-900 font-medium">
-            {ui.oneTimeNotice}
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
             <button
               type="button"
               onClick={() => setActiveStep("1")}
               disabled={submittingFinal}
-              className="px-4 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-extrabold transition-all"
+              className="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-extrabold transition-all"
             >
               {ui.backToPromptBtn}
             </button>

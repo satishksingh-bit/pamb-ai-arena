@@ -1,14 +1,23 @@
-"""Challenge 2 Scenario Bank: 56 Unique HNW Malaysian Executive Pre-Pitch Cases (14 Archetypes × 4 Personas).
+"""Challenge 2 Scenario Bank: 72 Unique HNW Malaysian Executive Pre-Pitch Seats (6 Curated Cases × 12 Personas).
 
-Every participant in a 50–54 leader room receives a distinct HNW client case while being evaluated
-on the exact same core skill: structuring a 5-Pillar R.C.T.F.C. prompt + personal strategic angle
-to generate a boardroom-grade 3-Slide Pre-Pitch Deck (Slide 1 Snapshot & KPIs, Slide 2 Liquidity Gap Chart,
-Slide 3 Tailored Strategy Matrix & Co-Advisory Close).
+Every participant in up to a 72-leader room receives a distinct HNW client case evenly distributed
+across the 6 curated workshop cases (2 Health-led + 4 Legacy/Wealth), while being evaluated on
+structuring a 5-Pillar R.C.T.F.C. prompt + personal strategic angle to generate a boardroom-grade
+3-Slide Pre-Pitch Deck (Slide 1 Snapshot & KPIs, Slide 2 Liquidity Gap Chart, Slide 3 Strategy Matrix).
 """
 
 from __future__ import annotations
 
 import copy
+
+C2_CURATED_6_ORDER = [
+    "glc_cfo_golden_bridge",     # 1. 🏛️ Listed Group CFO — Age-60 Executive Health Bridge (PRUValue Med Smart Deductible + PRUElite Flex)
+    "kl_surgeon_practice",       # 2. 🩺 Senior Medical Specialist — Premier Health & Practice Reserve (PRUMillion Med Active 2.0 RM 8M + PRUAll Care to 100)
+    "clinic_founder_takaful",    # 3. 🏥 Specialist Clinic Founder — Takaful Medical & Hibah (PRUBSN WarisanPlus)
+    "tech_exit_family_office",   # 4. 🚀 Post-Exit Tech Founder — Family Wellness & Milestone Trust (PRUPrestige Legacy + PRUElite Invest)
+    "ipoh_pharma_matriarch",     # 5. 🌿 3-Gen Family Matriarch — Longevity Care & Grandkids Pool
+    "penang_semicon_keyman",     # 6. 🏭 Penang Semicon Founder — Business & Heir Harmony (PRUWealth Enrich 2.0 + PRUAll Care)
+]
 
 C2_ARCHETYPE_ORDER = [
     "clinic_founder_takaful",
@@ -28,35 +37,95 @@ C2_ARCHETYPE_ORDER = [
 ]
 
 C2_PERSONA_VARIANTS: dict[str, list[dict[str, str]]] = {
+    "glc_cfo_golden_bridge": [
+        {"en": "Encik Wan Zulhilmi (53, Group CFO, KL)", "zh": "Wan Zulhilmi（53岁，上市集团首席财务官）", "biz": "Bursa-Listed Infrastructure Group CFO", "loc": "KLCC"},
+        {"en": "Ms. Pauline Chok (52, Regional Bank MD)", "zh": "卓保琳 Pauline Chok（52岁，区域银行董事总经理）", "biz": "Regional Corporate Banking Managing Director", "loc": "TRX Kuala Lumpur"},
+        {"en": "Mr. Devandran Pillai (54, Energy EVP)", "zh": "Devandran Pillai（54岁，国家能源集团执行副总裁）", "biz": "National Energy Transition EVP", "loc": "Bangsar"},
+        {"en": "Dato' Simon Foo (53, Telco COO)", "zh": "拿督符志明 Simon Foo（53岁，电讯集团首席运营官）", "biz": "Listed Telecom & Data-Centre COO", "loc": "Petaling Jaya"},
+        {"en": "Datin Noraini Binti Halim (53, GLC Group Treasurer)", "zh": "Datin Noraini Halim（53岁，政联集团首席司库）", "biz": "Listed Utilities & Grid Group Treasurer", "loc": "Putrajaya"},
+        {"en": "Mr. Terence Cheah (54, Aviation Group CFO)", "zh": "谢天伦 Terence Cheah（54岁，航空集团首席财务官）", "biz": "Regional Aviation & Airport Logistics CFO", "loc": "Sepang"},
+        {"en": "Ms. Clarissa Yeoh (52, REIT CEO, Penang)", "zh": "杨嘉丽 Clarissa Yeoh（52岁，商业产托行政总裁）", "biz": "Northern Commercial & Industrial REIT CEO", "loc": "Gurney Drive"},
+        {"en": "Encik Khairul Azman (55, Port Holdings MD)", "zh": "Khairul Azman（55岁，港口控股董事总经理）", "biz": "Listed Deepwater Port Holdings MD", "loc": "Port Klang"},
+        {"en": "Mr. Ramesh Subramaniam (53, Healthcare Group CFO)", "zh": "Ramesh Subramaniam（53岁，私立医院集团财务总监）", "biz": "Bursa-Listed Tertiary Hospital Group CFO", "loc": "Subang Jaya"},
+        {"en": "Ms. Vivienne Phua (52, Consumer PLC Finance Director)", "zh": "潘慧雯 Vivienne Phua（52岁，上市快消集团财务董事）", "biz": "Listed FMCG & Dairy Group Finance Director", "loc": "Damansara Heights"},
+        {"en": "Datuk Desmond Ting (54, Sarawak Energy Director)", "zh": "拿督丁德明 Desmond Ting（54岁，砂拉越清洁能源董事）", "biz": "Borneo Hydro & Renewables Group Director", "loc": "Kuching"},
+        {"en": "Encik Megat Iskandar (53, Sovereign Fund Senior MD)", "zh": "Megat Iskandar（53岁，策略投资基金资深董事总经理）", "biz": "Institutional Infrastructure Investment MD", "loc": "KL Sentral"},
+    ],
+    "kl_surgeon_practice": [
+        {"en": "Dato' Dr. Anand Krishnan (49, Bukit Tunku)", "zh": "Dato' Dr. Anand Krishnan（49岁，武吉东姑）", "biz": "KL Premier Orthopaedic & Sports Specialist Suite", "loc": "Mont Kiara"},
+        {"en": "Dr. Gerard Sta Maria (51, Bangsar)", "zh": "Dr. Gerard Sta Maria（51岁，孟沙）", "biz": "Bangsar Spine & Joint Microsurgery Practice", "loc": "Bangsar"},
+        {"en": "Prof. Dr. Suresh Nair (52, PJ)", "zh": "Prof. Dr. Suresh Nair（52岁，八打灵再也）", "biz": "Nair Minimally Invasive Surgical Suite", "loc": "Petaling Jaya"},
+        {"en": "Dr. Evelyn Cheah (48, Desa ParkCity)", "zh": "谢伊琳医生 Dr. Evelyn Cheah（48岁，帝沙城市园）", "biz": "ParkCity Premier ENT & Head-Neck Practice", "loc": "Desa ParkCity"},
+        {"en": "Dato' Dr. Benjamin Lim (50, Damansara Heights)", "zh": "拿督林本杰医生 Dr. Benjamin Lim（50岁，白沙罗高原）", "biz": "Damansara Ophthalmic & Retina Laser Centre", "loc": "Damansara Heights"},
+        {"en": "Dr. Sharifah Nadia (49, TTDI KL)", "zh": "Dr. Sharifah Nadia（49岁，敦依斯迈花园）", "biz": "TTDI Reconstructive & Micro-Surgical Suite", "loc": "TTDI KL"},
+        {"en": "Dr. Nicholas Khoo (51, Pulau Tikus Penang)", "zh": "邱伟伦医生 Dr. Nicholas Khoo（51岁，槟城浮罗池滑）", "biz": "Island Robotic Urology & Laparoscopy Practice", "loc": "Georgetown"},
+        {"en": "Dr. Kavitha Menon (48, Sunway South Quay)", "zh": "Dr. Kavitha Menon（48岁，双威南湾）", "biz": "Sunway Fertility & Specialist Surgical Practice", "loc": "Sunway"},
+        {"en": "Dato' Dr. Hafizuddin Rahman (52, Shah Alam)", "zh": "Dato' Dr. Hafizuddin Rahman（52岁，莎阿南）", "biz": "Selangor Gastrointestinal & Endoscopy Suite", "loc": "Shah Alam"},
+        {"en": "Dr. Valerie Ong (47, Horizon Hills JB)", "zh": "王薇莉医生 Dr. Valerie Ong（47岁，新山浩然山庄）", "biz": "Southern Premier Dermatology & Laser Surgery", "loc": "Iskandar Puteri"},
+        {"en": "Dr. Jonathan Ngu (50, Brighton Kuching)", "zh": "吴乔纳森医生 Dr. Jonathan Ngu（50岁，古晋）", "biz": "Borneo Specialist Orthopaedic & Trauma Suite", "loc": "Kuching"},
+        {"en": "Dr. Liew Wai Keong (51, Luyang Kota Kinabalu)", "zh": "刘伟强医生 Dr. Liew Wai Keong（51岁，亚庇路阳）", "biz": "Sabah Specialist Eye & Cataract Surgical Centre", "loc": "Kota Kinabalu"},
+    ],
     "clinic_founder_takaful": [
         {"en": "Datin Sharifah Aleya (52, Klang Valley)", "zh": "Datin Sharifah Aleya（52岁，巴生谷）", "biz": "Aleya Specialist Clinics (6 clinics)", "loc": "Bangsar"},
         {"en": "Dato' Dr. Nik Mahmood (54, Shah Alam)", "zh": "Dato' Dr. Nik Mahmood（54岁，莎阿南）", "biz": "Nik Eye & Laser Centres (5 centres)", "loc": "Shah Alam"},
         {"en": "Puan Sri Dr. Huda Zainal (51, Putrajaya)", "zh": "Puan Sri Dr. Huda Zainal（51岁，布城）", "biz": "Zainal Women & Child Specialist Group", "loc": "Damansara"},
         {"en": "Datin Paduka Dr. Soraya (55, Subang)", "zh": "Datin Paduka Dr. Soraya（55岁，梳邦）", "biz": "Soraya Dental & Aesthetic Group (7 branches)", "loc": "Subang Jaya"},
+        {"en": "Dato' Dr. Irfan Zulkarnain (53, Bangi)", "zh": "Dato' Dr. Irfan Zulkarnain（53岁，万宜）", "biz": "Zulkarnain Poliklinik & Dialysis Network (8 centres)", "loc": "Bangi"},
+        {"en": "Datin Dr. Farahiyah Aziz (50, Ampang Hilir)", "zh": "Datin Dr. Farahiyah Aziz（50岁，安邦希流）", "biz": "Aziz Paediatric & Family Wellness Clinics (6 branches)", "loc": "KLCC"},
+        {"en": "Tuan Haji Dr. Luqman Hakim (54, Johor Bahru)", "zh": "Tuan Haji Dr. Luqman Hakim（54岁，新山）", "biz": "Southern Specialist Ambulatory Care Group (5 clinics)", "loc": "Johor Bahru"},
+        {"en": "Datin Dr. Yasmin Kamarudin (52, Cyberjaya)", "zh": "Datin Dr. Yasmin Kamarudin（52岁，赛城）", "biz": "Kamarudin Preventive Diagnostics & Specialist Clinics", "loc": "Cyberjaya"},
+        {"en": "Dato' Dr. Ridzuan Mustapha (55, Kota Bharu / KL)", "zh": "Dato' Dr. Ridzuan Mustapha（55岁，吉隆坡）", "biz": "Mustapha Ear, Nose & Specialist Daycare Group", "loc": "TTDI KL"},
+        {"en": "Dr. Nurul Syuhada Mansor (49, Setia Alam)", "zh": "Dr. Nurul Syuhada Mansor（49岁，实达阿南）", "biz": "Syuhada Orthopaedic Rehab & Specialist Clinics", "loc": "Setia Alam"},
+        {"en": "Datuk Dr. Azlan Syafiq (53, Alor Setar / Penang)", "zh": "Datuk Dr. Azlan Syafiq（53岁，槟城）", "biz": "Northern Medical Imaging & Specialist Clinics (6 outlets)", "loc": "Bayan Lepas"},
+        {"en": "Datin Dr. Aishah Sofea (51, Kuching)", "zh": "Datin Dr. Aishah Sofea（51岁，古晋）", "biz": "Sofea Premier Family & Specialist Clinics (5 branches)", "loc": "Kuching"},
+    ],
+    "tech_exit_family_office": [
+        {"en": "Brendan Lim & Cheryl Tan (43, KLCC)", "zh": "林哲宇与陈欣怡（43岁，吉隆坡双峰塔）", "biz": "Post-Series-C Retail SaaS Buyout", "loc": "KLCC"},
+        {"en": "Adrian Yap (41, Mont Kiara)", "zh": "叶俊杰 Adrian Yap（41岁，满家乐）", "biz": "ASEAN FinTech Payment Gateway Exit", "loc": "Mont Kiara"},
+        {"en": "Karthik Subramaniam (44, Cyberjaya)", "zh": "Karthik Subramaniam（44岁，赛城）", "biz": "Cloud Cybersecurity Firm Acquisition", "loc": "Bangsar South"},
+        {"en": "Melissa Wong (42, Damansara Heights)", "zh": "黄美玲 Melissa Wong（42岁，白沙罗高原）", "biz": "E-Logistics Platform Strategic Sale", "loc": "Damansara Heights"},
+        {"en": "Marcus Teoh & Sabrina Khor (40, Tanjung Bungah)", "zh": "张文豪与许思敏（40岁，槟城丹绒武雅）", "biz": "Industrial AI Vision Startup M&A Exit", "loc": "Georgetown"},
+        {"en": "Gavin Chew (43, TRX Kuala Lumpur)", "zh": "周家豪 Gavin Chew（43岁，敦拉萨国际贸易中心）", "biz": "B2B Supply-Chain ERP Regional Buyout", "loc": "TRX Kuala Lumpur"},
+        {"en": "Arjun Rajendran & Divya Rao (41, Bangsar)", "zh": "Arjun Rajendran 与 Divya Rao（41岁，孟沙）", "biz": "HealthTech Telemedicine Platform Acquisition", "loc": "Bangsar"},
+        {"en": "Julian Siaw (45, Eco Botanic JB)", "zh": "萧志远 Julian Siaw（45岁，新山生态园）", "biz": "Data-Centre Cooling Engineering Tech Exit", "loc": "Iskandar Puteri"},
+        {"en": "Stephanie Tham & Kelvin Lau (42, Desa ParkCity)", "zh": "谭思婷与刘凯文（42岁，帝沙城市园）", "biz": "EdTech Regional Assessment Platform Sale", "loc": "Desa ParkCity"},
+        {"en": "Farhan Iskandar (39, Putrajaya / KL)", "zh": "Farhan Iskandar（39岁，吉隆坡）", "biz": "Enterprise GovTech & Digital ID M&A Exit", "loc": "KL Sentral"},
+        {"en": "Dominic Chin & Rachel Pang (44, Kota Kinabalu)", "zh": "陈明达与彭瑞秋（44岁，亚庇）", "biz": "TravelTech Hospitality Booking Engine Exit", "loc": "Kota Kinabalu"},
+        {"en": "Shaun Quah (41, Bandar Utama PJ)", "zh": "柯俊雄 Shaun Quah（41岁，万达镇）", "biz": "PropTech Smart-Building IoT Strategic Sale", "loc": "Petaling Jaya"},
+    ],
+    "ipoh_pharma_matriarch": [
+        {"en": "Datin Seri Madam Foo (58, Ipoh)", "zh": "拿汀斯里胡太 Madam Foo（58岁，怡保）", "biz": "Perak Herbal & GMP Nutraceutical Industries", "loc": "Ipoh"},
+        {"en": "Madam Cheong Siew Lan (60, Taiping)", "zh": "张秀兰董事长 Madam Cheong（60岁，太平）", "biz": "Cheong Medical Supplies & OEM Factory", "loc": "Ipoh"},
+        {"en": "Datin Lee Mei Fong (57, Seremban)", "zh": "拿汀李美芳 Datin Lee（57岁，芙蓉）", "biz": "Negeri GMP Healthcare Packaging Group", "loc": "Seremban"},
+        {"en": "Madam Tan Geok Bee (59, Klang)", "zh": "陈玉美女士 Madam Tan（59岁，巴生）", "biz": "Port Klang Biotech & Wellness Manufacturing", "loc": "Klang"},
+        {"en": "Datin Paduka Ong Siew Khim (61, Penang)", "zh": "拿汀王秀琴 Datin Paduka Ong（61岁，槟城）", "biz": "Northern GMP Botanical Extracts & Wellness Group", "loc": "Georgetown"},
+        {"en": "Madam Lim Swee Choo (58, Melaka)", "zh": "林瑞珠董事长 Madam Lim（58岁，马六甲）", "biz": "Straits Traditional Remedies & GMP Pharma Sdn Bhd", "loc": "Melaka"},
+        {"en": "Datin Khor Bee Leng (60, Bukit Mertajam)", "zh": "拿汀许美玲 Datin Khor（60岁，大山脚）", "biz": "Peninsula Cleanroom Medical Consumables Group", "loc": "Bukit Mertajam"},
+        {"en": "Madam Yap Siew Chin (59, Batu Pahat)", "zh": "叶秀珍女士 Madam Yap（59岁，峇株巴辖）", "biz": "Southern Health Supplements & Probiotics Factory", "loc": "Johor Bahru"},
+        {"en": "Datin Seri Wong Mei Ling (62, Petaling Jaya)", "zh": "拿汀斯里黄美玲 Datin Seri Wong（62岁，八打灵再也）", "biz": "Selangor Sterile Cosmeceutical & Pharma Labs", "loc": "Petaling Jaya"},
+        {"en": "Madam Siaw Geok Lan (58, Kuching)", "zh": "萧玉兰董事长 Madam Siaw（58岁，古晋）", "biz": "Sarawak Natural Wellness & Pharmacy Chain (18 stores)", "loc": "Kuching"},
+        {"en": "Datin Chan Siew Fang (60, Kuantan)", "zh": "拿汀陈秀芳 Datin Chan（60岁，关丹）", "biz": "East Coast Pharmaceutical Distribution & Cold-Chain", "loc": "Kuantan"},
+        {"en": "Madam Beh Geok Choo (59, Alor Setar)", "zh": "马玉珠女士 Madam Beh（59岁，亚罗士打）", "biz": "Kedah Medical Disposables & Wellness Group", "loc": "Alor Setar"},
     ],
     "penang_semicon_keyman": [
         {"en": "Dato' Sri Raymond Khor (53, Penang)", "zh": "拿督斯里许总 Raymond Khor（53岁，槟城）", "biz": "KhorTech Precision Automation Sdn Bhd", "loc": "Bayan Lepas"},
         {"en": "Dato' Lawrence Yeoh (56, Batu Kawan)", "zh": "拿督杨总 Lawrence Yeoh（56岁，峇都交湾）", "biz": "Yeoh Micro-Optics Engineering Sdn Bhd", "loc": "Batu Kawan"},
-        {"en": "Ir. Kenneth Ooi (50, Bukit Mertajam)", "zh": "黄总工程师 Kenneth Ooi（50岁，大山脚）", "biz": "Ooi Semicon Tooling Group", "loc": "Georgetown"},
+        {"en": "Ir. Kenneth Ooi (50, Bukit Mertajam)", "zh": "黄总工程师 Ir. Kenneth Ooi（50岁，大山脚）", "biz": "Ooi Semicon Tooling Group", "loc": "Georgetown"},
         {"en": "Dato' Victor Chuah (54, Perai)", "zh": "拿督蔡总 Victor Chuah（54岁，北赖）", "biz": "Chuah Cleanroom Robotics Sdn Bhd", "loc": "Gurney Drive"},
+        {"en": "Datuk Seri Edmund Loh (55, Kulim Hi-Tech)", "zh": "拿督斯里罗文耀 Edmund Loh（55岁，居林高科技园）", "biz": "Loh Wafer Handling & Test Systems Sdn Bhd", "loc": "Bayan Lepas"},
+        {"en": "Dato' Patrick Teoh (52, Simpang Ampat)", "zh": "拿督张博智 Patrick Teoh（52岁，新邦安拔）", "biz": "Teoh Precision Die-Bonding & Packaging Group", "loc": "Batu Kawan"},
+        {"en": "Ir. Stanley Phang (51, Senai Hi-Tech JB)", "zh": "彭总工程师 Ir. Stanley Phang（51岁，士乃高科技园）", "biz": "Southern Semicon Thermal & Mechatronics Sdn Bhd", "loc": "Johor Bahru"},
+        {"en": "Dato' Jeffrey Quah (57, Bayan Lepas)", "zh": "拿督柯杰明 Jeffrey Quah（57岁，峇六拜）", "biz": "Quah Automated Optical Inspection Holdings", "loc": "Bayan Lepas"},
+        {"en": "Datuk Vincent Ng (54, Shah Alam)", "zh": "拿督黄文森 Vincent Ng（54岁，莎阿南）", "biz": "Central Precision CNC & Aerospace Semicon Parts", "loc": "Shah Alam"},
+        {"en": "Dato' Eric Cheong (53, Nilai / Seremban)", "zh": "拿督张伟良 Eric Cheong（53岁，汝来工业园）", "biz": "Cheong High-Purity Gas & Cleanroom Modules Sdn Bhd", "loc": "Seremban"},
+        {"en": "Datuk Francis Lau (56, Sama Jaya Kuching)", "zh": "拿督刘弗朗 Francis Lau（56岁，古晋自由工业区）", "biz": "Borneo Substrate & Copper Foil Precision Sdn Bhd", "loc": "Kuching"},
+        {"en": "Dato' Melvin Sia (52, Melaka Batu Berendam)", "zh": "拿督谢明辉 Melvin Sia（52岁，马六甲峇株安南）", "biz": "Straits Leadframe & IC Sensor Assembly Group", "loc": "Melaka"},
     ],
     "johor_logistics_succession": [
         {"en": "Dato' Ong Boon Huat (58, Johor Bahru)", "zh": "拿督王文发 Dato' Ong（58岁，新山）", "biz": "Southern Cross-Border Haulage (180 trucks)", "loc": "Iskandar Puteri"},
         {"en": "Dato' Chua Kian Seng (59, Pasir Gudang)", "zh": "拿督蔡建生 Dato' Chua（59岁，巴西古当）", "biz": "Kian Seng Cold-Chain Port Logistics", "loc": "Tebrau"},
         {"en": "Mr. Teo Kah Meng (57, Senai)", "zh": "张家明董事长 Teo Kah Meng（57岁，士乃）", "biz": "Senai Regional Bonded Warehousing", "loc": "Senai"},
         {"en": "Dato' Koh Swee Heng (60, Batu Pahat)", "zh": "拿督许瑞兴 Dato' Koh（60岁，峇株巴辖）", "biz": "Swee Heng Container & Freight Group", "loc": "Johor Bahru"},
-    ],
-    "kl_surgeon_practice": [
-        {"en": "Dato' Dr. Anand Krishnan (49, Bukit Tunku)", "zh": "Dato' Dr. Anand Krishnan（49岁，吉隆坡）", "biz": "KL Heart & Vascular Private Practice", "loc": "Mont Kiara"},
-        {"en": "Dr. Gerard Sta Maria (51, Bangsar)", "zh": "Dr. Gerard Sta Maria（51岁，孟沙）", "biz": "Bangsar Spine & Orthopaedic Suite", "loc": "Bangsar"},
-        {"en": "Prof. Dr. Suresh Nair (52, PJ)", "zh": "Prof. Dr. Suresh Nair（52岁，八打灵再也）", "biz": "Nair Neuro & Minimally Invasive Centre", "loc": "Petaling Jaya"},
-        {"en": "Dr. Evelyn Cheah (48, Desa ParkCity)", "zh": "谢医生 Dr. Evelyn Cheah（48岁，甲洞）", "biz": "ParkCity Oncology & Diagnostic Practice", "loc": "Desa ParkCity"},
-    ],
-    "tech_exit_family_office": [
-        {"en": "brendan Lim & Cheryl Tan (43, KLCC)", "zh": "林哲宇与陈欣怡（43岁，吉隆坡双峰塔）", "biz": "Post-Series-C Retail SaaS Buyout", "loc": "KLCC"},
-        {"en": "Adrian Yap (41, Mont Kiara)", "zh": "叶俊杰 Adrian Yap（41岁，满家乐）", "biz": "ASEAN FinTech Payment Gateway Exit", "loc": "Mont Kiara"},
-        {"en": "karthik Subramaniam (44, Cyberjaya)", "zh": "Karthik Subramaniam（44岁，赛城）", "biz": "Cloud Cybersecurity Firm Acquisition", "loc": "Bangsar South"},
-        {"en": "melissa Wong (42, Damansara Heights)", "zh": "黄美玲 Melissa Wong（42岁，白沙罗高原）", "biz": "E-Logistics Platform Strategic Sale", "loc": "Damansara Heights"},
     ],
     "east_my_plantation_probate": [
         {"en": "Temenggong Dato' Philip Ting (59, Sibu)", "zh": "拿督陈总 Dato' Philip Ting（59岁，诗巫）", "biz": "Ting Borneo Agro & Timber Holdings", "loc": "Kuching"},
@@ -69,12 +138,6 @@ C2_PERSONA_VARIANTS: dict[str, list[dict[str, str]]] = {
         {"en": "Encik Hafiz & Encik Azlan (45, TTDI)", "zh": "Encik Hafiz 与 Azlan（45岁，敦依斯迈花园）", "biz": "Kopi Nusantara Roastery & Franchises (30 stores)", "loc": "TTDI KL"},
         {"en": "Puan Nadia & Puan Farah (44, Ampang)", "zh": "Puan Nadia 与 Farah（44岁，安邦）", "biz": "Seri Modest Fashion & Halal Pastry Group", "loc": "KLCC"},
         {"en": "Dato' Kamarul & Encik Imran (50, Klang)", "zh": "Dato' Kamarul 与 Imran（50岁，巴生）", "biz": "Barakah Frozen Halal Export Foods Sdn Bhd", "loc": "Shah Alam"},
-    ],
-    "ipoh_pharma_matriarch": [
-        {"en": "Datin Seri Madam Foo (58, Ipoh)", "zh": "拿汀斯里胡太 Madam Foo（58岁，怡保）", "biz": "Perak Herbal & GMP Nutraceutical Industries", "loc": "Ipoh"},
-        {"en": "Madam Cheong Siew Lan (60, Taiping)", "zh": "张秀兰董事长 Madam Cheong（60岁，太平）", "biz": "Cheong Medical Supplies & OEM Factory", "loc": "Ipoh"},
-        {"en": "Datin Lee Mei Fong (57, Seremban)", "zh": "拿汀李美芳 Datin Lee（57岁，芙蓉）", "biz": "Negeri GMP Healthcare Packaging Group", "loc": "Seremban"},
-        {"en": "Madam Tan Geok Bee (59, Klang)", "zh": "陈玉美女士 Madam Tan（59岁，巴生）", "biz": "Port Klang Biotech & Wellness Manufacturing", "loc": "Klang"},
     ],
     "boutique_law_partner": [
         {"en": "Dato' Ranjit Singh (54, Kenny Hills)", "zh": "Dato' Ranjit Singh 大律师（54岁，吉隆坡）", "biz": "Ranjit & Partners Corporate Law Chambers", "loc": "KL Sentral"},
@@ -90,26 +153,20 @@ C2_PERSONA_VARIANTS: dict[str, list[dict[str, str]]] = {
     ],
     "intl_school_founder": [
         {"en": "Datin Paduka Evelyn Khor (53, Setia Alam)", "zh": "拿汀伊芙琳 Evelyn Khor（53岁，实达阿南）", "biz": "Oakridge International Academy (1,400 students)", "loc": "Setia Alam"},
-        {"en": "Dato' Dr. Samuel Ling (56, Cheras)", "zh": "拿督林博士 Dato' Dr. Ling（56岁，蕉赖）", "biz": " Beacon Private K-12 & Montessori Group", "loc": "Cheras"},
+        {"en": "Dato' Dr. Samuel Ling (56, Cheras)", "zh": "拿督林博士 Dato' Dr. Ling（56岁，蕉赖）", "biz": "Beacon Private K-12 & Montessori Group", "loc": "Cheras"},
         {"en": "Puan Sri Rohani (55, Cyberjaya)", "zh": "Puan Sri Rohani（55岁，赛城）", "biz": "Cemerlang STEM International Campus", "loc": "Cyberjaya"},
         {"en": "Mr. Rajendran (54, Subang)", "zh": "Rajendran 校长（54岁，梳邦）", "biz": "Regent A-Levels & Private College Group", "loc": "Subang Jaya"},
     ],
     "auto_dealership_group": [
         {"en": "Datuk Seri Clement Tan (52, Glenmarie)", "zh": "拿督斯里陈总 Clement Tan（52岁，格林玛丽）", "biz": "Glenmarie Luxury EV & 4S Dealership Group", "loc": "Glenmarie"},
         {"en": "Dato' Billy Ng (54, Puchong)", "zh": "拿督黄总 Billy Ng（54岁，蒲种）", "biz": "Southern 4S Passenger & Commercial Auto Group", "loc": "Puchong"},
-        {"en": "Datuk Azman Shah (53, Sungai Besi)", "zh": "Datuk Azman Shah（53岁，新街场）", "biz": " continental AP & 4S Flagship Showrooms", "loc": "Kuala Lumpur"},
+        {"en": "Datuk Azman Shah (53, Sungai Besi)", "zh": "Datuk Azman Shah（53岁，新街场）", "biz": "Continental AP & 4S Flagship Showrooms", "loc": "Kuala Lumpur"},
         {"en": "Dato' Steven Phua (55, Johor Bahru)", "zh": "拿督潘总 Steven Phua（55岁，新山）", "biz": "Tebrau Multi-Brand Auto & Fleet Group", "loc": "Johor Bahru"},
-    ],
-    "glc_cfo_golden_bridge": [
-        {"en": "Encik Wan Zulhilmi (53, Group CFO, KL)", "zh": "Wan Zulhilmi（53岁，上市集团首席财务官）", "biz": "Bursa-Listed Infrastructure Group CFO", "loc": "KLCC"},
-        {"en": "Ms. Pauline Chok (52, Regional Bank MD)", "zh": "卓保琳 Pauline Chok（52岁，银行董事总经理）", "biz": "Regional Corporate Banking Managing Director", "loc": "TRX Kuala Lumpur"},
-        {"en": "Mr. Devandran Pillai (54, Energy EVP)", "zh": "Devandran Pillai（54岁，能源集团执行副总裁）", "biz": "National Energy Transition EVP", "loc": "Bangsar"},
-        {"en": "Dato' Simon Foo (53, Telco COO)", "zh": "拿督符总 Simon Foo（53岁，电讯集团首席运营官）", "biz": "Listed Telecom & Data-Centre COO", "loc": "Petaling Jaya"},
     ],
     "d2c_couple_founders": [
         {"en": "Jason Lee & Vivienne Chua (38, Bangsar)", "zh": "李杰森与蔡薇薇（38岁，孟沙）", "biz": "GlowLab Malaysia D2C Skincare (RM 45M rev)", "loc": "Bangsar"},
         {"en": "Syafiq & Hanna Zulkifli (36, Shah Alam)", "zh": "Syafiq 与 Hanna（36岁，莎阿南）", "biz": "Alya Wellness & Halal Cosmetics E-Commerce", "loc": "Shah Alam"},
-        {"en": "ryan Goh & Mandy Lim (39, Penang)", "zh": "吴瑞安与林曼迪（39岁，槟城）", "biz": "Artisan Home & Lifestyle Regional Brand", "loc": "Georgetown"},
+        {"en": "Ryan Goh & Mandy Lim (39, Penang)", "zh": "吴瑞安与林曼迪（39岁，槟城）", "biz": "Artisan Home & Lifestyle Regional Brand", "loc": "Georgetown"},
         {"en": "Kelvin Tan & Joanne Yap (37, Sunway)", "zh": "陈凯文与叶乔安（37岁，双威）", "biz": "FitFuel Active Nutrition Omnichannel Brand", "loc": "Sunway"},
     ],
 }
@@ -117,6 +174,7 @@ C2_PERSONA_VARIANTS: dict[str, list[dict[str, str]]] = {
 # Capitalize clean English names
 for _aid, _plist in C2_PERSONA_VARIANTS.items():
     for _p in _plist:
+        _p["en"] = _p["en"].strip()
         _p["en"] = _p["en"][0].upper() + _p["en"][1:]
         _p["biz"] = _p["biz"].strip()
 
@@ -225,33 +283,33 @@ C2_ARCHETYPES: dict[str, dict] = {
     },
     "kl_surgeon_practice": {
         "icon": "🩺",
-        "en_label": "Senior Specialist Surgeon (Income & Debt)",
-        "zh_label": "资深专科外科名医 (高收入与设备债)",
-        "ms_label": "Pakar Bedah Kanan (Pendapatan & Klinik)",
-        "ta_label": "மூத்த சிறப்பு அறுவை சிகிச்சை நிபுணர்",
+        "en_label": "Senior Medical Specialist (Premier Health & Practice Reserve)",
+        "zh_label": "资深专科名医 (高端私立医疗与执业收入储备)",
+        "ms_label": "Pakar Perubatan Kanan (Perubatan Premier & Rizab Amalan)",
+        "ta_label": "மூத்த மருத்துவ நிபுணர் (பிரீமியர் மருத்துவம் & வருமான இருப்பு)",
         "nw": "RM 18M",
         "illiquid": "RM 9.5M medical suite equity + RM 5.5M Bangsar home",
         "liquid_only": "RM 3.0M cash/unit trusts",
         "loan": "RM 3.8M surgical suite & mortgage liability",
-        "old_cover": "RM 700k old CI/life cover from junior doctor days",
+        "old_cover": "RM 700k legacy cover from junior doctor days",
         "family": "Spouse + 2 teenagers bound for UK medical schools (RM 650k/yr upcoming tuition)",
-        "need_m": 9.5,
+        "need_m": 9.6,
         "have_m": 3.7,
-        "gap_m": 5.8,
-        "need_breakdown": "RM 3.8M suite/home debt + RM 3.2M UK medical tuition reserve + RM 2.5M Specialist Practice & Sabbatical Continuity Reserve",
+        "gap_m": 5.9,
+        "need_breakdown": "RM 3.8M suite/home facility + RM 3.3M UK medical school tuition readiness + RM 2.5M Premier Private Hospital & Practice Income Reserve",
         "shariah": False,
         "solution_rows": [
-            ["Specialist Practice & Sabbatical Continuity Reserve", "PRUAll Care (~190 Conditions + Recovery)", "Provides dedicated income liquidity to sustain practice & family lifestyle", "RM 3.0M"],
-            ["Debt & Family Protection", "PRUWith You Plus (+50% Auto Booster)", "Clears RM 3.8M suite & home loans while keeping investments compounding", "RM 4.0M"],
-            ["UK Medical Tuition Lock", "PRUElite Flex Guaranteed Annual Cash", "Contractually guaranteed tuition cashflow + parent waiver shield", "RM 2.5M"],
+            ["Premier Private Hospital & Income Reserve", "PRUMillion Med Active 2.0 (RM 8M Limit + 15% Healthy No-Claim Discount) + PRUAll Care (to Age 100)", "RM 8M premier medical cover with 15% healthy no-claim discount plus comprehensive practice income continuity to Age 100", "RM 3.0M + RM 8M Med"],
+            ["Suite & Family Protection", "PRUWith You Plus (+50% Auto Booster)", "Clears RM 3.8M suite & home facilities while keeping investments compounding", "RM 4.0M"],
+            ["UK Medical School Tuition Readiness", "PRUElite Flex Guaranteed Annual Cash", "Contractually guaranteed UK medical school tuition cashflow + parent waiver shield", "RM 2.5M"],
         ],
         "angle_hints_en": [
-            "Build a 'Specialist Practice & Sabbatical Continuity Reserve' so your clinical excellence is backed by passive balance-sheet strength",
+            "Pair PRUMillion Med Active 2.0 (RM 8M limit + 15% healthy no-claim discount) with PRUAll Care to Age 100 as your Premier Practice Reserve",
             "Guarantee both teenagers complete UK medical school on schedule with contractually ring-fenced tuition funding",
             "Concise 20-min lunch review between clinic list hours at {loc}",
         ],
         "angle_hints_zh": [
-            "建立专属「专科名医执业延续与英伦教育储备」，让精湛医术与稳健家庭现金流双轨并行",
+            "结合 PRUMillion Med Active 2.0（RM 8M 额度 + 15% 无索赔健康折扣）与 PRUAll Care 保至100岁，打造名医高端医疗与执业收入储备",
             "叠加教育护盾，契约化锁定两名子女100%顺利完成英国医科学业",
             "配合医生门诊间隙，在 {loc} 诊所做20分钟精炼午餐简报",
         ],
@@ -361,34 +419,34 @@ C2_ARCHETYPES: dict[str, dict] = {
     },
     "ipoh_pharma_matriarch": {
         "icon": "🌿",
-        "en_label": "GMP Pharma Matriarch (3-Gen Trust Pool)",
-        "zh_label": "制药集团女掌门 (三代同堂传承与医疗)",
-        "ms_label": "Pengasas Kilang Farmasi (Amanah 3 Generasi)",
-        "ta_label": "மருந்துத் தொழிற்சாலை நிறுவனர்",
+        "en_label": "3-Gen Family Matriarch (Longevity Care & Grandkids Pool)",
+        "zh_label": "三代家族女掌门 (长寿康养储备与孙辈教育池)",
+        "ms_label": "Matriark Keluarga 3-Generasi (Rizab Penjagaan & Pendidikan Cucu)",
+        "ta_label": "3-தலைமுறை குடும்பத் தலைவி (நீண்ட ஆயுள் மருத்துவம் & பேரப்பிள்ளைகள் கல்வி)",
         "nw": "RM 30M",
         "illiquid": "RM 21M (70%) GMP plant shares + RM 5M commercial lots",
         "liquid_only": "RM 4.0M FD/cash",
-        "loan": "RM 3.5M automated GMP line loan + RM 2.5M elderly spouse care reserve",
+        "loan": "RM 3.5M automated GMP line loan + RM 2.5M senior longevity care reserve",
         "old_cover": "RM 800k matured/old endowment",
-        "family": "Spouse (64, retired) + 2 children + 3 grandchildren; wants direct grandchild education payouts",
+        "family": "Spouse (64, retired) + 2 children + 3 grandchildren; wants dedicated senior longevity care & direct grandchild education pool",
         "need_m": 10.8,
         "have_m": 4.8,
         "gap_m": 6.0,
-        "need_breakdown": "RM 3.5M GMP plant loan + RM 3.3M spouse medical/care reserve + RM 4.0M 3-grandchild education legacy",
+        "need_breakdown": "RM 3.5M GMP plant facility + RM 3.3M Senior Longevity Healthcare Reserve + RM 4.0M 3-Generation Grandchildren Education Pool",
         "shariah": False,
         "solution_rows": [
-            ["Plant & Spouse Liquidity", "PRUPrestige Legacy (100% Day-1 Alloc)", "Bypasses probate to clear RM 3.5M GMP loan & fund spouse care", "RM 6.0M"],
-            ["3-Grandchild Uni Stream", "PRUElite Flex Guaranteed Annual Payouts", "Contractually guaranteed education & milestone cash to Age 100", "RM 3.0M"],
-            ["High-Limit Medical Buffer", "PRUValue Med (Auto-Growing Med Value)", "Protects retirement savings from private hospital inflation", "Included"],
+            ["Senior Longevity Healthcare Reserve", "PRUValue Med (Auto-Growing Med Value) + PRUPrestige Legacy", "Dedicated private hospital & longevity care reserve plus RM 3.5M GMP facility ring-fencing", "RM 6.0M + Med"],
+            ["3-Generation Grandchildren Education Pool", "PRUElite Flex Guaranteed Annual Payouts", "Contractually guaranteed annual education & milestone stream for all 3 grandchildren to Age 100", "RM 3.0M"],
+            ["Estate Continuity & Family Harmony", "Built-In Legacy Settlement (FSA Sched 10)", "Direct multi-generation distribution keeping family enterprise & retirement savings intact", "Included"],
         ],
         "angle_hints_en": [
-            "Create a 'Matriarch Love Envelope' paying guaranteed annual university gifts directly to each grandchild",
-            "Protect retired spouse's dignity and medical comfort without burdening the children",
+            "Pair a dedicated Senior Longevity Healthcare Reserve with a 3-Generation Grandchildren Education Pool paying annual milestone gifts",
+            "Ring-fence retired spouse's private healthcare comfort independently so children & grandchildren thrive worry-free",
             "Warm 30-min tea review with family accountant in {loc}",
         ],
         "angle_hints_zh": [
-            "设立专属「祖母关爱传承金」，每年契约保证派发教育贺礼陪伴3名孙辈成长",
-            "独立预留退休先生的终身医疗与安养金，不给儿女添任何财务压力",
+            "同步设立「长寿康养医疗储备」与「三代孙辈教育传承池」，每年契约保证派发教育贺礼陪伴3名孙辈成长",
+            "独立预留尊尚私立医疗与长寿安养金，让退休生活从容优雅、儿孙零负担",
             "在 {loc} 与您的家族会计师喝茶聊30分钟完成财务盘点",
         ],
         "nums": ["30", "21", "3.5", "10.8", "4.8", "6"],
@@ -600,27 +658,28 @@ C2_ARCHETYPES: dict[str, dict] = {
 }
 
 
-def _build_c2_56_roster() -> list[dict]:
+def _build_c2_72_roster() -> list[dict]:
     roster: list[dict] = []
-    max_v = max(len(v) for v in C2_PERSONA_VARIANTS.values())
-    for v_idx in range(max_v):
-        for aid in C2_ARCHETYPE_ORDER:
+    for round_idx in range(12):
+        for case_slot, aid in enumerate(C2_CURATED_6_ORDER):
             plist = C2_PERSONA_VARIANTS[aid]
-            if v_idx < len(plist):
-                roster.append({
-                    "seatIndex": len(roster),
-                    "archetypeId": aid,
-                    "variantIndex": v_idx,
-                    "persona": plist[v_idx],
-                })
+            persona = plist[round_idx % len(plist)]
+            roster.append({
+                "seatIndex": len(roster),
+                "caseSlot": case_slot,
+                "archetypeId": aid,
+                "variantIndex": round_idx,
+                "persona": persona,
+            })
     return roster
 
 
-C2_SEAT_ROSTER_56 = _build_c2_56_roster()
+C2_SEAT_ROSTER = _build_c2_72_roster()
+C2_SEAT_ROSTER_56 = C2_SEAT_ROSTER  # backward-compatible alias
 
 
 def get_c2_total_unique_seats() -> int:
-    return len(C2_SEAT_ROSTER_56)
+    return len(C2_SEAT_ROSTER)
 
 
 def _to_yue_text(s: str) -> str:
@@ -641,7 +700,7 @@ def resolve_c2_seat_scenario(seat_index: int, lang: str = "en") -> dict:
     """Returns a complete, localized Challenge 2 scenario, 5-pillar R.C.T.F.C. guide,
     personal strategic angle hints, and 3-slide benchmark target deck."""
     norm = "yue" if lang in ("zh-TW", "zh-HK") else (lang or "en")
-    seat = C2_SEAT_ROSTER_56[seat_index % len(C2_SEAT_ROSTER_56)]
+    seat = C2_SEAT_ROSTER[seat_index % len(C2_SEAT_ROSTER)]
     aid = seat["archetypeId"]
     persona = seat["persona"]
     arch = C2_ARCHETYPES[aid]
@@ -984,7 +1043,9 @@ def resolve_c2_seat_scenario(seat_index: int, lang: str = "en") -> dict:
 
     return {
         "seatIndex": seat["seatIndex"],
-        "totalUniqueSeats": len(C2_SEAT_ROSTER_56),
+        "caseSlot": seat.get("caseSlot", seat["seatIndex"] % 6),
+        "personaRound": seat["variantIndex"],
+        "totalUniqueSeats": len(C2_SEAT_ROSTER),
         "id": aid,
         "scenarioKey": f"{aid}__v{seat['variantIndex']}",
         "icon": arch["icon"],
@@ -1011,7 +1072,7 @@ def resolve_c2_seat_scenario(seat_index: int, lang: str = "en") -> dict:
 def list_c2_archetype_summaries(lang: str = "en") -> list[dict]:
     seen = set()
     out = []
-    for s in C2_SEAT_ROSTER_56:
+    for s in C2_SEAT_ROSTER:
         aid = s["archetypeId"]
         if aid in seen:
             continue
@@ -1019,6 +1080,7 @@ def list_c2_archetype_summaries(lang: str = "en") -> list[dict]:
         sc = resolve_c2_seat_scenario(s["seatIndex"], lang)
         out.append({
             "seatIndex": s["seatIndex"],
+            "caseSlot": s.get("caseSlot", len(out)),
             "id": aid,
             "icon": sc["icon"],
             "shortLabel": sc["shortLabel"],

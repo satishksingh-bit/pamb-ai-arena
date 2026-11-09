@@ -1,10 +1,10 @@
 """
 Challenge 3 Scenario Bank — PRUMDA Learning Trip
 =================================================
-16 Authentic Malaysian Financial Advisory Archetypes (Life, Medical, CI, Wealth,
-Takaful/Hibah, Keyman/SME, Education, Retirement) x Unique Client Persona Variants
-= 56 Distinct Seat Assignments (0..55) so every leader in a 50-54 person room gets
-their own unique client & scenario!
+6 Curated Malaysian Financial Advisory Cases (3 Health-Led + 3 Family/Wealth Milestones)
+x 12 Unique Client Persona Variants = 72 Evenly Distributed Seats (0..71) so every
+leader in a 60–72 person room gets their own unique client & scenario, with 16 full
+archetypes preserved for catalog compatibility!
 
 Supports all 5 languages:
 - English (en)
@@ -16,31 +16,64 @@ Supports all 5 languages:
 
 from __future__ import annotations
 
-# 56 distinct Malaysian client identities grouped across the 16 archetypes (3-4 unique clients per archetype)
+# 72 distinct Malaysian client identities across the 6 curated Challenge 3 cases (12 unique personas per case = 72 seats),
+# plus the remaining 10 archetypes preserved for full 16-archetype catalog compatibility.
 PERSONA_VARIANTS = {
     "newborn_baby": [
         {"en": "Tan Wei Ming & Chloe Lim (32, Petaling Jaya)", "zh": "陈伟明 & 林晓雯 (32岁, PJ)", "child": "Lucas"},
         {"en": "Arjun Nair & Divya Menon (34, Bangsar)", "zh": "Arjun & Divya (34岁, 孟沙 Bangsar)", "child": "Maya"},
         {"en": "Farhan Zulkifli & Nurul Izzah (30, Shah Alam)", "zh": "Farhan & Nurul (30岁, 莎阿南)", "child": "Adam"},
         {"en": "Darren Yap & Michelle Ong (35, Mont Kiara)", "zh": "叶俊杰 & 王美琪 (35岁, 满家乐)", "child": "Ethan"},
+        {"en": "Gavin Khor & Clarissa Teoh (33, Tanjung Tokong Penang)", "zh": "许家豪 & 张嘉欣 (33岁, 槟城丹绒道光)", "child": "Noah"},
+        {"en": "Syafiq Rahman & Hannah Sofea (31, Putrajaya)", "zh": "Syafiq & Hannah (31岁, 布城)", "child": "Ayden"},
+        {"en": "Dinesh Kumar & Lavanya Raj (34, Bukit Damansara)", "zh": "Dinesh & Lavanya (34岁, 武吉白沙罗)", "child": "Aarav"},
+        {"en": "Justin Chew & Valerie Tan (32, Sutera Utama JB)", "zh": "周子俊 & 陈薇莉 (32岁, 新山五福城)", "child": "Chloe"},
+        {"en": "Melvin Sia & Joanne Ling (35, Kuching Sarawak)", "zh": "谢明辉 & 林乔安 (35岁, 砂拉越古晋)", "child": "Caleb"},
+        {"en": "Imran Hakimi & Farah Yasmin (31, Cyberjaya)", "zh": "Imran & Farah (31岁, 赛城)", "child": "Zara"},
+        {"en": "Kenneth Ooi & Sabrina Lee (33, Sunway Geo Subang)", "zh": "黄健恒 & 李思敏 (33岁, 双威梳邦)", "child": "Jayden"},
+        {"en": "Navin Pillai & Preetha Nair (36, Taman Tun KL)", "zh": "Navin & Preetha (36岁, 敦依斯迈花园)", "child": "Riya"},
     ],
     "ci_health_scare": [
         {"en": "Jason Khoo (39, Penang Tech Director)", "zh": "邱志豪 Jason (39岁, 槟城科技总监)", "city": "Penang"},
         {"en": "Kelvin Chong (39, Subang Engineering Lead)", "zh": "张凯文 Kelvin (39岁, 梳邦工程主管)", "city": "Subang"},
         {"en": "Suresh Krishnan (39, Cyberjaya Cloud Architect)", "zh": "Suresh (39岁, 赛城云端架构师)", "city": "Cyberjaya"},
         {"en": "Hafizuddin Omar (39, KL Oil & Gas Manager)", "zh": "Hafizuddin (39岁, 吉隆坡油气经理)", "city": "KLCC"},
+        {"en": "terence Liew (39, Bangsar Fintech VP)", "zh": "刘志轩 Terence (39岁, 孟沙金融科技副总裁)", "city": "Bangsar"},
+        {"en": "Anand Subramaniam (39, PJ Data Science Head)", "zh": "Anand (39岁, 八打灵数据科学总监)", "city": "Petaling Jaya"},
+        {"en": "Khairul Anwar (39, Iskandar Puteri Port Director)", "zh": "Khairul (39岁, 柔佛依斯干达港口总监)", "city": "Iskandar JB"},
+        {"en": "Victor Phua (39, Kota Kinabalu Aviation Manager)", "zh": "潘维克 Victor (39岁, 亚庇航空运营经理)", "city": "Kota Kinabalu"},
+        {"en": "Adrian Yeoh (39, Bayan Lepas Chip Design Lead)", "zh": "杨文轩 Adrian (39岁, 槟城芯片设计主管)", "city": "Bayan Lepas"},
+        {"en": "Faizal Mustapha (39, Shah Alam Automotive GM)", "zh": "Faizal (39岁, 莎阿南汽车制造总经理)", "city": "Shah Alam"},
+        {"en": "Rajeshwar Rao (39, KL Sentral Telecom Director)", "zh": "Rajeshwar (39岁, 中环电信工程总监)", "city": "KL Sentral"},
+        {"en": "Dominic Ngu (39, Miri Offshore Operations Lead)", "zh": "吴明达 Dominic (39岁, 美里海事工程主管)", "city": "Miri"},
     ],
     "new_home_mortgage": [
         {"en": "Amirul Hakim & Farah Nadia (35, Eco Botanic JB)", "zh": "Amirul & Farah (35岁, 新山 Eco Botanic)", "area": "Eco Botanic"},
         {"en": "Brandon Lee & Rachel Tan (33, Desa ParkCity KL)", "zh": "李家豪 & 陈瑞秋 (33岁, 甲洞 DPC)", "area": "Desa ParkCity"},
         {"en": "Viknesh Raj & Shalini Devi (36, Setia Alam)", "zh": "Viknesh & Shalini (36岁, 实达阿南)", "area": "Setia Alam"},
         {"en": "Nicholas Teoh & Vivian Lim (34, Queensbay Penang)", "zh": "张伟伦 & 林慧雯 (34岁, 槟城 Queensbay)", "area": "Queensbay"},
+        {"en": "Zharif Azmi & Nurul Ain (34, Elmina Gardens Shah Alam)", "zh": "Zharif & Ain (34岁, 莎阿南 Elmina)", "area": "Elmina Gardens"},
+        {"en": "Desmond Ting & Felicia Wong (35, Tropics Kuching)", "zh": "丁德明 & 黄菲莉 (35岁, 古晋 Tropics)", "area": "Tropics Kuching"},
+        {"en": "Harish Menon & Deepika Nair (37, Kota Kemuning)", "zh": "Harish & Deepika (37岁, 哥打哥文宁)", "area": "Kota Kemuning"},
+        {"en": "Shaun Goh & Amanda Koh (33, Horizon Hills JB)", "zh": "吴俊雄 & 许雅曼 (33岁, 新山浩然山庄)", "area": "Horizon Hills"},
+        {"en": "wan Muhd Firdaus & Sabrina Noor (36, Bangi Avenue)", "zh": "Wan Firdaus & Sabrina (36岁, 万宜新镇)", "area": "Bangi Avenue"},
+        {"en": "enson Chin & Stephanie Yap (34, Bandar Utama PJ)", "zh": "陈彦森 & 叶思婷 (34岁, 万达镇 BU)", "area": "Bandar Utama"},
+        {"en": "Kuganathan & Meera Krishnan (35, Sri Petaling KL)", "zh": "Kuganathan & Meera (35岁, 大城堡 KL)", "area": "Sri Petaling"},
+        {"en": "alvin Chua & Jocelyn Pang (36, Luyang Kota Kinabalu)", "zh": "蔡文杰 & 彭佳玲 (36岁, 亚庇路阳)", "area": "Luyang KK"},
     ],
     "career_promotion": [
         {"en": "Dr. Kavitha Pillai (42, KL Senior Specialist)", "zh": "Dr. Kavitha (42岁, 吉隆坡专科主任)", "role": "Hospital Dept Head"},
         {"en": "Evelyn Choo (40, Damansara Legal Partner)", "zh": "朱伊琳 Evelyn (40岁, 白沙罗律所合伙人)", "role": "Managing Partner"},
         {"en": "Nadia Kamarudin (41, Putrajaya CFO)", "zh": "Nadia (41岁, 集团首席财务官 CFO)", "role": "Group CFO"},
-        {"en": "grace Wong (43, George Town Pharma VP)", "zh": "黄淑仪 Grace (43岁, 槟城药企副总裁)", "role": "Regional VP"},
+        {"en": "Grace Wong (43, George Town Pharma VP)", "zh": "黄淑仪 Grace (43岁, 槟城药企副总裁)", "role": "Regional VP"},
+        {"en": "Stephanie Cheong (41, KLCC Investment Bank MD)", "zh": "张思敏 Stephanie (41岁, 双峰塔投行董事总经理)", "role": "Managing Director"},
+        {"en": "Dr. Suraya Halim (44, Subang Medical Director)", "zh": "Dr. Suraya (44岁, 梳邦私立医院院长)", "role": "Medical Director"},
+        {"en": "Sharmila Devi (40, Cyberjaya Regional Tech Head)", "zh": "Sharmila (40岁, 赛城亚太科技总裁)", "role": "APAC Tech Head"},
+        {"en": "Beatrice Lim (42, Johor MedTech Country Lead)", "zh": "林美琪 Beatrice (42岁, 柔佛医疗科技总裁)", "role": "Country Director"},
+        {"en": "Faridah Zainal (43, KL Energy Group Treasurer)", "zh": "Faridah (43岁, 吉隆坡能源集团司库长)", "role": "Group Treasurer"},
+        {"en": "celine Khoo (41, Penang Semiconductor VP)", "zh": "邱诗琳 Celine (41岁, 槟城半导体全球副总裁)", "role": "Global Operations VP"},
+        {"en": "Dr. Malini Natarajan (45, Sunway Chief Surgeon)", "zh": "Dr. Malini (45岁, 双威外科首席主任)", "role": "Chief of Surgery"},
+        {"en": "Audrey Siaw (42, Kuching Infrastructure CEO)", "zh": "萧雅丽 Audrey (42岁, 古晋基建集团总裁)", "role": "Chief Executive Officer"},
     ],
     "sme_expansion": [
         {"en": "Dato' Sri Raymond Tan (49, Batu Kawan Manufacturing)", "zh": "拿督斯里陈耀明 (49岁, 槟城精密制造厂主)", "area": "Batu Kawan"},
@@ -52,12 +85,29 @@ PERSONA_VARIANTS = {
         {"en": "Vincent Ong & Elaine Khor (50, Ipoh / KL)", "zh": "王文森 & 许伊琳 (50岁, 怡保 / 吉隆坡)", "uni": "University of Melbourne"},
         {"en": "Lawrence Cheah & Janet Ooi (50, Penang)", "zh": "谢国良 & 黄珍妮 (50岁, 槟城)", "uni": "UNSW Sydney"},
         {"en": "Ramesh Nair & Geetha (50, Petaling Jaya)", "zh": "Ramesh & Geetha (50岁, 八打灵再也)", "uni": "Monash Australia"},
+        {"en": "Patrick Yong & Shirley Chin (50, Kota Kinabalu)", "zh": "杨博智 & 陈雪莉 (50岁, 亚庇)", "uni": "University of Sydney"},
+        {"en": "Kamaludin Hassan & Rohana (50, Shah Alam)", "zh": "Kamaludin & Rohana (50岁, 莎阿南)", "uni": "University of Queensland"},
+        {"en": "francis Lau & Irene Ngu (50, Sibu / Kuching)", "zh": "刘弗朗 & 吴艾琳 (50岁, 诗巫 / 古晋)", "uni": "University of Western Australia"},
+        {"en": "Bala Chandran & Uma Devi (50, Klang)", "zh": "Bala & Uma (50岁, 巴生)", "uni": "Australian National University"},
+        {"en": "Stanley Phang & Wendy Sia (50, Mount Austin JB)", "zh": "彭世达 & 谢温蒂 (50岁, 新山茂奥斯汀)", "uni": "University of Adelaide"},
+        {"en": "jeffrey Quah & Esther Beh (50, Alor Setar / Penang)", "zh": "柯杰明 & 马伊丝 (50岁, 亚罗士打 / 槟城)", "uni": "University of Auckland"},
+        {"en": "Zulkifli Mahmud & Noraini (50, Putrajaya)", "zh": "Zulkifli & Noraini (50岁, 布城)", "uni": "University of Manchester"},
+        {"en": "Eric Tham & Cynthia Loh (50, Damansara Heights)", "zh": "谭伟良 & 罗心怡 (50岁, 白沙罗高原)", "uni": "Imperial College London"},
+        {"en": "Sivakumar & Vasanthi (50, Seremban 2)", "zh": "Sivakumar & Vasanthi (50岁, 芙蓉新城)", "uni": "University of Bristol"},
     ],
     "takaful_hibah_estate": [
         {"en": "Tuan Haji Zulkarnain & Puan Aishah (46, Shah Alam)", "zh": "Haji Zulkarnain & Aishah (46岁, 莎阿南企业主)", "biz": "Engineering Sdn Bhd"},
         {"en": "Dato' Irfan Hakimi & Datin Sofea (48, Bangi)", "zh": "Dato' Irfan & Datin Sofea (48岁, 万宜医疗连锁创办人)", "biz": "Poliklinik Group"},
         {"en": "Encik Ridzuan & Puan Mariam (44, Johor Bahru)", "zh": "Ridzuan & Mariam (44岁, 新山餐饮连锁东主)", "biz": "Bistro Holdings"},
         {"en": "Tuan Syed Azlan & Sharifah Hana (47, TTDI KL)", "zh": "Syed Azlan & Sharifah (47岁, 敦依斯迈建筑顾问)", "biz": "Consultancy Sdn Bhd"},
+        {"en": "Dato' Megat Firdaus & Datinalina (49, Putrajaya)", "zh": "Dato' Megat & Datin Alina (49岁, 布城土木工程集团)", "biz": "Infra Bina Sdn Bhd"},
+        {"en": "Encik Nik Faiz & Puan Hidayah (45, Kota Bharu / KL)", "zh": "Nik Faiz & Hidayah (45岁, 黄金珠宝连锁东主)", "biz": "Emas Warisan Sdn Bhd"},
+        {"en": "Tuan HajiLokman & Puan Salmah (51, Melaka)", "zh": "Haji Lokman & Salmah (51岁, 马六甲清真食品厂主)", "biz": "Halal Agro Industries"},
+        {"en": "EncikShahrul Nizam & Puan Nabila (43, Cyberjaya)", "zh": "Shahrul & Nabila (43岁, 赛城软件系统创办人)", "biz": " CloudTech Solutions"},
+        {"en": "Dato' Wan Hisham & Datin Soraya (50, Kuantan)", "zh": "Dato' Wan Hisham & Soraya (50岁, 关丹海运物流主席)", "biz": "East Coast Marine Sdn Bhd"},
+        {"en": "Encik Badrul Hisham & Puan Zulaikha (46, Bertam Penang)", "zh": "Badrul & Zulaikha (46岁, 槟城医疗耗材贸易东主)", "biz": "MedSupply Utara Sdn Bhd"},
+        {"en": "Tuan Haji Roslan & Puan Fauziah (52, Kuching)", "zh": "Haji Roslan & Fauziah (52岁, 古晋建材集团创办人)", "biz": "Borneo Niaga Sdn Bhd"},
+        {"en": "EncikTariq Ismail & Puan Ameera (44, Ampang Hilir KL)", "zh": "Tariq & Ameera (44岁, 安邦精品连锁酒店创办人)", "biz": "Seri Boutique Hotels"},
     ],
     "fd_maturing_wealth": [
         {"en": "Madam Christina Yeoh (54, Pulau Tikus Penang)", "zh": "杨丽华女士 Christina (54岁, 槟城浮罗池滑)", "amt": "RM 600k"},
@@ -66,7 +116,7 @@ PERSONA_VARIANTS = {
         {"en": "Mr. Philip Tiong (53, Kuching Timber Executive)", "zh": "张菲立 Philip (53岁, 古晋企业高管)", "amt": "RM 800k"},
     ],
     "female_ci_family_scare": [
-        {"en": " Melissa Chia (36, KL Marketing Director)", "zh": "谢美莉 Melissa (36岁, 吉隆坡行销总监)", "rel": "older sister"},
+        {"en": "Melissa Chia (36, KL Marketing Director)", "zh": "谢美莉 Melissa (36岁, 吉隆坡行销总监)", "rel": "older sister"},
         {"en": "Priya Darshini (35, PJ Senior Actuary)", "zh": "Priya Darshini (35岁, 八打灵再也精算主管)", "rel": "cousin"},
         {"en": "Nuraini Fauzi (37, Cyberjaya Product Lead)", "zh": "Nuraini (37岁, 赛城产品总监)", "rel": "close colleague"},
     ],
@@ -78,22 +128,22 @@ PERSONA_VARIANTS = {
     "hospital_bill_shock": [
         {"en": "Steven Goh & Linda Tan (44, Puchong)", "zh": "吴志强 & 陈琳达 (44岁, 蒲种家庭)", "bill": "RM 68k"},
         {"en": "Mohan Raj & Bavani (45, Seremban / KL)", "zh": "Mohan & Bavani (45岁, 芙蓉/吉隆坡)", "bill": "RM 74k"},
-        {"en": "chew Kok Wai & Annie Lim (43, Melaka)", "zh": "周国伟 & 林安妮 (43岁, 马六甲)", "bill": "RM 62k"},
+        {"en": "Chew Kok Wai & Annie Lim (43, Melaka)", "zh": "周国伟 & 林安妮 (43岁, 马六甲)", "bill": "RM 62k"},
     ],
     "cofounder_keyman_buysell": [
         {"en": "Marcus Teo & Alvin Ng (41, KL 12-Outlet F&B Chain)", "zh": "张文凯 & 吴家辉 (41岁, 吉隆坡12家连锁餐饮股东)", "biz": "12-outlet F&B chain"},
-        {"en": "ganesh & Hairul (42, Penang Automation Sdn Bhd)", "zh": "Ganesh & Hairul (42岁, 槟城自动化工程合伙人)", "biz": "automation firm"},
+        {"en": "Ganesh & Hairul (42, Penang Automation Sdn Bhd)", "zh": "Ganesh & Hairul (42岁, 槟城自动化工程合伙人)", "biz": "automation firm"},
         {"en": "Desmond Koh & Ivan Lau (40, JB E-Commerce Logistics)", "zh": "许德明 & 刘伊凡 (40岁, 新山跨境物流合伙人)", "biz": "logistics venture"},
     ],
     "single_parent_guardian": [
-        {"en": " Joanne Tan (38, PJ Architect & Mum of 2)", "zh": "陈乔安 Joanne (38岁, 八打灵建筑师·单亲妈妈育有2孩)", "kids": "ages 6 & 9"},
+        {"en": "Joanne Tan (38, PJ Architect & Mum of 2)", "zh": "陈乔安 Joanne (38岁, 八打灵建筑师·单亲妈妈育有2孩)", "kids": "ages 6 & 9"},
         {"en": "Siti Hajar (39, KL Senior Lecturer & Mum of 2)", "zh": "Siti Hajar (39岁, 吉隆坡资深讲师·育有2名子女)", "kids": "ages 5 & 8"},
         {"en": "Raymond D'Cruz (41, Subang IT Head & Single Dad)", "zh": "Raymond D'Cruz (41岁, 梳邦IT总监·单亲爸爸育有2孩)", "kids": "ages 7 & 10"},
     ],
     "overseas_med_student": [
         {"en": "Dr. Lim Kah Heng & Mrs. Lim (48, Penang)", "zh": "林家兴医生夫妇 (48岁, 槟城)", "dest": "University of Edinburgh (UK Medicine)"},
         {"en": "Dato' Bala & Datin Meena (49, Klang)", "zh": "拿督 Bala & 拿汀 Meena (49岁, 巴生)", "dest": "Monash Melbourne (Medicine)"},
-        {"en": " Wong Chee Keong & May (47, Kota Kinabalu)", "zh": "黄志强 & 梅姐 (47岁, 亚庇企业主)", "dest": "University of Manchester (Dentistry)"},
+        {"en": "Wong Chee Keong & May (47, Kota Kinabalu)", "zh": "黄志强 & 梅姐 (47岁, 亚庇企业主)", "dest": "University of Manchester (Dentistry)"},
     ],
     "sandwich_gen_parents": [
         {"en": "Daniel Foo & Serene Yap (43, Cheras KL)", "zh": "符国良 & 叶思琳 (43岁, 蕉赖夹心层夫妻)", "parents": "parents aged 71 & 69"},
@@ -108,19 +158,35 @@ PERSONA_VARIANTS = {
     ],
 }
 
-# Fix minor leading spaces in names cleanly
+# Normalize spacing & capitalization across all persona entries
 for _k, _vlist in PERSONA_VARIANTS.items():
     for _item in _vlist:
-        _item["en"] = _item["en"].strip()
-        if _item["en"].startswith("grace "):
-            _item["en"] = "G" + _item["en"][1:]
-        if _item["en"].startswith("chew "):
-            _item["en"] = "C" + _item["en"][1:]
-        if _item["en"].startswith("ganesh "):
-            _item["en"] = "G" + _item["en"][1:]
+        for _fk, _fv in list(_item.items()):
+            if isinstance(_fv, str):
+                _item[_fk] = _fv.strip()
+        if _item["en"] and _item["en"][0].islower():
+            _item["en"] = _item["en"][0].upper() + _item["en"][1:]
+        _item["en"] = (
+            _item["en"]
+            .replace("Datinalina", "Datin Alina")
+            .replace("HajiLokman", "Haji Lokman")
+            .replace("EncikShahrul", "Encik Shahrul")
+            .replace("EncikTariq", "Encik Tariq")
+            .replace("Enson Chin", "Benson Chin")
+        )
 
 
-ARCHETYPE_ORDER = list(PERSONA_VARIANTS.keys())  # 16 archetypes
+ARCHETYPE_ORDER = list(PERSONA_VARIANTS.keys())  # 16 archetypes preserved for catalog compatibility
+
+# 6 Approved Challenge 3 Cases (3 Health-led + 3 Family/Wealth Milestones, 100% upbeat & celebratory)
+C3_CURATED_6_ORDER = [
+    "newborn_baby",          # 1. 🍼 Newborn Baby (Baby Health + Day-1 Wellness + Uni)
+    "ci_health_scare",       # 2. ⚡ 40th Birthday & Premier Health Upgrade (PRUMillion Med Active 2.0 RM 8M + 15% Healthy Discount + PRUAll Care + PRUMan 110% Refund)
+    "career_promotion",      # 3. 🌟 Executive Promotion (PRUValue Med + PRULady + PRUElite Invest)
+    "uni_retirement_50",     # 4. 🎓 Turning 50 & Melbourne Uni Offer (PRUValue Med Smart Deductible + PRUElite Flex)
+    "new_home_mortgage",     # 5. 🏡 New Dream Home Keys (PRUWith You Plus + PRUAll Care)
+    "takaful_hibah_estate",  # 6. 🕌 Record Business Year & Takaful Hibah (PRUBSN WarisanPlus + AnugerahPlus)
+]
 
 
 # Base 16 Archetype Blueprints (multilingual + competitor facts + short playbook pills + hints)
@@ -179,51 +245,57 @@ BASE_ARCHETYPES: dict[str, dict] = {
     "ci_health_scare": {
         "icon": "⚡",
         "rivalBrand": "AIA Malaysia",
-        "pambPlan": "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
-        "aiaPlan": "AIA A-Life Beyond Critical Care + A-Plus Health360",
+        "pambPlan": "PRUMillion Med Active 2.0 + PRUAll Care + PRUMan",
+        "aiaPlan": "AIA A-Plus Health360 + A-Life Beyond Critical Care",
         "cardThemeColors": ((240, 249, 255), (237, 27, 46), (30, 64, 175)),
-        "cardArtPrompt": "Inspiring executive milestone greeting card illustration (16:9 landscape), golden sunrise over Malaysian skyline bridge, navy and gold accents, vibrant energy, zero corporate logos",
+        "cardArtPrompt": "Warm celebratory 40th birthday executive greeting card illustration (16:9 landscape), golden sunrise over {city} skyline, festive champagne toast, navy and brushed gold accents, vibrant healthy energy, zero corporate logos",
         "en": {
-            "shortLabel": "Turning-40 Executive Wellness Milestone",
-            "lifeEvent": "Turning 40 next month after annual executive wellness checkup; wants to lock in favorable Age-39 rates & 110% maturity cash refund.",
-            "existingGap": "Old RM 100k Life policy • Ready to upgrade comprehensive executive wellness & income continuity protection.",
-            "customerReply": "\"Appreciate you checking in! An AIA friend quoted me AIA A-Life Beyond Critical Care + Health360 before I turn 40. How does PRU compare?\"",
-            "cardHeadline": "Here's to Strength, Health & Your Next Decade! 🌟",
-            "cardChips": ["Here's to Strength, Health & Your Next Decade! 🌟", "Wishing You Vibrant Health Ahead of Your 40th! ⚡"],
-            "cardHints": ["🌅 Sunrise bridge & energizing health theme", "💪 Celebrating peak vitality & career momentum", "⚡ Entering your 40s strong & protected"],
+            "shortLabel": "40th Birthday & Health Upgrade",
+            "lifeEvent": "Celebrating upcoming 40th birthday after an A+ executive wellness checkup in {city}; wants to lock in Age-39 premier private suite medical & 110% refund.",
+            "existingGap": "Basic RM 100k policy • Ready to upgrade to RM 8M private hospital suite health cover with 15% healthy cash discount.",
+            "customerReply": "\"Love the 40th birthday card! An AIA friend quoted me AIA A-Plus Health360 + Beyond Critical Care before my 40th. How does PRU compare?\"",
+            "cardHeadline": "Happy 40th Birthday — Cheers to Peak Health & Your Best Decade Ahead! 🥂⚡",
+            "cardChips": [
+                "Happy 40th Birthday — Cheers to Peak Health & Your Best Decade Ahead! 🥂⚡",
+                "Celebrating 40 Years Strong — Wishing You Vibrant Health & Momentum! 🌟",
+            ],
+            "cardHints": ["🥂 Festive 40th birthday toast & golden {city} sunrise", "⚡ Celebrating A+ peak health & career momentum", "🏥 Premier private suite peace of mind for your 40s"],
             "waIdeas": [
-                {"label": "🎂 Lock Age-39 Wellness Rate", "detail": "Lock in favorable Age-39 underwriting rates before turning 40 next month"},
-                {"label": "⚡ ~190 Conditions to Age 100", "detail": "Comprehensive multi-stage wellness & recovery protection across ~190 conditions up to age 100 via PRUAll Care"},
-                {"label": "💰 110% Maturity Cash Refund", "detail": "Pair PRUMan for 260% executive wellness protection + up to 110% total premium refund at maturity"},
+                {"label": "🏥 RM 8M Suite + 15% Cash Saver", "detail": "Upgrade to PRUMillion Med Active 2.0 (RM 8M private hospital suite cover + 15% instant healthy no-claim cash discount at Age-39 rates)"},
+                {"label": "⚡ ~190 Conditions to Age 100", "detail": "Lock in comprehensive wellness & recovery protection across ~190 conditions up to Age 100 via PRUAll Care"},
+                {"label": "💰 110% Maturity Cash Refund", "detail": "Pair PRUMan for 260% executive wellness protection + up to 110% total premium cash refund at maturity"},
             ],
-            "waHints": ["Congrats on your great annual wellness checkup!", "Quick 5-min check before your 40th birthday rate step-up", "10-min coffee near your office this Friday?"],
+            "waHints": ["Early Happy 40th & congrats on your A+ wellness checkup!", "Quick 2-min tip to lock Age-39 rates + 15% healthy cash discount", "Celebratory 10-min coffee in {city} this Friday?"],
             "aiaFacts": [
-                "Comprehensive Protection to Age 100 & ~190 Conditions (vs. AIA Age 80): PRUAll Care protects wellness & recovery across ~190 conditions up to age 100 (AIA stops at age 80).",
-                "15% Instant Cash Medical Discount: PRUMillion Med Active 2.0 cuts cash premium by 15% every claim-free year (AIA only credits a Health Wallet).",
-                "Up to 110% Maturity Premium Refund: Pairing PRUMan gives 260% executive wellness protection + refunds up to 110% of premiums at maturity.",
+                "15% Instant Healthy Cash Discount (RM 8M Med Cover): PRUMillion Med Active 2.0 cuts actual cash medical premium by 15% every claim-free year (AIA Health360 only credits a conditional wallet).",
+                "Protection to Age 100 Across ~190 Conditions (vs. AIA Age 80): PRUAll Care safeguards executive wellness & recovery up to Age 100, 20 years longer than AIA's Age-80 cap.",
+                "Up to 110% Maturity Premium Refund: Pairing PRUMan delivers 260% executive wellness protection + refunds up to 110% of total premiums in cash at maturity.",
             ],
-            "closeHints": ["10-min coffee before your birthday rate window closes", "Compare Age-80 vs Age-100 payout tables side-by-side", "Quick 10-min Zoom Thursday at 8pm"],
+            "closeHints": ["Celebratory 10-min birthday coffee in {city} before your Age-39 window closes", "Compare RM 8M 15% cash discount & Age-100 tables side-by-side", "Quick 10-min Zoom Thursday at 8pm"],
         },
         "zh-CN": {
-            "shortLabel": "40岁高管健康里程碑",
-            "lifeEvent": "年度高管健康体检顺利达标，下月即将满40岁；希望趁39岁黄金费率锁定全面健康与110%满期返还。",
-            "existingGap": "仅有旧 RM 10万人寿 • 计划升级高管全方位健康与收入延续护盾。",
-            "customerReply": "“谢谢祝贺！有位 AIA 朋友趁我满40岁前报了 AIA A-Life Beyond Critical Care + Health360，你们的方案对比友邦有什么实际优势？”",
-            "cardHeadline": "迈向40黄金十年：愿健康与活力常伴！🌟",
-            "cardChips": ["迈向40黄金十年：愿健康与活力常伴！🌟", "祝事业稳健腾飞、身心康泰常青！⚡"],
-            "cardHints": ["🌅 大桥日出与健康活力主题", "💪 致敬巅峰状态与事业新篇章", "⚡ 迈入40岁前的稳健护航"],
+            "shortLabel": "40岁生日与高端医疗升级",
+            "lifeEvent": "在 {city} 完成年度高管健康体检全优达标，下月喜迎40岁生日；希望趁39岁黄金费率升级 RM 800万高端私家病房医疗与110%满期返还。",
+            "existingGap": "仅有基础 RM 10万旧单 • 计划升级 RM 800万高端医疗护盾（享15%健康现金折扣）与收入延续保障。",
+            "customerReply": "“40岁生日贺卡太赞了！有位 AIA 朋友趁我40岁生日前报了 AIA A-Plus Health360 + Beyond Critical Care，你们的方案有什么实际优势？”",
+            "cardHeadline": "40岁生日快乐 — 敬巅峰健康与人生最精彩的黄金十年！🥂⚡",
+            "cardChips": [
+                "40岁生日快乐 — 敬巅峰健康与人生最精彩的黄金十年！🥂⚡",
+                "礼赞四十风华正茂：愿活力常青、宏图大展！🌟",
+            ],
+            "cardHints": ["🥂 40岁生日香槟举杯与 {city} 金色日出", "⚡ 祝贺体检全优达标与巅峰状态", "🏥 尊尚私家病房健康护航黄金十年"],
             "waIdeas": [
-                {"label": "🎂 锁住 39 岁黄金费率", "detail": "趁下月满40岁费率调整前，锁定39岁更优健康费率"},
-                {"label": "⚡ ~190项全面守护至100岁", "detail": "PRUAll Care 提供约190项全方位健康与康复守护直至100岁"},
-                {"label": "💰 满期高达 110% 保费返还", "detail": "搭配 PRUMan 享260%高管健康保障，满期最高返还高达110%已缴保费"},
+                {"label": "🏥 RM 800万医疗 + 15%现金折", "detail": "趁39岁黄金费率升级 PRUMillion Med Active 2.0（RM 800万私家医院尊尚保障 + 无索赔立减15%现金保费）"},
+                {"label": "⚡ ~190项全面守护至100岁", "detail": "搭配 PRUAll Care 锁定约190项全方位健康与康复守护直至100岁"},
+                {"label": "💰 满期高达 110% 保费返还", "detail": "结合 PRUMan 享260%高管健康保障，满期最高返还高达110%已缴总保费"},
             ],
-            "waHints": ["恭喜年度高管体检一切顺利达标！", "赶在40岁生日前帮您省下长期保费差价", "周五在您公司附近喝杯10分钟咖啡？"],
+            "waHints": ["提前祝40岁生日快乐，更恭喜年度体检全优达标！", "趁40岁生日前帮您锁住39岁费率与15%健康现金折扣", "周五在 {city} 请您喝杯10分钟庆生咖啡？"],
             "aiaFacts": [
-                "保至100岁 & 约190项全面健康守护（对比 AIA 80岁终止）：PRUAll Care 全面健康与康复保障直至100岁，AIA 仅保至80岁。",
-                "无索赔享 15% 保费现金折扣：PRUMillion Med Active 2.0 直接减免15%保费（AIA 仅记入医疗钱包）。",
-                "高达 110% 满期保费返还：搭配 PRUMan 提供260%高管健康保障，满期最高返还110%已缴保费。",
+                "无索赔立享 15% 现金保费折扣（RM 800万高端医疗）：PRUMillion Med Active 2.0 直接减免15%现金保费（AIA Health360 保费照收、仅记入有条件医疗钱包）。",
+                "保至100岁 & 约190项全面守护（对比 AIA 80岁终止）：PRUAll Care 全方位健康与康复保障直至100岁，比 AIA 多守护整整20年。",
+                "高达 110% 满期保费现金返还：搭配 PRUMan 提供260%高管健康保障，满期最高返还110%已缴总保费。",
             ],
-            "closeHints": ["生日前喝杯10分钟咖啡并排对照条款", "一页表看清保至80岁 vs 保至100岁的差距", "周四晚8点用10分钟Zoom快速过一遍"],
+            "closeHints": ["生日前在 {city} 喝杯10分钟庆生咖啡并排看利益表", "一页表看清15%真金白银折扣与保至100岁优势", "周四晚8点用10分钟Zoom轻松过一遍"],
         },
     },
 
@@ -956,14 +1028,14 @@ def _fill_template(val, fmt_vars: dict[str, str]):
     return val
 
 
-# Build the 56-seat deterministic roster by interleaving across all 16 archetypes so
-# Seat 0, Seat 1, Seat 2 ... Seat 15 each get a DIFFERENT archetype first, and Seat 16..55
-# get distinct client personas on the second/third pass!
-def _build_56_seat_roster() -> list[dict]:
+# Build the 72-seat deterministic roster by interleaving r_idx (0..11) across the 6 curated
+# Challenge 3 cases (C3_CURATED_6_ORDER) so every batch of 6 participants gets an exact
+# 1-1-1-1-1-1 even split, and 60-72 participants get 100% unique client names!
+def _build_curated_72_seat_roster() -> list[dict]:
     seats: list[dict] = []
-    max_rounds = max(len(v) for v in PERSONA_VARIANTS.values())
+    max_rounds = max(len(PERSONA_VARIANTS[aid]) for aid in C3_CURATED_6_ORDER)
     for r_idx in range(max_rounds):
-        for arch_id in ARCHETYPE_ORDER:
+        for arch_id in C3_CURATED_6_ORDER:
             variants = PERSONA_VARIANTS[arch_id]
             if r_idx < len(variants):
                 seats.append({
@@ -975,7 +1047,8 @@ def _build_56_seat_roster() -> list[dict]:
     return seats
 
 
-SEAT_ROSTER_56 = _build_56_seat_roster()  # 54+ unique seats
+CURATED_ROSTER_72 = _build_curated_72_seat_roster()  # 6 curated cases x 12 personas = 72 unique seats
+SEAT_ROSTER_56 = CURATED_ROSTER_72  # Alias kept for seamless compatibility across c3_pre_pitch.py & tests
 
 
 def get_total_unique_seats() -> int:
@@ -1074,17 +1147,12 @@ def resolve_seat_scenario(seat_index: int, lang: str = "en") -> dict:
 
 
 def list_all_archetype_summaries(lang: str = "en") -> list[dict]:
-    """Returns 1 representative entry per archetype (16 archetypes) for Switch Case picker."""
-    seen = set()
+    """Returns 1 representative entry per curated archetype (6 curated cases) for Switch Case picker."""
     out = []
-    for s in SEAT_ROSTER_56:
-        aid = s["archetypeId"]
-        if aid in seen:
-            continue
-        seen.add(aid)
-        sc = resolve_seat_scenario(s["seatIndex"], lang)
+    for slot_idx, aid in enumerate(C3_CURATED_6_ORDER):
+        sc = resolve_seat_scenario(slot_idx, lang)
         out.append({
-            "seatIndex": s["seatIndex"],
+            "seatIndex": sc["seatIndex"],
             "id": aid,
             "icon": sc["icon"],
             "shortLabel": sc["shortLabel"],
@@ -1094,7 +1162,7 @@ def list_all_archetype_summaries(lang: str = "en") -> list[dict]:
     return out
 
 
-# Native Bahasa Melayu (ms) and Tamil (ta) scenario summaries, pills & hints across all 16 archetypes
+# Native Bahasa Melayu (ms) and Tamil (ta) scenario summaries, pills & hints across curated archetypes
 ARCHETYPE_MS_OVERRIDES = {
     "newborn_baby": {
         "shortLabel": "Kelahiran Bayi Baharu",
@@ -1116,6 +1184,30 @@ ARCHETYPE_MS_OVERRIDES = {
             "Diskaun Tunai 15% Tiada Tuntutan: PRUMillion Med Active 2.0 memberi diskaun tunai 15% atas kos perubatan (berbanding dompet bersyarat AIA).",
         ],
         "closeHints": ["Zoom 10 minit jam 8:30 malam selepas bayi tidur", "Bandingkan kedua-dua jadual PDF sebelah-menyebelah", "Saya hantarkan jadual 1 halaman di WhatsApp dahulu"],
+    },
+    "ci_health_scare": {
+        "shortLabel": "Ulang Tahun Ke-40 & Medikal Premier",
+        "lifeEvent": "Meraikan ulang tahun ke-40 selepas pemeriksaan kesihatan eksekutif A+ di {city}; mahu mengunci kadar Umur 39 bilik suite perubatan RM 8J & pulangan 110%.",
+        "existingGap": "Polisi asas lama RM 100k • Sedia menaik taraf ke pelan perubatan suite swasta RM 8J dengan diskaun tunai sihat 15%.",
+        "customerReply": "\"Cantik kad hari jadi ke-40 ini! Rakan AIA mencadangkan AIA A-Plus Health360 + Beyond Critical Care sebelum umur 40 saya. Bagaimana PRU berbanding secara fakta?\"",
+        "cardHeadline": "Selamat Ulang Tahun Ke-40 — Semoga Sihat Unggul & Dekad Terbaik Menanti! 🥂⚡",
+        "cardChips": [
+            "Selamat Ulang Tahun Ke-40 — Semoga Sihat Unggul & Dekad Terbaik Menanti! 🥂⚡",
+            "Meraikan 40 Tahun Cemerlang — Semoga Terus Bertenaga & Berjaya! 🌟",
+        ],
+        "cardHints": ["🥂 Sambutan hari jadi ke-40 & matahari terbit {city}", "⚡ Meraikan kesihatan A+ & momentum kerjaya", "🏥 Ketenangan suite hospital premier untuk dekad baharu"],
+        "waIdeas": [
+            {"label": "🏥 Suite RM 8J + Diskaun Tunai 15%", "detail": "Naik taraf ke PRUMillion Med Active 2.0 (suite hospital swasta RM 8J + diskaun tunai sihat 15% pada kadar Umur 39)"},
+            {"label": "⚡ ~190 Kondisi hingga Umur 100", "detail": "Kunci perlindungan kesejahteraan & pemulihan menyeluruh ~190 kondisi sehingga Umur 100 melalui PRUAll Care"},
+            {"label": "💰 Pulangan Tunai Matang 110%", "detail": "Padankan PRUMan untuk 260% perlindungan eksekutif + pulangan tunai sehingga 110% jumlah premium semasa matang"},
+        ],
+        "waHints": ["Selamat Hari Jadi ke-40 awal & tahniah atas rekod kesihatan A+!", "Tip pantas 2 minit kunci kadar Umur 39 + diskaun tunai sihat 15%", "Minum kopi sambutan 10 minit di {city} Jumaat ini?"],
+        "aiaFacts": [
+            "Diskaun Tunai Sihat 15% Serta-merta (Perlindungan RM 8J): PRUMillion Med Active 2.0 memotong bayaran tunai sebanyak 15% setiap tahun tanpa tuntutan (AIA Health360 hanya mengkreditkan dompet bersyarat).",
+            "Perlindungan Sehingga Umur 100 Merangkumi ~190 Kondisi (lwn AIA Umur 80): PRUAll Care melindungi kesejahteraan & pemulihan sehingga Umur 100, 20 tahun lebih lama daripada had AIA.",
+            "Pulangan Tunai Premium Matang Sehingga 110%: Padanan PRUMan memberi 260% perlindungan eksekutif + memulangkan sehingga 110% jumlah premium dalam tunai semasa matang.",
+        ],
+        "closeHints": ["Kopi sambutan 10 minit di {city} sebelum tetingkap Umur 39 ditutup", "Bandingkan diskaun tunai 15% RM 8J & jadual Umur 100 bersebelahan", "Zoom ringkas 10 minit Khamis jam 8 malam"],
     },
     "takaful_hibah_estate": {
         "shortLabel": "Hibah Takaful & Pusaka Perniagaan",
@@ -1173,7 +1265,7 @@ def resolve_seat_scenario(seat_index: int, lang: str = "en") -> dict:
     elif norm == "ta":
         ta_prefix_label = {
             "newborn_baby": "புதிய குழந்தை பிறப்பு",
-            "ci_health_scare": "40 வயது ஆரோக்கிய மைல்கல்",
+            "ci_health_scare": "40-வது பிறந்தநாள் & மருத்துவ மேம்பாடு",
             "new_home_mortgage": "புதிய RM 1.3M வீட்டுக் கடன்",
             "career_promotion": "உயர் பதவி உயர்வு",
             "sme_expansion": "தொழிற்சாலை RM 6M வங்கி உத்தரவாதம்",
@@ -1195,4 +1287,10 @@ def resolve_seat_scenario(seat_index: int, lang: str = "en") -> dict:
                 "label": "🛡️ முதல் நாள் குழந்தை நலப் பாதுகாப்பு",
                 "detail": "PRUMy Child Plus மூலம் குழந்தையின் முதல் நாள் நலன் மற்றும் வளர்ச்சிப் பாதுகாப்பு",
             }
+        elif base["id"] == "ci_health_scare":
+            base["cardHeadline"] = "இனிய 40-வது பிறந்தநாள் — சிறந்த ஆரோக்கியம் & பொன்னான தசாப்தத்திற்கு வாழ்த்துகள்! 🥂⚡"
+            base["cardChips"] = [
+                "இனிய 40-வது பிறந்தநாள் — சிறந்த ஆரோக்கியம் & பொன்னான தசாப்தத்திற்கு வாழ்த்துகள்! 🥂⚡",
+                "40 ஆண்டு சாதனை & துடிப்பான ஆரோக்கியத்திற்கு நல்வாழ்த்துகள்! 🌟",
+            ]
     return base

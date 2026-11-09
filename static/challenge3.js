@@ -554,54 +554,54 @@ const C3_ADVISOR_PLAYBOOK = {
 
   ci_health_scare: {
     en: {
-      cardHints: ["🌅 Penang Bridge sunrise & vitality theme", "💪 Celebrating your peak vitality & leadership", "⚡ Energizing Age-40 wellness milestone"],
+      cardHints: ["🥂 Festive 40th birthday toast & golden sunrise", "⚡ Celebrating A+ peak health & career momentum", "🏥 Premier private suite peace of mind for your 40s"],
       waIdeas: [
-        { label: "🎂 Lock Age-39 Wellness Rate", detail: "Lock in favorable Age-39 underwriting rates before turning 40 next month" },
-        { label: "⚡ ~190 Conditions to Age 100", detail: "Comprehensive multi-stage wellness & recovery protection across ~190 conditions up to age 100 via PRUAll Care" },
-        { label: "💰 110% Maturity Refund", detail: "Pair PRUMan for 260% executive wellness protection + up to 110% total premium refund at maturity" },
+        { label: "🏥 RM 8M Suite + 15% Cash Saver", detail: "Upgrade to PRUMillion Med Active 2.0 (RM 8M private hospital suite cover + 15% instant healthy no-claim cash discount at Age-39 rates)" },
+        { label: "⚡ ~190 Conditions to Age 100", detail: "Lock in comprehensive wellness & recovery protection across ~190 conditions up to Age 100 via PRUAll Care" },
+        { label: "💰 110% Maturity Cash Refund", detail: "Pair PRUMan for 260% executive wellness protection + up to 110% total premium cash refund at maturity" },
       ],
-      waHints: ["Congrats on your great annual wellness checkup!", "Quick 5-min check before your 40th birthday rate step-up", "Coffee near Bayan Lepas this Friday?"],
-      closeHints: ["10-min coffee near Bayan Lepas before your birthday", "Compare Age-80 vs Age-100 payout tables side-by-side", "Quick 10-min Zoom Thursday evening"],
+      waHints: ["Early Happy 40th & congrats on your A+ wellness checkup!", "Quick 2-min tip to lock Age-39 rates + 15% healthy cash discount", "Celebratory 10-min coffee this Friday?"],
+      closeHints: ["Celebratory 10-min birthday coffee before your Age-39 window closes", "Compare RM 8M 15% cash discount & Age-100 tables side-by-side", "Quick 10-min Zoom Thursday evening"],
     },
     "zh-CN": {
-      cardHints: ["🌅 槟威大桥日出与活力健康主题", "💪 致敬巅峰活力与事业新篇章", "⚡ 40岁健康里程碑稳健护航"],
+      cardHints: ["🥂 40岁生日香槟举杯与金色日出", "⚡ 祝贺体检全优达标与巅峰状态", "🏥 尊尚私家病房健康护航黄金十年"],
       waIdeas: [
-        { label: "🎂 锁住 39 岁黄金费率", detail: "趁下个月满40岁保费调整前，锁住39岁最优健康费率" },
-        { label: "⚡ ~190项全面守护至100岁", detail: "PRUAll Care 提供约190项全面健康与康复保障直至100岁" },
-        { label: "💰 满期高达 110% 保费返还", detail: "搭配 PRUMan 享260%高管健康保障，满期返还高达110%保费" },
+        { label: "🏥 RM 800万医疗 + 15%现金折", detail: "趁39岁黄金费率升级 PRUMillion Med Active 2.0（RM 800万私家医院尊尚保障 + 无索赔立减15%现金保费）" },
+        { label: "⚡ ~190项全面守护至100岁", detail: "搭配 PRUAll Care 锁定约190项全方位健康与康复守护直至100岁" },
+        { label: "💰 满期高达 110% 保费返还", detail: "结合 PRUMan 享260%高管健康保障，满期最高返还高达110%已缴总保费" },
       ],
-      waHints: ["恭喜年度高管健康体检顺利达标！", "赶在您40岁生日前帮您省下长期保费差价", "周五在槟城园区附近喝杯10分钟咖啡？"],
-      closeHints: ["生日前在 Bayan Lepas 喝杯10分钟咖啡对照条款", "并排对比80岁终止 vs 100岁保障利益表", "周四晚用10分钟Zoom快速过一遍"],
+      waHints: ["提前祝40岁生日快乐，更恭喜年度体检全优达标！", "趁40岁生日前帮您锁住39岁费率与15%健康现金折扣", "周五请您喝杯10分钟庆生咖啡？"],
+      closeHints: ["生日前喝杯10分钟庆生咖啡并排看利益表", "一页表看清15%真金白银折扣与保至100岁优势", "周四晚用10分钟Zoom快速过一遍"],
     },
     yue: {
-      cardHints: ["🌅 檳威大橋日出同健康活力主題", "💪 致敬巔峰狀態同事業新里程", "⚡ 踏入40歲健康里程碑護航"],
+      cardHints: ["🥂 40歲生日舉杯同金色日出賀圖", "⚡ 恭喜體檢靚仔達標同巔峰狀態", "🏥 尊尚私家病房護航黃金十年"],
       waIdeas: [
-        { label: "🎂 鎖定 39 歲最靚保費", detail: "趁下個月踏入40歲調整保費前，鎖實39歲最抵健康保費" },
-        { label: "⚡ ~190項周全守護到100歲", detail: "PRUAll Care 保足約190項全面健康同康復保障直到100歲" },
-        { label: "💰 期滿高達 110% 回贈保費", detail: "配埋 PRUMan 享260%高管健康保障，期滿攞返高達110%保費" },
+        { label: "🏥 RM 800萬醫療 + 15%現金折", detail: "趁39歲靚價升級 PRUMillion Med Active 2.0（RM 800萬私家醫院尊尚保障 + 無索償即減15%現金保費）" },
+        { label: "⚡ ~190項周全守護到100歲", detail: "配搭 PRUAll Care 保足約190項全面健康同康復保障直到100歲" },
+        { label: "💰 期滿高達 110% 回贈保費", detail: "配埋 PRUMan 享260%高管健康保障，期滿攞返高達110%總保費" },
       ],
-      waHints: ["恭喜你年度高管體檢靚仔達標！", "趕喺你40歲生日前幫你慳返長線保費差價", "星期五喺 Bayan Lepas 附近飲杯10分鐘啡？"],
-      closeHints: ["生日前約個10分鐘飲杯啡拍住睇條款", "一頁紙對比保到80歲 vs 保到100歲嘅分別", "星期四晚10分鐘 Zoom 快閃傾吓"],
+      waHints: ["預祝40歲生日快樂，仲要恭喜年度體檢靚仔達標！", "趕喺40歲生日前幫你鎖實39歲靚價同15%現金折扣", "星期五請你飲杯10分鐘慶生啡？"],
+      closeHints: ["生日前約個10分鐘飲杯慶生啡拍住睇條款", "一頁紙對比15%真減保費同保到100歲優勢", "星期四晚10分鐘 Zoom 快閃傾吓"],
     },
     ms: {
-      cardHints: ["🌅 Matahari terbit Jambatan Pulau Pinang", "💪 Meraikan kecergasan & kepimpinan eksekutif", "⚡ Kesejahteraan menjelang usia 40"],
+      cardHints: ["🥂 Sambutan hari jadi ke-40 & matahari terbit emas", "⚡ Meraikan kesihatan A+ & momentum kerjaya", "🏥 Ketenangan suite hospital premier untuk dekad baharu"],
       waIdeas: [
-        { label: "🎂 Kunci Kadar Umur 39", detail: "Kunci kadar kesihatan umur 39 sebelum meningkat pada hari lahir ke-40 bulan depan" },
-        { label: "⚡ ~190 Perlindungan hingga 100", detail: "PRUAll Care melindungi ~190 kondisi kesejahteraan & pemulihan hingga umur 100" },
-        { label: "💰 Pulangan Matang 110%", detail: "Padankan PRUMan untuk 260% perlindungan eksekutif + pulangan sehingga 110% jumlah premium" },
+        { label: "🏥 Suite RM 8J + Diskaun Tunai 15%", detail: "Naik taraf ke PRUMillion Med Active 2.0 (suite hospital swasta RM 8J + diskaun tunai sihat 15% pada kadar Umur 39)" },
+        { label: "⚡ ~190 Perlindungan hingga 100", detail: "PRUAll Care melindungi ~190 kondisi kesejahteraan & pemulihan hingga Umur 100" },
+        { label: "💰 Pulangan Matang 110%", detail: "Padankan PRUMan untuk 260% perlindungan eksekutif + pulangan tunai sehingga 110% jumlah premium" },
       ],
-      waHints: ["Tahniah atas pemeriksaan kesihatan tahunan yang cemerlang!", "Semakan pantas 5 minit sebelum kadar umur 40 bermula", "Minum kopi 10 minit di Bayan Lepas Jumaat ini?"],
-      closeHints: ["Kopi 10 minit sebelum tarikh lahir ke-40 anda", "Bandingkan jadual perlindungan Umur 80 lwn Umur 100", "Zoom ringkas 10 minit Khamis malam"],
+      waHints: ["Selamat Hari Jadi ke-40 awal & tahniah rekod kesihatan A+!", "Tip pantas 2 minit kunci kadar Umur 39 + diskaun tunai sihat 15%", "Minum kopi sambutan 10 minit Jumaat ini?"],
+      closeHints: ["Kopi sambutan 10 minit sebelum tetingkap Umur 39 ditutup", "Bandingkan diskaun tunai 15% RM 8J & jadual Umur 100", "Zoom ringkas 10 minit Khamis malam"],
     },
     ta: {
-      cardHints: ["🌅 பினாங்கு பாலம் சூரிய உதயம் & ஆரோக்கியம்", "💪 சிறந்த ஆரோக்கியம் & தலைமைத்துவ வாழ்த்து", "⚡ 40 வயது ஆரோக்கிய மைல்கல்"],
+      cardHints: ["🥂 இனிய 40-வது பிறந்தநாள் & பொன்னிற உதயம்", "⚡ சிறந்த A+ ஆரோக்கியம் & தலைமைத்துவ வாழ்த்து", "🏥 RM 8M பிரீமியம் மருத்துவப் பாதுகாப்பு"],
       waIdeas: [
-        { label: "🎂 39 வயது சலுகைக் கட்டணம்", detail: "அடுத்த மாதம் 40 வயது கட்டண உயர்வுக்கு முன் 39 வயது கட்டணத்தை உறுதி செய்க" },
+        { label: "🏥 RM 8M மருத்துவம் + 15% தள்ளுபடி", detail: "39 வயது சலுகைக் கட்டணத்தில் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% நேரடி ரொக்கத் தள்ளுபடி)" },
         { label: "⚡ 100 வயது வரை ~190 நலன்", detail: "PRUAll Care மூலம் ~190 நலன் & குணமடைதல் நிலைகளுக்கு 100 வயது வரை பாதுகாப்பு" },
         { label: "💰 110% முதிர்வுப் பணம் திரும்ப", detail: "PRUMan மூலம் 260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்" },
       ],
-      waHints: ["உங்கள் வருடாந்திர உடல்நலப் பரிசோதனை சிறப்பாக அமைந்ததற்கு வாழ்த்துகள்!", "40வது பிறந்தநாளுக்கு முன் 5 நிமிட சுருக்க ஒப்பீடு", "வெள்ளிக்கிழமை 10 நிமிடம் காபி அருந்திப் பேசலாமா?"],
-      closeHints: ["பிறந்தநாளுக்கு முன் 10 நிமிட காபி சந்திப்பு", "80 வயது vs 100 வயது பாதுகாப்பு அட்டவணை ஒப்பீடு", "வியாழன் மாலை 10 நிமிட Zoom அழைப்பு"],
+      waHints: ["இனிய 40-வது பிறந்தநாள் & சிறந்த உடல்நலப் பரிசோதனைக்கு வாழ்த்துகள்!", "40-வது பிறந்தநாளுக்கு முன் 39 வயது கட்டணம் & 15% தள்ளுபடி", "வெள்ளிக்கிழமை 10 நிமிடம் காபி அருந்திப் பேசலாமா?"],
+      closeHints: ["பிறந்தநாளுக்கு முன் 10 நிமிட காபி சந்திப்பு", "RM 8M 15% தள்ளுபடி & 100 வயது பாதுகாப்பு ஒப்பீடு", "வியாழன் மாலை 10 நிமிட Zoom அழைப்பு"],
     },
   },
 
@@ -611,7 +611,7 @@ const C3_ADVISOR_PLAYBOOK = {
       waIdeas: [
         { label: "🔑 RM 500 New Home Reward", detail: "Claim an immediate RM 500 New Home Goal Achievement Cash Reward under PRUWith You Plus" },
         { label: "🏠 Portable MLTA (Keep Surplus)", detail: "Protect the RM 1.3M mortgage with portable family-owned MLTA instead of bank-locked MRTA" },
-        { label: "🛡️ +20% CI Mortgage Buffer", detail: "PRUAll Care adds +20% Recovery Care cash to cover RM 5,600/mth installments during illness" },
+        { label: "🛡️ 20% Mortgage Continuity Reserve", detail: "PRUAll Care adds a +20% mortgage continuity reserve to keep RM 5,600/mth installments smooth during recovery" },
       ],
       waHints: ["Congrats on your beautiful Eco Botanic semi-D!", "Celebrate housewarming first—happy to share a 2-min MRTA vs MLTA tip", "Coffee near Eco Botanic this weekend?"],
       closeHints: ["10-min coffee near Eco Botanic with you & Farah", "Side-by-side bank MRTA vs portable MLTA + AIA comparison", "Quick 10-min Zoom Sunday afternoon"],
@@ -621,7 +621,7 @@ const C3_ADVISOR_PLAYBOOK = {
       waIdeas: [
         { label: "🔑 RM 500 新居现金奖", detail: "凭新屋拿钥匙直接申领 PRUWith You Plus RM 500 人生目标现金奖赏" },
         { label: "🏠 可携式 MLTA 胜过银行 MRTA", detail: "用可随身携带、盈余归家人的 MLTA 守护 RM 130万房贷，而非只赔银行的 MRTA" },
-        { label: "🛡️ 额外 +20% 重疾供楼缓冲金", detail: "PRUAll Care 额外赔付 +20% 康复津贴，确保患病休养期间不断供 RM 5,600 月供" },
+        { label: "🛡️ 20% 房贷延续储备金", detail: "PRUAll Care 额外加码 +20% 房贷延续储备金，稳妥守护每月 RM 5,600 供款顺畅" },
       ],
       waHints: ["恭喜喜提 Eco Botanic 新居金钥匙！", "先开心布置新家，顺手发您一份2分钟房贷护盾对比", "周末在 Eco Botanic 附近请你们喝杯咖啡？"],
       closeHints: ["周末在 Eco Botanic 喝杯10分钟咖啡和太太一起看", "一页纸看清银行MRTA、AIA与PRU可携式护盾差别", "周日晚8点10分钟Zoom轻松聊"],
@@ -631,7 +631,7 @@ const C3_ADVISOR_PLAYBOOK = {
       waIdeas: [
         { label: "🔑 RM 500 新居現金獎", detail: "攞新屋鎖匙即刻領取 PRUWith You Plus RM 500 人生目標現金獎" },
         { label: "🏠 可攜式 MLTA 贏銀行 MRTA", detail: "用跟身兼餘額歸屋企人嘅 MLTA 守住 RM 130萬按揭，唔使綁死銀行 MRTA" },
-        { label: "🛡️ 額外 +20% 危疾供樓緩衝金", detail: "PRUAll Care 額外賠多 +20% 康復現金，休養期間照樣輕鬆供 RM 5,600 月供" },
+        { label: "🛡️ 20% 供樓延續儲備金", detail: "PRUAll Care 額外加碼 +20% 供樓延續儲備金，確保每月 RM 5,600 供款順暢安心" },
       ],
       waHints: ["恭喜晒攞到 Eco Botanic 靚屋鎖匙！", "先開心執靚間新屋，順手 Send 份2分鐘按揭比較俾你", "週末喺 Eco Botanic 附近請你哋飲杯啡？"],
       closeHints: ["週末喺 Eco Botanic 同太太一齊飲杯啡睇10分鐘", "一頁紙拍住睇清銀行 MRTA、AIA 同 PRU 分別", "星期日晚8點10分鐘 Zoom 輕鬆傾"],
@@ -641,7 +641,7 @@ const C3_ADVISOR_PLAYBOOK = {
       waIdeas: [
         { label: "🔑 Ganjaran Rumah Baharu RM 500", detail: "Tuntut Ganjaran Tunai Pencapaian RM 500 sempena kunci rumah baharu (PRUWith You Plus)" },
         { label: "🏠 MLTA Mudah Alih (Milik Keluarga)", detail: "Lindungi gadai janji RM 1.3J dengan MLTA milik keluarga berbanding MRTA terkunci bank" },
-        { label: "🛡️ +20% Penampan Ansuran CI", detail: "PRUAll Care membayar tambahan +20% tunai pemulihan untuk menampung ansuran RM 5,600/bln" },
+        { label: "🛡️ 20% Rizab Kesinambungan", detail: "PRUAll Care menambah +20% rizab kesinambungan gadai janji supaya ansuran RM 5,600/bln kekal lancar" },
       ],
       waHints: ["Tahniah atas kunci rumah Semi-D Eco Botanic yang indah!", "Selamat mengemas rumah baharu—saya kongsikan tip 2 minit MRTA lwn MLTA", "Jom minum kopi di Eco Botanic hujung minggu ini?"],
       closeHints: ["Kopi 10 minit di Eco Botanic bersama Farah", "Jadual ringkas 1 halaman MRTA Bank lwn AIA lwn PRU", "Zoom santai 10 minit Ahad petang"],
@@ -651,7 +651,7 @@ const C3_ADVISOR_PLAYBOOK = {
       waIdeas: [
         { label: "🔑 RM 500 புது வீடு ரொக்கப் பரிசு", detail: "புதிய வீட்டு சாவி பெற்றதற்கு PRUWith You Plus மூலம் RM 500 ரொக்கப் பரிசு" },
         { label: "🏠 குடும்பத்திற்கான Portable MLTA", detail: "வங்கி MRTA-க்கு பதில் குடும்பத்திற்கு உபரித் தொகை தரும் Portable MLTA பாதுகாப்பு" },
-        { label: "🛡️ +20% கூடுதல் CI தவணை நிதி", detail: "நோயிலிருந்து மீளும்போது RM 5,600 மாதத் தவணையைக் கட்ட PRUAll Care +20% கூடுதல் நிதி" },
+        { label: "🛡️ 20% கடன் தொடர்ச்சி நிதி", detail: "மாதம் RM 5,600 தவணை தடையின்றித் தொடர PRUAll Care +20% கூடுதல் தொடர்ச்சி நிதி" },
       ],
       waHints: ["Eco Botanic புதிய வீட்டு சாவிகள் பெற்றதற்கு மனமார்ந்த வாழ்த்துகள்!", "புது வீட்டு வேலைகளுக்கு நடுவே 2 நிமிட சுருக்கம் அனுப்புகிறேன்", "இந்த வார இறுதியில் Eco Botanic அருகே காபி அருந்தலாமா?"],
       closeHints: ["மனைவியுடன் 10 நிமிட காபி சந்திப்பில் ஒப்பிட்டுப் பார்ப்போம்", "வங்கி MRTA vs AIA vs PRU 1 பக்க ஒப்பீட்டு அட்டவணை", "ஞாயிறு மாலை 10 நிமிட Zoom அழைப்பு"],
@@ -1023,144 +1023,144 @@ const PAMB_C3_SCENARIOS = [
     icon: "⚡",
     i18n: {
       en: {
-        shortLabel: "Turning-40 Wellness Milestone",
+        shortLabel: "40th Birthday & Health Upgrade",
         customerName: "Jason Khoo (39, Penang Tech Director)",
-        existingGap: "Old RM 100k Life policy • Ready to upgrade executive wellness & income continuity shield",
-        lifeEvent: "Turning 40 next month after annual executive wellness checkup; wants Age-39 rates & 110% refund",
-        pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
-        aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
+        existingGap: "Basic RM 100k policy • Ready to upgrade RM 8M private suite health cover + 15% cash discount",
+        lifeEvent: "Celebrating upcoming 40th birthday after A+ checkup; wants Age-39 premier medical & 110% refund",
+        pambPlan: "PRUMillion Med Active 2.0 + PRUAll Care + PRUMan",
+        aiaPlan: "AIA A-Plus Health360 + A-Life Beyond Critical Care",
         customerReply:
-          "\"Appreciate the 40th birthday card, bro! My friend at AIA pitched AIA A-Life Beyond Critical Care + A-Plus Health360. Email me how our PRU plan compares factually!\"",
-        cardHeadline: "Cheers to 40 Years of Leadership & Peak Health, Jason! 🥂",
+          "\"Love the 40th birthday card, bro! My friend at AIA quoted AIA A-Plus Health360 + A-Life Beyond Critical Care. Email me how our PRU plan compares factually!\"",
+        cardHeadline: "Happy 40th Birthday — Cheers to Peak Health & Your Best Decade Ahead! 🥂⚡",
         cardChips: [
-          "Cheers to 40 Years of Leadership & Peak Health, Jason! 🥂",
-          "Happy 40th Milestone Birthday, Jason Khoo! 🛡️",
+          "Happy 40th Birthday — Cheers to Peak Health & Your Best Decade Ahead! 🥂⚡",
+          "Celebrating 40 Years Strong — Wishing You Vibrant Health & Momentum! 🌟",
         ],
         whatsappChips: [
-          "Lock in age-39 rates before next month: PRUAll Care (~190 wellness & recovery conditions to Age 100 + 20% Recovery Care) + PRUMillion Med Active 2.0 (15% discount)",
+          "Lock in Age-39 rates on PRUMillion Med Active 2.0 (RM 8M private suite + 15% healthy cash discount) + PRUAll Care (~190 conditions to Age 100)",
           "Add PRUMan (260% executive wellness protection + up to 110% total premium refund at maturity)",
         ],
         aiaFacts: [
+          "✓ 15% Instant Healthy Cash Discount on RM 8M Med Cover (PRUMillion Med Active 2.0 vs. AIA Health360 conditional wallet)",
           "✓ Protects ~190 Conditions to Age 100 (PRUAll Care vs. AIA A-Life Beyond expiring at Age 80)",
-          "✓ 15% Instant Cash Premium Discount (PRUMillion Med Active 2.0 vs. AIA Health360 wallet credit)",
-          "✓ Up to 110% Maturity Refund (PRUMan 260% executive protection + 110% refund at maturity)",
+          "✓ Up to 110% Maturity Cash Refund (PRUMan 260% executive protection + 110% refund at maturity)",
         ],
         defaultWhatsapp:
-          "Happy early 40th Birthday, Jason! 🥂 Awesome news on your clean annual executive wellness checkup—I made this milestone card for your 40th.\n\nBefore your age-40 rate step-up next month, we can lock in favorable Age-39 rates on PRUAll Care (~190 wellness & recovery conditions to Age 100 + 20% Recovery Care) and PRUMillion Med Active 2.0 (RM 8M limit + 15% claim-free discount). Free for a 10-min coffee in Bayan Lepas this week? ☕",
+          "Happy early 40th Birthday, Jason! 🥂⚡ Awesome news on your A+ annual executive wellness checkup—I made this celebratory card for your 40th.\n\nBefore your age-40 rate step-up next month, we can lock in Age-39 rates on PRUMillion Med Active 2.0 (RM 8M private suite cover + 15% instant healthy cash discount), PRUAll Care (~190 conditions to Age 100), and PRUMan (up to 110% maturity refund). Free for a 10-min birthday coffee this Friday? ☕",
         defaultEmail:
-          "Subject: Factual Comparison Before Age 40: PRU (PRUAll Care) vs. AIA (A-Life Beyond Critical Care)\n\nHi Jason,\nHere is the factual side-by-side between our PRU plan and AIA before your age-39 window closes:\n1. Comprehensive Protection to Age 100 & ~190 Conditions: PRUAll Care covers ~190 conditions up to Age 100 (+20% Recovery Care), whereas AIA A-Life Beyond Critical Care expires at Age 80.\n2. 15% Direct Premium Discount: PRUMillion Med Active 2.0 cuts your cash premium by 15% when claim-free (AIA charges full premium and only credits a Health Wallet).\n3. 110% Maturity Cash Refund: PRUMan gives 260% executive wellness protection + up to 110% maturity refund.\n\nLet's review the 1-page rate sheet over coffee this Thursday!",
+          "Subject: Factual 40th Milestone Comparison: PRU (PRUMillion Med Active 2.0 & PRUAll Care) vs. AIA\n\nHi Jason,\nHere is the factual side-by-side between our PRU plan and AIA before your Age-39 window closes:\n1. 15% Direct Healthy Cash Discount (RM 8M Cover): PRUMillion Med Active 2.0 cuts your cash premium by 15% when claim-free (AIA charges full premium and only credits a Health Wallet).\n2. Comprehensive Protection to Age 100 & ~190 Conditions: PRUAll Care covers ~190 conditions up to Age 100, whereas AIA A-Life Beyond Critical Care expires at Age 80.\n3. Up to 110% Maturity Cash Refund: PRUMan gives 260% executive wellness protection + up to 110% maturity refund.\n\nLet's review the 1-page rate sheet over birthday coffee this Thursday!",
       },
       "zh-CN": {
-        shortLabel: "40岁高管健康里程碑",
-        customerName: "邱家豪 Jason Khoo (39岁，槟城科技总监)",
-        existingGap: "旧 RM 10万寿险 • 计划升级高管全方位健康与收入延续护盾",
-        lifeEvent: "年度高管健康体检顺利达标，下个月即将满 40 岁；希望锁定39岁费率与110%返还",
-        pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
-        aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
+        shortLabel: "40岁生日与高端医疗升级",
+        customerName: "邱志豪 Jason Khoo (39岁，槟城科技总监)",
+        existingGap: "基础 RM 10万旧单 • 计划升级 RM 800万私家病房高端医疗（享15%健康现金折扣）",
+        lifeEvent: "年度高管体检全优达标，下月喜迎 40 岁生日；希望趁39岁锁定高端医疗与110%返还",
+        pambPlan: "PRUMillion Med Active 2.0 + PRUAll Care + PRUMan",
+        aiaPlan: "AIA A-Plus Health360 + A-Life Beyond Critical Care",
         customerReply:
-          "“谢谢你的40岁生日贺卡兄弟！我一位做 AIA 的朋友刚推荐了 AIA A-Life Beyond Critical Care + A-Plus Health360。你能发封电邮客观对比保诚和 AIA 的条款吗？”",
-        cardHeadline: "致敬 40 岁卓越领导力与巅峰健康，Jason！🥂",
+          "“40岁生日贺卡太赞了兄弟！我一位做 AIA 的朋友刚推荐了 AIA A-Plus Health360 + Beyond Critical Care。你能发封电邮客观对比 PRU 和 AIA 的条款吗？”",
+        cardHeadline: "40岁生日快乐 — 敬巅峰健康与人生最精彩的黄金十年！🥂⚡",
         cardChips: [
-          "致敬 40 岁卓越领导力与巅峰健康，Jason！🥂",
-          "祝 Jason Khoo 40 岁里程碑生日快乐，事业家庭双丰收！🛡️",
+          "40岁生日快乐 — 敬巅峰健康与人生最精彩的黄金十年！🥂⚡",
+          "礼赞四十风华正茂：愿活力常青、宏图大展！🌟",
         ],
         whatsappChips: [
-          "赶在下月满40岁调整费率前锁定39岁费率：PRUAll Care（~190项全面健康与康复守护至100岁+20%康复津贴）+ PRUMillion Med Active 2.0（15%保费折扣）",
+          "趁下月满40岁前锁住39岁黄金费率：PRUMillion Med Active 2.0（RM 800万医疗+15%健康现金折）+ PRUAll Care（保至100岁）",
           "搭配 PRUMan（高达260%高管健康保障 + 满期退还高达110%总保费）",
         ],
         aiaFacts: [
-          "✓ 保障约 190 项健康与康复条件至 100 岁（PRUAll Care 保至100岁 vs AIA A-Life Beyond 仅保至80岁）",
-          "✓ 无索赔享 15% 现金保费折扣（PRUMillion Med Active 2.0 直接扣减保费 vs AIA 仅记入钱包）",
+          "✓ 无索赔立享 15% 现金保费折扣（PRUMillion Med Active 2.0 RM 800万高端医疗 vs AIA 仅记入钱包）",
+          "✓ 保障约 190 项健康与康复条件至 100 岁（PRUAll Care 保至100岁 vs AIA A-Life Beyond 80岁终止）",
           "✓ 满期退还高达 110% 总保费（PRUMan 提供260%高管健康保障 + 110%满期退费）",
         ],
         defaultWhatsapp:
-          "Jason，提前祝你 40 岁生日快乐！🥂 恭喜年度高管健康体检一切顺利达标，我特意为你制作了这张 40 岁健康里程碑贺卡。\n\n趁下个月满 40 岁费率调整前，我们可以用 39 岁黄金健康费率锁定 PRUAll Care（涵盖约190项全面健康与康复保障至100岁及额外20%康复津贴）与 PRUMillion Med Active 2.0（RM 800万年度医疗限额 + 无索赔15%现金保费折扣）。本周在 Bayan Lepas 喝杯10分钟咖啡聊聊？☕",
+          "Jason，提前祝你 40 岁生日快乐！🥂⚡ 恭喜年度高管健康体检全优达标，我特意为你制作了这张 40 岁庆生贺卡。\n\n趁下个月满 40 岁费率调整前，我们可以用 39 岁黄金费率锁定 PRUMillion Med Active 2.0（RM 800万私家医院尊尚医疗 + 无索赔15%现金保费折扣）、PRUAll Care（保至100岁）及 PRUMan（高达110%满期返还）。本周请您喝杯10分钟庆生咖啡聊聊？☕",
         defaultEmail:
-          "主题：40岁健康里程碑客观对比：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\nJason 您好：\n赶在您 39 岁费率窗口关闭前，为您整理 PRU 方案与友邦 AIA 的 3 大客观条款差异：\n1. 保至 100 岁且涵盖约 190 项全面守护：PRUAll Care 全面健康与康复守护至 100 岁（含额外 20% 康复津贴），而 AIA A-Life Beyond Critical Care 仅保至 80 岁。\n2. 15% 直接现金保费折扣：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仍收全额保费，仅把额度记入 Health Wallet）。\n3. 高达 110% 保费退还：PRUMan 提供高达 260% 高管健康保障，满期可退还高达 110% 已缴总保费。\n\n这周四喝咖啡时我带一页式费率对比表给您过目！",
+          "主题：40岁高端医疗升级客观对比：PRU (PRUMillion Med Active 2.0) vs 友邦 (AIA)\n\nJason 您好：\n赶在您 39 岁费率窗口关闭前，为您整理 PRU 方案与友邦 AIA 的 3 大客观条款差异：\n1. 15% 直接现金保费折扣（RM 800万高端医疗）：PRUMillion Med Active 2.0 在无索赔时直接减免 15% 现金保费（AIA 仍收全额保费，仅把额度记入 Health Wallet）。\n2. 保至 100 岁且涵盖约 190 项全面守护：PRUAll Care 全面健康与康复守护至 100 岁，而 AIA A-Life Beyond Critical Care 仅保至 80 岁。\n3. 高达 110% 保费退还：PRUMan 提供高达 260% 高管健康保障，满期可退还高达 110% 已缴总保费。\n\n这周四喝庆生咖啡时我带一页式对比表给您过目！",
       },
       yue: {
-        shortLabel: "40歲高管健康里程碑",
-        customerName: "邱家豪 Jason Khoo (39歲，檳城 Tech 總監)",
-        existingGap: "舊 RM 10萬人壽 • 計劃升級高管全面健康與收入延續保障",
-        lifeEvent: "年度高管體檢靚仔達標，下個月踏入 40 歲；想鎖定39歲靚價同110%回贈",
-        pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
-        aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
+        shortLabel: "40歲生日與高端醫療升級",
+        customerName: "邱志豪 Jason Khoo (39歲，檳城 Tech 總監)",
+        existingGap: "基礎 RM 10萬舊單 • 計劃升級 RM 800萬私家病房高端醫療（享15%健康現金折扣）",
+        lifeEvent: "年度高管體檢靚仔達標，下個月喜迎 40 歲生日；想趁39歲鎖定高端醫療同110%回贈",
+        pambPlan: "PRUMillion Med Active 2.0 + PRUAll Care + PRUMan",
+        aiaPlan: "AIA A-Plus Health360 + A-Life Beyond Critical Care",
         customerReply:
-          "「多謝你張 40 歲生日卡呀 Bro！我有個做 AIA 嘅 friend 啱啱 sell 我 AIA A-Life Beyond Critical Care + A-Plus Health360。你可唔可以 Email 份 PRU vs AIA 嘅真實比較俾我睇？」",
-        cardHeadline: "賀 Jason 40 歲事業巔峰、身體健康！🥂",
+          "「多謝你張 40 歲生日卡呀 Bro！我有個做 AIA 嘅 friend 啱啱 sell 我 AIA A-Plus Health360 + Beyond Critical Care。你可唔可以 Email 份 PRU vs AIA 嘅真實比較俾我睇？」",
+        cardHeadline: "40歲生日快樂 — 敬巔峰健康同人生最精彩嘅黃金十年！🥂⚡",
         cardChips: [
-          "賀 Jason 40 歲事業巔峰、身體健康！🥂",
-          "祝 Jason Khoo 40 歲大壽快樂，健康同事業一樣咁勁！🛡️",
+          "40歲生日快樂 — 敬巔峰健康同人生最精彩嘅黃金十年！🥂⚡",
+          "賀四十風華正茂：祝身體健康、事業再創高峰！🌟",
         ],
         whatsappChips: [
-          "趕喺下個月 40 歲調整保費前鎖定 39 歲靚價：PRUAll Care（~190項周全健康守護到100歲+20%康復金）+ PRUMillion Med Active 2.0（15%保費折扣）",
+          "趕喺下個月 40 歲前鎖定 39 歲靚價：PRUMillion Med Active 2.0（RM 800萬醫療+15%現金折扣）+ PRUAll Care（保到100歲）",
           "加埋 PRUMan（高達 260% 高管健康保障 + 期滿退返高達 110% 總保費）",
         ],
         aiaFacts: [
+          "✓ 無 Claim 直接減 15% 現金保費（PRUMillion Med Active 2.0 RM 800萬醫療 vs AIA 入落 Wallet）",
           "✓ 保約 190 項周全守護到 100 歲（PRUAll Care 保到100歲 vs AIA A-Life Beyond 80歲就滿期）",
-          "✓ 無 Claim 直接減 15% 現金保費（PRUMillion Med Active 2.0 真係減保費 vs AIA 入落 Wallet）",
           "✓ 期滿退返高達 110% 總保費（PRUMan 260% 高管健康保障 + 110% 退費）",
         ],
         defaultWhatsapp:
-          "Jason，預祝你 40 歲生日快樂呀！🥂 恭喜你年度高管體檢靚仔達標，我特登整咗呢張 40 歲健康里程碑賀卡俾你。\n\n趁下個月踏入 40 歲保費調整之前，我哋可以用 39 歲靚價鎖定 PRUAll Care（保約190項全面健康同康復守護到100歲 + 20%康復津貼）同埋 PRUMillion Med Active 2.0（RM 800萬醫療額 + 無索償減 15% 保費）。今個禮拜喺 Bayan Lepas 飲杯咖啡傾 10 分鐘？☕",
+          "Jason，預祝你 40 歲生日快樂呀！🥂⚡ 恭喜你年度高管體檢靚仔達標，我特登整咗呢張 40 歲生日賀卡俾你。\n\n趁下個月踏入 40 歲保費調整之前，我哋可以用 39 歲靚價鎖定 PRUMillion Med Active 2.0（RM 800萬私家病房醫療 + 無索償減 15% 保費）、PRUAll Care（保到100歲）同 PRUMan（高達110%期滿回贈）。今個禮拜請你飲杯10分鐘慶生啡？☕",
         defaultEmail:
-          "主題：40歲健康里程碑客觀比較：PRU (PRUAll Care) vs 友邦 (AIA A-Life Beyond Critical Care)\n\nHi Jason：\n趕喺你 39 歲保費窗口閂門之前，同你客觀對比 PRU 方案同 AIA 嘅 3 大分別：\n1. 保到 100 歲兼包約 190 項周全守護：PRUAll Care 全面健康同康復保障直到 100 歲（仲有額外 20% 康復金），相反 AIA A-Life Beyond Critical Care 去到 80 歲就完。\n2. 直接減 15% 現金保費：PRUMillion Med Active 2.0 只要無 claim 就真金白銀減 15% 保費（AIA 照收全額保費，只係撥落 Health Wallet）。\n3. 高達 110% 保費退還：PRUMan 俾到 260% 高管健康保障，期滿仲退返高達 110% 總保費。\n\n星期四飲咖啡嗰陣我帶埋張一頁紙對比表俾你過目！",
+          "主題：40歲高端醫療升級客觀比較：PRU (PRUMillion Med Active 2.0) vs 友邦 (AIA)\n\nHi Jason：\n趕喺你 39 歲保費窗口閂門之前，同你客觀對比 PRU 方案同 AIA 嘅 3 大分別：\n1. 直接減 15% 現金保費（RM 800萬醫療）：PRUMillion Med Active 2.0 只要無 claim 就真金白銀減 15% 保費（AIA 照收全額保費，只係撥落 Health Wallet）。\n2. 保到 100 歲兼包約 190 項周全守護：PRUAll Care 全面健康同康復保障直到 100 歲，相反 AIA A-Life Beyond 去到 80 歲就完。\n3. 高達 110% 保費退還：PRUMan 俾到 260% 高管健康保障，期滿仲退返高達 110% 總保費。\n\n星期四飲慶生啡嗰陣我帶埋張一頁紙對比表俾你過目！",
       },
       ms: {
-        shortLabel: "Mercu Kesejahteraan Umur 40",
+        shortLabel: "Ulang Tahun Ke-40 & Medikal Premier",
         customerName: "Jason Khoo (39, Pengarah Teknologi Pulau Pinang)",
-        existingGap: "Polisi Hayat lama RM 100k • Sedia menaik taraf perlindungan kesejahteraan & kesinambungan pendapatan",
-        lifeEvent: "Bakal mencecah umur 40 bulan depan selepas pemeriksaan kesihatan eksekutif; mahu kadar Umur 39 & pulangan 110%",
-        pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
-        aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
+        existingGap: "Polisi asas lama RM 100k • Sedia naik taraf suite hospital swasta RM 8J + diskaun tunai sihat 15%",
+        lifeEvent: "Meraikan ulang tahun ke-40 selepas pemeriksaan kesihatan A+; mahu kadar Umur 39 & pulangan 110%",
+        pambPlan: "PRUMillion Med Active 2.0 + PRUAll Care + PRUMan",
+        aiaPlan: "AIA A-Plus Health360 + A-Life Beyond Critical Care",
         customerReply:
-          "\"Terima kasih atas kad hari jadi ke-40, bro! Rakan saya di AIA mencadangkan AIA A-Life Beyond Critical Care + A-Plus Health360. E-melkan kepada saya perbandingan berfakta dengan Prudential!\"",
-        cardHeadline: "Tahniah 40 Tahun Kepimpinan & Kesihatan Unggul, Jason! 🥂",
+          "\"Cantik kad hari jadi ke-40 ini, bro! Rakan saya di AIA mencadangkan AIA A-Plus Health360 + Beyond Critical Care. E-melkan kepada saya perbandingan berfakta dengan PRU!\"",
+        cardHeadline: "Selamat Ulang Tahun Ke-40 — Semoga Sihat Unggul & Dekad Terbaik Menanti! 🥂⚡",
         cardChips: [
-          "Tahniah 40 Tahun Kepimpinan & Kesihatan Unggul, Jason! 🥂",
-          "Selamat Hari Jadi Ke-40, Jason Khoo! 🛡️",
+          "Selamat Ulang Tahun Ke-40 — Semoga Sihat Unggul & Dekad Terbaik Menanti! 🥂⚡",
+          "Meraikan 40 Tahun Cemerlang — Semoga Terus Bertenaga & Berjaya! 🌟",
         ],
         whatsappChips: [
-          "Kunci kadar umur 39 sebelum bulan depan: PRUAll Care (~190 perlindungan kesejahteraan hingga Umur 100 + 20% Penjagaan Pemulihan) + PRUMillion Med Active 2.0 (diskaun 15%)",
+          "Kunci kadar Umur 39 sebelum bulan depan: PRUMillion Med Active 2.0 (suite RM 8J + diskaun tunai sihat 15%) + PRUAll Care (hingga Umur 100)",
           "Tambah PRUMan (260% perlindungan eksekutif + sehingga 110% pulangan premium semasa matang)",
         ],
         aiaFacts: [
+          "✓ Diskaun Tunai Sihat 15% atas Pelan RM 8J (PRUMillion Med Active 2.0 lwn kredit dompet AIA Health360)",
           "✓ Melindungi ~190 Kondisi Kesejahteraan hingga Umur 100 (PRUAll Care lwn AIA A-Life Beyond tamat pada Umur 80)",
-          "✓ Diskaun Premium Tunai 15% (PRUMillion Med Active 2.0 lwn kredit dompet AIA Health360)",
           "✓ Pulangan Matang Sehingga 110% (PRUMan 260% perlindungan eksekutif + 110% pulangan matang)",
         ],
         defaultWhatsapp:
-          "Selamat menyambut Hari Jadi ke-40 awal, Jason! 🥂 Tahniah atas keputusan pemeriksaan kesihatan tahunan eksekutif yang cemerlang—saya reka kad khas ini untuk ulang tahun ke-40 anda.\n\nSebelum kadar premium umur 40 meningkat bulan depan, kita boleh kunci PRUAll Care (~190 perlindungan kesejahteraan & pemulihan hingga Umur 100 + 20% Penjagaan Pemulihan) dan PRUMillion Med Active 2.0 (had RM 8 Juta + diskaun 15% tanpa tuntutan). Jom minum kopi 10 minit di Bayan Lepas minggu ini? ☕",
+          "Selamat menyambut Hari Jadi ke-40 awal, Jason! 🥂⚡ Tahniah atas keputusan pemeriksaan kesihatan eksekutif A+—saya reka kad sambutan ini khas untuk ulang tahun ke-40 anda.\n\nSebelum kadar umur 40 meningkat bulan depan, kita boleh kunci PRUMillion Med Active 2.0 (suite hospital RM 8J + diskaun tunai sihat 15%), PRUAll Care (hingga Umur 100), dan PRUMan (pulangan 110%). Jom minum kopi sambutan 10 minit minggu ini? ☕",
         defaultEmail:
-          "Subjek: Perbandingan Berfakta Sebelum Umur 40: PRU (PRUAll Care) lwn AIA (A-Life Beyond Critical Care)\n\nHai Jason,\nBerikut ialah perbandingan berfakta antara pelan PRU dan AIA sebelum tetingkap umur 39 anda ditutup:\n1. Perlindungan hingga Umur 100 & ~190 Kondisi: PRUAll Care melindungi ~190 keadaan kesejahteraan sehingga Umur 100, manakala AIA A-Life Beyond Critical Care tamat pada Umur 80.\n2. Diskaun Premium Langsung 15%: PRUMillion Med Active 2.0 memotong premium tunai anda sebanyak 15% apabila tiada tuntutan.\n3. Pulangan Premium 110%: PRUMan memberi 260% perlindungan eksekutif + sehingga 110% pulangan premium semasa matang.\n\nMari kita semak jadual kadar 1 halaman sambil minum kopi Khamis ini!",
+          "Subjek: Perbandingan Ulang Tahun Ke-40: PRU (PRUMillion Med Active 2.0) lwn AIA\n\nHai Jason,\nBerikut ialah perbandingan berfakta antara pelan PRU dan AIA sebelum tetingkap Umur 39 anda ditutup:\n1. Diskaun Tunai Sihat 15% (Had RM 8J): PRUMillion Med Active 2.0 memotong premium tunai anda sebanyak 15% apabila tiada tuntutan.\n2. Perlindungan hingga Umur 100 & ~190 Kondisi: PRUAll Care melindungi ~190 keadaan kesejahteraan sehingga Umur 100, manakala AIA tamat pada Umur 80.\n3. Pulangan Premium 110%: PRUMan memberi 260% perlindungan eksekutif + sehingga 110% pulangan premium semasa matang.\n\nMari kita semak jadual kadar 1 halaman sambil minum kopi Khamis ini!",
       },
       ta: {
-        shortLabel: "40 வயது ஆரோக்கிய மைல்கல்",
+        shortLabel: "40-வது பிறந்தநாள் & மருத்துவ மேம்பாடு",
         customerName: "ஜேசன் கூ (Jason Khoo, 39, பினாங்கு தொழில்நுட்ப இயக்குநர்)",
-        existingGap: "பழைய RM 100k ஆயுள் பாலிசி • விரிவான நலன் மற்றும் வருமான தொடர்ச்சிப் பாதுகாப்பை மேம்படுத்தத் தயார்",
-        lifeEvent: "வருடாந்திர உடல்நலப் பரிசோதனைக்குப் பின் அடுத்த மாதம் 40 வயது; 39 வயது சலுகைக் கட்டணம் & 110% முதிர்வுப் பலன்",
-        pambPlan: "PRUAll Care + PRUMillion Med Active 2.0 + PRUMan",
-        aiaPlan: "AIA A-Life Beyond Critical Care + A-Plus Health360",
+        existingGap: "பழைய RM 100k பாலிசி • RM 8M மருத்துவக் காப்பீடு + 15% ரொக்கத் தள்ளுபடிக்கு மேம்படுத்தத் தயார்",
+        lifeEvent: "சிறந்த உடல்நலப் பரிசோதனைக்குப் பின் 40-வது பிறந்தநாள்; 39 வயது சலுகைக் கட்டணம் & 110% முதிர்வுப் பலன்",
+        pambPlan: "PRUMillion Med Active 2.0 + PRUAll Care + PRUMan",
+        aiaPlan: "AIA A-Plus Health360 + A-Life Beyond Critical Care",
         customerReply:
-          "\"40வது பிறந்தநாள் வாழ்த்து அட்டைக்கு நன்றி சகோதரா! எனது AIA நண்பர் AIA A-Life Beyond Critical Care + A-Plus Health360 திட்டத்தை பரிந்துரைத்தார். Prudential உடன் உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்யவும்!\"",
-        cardHeadline: "40 ஆண்டு தலைமைத்துவம் & சிறந்த ஆரோக்கியத்திற்கு வாழ்த்துகள் ஜேசன்! 🥂",
+          "\"40-வது பிறந்தநாள் வாழ்த்து அட்டைக்கு நன்றி சகோதரா! எனது AIA நண்பர் AIA A-Plus Health360 + Beyond Critical Care திட்டத்தை பரிந்துரைத்தார். PRU உடன் உண்மையான ஒப்பீட்டை மின்னஞ்சல் செய்யவும்!\"",
+        cardHeadline: "இனிய 40-வது பிறந்தநாள் — சிறந்த ஆரோக்கியம் & பொன்னான தசாப்தத்திற்கு வாழ்த்துகள்! 🥂⚡",
         cardChips: [
-          "40 ஆண்டு தலைமைத்துவம் & சிறந்த ஆரோக்கியத்திற்கு வாழ்த்துகள் ஜேசன்! 🥂",
-          "இனிய 40வது பிறந்தநாள் நல்வாழ்த்துகள், ஜேசன் கூ! 🛡️",
+          "இனிய 40-வது பிறந்தநாள் — சிறந்த ஆரோக்கியம் & பொன்னான தசாப்தத்திற்கு வாழ்த்துகள்! 🥂⚡",
+          "40 ஆண்டு சாதனை & துடிப்பான ஆரோக்கியத்திற்கு நல்வாழ்த்துகள்! 🌟",
         ],
         whatsappChips: [
-          "அடுத்த மாதம் 40 வயது கட்டண உயர்வுக்கு முன் 39 வயது கட்டணத்தில் PRUAll Care (~190 நலன் பாதுகாப்பு + 20% Recovery Care) உறுதி செய்க",
+          "39 வயது சலுகைக் கட்டணத்தில் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) + PRUAll Care உறுதி செய்க",
           "PRUMan (260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல்) சேர்க்கவும்",
         ],
         aiaFacts: [
+          "✓ RM 8M மருத்துவப் பாதுகாப்பில் 15% நேரடி பிரீமியம் ரொக்கத் தள்ளுபடி (PRUMillion Med Active 2.0 vs AIA Health360 வாலட்)",
           "✓ 100 வயது வரை ~190 நிலைகளுக்கு பாதுகாப்பு (PRUAll Care vs 80 வயதில் முடியும் AIA A-Life Beyond)",
-          "✓ 15% நேரடி பிரீமியம் ரொக்கத் தள்ளுபடி (PRUMillion Med Active 2.0 vs AIA Health360 வாலட்)",
           "✓ முதிர்வில் 110% வரை பிரீமியம் திரும்பப் பெறுதல் (PRUMan 260% பாதுகாப்பு + 110% refund)",
         ],
         defaultWhatsapp:
-          "இனிய 40வது பிறந்தநாள் நல்வாழ்த்துகள் ஜேசன்! 🥂 உங்கள் வருடாந்திர முழு உடல்நலப் பரிசோதனை சிறப்பாக அமைந்ததற்கு வாழ்த்துகள்—உங்களுக்காக இந்த சிறப்பு வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nஅடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUAll Care (~190 நலன் & குணமடைதல் பாதுகாப்பு + 20% Recovery Care) மற்றும் PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி) திட்டங்களை உறுதி செய்யலாம். இந்த வாரம் Bayan Lepas-ல் 10 நிமிடம் காபி அருந்தலாமா? ☕",
+          "இனிய 40-வது பிறந்தநாள் நல்வாழ்த்துகள் ஜேசன்! 🥂⚡ உங்கள் வருடாந்திர உடல்நலப் பரிசோதனை சிறப்பாக அமைந்ததற்கு வாழ்த்துகள்—உங்களுக்காக இந்த பிறந்தநாள் வாழ்த்து அட்டையை உருவாக்கினேன்.\n\nஅடுத்த மாதம் 40 வயது பிரீமியம் உயர்வுக்கு முன், PRUMillion Med Active 2.0 (RM 8M மருத்துவ வரம்பு + 15% தள்ளுபடி), PRUAll Care மற்றும் PRUMan திட்டங்களை உறுதி செய்யலாம். இந்த வாரம் 10 நிமிடம் காபி அருந்தலாமா? ☕",
         defaultEmail:
-          "பொருள்: 40 வயதுக்கு முன் உண்மையான ஒப்பீடு: PRU (PRUAll Care) vs AIA (A-Life Beyond Critical Care)\n\nவணக்கம் ஜேசன்,\nஉங்கள் 39 வயது சலுகை முடிவதற்குள் PRU திட்டம் மற்றும் AIA இடையேயான உண்மையான ஒப்பீடு:\n1. 100 வயது வரை பாதுகாப்பு & ~190 நிலைகள்: PRUAll Care 100 வயது வரை விரிவான நலப் பாதுகாப்பை வழங்குகிறது (AIA A-Life Beyond Critical Care 80 வயதில் முடிவடைகிறது).\n2. 15% நேரடி பிரீமியம் தள்ளுபடி: PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது 15% நேரடி ரொக்கத் தள்ளுபடி தருகிறது.\n3. 110% பிரீமியம் திரும்பப் பெறுதல்: PRUMan 260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பத் தருகிறது.\n\nஇந்த வியாழக்கிழமை காபி சந்திப்பில் 1 பக்க அட்டவணையைப் பார்ப்போம்!",
+          "பொருள்: 40-வது பிறந்தநாள் மருத்துவ மேம்பாடு ஒப்பீடு: PRU (PRUMillion Med Active 2.0) vs AIA\n\nவணக்கம் ஜேசன்,\nஉங்கள் 39 வயது சலுகை முடிவதற்குள் PRU திட்டம் மற்றும் AIA இடையேயான உண்மையான ஒப்பீடு:\n1. 15% நேரடி பிரீமியம் தள்ளுபடி (RM 8M வரம்பு): PRUMillion Med Active 2.0 கிளைம் இல்லாதபோது 15% நேரடி ரொக்கத் தள்ளுபடி தருகிறது.\n2. 100 வயது வரை பாதுகாப்பு & ~190 நிலைகள்: PRUAll Care 100 வயது வரை விரிவான நலப் பாதுகாப்பை வழங்குகிறது (AIA 80 வயதில் முடிவடைகிறது).\n3. 110% பிரீமியம் திரும்பப் பெறுதல்: PRUMan 260% பாதுகாப்பு + முதிர்வில் 110% வரை பிரீமியம் திரும்பத் தருகிறது.\n\nஇந்த வியாழக்கிழமை காபி சந்திப்பில் 1 பக்க அட்டவணையைப் பார்ப்போம்!",
       },
     },
   },
@@ -1882,25 +1882,39 @@ const PAMB_C3_SCENARIOS = [
   },
 ];
 
-// Curated Top-5 Malaysian Advisor Playbook Cases (hiding crowded multi-dozen rosters on mobile)
-const C3_TOP5_SEATS = [0, 3, 4, 6, 5];
+// Curated 6 Malaysian Advisor Playbook Cases (3 Health-Led + 3 Family/Wealth Milestones)
+// Interleaved across 12 unique Malaysian personas per case = 72 evenly distributed seats (0..71)
+const C3_CURATED_6_SEATS = [0, 1, 2, 3, 4, 5];
 
-const C3_TOP5_CASES_META = [
+const C3_CURATED_6_META = [
   {
-    seat: 0,
+    slot: 0,
     id: "newborn_baby",
     icon: "🍼",
     clientName: "Tan Wei Ming & Chloe",
     labels: {
       en: "Newborn Baby",
-      "zh-CN": "新生宝宝",
-      yue: "初生 BB",
-      ms: "Bayi Baharu",
-      ta: "பிறந்த குழந்தை",
+      "zh-CN": "喜迎新生宝宝",
+      yue: "喜迎初生 BB",
+      ms: "Kelahiran Bayi Baharu",
+      ta: "புதிய குழந்தை பிறப்பு",
     },
   },
   {
-    seat: 3,
+    slot: 1,
+    id: "ci_health_scare",
+    icon: "⚡",
+    clientName: "Jason Khoo",
+    labels: {
+      en: "40th Birthday & Health Upgrade",
+      "zh-CN": "40岁生日与高端医疗升级",
+      yue: "40歲生日與高端醫療升級",
+      ms: "Ulang Tahun Ke-40 & Medikal Premier",
+      ta: "40-வது பிறந்தநாள் & மருத்துவ மேம்பாடு",
+    },
+  },
+  {
+    slot: 2,
     id: "career_promotion",
     icon: "🌟",
     clientName: "Dr. Kavitha Pillai",
@@ -1909,46 +1923,46 @@ const C3_TOP5_CASES_META = [
       "zh-CN": "高管晋升加薪",
       yue: "高管升職加薪",
       ms: "Kenaikan Pangkat",
-      ta: "பதவி உயர்வு",
+      ta: "உயர் பதவி உயர்வு",
     },
   },
   {
-    seat: 4,
-    id: "sme_expansion",
-    icon: "🏭",
-    clientName: "Dato' Sri Raymond Tan",
-    labels: {
-      en: "SME RM 6M Keyman",
-      "zh-CN": "企业 RM 600万担保",
-      yue: "廠家 RM 600萬擔保",
-      ms: "Jaminan PKS RM 6J",
-      ta: "RM 6M நிறுவன பாதுகாப்பு",
-    },
-  },
-  {
-    seat: 6,
-    id: "takaful_hibah_estate",
-    icon: "🕌",
-    clientName: "Tuan Haji Zulkarnain & Puan Aishah",
-    labels: {
-      en: "Shariah Hibah Estate",
-      "zh-CN": "清真企业 Hibah",
-      yue: "清真企業 Hibah",
-      ms: "Hibah Takaful PKS",
-      ta: "தகாஃபுல் Hibah",
-    },
-  },
-  {
-    seat: 5,
+    slot: 3,
     id: "uni_retirement_50",
     icon: "🎓",
     clientName: "Vincent Ong & Elaine Khor",
     labels: {
-      en: "Age-50 Med & Uni",
-      "zh-CN": "50岁退休与留学",
-      yue: "50歲退休兼留學",
+      en: "Turning 50 & Uni Offer",
+      "zh-CN": "50岁与名校录取",
+      yue: "50歲兼名校錄取",
       ms: "Umur 50 & Universiti",
-      ta: "வயது 50 & பல்கலைக்கழகம்",
+      ta: "50வது பிறந்தநாள் & பல்கலைக்கழக அனுமதி",
+    },
+  },
+  {
+    slot: 4,
+    id: "new_home_mortgage",
+    icon: "🏡",
+    clientName: "Amirul Hakim & Farah Nadia",
+    labels: {
+      en: "New Dream Home Keys",
+      "zh-CN": "喜提理想新居",
+      yue: "喜提夢想新居",
+      ms: "Kunci Rumah Impian",
+      ta: "புதிய RM 1.3M வீட்டுக் கடன்",
+    },
+  },
+  {
+    slot: 5,
+    id: "takaful_hibah_estate",
+    icon: "🕌",
+    clientName: "Tuan Haji Zulkarnain & Puan Aishah",
+    labels: {
+      en: "Record Year & Takaful Hibah",
+      "zh-CN": "企业佳绩与 Hibah 传承",
+      yue: "企業佳績與 Hibah 傳承",
+      ms: "Hibah Takaful & Pusaka",
+      ta: "தகாஃபுல் Hibah சொத்து பாதுகாப்பு",
     },
   },
 ];
@@ -2038,16 +2052,18 @@ window.Challenge3ParticipantView = function ({
     }
   });
 
-  const defaultTop5Seat = C3_TOP5_SEATS[_pickAssignedScenarioIdx(agentId) % C3_TOP5_SEATS.length];
-
   const [seatOverride, setSeatOverride] = useState(() =>
-    typeof savedInit.seatOverride === "number" && C3_TOP5_SEATS.includes(savedInit.seatOverride)
+    typeof savedInit.seatOverride === "number" && savedInit.seatOverride >= 0
       ? savedInit.seatOverride
-      : defaultTop5Seat
+      : null
   );
 
   const seatToFallbackIdx = (targetSeat) => {
-    const meta = C3_TOP5_CASES_META.find((m) => m.seat === targetSeat);
+    const slot =
+      typeof targetSeat === "number" && targetSeat >= 0
+        ? targetSeat % C3_CURATED_6_SEATS.length
+        : _pickAssignedScenarioIdx(agentId) % C3_CURATED_6_SEATS.length;
+    const meta = C3_CURATED_6_META[slot];
     if (meta) {
       const foundIdx = PAMB_C3_SCENARIOS.findIndex((s) => s.id === meta.id);
       if (foundIdx >= 0) return foundIdx;
@@ -2056,21 +2072,30 @@ window.Challenge3ParticipantView = function ({
   };
 
   const [scenarioIdx, setScenarioIdx] = useState(() =>
-    seatToFallbackIdx(
-      typeof savedInit.seatOverride === "number" && C3_TOP5_SEATS.includes(savedInit.seatOverride)
-        ? savedInit.seatOverride
-        : defaultTop5Seat
-    )
+    seatToFallbackIdx(savedInit.seatOverride ?? null)
   );
   const [serverScenario, setServerScenario] = useState(null);
   const [showCasePicker, setShowCasePicker] = useState(false);
 
-  const activeTop5Slot = Math.max(0, C3_TOP5_SEATS.indexOf(seatOverride));
-  const activeTop5Meta = C3_TOP5_CASES_META[activeTop5Slot] || C3_TOP5_CASES_META[0];
-
   const rawFallbackSc = PAMB_C3_SCENARIOS[scenarioIdx % PAMB_C3_SCENARIOS.length] || PAMB_C3_SCENARIOS[0];
   const fallbackSc = _getLocalizedScenario(rawFallbackSc, normLang);
   const sc = serverScenario || fallbackSc;
+
+  const effectiveSeat =
+    typeof sc.seatIndex === "number"
+      ? sc.seatIndex
+      : typeof seatOverride === "number"
+      ? seatOverride
+      : _pickAssignedScenarioIdx(agentId) % C3_CURATED_6_SEATS.length;
+  const matchedMetaSlot = C3_CURATED_6_META.findIndex((m) => m.id === sc.id);
+  const activeSlot =
+    typeof sc.seatIndex === "number" || typeof seatOverride === "number"
+      ? ((effectiveSeat % C3_CURATED_6_SEATS.length) + C3_CURATED_6_SEATS.length) %
+        C3_CURATED_6_SEATS.length
+      : matchedMetaSlot >= 0
+      ? matchedMetaSlot
+      : 0;
+  const activeCaseMeta = C3_CURATED_6_META[activeSlot] || C3_CURATED_6_META[0];
 
   const fallbackPb =
     (C3_ADVISOR_PLAYBOOK[sc.id] &&
@@ -2337,18 +2362,28 @@ window.Challenge3ParticipantView = function ({
     setStep(1);
   };
 
-  const handleSelectSeat = (targetSeat) => {
-    const safeSeat = C3_TOP5_SEATS.includes(targetSeat) ? targetSeat : C3_TOP5_SEATS[0];
-    setSeatOverride(safeSeat);
-    setScenarioIdx(seatToFallbackIdx(safeSeat));
+  const handleSelectCaseSlot = (targetSlot) => {
+    const k =
+      ((Number(targetSlot) || 0) % C3_CURATED_6_SEATS.length +
+        C3_CURATED_6_SEATS.length) %
+      C3_CURATED_6_SEATS.length;
+    const baseSeat =
+      typeof sc.seatIndex === "number"
+        ? sc.seatIndex
+        : typeof seatOverride === "number"
+        ? seatOverride
+        : 0;
+    const curRound = Math.floor(baseSeat / C3_CURATED_6_SEATS.length);
+    const nextSeat = curRound * C3_CURATED_6_SEATS.length + k;
+    setSeatOverride(nextSeat);
+    setScenarioIdx(seatToFallbackIdx(nextSeat));
     setShowCasePicker(false);
     resetDraftsForNewCase();
   };
 
   const handleRotateScenario = () => {
-    const curSlot = Math.max(0, C3_TOP5_SEATS.indexOf(seatOverride));
-    const nextSeat = C3_TOP5_SEATS[(curSlot + 1) % C3_TOP5_SEATS.length];
-    handleSelectSeat(nextSeat);
+    const nextSlot = (activeSlot + 1) % C3_CURATED_6_SEATS.length;
+    handleSelectCaseSlot(nextSlot);
   };
 
   const activeHeadline =
@@ -2882,13 +2917,13 @@ window.Challenge3ParticipantView = function ({
     );
   }
 
-  const clientShortName = (sc.customerName || activeTop5Meta.clientName || "").split("(")[0].trim();
+  const clientShortName = (sc.customerName || activeCaseMeta.clientName || "").split("(")[0].trim();
   const clientShortTitle =
-    sc.shortLabel || activeTop5Meta.labels[normLang] || activeTop5Meta.labels.en;
+    sc.shortLabel || activeCaseMeta.labels[normLang] || activeCaseMeta.labels.en;
 
   return (
     <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-2.5 sm:p-4 shadow-md space-y-2.5">
-      {/* Unified Auto-Collapsing Mobile Client Brief Card + Curated Top-5 Switcher */}
+      {/* Unified Auto-Collapsing Mobile Client Brief Card + Curated 6-Case Switcher */}
       <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
         <div className="flex items-center justify-between gap-1.5 min-h-[36px]">
           <button
@@ -2896,7 +2931,7 @@ window.Challenge3ParticipantView = function ({
             onClick={() => setShowCaseBrief((v) => !v)}
             className="flex items-center gap-1.5 min-w-0 text-left flex-1"
           >
-            <span className="text-base shrink-0">{sc.icon || activeTop5Meta.icon}</span>
+            <span className="text-base shrink-0">{sc.icon || activeCaseMeta.icon}</span>
             <div className="min-w-0 flex-1">
               <div className="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
                 {clientShortName} <span className="text-[#ed1b2e]">• {clientShortTitle}</span>
@@ -2922,7 +2957,7 @@ window.Challenge3ParticipantView = function ({
               onClick={() => setShowCasePicker((v) => !v)}
               className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold transition-all"
             >
-              {ui.switchCase} ({activeTop5Slot + 1}/5) {showCasePicker ? "▴" : "▾"}
+              {ui.switchCase} ({activeSlot + 1}/6) {showCasePicker ? "▴" : "▾"}
             </button>
 
             <button
@@ -2937,17 +2972,17 @@ window.Challenge3ParticipantView = function ({
           </div>
         </div>
 
-        {/* Curated Top-5 Popover / List */}
+        {/* Curated 6-Case Popover / List */}
         {showCasePicker && (
-          <div className="bg-white border border-slate-200 rounded-xl p-1.5 grid grid-cols-1 sm:grid-cols-5 gap-1 shadow-sm">
-            {C3_TOP5_CASES_META.map((item, idx) => {
-              const isCurrent = item.seat === seatOverride;
+          <div className="bg-white border border-slate-200 rounded-xl p-1.5 grid grid-cols-1 sm:grid-cols-3 gap-1 shadow-sm">
+            {C3_CURATED_6_META.map((item, idx) => {
+              const isCurrent = idx === activeSlot;
               const locLabel = item.labels[normLang] || item.labels.en;
               return (
                 <button
-                  key={item.seat}
+                  key={item.id}
                   type="button"
-                  onClick={() => handleSelectSeat(item.seat)}
+                  onClick={() => handleSelectCaseSlot(idx)}
                   className={`px-2.5 py-1.5 rounded-lg border text-left text-xs font-bold transition-all flex items-center justify-between sm:block gap-2 ${
                     isCurrent
                       ? "bg-[#ed1b2e] text-white border-[#ed1b2e]"
@@ -2958,7 +2993,7 @@ window.Challenge3ParticipantView = function ({
                     {idx + 1}. {item.icon} {locLabel}
                   </div>
                   <div className={`text-[10px] truncate ${isCurrent ? "text-red-100" : "text-slate-500"}`}>
-                    {item.clientName}
+                    {isCurrent && clientShortName ? clientShortName : item.clientName}
                   </div>
                 </button>
               );

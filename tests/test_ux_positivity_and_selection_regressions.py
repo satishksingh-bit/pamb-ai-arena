@@ -271,17 +271,50 @@ class TestWorkshopPositivityAndUX(unittest.TestCase):
                 violations.append(f"SCENARIO_CATALOG matched `{pat}` -> `{m.group(0)}`")
         self.assertEqual(violations, [], "\n".join(violations))
 
-    def test_c3_top5_excludes_health_scare_and_hides_56_cases(self):
-        c3_js_path = os.path.join(ROOT_DIR, "static", "challenge3.js")
-        with open(c3_js_path, encoding="utf-8") as f:
+    def test_c2_and_c3_curated_6_cases_and_72_even_seat_distribution(self):
+        from collections import Counter
+
+        # Verify 72 unique seats (6 cases x 12 personas) for BOTH Challenge 2 and Challenge 3
+        self.assertEqual(get_total_unique_seats(), 72)
+        self.assertEqual(get_c2_total_unique_seats(), 72)
+        self.assertEqual(len(ARCHETYPE_ORDER), 16)
+
+        # Verify exact even distribution for 60 leaders (10 per case) and 72 leaders (12 per case)
+        for room_size, expected_per_case in ((60, 10), (72, 12)):
+            c3_cases = Counter()
+            c3_keys = set()
+            c2_cases = Counter()
+            c2_keys = set()
+            for seat in range(room_size):
+                s3 = resolve_seat_scenario(seat, "en")
+                c3_cases[s3["id"]] += 1
+                c3_keys.add(s3["scenarioKey"])
+
+                s2 = resolve_c2_seat_scenario(seat, "en")
+                c2_cases[s2["id"]] += 1
+                c2_keys.add(s2["scenarioKey"])
+
+            self.assertEqual(len(c3_cases), 6, f"C3 expected 6 cases, got {c3_cases}")
+            self.assertEqual(len(c2_cases), 6, f"C2 expected 6 cases, got {c2_cases}")
+            self.assertEqual(len(c3_keys), room_size, f"C3 duplicate personas at room_size={room_size}")
+            self.assertEqual(len(c2_keys), room_size, f"C2 duplicate personas at room_size={room_size}")
+            for cid, cnt in c3_cases.items():
+                self.assertEqual(cnt, expected_per_case, f"C3 uneven distribution for {cid}: {cnt}")
+            for cid, cnt in c2_cases.items():
+                self.assertEqual(cnt, expected_per_case, f"C2 uneven distribution for {cid}: {cnt}")
+
+        # Verify both C2 and C3 mobile UIs hide /56, 14 Cases, and 16 Scenarios clutter
+        with open(os.path.join(ROOT_DIR, "static", "challenge3.js"), encoding="utf-8") as f:
             c3_js = f.read()
-        self.assertIn("const C3_TOP5_SEATS = [0, 3, 4, 6, 5]", c3_js)
+        self.assertIn("C3_CURATED_6_SEATS", c3_js)
         self.assertNotIn("/56", c3_js)
         self.assertNotIn("16 Scenarios", c3_js)
-        # Backend 56-seat & 16-archetype bank remains intact for evals
-        self.assertGreaterEqual(get_total_unique_seats(), 54)
-        self.assertEqual(len(ARCHETYPE_ORDER), 16)
-        self.assertEqual(get_c2_total_unique_seats(), 56)
+
+        with open(os.path.join(ROOT_DIR, "static", "challenge2.js"), encoding="utf-8") as f:
+            c2_js = f.read()
+        self.assertNotIn("/56", c2_js)
+        self.assertNotIn("14 Cases", c2_js)
+        self.assertIsNone(re.search(r"Gemini 2\.5|4-Pillar Master|PAMB Persona|RM 5\.8M", c2_js, re.I))
 
     def test_c2_and_c3_banks_pass_brand_guardrails(self):
         for seat in range(get_total_unique_seats()):
