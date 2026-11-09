@@ -2747,12 +2747,41 @@ window.Challenge3ParticipantView = function ({
     setSubmitted(true);
   };
 
+  const fallbackExecCopy = (str) => {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = String(str || "");
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-9999px";
+      ta.style.left = "-9999px";
+      ta.style.opacity = "0";
+      ta.style.fontSize = "16px";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok = document.execCommand && document.execCommand("copy");
+      ta.remove();
+      return Boolean(ok);
+    } catch (e) {
+      return false;
+    }
+  };
+
   const handleCopyPrePitch = (textToCopy, toastMsg) => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        setCopyToast(toastMsg);
-        setTimeout(() => setCopyToast(""), 2400);
-      });
+    const showDone = () => {
+      setCopyToast(toastMsg);
+      setTimeout(() => setCopyToast(""), 2400);
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard
+        .writeText(textToCopy)
+        .then(showDone)
+        .catch(() => {
+          if (fallbackExecCopy(textToCopy)) showDone();
+        });
+    } else if (fallbackExecCopy(textToCopy)) {
+      showDone();
     }
   };
 
@@ -2925,11 +2954,11 @@ window.Challenge3ParticipantView = function ({
     <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-2.5 sm:p-4 shadow-md space-y-2.5">
       {/* Unified Auto-Collapsing Mobile Client Brief Card + Curated 6-Case Switcher */}
       <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
-        <div className="flex items-center justify-between gap-1.5 min-h-[36px]">
+        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 min-h-[36px]">
           <button
             type="button"
             onClick={() => setShowCaseBrief((v) => !v)}
-            className="flex items-center gap-1.5 min-w-0 text-left flex-1"
+            className="flex items-center gap-1.5 min-w-[140px] text-left flex-1"
           >
             <span className="text-base shrink-0">{sc.icon || activeCaseMeta.icon}</span>
             <div className="min-w-0 flex-1">
@@ -2939,11 +2968,11 @@ window.Challenge3ParticipantView = function ({
             </div>
           </button>
 
-          <div className="flex items-center gap-1 shrink-0">
+          <div className="flex items-center gap-1 shrink-0 ml-auto">
             <button
               type="button"
               onClick={() => setShowCaseBrief((v) => !v)}
-              className={`px-2 py-1 rounded-lg border text-[11px] font-extrabold transition-all ${
+              className={`px-2 py-1 rounded-lg border text-[11px] font-extrabold whitespace-nowrap transition-all ${
                 showCaseBrief
                   ? "bg-red-50 border-red-200 text-[#ed1b2e]"
                   : "bg-white border-slate-300 text-slate-700 hover:border-[#ed1b2e]"
@@ -2955,7 +2984,7 @@ window.Challenge3ParticipantView = function ({
             <button
               type="button"
               onClick={() => setShowCasePicker((v) => !v)}
-              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold transition-all"
+              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold whitespace-nowrap transition-all"
             >
               {ui.switchCase} ({activeSlot + 1}/6) {showCasePicker ? "▴" : "▾"}
             </button>
@@ -2965,7 +2994,7 @@ window.Challenge3ParticipantView = function ({
               onClick={handleRotateScenario}
               title="Next curated case"
               aria-label="Next curated case"
-              className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-slate-700 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold transition-all"
+              className="hidden sm:inline-flex items-center justify-center px-2 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-slate-700 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold transition-all"
             >
               ↻
             </button>
@@ -3102,7 +3131,7 @@ window.Challenge3ParticipantView = function ({
 
               <div className="space-y-1">
                 <div className="text-[11px] font-extrabold text-slate-700">{ui.pickVisualStyle}</div>
-                <div className="grid grid-cols-3 gap-1.5">
+                <div className="grid grid-cols-3 gap-1.5 min-w-0">
                   {ui.visualStyles.map((vs) => {
                     const active = cardStyleId === vs.id;
                     return (
@@ -3110,7 +3139,7 @@ window.Challenge3ParticipantView = function ({
                         key={vs.id}
                         type="button"
                         onClick={() => setCardStyleId(vs.id)}
-                        className={`px-2 py-2 rounded-xl border text-center sm:text-left text-[11px] sm:text-xs font-extrabold leading-tight transition-all ${
+                        className={`min-w-0 break-words px-1.5 sm:px-2 py-2 rounded-xl border text-center sm:text-left text-[11px] sm:text-xs font-extrabold leading-tight transition-all ${
                           active
                             ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
                             : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
@@ -3187,7 +3216,7 @@ window.Challenge3ParticipantView = function ({
                       value={cardPersonalNote}
                       onChange={(e) => setCardPersonalNote(e.target.value)}
                       placeholder={ui.cardTouchPlaceholder}
-                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-xs text-slate-900 font-medium focus:outline-none"
+                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-base sm:text-xs text-slate-900 font-medium focus:outline-none"
                     />
                   </div>
                 )}
@@ -3408,7 +3437,7 @@ window.Challenge3ParticipantView = function ({
                       value={waPersonalNote}
                       onChange={(e) => setWaPersonalNote(e.target.value)}
                       placeholder={ui.waTouchPlaceholder}
-                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-xs text-slate-900 font-medium focus:outline-none"
+                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-base sm:text-xs text-slate-900 font-medium focus:outline-none"
                     />
                   </div>
                 )}
@@ -3418,7 +3447,7 @@ window.Challenge3ParticipantView = function ({
                 type="button"
                 onClick={() => handleGenerateWhatsapp("")}
                 disabled={isBusy}
-                className="w-full py-3 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+                className="w-full py-3 px-4 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
               >
                 {isBusy ? ui.waDrafting : whatsappText ? ui.waRegenerateBtn : ui.waGenerateBtn}
               </button>
@@ -3434,7 +3463,7 @@ window.Challenge3ParticipantView = function ({
                 rows={4}
                 value={whatsappText}
                 onChange={(e) => setWhatsappText(e.target.value)}
-                className="w-full bg-white border border-emerald-300 rounded-xl p-2.5 text-sm text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
+                className="w-full bg-white border border-emerald-300 rounded-xl p-2.5 text-base sm:text-sm text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
               />
               <div className="flex flex-wrap items-center gap-1.5">
                 <span className="text-[11px] font-extrabold text-emerald-900 mr-0.5">
@@ -3646,7 +3675,7 @@ window.Challenge3ParticipantView = function ({
                       value={emailPersonalNote}
                       onChange={(e) => setEmailPersonalNote(e.target.value)}
                       placeholder={ui.closeTouchPlaceholder}
-                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-xs text-slate-900 font-medium focus:outline-none"
+                      className="w-full bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#ed1b2e] rounded-lg px-3 py-2 text-base sm:text-xs text-slate-900 font-medium focus:outline-none"
                     />
                   </div>
                 )}
@@ -3656,7 +3685,7 @@ window.Challenge3ParticipantView = function ({
                 type="button"
                 onClick={() => handleGenerateEmail("")}
                 disabled={isBusy}
-                className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+                className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
               >
                 {isBusy ? ui.emailDrafting : emailText ? ui.emailRegenerateBtn : ui.emailGenerateBtn}
               </button>
@@ -3672,7 +3701,7 @@ window.Challenge3ParticipantView = function ({
                 rows={5}
                 value={emailText}
                 onChange={(e) => setEmailText(e.target.value)}
-                className="w-full bg-white border border-blue-300 rounded-xl p-2.5 text-sm text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
+                className="w-full bg-white border border-blue-300 rounded-xl p-2.5 text-base sm:text-sm text-slate-900 leading-relaxed focus:outline-none focus:border-[#ed1b2e]"
               />
               <div className="flex flex-wrap items-center gap-1.5">
                 <span className="text-[11px] font-extrabold text-blue-950 mr-0.5">

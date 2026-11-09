@@ -805,6 +805,7 @@ function CameraModalC1({ isOpen, onClose, onCapture }) {
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const filePickerRef = useRef(null);
+  const nativeSelfieRef = useRef(null);
   const [facingMode, setFacingMode] = useState("user");
   const [cameraError, setCameraError] = useState("");
 
@@ -835,10 +836,12 @@ function CameraModalC1({ isOpen, onClose, onCapture }) {
         streamRef.current = stream;
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
+          const p = videoRef.current.play();
+          if (p && p.catch) p.catch(() => {});
         }
       } catch (err) {
         setCameraError(
-          "Camera preview unavailable — tap 'Choose Photo from Device' above to upload or take a photo."
+          "Camera preview unavailable — tap 'Take Selfie with Phone Camera' below or 'Choose Photo from Device' above."
         );
       }
     }
@@ -899,7 +902,7 @@ function CameraModalC1({ isOpen, onClose, onCapture }) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md bg-white border-2 border-[#ed1b2e] rounded-2xl overflow-hidden shadow-2xl space-y-3 p-4"
+        className="w-full max-w-md bg-white border-2 border-[#ed1b2e] rounded-2xl max-h-[90dvh] overflow-y-auto shadow-2xl space-y-3 p-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between gap-2">
@@ -933,14 +936,29 @@ function CameraModalC1({ isOpen, onClose, onCapture }) {
           onChange={handleFileSelected}
           className="hidden"
         />
+        <input
+          ref={nativeSelfieRef}
+          type="file"
+          accept="image/*"
+          capture="user"
+          onChange={handleFileSelected}
+          className="hidden"
+        />
 
         {cameraError ? (
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-600 leading-relaxed">
-            {cameraError}
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center space-y-3">
+            <div className="text-xs text-slate-600 leading-relaxed">{cameraError}</div>
+            <button
+              type="button"
+              onClick={() => nativeSelfieRef.current && nativeSelfieRef.current.click()}
+              className="w-full py-2.5 px-4 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md shadow-red-600/20 transition-all"
+            >
+              <span>📷 Take Selfie with Phone Camera</span>
+            </button>
           </div>
         ) : (
           <>
-            <div className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-square max-h-[50vh] mx-auto border border-slate-300">
+            <div className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-square max-h-[46dvh] mx-auto border border-slate-300">
               <video
                 ref={videoRef}
                 autoPlay
@@ -1156,7 +1174,11 @@ window.Challenge1ParticipantView = function ({
     };
     rec.onerror = () => setIsDictating(false);
     rec.onend = () => setIsDictating(false);
-    rec.start();
+    try {
+      rec.start();
+    } catch (_) {
+      setIsDictating(false);
+    }
   };
 
   const handleResetChat = () => {
@@ -1540,12 +1562,34 @@ window.Challenge1ParticipantView = function ({
 
   const handleDownloadUrl = (url, modeName) => {
     if (!url) return;
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `AI_Image_${modeName || "Studio"}_${Date.now()}.jpg`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const baseName = "AI_Image_" + (modeName || "Studio") + "_" + Date.now();
+    if (typeof window.saveArenaMediaMobileSafe === "function") {
+      window.saveArenaMediaMobileSafe(url, baseName);
+      return;
+    }
+    fetch(url)
+      .then((r) => r.blob())
+      .then((blob) => {
+        const ext = blob.type && blob.type.includes("png") ? "png" : "jpg";
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = `${baseName}.${ext}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => {
+          URL.revokeObjectURL(blobUrl);
+        }, 30000);
+      })
+      .catch(() => {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${baseName}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
   };
 
   // Step 1: Image-first gate — Take a photo OR Upload an image
@@ -1760,7 +1804,7 @@ window.Challenge1ParticipantView = function ({
           <button
             type="button"
             onClick={onNext}
-            className="w-full py-3.5 bg-[#ed1b2e] hover:bg-[#c8102e] text-white font-extrabold rounded-xl shadow-md shadow-red-600/20 text-sm"
+            className="w-full py-3.5 px-4 bg-[#ed1b2e] hover:bg-[#c8102e] text-white font-extrabold rounded-xl shadow-md shadow-red-600/20 text-sm"
           >
             {t.nextMission} (14:20 Master the Art of AI Dialogue)
           </button>
@@ -1782,7 +1826,7 @@ window.Challenge1ParticipantView = function ({
 
   // Compact 1-line status bar above the unlocked composer so user can switch/upload a photo anytime
   const compactAttachmentStrip = (
-    <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px]">
+    <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px]">
       <div className="flex items-center gap-2 min-w-0">
         {rawPhoto && (
           <img

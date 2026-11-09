@@ -663,8 +663,8 @@ function ExecutiveSlideCard({
                   const pct = Math.max(12, Math.round(((Number(pt.value) || 0) / maxChartVal) * 100));
                   const st = getSemanticBarStyle(pt.label, pi, slide.chart.series.length);
                   return (
-                    <div key={pi} className="flex-1 flex flex-col items-center justify-end h-full">
-                      <div className={`text-xs font-extrabold mb-1 ${st.val}`}>
+                    <div key={pi} className="flex-1 flex flex-col items-center justify-end h-full min-w-0">
+                      <div className={`text-[11px] sm:text-xs whitespace-nowrap font-extrabold mb-1 ${st.val}`}>
                         {pt.value}
                       </div>
                       <div
@@ -897,6 +897,7 @@ window.Challenge2ParticipantView = function ({
       : null
   );
   const [showCasePicker, setShowCasePicker] = useState(false);
+  const [confirmArmedSlot, setConfirmArmedSlot] = useState(null);
   const [showBenchmark, setShowBenchmark] = useState(false);
   const [targetSlideIdx, setTargetSlideIdx] = useState(0);
 
@@ -1380,20 +1381,28 @@ window.Challenge2ParticipantView = function ({
   const currentCaseSlot = ((currentSeat % 6) + 6) % 6;
   const currentPersonaRound = Math.floor(currentSeat / 6);
 
-  const handlePickCaseSlot = (targetSlot) => {
+  const executePickCaseSlot = (targetSlot) => {
     const k = ((targetSlot % 6) + 6) % 6;
-    if (k === currentCaseSlot) {
-      setShowCasePicker(false);
-      return;
-    }
-    if (deck && !window.confirm(ui.switchConfirmMsg)) {
-      return;
-    }
     const total = challengeData?.totalUniqueSeats || 72;
     const nextSeat = (currentPersonaRound * 6 + k) % total;
+    setConfirmArmedSlot(null);
     setSeatOverride(nextSeat);
     setShowCasePicker(false);
     loadScenarioSeat(nextSeat, true);
+  };
+
+  const handlePickCaseSlot = (targetSlot) => {
+    const k = ((targetSlot % 6) + 6) % 6;
+    if (k === currentCaseSlot) {
+      setConfirmArmedSlot(null);
+      setShowCasePicker(false);
+      return;
+    }
+    if (deck && confirmArmedSlot !== k) {
+      setConfirmArmedSlot(k);
+      return;
+    }
+    executePickCaseSlot(k);
   };
 
   // Ping Arena activity
@@ -1504,7 +1513,11 @@ window.Challenge2ParticipantView = function ({
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL.revokeObjectURL(url);
+      setTimeout(() => {
+        try {
+          URL.revokeObjectURL(url);
+        } catch (e) {}
+      }, 30000);
     } catch (e) {}
   };
 
@@ -1787,7 +1800,7 @@ window.Challenge2ParticipantView = function ({
         {finalSlides.length > 0 && (
           <div className="space-y-2.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5">
                 {finalSlides.map((_, idx) => (
                   <button
                     key={idx}
@@ -1879,11 +1892,11 @@ window.Challenge2ParticipantView = function ({
       {/* Dismissible Sample / Benchmark 3-Slide Modal Overlay */}
       {showBenchmark && targetSlides.length > 0 && (
         <div
-          className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5 overflow-y-auto"
+          className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto"
           onClick={() => setShowBenchmark(false)}
         >
           <div
-            className="bg-slate-900 text-white border border-slate-700 rounded-2xl w-full max-w-2xl p-3.5 sm:p-4 space-y-3 shadow-2xl max-h-[90vh] overflow-y-auto"
+            className="bg-slate-900 text-white border border-slate-700 rounded-2xl w-full max-w-2xl p-3.5 sm:p-4 space-y-3 shadow-2xl max-h-[88dvh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-2">
@@ -1905,7 +1918,7 @@ window.Challenge2ParticipantView = function ({
                   key={ti}
                   type="button"
                   onClick={() => setTargetSlideIdx(ti)}
-                  className={`py-1.5 px-2 rounded-lg text-xs font-extrabold transition-all ${
+                  className={`py-1.5 px-2 rounded-lg text-xs font-extrabold truncate transition-all ${
                     safeTargetIdx === ti
                       ? "bg-[#ed1b2e] text-white shadow-sm"
                       : "text-slate-300 hover:text-white"
@@ -1933,11 +1946,13 @@ window.Challenge2ParticipantView = function ({
         {!showBrief ? (
           /* Sleek 1-Line Collapsed Client Bar */
           <div className="flex items-center justify-between gap-2">
-            <div className="min-w-0 flex items-center gap-1.5 text-xs font-extrabold truncate">
-              <span>{scen?.icon || "🏛️"}</span>
-              <span className="truncate">{clientShort}</span>
+            <div className="min-w-0 flex-1 flex items-center gap-1.5 text-xs font-extrabold truncate">
+              <span className="shrink-0">{scen?.icon || "🏛️"}</span>
+              <span className="truncate flex-1">{clientShort}</span>
               {gapValue && (
-                <span className="text-amber-300 font-mono text-[11px] shrink-0">• {gapValue}</span>
+                <span className="hidden min-[400px]:inline text-amber-300 font-mono text-[11px] shrink-0">
+                  • {gapValue}
+                </span>
               )}
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
@@ -1950,7 +1965,10 @@ window.Challenge2ParticipantView = function ({
               </button>
               <button
                 type="button"
-                onClick={() => setShowCasePicker((v) => !v)}
+                onClick={() => {
+                  setConfirmArmedSlot(null);
+                  setShowCasePicker((v) => !v);
+                }}
                 className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300"
               >
                 {ui.switchShortFmt} ({currentCaseSlot + 1}/6) ▾
@@ -1960,7 +1978,7 @@ window.Challenge2ParticipantView = function ({
         ) : (
           /* Expanded Client Card Header */
           <div className="flex items-center justify-between gap-2">
-            <div className="min-w-0 flex items-center gap-1.5">
+            <div className="min-w-0 flex-1 flex items-center gap-1.5">
               <span className="text-base leading-none shrink-0">{scen?.icon || "🏛️"}</span>
               <span className="text-xs font-extrabold text-amber-300 truncate">
                 {scen?.shortLabel || clientShort}
@@ -1978,7 +1996,10 @@ window.Challenge2ParticipantView = function ({
               )}
               <button
                 type="button"
-                onClick={() => setShowCasePicker((v) => !v)}
+                onClick={() => {
+                  setConfirmArmedSlot(null);
+                  setShowCasePicker((v) => !v);
+                }}
                 className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300"
               >
                 {ui.switchCaseFmt} ({currentCaseSlot + 1}/6) ▾
@@ -1987,32 +2008,60 @@ window.Challenge2ParticipantView = function ({
           </div>
         )}
 
-        {/* Sleek 6-Item Curated Case Picker */}
+        {/* Sleek 6-Item Curated Case Picker (WebView-Safe Inline Switch Confirmation — No window.confirm!) */}
         {showCasePicker && (
-          <div className="bg-slate-800/95 border border-slate-700 rounded-xl p-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-            {C2_CURATED_CASES_META.map((cm) => {
-              const isCur = cm.slot === currentCaseSlot;
-              const lbl = cm.labels[normLang] || cm.labels.en;
-              return (
-                <button
-                  key={cm.id}
-                  type="button"
-                  onClick={() => handlePickCaseSlot(cm.slot)}
-                  className={`text-left px-2.5 py-2 rounded-lg border text-xs font-extrabold transition-all flex items-center justify-between gap-2 ${
-                    isCur
-                      ? "bg-[#ed1b2e]/25 border-[#ed1b2e] text-white"
-                      : "bg-slate-900/80 hover:bg-slate-900 border-slate-700 text-slate-200"
-                  }`}
-                >
-                  <span className="truncate">
-                    {cm.icon} {lbl}
-                  </span>
-                  <span className="text-[10px] font-mono text-amber-300 shrink-0">
-                    {cm.slot + 1}/6
-                  </span>
-                </button>
-              );
-            })}
+          <div className="bg-slate-800/95 border border-slate-700 rounded-xl p-2 space-y-2">
+            {confirmArmedSlot !== null && (
+              <div className="bg-amber-950/80 border border-amber-400/60 rounded-lg p-2 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-[11px] font-bold text-amber-200 leading-snug">
+                  ⚠️ {ui.switchConfirmMsg}
+                </span>
+                <div className="flex items-center gap-1.5 ml-auto">
+                  <button
+                    type="button"
+                    onClick={() => setConfirmArmedSlot(null)}
+                    className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-bold text-slate-200"
+                  >
+                    ✕
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => executePickCaseSlot(confirmArmedSlot)}
+                    className="px-2.5 py-1 rounded-lg bg-[#ed1b2e] hover:bg-[#c81526] text-white text-[11px] font-extrabold"
+                  >
+                    ✓ {ui.switchShortFmt} ({confirmArmedSlot + 1}/6)
+                  </button>
+                </div>
+              </div>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              {C2_CURATED_CASES_META.map((cm) => {
+                const isCur = cm.slot === currentCaseSlot;
+                const isArmed = confirmArmedSlot === cm.slot;
+                const lbl = cm.labels[normLang] || cm.labels.en;
+                return (
+                  <button
+                    key={cm.id}
+                    type="button"
+                    onClick={() => handlePickCaseSlot(cm.slot)}
+                    className={`text-left px-2.5 py-2 rounded-lg border text-xs font-extrabold transition-all flex items-center justify-between gap-2 ${
+                      isCur
+                        ? "bg-[#ed1b2e]/25 border-[#ed1b2e] text-white"
+                        : isArmed
+                        ? "bg-amber-500/20 border-amber-400 text-amber-200"
+                        : "bg-slate-900/80 hover:bg-slate-900 border-slate-700 text-slate-200"
+                    }`}
+                  >
+                    <span className="truncate">
+                      {cm.icon} {lbl}
+                    </span>
+                    <span className="text-[10px] font-mono text-amber-300 shrink-0">
+                      {cm.slot + 1}/6
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
 
@@ -2106,7 +2155,7 @@ window.Challenge2ParticipantView = function ({
                       onClick={() => handleTogglePillar(g.key)}
                       className={`${spanLast} min-w-0 max-w-full overflow-hidden px-2.5 py-2 rounded-xl border text-left transition-all ${
                         isDone
-                          ? "bg-emerald-50/80 border-emerald-500 shadow-2xs"
+                          ? "bg-emerald-50/80 border-emerald-500 shadow-sm"
                           : "bg-slate-50 hover:bg-slate-100 border-slate-200 opacity-75"
                       }`}
                     >
@@ -2139,7 +2188,7 @@ window.Challenge2ParticipantView = function ({
                     onClick={() => handleSelectTone(tn.id)}
                     className={`min-w-0 max-w-full overflow-hidden px-2 py-2 rounded-xl border text-[11px] sm:text-xs font-extrabold text-center truncate transition-all ${
                       active
-                        ? "bg-slate-900 text-white border-slate-900 shadow-xs"
+                        ? "bg-slate-900 text-white border-slate-900 shadow-sm"
                         : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200"
                     }`}
                   >
@@ -2166,7 +2215,7 @@ window.Challenge2ParticipantView = function ({
                       onClick={() => handlePickAngleChip(hint, hi)}
                       className={`w-full min-w-0 max-w-full overflow-hidden px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left whitespace-normal break-words leading-snug transition-all ${
                         selected
-                          ? "bg-amber-600 text-white border-amber-700 shadow-xs"
+                          ? "bg-amber-600 text-white border-amber-700 shadow-sm"
                           : "bg-amber-50/70 hover:bg-amber-100 text-slate-800 border-amber-300"
                       }`}
                     >
@@ -2243,7 +2292,7 @@ window.Challenge2ParticipantView = function ({
                   value={promptText}
                   onChange={(e) => handleLivePromptEdit(e.target.value)}
                   placeholder={ui.anglePlaceholder}
-                  className="w-full rounded-xl border border-slate-200 bg-white focus:outline-none p-2.5 text-xs text-slate-900 leading-relaxed font-sans"
+                  className="w-full rounded-xl border border-slate-200 bg-white focus:outline-none p-2.5 text-base sm:text-xs text-slate-900 leading-relaxed font-sans"
                 />
               </div>
             );

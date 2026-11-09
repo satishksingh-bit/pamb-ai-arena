@@ -1610,24 +1610,48 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
    - Before Presenter clicks Start: Shows Brief of Challenge 1, 2 & 3
    - When Presenter clicks Start C1 / C2 / C3: Unlocks that Challenge!
 ============================================================================ */
+function safeGetStorage(k) {
+  try {
+    return localStorage.getItem(k);
+  } catch (_) {
+    return null;
+  }
+}
+
+function safeSetStorage(k, v) {
+  try {
+    localStorage.setItem(k, v);
+  } catch (_) {
+    return null;
+  }
+}
+
+function safeRemoveStorage(k) {
+  try {
+    localStorage.removeItem(k);
+  } catch (_) {
+    return null;
+  }
+}
+
 function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
   const [agentId] = useState(() => {
-    const saved = localStorage.getItem("pamb_agent_id_v1");
+    const saved = safeGetStorage("pamb_agent_id_v1");
     if (saved) return saved;
     const fresh = `pamb-${Date.now()}-${Math.floor(Math.random() * 900 + 100)}`;
-    localStorage.setItem("pamb_agent_id_v1", fresh);
+    safeSetStorage("pamb_agent_id_v1", fresh);
     return fresh;
   });
 
   const [agentName, setAgentName] = useState(
-    () => localStorage.getItem("pamb_agent_name_v1") || ""
+    () => safeGetStorage("pamb_agent_name_v1") || ""
   );
   const [agentRegion] = useState("");
   const [lang, setLang] = useState(
-    () => localStorage.getItem("pamb_agent_lang_v1") || "en"
+    () => safeGetStorage("pamb_agent_lang_v1") || "en"
   );
   const [registered, setRegistered] = useState(
-    () => localStorage.getItem("pamb_agent_registered_v1") === "true"
+    () => safeGetStorage("pamb_agent_registered_v1") === "true"
   );
   const [activeTab, setActiveTab] = useState("1"); // "1" | "2" | "3" | "card"
 
@@ -1643,14 +1667,14 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
   // Automatically reset phone back to the Join screen whenever Presenter clicks "Reset Game"
   useEffect(() => {
     if (!arenaState.gameSessionId) return;
-    const savedSession = localStorage.getItem("pamb_game_session_id_v1");
+    const savedSession = safeGetStorage("pamb_game_session_id_v1");
     if (savedSession && savedSession !== arenaState.gameSessionId) {
-      localStorage.setItem("pamb_game_session_id_v1", arenaState.gameSessionId);
-      localStorage.removeItem("pamb_agent_registered_v1");
+      safeSetStorage("pamb_game_session_id_v1", arenaState.gameSessionId);
+      safeRemoveStorage("pamb_agent_registered_v1");
       setRegistered(false);
       setActiveTab("1");
     } else if (!savedSession) {
-      localStorage.setItem("pamb_game_session_id_v1", arenaState.gameSessionId);
+      safeSetStorage("pamb_game_session_id_v1", arenaState.gameSessionId);
     }
   }, [arenaState.gameSessionId]);
 
@@ -1666,12 +1690,12 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
     if (e) e.preventDefault();
     const cleanName = agentName.trim() || "PRUMDA Leader";
     setAgentName(cleanName);
-    localStorage.setItem("pamb_agent_name_v1", cleanName);
-    localStorage.removeItem("pamb_agent_region_v1");
-    localStorage.setItem("pamb_agent_lang_v1", lang);
-    localStorage.setItem("pamb_agent_registered_v1", "true");
+    safeSetStorage("pamb_agent_name_v1", cleanName);
+    safeRemoveStorage("pamb_agent_region_v1");
+    safeSetStorage("pamb_agent_lang_v1", lang);
+    safeSetStorage("pamb_agent_registered_v1", "true");
     if (arenaState.gameSessionId) {
-      localStorage.setItem("pamb_game_session_id_v1", arenaState.gameSessionId);
+      safeSetStorage("pamb_game_session_id_v1", arenaState.gameSessionId);
     }
     setRegistered(true);
 
@@ -1691,7 +1715,7 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
 
   if (!registered) {
     return (
-      <div className="min-h-screen bg-[#f4f6f9] text-slate-900 flex items-center justify-center p-3 sm:p-5">
+      <div className="min-h-[100dvh] bg-[#f4f6f9] text-slate-900 flex items-center justify-center p-3 sm:p-5">
         <form
           onSubmit={handleRegister}
           className="w-full max-w-md sm:max-w-lg md:max-w-2xl bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-3xl p-5 sm:p-7 space-y-5 shadow-2xl"
@@ -1742,13 +1766,13 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
               value={agentName}
               onChange={(e) => setAgentName(e.target.value)}
               placeholder="e.g. Dato' Jason Lim / Mei Ling / Priya / Amirul"
-              className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-3 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 font-bold focus:outline-none focus:border-[#ed1b2e] focus:ring-2 focus:ring-[#ed1b2e]/15"
+              className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 font-bold focus:outline-none focus:border-[#ed1b2e] focus:ring-2 focus:ring-[#ed1b2e]/15"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-4 rounded-2xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white font-extrabold text-sm sm:text-base shadow-lg transition-all"
+            className="w-full py-4 px-4 rounded-2xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white font-extrabold text-sm sm:text-base shadow-lg transition-all"
           >
             {t.enterArenaBtn}
           </button>
@@ -1762,10 +1786,12 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
       {/* Adaptive Sticky Header (Phone, iPad & Laptop) */}
       <header className="sticky top-0 z-30 bg-white/95 backdrop-blur border-t-4 border-t-[#ed1b2e] border-b border-slate-200 px-3 sm:px-5 py-2.5 shadow-sm">
         <div className="w-full max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-sm sm:text-base text-slate-900">🇲🇾 {agentName}</span>
-              <span className="text-[11px] px-2 py-0.5 rounded bg-red-50 text-[#ed1b2e] border border-red-200 font-extrabold">
+          <div className="min-w-0 max-w-full">
+            <div className="flex items-center gap-1.5 min-w-0 max-w-full">
+              <span className="font-extrabold text-sm sm:text-base text-slate-900 truncate max-w-[160px] sm:max-w-xs">
+                🇲🇾 {agentName}
+              </span>
+              <span className="shrink-0 whitespace-nowrap text-[11px] px-2 py-0.5 rounded bg-red-50 text-[#ed1b2e] border border-red-200 font-extrabold">
                 {(myRecord?.scores?.["1"]?.total || 0) +
                   (myRecord?.scores?.["2"]?.total || 0) +
                   (myRecord?.scores?.["3"]?.total || 0)}{" "}
@@ -1774,10 +1800,10 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
               <button
                 type="button"
                 onClick={() => {
-                  localStorage.removeItem("pamb_agent_registered_v1");
+                  safeRemoveStorage("pamb_agent_registered_v1");
                   setRegistered(false);
                 }}
-                className="text-[10px] px-2 py-0.5 rounded bg-white hover:bg-red-50 text-[#ed1b2e] border border-[#ed1b2e] font-bold"
+                className="shrink-0 whitespace-nowrap text-[10px] px-2 py-0.5 rounded bg-white hover:bg-red-50 text-[#ed1b2e] border border-[#ed1b2e] font-bold"
                 title="Change Name or Re-Join"
               >
                 ✎ Re-Join
@@ -1791,7 +1817,7 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
                 key={l.code}
                 onClick={() => {
                   setLang(l.code);
-                  localStorage.setItem("pamb_agent_lang_v1", l.code);
+                  safeSetStorage("pamb_agent_lang_v1", l.code);
                   fetch("/api/activity", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -1886,7 +1912,7 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
                   onClick={() => {
                     if (tb.unlocked) setActiveTab(tb.id);
                   }}
-                  className={`py-2 px-1 rounded-xl text-xs font-extrabold transition-all ${
+                  className={`py-2 px-1 rounded-xl whitespace-nowrap text-[11px] sm:text-xs font-extrabold transition-all ${
                     !tb.unlocked
                       ? "bg-slate-50 text-slate-400 cursor-not-allowed opacity-70"
                       : activeTab === tb.id

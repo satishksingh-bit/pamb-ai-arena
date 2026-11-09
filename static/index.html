@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
     <title>PRUMDA Learning Trip • AI Arena</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,11 +17,19 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
       :root {
+        color-scheme: light;
         --pru-red: #ed1b2e;
         --pru-red-dark: #c8102e;
         --pru-bg: #f4f6f9;
         --pru-surface: #ffffff;
         --pru-slate: #0f172a;
+      }
+      @media (max-width: 639px) {
+        input,
+        textarea,
+        select {
+          font-size: 16px !important;
+        }
       }
       body {
         background-color: #f4f6f9;
@@ -130,7 +139,7 @@
       <!-- Top Bar: Caption + Save + Close -->
       <div
         id="arena-zoom-topbar"
-        style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:linear-gradient(to bottom,rgba(8,12,22,0.88),rgba(8,12,22,0));z-index:2;"
+        style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:max(12px, env(safe-area-inset-top)) 16px 12px 16px;touch-action:manipulation;background:linear-gradient(to bottom,rgba(8,12,22,0.88),rgba(8,12,22,0));z-index:2;"
       >
         <div
           id="arena-zoom-caption"
@@ -172,7 +181,7 @@
       <!-- Bottom Floating Zoom Toolbar -->
       <div
         id="arena-zoom-bottombar"
-        style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 16px 16px;background:linear-gradient(to top,rgba(8,12,22,0.9),rgba(8,12,22,0));z-index:2;"
+        style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 16px max(16px, env(safe-area-inset-bottom)) 16px;touch-action:manipulation;background:linear-gradient(to top,rgba(8,12,22,0.9),rgba(8,12,22,0));z-index:2;"
       >
         <div
           style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;background:rgba(15,23,42,0.92);border:1px solid rgba(148,163,184,0.3);padding:6px 10px;border-radius:9999px;box-shadow:0 12px 30px rgba(0,0,0,0.5);"
@@ -275,12 +284,97 @@
           applyTransform(Boolean(smooth));
         }
 
+        function showArenaSaveToast(msg) {
+          var existing = document.getElementById("arena-save-toast");
+          if (existing && existing.parentNode) {
+            existing.parentNode.removeChild(existing);
+          }
+          var toast = document.createElement("div");
+          toast.id = "arena-save-toast";
+          toast.textContent = msg;
+          toast.style.cssText =
+            "position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:10050;" +
+            "background:rgba(15,23,42,0.96);color:#f8fafc;border:1px solid rgba(237,27,46,0.75);border-radius:9999px;" +
+            "padding:10px 16px;font-size:12px;font-weight:700;box-shadow:0 12px 32px rgba(0,0,0,0.45);" +
+            "max-width:90vw;text-align:center;pointer-events:none;transition:opacity 0.2s ease;";
+          document.body.appendChild(toast);
+          setTimeout(function () {
+            toast.style.opacity = "0";
+            setTimeout(function () {
+              if (toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 240);
+          }, 2800);
+        }
+
+        window.saveArenaMediaMobileSafe = async function (src, baseName) {
+          if (!src) return;
+          var safeBase = String(baseName || "prumda-ai-image-" + Date.now()).replace(/\.(png|jpe?g|webp)$/i, "");
+          var ua = (navigator && navigator.userAgent) || "";
+          var isInAppWebView = /MicroMessenger|WhatsApp/i.test(ua);
+          if (isInAppWebView && !(navigator && navigator.canShare)) {
+            showArenaSaveToast("📱 Tip: Long-press the image directly to Save to Photos");
+          }
+          try {
+            var res = await fetch(src);
+            var blob = await res.blob();
+            var ext = blob.type && blob.type.indexOf("png") !== -1 ? "png" : "jpg";
+            var filename = safeBase + "." + ext;
+            var mime = blob.type || (ext === "png" ? "image/png" : "image/jpeg");
+
+            if (
+              navigator &&
+              navigator.maxTouchPoints > 0 &&
+              typeof File === "function" &&
+              typeof navigator.canShare === "function" &&
+              typeof navigator.share === "function"
+            ) {
+              try {
+                var file = new File([blob], filename, { type: mime });
+                if (navigator.canShare({ files: [file] })) {
+                  await navigator.share({ files: [file], title: filename });
+                  return;
+                }
+              } catch (shareErr) {
+                if (shareErr && shareErr.name === "AbortError") {
+                  return;
+                }
+              }
+            }
+
+            if (isInAppWebView) {
+              showArenaSaveToast("📱 Tip: Long-press the image directly to Save to Photos");
+            }
+
+            var blobUrl = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = blobUrl;
+            a.download = filename;
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function () {
+              URL.revokeObjectURL(blobUrl);
+            }, 30000);
+          } catch (err) {
+            var fallbackExt = src.indexOf("image/png") !== -1 ? "png" : "jpg";
+            var aFallback = document.createElement("a");
+            aFallback.href = src;
+            aFallback.download = safeBase + "." + fallbackExt;
+            aFallback.style.display = "none";
+            document.body.appendChild(aFallback);
+            aFallback.click();
+            document.body.removeChild(aFallback);
+          }
+        };
+
         window.openArenaImageZoom = function (src, altText) {
           if (!src) return;
           state.open = true;
           state.scale = 1;
           state.tx = 0;
           state.ty = 0;
+          state.dragMoved = false;
           state.dragging = false;
           state.pinching = false;
           zoomImg.src = src;
@@ -341,15 +435,7 @@
           e.stopPropagation();
           var src = zoomImg.src;
           if (!src) return;
-          var a = document.createElement("a");
-          a.href = src;
-          var ext = src.indexOf("image/png") !== -1 ? "png" : "jpg";
-          a.download = "prumda-ai-image-" + Date.now() + "." + ext;
-          a.target = "_blank";
-          a.rel = "noopener";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+          window.saveArenaMediaMobileSafe(src, "prumda-ai-image-" + Date.now());
         });
 
         // Escape key & +/- keyboard shortcuts
@@ -517,6 +603,11 @@
           }
           if (e.touches.length === 0) {
             state.dragging = false;
+            if (state.dragMoved) {
+              setTimeout(function () {
+                state.dragMoved = false;
+              }, 60);
+            }
             applyTransform(true);
           }
         });
