@@ -752,12 +752,17 @@ function ExecutiveSlideCard({
                 )}
               </div>
               {slide.image ? (
-                <div className="md:col-span-4">
+                <div className="md:col-span-4 relative group">
                   <img
                     src={slide.image}
-                    alt={slide.title}
-                    className="w-full aspect-video object-cover rounded-xl border border-slate-200 shadow-sm"
+                    alt={slide.title || "Executive Slide Visual"}
+                    title="Tap to zoom"
+                    data-zoomable="true"
+                    className="w-full aspect-video object-cover rounded-xl border border-slate-200 shadow-sm cursor-zoom-in"
                   />
+                  <span className="pointer-events-none absolute bottom-1.5 right-1.5 px-2 py-0.5 rounded-full bg-slate-900/70 text-white text-[9px] font-bold opacity-85 group-hover:opacity-100">
+                    🔍 Zoom
+                  </span>
                 </div>
               ) : generatingImages && slide.image_prompt ? (
                 <div className="md:col-span-4">

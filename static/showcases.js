@@ -114,9 +114,11 @@ window.SubmissionCardRenderer = function ({
               <img
                 src={displayPortrait}
                 alt="Submitted Life-Event Greeting Card"
+                title="Tap to zoom"
+                data-zoomable="true"
                 className={`${
                   mode === "spotlight" ? "h-40 sm:h-44" : "h-32"
-                } w-auto object-contain rounded-lg border-2 border-[#ed1b2e] shadow-sm`}
+                } w-auto object-contain rounded-lg border-2 border-[#ed1b2e] shadow-sm cursor-zoom-in`}
               />
             </div>
           )}
@@ -283,7 +285,9 @@ window.SubmissionCardRenderer = function ({
                 <img
                   src={displayPortrait}
                   alt="Submitted AI Executive Portrait"
-                  className={`mx-auto rounded-2xl border-2 border-[#ed1b2e] shadow-xl ${
+                  title="Tap to zoom"
+                  data-zoomable="true"
+                  className={`mx-auto rounded-2xl border-2 border-[#ed1b2e] shadow-xl cursor-zoom-in ${
                     mode === "spotlight" ? "w-full max-w-[380px]" : "w-44"
                   }`}
                 />
@@ -292,7 +296,9 @@ window.SubmissionCardRenderer = function ({
                     <img
                       src={submission.imageBefore}
                       alt="Original Selfie"
-                      className={`${mode === "spotlight" ? "w-16 h-16" : "w-11 h-11"} object-cover rounded-lg`}
+                      title="Tap to zoom"
+                      data-zoomable="true"
+                      className={`${mode === "spotlight" ? "w-16 h-16" : "w-11 h-11"} object-cover rounded-lg cursor-zoom-in`}
                     />
                     <div className="text-[9px] font-extrabold text-[#ed1b2e] uppercase mt-0.5">
                       Before Selfie

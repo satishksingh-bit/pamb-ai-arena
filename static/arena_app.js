@@ -964,7 +964,9 @@ function PresenterIsolatedApp({ arenaState, fetchArenaState }) {
                 <img
                   src={qrImageUrl}
                   alt="Scan to join PRUMDA Learning Trip"
-                  className="w-52 h-52 mx-auto rounded-2xl border-4 border-[#ed1b2e]/20 shadow-lg bg-white p-1"
+                  title="Tap to zoom"
+                  data-zoomable="true"
+                  className="w-52 h-52 mx-auto rounded-2xl border-4 border-[#ed1b2e]/20 shadow-lg bg-white p-1 cursor-zoom-in"
                 />
                 <div className="text-xs font-mono font-extrabold text-[#ed1b2e] break-all">
                   {joinUrl}

@@ -2341,11 +2341,18 @@ window.Challenge3ParticipantView = function ({
 
         {submittedData.cardUrl && (
           <div className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-2.5">
-            <img
-              src={submittedData.cardUrl}
-              alt="Life-Event Greeting Card"
-              className="h-40 sm:h-48 md:h-52 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md"
-            />
+            <div className="relative group inline-block">
+              <img
+                src={submittedData.cardUrl}
+                alt="Life-Event Greeting Card"
+                title="Tap to zoom"
+                data-zoomable="true"
+                className="h-40 sm:h-48 md:h-52 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md cursor-zoom-in"
+              />
+              <span className="pointer-events-none absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-slate-900/75 text-white text-[10px] font-bold">
+                🔍 Tap to zoom
+              </span>
+            </div>
           </div>
         )}
 
@@ -2610,11 +2617,18 @@ window.Challenge3ParticipantView = function ({
 
           {cardUrl && (
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white border-2 border-emerald-300 rounded-2xl p-3.5 shadow-sm">
-              <img
-                src={cardUrl}
-                alt="Generated Greeting Card"
-                className="h-48 sm:h-56 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md mx-auto md:mx-0"
-              />
+              <div className="relative group mx-auto md:mx-0 shrink-0">
+                <img
+                  src={cardUrl}
+                  alt="Generated Greeting Card"
+                  title="Tap to zoom"
+                  data-zoomable="true"
+                  className="h-48 sm:h-56 w-auto object-contain rounded-xl border-2 border-[#ed1b2e] shadow-md cursor-zoom-in"
+                />
+                <span className="pointer-events-none absolute bottom-2 right-2 px-2.5 py-0.5 rounded-full bg-slate-900/75 text-white text-[10px] font-bold">
+                  🔍 Tap to zoom
+                </span>
+              </div>
               <div className="flex flex-col gap-2.5 w-full md:flex-1">
                 <div className="text-xs sm:text-sm font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-3.5 py-2.5 rounded-xl">
                   {ui.cardReadyMsg}
@@ -2640,8 +2654,10 @@ window.Challenge3ParticipantView = function ({
               <div className="flex items-center gap-2.5 min-w-0">
                 <img
                   src={cardUrl}
-                  alt="Card Thumbnail"
-                  className="h-10 w-auto rounded border border-[#ed1b2e] shrink-0"
+                  alt="Greeting Card Thumbnail"
+                  title="Tap to zoom"
+                  data-zoomable="true"
+                  className="h-10 w-auto rounded border border-[#ed1b2e] shrink-0 cursor-zoom-in hover:opacity-90"
                 />
                 <span className="text-xs font-extrabold text-emerald-700 truncate">
                   {ui.cardAttachedBadge}

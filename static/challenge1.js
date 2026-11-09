@@ -174,8 +174,10 @@ window.PAMBChatShell = function PAMBChatShell({
                 {msg.thumbUrl && (
                   <img
                     src={msg.thumbUrl}
-                    alt="Uploaded"
-                    className="w-12 h-12 rounded-xl object-cover border-2 border-[#ed1b2e] shadow-sm"
+                    alt="Uploaded Photo"
+                    title="Tap to zoom"
+                    data-zoomable="true"
+                    className="w-12 h-12 rounded-xl object-cover border-2 border-[#ed1b2e] shadow-sm cursor-zoom-in hover:opacity-90"
                   />
                 )}
                 <div className="max-w-[88%] sm:max-w-[80%] rounded-2xl rounded-br-sm bg-[#ed1b2e] text-white px-3.5 py-2.5 text-xs sm:text-sm leading-relaxed shadow-sm break-words font-medium">
@@ -204,8 +206,10 @@ window.PAMBChatShell = function PAMBChatShell({
                     <div className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-red-50/70 border border-red-200">
                       <img
                         src={msg.photoThumb}
-                        alt="Your photo"
-                        className="w-9 h-9 rounded-full object-cover border-2 border-[#ed1b2e]"
+                        alt="Your Uploaded Photo"
+                        title="Tap to zoom"
+                        data-zoomable="true"
+                        className="w-9 h-9 rounded-full object-cover border-2 border-[#ed1b2e] cursor-zoom-in hover:opacity-90"
                       />
                       <span className="text-[11px] font-bold text-[#ed1b2e]">
                         ✓ Photo ready
@@ -1586,11 +1590,28 @@ window.Challenge1ParticipantView = function ({
                 : "max-w-full sm:max-w-[460px]"
             }`}
           >
-            <img
-              src={displayedImg}
-              alt="Generated AI Image"
-              className="w-full rounded-2xl border-2 border-slate-200 shadow-lg block"
-            />
+            <div className="relative group">
+              <img
+                src={displayedImg}
+                alt={showingBefore ? "Original Uploaded Photo" : "Generated AI Image"}
+                title="Tap to zoom"
+                data-zoomable="true"
+                className="w-full rounded-2xl border-2 border-slate-200 shadow-lg block cursor-zoom-in"
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  window.openArenaImageZoom &&
+                  window.openArenaImageZoom(
+                    displayedImg,
+                    showingBefore ? "Original Uploaded Photo" : "Generated AI Image"
+                  )
+                }
+                className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-slate-900/75 hover:bg-[#ed1b2e] text-white text-[10px] font-bold backdrop-blur-sm shadow-md transition-colors"
+              >
+                🔍 Tap to zoom
+              </button>
+            </div>
             <div className="flex flex-wrap items-center justify-end gap-1.5 mt-2">
               {art.creationMode === "executive_headshot" &&
                 art.cleanImageUrl &&
@@ -1705,7 +1726,9 @@ window.Challenge1ParticipantView = function ({
           <img
             src={submittedSnapshot.cleanImageUrl}
             alt="Submitted AI Image"
-            className="w-56 mx-auto rounded-2xl border-2 border-[#ed1b2e] shadow-lg"
+            title="Tap to zoom"
+            data-zoomable="true"
+            className="w-56 mx-auto rounded-2xl border-2 border-[#ed1b2e] shadow-lg cursor-zoom-in"
           />
         )}
 
@@ -1764,8 +1787,10 @@ window.Challenge1ParticipantView = function ({
         {rawPhoto && (
           <img
             src={rawPhoto}
-            alt="Uploaded"
-            className="w-6 h-6 rounded-full object-cover border-2 border-[#ed1b2e] shrink-0"
+            alt="Locked Selfie Photo"
+            title="Tap to zoom"
+            data-zoomable="true"
+            className="w-6 h-6 rounded-full object-cover border-2 border-[#ed1b2e] shrink-0 cursor-zoom-in hover:opacity-90"
           />
         )}
         <span className="font-bold text-slate-800 truncate">✓ {ui.lockedSelfie}</span>
