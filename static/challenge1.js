@@ -244,7 +244,8 @@ window.PAMBChatShell = function PAMBChatShell({
                             </div>
                             <div className="flex flex-wrap gap-1.5">
                               {craftPills.map((fup, fIdx) => {
-                                const isActive = (inputText || "").includes(fup.prompt);
+                                const isActive =
+                                  (inputText || "").trim() === (fup.prompt || "").trim();
                                 return (
                                   <button
                                     key={`c_${fIdx}`}
@@ -256,7 +257,7 @@ window.PAMBChatShell = function PAMBChatShell({
                                         ? "bg-emerald-50 text-emerald-950 border-emerald-500"
                                         : "bg-white hover:bg-[#ed1b2e] text-[#ed1b2e] hover:text-white border-[#ed1b2e]/60 hover:border-[#ed1b2e]"
                                     }`}
-                                    title="Tap to combine into the prompt box below so you can edit freely"
+                                    title="Tap to load this sample prompt (replaces current prompt)"
                                   >
                                     <span>{isActive ? `✓ ${fup.label}` : fup.label}</span>
                                   </button>
@@ -274,7 +275,8 @@ window.PAMBChatShell = function PAMBChatShell({
                             </div>
                             <div className="flex flex-wrap gap-1.5">
                               {workPills.map((fup, fIdx) => {
-                                const isActive = (inputText || "").includes(fup.prompt);
+                                const isActive =
+                                  (inputText || "").trim() === (fup.prompt || "").trim();
                                 return (
                                   <button
                                     key={`w_${fIdx}`}
@@ -286,7 +288,7 @@ window.PAMBChatShell = function PAMBChatShell({
                                         ? "bg-emerald-50 text-emerald-950 border-emerald-500"
                                         : "bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border-slate-300 hover:border-[#ed1b2e]"
                                     }`}
-                                    title="Tap to combine into the prompt box below so you can edit freely"
+                                    title="Tap to load this sample prompt (replaces current prompt)"
                                   >
                                     <span>{isActive ? `✓ ${fup.label}` : fup.label}</span>
                                   </button>
@@ -721,7 +723,7 @@ const UI_COPY_C1 = {
     lockedSelfie: "Image Ready",
     placeholder: "Tap a portrait style pill or type your visual prompt, then press Send...",
     streaming: "✨ Generating your studio image...",
-    editHint: "Tap an option pill to load or combine a visual prompt you can edit freely:",
+    editHint: "Tap an option pill to load a sample prompt (replaces current prompt), then edit freely:",
     saveImgBtn: "⬇️ Save",
     dictateBtn: "🎙️ Voice",
     listeningBtn: "🔴 Listening...",
@@ -753,7 +755,7 @@ const UI_COPY_C1 = {
     lockedSelfie: "புகைப்படம் தயார்",
     placeholder: "மேலே உள்ள உருவப்பட பாணியைத் தேர்ந்தெடுத்து அனுப்பவும்...",
     streaming: "✨ உங்கள் படம் உருவாக்கப்படுகிறது...",
-    editHint: "விருப்பத்தைத் தட்டி ப்ராம்ப்டில் இணைத்து சுதந்திரமாகத் திருத்தவும்:",
+    editHint: "விருப்பத்தைத் தட்டி மாதிரி ப்ராம்ப்டை ஏற்றி சுதந்திரமாகத் திருத்தவும்:",
     saveImgBtn: "⬇️ சேமி",
     dictateBtn: "🎙️ குரல்",
     listeningBtn: "🔴 கேட்கிறது...",
@@ -1056,14 +1058,21 @@ window.Challenge1ParticipantView = function ({
     }).catch(() => {});
   }, [lang]);
 
-  // User took a photo or uploaded an image -> unlock Step 1 (Craft Your Studio Portrait FIRST)
+  // User took a photo or uploaded an image -> reset studio state cleanly & unlock Step 1
   const handlePhotoLocked = (dataUrl) => {
     setRawPhoto(dataUrl);
-    setStudioState((prev) => ({
-      ...prev,
+    setStudioState({
+      creationMode: "executive_headshot",
+      style: "mdrt_keynote",
+      occasion: "newborn",
+      clientName: "",
+      motto: "",
+      cardHeadline: "",
+      visualPrompt: "",
       aiPortraitDataUrl: null,
       aiCardArtworkDataUrl: null,
-    }));
+      latestArtifact: null,
+    });
     const step1Pills = getStep1CraftOnlyPillsC1(lang);
     if (step1Pills.length > 0) {
       setInputText(step1Pills[0].prompt);
@@ -1217,9 +1226,20 @@ window.Challenge1ParticipantView = function ({
     }).catch(() => {});
 
     try {
-      const compactHistory = nextHistory
-        .filter((m) => m.id !== "welcome_c1" && !m.isPhotoReadyGreeting)
-        .slice(-6)
+      // Only consider turns AFTER the latest photo upload so changing photos never leaks old turns
+      let lastResetIdx = -1;
+      for (let i = nextHistory.length - 1; i >= 0; i--) {
+        if (nextHistory[i].isPhotoReadyGreeting || nextHistory[i].id === "welcome_c1") {
+          lastResetIdx = i;
+          break;
+        }
+      }
+      const postPhotoTurns = nextHistory
+        .slice(lastResetIdx + 1)
+        .filter((m) => !m.isRefusalNotice);
+      // Keep only the immediate prior exchange + current user prompt to prevent multi-turn pollution
+      const compactHistory = postPhotoTurns
+        .slice(-3)
         .map((m) => ({ role: m.role, text: m.text }));
 
       const res = await fetch("/api/ai", {
@@ -1274,6 +1294,25 @@ window.Challenge1ParticipantView = function ({
         return;
       }
 
+      if (data.status === "refused_out_of_scope") {
+        const currentFollowUps = Boolean(studioState.aiPortraitDataUrl)
+          ? data.suggestedFollowUps || getPostPhotoPillsC1(lang)
+          : getStep1CraftOnlyPillsC1(lang);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `refuse_${Date.now()}`,
+            role: "assistant",
+            agentName: "AI Image Assistant",
+            isRefusalNotice: true,
+            text: data.assistantReply || data.message,
+            followUps: currentFollowUps,
+          },
+        ]);
+        setIsStreaming(false);
+        return;
+      }
+
       const nextMode = data.creationMode || studioState.creationMode || "executive_headshot";
       const nextStyle = data.style || studioState.style || "mdrt_keynote";
       const nextOccasion = data.occasion || studioState.occasion || "newborn";
@@ -1304,8 +1343,8 @@ window.Challenge1ParticipantView = function ({
         brandScore: data.brandScore || 96,
         personalizationScore: data.personalizationScore || 96,
         craftScore: data.craftScore || 96,
-        clientName: data.clientName || "",
-        motto: data.motto || "",
+        clientName: nextMode === "outreach_card" ? data.clientName || "" : "",
+        motto: nextMode === "brand_banner" ? data.motto || "" : "",
         userPrompt: promptToSend,
       };
 
@@ -1313,12 +1352,12 @@ window.Challenge1ParticipantView = function ({
         creationMode: nextMode,
         style: nextStyle,
         occasion: nextOccasion,
-        clientName: typeof data.clientName === "string" ? data.clientName : "",
-        motto: typeof data.motto === "string" ? data.motto : "",
-        cardHeadline: data.cardHeadline || studioState.cardHeadline,
+        clientName: nextMode === "outreach_card" ? data.clientName || "" : "",
+        motto: nextMode === "brand_banner" ? data.motto || "" : "",
+        cardHeadline: nextMode === "outreach_card" ? data.cardHeadline || "" : "",
         visualPrompt: data.visualPrompt || promptToSend,
         aiPortraitDataUrl: mergedPortrait,
-        aiCardArtworkDataUrl: mergedArtwork,
+        aiCardArtworkDataUrl: nextMode === "executive_headshot" ? null : mergedArtwork,
         latestArtifact: artifactObj,
       });
 
@@ -1376,21 +1415,10 @@ window.Challenge1ParticipantView = function ({
     return c.toDataURL("image/jpeg", 0.8);
   };
 
-  const handleCombinePillPrompt = (pillPrompt) => {
+  const handleReplacePillPrompt = (pillPrompt) => {
     const clean = (pillPrompt || "").trim();
     if (!clean) return;
-    setInputText((prev) => {
-      const cur = (prev || "").trim();
-      if (!cur) return clean;
-      if (cur.includes(clean)) {
-        const lines = cur
-          .split(/\n+/)
-          .map((l) => l.trim())
-          .filter((l) => l && l !== clean);
-        return lines.join("\n");
-      }
-      return `${cur}\n${clean}`;
-    });
+    setInputText(clean);
   };
 
   const handleSubmitArtifact = async (targetArtifact = null) => {
@@ -1799,7 +1827,7 @@ window.Challenge1ParticipantView = function ({
         hideComposer={!isStep1Unlocked}
         inputText={inputText}
         onInputChange={setInputText}
-        onPrefillPrompt={handleCombinePillPrompt}
+        onPrefillPrompt={handleReplacePillPrompt}
         onSendMessage={handleSendMessage}
         inputPlaceholder={ui.placeholder}
         composerAttachmentStrip={compactAttachmentStrip}

@@ -1640,6 +1640,161 @@ def handle_c1_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         }
 
 
+def _is_standalone_or_redo_prompt(user_msg: str) -> bool:
+    """Detect whether the user selected a standalone preset pill or asked to redo/replace from scratch,
+    so prior turns' outfits, colors, skylines, headlines, slogans, or recipient names never pollute."""
+    s = (user_msg or "").strip().lower()
+    if not s:
+        return True
+    standalone_markers = (
+        "transform my photo",
+        "keep my exact face",
+        "put my studio portrait onto",
+        "put my studio portrait on",
+        "create an executive studio portrait",
+        "design a ",
+        "start fresh",
+        "start over",
+        "redo ",
+        "new portrait",
+        "new headshot",
+        "new card",
+        "将我的照片",
+        "將我的照片",
+        "保留我的五官",
+        "保留我嘅五官",
+        "把我的高管形象照放到",
+        "將我張高管形象照放到",
+        "把我的影棚形象照放到",
+        "设计一张",
+        "設計一張",
+        "製作一張",
+        "用我的形象照生成",
+        "生成一張",
+        "transformasikan foto saya",
+        "kekalkan wajah saya",
+        "letakkan potret studio saya",
+        "hasilkan kad ucapan",
+        "jana sepanduk",
+        "எனது புகைப்படத்தை",
+        "எனது முக அமைப்பை",
+        "எனது உருவப்பட பேட்ஜுடன்",
+        "எனது ஸ்டுடியோ உருவப்படத்துடன்",
+        "தனிப்பட்ட பிராண்டிங் பேனரை உருவாக்கவும்",
+    )
+    return any(m in s for m in standalone_markers)
+
+
+def _check_stacked_or_out_of_scope_refusal(
+    user_msg: str, lang: str, has_step1_portrait: bool
+) -> dict[str, Any] | None:
+    """Refuse:
+    1) Stacked multi-action prompts (e.g., newline-stacked pills or asking to generate two distinct modes at once).
+    2) Out-of-scope '3rd step' non-image requests (e.g., WhatsApp outreach copy, emails, slide decks, videos).
+    """
+    raw = (user_msg or "").strip()
+    if not raw:
+        return None
+    low = raw.lower()
+
+    stacked_msgs = {
+        "zh-CN": "⚠️ 请一次只选择或输入**一项**视觉创作指令（不支持叠加多条提示词），以免画面元素互相干扰！请点击下方单个标签或直接输入一项修改。",
+        "zh-TW": "⚠️ 請一次只選擇或輸入**一項**視覺創作指令（不支援疊加多條提示詞），以免畫面元素互相干擾！請點擊下方單個標籤或直接輸入一項修改。",
+        "yue": "⚠️ 請每次只揀選或輸入**一項**視覺創作指令（唔支援疊加多條提示詞），以免畫面元素互相干擾！請撳下面單一標籤或者輸入一項修改。",
+        "ms": "⚠️ Sila pilih atau taip **satu** arahan visual sahaja pada satu masa (tiada gabungan beberapa prompt) supaya imej kekal kemas! Klik satu pilihan di bawah.",
+        "ta": "⚠️ படம் துல்லியமாக இருக்க ஒரு நேரத்தில் **ஒரே ஒரு** காட்சி ப்ராம்ப்டை மட்டும் பயன்படுத்தவும் (ப்ராம்ப்ட்களை அடுக்க வேண்டாம்)! கீழே உள்ள ஒரு விருப்பத்தைத் தேர்ந்தெடுக்கவும்.",
+        "en": "⚠️ Please run **one visual prompt at a time** (prompt stacking is disabled so different styles don't pollute your image). Tap a single option pill below or describe one visual update!",
+    }
+
+    third_task_msgs = {
+        "zh-CN": "⚠️ 挑战 1 仅专注于两项视觉创作：**1. 高管影棚形象照** 与 **2. 尊尚贺卡 / 个人品牌横幅**（不支持生成第 3 类任务如 WhatsApp 话术、邮件、简报或视频）。请选择下方视觉选项继续优化图片，或点击「提交作品」！",
+        "zh-TW": "⚠️ 挑戰 1 僅專注於兩項視覺創作：**1. 高管影棚形象照** 與 **2. 尊尚賀卡 / 個人品牌橫幅**（不支援生成第 3 類任務如 WhatsApp 話術、電郵、簡報或影片）。請揀選下方視覺選項繼續微調圖片，或點擊「提交作品」！",
+        "yue": "⚠️ 挑戰 1 淨係專注兩項視覺創作：**1. 高管影棚形象照** 同埋 **2. 尊尚賀卡 / 個人品牌橫幅**（唔支援第 3 類任務例如 WhatsApp 訊息、電郵、簡報或者影片）。請揀下面視覺選項繼續微調圖片，或者撳「提交作品」！",
+        "ms": "⚠️ Cabaran 1 hanya memfokuskan kepada **1. Potret Studio** dan **2. Kad Ucapan / Sepanduk Jenama** sahaja (tiada mesej WhatsApp, e-mel, slaid atau video). Sila pilih gaya visual di bawah atau klik **Hantar**!",
+        "ta": "⚠️ சவால் 1 இரண்டு காட்சிப் படைப்புகளுக்கு மட்டுமே (**1. ஸ்டுடியோ உருவப்படம்** மற்றும் **2. வாழ்த்து அட்டை / பிராண்டிங் பேனர்** — WhatsApp செய்திகள், மின்னஞ்சல், ஸ்லைடுகள் அல்லது வீடியோ கிடையாது). கீழே உள்ள காட்சி விருப்பத்தைத் தேர்ந்தெடுக்கவும் அல்லது சமர்ப்பிக்கவும்!",
+        "en": "⚠️ Challenge 1 is strictly for **1. Studio Portraits** and **2. Greeting Cards / Personal Branding Banners** — we refuse 3rd-step requests like WhatsApp messages, emails, slide decks, or videos here. Feel free to iterate on your portrait or card/banner, or hit **Submit**!",
+    }
+
+    # 1. Check newline-stacked prompts (2+ lines that each contain full visual mode directives)
+    non_empty_lines = [ln.strip() for ln in raw.splitlines() if len(ln.strip()) >= 12]
+    if len(non_empty_lines) >= 2:
+        directive_lines = sum(
+            1
+            for ln in non_empty_lines
+            if _is_standalone_or_redo_prompt(ln)
+            or any(
+                kw in ln.lower()
+                for kw in (
+                    "headshot", "portrait", "greeting card", "cny card", "hari raya", "deepavali",
+                    "branding banner", "brand banner", "形象照", "贺卡", "賀卡", "横幅", "橫幅",
+                    "potret", "kad ucapan", "sepanduk", "உருவப்படம்", "வாழ்த்து அட்டை", "பேனர",
+                )
+            )
+        )
+        if directive_lines >= 2:
+            msg = stacked_msgs.get(lang, stacked_msgs["en"])
+            return {
+                "status": "refused_out_of_scope",
+                "refusedReason": "stacked_prompts",
+                "assistantReply": msg,
+                "message": msg,
+            }
+
+    # 2. Check single-line dual-mode stacking (e.g., asking for BOTH a greeting card AND a branding banner,
+    #    or asking to generate BOTH a new headshot AND a card/banner in one turn)
+    has_card_target = any(
+        k in low
+        for k in ("greeting card", "milestone card", "cny card", "prosperity card", "hari raya card", "deepavali card", "贺卡", "賀卡", "纪念卡", "紀念卡", "关怀卡", "關懷卡", "kad ucapan", "வாழ்த்து அட்டை")
+    )
+    has_banner_target = any(
+        k in low
+        for k in ("branding banner", "brand banner", "linkedin banner", "profile cover", "个人品牌横幅", "個人品牌橫幅", "sepanduk penjenamaan", "பிராண்டிங் பேனர")
+    )
+    has_explicit_headshot_gen = any(
+        k in low
+        for k in ("transform my photo", "keep my exact face", "create an executive studio portrait", "generate a studio headshot", "将我的照片", "將我的照片", "保留我的五官", "保留我嘅五官", "transformasikan foto saya", "kekalkan wajah saya")
+    )
+    if (has_card_target and has_banner_target) or (has_explicit_headshot_gen and (has_card_target or has_banner_target)):
+        msg = stacked_msgs.get(lang, stacked_msgs["en"])
+        return {
+            "status": "refused_out_of_scope",
+            "refusedReason": "stacked_prompts",
+            "assistantReply": msg,
+            "message": msg,
+        }
+
+    # 3. Check out-of-scope '3rd step' non-image requests (WhatsApp copy, email, slide deck, video, script)
+    if has_step1_portrait or not any(
+        vk in low for vk in ("portrait", "headshot", "card", "banner", "suit", "blazer", "photo", "形象照", "贺卡", "賀卡", "横幅", "橫幅", "potret", "kad", "sepanduk", "உருவப்படம்", "அட்டை", "பேனர")
+    ):
+        third_task_triggers = (
+            "whatsapp", "wechat", "sms", "text message", "outreach message",
+            "write a message", "draft a message", "write an email", "draft an email",
+            "slide deck", "powerpoint", "pptx", "3-slide", "create a slide", "make a slide",
+            "make a video", "create a video", "generate a video", "10-second video",
+            "compare with aia", "aia comparison",
+            "写一段", "寫一段", "生成话术", "生成話術", "发给客户的信息", "寫封電郵", "写封邮件", "演示文稿", "做一份简报", "生成视频", "生成影片",
+            "tulis mesej", "tulis e-mel", "buat slaid", "jana video",
+            "வாட்ஸ்அப்", "மின்னஞ்சல் எழுது", "வீடியோ உருவாக்கு",
+        )
+        visual_creation_verbs = (
+            "make a deepavali card", "make a cny card", "make a hari raya card", "make a greeting card",
+            "create a card", "design a ", "put my studio portrait", "put my portrait",
+            "in the background of", "transform my photo", "keep my exact face", "keep my card design",
+            "switch the outfit", "change the background",
+        )
+        if any(tt in low for tt in third_task_triggers) and not any(vv in low for vv in visual_creation_verbs):
+            msg = third_task_msgs.get(lang, third_task_msgs["en"])
+            return {
+                "status": "refused_out_of_scope",
+                "refusedReason": "out_of_scope_third_task",
+                "assistantReply": msg,
+                "message": msg,
+            }
+
+    return None
+
+
 def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=None) -> dict:
     """Main Challenge 1 multi-turn chat & studio handler invoked by `POST /api/ai` (`challenge == "1"`)."""
     t_start = time.time()
@@ -1687,6 +1842,12 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
             "message": gate_msgs.get(lang, gate_msgs["en"]),
         }
 
+    # Strict Refusal Gate: Reject stacked multi-prompts or out-of-scope '3rd step' non-image tasks
+    refusal = _check_stacked_or_out_of_scope_refusal(user_message, lang, has_step1_portrait)
+    if refusal is not None:
+        refusal["suggestedFollowUps"] = _default_follow_ups(lang, prev_mode, prev_occasion, "")
+        return refusal
+
     # Heuristic seed from user's message + previous conversation state
     heur = _detect_heuristic_intent(
         user_msg=user_message,
@@ -1703,35 +1864,52 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     style_key = heur["styleKey"] if heur["styleKey"] in STYLE_META else "mdrt_keynote"
     occasion_key = heur["occasionKey"] if heur["occasionKey"] in OCCASION_META else "newborn"
     celebrity_name = ""
-    copy_only = heur["copyOnly"]
+    copy_only = False
 
-    # Strict Gate 1: Step 1 Studio Portrait MUST be generated first before Step 2 Outreach Cards / Banners / Copy unlock
+    # Strict Gate 1: Step 1 Studio Portrait MUST be generated first before Step 2 Outreach Cards / Banners unlock
     if not has_step1_portrait:
         creation_mode = "executive_headshot"
-        copy_only = False
 
     explicit_body_client = (body.get("clientName") or "").strip()
     prev_state_client = (prev_state.get("clientName") or "").strip()
-    client_name_in = explicit_body_client or prev_state_client
-    motto_in = (body.get("motto") or prev_state.get("motto") or "").strip()
-    card_headline_in = (body.get("cardHeadline") or prev_state.get("cardHeadline") or "").strip()
+    explicit_body_motto = (body.get("motto") or "").strip()
+    prev_state_motto = (prev_state.get("motto") or "").strip()
+    explicit_body_headline = (body.get("cardHeadline") or "").strip()
+    prev_state_headline = (prev_state.get("cardHeadline") or "").strip()
 
-    # Format compact prior conversation context (up to last 6 messages)
-    history_lines: list[str] = []
-    for turn in chat_history[-6:]:
-        r_label = "Leader" if turn.get("role") == "user" else "Studio AI"
-        t_txt = str(turn.get("text") or "").strip()
-        if t_txt:
-            history_lines.append(f"{r_label}: {t_txt[:260]}")
-    history_block = "\n".join(history_lines) if history_lines else "(First turn in Studio session)"
-
-    same_card_seed = (
-        prev_mode == "outreach_card"
-        and creation_mode == "outreach_card"
-        and prev_occasion == occasion_key
+    # Anti-Pollution Isolation: Only carry over prior visual prompt, history, or card/banner fields
+    # when incrementally refining the EXACT same artifact (never across mode switches, occasion switches, or standalone redo pills!)
+    is_standalone_preset = _is_standalone_or_redo_prompt(user_message)
+    is_same_artifact_seed = bool(
+        has_existing_visual
+        and not is_standalone_preset
+        and prev_mode == creation_mode
+        and (creation_mode != "outreach_card" or prev_occasion == occasion_key)
     )
-    default_client = explicit_body_client or (prev_state_client if same_card_seed else "")
-    default_motto = motto_in or ""
+
+    if is_same_artifact_seed:
+        history_lines: list[str] = []
+        for turn in chat_history[-2:]:
+            r_label = "Leader" if turn.get("role") == "user" else "Studio AI"
+            t_txt = str(turn.get("text") or "").strip()
+            if t_txt:
+                history_lines.append(f"{r_label}: {t_txt[:220]}")
+        history_block = "\n".join(history_lines) if history_lines else "(Incremental visual refinement)"
+        effective_prev_visual = prev_visual_prompt
+        default_client = explicit_body_client or (prev_state_client if creation_mode == "outreach_card" else "")
+        default_motto = explicit_body_motto or (prev_state_motto if creation_mode == "brand_banner" else "")
+        card_headline_in = explicit_body_headline or (prev_state_headline if creation_mode == "outreach_card" else "")
+    else:
+        history_block = (
+            "(Fresh visual selection — treat NEW USER MESSAGE independently. "
+            "Do NOT carry over any colors, outfits, backgrounds, headlines, slogans, or recipient names from previous turns.)"
+        )
+        effective_prev_visual = ""
+        default_client = explicit_body_client
+        default_motto = explicit_body_motto
+        card_headline_in = explicit_body_headline
+    client_name_in = default_client
+    motto_in = default_motto
 
     identity_desc = (
         "Live Camera Selfie / Uploaded Photo (Strict 100% Face-Lock Active)"
@@ -1767,9 +1945,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         )
         + f"Conversation History:\n{history_block}\n\n"
         f"Previous Studio State:\n"
-        f"- Previous Mode: {prev_mode}\n"
-        f"- Previous Visual Styling Prompt: {prev_visual_prompt or 'None yet'}\n"
-        f"- Previous Style Key: {prev_style} | Previous Occasion Key: {prev_occasion}\n"
+        f"- Active Refinement Base: {effective_prev_visual or 'None (Fresh visual — build purely from NEW USER MESSAGE)'}\n"
         f"- Previous Recipient Name (if refining same card): {default_client or 'None (generic card)'}\n"
         f"- Identity Source: {identity_desc}\n\n"
         f"NEW USER MESSAGE (Turn Input):\n\"{user_message or 'Create an executive studio portrait.'}\"\n\n"
@@ -1845,12 +2021,14 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
     s_meta = STYLE_META.get(style_key, STYLE_META["mdrt_keynote"])
     o_meta = OCCASION_META.get(occasion_key, OCCASION_META["newborn"])
 
-    same_card_refinement = (
-        prev_mode == "outreach_card"
-        and creation_mode == "outreach_card"
-        and prev_occasion == occasion_key
+    # Re-verify post-parse continuity so LLM mode/occasion shifts also wipe stale fields cleanly
+    same_artifact_post = bool(
+        has_existing_visual
+        and not is_standalone_preset
+        and prev_mode == creation_mode
+        and (creation_mode != "outreach_card" or prev_occasion == occasion_key)
     )
-    fallback_client = explicit_body_client or (prev_state_client if same_card_refinement else "")
+    fallback_client = explicit_body_client or (prev_state_client if (same_artifact_post and creation_mode == "outreach_card") else "")
     if parsed is not None and "clientName" in parsed:
         parsed_client = str(parsed.get("clientName") or "").strip()
         resolved_client = parsed_client or explicit_body_client
@@ -1858,24 +2036,30 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         resolved_client = fallback_client
     if creation_mode != "outreach_card" and not explicit_body_client:
         resolved_client = ""
+    if not same_artifact_post and resolved_client and resolved_client == prev_state_client and resolved_client.lower() not in (user_message or "").lower():
+        resolved_client = ""
 
     # Guard against accidentally treating the advisor's own name as the recipient name
     clean_adv_check = _clean_advisor_display_name(raw_agent_name)
     if resolved_client and clean_adv_check and resolved_client.strip().lower() == clean_adv_check.strip().lower():
         if resolved_client.strip().lower() not in (user_message or "").lower():
             resolved_client = ""
+
     def _strip_raw_emojis(txt: str) -> str:
         cleaned_txt = re.sub(r"[\U0001F300-\U0001FAFF\u2600-\u27BF\uFE0F]+", "", txt or "")
         return re.sub(r"\s{2,}", " ", cleaned_txt).strip()
 
+    post_motto_fallback = explicit_body_motto or (prev_state_motto if (same_artifact_post and creation_mode == "brand_banner") else "")
+    post_headline_fallback = explicit_body_headline or (prev_state_headline if (same_artifact_post and creation_mode == "outreach_card") else "")
+
     resolved_client = _strip_raw_emojis(resolved_client)
     effective_motto = _strip_raw_emojis(
         (str(parsed.get("motto")).strip() if parsed and parsed.get("motto") else "")
-        or (default_motto if creation_mode == "brand_banner" else "")
+        or (post_motto_fallback if creation_mode == "brand_banner" else "")
     )
     effective_headline = _strip_raw_emojis(
         (str(parsed.get("cardHeadline")).strip() if parsed and parsed.get("cardHeadline") else "")
-        or card_headline_in
+        or post_headline_fallback
         or o_meta["cardHeadline"]
     )
     effective_headline = re.sub(r"\s*[—–-]{2,}\s*", " • ", effective_headline).strip(" —–-")
@@ -1916,8 +2100,8 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
                 "golden-hour skyline and refined crimson-and-gold executive accents"
             )
         else:
-            if prev_visual_prompt and user_message and prev_mode == "executive_headshot":
-                planned_visual = f"{prev_visual_prompt}; updated with: {user_message}"
+            if effective_prev_visual and user_message and same_artifact_post and creation_mode == "executive_headshot":
+                planned_visual = f"{effective_prev_visual}; updated with: {user_message}"
             else:
                 planned_visual = user_message or s_meta["wardrobePrompt"]
 
@@ -2137,7 +2321,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
             )
         elif creation_mode == "outreach_card":
             default_reply = (
-                f"Here is your **{loc_artifact_name}**! 🙌 Combine any pills below to refine the visual design, "
+                f"Here is your **{loc_artifact_name}**! 🙌 Tap any pill below to switch styles or refine the visual design, "
                 "save the image, or hit **Submit** to send it to the Arena leaderboard."
             )
         else:
@@ -2226,7 +2410,7 @@ def _handle_c1_ai_internal(body: dict, call_vertex_fn, lang_names: dict, call_im
         "linkedinHeadline": (
             parsed.get("linkedinHeadline") if parsed and parsed.get("linkedinHeadline") else default_headline
         ),
-        "cardHeadline": effective_headline,
+        "cardHeadline": effective_headline if creation_mode == "outreach_card" else "",
         "clientName": resolved_client,
         "motto": effective_motto,
         "visualPrompt": clean_styling if creation_mode == "executive_headshot" else planned_visual,
