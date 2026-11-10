@@ -557,9 +557,9 @@ async function run() {
       const bodyTxt = document.body.innerText;
       const scrollW = document.documentElement.scrollWidth;
 
-      // 3 visual style pills in 1 horizontal row
+      // 3 synthesis focus or visual style pills in 1 horizontal row
       const styleGrid = Array.from(document.querySelectorAll("div.grid.grid-cols-3")).find(
-        g => g.children.length === 3 && /Watercolor|Prestige|Luxury|Modern|Lifestyle|水彩|奢华|尊尚/i.test(g.innerText)
+        g => g.children.length === 3 && /Gap|Urgency|Wealth|Funding|Rival|Radar|Watercolor|Prestige|Luxury|Modern|Lifestyle|水彩|奢华|尊尚/i.test(g.innerText)
       );
       const styleTops = styleGrid
         ? Array.from(styleGrid.children).map(el => Math.round(el.getBoundingClientRect().top))
@@ -568,8 +568,8 @@ async function run() {
       // Personal touch input collapsed by default on Step 1
       const step1Inputs = Array.from(document.querySelectorAll("input[type='text']"));
 
-      // Primary Create Greeting Card button position relative to 844px mobile fold
-      const createBtn = Array.from(document.querySelectorAll("button")).find(b => /Create Greeting Card|生成专属贺卡|生成专属祝贺卡/i.test(b.textContent));
+      // Primary Synthesize Brief / Create Greeting Card button position relative to 844px mobile fold
+      const createBtn = Array.from(document.querySelectorAll("button")).find(b => /Synthesize Pre-Pitch Brief|Create Greeting Card|生成一页式战前简报|生成专属贺卡|生成专属祝贺卡/i.test(b.textContent));
       const createRect = createBtn ? createBtn.getBoundingClientRect() : null;
 
       // Verify R.C.T.F.C. drawer and live prompt are NOT present on Step 1

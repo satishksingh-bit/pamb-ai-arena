@@ -1237,7 +1237,324 @@ ARCHETYPE_MS_OVERRIDES = {
 _orig_resolve_seat = resolve_seat_scenario
 
 
-def resolve_seat_scenario(seat_index: int, lang: str = "en") -> dict:
+PRE_PITCH_BRIEF_META = {
+    "newborn_baby": {
+        "en": {
+            "gapHeadline": "Day-1 Baby Wellness & Uni Fund Gap",
+            "gapBullets": [
+                "Legacy RM 150k single medical card only covers parents with RM 0 Day-1 newborn protection.",
+                "No pediatric wellness reserve or ring-fenced university milestone fund started yet.",
+            ],
+            "urgencyWindow": "First 30–60 Days Post-Birth Window",
+            "doorOpenerOffer": "RM 500 Childbirth Cash Reward",
+        },
+        "zh-CN": {
+            "gapHeadline": "初生宝宝首日健康与大学教育缺口",
+            "gapBullets": [
+                "现有旧款 RM 15万单人医药卡未涵盖新生宝宝首日全面健康与儿科守护。",
+                "尚未建立专属大学教育里程碑基金与父母保费豁免延续机制。",
+            ],
+            "urgencyWindow": "宝宝出生后 30–60 天黄金规划期",
+            "doorOpenerOffer": "RM 500 添丁生育现金奖",
+        },
+        "yue": {
+            "gapHeadline": "初生 BB 首日健康與大學基金缺口",
+            "gapBullets": [
+                "現有舊款 RM 15萬單人醫療卡未包初生 BB 首日周全健康與兒科守護。",
+                "尚未建立專屬大學教育里程碑基金同埋父母 Payor Waiver 保費豁免。",
+            ],
+            "urgencyWindow": "BB 出世後 30–60 日黃金規劃期",
+            "doorOpenerOffer": "RM 500 添丁生育現金獎",
+        },
+        "ms": {
+            "gapHeadline": "Jurang Kesejahteraan Bayi Hari-1 & Tabung Uni",
+            "gapBullets": [
+                "Kad perubatan lama RM 150k belum melindungi kesejahteraan awal Hari-1 bayi.",
+                "Tiada dana pendidikan universiti berstruktur dengan Jaminan Kesinambungan Pembayar.",
+            ],
+            "urgencyWindow": "30–60 Hari Pertama Selepas Kelahiran",
+            "doorOpenerOffer": "Ganjaran Tunai Bayi RM 500",
+        },
+        "ta": {
+            "gapHeadline": "முதல் நாள் குழந்தை நலன் & கல்வி நிதி இடைவெளி",
+            "gapBullets": [
+                "பழைய RM 150k மருத்துவ அட்டை குழந்தையின் முதல் நாள் நலப் பாதுகாப்பை உள்ளடக்கவில்லை.",
+                "பல்கலைக்கழக கல்வி நிதி மற்றும் Payor Waiver தொடர்ச்சி பாதுகாப்பு இன்னும் தொடங்கப்படவில்லை.",
+            ],
+            "urgencyWindow": "குழந்தை பிறந்த முதல் 30–60 நாட்கள்",
+            "doorOpenerOffer": "RM 500 குழந்தை பிறப்பு ரொக்கப் பரிசு",
+        },
+    },
+    "ci_health_scare": {
+        "en": {
+            "gapHeadline": "Age-39 Premier Suite & Income Upgrade",
+            "gapBullets": [
+                "Legacy RM 100k policy lags executive income & private hospital suite costs entering the 40s.",
+                "Age-40 birthday next month triggers an automatic age-band premium step-up.",
+            ],
+            "urgencyWindow": "Before Age-40 Birthday Rate Step-Up",
+            "doorOpenerOffer": "Age-39 Rate Lock + 15% Cash Saver",
+        },
+        "zh-CN": {
+            "gapHeadline": "39岁黄金费率与高管医疗升级窗口",
+            "gapBullets": [
+                "旧有 RM 10万基础保单难以匹配高管尊尚私家病房与黄金十年收入延续需求。",
+                "下月满 40 岁将跨入新年龄费率档，亟需趁体检全优锁定 39 岁健康费率。",
+            ],
+            "urgencyWindow": "满 40 岁生日前黄金费率锁定期",
+            "doorOpenerOffer": "锁住39岁费率 + 15%现金折扣",
+        },
+        "yue": {
+            "gapHeadline": "39歲靚價鎖定與高管醫療升級窗口",
+            "gapBullets": [
+                "舊有 RM 10萬基本保單未能配合高管私家病房同埋黃金十年收入延續需要。",
+                "下個月踏入 40 歲就會調整保費級別，宜趁體檢靚仔鎖定 39 歲健康費率。",
+            ],
+            "urgencyWindow": "踏入 40 歲生日前黃金鎖價期",
+            "doorOpenerOffer": "鎖定39歲靚價 + 15%現金折扣",
+        },
+        "ms": {
+            "gapHeadline": "Naik Taraf Suite Premier & Kunci Kadar Umur 39",
+            "gapBullets": [
+                "Polisi lama RM 100k tidak lagi sepadan dengan gaya hidup eksekutif & kos bilik suite hospital.",
+                "Ulang tahun ke-40 bulan depan bakal meningkatkan kadar premium mengikut umur.",
+            ],
+            "urgencyWindow": "Sebelum Kenaikan Kadar Umur 40",
+            "doorOpenerOffer": "Kunci Kadar Umur 39 + Diskaun 15%",
+        },
+        "ta": {
+            "gapHeadline": "39 வயது சலுகைக் கட்டணம் & உயர் மருத்துவ மேம்பாடு",
+            "gapBullets": [
+                "பழைய RM 100k பாலிசி தற்போதைய உயர் மருத்துவமனை மற்றும் வருமானப் பாதுகாப்பிற்குப் போதாது.",
+                "அடுத்த மாதம் 40 வயது பிறந்தநாளுக்குப் பிறகு பிரீமியம் கட்டணம் உயரும்.",
+            ],
+            "urgencyWindow": "40 வயது பிறந்தநாள் கட்டண உயர்வுக்கு முன்",
+            "doorOpenerOffer": "39 வயது கட்டண உறுதி + 15% தள்ளுபடி",
+        },
+    },
+    "career_promotion": {
+        "en": {
+            "gapHeadline": "Executive Income & Wealth Allocation Gap",
+            "gapBullets": [
+                "Monthly income doubled to RM 48k/mth, leaving the 10-year-old RM 200k policy outgrown.",
+                "Surplus executive cashflow lacks 260% female wellness protection and Day-1 103% wealth allocation.",
+            ],
+            "urgencyWindow": "First 60 Days of New Executive Role",
+            "doorOpenerOffer": "Career Promotion Cash Reward",
+        },
+        "zh-CN": {
+            "gapHeadline": "高管收入翻倍与财富配置升级缺口",
+            "gapBullets": [
+                "晋升后月入翻倍至 RM 4.8万，十年前 RM 20万旧保单已远低于高管身价。",
+                "新增高额盈余亟需 260% 专属女性健康守护与首日 103% 高配比财富增值通道。",
+            ],
+            "urgencyWindow": "履新晋升首 60 天里程碑申领期",
+            "doorOpenerOffer": "PRULady 升职里程碑现金奖",
+        },
+        "yue": {
+            "gapHeadline": "高管收入翻倍與財富配置升級缺口",
+            "gapBullets": [
+                "升職後月入翻倍至 RM 4.8萬，十年前 RM 20萬舊單已經追唔上高管身價。",
+                "每月盈餘需要 260% 女性專屬健康守護同埋首日 103% 財富增值配置。",
+            ],
+            "urgencyWindow": "升職上任首 60 日現金獎申領期",
+            "doorOpenerOffer": "PRULady 升職里程碑現金獎",
+        },
+        "ms": {
+            "gapHeadline": "Jurang Perlindungan Eksekutif & Alokasi Kekayaan",
+            "gapBullets": [
+                "Pendapatan meningkat dua kali ganda ke RM 48k/bulan, mengatasi polisi lama RM 200k.",
+                "Lebihan tunai eksekutif memerlukan perlindungan wanita 260% dan alokasi pelaburan 103% Hari-1.",
+            ],
+            "urgencyWindow": "60 Hari Pertama Selepas Kenaikan Pangkat",
+            "doorOpenerOffer": "Ganjaran Tunai Kenaikan Pangkat",
+        },
+        "ta": {
+            "gapHeadline": "உயர் பதவி வருமானம் & செல்வ முதலீட்டு இடைவெளி",
+            "gapBullets": [
+                "மாத வருமானம் RM 48k ஆக உயர்ந்துள்ள நிலையில், 10 ஆண்டு பழைய RM 200k பாலிசி போதாது.",
+                "உபரி வருமானத்திற்கு 260% பெண்கள் நலப் பாதுகாப்பு மற்றும் முதல் நாள் 103% முதலீட்டு ஒதுக்கீடு தேவை.",
+            ],
+            "urgencyWindow": "பதவி உயர்வு பெற்ற முதல் 60 நாட்கள்",
+            "doorOpenerOffer": "பதவி உயர்வு ரொக்கப் பரிசு",
+        },
+    },
+    "uni_retirement_50": {
+        "en": {
+            "gapHeadline": "Age-60 Employer Medical Cliff & Retirement Bridge",
+            "gapBullets": [
+                "Company group medical ends sharply at Age 60 while post-50 underwriting gets stricter.",
+                "Needs guaranteed post-60 retirement cashflow without touching the child's overseas AUD tuition pool.",
+            ],
+            "urgencyWindow": "Age-50 Clean Health Underwriting Window",
+            "doorOpenerOffer": "Smart Deductible Age-60 Bridge",
+        },
+        "zh-CN": {
+            "gapHeadline": "60岁公司医保断层与退休现金流衔接",
+            "gapBullets": [
+                "公司团体医疗将于60岁退休时终止，需趁50岁健康体提前锁定终身医疗。",
+                "需在不触动孩子海外大学学费储备的前提下，建立60岁后契约保证退休金。",
+            ],
+            "urgencyWindow": "50岁标准健康体核保黄金窗口",
+            "doorOpenerOffer": "Smart Deductible 省费医疗衔接",
+        },
+        "yue": {
+            "gapHeadline": "60歲公司醫保斷層與退休現金流銜接",
+            "gapBullets": [
+                "公司團體醫療去到60歲退休就停，要趁50歲健康體提早鎖定終身醫療額度。",
+                "唔郁小朋友外國大學學費儲備之下，建立60歲後寫入合約嘅保證退休長俸。",
+            ],
+            "urgencyWindow": "50歲標準健康核保黃金窗口",
+            "doorOpenerOffer": "Smart Deductible 慳費醫療銜接",
+        },
+        "ms": {
+            "gapHeadline": "Jurang Perubatan Umur 60 & Aliran Tunai Persaraan",
+            "gapBullets": [
+                "Kad perubatan syarikat tamat pada umur 60 tahun; perlu kunci kelayakan sihat pada umur 50.",
+                "Perlukan pendapatan pasif terjamin selepas umur 60 tanpa mengusik tabung universiti anak.",
+            ],
+            "urgencyWindow": "Tetingkap Kesihatan Umur 50 Tahun",
+            "doorOpenerOffer": "Jambatan Smart Deductible Umur 60",
+        },
+        "ta": {
+            "gapHeadline": "60 வயது நிறுவன மருத்துவ முடிவு & ஓய்வுக்கால நிதி",
+            "gapBullets": [
+                "நிறுவன மருத்துவக் காப்பீடு 60 வயதில் முடிகிறது; 50 வயது ஆரோக்கியத்தில் வாழ்நாள் பாதுகாப்பை உறுதி செய்ய வேண்டும்.",
+                "குழந்தையின் வெளிநாட்டுக் கல்வி நிதியைத் தொடாமல் 60 வயதுக்குப் பின் உத்தரவாத ஓய்வூதியம் தேவை.",
+            ],
+            "urgencyWindow": "50 வயது ஆரோக்கிய தகுதி காலக்கெடு",
+            "doorOpenerOffer": "Smart Deductible மருத்துவ இணைப்பு",
+        },
+    },
+    "new_home_mortgage": {
+        "en": {
+            "gapHeadline": "RM 1.3M Joint Mortgage & Family Continuity Gap",
+            "gapBullets": [
+                "Holding medical cards only while carrying a new RM 1.3M 35-year mortgage (RM 5,600/mth).",
+                "Bank-locked MRTA pays only the bank with zero portable cash surplus or installment continuity reserve.",
+            ],
+            "urgencyWindow": "New Home Keys & Mortgage Onboarding Window",
+            "doorOpenerOffer": "RM 500 New Home Cash Reward",
+        },
+        "zh-CN": {
+            "gapHeadline": "RM 130万新居房贷护盾与月供延续缺口",
+            "gapBullets": [
+                "目前仅有普通医药卡，尚未为 RM 130万新居（月供 RM 5,600）配置可携式家庭护盾。",
+                "银行绑定型 MRTA 仅赔银行且保额递减，缺乏归属家人的盈余与 20% 房贷延续储备。",
+            ],
+            "urgencyWindow": "新居入伙拿钥匙 90 天申领窗口",
+            "doorOpenerOffer": "RM 500 新居达成现金奖",
+        },
+        "yue": {
+            "gapHeadline": "RM 130萬新居按揭護盾與供樓延續缺口",
+            "gapBullets": [
+                "目前淨係得普通醫療卡，未幫 RM 130萬新屋（月供 RM 5,600）配置跟身家庭保障。",
+                "銀行綁定 MRTA 淨係賠俾銀行，缺乏留俾屋企人嘅盈餘同埋 20% 供樓延續儲備。",
+            ],
+            "urgencyWindow": "新居入伙攞鎖匙 90 日申領期",
+            "doorOpenerOffer": "RM 500 新居入伙現金獎",
+        },
+        "ms": {
+            "gapHeadline": "Jurang Gadai Janji RM 1.3J & Kesinambungan Keluarga",
+            "gapBullets": [
+                "Hanya mempunyai kad perubatan manakala komitmen gadai janji baharu ialah RM 1.3J (RM 5,600/bln).",
+                "MRTA bank hanya membayar bank tanpa lebihan tunai milik keluarga atau rizab ansuran 20%.",
+            ],
+            "urgencyWindow": "Tetingkap Sambutan Kunci Rumah Baharu",
+            "doorOpenerOffer": "Ganjaran Tunai Rumah Baharu RM 500",
+        },
+        "ta": {
+            "gapHeadline": "RM 1.3M புதிய வீட்டுக் கடன் & குடும்பப் பாதுகாப்பு இடைவெளி",
+            "gapBullets": [
+                "மாதம் RM 5,600 செலுத்தும் RM 1.3M புதிய வீட்டுக் கடனுக்கு குடும்பத்திற்குச் சொந்தமான பாதுகாப்பு இல்லை.",
+                "வங்கி MRTA வங்கிக்கு மட்டுமே செலுத்தும்; குடும்பத்திற்கு உபரி ரொக்கமோ 20% தவணை தொடர்ச்சி நிதியோ தராது.",
+            ],
+            "urgencyWindow": "புதிய வீட்டுச் சாவி பெற்ற 90 நாட்கள்",
+            "doorOpenerOffer": "RM 500 புதிய வீடு ரொக்கப் பரிசு",
+        },
+    },
+    "takaful_hibah_estate": {
+        "en": {
+            "gapHeadline": "RM 9M Joint Business & Probate Freeze Exposure",
+            "gapBullets": [
+                "RM 9M business equity & property held in joint names face an 18-month estate freeze.",
+                "Zero conditional Shariah Hibah liquidity to keep family cashflow and business operations smooth.",
+            ],
+            "urgencyWindow": "Post-Record Financial Year Structuring Window",
+            "doorOpenerOffer": "Fast Probate-Free Hibah Liquidity",
+        },
+        "zh-CN": {
+            "gapHeadline": "RM 900万联名企业资产与遗产冻结风险",
+            "gapBullets": [
+                "RM 900万公司股权与房产联名持有，一旦面临长达18个月遗产冻结将影响资金周转。",
+                "尚未配置免冻结即刻直付家人的 Shariah Hibah 专项流动资金池。",
+            ],
+            "urgencyWindow": "企业创收里程碑年度资产配置窗口",
+            "doorOpenerOffer": "Hibah 免遗产冻结直付通道",
+        },
+        "yue": {
+            "gapHeadline": "RM 900萬聯名企業資產與遺產凍結風險",
+            "gapBullets": [
+                "RM 900萬公司股份同物業聯名持有，一旦遇上18個月遺產凍結會影響周轉。",
+                "尚未配置免凍結即刻直付屋企人嘅 Shariah Hibah 專項流動現金池。",
+            ],
+            "urgencyWindow": "企業業績創新高年度資產配置期",
+            "doorOpenerOffer": "Hibah 免遺產凍結直付通道",
+        },
+        "ms": {
+            "gapHeadline": "Pendedahan Pembekuan Pusaka & Aset Perniagaan RM 9J",
+            "gapBullets": [
+                "Aset perniagaan & hartanah RM 9J atas nama bersama berisiko mengalami pembekuan pusaka 18 bulan.",
+                "Tiada kecairan segera Hibah Takaful bersyarat untuk kelangsungan keluarga dan operasi syarikat.",
+            ],
+            "urgencyWindow": "Tetingkap Penstrukturan Tahun Rekod Perniagaan",
+            "doorOpenerOffer": "Kecairan Segera Hibah Tanpa Pembekuan",
+        },
+        "ta": {
+            "gapHeadline": "RM 9M கூட்டுத் தொழில் சொத்து & முடக்க அபாயம்",
+            "gapBullets": [
+                "RM 9M தொழில் மற்றும் சொத்துக்கள் கூட்டுப் பெயரில் உள்ளதால் 18 மாத சொத்து முடக்கம் ஏற்படலாம்.",
+                "குடும்பம் மற்றும் தொழில் தொடர்ச்சிக்கு உடனடி Shariah Hibah ரொக்கப் பாதுகாப்பு இல்லை.",
+            ],
+            "urgencyWindow": "சாதனை வருவாய் ஆண்டின் நிதித் திட்டமிடல் காலம்",
+            "doorOpenerOffer": "முடக்கமில்லா உடனடி Hibah ரொக்கம்",
+        },
+    },
+}
+
+
+def _build_default_pre_pitch_brief(base: dict, norm: str) -> dict:
+    arch_id = base["id"]
+    meta_by_arch = PRE_PITCH_BRIEF_META.get(arch_id, PRE_PITCH_BRIEF_META["newborn_baby"])
+    meta = meta_by_arch.get(norm) or meta_by_arch.get("en")
+    wa_ideas = base.get("waIdeas") or []
+    pru_bullets = [
+        (w.get("detail") or w.get("label") or "").strip() if isinstance(w, dict) else str(w).strip()
+        for w in wa_ideas[:2]
+    ]
+    while len(pru_bullets) < 2:
+        pru_bullets.append(base["pambPlan"])
+    aia_facts = base.get("aiaFacts") or []
+    rival_bullets = [str(f).strip() for f in aia_facts[:2]]
+    while len(rival_bullets) < 2:
+        rival_bullets.append(base["policyCitation"])
+    return {
+        "clientName": base["customerName"],
+        "milestoneBadge": f"{base['icon']} {base['shortLabel']}",
+        "crmRecord": base["existingGap"],
+        "gapHeadline": meta["gapHeadline"],
+        "gapBullets": list(meta["gapBullets"]),
+        "urgencyWindow": meta["urgencyWindow"],
+        "pruPlan": base["pambPlan"],
+        "pruBullets": pru_bullets,
+        "doorOpenerOffer": meta["doorOpenerOffer"],
+        "rivalBrand": base["rivalBrand"],
+        "rivalPlan": base["aiaPlan"],
+        "rivalBullets": rival_bullets,
+    }
+
+
+def _resolve_single_seat_scenario(seat_index: int, lang: str = "en") -> dict:
     norm = "yue" if lang == "zh-TW" else (lang or "en")
     base = _orig_resolve_seat(seat_index, norm)
     if norm == "ms":
@@ -1293,4 +1610,32 @@ def resolve_seat_scenario(seat_index: int, lang: str = "en") -> dict:
                 "இனிய 40-வது பிறந்தநாள் — சிறந்த ஆரோக்கியம் & பொன்னான தசாப்தத்திற்கு வாழ்த்துகள்! 🥂⚡",
                 "40 ஆண்டு சாதனை & துடிப்பான ஆரோக்கியத்திற்கு நல்வாழ்த்துகள்! 🌟",
             ]
+    base["defaultPrePitchBrief"] = _build_default_pre_pitch_brief(base, norm)
+    return base
+
+
+def resolve_seat_scenario(seat_index: int, lang: str = "en") -> dict:
+    norm = "yue" if lang == "zh-TW" else (lang or "en")
+    idx = seat_index % len(SEAT_ROSTER_56)
+    base = _resolve_single_seat_scenario(idx, norm)
+    round_idx = (idx // 6) % 12
+    roster_6 = []
+    for slot in range(6):
+        slot_seat_idx = round_idx * 6 + slot
+        slot_sc = _resolve_single_seat_scenario(slot_seat_idx, norm)
+        cust_full = slot_sc["customerName"]
+        roster_6.append({
+            "slot": slot,
+            "seatIndex": slot_seat_idx,
+            "id": slot_sc["id"],
+            "icon": slot_sc["icon"],
+            "customerName": cust_full,
+            "shortName": cust_full.split("(")[0].strip(),
+            "shortLabel": slot_sc["shortLabel"],
+            "lifeEvent": slot_sc["lifeEvent"],
+            "existingGap": slot_sc["existingGap"],
+            "pambPlan": slot_sc["pambPlan"],
+            "rivalBrand": slot_sc["rivalBrand"],
+        })
+    base["clientRoster6"] = roster_6
     return base

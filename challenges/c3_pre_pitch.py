@@ -1510,6 +1510,7 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
                 True,
                 lang=norm_lang,
             )
+        has_brief = bool(body.get("prePitchBrief") or body.get("hasBrief") or card_data_url)
         final_wa = submitted_wa_text
         final_em = submitted_em_text
         pillars, total_q, verdict = _evaluate_c3_hybrid(
@@ -1521,7 +1522,7 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             final_wa,
             email_prompt,
             final_em,
-            has_card=bool(card_data_url),
+            has_card=has_brief,
             personal_notes=combined_personal_notes,
             call_vertex_fn=call_vertex_fn,
         )
@@ -1530,6 +1531,7 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             "seatIndex": scen.get("seatIndex", 0),
             "customerName": scen["customerName"],
             "greetingCardDataUrl": card_data_url,
+            "prePitchBrief": body.get("prePitchBrief") or scen.get("defaultPrePitchBrief"),
             "firstTouchMessage": final_wa,
             "aiaComparisonEmail": final_em,
             "policyCitation": scen["policyCitation"],
@@ -1593,6 +1595,74 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         except Exception:
             return None
 
+    if step_mode == "brief":
+        default_brief = dict(scen.get("defaultPrePitchBrief") or {})
+        fallback_brief = dict(default_brief)
+        fallback_brief["pruBullets"] = list(default_brief.get("pruBullets") or [])
+        fallback_brief["gapBullets"] = list(default_brief.get("gapBullets") or [])
+        fallback_brief["rivalBullets"] = list(default_brief.get("rivalBullets") or [])
+        if card_personal_note:
+            if len(fallback_brief["pruBullets"]) >= 2:
+                fallback_brief["pruBullets"][1] = f"{fallback_brief['pruBullets'][1]} ({card_personal_note})"
+            else:
+                fallback_brief["pruBullets"].append(card_personal_note)
+
+        model_used = None
+        brief_obj = dict(fallback_brief)
+        if call_vertex_fn is not None:
+            brief_prompt = (
+                f"You are an expert MDRT Agent Assist AI Analyst supporting advisor {advisor_name} on the PRUMDA Learning Trip.\n"
+                f"{lang_instruction}\n"
+                f"Synthesize a crisp, executive 1-Page Pre-Pitch Brief JSON for this existing client case:\n"
+                f"- Client: {scen['customerName']}\n"
+                f"- Positive Life Milestone: {scen['lifeEvent']}\n"
+                f"- Existing CRM Coverage Record & Gap: {scen['existingPolicy']}\n"
+                f"- Recommended PRU Portfolio: {scen['pambPlan']}\n"
+                f"- Key PRU Door-Opener & Hooks: {'; '.join(all_wa_items)}\n"
+                f"- Competitor Being Quoted: {scen.get('rivalBrand', 'AIA Malaysia')} — {scen['aiaPlan']}\n"
+                f"- Factual PRU vs Competitor Advantages: {'; '.join(all_fact_items)}\n"
+                + (f"- Selected Synthesis Lens / Focus: {card_style}\n" if card_style else "")
+                + (f"- Advisor's Custom CRM Note / Personal Angle to Weave In: {card_personal_note}\n" if card_personal_note else "")
+                + (f"- Additional Advisor Instructions: {card_prompt}\n" if card_prompt and card_prompt != scen.get("cardHeadline") else "")
+                + "Rules:\n"
+                + "1. Keep all copy 100% positive, celebratory, and empowering (zero morbid or fear-mongering terms).\n"
+                + "2. Never write 'PAMB' or 'Prudential Malaysia' (use exact PRU / PRUBSN plan names).\n"
+                + "3. Keep bullets crisp (12–22 words each) and executive-ready.\n"
+                + "Respond STRICTLY in valid JSON matching this schema:\n"
+                + '{"gapHeadline": "3-6 word headline", "gapBullets": ["bullet 1", "bullet 2"], "urgencyWindow": "short timing window", '
+                + '"pruPlan": "...", "pruBullets": ["door-opener hook bullet", "funding/positioning angle bullet"], '
+                + '"doorOpenerOffer": "short badge text", "rivalBrand": "...", "rivalPlan": "...", "rivalBullets": ["factual edge 1", "factual edge 2"]}'
+            )
+            try:
+                ai_text, model_used, _ms = call_vertex_fn(brief_prompt)
+                parsed_b = _extract_json_dict(ai_text)
+                if parsed_b and parsed_b.get("gapHeadline") and isinstance(parsed_b.get("pruBullets"), list):
+                    brief_obj = {
+                        "clientName": scen["customerName"],
+                        "milestoneBadge": f"{scen['icon']} {scen['shortLabel']}",
+                        "crmRecord": scen["existingGap"],
+                        "gapHeadline": str(parsed_b.get("gapHeadline") or fallback_brief.get("gapHeadline") or "").strip(),
+                        "gapBullets": [str(x).strip() for x in (parsed_b.get("gapBullets") or fallback_brief.get("gapBullets") or []) if str(x).strip()][:2] or fallback_brief.get("gapBullets", []),
+                        "urgencyWindow": str(parsed_b.get("urgencyWindow") or fallback_brief.get("urgencyWindow") or "").strip(),
+                        "pruPlan": str(parsed_b.get("pruPlan") or scen["pambPlan"]).strip(),
+                        "pruBullets": [str(x).strip() for x in (parsed_b.get("pruBullets") or fallback_brief.get("pruBullets") or []) if str(x).strip()][:2] or fallback_brief.get("pruBullets", []),
+                        "doorOpenerOffer": str(parsed_b.get("doorOpenerOffer") or fallback_brief.get("doorOpenerOffer") or "").strip(),
+                        "rivalBrand": str(parsed_b.get("rivalBrand") or scen.get("rivalBrand", "AIA Malaysia")).strip(),
+                        "rivalPlan": str(parsed_b.get("rivalPlan") or scen["aiaPlan"]).strip(),
+                        "rivalBullets": [str(x).strip() for x in (parsed_b.get("rivalBullets") or fallback_brief.get("rivalBullets") or []) if str(x).strip()][:2] or fallback_brief.get("rivalBullets", []),
+                    }
+            except Exception:
+                brief_obj = dict(fallback_brief)
+
+        return {
+            "scenarioId": scenario_id,
+            "seatIndex": scen.get("seatIndex", 0),
+            "prePitchBrief": brief_obj,
+            "policyCitation": scen["policyCitation"],
+            "modelUsed": model_used or "deterministic-brief",
+            "latencyMs": int((time.time() - t_start) * 1000),
+        }
+
     if step_mode == "whatsapp":
         is_wa_subset = wa_subset_explicit and len(chosen_wa_ideas) < len(all_wa_items)
         wa_hooks_block = (
@@ -1652,10 +1722,10 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         reply_prompt = (
             f"You are role-playing as {scen['customerName']} ({scen['lifeEvent']}), a warm, friendly Malaysian client replying on WhatsApp to your trusted advisor ({advisor_name}).\n"
             f"{lang_instruction}\n"
-            f"Your advisor just sent you a celebratory Greeting Card (\"{card_prompt or scen['cardHeadline']}\") and this First-Touch WhatsApp message:\n"
+            f"Your advisor just reached out with thoughtful milestone outreach (a Pre-Pitch Brief hook or celebratory Greeting Card: \"{card_prompt or scen['cardHeadline']}\") and this First-Touch WhatsApp message:\n"
             f"\"\"\"{advisor_msg}\"\"\"\n\n"
             f"Write a natural, warm, conversational WhatsApp reply (28–52 words, 2–3 sentences) directly responding to what your advisor wrote:\n"
-            f"1. Warmly thank {advisor_name} for the thoughtful card and specific message/personal touch, and gladly accept catching up / reviewing their summary.\n"
+            f"1. Warmly thank {advisor_name} for the thoughtful outreach and specific message/personal touch, and gladly accept catching up / reviewing their summary.\n"
             f"2. Mention naturally that a friend/agent from {rival_brand} also just shared a quote for {rival_plan}, and ask how {pru_plan} compares factually so you can review both together.\n"
             f"Rules: Sound like a real, appreciative Malaysian client on WhatsApp (warm, receptive, never hostile). Keep official plan names ({rival_plan}, {pru_plan.split('+')[0].strip()}) clear.\n"
             + 'Respond STRICTLY in valid JSON: {"customerReply": "..."}'

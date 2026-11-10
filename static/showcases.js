@@ -106,7 +106,7 @@ window.SubmissionCardRenderer = function ({
         </div>
       </div>
 
-      {/* Challenge 3 Compact Single-Box Layout: Greeting Card at Top + Leader's Personal Touch + WhatsApp & Plan Comparison Email + Rubric */}
+      {/* Challenge 3 Compact Single-Box Layout: Greeting Card or 1-Page Pre-Pitch Brief at Top + Leader's Personal Touch + WhatsApp & Plan Comparison Email + Rubric */}
       {cNum === "3" ? (
         <div className="space-y-2.5">
           {displayPortrait && (
@@ -120,6 +120,48 @@ window.SubmissionCardRenderer = function ({
                   mode === "spotlight" ? "h-40 sm:h-44" : "h-32"
                 } w-auto object-contain rounded-lg border-2 border-[#ed1b2e] shadow-sm cursor-zoom-in`}
               />
+            </div>
+          )}
+
+          {!displayPortrait && submission.prePitchBrief && (
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1.5">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[11px] font-extrabold text-[#ed1b2e]">
+                  🤖 Step 1 • Agent Assist 1-Page Pre-Pitch Brief
+                </span>
+                {submission.prePitchBrief.focusLabel && (
+                  <span className="text-[10px] font-bold text-slate-600 truncate">
+                    {submission.prePitchBrief.focusLabel}
+                  </span>
+                )}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <div className="bg-white border border-slate-200 rounded-lg p-2">
+                  <div className="text-[10px] font-extrabold text-[#ed1b2e] uppercase">
+                    1. Coverage Gap
+                  </div>
+                  <div className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2">
+                    {submission.prePitchBrief.gapHeadline}
+                  </div>
+                </div>
+                <div className="bg-white border border-slate-200 rounded-lg p-2">
+                  <div className="text-[10px] font-extrabold text-emerald-700 uppercase">
+                    2. PRU Hook
+                  </div>
+                  <div className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2">
+                    {submission.prePitchBrief.pruPlan}
+                  </div>
+                </div>
+                <div className="bg-white border border-slate-200 rounded-lg p-2">
+                  <div className="text-[10px] font-extrabold text-amber-800 uppercase">
+                    3. Competitor Radar (vs. {submission.prePitchBrief.rivalBrand || submission.rivalBrand || "Rival"})
+                  </div>
+                  <div className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2">
+                    {(submission.prePitchBrief.rivalBullets && submission.prePitchBrief.rivalBullets[0]) ||
+                      submission.prePitchBrief.rivalPlan}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 

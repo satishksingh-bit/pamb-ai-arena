@@ -710,8 +710,11 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
                     page.wait_for_timeout(120)
                     self._assert_ios_focus_zoom_safe_inputs(page, f"{profile['id']}:C3:personal_touch_open")
 
-                    # Generate Card -> Step 2 WhatsApp -> Mock-Send WhatsApp -> Step 3 Email -> Submit -> Copy Pack!
-                    self._tap_button_containing(page, "Create Greeting Card")
+                    # Synthesize Pre-Pitch Brief (or Create Greeting Card) -> Step 2 WhatsApp -> Mock-Send WhatsApp -> Step 3 Email -> Submit -> Copy Pack!
+                    if page.locator("button:visible", has_text="Synthesize Pre-Pitch Brief").count() > 0:
+                        self._tap_button_containing(page, "Synthesize Pre-Pitch Brief")
+                    else:
+                        self._tap_button_containing(page, "Create Greeting Card")
                     page.locator("button:visible", has_text="Next: Craft First WhatsApp").first.wait_for(
                         state="visible", timeout=10000
                     )

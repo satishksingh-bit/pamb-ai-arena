@@ -29,16 +29,30 @@ const C3_PLAYBOOK_UI = {
     lifeEventLabel: "🎉 Moment",
     gapLabel: "⚠️ Gap",
     offerLabel: "🛡️ PRU Plan",
-    step1Tab: "1. 🎨 Card",
+    step1Tab: "1. 🤖 Brief",
     step2Tab: "2. 💬 WhatsApp",
     step3Tab: "3. 📧 vs. AIA",
-    step1TabFull: "1. 🎨 Greeting Card",
+    step1TabFull: "1. 🤖 Pre-Pitch Brief",
     step2TabFull: "2. 💬 First WhatsApp",
     step3TabFull: "3. 📧 Win vs. AIA",
     step3LockedShort: "3. 🔒 Step 3",
     step3LockedFull: "3. 🔒 Send WhatsApp First",
 
-    step1Title: "Step 1: Warm Door-Opener Greeting Card",
+    step1Title: "Step 1: CRM Client Roster & 🤖 Agent Assist Pre-Pitch Brief",
+    pickCrmClient: "1. 👥 Select Client from Your CRM Roster (6 Clients):",
+    pickSynthesisFocus: "2. 🎯 Choose Agent Assist Synthesis Focus:",
+    synthesisFocusPills: [
+      { id: "gap_focus", label: "🔍 Gap & Urgency", prompt: "Prioritize urgent coverage gap analysis, rate-step timing, and protection vulnerability" },
+      { id: "wealth_focus", label: "💎 Wealth & Funding", prompt: "Prioritize tax-free cash rewards, Day-1 allocation, and low-friction FD/cashflow funding" },
+      { id: "rival_focus", label: "🛡️ Rival Radar", prompt: "Prioritize preemptive clause-by-clause counter-angles against likely competing quotes" },
+    ],
+    briefSettingsBar: "🤖 Brief Settings",
+    synthesizingBrief: "🤖 Agent Assist Synthesizing...",
+    resynthesizeBriefBtn: "↻ Re-Synthesize Brief",
+    synthesizeBriefBtn: "✨ Synthesize Pre-Pitch Brief",
+    briefReadyMsg: "✓ 1-Page Pre-Pitch Brief Ready — Now craft your warm First-Touch WhatsApp!",
+    briefAttachedBadge: "✓ 🤖 Step 1 Pre-Pitch Brief Attached",
+    viewBriefBtn: "View Brief",
     pickVisualStyle: "1. Choose Card Visual Style:",
     visualStyles: [
       { id: "watercolor", label: "🎨 Warm Family Watercolor", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
@@ -48,7 +62,7 @@ const C3_PLAYBOOK_UI = {
     pickHeadline: "2. Choose Greeting Headline:",
     cardTouchLabel: "3. 💡 Add Your Own Creative Touch (Optional — type a few words):",
     cardTouchHint: "Hint: Mention a warm visual detail (e.g. teddy bear, house keys, flowers) or a special family blessing — tap an example below to edit, or type your own!",
-    cardTouchPlaceholder: "e.g. Add a cute teddy bear & warm family blessing...",
+    cardTouchPlaceholder: "e.g. Highlight RM 500 cash reward & offer a 2-min summary...",
     generatingCard: "🎨 Designing Your Card...",
     redrawCard: "↻ Regenerate Card",
     generateCardBtn: "🎨 Create Greeting Card",
@@ -149,16 +163,30 @@ const C3_PLAYBOOK_UI = {
     lifeEventLabel: "🎉 时刻",
     gapLabel: "⚠️ 缺口",
     offerLabel: "🛡️ PRU 方案",
-    step1Tab: "1. 🎨 贺卡",
+    step1Tab: "1. 🤖 简报",
     step2Tab: "2. 💬 WhatsApp",
     step3Tab: "3. 📧 vs AIA",
-    step1TabFull: "1. 🎨 暖心祝贺卡",
+    step1TabFull: "1. 🤖 智能战前简报",
     step2TabFull: "2. 💬 首条 WhatsApp",
     step3TabFull: "3. 📧 应对 AIA 对比",
     step3LockedShort: "3. 🔒 第3步",
     step3LockedFull: "3. 🔒 发送 WhatsApp 后解锁",
 
-    step1Title: "第 1 步：制作专属开门红祝贺卡",
+    step1Title: "第 1 步：CRM 客户名册与 🤖 Agent Assist 一页式战前简报",
+    pickCrmClient: "1. 👥 从 CRM 名册选择目标客户（6 位客户）：",
+    pickSynthesisFocus: "2. 🎯 选择 Agent Assist 智能提炼重点：",
+    synthesisFocusPills: [
+      { id: "gap_focus", label: "🔍 缺口与紧迫感", prompt: "Prioritize urgent coverage gap analysis, rate-step timing, and protection vulnerability" },
+      { id: "wealth_focus", label: "💎 财富与资金巧思", prompt: "Prioritize tax-free cash rewards, Day-1 allocation, and low-friction FD/cashflow funding" },
+      { id: "rival_focus", label: "🛡️ 竞品雷达预判", prompt: "Prioritize preemptive clause-by-clause counter-angles against likely competing quotes" },
+    ],
+    briefSettingsBar: "🤖 简报设定",
+    synthesizingBrief: "🤖 Agent Assist 正在提炼简报...",
+    resynthesizeBriefBtn: "↻ 重新提炼战前简报",
+    synthesizeBriefBtn: "✨ 生成一页式战前简报",
+    briefReadyMsg: "✓ 一页式战前简报已就绪！接下来构思您的首条破冰 WhatsApp。",
+    briefAttachedBadge: "✓ 🤖 已附上第1步战前简报",
+    viewBriefBtn: "查看简报",
     pickVisualStyle: "1. 选择祝贺卡视觉风格：",
     visualStyles: [
       { id: "watercolor", label: "🎨 温馨手绘水彩风", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
@@ -168,7 +196,7 @@ const C3_PLAYBOOK_UI = {
     pickHeadline: "2. 选择贺卡主标题：",
     cardTouchLabel: "3. 💡 加入您的专属创意巧思（选填 — 简单输入几个字即可）：",
     cardTouchHint: "提示：可补充温馨画面细节（如小泰迪熊、新居钥匙、鲜花）或一句专属祝福 — 点击下方灵感词可直接修改，或输入您自己的想法！",
-    cardTouchPlaceholder: "例如：加上可爱的小泰迪熊与温馨家庭祝福...",
+    cardTouchPlaceholder: "例如：突出 RM 500 现金奖与 2 分钟精简对比...",
     generatingCard: "🎨 正在设计祝贺卡...",
     redrawCard: "↻ 重新生成祝贺卡",
     generateCardBtn: "🎨 生成专属祝贺卡",
@@ -269,16 +297,30 @@ const C3_PLAYBOOK_UI = {
     lifeEventLabel: "🎉 時刻",
     gapLabel: "⚠️ 缺口",
     offerLabel: "🛡️ PRU 方案",
-    step1Tab: "1. 🎨 賀卡",
+    step1Tab: "1. 🤖 簡報",
     step2Tab: "2. 💬 WhatsApp",
     step3Tab: "3. 📧 vs AIA",
-    step1TabFull: "1. 🎨 窩心賀卡",
+    step1TabFull: "1. 🤖 智能戰前簡報",
     step2TabFull: "2. 💬 首條 WhatsApp",
     step3TabFull: "3. 📧 應對 AIA 比較",
     step3LockedShort: "3. 🔒 第3步",
     step3LockedFull: "3. 🔒 Send 咗 WhatsApp 先解鎖",
 
-    step1Title: "第 1 步：整張專屬開門紅賀卡",
+    step1Title: "第 1 步：CRM 客戶名冊與 🤖 Agent Assist 一頁紙戰前簡報",
+    pickCrmClient: "1. 👥 喺 CRM 名冊揀目標客戶（6 位客戶）：",
+    pickSynthesisFocus: "2. 🎯 揀 Agent Assist 智能提煉重點：",
+    synthesisFocusPills: [
+      { id: "gap_focus", label: "🔍 缺口與迫切性", prompt: "Prioritize urgent coverage gap analysis, rate-step timing, and protection vulnerability" },
+      { id: "wealth_focus", label: "💎 財富與資金配置", prompt: "Prioritize tax-free cash rewards, Day-1 allocation, and low-friction FD/cashflow funding" },
+      { id: "rival_focus", label: "🛡️ 競品雷達預判", prompt: "Prioritize preemptive clause-by-clause counter-angles against likely competing quotes" },
+    ],
+    briefSettingsBar: "🤖 簡報設定",
+    synthesizingBrief: "🤖 Agent Assist 提煉緊簡報...",
+    resynthesizeBriefBtn: "↻ 重新提煉戰前簡報",
+    synthesizeBriefBtn: "✨ 生成一頁紙戰前簡報",
+    briefReadyMsg: "✓ 一頁紙戰前簡報搞掂！跟住構思你第一條破冰 WhatsApp。",
+    briefAttachedBadge: "✓ 🤖 已連埋第1步戰前簡報",
+    viewBriefBtn: "睇返簡報",
     pickVisualStyle: "1. 揀賀卡視覺風格：",
     visualStyles: [
       { id: "watercolor", label: "🎨 溫馨手繪水彩風", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
@@ -288,7 +330,7 @@ const C3_PLAYBOOK_UI = {
     pickHeadline: "2. 揀賀卡主標題：",
     cardTouchLabel: "3. 💡 加少少你個人創意細節（選填 — 打幾個字就得）：",
     cardTouchHint: "貼士：可以加個畫面細節（例如公仔熊、新屋鎖匙、鮮花）或者一句窩心祝福 — 撳下面靈感詞即刻改，或者打你自己諗法！",
-    cardTouchPlaceholder: "例如：加隻得意公仔熊同埋屋企祝福...",
+    cardTouchPlaceholder: "例如：突出 RM 500 現金獎同 2 分鐘懶人包...",
     generatingCard: "🎨 緊係幫緊你畫賀卡...",
     redrawCard: "↻ 重新畫過張卡",
     generateCardBtn: "🎨 生成專屬賀卡",
@@ -389,16 +431,30 @@ const C3_PLAYBOOK_UI = {
     lifeEventLabel: "🎉 Detik",
     gapLabel: "⚠️ Jurang",
     offerLabel: "🛡️ Pelan PRU",
-    step1Tab: "1. 🎨 Kad",
+    step1Tab: "1. 🤖 Ringkasan",
     step2Tab: "2. 💬 WhatsApp",
     step3Tab: "3. 📧 lwn AIA",
-    step1TabFull: "1. 🎨 Kad Ucapan",
+    step1TabFull: "1. 🤖 Ringkasan Pra-Pitch",
     step2TabFull: "2. 💬 WhatsApp Pertama",
     step3TabFull: "3. 📧 Banding lwn AIA",
     step3LockedShort: "3. 🔒 Langkah 3",
     step3LockedFull: "3. 🔒 Hantar WhatsApp Dahulu",
 
-    step1Title: "Langkah 1: Kad Ucapan Pembuka Bicara Mesra",
+    step1Title: "Langkah 1: Senarai CRM & 🤖 Ringkasan Pra-Pitch Agent Assist",
+    pickCrmClient: "1. 👥 Pilih Pelanggan daripada Senarai CRM Anda (6 Pelanggan):",
+    pickSynthesisFocus: "2. 🎯 Pilih Fokus Sintesis Agent Assist:",
+    synthesisFocusPills: [
+      { id: "gap_focus", label: "🔍 Jurang & Segera", prompt: "Prioritize urgent coverage gap analysis, rate-step timing, and protection vulnerability" },
+      { id: "wealth_focus", label: "💎 Kekayaan & Dana", prompt: "Prioritize tax-free cash rewards, Day-1 allocation, and low-friction FD/cashflow funding" },
+      { id: "rival_focus", label: "🛡️ Radar Pesaing", prompt: "Prioritize preemptive clause-by-clause counter-angles against likely competing quotes" },
+    ],
+    briefSettingsBar: "🤖 Tetapan Ringkasan",
+    synthesizingBrief: "🤖 Agent Assist Mensintesis...",
+    resynthesizeBriefBtn: "↻ Sintesis Semula Ringkasan",
+    synthesizeBriefBtn: "✨ Sintesis Ringkasan Pra-Pitch",
+    briefReadyMsg: "✓ Ringkasan Pra-Pitch 1 Halaman siap! Sekarang rangka WhatsApp pertama anda.",
+    briefAttachedBadge: "✓ 🤖 Ringkasan Langkah 1 Dilampirkan",
+    viewBriefBtn: "Lihat Ringkasan",
     pickVisualStyle: "1. Pilih Gaya Visual Kad:",
     visualStyles: [
       { id: "watercolor", label: "🎨 Cat Air Keluarga Mesra", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
@@ -408,7 +464,7 @@ const C3_PLAYBOOK_UI = {
     pickHeadline: "2. Pilih Tajuk Ucapan:",
     cardTouchLabel: "3. 💡 Tambah Sentuhan Kreatif Anda (Pilihan — taip beberapa patah perkataan):",
     cardTouchHint: "Tip: Nyatakan perincian mesra (cth. patung beruang, kunci rumah, bunga) atau doa keluarga — tekan contoh di bawah atau taip idea anda!",
-    cardTouchPlaceholder: "cth. Tambah patung beruang comel & doa kesejahteraan keluarga...",
+    cardTouchPlaceholder: "cth. Serlahkan ganjaran tunai RM 500 & ringkasan 2 minit...",
     generatingCard: "🎨 Mencipta Kad Anda...",
     redrawCard: "↻ Jana Semula Kad",
     generateCardBtn: "🎨 Cipta Kad Ucapan",
@@ -509,16 +565,30 @@ const C3_PLAYBOOK_UI = {
     lifeEventLabel: "🎉 நிகழ்வு",
     gapLabel: "⚠️ இடைவெளி",
     offerLabel: "🛡️ PRU திட்டம்",
-    step1Tab: "1. 🎨 அட்டை",
+    step1Tab: "1. 🤖 சுருக்கம்",
     step2Tab: "2. 💬 WhatsApp",
     step3Tab: "3. 📧 vs AIA",
-    step1TabFull: "1. 🎨 வாழ்த்து அட்டை",
+    step1TabFull: "1. 🤖 முன்-முன்மொழிவு சுருக்கம்",
     step2TabFull: "2. 💬 முதல் WhatsApp",
     step3TabFull: "3. 📧 AIA ஒப்பீடு",
     step3LockedShort: "3. 🔒 படி 3",
     step3LockedFull: "3. 🔒 முதலில் WhatsApp அனுப்புக",
 
-    step1Title: "படி 1: அன்பான வாழ்த்து அட்டையை உருவாக்குங்கள்",
+    step1Title: "படி 1: CRM வாடிக்கையாளர் பட்டியல் & 🤖 Agent Assist சுருக்கம்",
+    pickCrmClient: "1. 👥 CRM பட்டியலிலிருந்து வாடிக்கையாளரைத் தேர்ந்தெடுக்கவும் (6):",
+    pickSynthesisFocus: "2. 🎯 Agent Assist சுருக்கக் கோணத்தைத் தேர்ந்தெடுக்கவும்:",
+    synthesisFocusPills: [
+      { id: "gap_focus", label: "🔍 இடைவெளி & அவசரம்", prompt: "Prioritize urgent coverage gap analysis, rate-step timing, and protection vulnerability" },
+      { id: "wealth_focus", label: "💎 செல்வம் & நிதி", prompt: "Prioritize tax-free cash rewards, Day-1 allocation, and low-friction FD/cashflow funding" },
+      { id: "rival_focus", label: "🛡️ போட்டி ரேடார்", prompt: "Prioritize preemptive clause-by-clause counter-angles against likely competing quotes" },
+    ],
+    briefSettingsBar: "🤖 சுருக்க அமைப்பு",
+    synthesizingBrief: "🤖 Agent Assist சுருக்கத்தை உருவாக்குகிறது...",
+    resynthesizeBriefBtn: "↻ மீண்டும் சுருக்கத்தை உருவாக்கு",
+    synthesizeBriefBtn: "✨ முன்-முன்மொழிவு சுருக்கத்தை உருவாக்கு",
+    briefReadyMsg: "✓ 1-பக்க சுருக்கம் தயார்! இப்போது முதல் WhatsApp செய்தியை உருவாக்குவோம்.",
+    briefAttachedBadge: "✓ 🤖 படி 1 சுருக்கம் இணைக்கப்பட்டது",
+    viewBriefBtn: "சுருக்கத்தைப் பார்",
     pickVisualStyle: "1. அட்டையின் காட்சி பாணியைத் தேர்ந்தெடுக்கவும்:",
     visualStyles: [
       { id: "watercolor", label: "🎨 குடும்ப நீர்வண்ண ஓவியம்", prompt: "Warm hand-painted storybook watercolor illustration, soft golden family glow, heartfelt emotional warmth" },
@@ -528,7 +598,7 @@ const C3_PLAYBOOK_UI = {
     pickHeadline: "2. வாழ்த்துத் தலைப்பைத் தேர்ந்தெடுக்கவும்:",
     cardTouchLabel: "3. 💡 உங்கள் சொந்த படைப்புத் தொடலைச் சேர்க்கவும் (விருப்பத்தேர்வு — சில சொற்கள்):",
     cardTouchHint: "குறிப்பு: அழகான காட்சி விவரம் (பொம்மை கரடி, வீட்டு சாவி, பூக்கள்) அல்லது குடும்ப வாழ்த்தைச் சேர்க்கலாம் — கீழே உள்ள குறிப்பைத் தட்டவும் அல்லது தட்டச்சு செய்யவும்!",
-    cardTouchPlaceholder: "எ.கா. அழகான பொம்மை கரடி மற்றும் குடும்ப ஆசீர்வாதம்...",
+    cardTouchPlaceholder: "எ.கா. RM 500 ரொக்கப் பரிசு மற்றும் 2 நிமிட சுருக்கம்...",
     generatingCard: "🎨 அட்டை தயாராகிறது...",
     redrawCard: "↻ மீண்டும் உருவாக்கு",
     generateCardBtn: "🎨 வாழ்த்து அட்டையை உருவாக்கு",
@@ -2273,12 +2343,22 @@ window.Challenge3ParticipantView = function ({
   const [copyToast, setCopyToast] = useState("");
 
   // Step 1 State
-  const [cardStyleId, setCardStyleId] = useState(() => savedInit.cardStyleId || "watercolor");
+  const [cardStyleId, setCardStyleId] = useState(() => savedInit.cardStyleId || "gap_focus");
   const [selectedHeadlineIdx, setSelectedHeadlineIdx] = useState(() => savedInit.selectedHeadlineIdx || 0);
   const [cardPersonalNote, setCardPersonalNote] = useState(() => savedInit.cardPersonalNote || "");
   const [cardUrl, setCardUrl] = useState(() => savedInit.cardUrl || existingSubmission?.imageAfter || null);
+  const [prePitchBrief, setPrePitchBrief] = useState(
+    () => savedInit.prePitchBrief || existingSubmission?.prePitchBrief || null
+  );
+  const [legacyCardMode] = useState(false);
   const [showStep1Pickers, setShowStep1Pickers] = useState(
-    () => !(savedInit.cardUrl || existingSubmission?.imageAfter)
+    () =>
+      !(
+        savedInit.prePitchBrief ||
+        existingSubmission?.prePitchBrief ||
+        savedInit.cardUrl ||
+        existingSubmission?.imageAfter
+      )
   );
   const [showCardTouch, setShowCardTouch] = useState(() => Boolean((savedInit.cardPersonalNote || "").trim()));
 
@@ -2313,7 +2393,14 @@ window.Challenge3ParticipantView = function ({
 
   // Collapsible Brief Card & Post-Submit Tab State
   const [showCaseBrief, setShowCaseBrief] = useState(
-    () => (savedInit.step || 1) === 1 && !(savedInit.cardUrl || existingSubmission?.imageAfter)
+    () =>
+      (savedInit.step || 1) === 1 &&
+      !(
+        savedInit.prePitchBrief ||
+        existingSubmission?.prePitchBrief ||
+        savedInit.cardUrl ||
+        existingSubmission?.imageAfter
+      )
   );
   const [postSubmitTab, setPostSubmitTab] = useState("whatsapp");
 
@@ -2334,6 +2421,7 @@ window.Challenge3ParticipantView = function ({
         accuracy: existingScore?.accuracy || existingSubmission.total || 90,
         timeSec: existingScore?.timeSec || existingSubmission.timeSec || 25,
         cardUrl: existingSubmission.imageAfter || null,
+        prePitchBrief: existingSubmission.prePitchBrief || null,
         whatsappText: existingSubmission.whatsappMessage || "",
         emailText: existingSubmission.aiaComparisonEmail || "",
         personalTouch: existingSubmission.personalTouch || "",
@@ -2354,6 +2442,7 @@ window.Challenge3ParticipantView = function ({
         accuracy: existingScore?.accuracy || existingSubmission.total || 90,
         timeSec: existingScore?.timeSec || existingSubmission.timeSec || 25,
         cardUrl: existingSubmission.imageAfter || cardUrl || null,
+        prePitchBrief: existingSubmission.prePitchBrief || prePitchBrief || null,
         whatsappText: existingSubmission.whatsappMessage || whatsappText || "",
         emailText: existingSubmission.aiaComparisonEmail || emailText || "",
         personalTouch: existingSubmission.personalTouch || "",
@@ -2379,6 +2468,7 @@ window.Challenge3ParticipantView = function ({
           selectedHeadlineIdx,
           cardPersonalNote,
           cardUrl: safeCardUrl,
+          prePitchBrief,
           openingToneId,
           selectedWaIdeaIdxs,
           waPersonalNote,
@@ -2403,6 +2493,7 @@ window.Challenge3ParticipantView = function ({
     selectedHeadlineIdx,
     cardPersonalNote,
     cardUrl,
+    prePitchBrief,
     openingToneId,
     selectedWaIdeaIdxs,
     waPersonalNote,
@@ -2440,12 +2531,12 @@ window.Challenge3ParticipantView = function ({
     };
   }, [agentId, normLang, seatOverride]);
 
-  // Auto-collapse Client Brief Card whenever cardUrl is generated OR user moves to Step 2 / Step 3
+  // Auto-collapse Client Brief Card whenever prePitchBrief/cardUrl is generated OR user moves to Step 2 / Step 3
   useEffect(() => {
-    if (step === 2 || step === 3 || Boolean(cardUrl)) {
+    if (step === 2 || step === 3 || Boolean(prePitchBrief) || Boolean(cardUrl)) {
       setShowCaseBrief(false);
     }
-  }, [step, cardUrl]);
+  }, [step, prePitchBrief, cardUrl]);
 
   // Preserve user's drafted messages on language toggle instead of wiping them silently
   const prevLangRef = useRef(normLang);
@@ -2474,7 +2565,7 @@ window.Challenge3ParticipantView = function ({
 
   useEffect(() => {
     const stepLabels = {
-      1: "Step 1/3: Designing Door-Opener Greeting Card",
+      1: "Step 1/3: Synthesizing 1-Page Pre-Pitch Brief via Agent Assist",
       2: "Step 2/3: Crafting First-Touch WhatsApp",
       3: `Step 3/3: Answering Client's ${rivalShort} Comparison Reply`,
     };
@@ -2497,6 +2588,7 @@ window.Challenge3ParticipantView = function ({
     setSelectedHeadlineIdx(0);
     setCardPersonalNote("");
     setCardUrl(null);
+    setPrePitchBrief(null);
     setShowStep1Pickers(true);
     setShowCardTouch(false);
     setSelectedWaIdeaIdxs([0, 1]);
@@ -2552,7 +2644,7 @@ window.Challenge3ParticipantView = function ({
       setShowCasePicker(false);
       return;
     }
-    const hasProgress = Boolean(cardUrl || whatsappText.trim() || emailText.trim());
+    const hasProgress = Boolean(prePitchBrief || cardUrl || whatsappText.trim() || emailText.trim());
     if (hasProgress && confirmArmedSlot !== k) {
       setConfirmArmedSlot(k);
       return;
@@ -2634,8 +2726,15 @@ window.Challenge3ParticipantView = function ({
 
   const activeHeadline =
     (sc.cardChips && sc.cardChips[selectedHeadlineIdx]) || sc.cardHeadline;
+  const focusPills = ui.synthesisFocusPills || [
+    { id: "gap_focus", label: "🔍 Gap & Urgency", prompt: "Prioritize urgent coverage gap analysis, rate-step timing, and protection vulnerability" },
+    { id: "wealth_focus", label: "💎 Wealth & Funding", prompt: "Prioritize tax-free cash rewards, Day-1 allocation, and low-friction FD/cashflow funding" },
+    { id: "rival_focus", label: "🛡️ Rival Radar", prompt: "Prioritize preemptive clause-by-clause counter-angles against likely competing quotes" },
+  ];
+  const activeFocusObj =
+    focusPills.find((f) => f.id === cardStyleId) || focusPills[0];
   const activeStyleObj =
-    ui.visualStyles.find((s) => s.id === cardStyleId) || ui.visualStyles[0];
+    ui.visualStyles.find((s) => s.id === cardStyleId) || activeFocusObj || ui.visualStyles[0];
   const activeOpeningObj =
     ui.openingTones.find((o) => o.id === openingToneId) || ui.openingTones[0];
   const activeAdvisoryObj =
@@ -2643,6 +2742,25 @@ window.Challenge3ParticipantView = function ({
   const clientShortName = (sc.customerName || activeCaseMeta.clientName || "").split("(")[0].trim();
   const clientShortTitle =
     sc.shortLabel || activeCaseMeta.labels[normLang] || activeCaseMeta.labels.en;
+
+  const crmRoster6 = React.useMemo(() => {
+    if (Array.isArray(sc.clientRoster6) && sc.clientRoster6.length === 6) {
+      return sc.clientRoster6;
+    }
+    return C3_CURATED_6_META.map((item, idx) => {
+      const foundSc = PAMB_C3_SCENARIOS.find((s) => s.id === item.id);
+      const locSc = foundSc ? _getLocalizedScenario(foundSc, normLang) : null;
+      const fullName = (locSc && locSc.customerName) || item.clientName || "";
+      return {
+        slot: idx,
+        id: item.id,
+        icon: item.icon,
+        shortName: fullName.split("(")[0].trim() || item.clientName,
+        shortLabel: (locSc && locSc.shortLabel) || item.labels[normLang] || item.labels.en,
+        existingGap: (locSc && locSc.existingGap) || "",
+      };
+    });
+  }, [sc.clientRoster6, normLang]);
 
   const C3_RCTFC_KEYS = ["role", "context", "task", "format", "constraints"];
   const C3_KEY_TO_TAG = {
@@ -3102,7 +3220,7 @@ window.Challenge3ParticipantView = function ({
 
   const buildPersonalTouchSummary = () => {
     return [
-      cardPersonalNote.trim() ? `🎨 Card: ${cardPersonalNote.trim()}` : "",
+      cardPersonalNote.trim() ? `🤖 Brief: ${cardPersonalNote.trim()}` : "",
       waPersonalNote.trim() ? `💬 WhatsApp: ${waPersonalNote.trim()}` : "",
       emailPersonalNote.trim() ? `🤝 Closer: ${emailPersonalNote.trim()}` : "",
     ]
@@ -3112,6 +3230,112 @@ window.Challenge3ParticipantView = function ({
 
   const toggleIdxInList = (list, idx) =>
     list.includes(idx) ? list.filter((x) => x !== idx) : [...list, idx].sort();
+
+  const buildLocalPrePitchBriefFallback = () => {
+    if (sc.defaultPrePitchBrief && typeof sc.defaultPrePitchBrief === "object") {
+      const baseBrief = { ...sc.defaultPrePitchBrief };
+      if (cardPersonalNote.trim()) {
+        const prevHooks = Array.isArray(baseBrief.hookBullets) ? baseBrief.hookBullets : [];
+        baseBrief.hookBullets = [
+          ...prevHooks.slice(0, 1),
+          `💡 Personal Touch: ${cardPersonalNote.trim()}`,
+        ];
+      }
+      return baseBrief;
+    }
+    const gapParts = String(sc.existingGap || "")
+      .split("•")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const ideaDetails = (pb.waIdeas || []).map((w) => w.detail || w.label).filter(Boolean);
+    const factList = (sc.aiaFacts || [])
+      .map((f) => _summarizeFactClause(f).full || String(f).replace(/^\s*[✓✔•\-\*]\s*/, "").trim())
+      .filter(Boolean);
+    const customNote = cardPersonalNote.trim();
+    return {
+      focusId: activeFocusObj.id,
+      focusLabel: activeFocusObj.label,
+      clientName: sc.customerName || clientShortName,
+      milestoneBadge: `${sc.icon || "🎯"} ${sc.shortLabel || clientShortTitle}`,
+      crmRecord: sc.existingGap || "",
+      gapHeadline: gapParts[0] || sc.existingGap || "Existing coverage requires milestone review",
+      gapBullets: [
+        gapParts[1] || sc.lifeEvent || "Life milestone creates immediate protection & liquidity window",
+        `Milestone Trigger: ${sc.lifeEvent || sc.shortLabel}`,
+      ],
+      urgencyWindow:
+        normLang === "zh-CN"
+          ? "把握当前健康费率与里程碑黄金窗口"
+          : normLang === "yue"
+          ? "把握當前靚價同里程碑黃金窗口"
+          : normLang === "ms"
+          ? "Kunci kelayakan semasa & tetingkap detik penting"
+          : normLang === "ta"
+          ? "தற்போதைய தகுதி மற்றும் சிறப்பு நிகழ்வு சலுகை"
+          : "Lock in current health eligibility & milestone reward window",
+      pruPlan: sc.pambPlan || "PRU Strategic Portfolio",
+      hookBullets: customNote
+        ? [
+            ideaDetails[0] || `Position ${sc.pambPlan} around their ${sc.shortLabel}`,
+            `💡 Personal Touch: ${customNote}`,
+          ]
+        : [
+            ideaDetails[0] || `Position ${sc.pambPlan} around their ${sc.shortLabel}`,
+            ideaDetails[1] || "Zero-pressure 2-minute executive summary on WhatsApp",
+          ],
+      doorOpenerOffer:
+        (pb.waHints && pb.waHints[0]) ||
+        "Share a warm 2-min WhatsApp summary before any quotation table",
+      rivalBrand: rivalShort,
+      rivalPlan: sc.aiaPlan || `${rivalShort} Competing Quote`,
+      rivalBullets: [
+        factList[0] || `Highlight ${sc.pambPlan} contractual certainty vs. ${rivalShort}`,
+        factList[1] || "Compare long-term coverage horizon and direct cash savings",
+      ],
+    };
+  };
+
+  const handleSynthesizeBrief = async () => {
+    setIsBusy(true);
+    setLangChangedBanner(false);
+    try {
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: agentId,
+          name: agentName,
+          region: agentRegion,
+          challenge: "3",
+          language: lang,
+          scenarioId: sc.id,
+          seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
+          stepMode: "brief",
+          cardPrompt: activeHeadline,
+          cardHeadlineText: activeHeadline,
+          cardStyle: activeFocusObj.prompt || activeStyleObj.prompt,
+          focusId: activeFocusObj.id,
+          focusLabel: activeFocusObj.label,
+          cardPersonalNote: cardPersonalNote.trim(),
+          generateCard: false,
+        }),
+      });
+      const data = await res.json();
+      if (data && data.prePitchBrief && typeof data.prePitchBrief === "object") {
+        setPrePitchBrief(data.prePitchBrief);
+      } else {
+        setPrePitchBrief(buildLocalPrePitchBriefFallback());
+      }
+      if (data && data.greetingCardDataUrl) {
+        setCardUrl(data.greetingCardDataUrl);
+      }
+    } catch (e) {
+      setPrePitchBrief(buildLocalPrePitchBriefFallback());
+    }
+    setShowStep1Pickers(false);
+    setShowCaseBrief(false);
+    setIsBusy(false);
+  };
 
   const handleGenerateCard = async () => {
     setIsBusy(true);
@@ -3308,6 +3532,7 @@ window.Challenge3ParticipantView = function ({
     if (!readyToSubmit) return;
     setIsBusy(true);
     let finalCardUrl = cardUrl;
+    const finalBrief = prePitchBrief || buildLocalPrePitchBriefFallback();
     const finalWaText = whatsappText.trim();
     const finalEmText = emailText.trim();
     const waStrat = buildWhatsappStrategySummary();
@@ -3329,15 +3554,17 @@ window.Challenge3ParticipantView = function ({
           seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "evaluate",
           cardPrompt: activeHeadline,
-          cardStyle: activeStyleObj.prompt,
+          cardStyle: activeFocusObj.prompt || activeStyleObj.prompt,
           cardPersonalNote: cardPersonalNote.trim(),
+          prePitchBrief: finalBrief,
+          hasBrief: Boolean(finalBrief),
           whatsappPrompt: waStrat,
           waPersonalNote: waPersonalNote.trim(),
           whatsappText: finalWaText,
           emailPrompt: emStrat,
           emailPersonalNote: emailPersonalNote.trim(),
           emailText: finalEmText,
-          generateCard: !finalCardUrl,
+          generateCard: false,
           previousCardDataUrl: finalCardUrl,
         }),
       });
@@ -3354,10 +3581,10 @@ window.Challenge3ParticipantView = function ({
       evalData && evalData.pillarScores && Object.keys(evalData.pillarScores).length > 0
         ? evalData.pillarScores
         : {
-            "Visual Warmth & Card": 22,
+            "Agent Assist Brief": 23,
             "Empathy-First Opening": 22,
             "Wealth & Plan Mastery": 22,
-            "Personal Advisor Touch": personalTouchSummary ? 22 : 18,
+            "Personal Advisor Touch": personalTouchSummary ? 23 : 19,
           };
     const accuracyScore =
       evalData && typeof evalData.qualityScore === "number"
@@ -3366,7 +3593,7 @@ window.Challenge3ParticipantView = function ({
     const totalScore = Math.round(speedScore * 0.25 + accuracyScore * 0.75);
     const judgeFeedback =
       (evalData && evalData.judgeFeedback) ||
-      `Strong Pre-Pitch! Warm Greeting Card + empathetic WhatsApp + factual PRU vs. ${rivalShort} comparison.`;
+      `Strong Pre-Pitch! Sharp 1-Page Agent Assist Brief + empathetic WhatsApp + factual PRU vs. ${rivalShort} comparison.`;
 
     const combinedMessages = `💬 [WHATSAPP]:\n${finalWaText}\n\n📧 [PRU vs. ${rivalShort}]:\n${finalEmText}`;
 
@@ -3380,6 +3607,7 @@ window.Challenge3ParticipantView = function ({
       aiOutput: combinedMessages,
       whatsappMessage: finalWaText,
       aiaComparisonEmail: finalEmText,
+      prePitchBrief: finalBrief,
       imageAfter: finalCardUrl,
       policyCitation: `${sc.pambPlan} vs. ${sc.aiaPlan}`,
       pillarScores,
@@ -3420,6 +3648,7 @@ window.Challenge3ParticipantView = function ({
       accuracy: accuracyScore,
       timeSec: elapsedSec,
       cardUrl: finalCardUrl,
+      prePitchBrief: finalBrief,
       whatsappText: finalWaText,
       emailText: finalEmText,
       personalTouch: personalTouchSummary,
@@ -3561,7 +3790,7 @@ window.Challenge3ParticipantView = function ({
           </button>
         </div>
 
-        {submittedData.cardUrl && (
+        {submittedData.cardUrl ? (
           <div className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-2.5">
             <div className="relative group inline-block">
               <img
@@ -3576,7 +3805,41 @@ window.Challenge3ParticipantView = function ({
               </span>
             </div>
           </div>
-        )}
+        ) : submittedData.prePitchBrief ? (
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[11px] font-extrabold text-[#ed1b2e]">
+                🤖 Step 1 • 1-Page Agent Assist Pre-Pitch Brief
+              </span>
+              <span className="text-[10px] font-bold text-slate-600 truncate">
+                {submittedData.prePitchBrief.focusLabel || ""}
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <div className="bg-white border border-slate-200 rounded-lg p-2">
+                <div className="text-[10px] font-extrabold text-[#ed1b2e] uppercase">1. Coverage Gap</div>
+                <div className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2">
+                  {submittedData.prePitchBrief.gapHeadline}
+                </div>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-lg p-2">
+                <div className="text-[10px] font-extrabold text-emerald-700 uppercase">2. PRU Pre-Pitch Hook</div>
+                <div className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2">
+                  {submittedData.prePitchBrief.pruPlan}
+                </div>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-lg p-2">
+                <div className="text-[10px] font-extrabold text-amber-800 uppercase">
+                  3. Competitor Radar (vs. {submittedData.prePitchBrief.rivalBrand || rivalShort})
+                </div>
+                <div className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2">
+                  {(submittedData.prePitchBrief.rivalBullets && submittedData.prePitchBrief.rivalBullets[0]) ||
+                    submittedData.prePitchBrief.rivalPlan}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         {/* Clean 2-Tab Switcher for Submitted WhatsApp vs. Comparison Email */}
         <div className="space-y-2">
@@ -3785,7 +4048,7 @@ window.Challenge3ParticipantView = function ({
             n: 1,
             short: ui.step1Tab,
             full: ui.step1TabFull || ui.step1Tab,
-            done: !!cardUrl,
+            done: Boolean(prePitchBrief || cardUrl),
             unlocked: true,
           },
           {
@@ -3831,13 +4094,14 @@ window.Challenge3ParticipantView = function ({
         })}
       </div>
 
-      {/* STEP 1: DOOR-OPENER GREETING CARD */}
+      {/* STEP 1: CRM CLIENT ROSTER + AGENT ASSIST 1-PAGE PRE-PITCH BRIEF (Greeting Card code preserved) */}
       {step === 1 && (
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-2.5 sm:p-4 space-y-1.5">
-          {cardUrl && !showStep1Pickers ? (
+          {(prePitchBrief || cardUrl) && !showStep1Pickers ? (
             <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
               <div className="text-xs font-extrabold text-slate-800 truncate">
-                {ui.cardSettingsBar} <span className="text-slate-500 font-semibold">• {activeStyleObj.label}</span>
+                {ui.briefSettingsBar || ui.cardSettingsBar}{" "}
+                <span className="text-slate-500 font-semibold">• {activeFocusObj.label}</span>
               </div>
               <button
                 type="button"
@@ -3853,7 +4117,7 @@ window.Challenge3ParticipantView = function ({
                 <div className="text-xs sm:text-sm font-extrabold text-slate-900">
                   {ui.step1Title}
                 </div>
-                {cardUrl && (
+                {(prePitchBrief || cardUrl) && (
                   <button
                     type="button"
                     onClick={() => setShowStep1Pickers(false)}
@@ -3864,53 +4128,128 @@ window.Challenge3ParticipantView = function ({
                 )}
               </div>
 
+              {/* 1. CRM 6-Client Roster Selector */}
               <div className="space-y-1 min-w-0">
-                <div className="text-xs font-extrabold text-slate-900">{ui.pickVisualStyle}</div>
-                <div className="grid grid-cols-3 gap-1.5 min-w-0">
-                  {ui.visualStyles.map((vs) => {
-                    const active = cardStyleId === vs.id;
+                <div className="text-xs font-extrabold text-slate-900">
+                  {ui.pickCrmClient || "1. 👥 Select Client from Your CRM Roster (6 Clients):"}
+                </div>
+                {confirmArmedSlot !== null && (
+                  <div className="bg-amber-50 border border-amber-300 rounded-lg p-1.5 flex flex-wrap items-center justify-between gap-1.5">
+                    <span className="text-[11px] font-bold text-amber-950 leading-snug">
+                      ⚠️ {ui.switchConfirmMsg}
+                    </span>
+                    <div className="flex items-center gap-1 ml-auto">
+                      <button
+                        type="button"
+                        onClick={() => setConfirmArmedSlot(null)}
+                        className="px-2 py-0.5 rounded bg-white border border-slate-300 text-[10px] font-bold text-slate-700"
+                      >
+                        ✕
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => executeSelectCaseSlot(confirmArmedSlot)}
+                        className="px-2 py-0.5 rounded bg-[#ed1b2e] text-white text-[10px] font-extrabold"
+                      >
+                        ✓ {ui.switchShortFmt} ({confirmArmedSlot + 1}/6)
+                      </button>
+                    </div>
+                  </div>
+                )}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 min-w-0">
+                  {crmRoster6.map((cl, idx) => {
+                    const isCurrent = activeSlot === idx;
+                    const isArmed = confirmArmedSlot === idx;
                     return (
                       <button
-                        key={vs.id}
+                        key={cl.id || idx}
                         type="button"
-                        onClick={() => setCardStyleId(vs.id)}
+                        onClick={() => handleSelectCaseSlot(idx)}
+                        className={`min-w-0 px-2 py-1 rounded-xl border text-left transition-all ${
+                          isCurrent
+                            ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
+                            : isArmed
+                            ? "bg-amber-50 border-amber-400 text-amber-950"
+                            : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-1 min-w-0">
+                          <span className="text-[11px] font-extrabold truncate">
+                            {idx + 1}. {cl.icon} {cl.shortName}
+                          </span>
+                          <span
+                            className={`text-[9px] font-mono font-bold shrink-0 ${
+                              isCurrent ? "text-red-100" : "text-[#ed1b2e]"
+                            }`}
+                          >
+                            {idx + 1}/6
+                          </span>
+                        </div>
+                        <div
+                          className={`text-[10px] truncate ${
+                            isCurrent ? "text-red-100 font-semibold" : "text-slate-500 font-medium"
+                          }`}
+                        >
+                          {cl.shortLabel}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 2. Agent Assist Synthesis Focus (3 horizontal pills in 1 row) */}
+              <div className="space-y-1 min-w-0">
+                <div className="text-xs font-extrabold text-slate-900">
+                  {ui.pickSynthesisFocus || ui.pickVisualStyle}
+                </div>
+                <div className="grid grid-cols-3 gap-1.5 min-w-0">
+                  {focusPills.map((fp) => {
+                    const active = activeFocusObj.id === fp.id;
+                    return (
+                      <button
+                        key={fp.id}
+                        type="button"
+                        onClick={() => setCardStyleId(fp.id)}
                         className={`min-w-0 break-words px-1.5 sm:px-2 py-1.5 rounded-xl border text-center sm:text-left text-[11px] sm:text-xs font-extrabold leading-tight transition-all ${
                           active
                             ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
                             : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
                         }`}
                       >
-                        {vs.label}
+                        {fp.label}
                       </button>
                     );
                   })}
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <div className="text-xs font-extrabold text-slate-900">{ui.pickHeadline}</div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                  {(sc.cardChips || [sc.cardHeadline]).map((hl, idx) => {
-                    const active = selectedHeadlineIdx === idx;
-                    return (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => setSelectedHeadlineIdx(idx)}
-                        className={`px-2.5 py-1.5 rounded-xl border text-left text-xs font-bold leading-snug transition-all ${
-                          active
-                            ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
-                            : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
-                        }`}
-                      >
-                        {active ? "✓ " : ""}{hl}
-                      </button>
-                    );
-                  })}
+              {legacyCardMode && (
+                <div className="space-y-1">
+                  <div className="text-xs font-extrabold text-slate-900">{ui.pickHeadline}</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                    {(sc.cardChips || [sc.cardHeadline]).map((hl, idx) => {
+                      const active = selectedHeadlineIdx === idx;
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setSelectedHeadlineIdx(idx)}
+                          className={`px-2.5 py-1.5 rounded-xl border text-left text-xs font-bold leading-snug transition-all ${
+                            active
+                              ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
+                              : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
+                          }`}
+                        >
+                          {active ? "✓ " : ""}{hl}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Collapsed Optional Personal Touch */}
+              {/* 3. Collapsed Optional Personal Touch */}
               <div>
                 <button
                   type="button"
@@ -3959,11 +4298,15 @@ window.Challenge3ParticipantView = function ({
 
               <button
                 type="button"
-                onClick={handleGenerateCard}
+                onClick={legacyCardMode ? handleGenerateCard : handleSynthesizeBrief}
                 disabled={isBusy}
                 className="w-full rounded-2xl py-2.5 sm:py-3.5 px-4 bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
               >
-                {isBusy ? ui.generatingCard : cardUrl ? ui.redrawCard : ui.generateCardBtn}
+                {isBusy
+                  ? ui.synthesizingBrief || ui.generatingCard
+                  : prePitchBrief
+                  ? ui.resynthesizeBriefBtn || ui.redrawCard
+                  : ui.synthesizeBriefBtn || ui.generateCardBtn}
               </button>
             </div>
           )}
@@ -3971,7 +4314,7 @@ window.Challenge3ParticipantView = function ({
           {isBusy && (
             <div className="bg-white border border-red-200 rounded-xl p-2.5 space-y-1.5">
               <div className="flex items-center justify-between text-xs font-extrabold text-[#ed1b2e]">
-                <span>{cardProgressStages[cardStageIdx] || cardProgressStages[0]}</span>
+                <span>{ui.synthesizingBrief || cardProgressStages[cardStageIdx] || cardProgressStages[0]}</span>
                 <span>{cardStageIdx === 0 ? "35%" : cardStageIdx === 1 ? "72%" : "92%"}</span>
               </div>
               <div className="w-full h-2 bg-red-100 rounded-full overflow-hidden">
@@ -3983,6 +4326,133 @@ window.Challenge3ParticipantView = function ({
             </div>
           )}
 
+          {/* Synthesized 1-Page Pre-Pitch Brief Card */}
+          {prePitchBrief && (
+            <div
+              data-testid="c3-pre-pitch-brief-card"
+              className="bg-white border-2 border-slate-200 rounded-2xl p-2.5 sm:p-3.5 space-y-2.5 shadow-sm"
+            >
+              {/* Header Strip */}
+              <div className="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-200 pb-2">
+                <div className="min-w-0">
+                  <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#ed1b2e]">
+                    🤖 Agent Assist • 1-Page Pre-Pitch Brief
+                  </div>
+                  <div className="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
+                    {prePitchBrief.clientName || sc.customerName}
+                  </div>
+                </div>
+                <span className="px-2.5 py-0.5 rounded-full bg-red-50 border border-red-200 text-[#ed1b2e] text-[11px] font-extrabold shrink-0">
+                  {prePitchBrief.milestoneBadge || `${sc.icon} ${sc.shortLabel}`}
+                </span>
+              </div>
+
+              {(prePitchBrief.crmRecord || sc.existingGap) && (
+                <div className="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-[11px] text-slate-700 font-medium">
+                  <strong className="text-slate-900 font-extrabold">📋 CRM Record:</strong>{" "}
+                  {prePitchBrief.crmRecord || sc.existingGap}
+                </div>
+              )}
+
+              {/* 3 Synthesized Pillars */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                {/* Pillar 1: Coverage Gap Found */}
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1.5">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#ed1b2e]">
+                      1. COVERAGE GAP FOUND
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-red-100 text-[#ed1b2e] text-[9px] font-extrabold">
+                      High Priority
+                    </span>
+                  </div>
+                  <div className="text-xs font-extrabold text-slate-900 leading-snug">
+                    {prePitchBrief.gapHeadline || sc.existingGap}
+                  </div>
+                  <ul className="space-y-1 text-[11px] text-slate-700 leading-snug">
+                    {(prePitchBrief.gapBullets || []).slice(0, 2).map((b, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-[#ed1b2e] font-extrabold shrink-0">•</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {prePitchBrief.urgencyWindow && (
+                    <div className="bg-white border border-red-200 rounded-lg px-2 py-1 text-[10px] font-bold text-[#ed1b2e]">
+                      ⏱️ Urgency Window: {prePitchBrief.urgencyWindow}
+                    </div>
+                  )}
+                </div>
+
+                {/* Pillar 2: PRU Pre-Pitch Hook */}
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1.5">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800">
+                      2. PRU PRE-PITCH HOOK
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900 text-[9px] font-extrabold">
+                      Best Fit
+                    </span>
+                  </div>
+                  <div className="text-xs font-extrabold text-slate-900 leading-snug">
+                    {prePitchBrief.pruPlan || sc.pambPlan}
+                  </div>
+                  <ul className="space-y-1 text-[11px] text-slate-700 leading-snug">
+                    {(prePitchBrief.hookBullets || []).slice(0, 2).map((b, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-emerald-600 font-extrabold shrink-0">✓</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {prePitchBrief.doorOpenerOffer && (
+                    <div className="bg-white border border-emerald-200 rounded-lg px-2 py-1 text-[10px] font-bold text-emerald-900">
+                      🎁 Door-Opener Offer: {prePitchBrief.doorOpenerOffer}
+                    </div>
+                  )}
+                </div>
+
+                {/* Pillar 3: Competitor Radar */}
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1.5">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-900">
+                      3. COMPETITOR RADAR
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 text-[9px] font-extrabold">
+                      vs. {prePitchBrief.rivalBrand || rivalShort}
+                    </span>
+                  </div>
+                  <div className="text-xs font-extrabold text-slate-900 leading-snug">
+                    Likely Rival: {prePitchBrief.rivalPlan || sc.aiaPlan}
+                  </div>
+                  <ul className="space-y-1 text-[11px] text-slate-700 leading-snug">
+                    {(prePitchBrief.rivalBullets || []).slice(0, 2).map((b, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-amber-700 font-extrabold shrink-0">⚡</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Ready Banner + Next CTA */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1">
+                <div className="w-full sm:flex-1 text-xs font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
+                  {ui.briefReadyMsg || ui.cardReadyMsg}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setStep(2)}
+                  className="w-full sm:w-auto rounded-2xl py-2.5 sm:py-3 px-4 bg-slate-900 hover:bg-[#ed1b2e] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all shrink-0"
+                >
+                  {ui.nextStep2Btn}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Preserved Legacy Greeting Card Preview */}
           {cardUrl && (
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 bg-white border-2 border-emerald-300 rounded-2xl p-3 shadow-sm">
               <div className="relative group mx-auto md:mx-0 shrink-0">
@@ -4017,29 +4487,31 @@ window.Challenge3ParticipantView = function ({
       {/* STEP 2: FIRST-TOUCH WHATSAPP */}
       {step === 2 && (
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2.5">
-          {cardUrl && (
+          {(prePitchBrief || cardUrl) && (
             <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-2.5 py-1.5">
               <div className="flex items-center gap-2 min-w-0">
-                <img
-                  src={cardUrl}
-                  alt="Greeting Card Thumbnail"
-                  title="Tap to zoom"
-                  data-zoomable="true"
-                  className="h-9 w-auto rounded border border-[#ed1b2e] shrink-0 cursor-zoom-in hover:opacity-90"
-                />
+                {cardUrl && (
+                  <img
+                    src={cardUrl}
+                    alt="Greeting Card Thumbnail"
+                    title="Tap to zoom"
+                    data-zoomable="true"
+                    className="h-9 w-auto rounded border border-[#ed1b2e] shrink-0 cursor-zoom-in hover:opacity-90"
+                  />
+                )}
                 <span className="text-xs font-extrabold text-emerald-700 truncate">
-                  {ui.cardAttachedBadge}
+                  {cardUrl ? ui.cardAttachedBadge : ui.briefAttachedBadge || "✓ 🤖 Step 1 Pre-Pitch Brief Attached"}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => {
-                  setShowStep1Pickers(true);
+                  setShowStep1Pickers(false);
                   setStep(1);
                 }}
                 className="text-xs font-extrabold text-[#ed1b2e] hover:underline shrink-0"
               >
-                {ui.editCardBtn}
+                {cardUrl ? ui.editCardBtn : ui.viewBriefBtn || "View Brief"}
               </button>
             </div>
           )}
