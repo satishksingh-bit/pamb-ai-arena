@@ -2254,6 +2254,9 @@ window.Challenge3ParticipantView = function ({
   const [waReplyArrived, setWaReplyArrived] = useState(() =>
     Boolean((savedInit.waSent === true && savedInit.waReplyArrived) || existingSubmission)
   );
+  const [dynamicClientReply, setDynamicClientReply] = useState(
+    () => savedInit.dynamicClientReply || ""
+  );
   const [waSendPhase, setWaSendPhase] = useState("idle"); // "idle" | "sending" | "typing"
   const [showSentWaPreview, setShowSentWaPreview] = useState(false);
   const waTimerRef = useRef([]);
@@ -2382,6 +2385,7 @@ window.Challenge3ParticipantView = function ({
           whatsappText,
           waSent,
           waReplyArrived,
+          dynamicClientReply,
           selectedFactIdxs,
           advisoryStyleId,
           emailPersonalNote,
@@ -2405,6 +2409,7 @@ window.Challenge3ParticipantView = function ({
     whatsappText,
     waSent,
     waReplyArrived,
+    dynamicClientReply,
     selectedFactIdxs,
     advisoryStyleId,
     emailPersonalNote,
@@ -2499,6 +2504,7 @@ window.Challenge3ParticipantView = function ({
     setWhatsappText("");
     setWaSent(false);
     setWaReplyArrived(false);
+    setDynamicClientReply("");
     setWaSendPhase("idle");
     setShowSentWaPreview(false);
     setShowStep2Pickers(true);
@@ -2558,6 +2564,8 @@ window.Challenge3ParticipantView = function ({
     if (!whatsappText.trim() || waSendPhase === "sending") return;
     clearWaTimers();
     setWaSendPhase("sending");
+    const headlineForReply =
+      (sc.cardChips && sc.cardChips[selectedHeadlineIdx]) || sc.cardHeadline;
     fetch("/api/activity", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -2571,6 +2579,33 @@ window.Challenge3ParticipantView = function ({
       }),
     }).catch(() => {});
 
+    // Start Gemini 3.5 Flash-Lite client WhatsApp reply generation immediately in parallel
+    const replyFetchPromise = Promise.race([
+      fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: agentId,
+          name: agentName,
+          region: agentRegion,
+          challenge: "3",
+          language: lang,
+          scenarioId: sc.id,
+          seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
+          stepMode: "client_reply",
+          cardPrompt: headlineForReply,
+          whatsappText: whatsappText.trim(),
+          waPersonalNote: waPersonalNote.trim(),
+        }),
+      })
+        .then((r) => r.json())
+        .catch(() => ({})),
+      new Promise((resolve) => {
+        const tCap = setTimeout(() => resolve({}), 3800);
+        waTimerRef.current.push(tCap);
+      }),
+    ]);
+
     const tDeliver = setTimeout(() => {
       setWaSent(true);
       setWaReplyArrived(false);
@@ -2581,11 +2616,18 @@ window.Challenge3ParticipantView = function ({
         window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (e) {}
 
-      const tReply = setTimeout(() => {
+      const minTypingPromise = new Promise((resolve) => {
+        const tReply = setTimeout(resolve, 550);
+        waTimerRef.current.push(tReply);
+      });
+
+      Promise.all([replyFetchPromise, minTypingPromise]).then(([data]) => {
+        if (data && typeof data.customerReply === "string" && data.customerReply.trim()) {
+          setDynamicClientReply(data.customerReply.trim());
+        }
         setWaReplyArrived(true);
         setWaSendPhase("idle");
-      }, 550);
-      waTimerRef.current.push(tReply);
+      });
     }, 420);
     waTimerRef.current.push(tDeliver);
   };
@@ -3231,6 +3273,7 @@ window.Challenge3ParticipantView = function ({
           seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "email",
           cardPrompt: activeHeadline,
+          customerReplyText: (dynamicClientReply || sc.customerReply || "").trim(),
           emailPrompt: step3PromptText.trim() || buildEmailStrategySummary(),
           selectedFactIdxs,
           selectedFacts: chosenFacts,
@@ -4269,7 +4312,7 @@ window.Challenge3ParticipantView = function ({
                       </span>
                     </div>
                     <div className="bg-white border border-amber-200 rounded-xl rounded-tl-none px-2.5 py-2 text-xs font-bold text-slate-900 leading-snug">
-                      {sc.customerReply}
+                      {dynamicClientReply || sc.customerReply}
                     </div>
                   </div>
 

@@ -657,8 +657,11 @@ async function run() {
       }
 
       if (sendWaBtn) sendWaBtn.click();
-      // Wait ~1250ms for mock WhatsApp send (420ms) + client typing (550ms) transition to complete
-      await new Promise(r => setTimeout(r, 1250));
+      // Poll up to 4.5s for mock WhatsApp send + Gemini 3.5 Flash-Lite client reply + typing transition to complete
+      for (let i = 0; i < 30; i++) {
+        await new Promise(r => setTimeout(r, 150));
+        if (document.body.innerText.includes("Incoming Client WhatsApp Reply")) break;
+      }
 
       const step3ScrollW = document.documentElement.scrollWidth;
       const bodyAfterSend = document.body.innerText;
