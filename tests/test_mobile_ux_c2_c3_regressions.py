@@ -572,6 +572,10 @@ async function run() {
       const createBtn = Array.from(document.querySelectorAll("button")).find(b => /Create Greeting Card|生成专属贺卡|生成专属祝贺卡/i.test(b.textContent));
       const createRect = createBtn ? createBtn.getBoundingClientRect() : null;
 
+      // Verify R.C.T.F.C. drawer and live prompt are NOT present on Step 1
+      const step1HasRctfc = Boolean(document.querySelector('[data-testid^="c3-rctfc-collapsible"]'));
+      const step1HasLivePrompt = Boolean(document.querySelector('[data-testid^="c3-live-prompt"]'));
+
       // Light-grey brief card expanded height on Step 1
       const briefCard =
         document.querySelector('[data-testid="client-brief-card"]') ||
@@ -588,6 +592,8 @@ async function run() {
         hasHintWall: bodyTxt.includes("💡 Hint:"),
         styleTops,
         openTextInputsCount: step1Inputs.length,
+        step1HasRctfc,
+        step1HasLivePrompt,
         createBtnBottomPx: createRect ? Math.round(createRect.bottom) : null,
         step1BriefHeight,
       };
@@ -603,6 +609,8 @@ async function run() {
       const bodyStep2 = document.body.innerText;
       const hasPositiveBabyPill = bodyStep2.includes("Day-1 Baby Peace of Mind");
       const hasMorbidCongenital = /congenital|jaundice/i.test(bodyStep2);
+      const step2HasRctfc = Boolean(document.querySelector('[data-testid^="c3-rctfc-collapsible"]'));
+      const step2HasLivePrompt = Boolean(document.querySelector('[data-testid^="c3-live-prompt"]'));
 
       // Verify Client Brief collapsed (no 3-bullet Moment / Gap / PRU Plan box visible until Case Info tapped)
       const briefBulletsVisibleOnStep2 =
@@ -660,9 +668,32 @@ async function run() {
         Array.from(document.querySelectorAll("button")).find(b => /Draft Winning Comparison Reply/i.test(b.textContent))
       );
 
+      // Verify Step 3 HAS the collapsed R.C.T.F.C. drawer and Live AI Prompt box, and toggling R · Role populates [Role]:
+      const step3RctfcDrawer = document.querySelector('[data-testid="c3-rctfc-collapsible-3"]');
+      const step3PromptTa = document.querySelector('[data-testid="c3-live-prompt-3"]');
+      const step3RctfcCollapsedByDefault = Boolean(step3RctfcDrawer) && !Array.from(step3RctfcDrawer.querySelectorAll("button")).some(
+        b => /R\\s*·\\s*Role/i.test(b.textContent)
+      );
+      let step3RoleToggleOk = false;
+      if (step3RctfcDrawer && step3PromptTa) {
+        const hdrBtn = step3RctfcDrawer.querySelector("button");
+        if (hdrBtn) hdrBtn.click();
+        await new Promise(r => setTimeout(r, 120));
+        const roleBtn = Array.from(step3RctfcDrawer.querySelectorAll("button")).find(b => /R\\s*·\\s*Role/i.test(b.textContent));
+        if (roleBtn) roleBtn.click();
+        await new Promise(r => setTimeout(r, 120));
+        const addedRole = /\\[Role\\]:/i.test(step3PromptTa.value);
+        if (roleBtn) roleBtn.click();
+        await new Promise(r => setTimeout(r, 120));
+        const removedRole = !/\\[Role\\]:/i.test(step3PromptTa.value);
+        step3RoleToggleOk = addedRole && removedRole;
+      }
+
       return {
         hasPositiveBabyPill,
         hasMorbidCongenital,
+        step2HasRctfc,
+        step2HasLivePrompt,
         briefAutoCollapsedOnStep2: !briefBulletsVisibleOnStep2,
         reExpandedOk,
         step3DisabledBeforeSend,
@@ -670,6 +701,8 @@ async function run() {
         whatsappSentVisible,
         incomingReplyVisibleAfterSend,
         step3UnlockedAfterSend,
+        step3RctfcCollapsedByDefault,
+        step3RoleToggleOk,
         step3ScrollW,
       };
     })()`);
@@ -961,6 +994,8 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         self.assertEqual(len(c3["styleTops"]), 3, f"Expected 3 visual style pills, got {c3['styleTops']}")
         self.assertLessEqual(max(c3["styleTops"]) - min(c3["styleTops"]), 3)
         self.assertEqual(c3["openTextInputsCount"], 0, "C3 Personal Touch input should be collapsed by default")
+        self.assertFalse(c3["step1HasRctfc"], "C3 Step 1 should NOT show R.C.T.F.C. drawer")
+        self.assertFalse(c3["step1HasLivePrompt"], "C3 Step 1 should NOT show live prompt box")
         self.assertIsNotNone(c3["step1BriefHeight"])
         self.assertIsNotNone(c3["createBtnBottomPx"])
         self.assertLessEqual(
@@ -972,6 +1007,8 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         c3_s23 = res["c3Step2And3Audit"]
         self.assertTrue(c3_s23["hasPositiveBabyPill"], "Missing positive 'Day-1 Baby Peace of Mind' pill")
         self.assertFalse(c3_s23["hasMorbidCongenital"], "Morbid congenital/jaundice leaked into Step 2 DOM")
+        self.assertFalse(c3_s23["step2HasRctfc"], "C3 Step 2 should NOT show R.C.T.F.C. drawer")
+        self.assertFalse(c3_s23["step2HasLivePrompt"], "C3 Step 2 should NOT show live prompt box")
         self.assertTrue(c3_s23["briefAutoCollapsedOnStep2"], "C3 Client Brief did not auto-collapse on Step 2")
         self.assertTrue(c3_s23["reExpandedOk"], "C3 Case Info toggle failed to re-expand brief")
         self.assertTrue(c3_s23["step3DisabledBeforeSend"], "C3 Step 3 tab must be disabled before sending WhatsApp!")
@@ -987,6 +1024,14 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         self.assertTrue(
             c3_s23["step3UnlockedAfterSend"],
             "Did not automatically land on unlocked Step 3 ('Draft Winning Comparison Reply') after sending WhatsApp",
+        )
+        self.assertTrue(
+            c3_s23["step3RctfcCollapsedByDefault"],
+            "C3 Step 3 R.C.T.F.C. drawer must exist and be collapsed by default!",
+        )
+        self.assertTrue(
+            c3_s23["step3RoleToggleOk"],
+            "C3 Step 3 R.C.T.F.C. R · Role toggle failed to add/remove [Role]: in Step 3 live prompt!",
         )
         self.assertLessEqual(c3_s23["step3ScrollW"], 392, f"C3 Step 3 horizontal overflow: {c3_s23['step3ScrollW']}")
 

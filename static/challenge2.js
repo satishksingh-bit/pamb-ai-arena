@@ -115,19 +115,19 @@ const C2_UI_I18N = {
         id: "boardroom",
         shortLabel: "🏛️ Boardroom",
         clause:
-          "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales fluff.",
+          "Executive Family-Office boardroom style — crisp balance-sheet framing, zero sales fluff.",
       },
       {
         id: "empathy",
         shortLabel: "❤️ Empathy",
         clause:
-          "[Presentation Style]: Warm founder & family-dignity tone — protect family harmony, spouse security, and children's dreams.",
+          "Warm founder & family-harmony tone — protect spouse dignity and children's future.",
       },
       {
         id: "cfo",
         shortLabel: "📊 CFO",
         clause:
-          "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
+          "Analytical CFO tone — compare ~2% p.a. liquidity cost vs keeping 100% enterprise equity.",
       },
     ],
     angleHeader: "2. 💡 Personal Strategic Angle",
@@ -205,19 +205,19 @@ const C2_UI_I18N = {
         id: "boardroom",
         shortLabel: "🏛️ 董事会",
         clause:
-          "[呈现风格]：采用资深家族办公室董事会风格——聚焦资产负债表与传承结构，零推销感。",
+          "高管家族办公室董事会风格——聚焦资产负债表与传承结构，零推销感。",
       },
       {
         id: "empathy",
         shortLabel: "❤️ 共情家风",
         clause:
-          "[呈现风格]：温暖共情切入——守护创业心血与100%家族股权完整，保障配偶尊严与子女学业和谐。",
+          "温暖创始人家风共情——守护配偶尊严、家族和睦与子女学业未来。",
       },
       {
         id: "cfo",
         shortLabel: "📊 CFO量化",
         clause:
-          "[呈现风格]：严谨 CFO 财务视角——对比每年约 2% 资金配置成本与守护 100% 企业估值完整及法定信托隔离。",
+          "严谨CFO量化视角——对比每年约2%流动性成本与保留100%企业股权。",
       },
     ],
     angleHeader: "2. 💡 个人策略切入点",
@@ -294,19 +294,19 @@ const C2_UI_I18N = {
         id: "boardroom",
         shortLabel: "🏛️ 董事會",
         clause:
-          "[呈現風格]：採用資深家族辦公室董事會風格——聚焦資產負債表同傳承架構，零 Hard Sell。",
+          "高管家族辦公室董事會風格——聚焦資產負債表同傳承架構，零Hard Sell。",
       },
       {
         id: "empathy",
         shortLabel: "❤️ 共情護家",
         clause:
-          "[呈現風格]：窩心共情切入——守護創業心血同100%家族股權完整，保障另一半生活尊嚴同仔女升學和睦。",
+          "窩心創辦人護家語調——守護另一半尊嚴、家族和睦同仔女升學未來。",
       },
       {
         id: "cfo",
         shortLabel: "📊 CFO量化",
         clause:
-          "[呈現風格]：嚴謹 CFO 財務視角——對比每年約 2% 資金配置成本與守護 100% 企業估值完整同法定信託隔離。",
+          "嚴謹CFO量化視角——對比每年約2%流動性成本與保留100%企業股權。",
       },
     ],
     angleHeader: "2. 💡 個人策略切入點",
@@ -384,19 +384,19 @@ const C2_UI_I18N = {
         id: "boardroom",
         shortLabel: "🏛️ Lembaga",
         clause:
-          "[Gaya Pembentangan]: Nada eksekutif Pejabat Keluarga yang berwibawa — fokus kunci kira-kira tanpa tekanan jualan.",
+          "Gaya bilik lembaga Pejabat Keluarga — fokus kunci kira-kira, sifar tekanan jualan.",
       },
       {
         id: "empathy",
         shortLabel: "❤️ Empati",
         clause:
-          "[Gaya Pembentangan]: Nada empati hangat — lindungi maruah keluarga, kesinambungan perniagaan dan pendidikan anak.",
+          "Nada empati pengasas & harmoni keluarga — lindungi maruah pasangan dan masa depan anak.",
       },
       {
         id: "cfo",
         shortLabel: "📊 CFO",
         clause:
-          "[Gaya Pembentangan]: Nada analitik CFO — tekankan kecekapan modal (peruntukan kecairan ~2% setahun demi memelihara 100% nilai ekuiti perniagaan) serta perlindungan amanah.",
+          "Nada CFO analitik — bandingkan kos kecairan ~2% setahun lwn kekalkan 100% ekuiti syarikat.",
       },
     ],
     angleHeader: "2. 💡 Sudut Strategik Peribadi",
@@ -474,19 +474,19 @@ const C2_UI_I18N = {
         id: "boardroom",
         shortLabel: "🏛️ போர்டுரூம்",
         clause:
-          "[Presentation Style]: Authoritative Family-Office boardroom tone — crisp balance-sheet framing, zero sales pressure.",
+          "Executive Family-Office boardroom style — crisp balance-sheet framing, zero sales fluff.",
       },
       {
         id: "empathy",
         shortLabel: "❤️ அக்கறை",
         clause:
-          "[Presentation Style]: Warm founder empathy — protect family harmony, spouse security, and children's education.",
+          "Warm founder & family-harmony tone — protect spouse dignity and children's future.",
       },
       {
         id: "cfo",
         shortLabel: "📊 CFO",
         clause:
-          "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
+          "Analytical CFO tone — compare ~2% p.a. liquidity cost vs keeping 100% enterprise equity.",
       },
     ],
     angleHeader: "2. 💡 தனிப்பட்ட உத்தி கோணம்",
@@ -1164,6 +1164,107 @@ window.Challenge2ParticipantView = function ({
     return serializePromptBlocks(blocks, filteredCustomParas);
   };
 
+  // Shorten verbose R.C.T.F.C. guide templates into crisp ~1-sentence lines while preserving all key scenario numbers & visual/BNM keywords
+  const getConcisePillarTemplate = (g, sc = challengeData?.scenario, targetLang = normLang) => {
+    if (!g) return "";
+    const k = g.key;
+    const raw = String(g.template || "").trim();
+    const client = sc?.clientShort || sc?.clientName || "HNW Client";
+    const biz = sc?.businessName ? ` (${sc.businessName})` : "";
+    const nw = sc?.netWorth || "RM 28M";
+    const gap = sc?.gapAmount || "RM 6.5M";
+    const need = sc?.needAmount || "RM 10.5M";
+    const have = sc?.haveAmount || "RM 4.0M";
+    const loc = sc?.locationName || "KL";
+    const isShariah = Boolean(sc?.shariah);
+    const keyNums = Array.isArray(sc?.keyNumbers) ? sc.keyNumbers.map(String) : [];
+
+    if (k === "role") {
+      if (targetLang === "zh-CN") {
+        return `担任 PRUMDA 资深家族办公室与企业传承顾问，为 ${client} 撰写高管战前简报。`;
+      }
+      if (targetLang === "yue") {
+        return `擔任 PRUMDA 資深家族辦公室與企業傳承顧問，為 ${client} 撰寫高管戰前簡報。`;
+      }
+      if (targetLang === "ms") {
+        return `Bertindak sebagai Perunding Kanan Kekayaan & Legasi PRUMDA bagi dek pra-pitch ${client}.`;
+      }
+      if (targetLang === "ta") {
+        return `PRUMDA மூத்த செல்வ & பாரம்பரிய ஆலோசகராக ${client}-க்கான முன்-முன்மொழிவை உருவாக்கவும்.`;
+      }
+      return `Senior PRUMDA Family-Office Strategist preparing an executive pre-pitch brief for ${client}.`;
+    }
+
+    if (k === "context") {
+      const baseNumsText = `${nw} ${need} ${have} ${gap}`;
+      const extraNums = keyNums.filter((n) => !baseNumsText.includes(n));
+      const extraSuffix = extraNums.length > 0 ? ` (RM ${extraNums.join("M / RM ")}M)` : "";
+      if (targetLang === "zh-CN") {
+        return `${client}${biz}：净值 ${nw}，需 ${need} vs 现有 ${have}，面临 ${gap} 缺口${extraSuffix}。`;
+      }
+      if (targetLang === "yue") {
+        return `${client}${biz}：淨值 ${nw}，需 ${need} vs 現有 ${have}，面臨 ${gap} 缺口${extraSuffix}。`;
+      }
+      if (targetLang === "ms") {
+        return `${client}${biz}: Nilai bersih ${nw}, perlu ${need} lwn sedia ada ${have}, jurang kecairan ${gap}${extraSuffix}.`;
+      }
+      if (targetLang === "ta") {
+        return `${client}${biz}: சொத்து ${nw}, தேவை ${need} vs இருப்பு ${have}, பணப்புழக்க இடைவெளி ${gap}${extraSuffix}.`;
+      }
+      return `${client}${biz}: Net worth ${nw}, need ${need} vs liquid ${have}, leaving a ${gap} liquidity gap${extraSuffix}.`;
+    }
+
+    if (k === "task") {
+      if (targetLang === "zh-CN") {
+        return `为 ${client}（${loc}首次会面）制作严格 3 页高管战前简报，弥合 ${gap} 缺口。`;
+      }
+      if (targetLang === "yue") {
+        return `為 ${client}（${loc}首次會面）製作嚴格 3 頁高管戰前簡報，彌合 ${gap} 缺口。`;
+      }
+      if (targetLang === "ms") {
+        return `Bina dek pra-pitch tepat 3 slaid bagi mesyuarat pertama ${client} di ${loc} untuk menutup jurang ${gap}.`;
+      }
+      if (targetLang === "ta") {
+        return `${client} (${loc} முதல் சந்திப்பு) ${gap} இடைவெளியை நிரப்ப சரியாக 3-ஸ்லைடு டெக்கை உருவாக்கவும்.`;
+      }
+      return `Build a strictly 3-slide pre-pitch deck for ${client}'s first ${loc} review to close the ${gap} gap.`;
+    }
+
+    if (k === "format") {
+      if (targetLang === "zh-CN") {
+        return `严格3页：第1页4张KPI卡，第2页缺口柱状图（${need} vs ${have} vs ${gap}），第3页策略对比表+备注。`;
+      }
+      if (targetLang === "yue") {
+        return `嚴格3頁：第1頁4張KPI卡，第2頁缺口柱狀圖（${need} vs ${have} vs ${gap}），第3頁策略對比表+備註。`;
+      }
+      if (targetLang === "ms") {
+        return `3 slaid: Slaid 1 KPI, Slaid 2 Carta Palang Jurang (${need} lwn ${have} lwn ${gap}), Slaid 3 Jadual Strategi + nota.`;
+      }
+      if (targetLang === "ta") {
+        return `3 ஸ்லைடுகள்: ஸ்லைடு 1 KPI, ஸ்லைடு 2 இடைவெளி வரைபடம் (${need} vs ${have} vs ${gap}), ஸ்லைடு 3 தீர்வு அட்டவணை + குறிப்பு.`;
+      }
+      return `3 slides: Slide 1 KPIs, Slide 2 Liquidity Gap Bar Chart (${need} vs ${have} vs ${gap}), Slide 3 Strategy Table + speaker notes.`;
+    }
+
+    if (k === "constraints") {
+      if (targetLang === "zh-CN") {
+        return `遵守BNM公平待客：先做需求分析(Fact-Find)、说明PDS与15天犹豫期、非保证收益仅供说明${isShariah ? "、遵循Takaful与Hibah原则" : "、Schedule 10法定信托隔离"}。`;
+      }
+      if (targetLang === "yue") {
+        return `遵守BNM公平待客：先做需求分析(Fact-Find)、說明PDS與15天猶豫期、非保證收益僅供說明${isShariah ? "、遵循Takaful與Hibah原則" : "、Schedule 10法定信託隔離"}。`;
+      }
+      if (targetLang === "ms") {
+        return `Patuhi BNM FTFC: Fact-Find dahulu, PDS & 15 hari free-look, angka ilustratif tanpa jaminan${isShariah ? ", patuh Syariah Takaful/Hibah" : ", amanah Schedule 10"}.`;
+      }
+      if (targetLang === "ta") {
+        return `BNM விதிகள்: முதலில் Fact-Find, PDS & 15-நாள் free-look, உத்தரவாதமற்ற மாதிரி எண்கள்${isShariah ? ", ஷரியா Takaful/Hibah" : ", Schedule 10 பாதுகாப்பு"}.`;
+      }
+      return `BNM Fair Dealing: Fact-Find first, 15-day free-look, PDS, illustrative non-guaranteed figures${isShariah ? ", Shariah Takaful/Hibah" : ", FSA Schedule 10 trust"}.`;
+    }
+
+    return raw.length > 120 ? `${raw.slice(0, 117).trim()}...` : raw;
+  };
+
   // Assemble clean R.C.T.F.C. + Tone + Personal Strategic Angle prompt in explicit targetLang
   const buildAssembledPrompt = (
     guideList,
@@ -1171,7 +1272,8 @@ window.Challenge2ParticipantView = function ({
     toneId,
     angleStr,
     simpleFallback,
-    targetLang = normLang
+    targetLang = normLang,
+    scenObj = challengeData?.scenario
   ) => {
     const anyActive = Object.values(pMap || {}).some(Boolean);
     const langDict = C2_UI_I18N[targetLang] || C2_UI_I18N.en;
@@ -1180,7 +1282,7 @@ window.Challenge2ParticipantView = function ({
       (guideList || []).forEach((g) => {
         const tag = KEY_TO_TAG[g.key];
         if (tag && pMap[g.key] && g.template) {
-          blocks[tag] = g.template.trim();
+          blocks[tag] = getConcisePillarTemplate(g, scenObj, targetLang);
         }
       });
     }
@@ -1252,7 +1354,15 @@ window.Challenge2ParticipantView = function ({
           setActiveStep("1");
           setShowBrief(true);
           setPromptText(
-            buildAssembledPrompt(gList, starterMap, null, "", data.simple_prompt, targetLang)
+            buildAssembledPrompt(
+              gList,
+              starterMap,
+              null,
+              "",
+              data.simple_prompt,
+              targetLang,
+              data.scenario
+            )
           );
           initialPromptLoadedRef.current = true;
         } else {
@@ -1281,7 +1391,8 @@ window.Challenge2ParticipantView = function ({
                 selectedToneId,
                 nextAngle,
                 data.simple_prompt,
-                targetLang
+                targetLang,
+                data.scenario
               )
             );
             initialPromptLoadedRef.current = true;
@@ -1308,7 +1419,8 @@ window.Challenge2ParticipantView = function ({
     const shouldInclude = !currentlyActive;
     const nextMap = { ...activePillarsMap, [key]: shouldInclude };
     setActivePillarsMap(nextMap);
-    setPromptText((prev) => upsertOrRemovePromptBlock(prev, tag, gObj.template, shouldInclude));
+    const conciseBody = getConcisePillarTemplate(gObj, challengeData?.scenario, normLang);
+    setPromptText((prev) => upsertOrRemovePromptBlock(prev, tag, conciseBody, shouldInclude));
     flashTagFeedback(`${shouldInclude ? "+ Added" : "− Removed"} [${tag}]`);
     setLineage((prev) => [
       ...prev,
@@ -1388,7 +1500,8 @@ window.Challenge2ParticipantView = function ({
         null,
         "",
         challengeData?.simple_prompt || "",
-        normLang
+        normLang,
+        challengeData?.scenario
       )
     );
     flashTagFeedback("↺ Reset to Starter");
@@ -1402,7 +1515,8 @@ window.Challenge2ParticipantView = function ({
       (challengeData?.guide || []).forEach((g) => {
         const tag = KEY_TO_TAG[g.key];
         if (tag && g.template) {
-          cur = upsertOrRemovePromptBlock(cur, tag, g.template, true);
+          const conciseBody = getConcisePillarTemplate(g, challengeData?.scenario, normLang);
+          cur = upsertOrRemovePromptBlock(cur, tag, conciseBody, true);
         }
       });
       return cur;
@@ -2502,7 +2616,7 @@ window.Challenge2ParticipantView = function ({
                 )}
 
                 <textarea
-                  rows={6}
+                  rows={4}
                   value={promptText}
                   onChange={(e) => handleLivePromptEdit(e.target.value)}
                   placeholder={ui.anglePlaceholder}

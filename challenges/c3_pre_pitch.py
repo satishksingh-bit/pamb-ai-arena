@@ -1265,6 +1265,10 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
 
     step_mode = str(body.get("stepMode") or "all").strip()
     card_prompt = (body.get("cardPrompt") or scen["cardHeadline"]).strip()
+    card_headline_text = (body.get("cardHeadlineText") or "").strip()
+    if not card_headline_text:
+        m_hl = re.search(r'Headline:\s*"([^"]+)"', card_prompt)
+        card_headline_text = m_hl.group(1).strip() if m_hl else (card_prompt.splitlines()[0].strip() if card_prompt else scen["cardHeadline"])
     card_style = (body.get("cardStyle") or "").strip()
     card_personal_note = (body.get("cardPersonalNote") or "").strip()
     whatsapp_prompt = (body.get("whatsappPrompt") or body.get("customStrategy") or "").strip()
@@ -1423,6 +1427,8 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             parts.append(f"Visual Style & Mood: {card_style}")
         if card_personal_note:
             parts.append(f"Advisor's Custom Creative Detail to Include: {card_personal_note}")
+        if card_prompt and card_prompt != card_headline_text:
+            parts.append(f"Advisor's Live Prompt Instructions: {card_prompt.replace(chr(10), ' ; ')}")
         return ". ".join(parts) if parts else card_prompt
 
     def _weave_fallback_wa() -> str:
@@ -1492,7 +1498,7 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         card_data_url = prev_card_url
         img_model = "cached-card"
         if not card_data_url and generate_card:
-            headline = card_prompt or scen["cardHeadline"]
+            headline = card_headline_text or scen["cardHeadline"]
             card_data_url, _img_ms, img_model = _generate_c3_greeting_card(
                 scen,
                 headline,
@@ -1537,7 +1543,7 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
         }
 
     if step_mode == "card":
-        headline = card_prompt or scen["cardHeadline"]
+        headline = card_headline_text or scen["cardHeadline"]
         card_data_url, img_ms, img_model = _generate_c3_greeting_card(
             scen,
             headline,
@@ -1605,7 +1611,7 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             f"- Client: {scen['customerName']}\n"
             f"- Milestone to Celebrate: {clean_milestone_context if is_wa_subset else scen['lifeEvent']}\n"
             + ("" if is_wa_subset else f"- Existing Coverage Gap: {scen['existingPolicy']}\n- Suitable PRU Portfolio: {scen['pambPlan']}\n")
-            + f"- Opening Tone & Strategy: {whatsapp_prompt.split('|')[0].strip() if '|' in whatsapp_prompt else (whatsapp_prompt or 'Warm congratulations first + gentle wealth planning hook')}\n"
+            + f"- Advisor's Live Prompt & Strategy: {whatsapp_prompt.replace(chr(10), ' | ') if whatsapp_prompt else 'Warm congratulations first + gentle wealth planning hook'}\n"
             + f"- ALLOWED WEALTH PLANNING IDEA(S) TO INCLUDE (Include ONLY {'this exact 1 idea' if len(chosen_wa_ideas) == 1 else f'these exact {len(chosen_wa_ideas)} ideas'}):\n{wa_hooks_block}\n"
             + wa_excl_block
         )
@@ -1638,7 +1644,41 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             "latencyMs": int((time.time() - t_start) * 1000),
         }
 
+    if step_mode == "client_reply":
+        rival_brand = scen.get("rivalBrand", "AIA Malaysia")
+        rival_plan = scen.get("aiaPlan", "AIA plan")
+        pru_plan = scen.get("pambPlan", "PRU plan")
+        advisor_msg = submitted_wa_text or _weave_fallback_wa()
+        reply_prompt = (
+            f"You are role-playing as {scen['customerName']} ({scen['lifeEvent']}), a warm, friendly Malaysian client replying on WhatsApp to your trusted advisor ({advisor_name}).\n"
+            f"{lang_instruction}\n"
+            f"Your advisor just sent you a celebratory Greeting Card (\"{card_prompt or scen['cardHeadline']}\") and this First-Touch WhatsApp message:\n"
+            f"\"\"\"{advisor_msg}\"\"\"\n\n"
+            f"Write a natural, warm, conversational WhatsApp reply (28–52 words, 2–3 sentences) directly responding to what your advisor wrote:\n"
+            f"1. Warmly thank {advisor_name} for the thoughtful card and specific message/personal touch, and gladly accept catching up / reviewing their summary.\n"
+            f"2. Mention naturally that a friend/agent from {rival_brand} also just shared a quote for {rival_plan}, and ask how {pru_plan} compares factually so you can review both together.\n"
+            f"Rules: Sound like a real, appreciative Malaysian client on WhatsApp (warm, receptive, never hostile). Keep official plan names ({rival_plan}, {pru_plan.split('+')[0].strip()}) clear.\n"
+            + 'Respond STRICTLY in valid JSON: {"customerReply": "..."}'
+        )
+        ai_text, model_used, _ms = call_vertex_fn(reply_prompt)
+        parsed_rep = _extract_json_dict(ai_text)
+        out_reply = (
+            str(parsed_rep.get("customerReply")).strip().strip('"')
+            if parsed_rep and parsed_rep.get("customerReply")
+            else str(scen.get("customerObjection") or "").strip().strip('"')
+        )
+        return {
+            "scenarioId": scenario_id,
+            "seatIndex": scen.get("seatIndex", 0),
+            "customerReply": out_reply,
+            "modelUsed": model_used,
+            "latencyMs": int((time.time() - t_start) * 1000),
+        }
+
     if step_mode == "email":
+        custom_client_reply = (
+            str(body.get("customerReplyText") or "").strip() or scen["customerObjection"]
+        )
         is_fact_subset = fact_subset_explicit and len(chosen_facts) < len(all_fact_items)
         n_sel_facts = len(chosen_facts)
         bullet_rule = (
@@ -1661,8 +1701,8 @@ def handle_c3_ai(body: dict, call_vertex_fn, lang_names: dict, call_image_fn=Non
             f"- Client: {scen['customerName']} ({clean_milestone_context if is_fact_subset else scen['lifeEvent']})\n"
             f"- Recommended Portfolio: {scen['pambPlan'].split('+')[0].strip() if is_fact_subset else scen['pambPlan']}\n"
             f"- Competitor Quote: {scen['aiaPlan']}\n"
-            f"- Client's Question: \"{scen['customerObjection']}\"\n"
-            f"- Advisory Style: {email_prompt.split('|')[0].strip() if '|' in email_prompt else (email_prompt or 'Warm, respectful side-by-side comparison')}\n"
+            f"- Client's Question: \"{custom_client_reply}\"\n"
+            f"- Advisor's Live Prompt & Advisory Style: {email_prompt.replace(chr(10), ' | ') if email_prompt else 'Warm, respectful side-by-side comparison'}\n"
             f"- ONLY SELECTED FACTUAL ADVANTAGE(S) TO INCLUDE ({n_sel_facts} of {len(all_fact_items)} selected):\n{aia_facts_joined or '(None selected)'}\n"
             + fact_excl_block
             + (f"- MANDATORY MEETING CLOSER / PERSONAL IDEA TO INCLUDE IN CLOSING: \"{email_personal_note}\"\n" if email_personal_note else "")

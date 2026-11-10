@@ -84,7 +84,7 @@ const C3_PLAYBOOK_UI = {
     nextStep3Btn: "📲 Send WhatsApp Message →",
     resendWaBtn: "📲 Re-Send WhatsApp →",
     sendingWaBtn: "📤 Sending via WhatsApp...",
-    sentWaLabel: "✓✓ Your WhatsApp Sent & Delivered",
+    sentWaLabel: "Your WhatsApp Sent & Delivered",
     typingLabel: "💬 Client is typing a reply on WhatsApp...",
 
     incomingBubbleTag: "📲 Incoming Client WhatsApp Reply • Just now",
@@ -115,6 +115,20 @@ const C3_PLAYBOOK_UI = {
     scoreLabel: "🏆 Score:",
     waFinalHeader: "💬 1. First-Touch WhatsApp Message",
     emailFinalHeader: "📧 2. Winning Plan Comparison Email (vs. AIA)",
+    improvePromptBtn: "🚀 Improve Your Prompt! (R.C.T.F.C.)",
+    improvePromptSub: "Tap any R.C.T.F.C. pillar to add or remove a short instruction line:",
+    activateAllShort: "✨ All 5 On",
+    clearAllShort: "✕ Clear 5",
+    livePromptHeader: "✍️ Live AI Prompt",
+    resetPromptBtn: "↺ Reset",
+    clearPromptBtn: "✕ Clear",
+    pillarTitles: {
+      role: "R · Role",
+      context: "C · Context",
+      task: "T · Task",
+      format: "F · Format",
+      constraints: "C · Constraints",
+    },
   },
 
   "zh-CN": {
@@ -190,7 +204,7 @@ const C3_PLAYBOOK_UI = {
     nextStep3Btn: "📲 发送 WhatsApp 信息 →",
     resendWaBtn: "📲 重新发送 WhatsApp →",
     sendingWaBtn: "📤 正在通过 WhatsApp 发送...",
-    sentWaLabel: "✓✓ 您的 WhatsApp 已发送并送达",
+    sentWaLabel: "您的 WhatsApp 已发送并送达",
     typingLabel: "💬 客户正在 WhatsApp 输入回复...",
 
     incomingBubbleTag: "📲 客户刚刚回复了您的 WhatsApp • 刚刚",
@@ -221,6 +235,20 @@ const C3_PLAYBOOK_UI = {
     scoreLabel: "🏆 得分：",
     waFinalHeader: "💬 1. 首条 WhatsApp 破冰信息",
     emailFinalHeader: "📧 2. 方案对比回复电邮 (vs. AIA)",
+    improvePromptBtn: "🚀 升级您的提示词！(R.C.T.F.C.)",
+    improvePromptSub: "点击下方任意 R.C.T.F.C. 维度加入简短指令（再次点击可移除）：",
+    activateAllShort: "✨ 全选5维",
+    clearAllShort: "✕ 清空5维",
+    livePromptHeader: "✍️ 实时 AI 提示词",
+    resetPromptBtn: "↺ 重置",
+    clearPromptBtn: "✕ 清空",
+    pillarTitles: {
+      role: "R · 角色",
+      context: "C · 背景",
+      task: "T · 任务",
+      format: "F · 格式",
+      constraints: "C · 限制",
+    },
   },
 
   yue: {
@@ -296,7 +324,7 @@ const C3_PLAYBOOK_UI = {
     nextStep3Btn: "📲 Send WhatsApp 信息 →",
     resendWaBtn: "📲 重新 Send WhatsApp →",
     sendingWaBtn: "📤 正在透過 WhatsApp 發送...",
-    sentWaLabel: "✓✓ 你嘅 WhatsApp 已送達",
+    sentWaLabel: "你嘅 WhatsApp 已送達",
     typingLabel: "💬 個客喺 WhatsApp 打緊字覆你...",
 
     incomingBubbleTag: "📲 個客啱啱覆咗你 WhatsApp • 剛剛",
@@ -327,6 +355,20 @@ const C3_PLAYBOOK_UI = {
     scoreLabel: "🏆 得分：",
     waFinalHeader: "💬 1. 首條 WhatsApp 破冰信息",
     emailFinalHeader: "📧 2. 方案對比回覆電郵 (vs. AIA)",
+    improvePromptBtn: "🚀 升級你嘅提示詞！(R.C.T.F.C.)",
+    improvePromptSub: "撳下面任何一個 R.C.T.F.C. 維度加入簡短指令（再撳一次即可移除）：",
+    activateAllShort: "✨ 全選5維",
+    clearAllShort: "✕ 清空5維",
+    livePromptHeader: "✍️ 即時 AI 提示詞",
+    resetPromptBtn: "↺ 重設",
+    clearPromptBtn: "✕ 清空",
+    pillarTitles: {
+      role: "R · 角色",
+      context: "C · 背景",
+      task: "T · 任務",
+      format: "F · 格式",
+      constraints: "C · 限制",
+    },
   },
 
   ms: {
@@ -402,7 +444,7 @@ const C3_PLAYBOOK_UI = {
     nextStep3Btn: "📲 Hantar Mesej WhatsApp →",
     resendWaBtn: "📲 Hantar Semula WhatsApp →",
     sendingWaBtn: "📤 Menghantar melalui WhatsApp...",
-    sentWaLabel: "✓✓ WhatsApp Anda Dihantar",
+    sentWaLabel: "WhatsApp Anda Dihantar",
     typingLabel: "💬 Pelanggan sedang menaip balasan...",
 
     incomingBubbleTag: "📲 Balasan WhatsApp Pelanggan • Sebentar tadi",
@@ -433,6 +475,20 @@ const C3_PLAYBOOK_UI = {
     scoreLabel: "🏆 Skor:",
     waFinalHeader: "💬 1. Mesej WhatsApp Pertama",
     emailFinalHeader: "📧 2. E-mel Perbandingan Pelan (lwn AIA)",
+    improvePromptBtn: "🚀 Tingkatkan Prompt Anda! (R.C.T.F.C.)",
+    improvePromptSub: "Ketik mana-mana tiang R.C.T.F.C. untuk menambah atau membuang arahan ringkas:",
+    activateAllShort: "✨ Aktif 5",
+    clearAllShort: "✕ Kosongkan",
+    livePromptHeader: "✍️ Prompt AI Langsung",
+    resetPromptBtn: "↺ Tetap Semula",
+    clearPromptBtn: "✕ Kosongkan",
+    pillarTitles: {
+      role: "R · Peranan",
+      context: "C · Konteks",
+      task: "T · Tugasan",
+      format: "F · Format",
+      constraints: "C · Kekangan",
+    },
   },
 
   ta: {
@@ -508,7 +564,7 @@ const C3_PLAYBOOK_UI = {
     nextStep3Btn: "📲 WhatsApp செய்தி அனுப்பு →",
     resendWaBtn: "📲 மீண்டும் WhatsApp அனுப்பு →",
     sendingWaBtn: "📤 WhatsApp வழியாக அனுப்புகிறது...",
-    sentWaLabel: "✓✓ உங்கள் WhatsApp அனுப்பப்பட்டது",
+    sentWaLabel: "உங்கள் WhatsApp அனுப்பப்பட்டது",
     typingLabel: "💬 வாடிக்கையாளர் தட்டச்சு செய்கிறார்...",
 
     incomingBubbleTag: "📲 வாடிக்கையாளரின் WhatsApp பதில் • இப்போது",
@@ -539,6 +595,20 @@ const C3_PLAYBOOK_UI = {
     scoreLabel: "🏆 மதிப்பெண்:",
     waFinalHeader: "💬 1. முதல் WhatsApp செய்தி",
     emailFinalHeader: "📧 2. திட்ட ஒப்பீட்டு மின்னஞ்சல் (vs. AIA)",
+    improvePromptBtn: "🚀 உங்கள் Prompt-ஐ மேம்படுத்துக! (R.C.T.F.C.)",
+    improvePromptSub: "சுருக்கமான குறிப்பைச் சேர்க்க அல்லது நீக்க R.C.T.F.C. தூண்களைத் தட்டவும்:",
+    activateAllShort: "✨ அனைத்தும் 5",
+    clearAllShort: "✕ அழி",
+    livePromptHeader: "✍️ நேரடி AI Prompt",
+    resetPromptBtn: "↺ மீட்டமை",
+    clearPromptBtn: "✕ அழி",
+    pillarTitles: {
+      role: "R · பங்கு",
+      context: "C · சூழல்",
+      task: "T · பணி",
+      format: "F · வடிவம்",
+      constraints: "C · விதிகள்",
+    },
   },
 };
 C3_PLAYBOOK_UI["zh-TW"] = C3_PLAYBOOK_UI.yue;
@@ -2244,6 +2314,13 @@ window.Challenge3ParticipantView = function ({
   );
   const [postSubmitTab, setPostSubmitTab] = useState("whatsapp");
 
+  // Per-Step Collapsed-by-Default R.C.T.F.C. Drawer + Live Editable Prompt State (0/5 default on every step!)
+  const [openRctfcStep, setOpenRctfcStep] = useState({ 1: false, 2: false, 3: false });
+  const [c3RctfcMap, setC3RctfcMap] = useState({ 1: {}, 2: {}, 3: {} });
+  const [step1PromptText, setStep1PromptText] = useState("");
+  const [step2PromptText, setStep2PromptText] = useState("");
+  const [step3PromptText, setStep3PromptText] = useState("");
+
   // Final Submit State (restored from server submission or localStorage if already completed)
   const [submitted, setSubmitted] = useState(() => Boolean(isCompleted && existingSubmission));
   const [submittedData, setSubmittedData] = useState(() => {
@@ -2434,6 +2511,8 @@ window.Challenge3ParticipantView = function ({
     setExpandedFactIdxs([]);
     setShowCaseBrief(true);
     setLangChangedBanner(false);
+    setOpenRctfcStep({ 1: false, 2: false, 3: false });
+    setC3RctfcMap({ 1: {}, 2: {}, 3: {} });
     setStep(1);
   };
 
@@ -2519,6 +2598,441 @@ window.Challenge3ParticipantView = function ({
     ui.openingTones.find((o) => o.id === openingToneId) || ui.openingTones[0];
   const activeAdvisoryObj =
     ui.advisoryStyles.find((a) => a.id === advisoryStyleId) || ui.advisoryStyles[0];
+  const clientShortName = (sc.customerName || activeCaseMeta.clientName || "").split("(")[0].trim();
+  const clientShortTitle =
+    sc.shortLabel || activeCaseMeta.labels[normLang] || activeCaseMeta.labels.en;
+
+  const C3_RCTFC_KEYS = ["role", "context", "task", "format", "constraints"];
+  const C3_KEY_TO_TAG = {
+    role: "Role",
+    context: "Context",
+    task: "Task",
+    format: "Format",
+    constraints: "Constraints",
+  };
+
+  const getStepRctfcDefs = (stepNum) => {
+    const planLead = String(sc.pambPlan || "PRU Plan").split("+")[0].trim();
+    if (stepNum === 1) {
+      if (normLang === "zh-CN") {
+        return {
+          role: `[Role]: 资深 PRUMDA 家族财富顾问。`,
+          context: `[Context]: 祝贺 ${clientShortName} 迎来「${clientShortTitle}」喜悦时刻。`,
+          task: `[Task]: 设计一张温馨高雅的专属里程碑祝贺卡。`,
+          format: `[Format]: 16:9 精致插画构图，主标题字体清晰醒目。`,
+          constraints: `[Constraints]: 纯粹真挚祝贺氛围，贺卡画面零推销感。`,
+        };
+      }
+      if (normLang === "yue") {
+        return {
+          role: `[Role]: 資深 PRUMDA 家族財富顧問。`,
+          context: `[Context]: 祝賀 ${clientShortName} 迎接「${clientShortTitle}」喜悅時刻。`,
+          task: `[Task]: 設計一張窩心高雅嘅專屬里程碑祝賀卡。`,
+          format: `[Format]: 16:9 精緻插畫構圖，主標題字體清晰醒目。`,
+          constraints: `[Constraints]: 純粹真摯祝賀氣氛，賀卡畫面零 Hard Sell。`,
+        };
+      }
+      if (normLang === "ms") {
+        return {
+          role: `[Role]: Perunding Kekayaan Keluarga Utama PRUMDA.`,
+          context: `[Context]: Meraikan detik ${clientShortTitle} buat ${clientShortName}.`,
+          task: `[Task]: Reka kad ucapan pencapaian eksekutif yang mesra.`,
+          format: `[Format]: Ilustrasi kad mewah bersih dengan tipografi tajuk jelas.`,
+          constraints: `[Constraints]: Suasana meraikan yang ikhlas tanpa unsur jualan pada kad.`,
+        };
+      }
+      if (normLang === "ta") {
+        return {
+          role: `[Role]: முதன்மை PRUMDA குடும்பச் செல்வ ஆலோசகர்.`,
+          context: `[Context]: ${clientShortName}-ன் ${clientShortTitle} நிகழ்வைக் கொண்டாடுதல்.`,
+          task: `[Task]: அன்பான சிறப்பு வாழ்த்து அட்டையை வடிவமைக்கவும்.`,
+          format: `[Format]: தெளிவான தலைப்புடன் கூடிய அழகிய வாழ்த்து அட்டை ஓவியம்.`,
+          constraints: `[Constraints]: அன்பான கொண்டாட்ட உணர்வு, விற்பனை அழுத்தம் இல்லை.`,
+        };
+      }
+      return {
+        role: `[Role]: Premier PRUMDA Family Wealth Advisor.`,
+        context: `[Context]: Celebrating ${clientShortName}'s ${clientShortTitle}.`,
+        task: `[Task]: Design a warm executive milestone greeting card.`,
+        format: `[Format]: Clean luxury card illustration with clear headline typography.`,
+        constraints: `[Constraints]: Warm celebratory mood, zero sales pitch on card.`,
+      };
+    }
+
+    if (stepNum === 2) {
+      if (normLang === "zh-CN") {
+        return {
+          role: `[Role]: 值得信赖的 PRUMDA 家庭顾问，向 ${clientShortName} 发送问候。`,
+          context: `[Context]: 附上「${clientShortTitle}」专属祝贺卡并跟进关怀。`,
+          task: `[Task]: 撰写温暖的首条破冰 WhatsApp，自然带出所选财富亮点。`,
+          format: `[Format]: 简短 3 句手机易读 WhatsApp 信息，配自然表情符号。`,
+          constraints: `[Constraints]: 零硬性推销；以轻松 2 分钟简报邀约收尾。`,
+        };
+      }
+      if (normLang === "yue") {
+        return {
+          role: `[Role]: 值得信賴嘅 PRUMDA 家庭顧問，WhatsApp 問候 ${clientShortName}。`,
+          context: `[Context]: 連埋「${clientShortTitle}」專屬賀卡跟進問候。`,
+          task: `[Task]: 寫一條窩心首條破冰 WhatsApp，自然帶出所選財富亮點。`,
+          format: `[Format]: 簡短 3 句手機易睇 WhatsApp 信息，配自然 Emoji。`,
+          constraints: `[Constraints]: 零 Hard Sell；以輕鬆 2 分鐘懶人包邀約收尾。`,
+        };
+      }
+      if (normLang === "ms") {
+        return {
+          role: `[Role]: Perunding Keluarga PRUMDA yang dipercayai menyapa ${clientShortName}.`,
+          context: `[Context]: Susulan mesra bersama kad ucapan ${clientShortTitle}.`,
+          task: `[Task]: Rangka WhatsApp pertama yang mesra dengan idea kekayaan terpilih.`,
+          format: `[Format]: Mesej WhatsApp mudah alih 3 ayat ringkas dengan emoji semula jadi.`,
+          constraints: `[Constraints]: Tiada desakan jualan; akhiri dengan tawaran ringkasan 2 minit.`,
+        };
+      }
+      if (normLang === "ta") {
+        return {
+          role: `[Role]: ${clientShortName}-க்கு செய்தி அனுப்பும் நம்பகமான PRUMDA ஆலோசகர்.`,
+          context: `[Context]: ${clientShortTitle} வாழ்த்து அட்டையுடன் அன்பான தொடர்ச்சி.`,
+          task: `[Task]: தேர்ந்தெடுத்த செல்வக் கருத்துக்களுடன் முதல் WhatsApp செய்தி.`,
+          format: `[Format]: இயல்பான எமோஜிகளுடன் சுருக்கமான 3-வாக்கிய WhatsApp செய்தி.`,
+          constraints: `[Constraints]: விற்பனை அழுத்தம் வேண்டாம்; 2-நிமிட சுருக்க அழைப்புடன் முடிக்கவும்.`,
+        };
+      }
+      return {
+        role: `[Role]: Trusted PRUMDA Family Advisor texting ${clientShortName}.`,
+        context: `[Context]: Following up on ${clientShortTitle} greeting card.`,
+        task: `[Task]: Draft a warm first-touch WhatsApp planting selected wealth ideas.`,
+        format: `[Format]: Short 3-sentence mobile WhatsApp message with natural emojis.`,
+        constraints: `[Constraints]: Zero hard-selling; end with an easy 2-min summary offer.`,
+      };
+    }
+
+    // Step 3
+    if (normLang === "zh-CN") {
+      return {
+        role: `[Role]: 资深 MDRT 专家顾问，为 ${clientShortName} 客观解答。`,
+        context: `[Context]: 客户对比 ${planLead} 与 ${rivalShort} 报价。`,
+        task: `[Task]: 仅基于所选 PRU 条款优势撰写客观对比回复。`,
+        format: `[Format]: 温和共情开场 + 清晰要点对比 + 轻松面谈邀约。`,
+        constraints: `[Constraints]: 尊重同业 ${rivalShort}；严格遵循国家银行 (BNM) 公平待客规范。`,
+      };
+    }
+    if (normLang === "yue") {
+      return {
+        role: `[Role]: 資深 MDRT 專家顧問，為 ${clientShortName} 客觀解答。`,
+        context: `[Context]: 客戶比較緊 ${planLead} 同 ${rivalShort} 報價。`,
+        task: `[Task]: 淨係根據所選 PRU 條款優勢寫客觀對比回覆。`,
+        format: `[Format]: 窩心共情開場 + 清晰重點對比 + 輕鬆約見收尾。`,
+        constraints: `[Constraints]: 大方尊重 ${rivalShort}；嚴格遵守 BNM 公平待客規範。`,
+      };
+    }
+    if (normLang === "ms") {
+      return {
+        role: `[Role]: Pakar Kanan MDRT menasihati ${clientShortName}.`,
+        context: `[Context]: Pelanggan membandingkan ${planLead} dengan sebut harga ${rivalShort}.`,
+        task: `[Task]: Tulis balasan perbandingan berfakta menggunakan kelebihan PRU terpilih sahaja.`,
+        format: `[Format]: Pembukaan mesra + poin perbandingan padat + penutup temujanji santai.`,
+        constraints: `[Constraints]: Hormati ${rivalShort}; patuhi garis panduan layanan adil BNM.`,
+      };
+    }
+    if (normLang === "ta") {
+      return {
+        role: `[Role]: ${clientShortName}-க்கு ஆலோசனை வழங்கும் மூத்த MDRT நிபுணர்.`,
+        context: `[Context]: ${planLead} மற்றும் ${rivalShort} திட்டங்களை வாடிக்கையாளர் ஒப்பிடுகிறார்.`,
+        task: `[Task]: தேர்ந்தெடுக்கப்பட்ட PRU நன்மைகளை மட்டும் கொண்டு உண்மை ஒப்பீடு எழுதுக.`,
+        format: `[Format]: அன்பான தொடக்கம் + தெளிவான ஒப்பீட்டுப் புள்ளிகள் + எளிய சந்திப்பு அழைப்பு.`,
+        constraints: `[Constraints]: ${rivalShort}-ஐ மதிக்கவும்; BNM விதிமுறைகளுக்கு உட்பட்டது.`,
+      };
+    }
+    return {
+      role: `[Role]: Senior MDRT Specialist advising ${clientShortName}.`,
+      context: `[Context]: Client compared ${planLead} against ${rivalShort} quote.`,
+      task: `[Task]: Write a factual comparison reply using only selected PRU advantages.`,
+      format: `[Format]: Warm opening + crisp bullet comparison + low-pressure meeting close.`,
+      constraints: `[Constraints]: Respectful toward ${rivalShort}; BNM fair-dealing compliant.`,
+    };
+  };
+
+  const buildStepBaseLine = (stepNum) => {
+    if (stepNum === 1) {
+      return (
+        `Style: ${activeStyleObj.label} | Headline: "${activeHeadline}"` +
+        (cardPersonalNote.trim() ? ` | Touch: ${cardPersonalNote.trim()}` : "")
+      );
+    }
+    if (stepNum === 2) {
+      const chosenIdeaLabels = (pb.waIdeas || [])
+        .filter((_, idx) => selectedWaIdeaIdxs.includes(idx))
+        .map((item) => String(item.label || "").replace(/^[^\w\u4e00-\u9fff\u0b80-\u0bff]+/, "").trim());
+      return (
+        `Tone: ${activeOpeningObj.label} | Ideas: ${chosenIdeaLabels.join(", ") || "Warm check-in"}` +
+        (waPersonalNote.trim() ? ` | Touch: ${waPersonalNote.trim()}` : "")
+      );
+    }
+    const chosenFactSummaries = (sc.aiaFacts || [])
+      .filter((_, idx) => selectedFactIdxs.includes(idx))
+      .map((f) => _summarizeFactClause(f).summary);
+    return (
+      `Tone: ${activeAdvisoryObj.label} | PRU Advantages: ${chosenFactSummaries.join("; ") || "Select advantages"}` +
+      (emailPersonalNote.trim() ? ` | Closer: ${emailPersonalNote.trim()}` : "")
+    );
+  };
+
+  const composeStepPrompt = (stepNum, rctfcForStep) => {
+    const baseLine = buildStepBaseLine(stepNum);
+    const defs = getStepRctfcDefs(stepNum);
+    const activeLines = C3_RCTFC_KEYS.filter((k) => rctfcForStep && rctfcForStep[k]).map(
+      (k) => defs[k]
+    );
+    return [baseLine, ...activeLines].filter(Boolean).join("\n");
+  };
+
+  // Keep per-step live prompts synced whenever pills, notes, scenario, language, or R.C.T.F.C. toggles change
+  useEffect(() => {
+    setStep1PromptText(composeStepPrompt(1, c3RctfcMap[1] || {}));
+  }, [
+    cardStyleId,
+    selectedHeadlineIdx,
+    cardPersonalNote,
+    sc.id,
+    sc.seatIndex,
+    normLang,
+    c3RctfcMap[1],
+  ]);
+
+  useEffect(() => {
+    setStep2PromptText(composeStepPrompt(2, c3RctfcMap[2] || {}));
+  }, [
+    openingToneId,
+    selectedWaIdeaIdxs,
+    waPersonalNote,
+    sc.id,
+    sc.seatIndex,
+    normLang,
+    c3RctfcMap[2],
+  ]);
+
+  useEffect(() => {
+    setStep3PromptText(composeStepPrompt(3, c3RctfcMap[3] || {}));
+  }, [
+    advisoryStyleId,
+    selectedFactIdxs,
+    emailPersonalNote,
+    sc.id,
+    sc.seatIndex,
+    normLang,
+    c3RctfcMap[3],
+  ]);
+
+  const getStepPromptState = (stepNum) => {
+    if (stepNum === 1) return [step1PromptText, setStep1PromptText];
+    if (stepNum === 2) return [step2PromptText, setStep2PromptText];
+    return [step3PromptText, setStep3PromptText];
+  };
+
+  const handleToggleStepRctfcPillar = (stepNum, key) => {
+    const curStepMap = (c3RctfcMap && c3RctfcMap[stepNum]) || {};
+    const nextVal = !curStepMap[key];
+    const nextStepMap = { ...curStepMap };
+    if (nextVal) {
+      nextStepMap[key] = true;
+    } else {
+      delete nextStepMap[key];
+    }
+    setC3RctfcMap((prev) => ({ ...prev, [stepNum]: nextStepMap }));
+    const [, setPromptFn] = getStepPromptState(stepNum);
+    setPromptFn(composeStepPrompt(stepNum, nextStepMap));
+  };
+
+  const handleActivateAllStepRctfc = (stepNum) => {
+    const allMap = { role: true, context: true, task: true, format: true, constraints: true };
+    setC3RctfcMap((prev) => ({ ...prev, [stepNum]: allMap }));
+    const [, setPromptFn] = getStepPromptState(stepNum);
+    setPromptFn(composeStepPrompt(stepNum, allMap));
+  };
+
+  const handleClearAllStepRctfc = (stepNum) => {
+    setC3RctfcMap((prev) => ({ ...prev, [stepNum]: {} }));
+    const [, setPromptFn] = getStepPromptState(stepNum);
+    setPromptFn(composeStepPrompt(stepNum, {}));
+  };
+
+  const handleResetStepPrompt = (stepNum) => {
+    setC3RctfcMap((prev) => ({ ...prev, [stepNum]: {} }));
+    const [, setPromptFn] = getStepPromptState(stepNum);
+    setPromptFn(composeStepPrompt(stepNum, {}));
+  };
+
+  const handleClearStepPrompt = (stepNum) => {
+    setC3RctfcMap((prev) => ({ ...prev, [stepNum]: {} }));
+    const [, setPromptFn] = getStepPromptState(stepNum);
+    setPromptFn("");
+  };
+
+  const handleManualStepPromptEdit = (stepNum, rawVal) => {
+    const [, setPromptFn] = getStepPromptState(stepNum);
+    setPromptFn(rawVal);
+    const detected = {};
+    C3_RCTFC_KEYS.forEach((k) => {
+      const tag = C3_KEY_TO_TAG[k];
+      if (new RegExp(`^\\s*\\[${tag}\\]:`, "im").test(rawVal || "")) {
+        detected[k] = true;
+      }
+    });
+    setC3RctfcMap((prev) => ({ ...prev, [stepNum]: detected }));
+  };
+
+  const renderStepPromptAndRctfc = (stepNum) => {
+    const stepMap = (c3RctfcMap && c3RctfcMap[stepNum]) || {};
+    const activeCount = C3_RCTFC_KEYS.filter((k) => stepMap[k]).length;
+    const isOpen = Boolean(openRctfcStep && openRctfcStep[stepNum]);
+    const [curPromptVal] = getStepPromptState(stepNum);
+    const defs = getStepRctfcDefs(stepNum);
+
+    return (
+      <div className="space-y-1.5 min-w-0">
+        {/* 1. Collapsed-by-Default 🚀 Improve Your Prompt! (R.C.T.F.C.) Drawer */}
+        <div data-testid={`c3-rctfc-collapsible-${stepNum}`} className="min-w-0">
+          <button
+            type="button"
+            onClick={() =>
+              setOpenRctfcStep((prev) => ({ ...prev, [stepNum]: !prev[stepNum] }))
+            }
+            className="w-full px-3 py-1.5 rounded-xl bg-white hover:bg-red-50/40 border border-slate-300 text-xs font-extrabold text-slate-900 flex items-center justify-between gap-2 text-left transition-all"
+          >
+            <span className="truncate">{ui.improvePromptBtn}</span>
+            <span className="shrink-0 flex items-center gap-1.5">
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold border ${
+                  activeCount > 0
+                    ? "bg-emerald-50 text-emerald-800 border-emerald-300"
+                    : "bg-slate-100 text-slate-600 border-slate-200"
+                }`}
+              >
+                {activeCount}/5
+              </span>
+              <span className="text-xs font-extrabold text-slate-500">
+                {isOpen ? "▴" : "▾"}
+              </span>
+            </span>
+          </button>
+
+          {isOpen && (
+            <div className="pt-1.5 space-y-1.5">
+              <div className="flex flex-wrap items-center justify-between gap-1.5">
+                <span className="text-[11px] text-slate-600 leading-snug">
+                  {ui.improvePromptSub}
+                </span>
+                <div className="flex items-center gap-1.5 ml-auto shrink-0">
+                  {activeCount < 5 && (
+                    <button
+                      type="button"
+                      onClick={() => handleActivateAllStepRctfc(stepNum)}
+                      className="px-2 py-0.5 rounded-lg bg-[#ed1b2e] hover:bg-[#c81526] text-white text-[10px] font-extrabold transition-all"
+                    >
+                      {ui.activateAllShort}
+                    </button>
+                  )}
+                  {activeCount > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleClearAllStepRctfc(stepNum)}
+                      className="px-2 py-0.5 rounded-lg bg-white hover:bg-red-50 border border-slate-300 text-slate-700 hover:text-[#ed1b2e] text-[10px] font-extrabold transition-all"
+                    >
+                      {ui.clearAllShort}
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                {C3_RCTFC_KEYS.map((k) => {
+                  const isDone = Boolean(stepMap[k]);
+                  const title = (ui.pillarTitles && ui.pillarTitles[k]) || C3_KEY_TO_TAG[k];
+                  const shortDesc = String(defs[k] || "").replace(/^\[[^\]]+\]:\s*/, "");
+                  return (
+                    <button
+                      key={k}
+                      type="button"
+                      onClick={() => handleToggleStepRctfcPillar(stepNum, k)}
+                      className={`min-w-0 max-w-full px-2.5 py-2 rounded-xl border text-left transition-all ${
+                        isDone
+                          ? "bg-emerald-50/90 border-emerald-500 shadow-sm"
+                          : "bg-white hover:bg-red-50/40 border-slate-200"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-1 min-w-0">
+                        <span
+                          className={`text-xs font-extrabold ${
+                            isDone ? "text-emerald-900" : "text-slate-900"
+                          }`}
+                        >
+                          {isDone ? "✓ " : "+ "}
+                          {title}
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-slate-600 leading-snug mt-0.5 whitespace-normal break-words">
+                        {shortDesc}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 2. Compact Live Editable Prompt Box */}
+        <div className="bg-white border border-slate-300 focus-within:border-[#ed1b2e] rounded-xl p-2 space-y-1 transition-all">
+          <div className="flex flex-wrap items-center justify-between gap-1">
+            <span className="text-[11px] font-extrabold text-slate-800">
+              {ui.livePromptHeader} ({activeCount}/5 R.C.T.F.C.)
+            </span>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => handleResetStepPrompt(stepNum)}
+                className="px-2 py-0.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-300 text-[10px] font-extrabold text-slate-700"
+              >
+                {ui.resetPromptBtn}
+              </button>
+              {curPromptVal.trim().length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => handleClearStepPrompt(stepNum)}
+                  className="px-2 py-0.5 rounded-lg bg-slate-50 hover:bg-red-50 border border-slate-300 hover:border-red-300 text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e]"
+                >
+                  {ui.clearPromptBtn}
+                </button>
+              )}
+            </div>
+          </div>
+
+          {activeCount > 0 && (
+            <div className="flex flex-wrap items-center gap-1">
+              {C3_RCTFC_KEYS.filter((k) => stepMap[k]).map((k) => (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => handleToggleStepRctfcPillar(stepNum, k)}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-50 hover:bg-red-50 border border-slate-300 hover:border-[#ed1b2e] text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e] transition-all"
+                >
+                  <span>{C3_KEY_TO_TAG[k]}</span>
+                  <span className="text-[#ed1b2e]">✕</span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          <textarea
+            rows={2}
+            data-testid={`c3-live-prompt-${stepNum}`}
+            value={curPromptVal}
+            onChange={(e) => handleManualStepPromptEdit(stepNum, e.target.value)}
+            className="w-full rounded-lg border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none px-2 py-1 text-base sm:text-xs text-slate-900 leading-snug font-sans"
+          />
+        </div>
+      </div>
+    );
+  };
 
   const buildWhatsappStrategySummary = () => {
     const chosenIdeas = (pb.waIdeas || [])
@@ -2573,6 +3087,7 @@ window.Challenge3ParticipantView = function ({
           seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "card",
           cardPrompt: activeHeadline,
+          cardHeadlineText: activeHeadline,
           cardStyle: activeStyleObj.prompt,
           cardPersonalNote: cardPersonalNote.trim(),
           generateCard: true,
@@ -2716,7 +3231,7 @@ window.Challenge3ParticipantView = function ({
           seatIndex: typeof sc.seatIndex === "number" ? sc.seatIndex : seatOverride,
           stepMode: "email",
           cardPrompt: activeHeadline,
-          emailPrompt: buildEmailStrategySummary(),
+          emailPrompt: step3PromptText.trim() || buildEmailStrategySummary(),
           selectedFactIdxs,
           selectedFacts: chosenFacts,
           excludedFacts,
@@ -3071,18 +3586,14 @@ window.Challenge3ParticipantView = function ({
     );
   }
 
-  const clientShortName = (sc.customerName || activeCaseMeta.clientName || "").split("(")[0].trim();
-  const clientShortTitle =
-    sc.shortLabel || activeCaseMeta.labels[normLang] || activeCaseMeta.labels.en;
-
   return (
-    <div className="w-full max-w-full min-w-0 overflow-hidden bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
+    <div className="w-full max-w-full min-w-0 overflow-hidden bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-2.5 sm:p-5 shadow-sm space-y-2 sm:space-y-3">
       {/* 1. Slim Top Studio Bar (Aligned 1:1 with Challenge 2 Studio Header) */}
-      <div className="flex items-center justify-between gap-2 pb-1.5 border-b border-slate-200 min-w-0">
+      <div className="flex items-center justify-between gap-2 pb-1 border-b border-slate-200 min-w-0">
         <h2 className="text-sm sm:text-base font-extrabold text-slate-900 truncate min-w-0">
           {ui.studioHeader}
         </h2>
-        <span className="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-red-50 text-[#ed1b2e] border border-red-200 shrink-0">
+        <span className="px-2.5 py-0.5 rounded-xl text-[11px] font-extrabold bg-red-50 text-[#ed1b2e] border border-red-200 shrink-0">
           Step {step}/3
         </span>
       </div>
@@ -3090,7 +3601,7 @@ window.Challenge3ParticipantView = function ({
       {/* 2. Unified Auto-Collapsing Light-Grey Client Brief Card + 6-Case Switcher (Aligned 1:1 with C2) */}
       <div
         data-testid="client-brief-card"
-        className="bg-slate-50 border border-slate-200 rounded-2xl p-2.5 sm:p-3 space-y-2"
+        className="bg-slate-50 border border-slate-200 rounded-2xl p-2 sm:p-3 space-y-1.5"
       >
         <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5">
           <button
@@ -3279,7 +3790,7 @@ window.Challenge3ParticipantView = function ({
 
       {/* STEP 1: DOOR-OPENER GREETING CARD */}
       {step === 1 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2">
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-2.5 sm:p-4 space-y-1.5">
           {cardUrl && !showStep1Pickers ? (
             <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
               <div className="text-xs font-extrabold text-slate-800 truncate">
@@ -3294,7 +3805,7 @@ window.Challenge3ParticipantView = function ({
               </button>
             </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <div className="flex items-center justify-between gap-2">
                 <div className="text-xs sm:text-sm font-extrabold text-slate-900">
                   {ui.step1Title}
@@ -3320,7 +3831,7 @@ window.Challenge3ParticipantView = function ({
                         key={vs.id}
                         type="button"
                         onClick={() => setCardStyleId(vs.id)}
-                        className={`min-w-0 break-words px-1.5 sm:px-2 py-2 rounded-xl border text-center sm:text-left text-[11px] sm:text-xs font-extrabold leading-tight transition-all ${
+                        className={`min-w-0 break-words px-1.5 sm:px-2 py-1.5 rounded-xl border text-center sm:text-left text-[11px] sm:text-xs font-extrabold leading-tight transition-all ${
                           active
                             ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
                             : "bg-white hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
@@ -3343,7 +3854,7 @@ window.Challenge3ParticipantView = function ({
                         key={idx}
                         type="button"
                         onClick={() => setSelectedHeadlineIdx(idx)}
-                        className={`px-2.5 py-2 rounded-xl border text-left text-xs font-bold leading-snug transition-all ${
+                        className={`px-2.5 py-1.5 rounded-xl border text-left text-xs font-bold leading-snug transition-all ${
                           active
                             ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
                             : "bg-white hover:bg-red-50/40 border-slate-200 text-slate-800"
@@ -3361,7 +3872,7 @@ window.Challenge3ParticipantView = function ({
                 <button
                   type="button"
                   onClick={() => setShowCardTouch((v) => !v)}
-                  className={`px-3 py-1.5 rounded-full border text-[11px] font-extrabold transition-all ${
+                  className={`px-3 py-1 rounded-full border text-[11px] font-extrabold transition-all ${
                     showCardTouch || cardPersonalNote.trim()
                       ? "bg-amber-50 border-amber-300 text-amber-950"
                       : "bg-white border-slate-300 text-slate-700 hover:border-[#ed1b2e]"
@@ -3407,7 +3918,7 @@ window.Challenge3ParticipantView = function ({
                 type="button"
                 onClick={handleGenerateCard}
                 disabled={isBusy}
-                className="w-full rounded-2xl py-3 sm:py-3.5 px-4 bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
+                className="w-full rounded-2xl py-2.5 sm:py-3.5 px-4 bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
               >
                 {isBusy ? ui.generatingCard : cardUrl ? ui.redrawCard : ui.generateCardBtn}
               </button>
@@ -3920,6 +4431,8 @@ window.Challenge3ParticipantView = function ({
                   </div>
                 )}
               </div>
+
+              {renderStepPromptAndRctfc(3)}
 
               <button
                 type="button"
