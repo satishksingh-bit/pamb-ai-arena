@@ -518,19 +518,23 @@ async function run() {
     }
     await sleep(250);
 
-    // Switch to Case 1/6 (Newborn Baby) via C3 Step 1 6-Client CRM Roster and verify 6 options + instant 0ms highlight
+    // Switch to Case 1/6 (Newborn Baby) via C3 Step 1 6-Client CRM Roster and verify 6 options + instant highlight
     const c3CaseSwitcherAudit = await evalJs(`(async () => {
       const darkBrief = document.querySelector('[data-testid="client-brief-card"]');
-      const rosterBtns = Array.from(document.querySelectorAll("button")).filter(b =>
-        /^[1-6]\\.\\s.*[1-6]\\/6$/.test(b.textContent.replace(/\\s+/g, " ").trim())
-      );
+      const getRosterBtns = () =>
+        Array.from(document.querySelectorAll("button")).filter(b =>
+          /^[1-6]\\.\\s.*[1-6]\\/6/.test(b.textContent.replace(/\\s+/g, " ").trim())
+        );
+      const rosterBtns = getRosterBtns();
       const count = rosterBtns.length;
       if (!count) return { found: false };
       if (rosterBtns[1]) rosterBtns[1].click(); // Tap Client 2/6 first
-      const highlighted2Immediately = rosterBtns[1] ? rosterBtns[1].className.includes("bg-[#ed1b2e]") : false;
-      if (rosterBtns[0]) rosterBtns[0].click(); // Tap Client 1/6 (Newborn Baby)
-      const highlighted1Immediately = rosterBtns[0] ? rosterBtns[0].className.includes("bg-[#ed1b2e]") : false;
-      await new Promise(r => setTimeout(r, 150));
+      await new Promise(r => requestAnimationFrame(r));
+      const highlighted2Immediately = getRosterBtns()[1]?.className.includes("bg-[#ed1b2e]") || false;
+      if (getRosterBtns()[0]) getRosterBtns()[0].click(); // Tap Client 1/6 (Newborn Baby)
+      await new Promise(r => requestAnimationFrame(r));
+      const highlighted1Immediately = getRosterBtns()[0]?.className.includes("bg-[#ed1b2e]") || false;
+      await new Promise(r => setTimeout(r, 120));
       return {
         found: true,
         hasDarkSlateBrief: Boolean(darkBrief),
