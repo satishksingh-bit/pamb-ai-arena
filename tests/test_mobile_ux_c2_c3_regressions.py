@@ -200,9 +200,9 @@ async function run() {
       const bodyTxt = document.body.innerText;
       const scrollW = document.documentElement.scrollWidth;
 
-      // 4 balance-sheet tiles inside dark client card
+      // 4 balance-sheet tiles inside light-grey client brief card
       const briefGrid = Array.from(document.querySelectorAll("div.grid.grid-cols-2")).find(
-        g => g.children.length === 4 && g.closest(".bg-gradient-to-br")
+        g => g.children.length === 4 && g.closest('[data-testid="client-brief-card"]')
       );
       const tileRects = briefGrid
         ? Array.from(briefGrid.children).map(el => {
@@ -526,7 +526,7 @@ async function run() {
       if (!swBtn) return { found: false };
       swBtn.click();
       await new Promise(r => setTimeout(r, 150));
-      const darkBrief = document.querySelector("div.from-slate-900");
+      const darkBrief = document.querySelector('[data-testid="client-brief-card"]');
       const searchRoot = darkBrief || document;
       const pickerGrid = Array.from(searchRoot.querySelectorAll("div.grid")).find(g => {
         const btns = Array.from(g.querySelectorAll("button"));
@@ -572,9 +572,9 @@ async function run() {
       const createBtn = Array.from(document.querySelectorAll("button")).find(b => /Create Greeting Card|生成专属贺卡|生成专属祝贺卡/i.test(b.textContent));
       const createRect = createBtn ? createBtn.getBoundingClientRect() : null;
 
-      // Dark-slate brief card expanded height on Step 1
+      // Light-grey brief card expanded height on Step 1
       const briefCard =
-        document.querySelector("div.from-slate-900") ||
+        document.querySelector('[data-testid="client-brief-card"]') ||
         Array.from(document.querySelectorAll("div")).find(
           d => d.querySelector("button") && /\\(1\\/6\\)/.test(d.innerText) && d.className.includes("rounded-2xl")
         );

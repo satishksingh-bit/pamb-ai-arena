@@ -3087,8 +3087,11 @@ window.Challenge3ParticipantView = function ({
         </span>
       </div>
 
-      {/* 2. Unified Auto-Collapsing Executive Dark-Slate Client Brief Card + 6-Case Switcher (Aligned 1:1 with C2) */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-2xl p-2.5 sm:p-3 space-y-2 shadow-md">
+      {/* 2. Unified Auto-Collapsing Light-Grey Client Brief Card + 6-Case Switcher (Aligned 1:1 with C2) */}
+      <div
+        data-testid="client-brief-card"
+        className="bg-slate-50 border border-slate-200 rounded-2xl p-2.5 sm:p-3 space-y-2"
+      >
         <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5">
           <button
             type="button"
@@ -3097,9 +3100,9 @@ window.Challenge3ParticipantView = function ({
           >
             <span className="text-base leading-none shrink-0">{sc.icon || activeCaseMeta.icon}</span>
             <div className="min-w-0 flex-1">
-              <div className="text-xs font-extrabold text-white truncate">
+              <div className="text-xs font-extrabold text-slate-900 truncate">
                 {clientShortName}{" "}
-                <span className="hidden min-[400px]:inline text-amber-300 font-bold">
+                <span className="hidden min-[400px]:inline text-[#ed1b2e] font-bold">
                   • {clientShortTitle}
                 </span>
               </div>
@@ -3110,7 +3113,7 @@ window.Challenge3ParticipantView = function ({
             <button
               type="button"
               onClick={() => setShowCaseBrief((v) => !v)}
-              className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-bold text-slate-200 whitespace-nowrap transition-all"
+              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 border border-slate-300 text-[11px] font-bold text-slate-700 hover:text-[#ed1b2e] whitespace-nowrap transition-all"
             >
               {showCaseBrief ? `${ui.hideBtn} ▴` : `${ui.caseInfoBtn} ▾`}
             </button>
@@ -3121,7 +3124,7 @@ window.Challenge3ParticipantView = function ({
                 setConfirmArmedSlot(null);
                 setShowCasePicker((v) => !v);
               }}
-              className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300 whitespace-nowrap transition-all"
+              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 border border-slate-300 text-[11px] font-extrabold text-slate-800 hover:text-[#ed1b2e] whitespace-nowrap transition-all"
             >
               {ui.switchShortFmt} ({activeSlot + 1}/6) ▾
             </button>
@@ -3130,17 +3133,17 @@ window.Challenge3ParticipantView = function ({
 
         {/* Sleek 6-Item Curated Case Picker (Aligned 1:1 with C2 + WebView-Safe Inline Switch Confirmation) */}
         {showCasePicker && (
-          <div className="bg-slate-800/95 border border-slate-700 rounded-xl p-2 space-y-2">
+          <div className="bg-white border border-slate-200 rounded-xl p-2 space-y-2 shadow-sm">
             {confirmArmedSlot !== null && (
-              <div className="bg-amber-950/80 border border-amber-400/60 rounded-lg p-2 flex flex-wrap items-center justify-between gap-2">
-                <span className="text-[11px] font-bold text-amber-200 leading-snug">
+              <div className="bg-amber-50 border border-amber-300 rounded-lg p-2 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-[11px] font-bold text-amber-950 leading-snug">
                   ⚠️ {ui.switchConfirmMsg}
                 </span>
                 <div className="flex items-center gap-1.5 ml-auto">
                   <button
                     type="button"
                     onClick={() => setConfirmArmedSlot(null)}
-                    className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-bold text-slate-200"
+                    className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-[11px] font-bold text-slate-700"
                   >
                     ✕
                   </button>
@@ -3166,16 +3169,20 @@ window.Challenge3ParticipantView = function ({
                     onClick={() => handleSelectCaseSlot(idx)}
                     className={`text-left px-2.5 py-2 rounded-lg border text-xs font-extrabold transition-all flex items-center justify-between gap-2 ${
                       isCurrent
-                        ? "bg-[#ed1b2e]/25 border-[#ed1b2e] text-white"
+                        ? "bg-[#ed1b2e] border-[#ed1b2e] text-white"
                         : isArmed
-                        ? "bg-amber-500/20 border-amber-400 text-amber-200"
-                        : "bg-slate-900/80 hover:bg-slate-900 border-slate-700 text-slate-200"
+                        ? "bg-amber-50 border-amber-400 text-amber-950"
+                        : "bg-slate-50 hover:bg-red-50/50 border-slate-200 text-slate-800 hover:border-[#ed1b2e]"
                     }`}
                   >
                     <span className="truncate">
                       {idx + 1}. {item.icon} {locLabel}
                     </span>
-                    <span className="text-[10px] font-mono text-amber-300 shrink-0">
+                    <span
+                      className={`text-[10px] font-mono shrink-0 ${
+                        isCurrent ? "text-red-100" : "text-[#ed1b2e]"
+                      }`}
+                    >
                       {idx + 1}/6
                     </span>
                   </button>
@@ -3185,20 +3192,20 @@ window.Challenge3ParticipantView = function ({
           </div>
         )}
 
-        {/* Expandable 3 Ultra-Concise 1-Line Bullets in Matching Dark-Slate Card */}
+        {/* Expandable 3 Ultra-Concise 1-Line Bullets in Matching Light Card */}
         {showCaseBrief && (
-          <div className="bg-slate-800/90 border border-slate-700 rounded-xl px-2.5 py-2 space-y-1 text-[11px] sm:text-xs leading-snug">
+          <div className="bg-white border border-slate-200 rounded-xl px-2.5 py-2 space-y-1 text-[11px] sm:text-xs leading-snug">
             <div className="flex items-baseline gap-1.5">
-              <span className="font-extrabold text-amber-300 shrink-0">{ui.lifeEventLabel}:</span>
-              <span className="text-slate-100 font-medium line-clamp-1">{sc.lifeEvent}</span>
+              <span className="font-extrabold text-[#ed1b2e] shrink-0">{ui.lifeEventLabel}:</span>
+              <span className="text-slate-800 font-medium line-clamp-1">{sc.lifeEvent}</span>
             </div>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-extrabold text-slate-300 shrink-0">{ui.gapLabel}:</span>
-              <span className="text-slate-200 line-clamp-1">{sc.existingGap}</span>
+              <span className="font-extrabold text-slate-700 shrink-0">{ui.gapLabel}:</span>
+              <span className="text-slate-700 line-clamp-1">{sc.existingGap}</span>
             </div>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-extrabold text-emerald-300 shrink-0">{ui.offerLabel}:</span>
-              <span className="text-white font-bold line-clamp-1">{sc.pambPlan}</span>
+              <span className="font-extrabold text-[#ed1b2e] shrink-0">{ui.offerLabel}:</span>
+              <span className="text-slate-900 font-bold line-clamp-1">{sc.pambPlan}</span>
             </div>
           </div>
         )}

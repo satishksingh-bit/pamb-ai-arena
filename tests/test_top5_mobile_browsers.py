@@ -565,8 +565,8 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
 
                         c3_header_w = page.evaluate(
                             """() => {
-                              // First button inside C3 dark-slate brief card is the clientShortName toggle
-                              const card = document.querySelector('div.from-slate-900') || document.querySelector('div.border-t-4');
+                              // First button inside C3 brief card is the clientShortName toggle
+                              const card = document.querySelector('[data-testid="client-brief-card"]') || document.querySelector('div.border-t-4');
                               if (!card) return 0;
                               const btn = card.querySelector('button');
                               return btn ? Math.round(btn.getBoundingClientRect().width) : 0;
@@ -667,7 +667,7 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
 
                     collapsed_name_w = page.evaluate(
                         """() => {
-                          const bar = document.querySelector('div.from-slate-900');
+                          const bar = document.querySelector('[data-testid="client-brief-card"]');
                           if (!bar) return 0;
                           const spans = bar.querySelectorAll('span.truncate');
                           return spans.length ? Math.round(spans[0].getBoundingClientRect().width) : 0;
@@ -681,20 +681,20 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
 
                     # CRITICAL WebView Test: Switch Case AFTER a deck exists!
                     # Even when `window.confirm` is suppressed (`() => false`), our inline confirmation must switch cleanly!
-                    before_switch_text = page.locator("div.from-slate-900").first.inner_text()
+                    before_switch_text = page.locator('[data-testid="client-brief-card"]').first.inner_text()
                     self._tap_button_containing(page, "Switch (")
                     page.wait_for_timeout(150)
                     # Pick a slot different from current `(X/6)`
                     other_slot_idx = 1 if "(1/6)" in before_switch_text else 0
-                    case_picker_btns = page.locator("div.from-slate-900 div.grid button:visible")
+                    case_picker_btns = page.locator('[data-testid="client-brief-card"] div.grid button:visible')
                     case_picker_btns.nth(other_slot_idx).tap()
                     page.wait_for_timeout(150)
                     # Inline confirmation banner should now be visible — tap its confirm button (`✓ Switch`)
-                    confirm_btn = page.locator("div.from-slate-900 button:visible", has_text="✓").first
+                    confirm_btn = page.locator('[data-testid="client-brief-card"] button:visible', has_text="✓").first
                     confirm_btn.wait_for(state="visible", timeout=4000)
                     confirm_btn.tap()
                     page.wait_for_timeout(350)
-                    after_switch_text = page.locator("div.from-slate-900").first.inner_text()
+                    after_switch_text = page.locator('[data-testid="client-brief-card"]').first.inner_text()
                     self.assertNotEqual(
                         before_switch_text,
                         after_switch_text,
