@@ -13,8 +13,12 @@ in Headless Chrome (390x844 iPhone 14 viewport via Chrome DevTools Protocol):
    - Zero horizontal scroll overflow (scrollWidth <= 390).
    - Zero legacy clutter (/56, 14 Cases, Full Dossier, Try Weak, Compare vs Benchmark).
    - 2x2 Balance-Sheet Grid geometry (2 side-by-side columns, not 4 stacked rows).
-   - 3 Boardroom Tone pills aligned on 1 horizontal row (y-delta <= 2px).
-   - Raw Master Prompt collapsed by default, and readOnly===true until explicitly unlocked.
+   - Aligned Step-1 Section Order:
+     1) 1. Boardroom Style (3 horizontal tone pills toggling `[Tone]:` ON/OFF)
+     2) 2. 💡 Personal Strategic Angle (3 hint pills + 4th custom `"Write my own"` option opening `<input type="text">` >=16px)
+     3) 3. 🚀 Improve Your Prompt! (R.C.T.F.C.) collapsible drawer (collapsed by default on load!)
+   - Starts at `0/5` R.C.T.F.C. pillars pre-selected (1-line baseline `simple_prompt`, NOT `[Task]:`),
+     and clicking `R · Role` ON then OFF cleanly returns down to `0/5` pillars selected.
    - Sample Deck opens as a fixed modal overlay (does not push Step 1 down inline), renders
      stacked mobile strategy cards (not a crushed table) on Slide 3 at 390px, and keeps Speaker Notes collapsed.
    - 6-Case Switcher opens exact 6 curated cases and updates active case cleanly.
@@ -23,11 +27,13 @@ in Headless Chrome (390x844 iPhone 14 viewport via Chrome DevTools Protocol):
 3. Challenge 3 Mobile UX Regressions (390x844 Phone Viewport on /join):
    - Zero horizontal scroll overflow (scrollWidth <= 390).
    - Zero legacy clutter (/56, 16 Scenarios, CHALLENGE 3 • ADVISOR PLAYBOOK) & zero morbid labels.
+   - Aligned dark-slate executive client brief card (`from-slate-900`) and 2-column 6-Case Switcher (`1/6`..`6/6`).
    - Step 1 visual style pills sit on 1 horizontal row; Personal Touch input collapsed by default;
      primary "Create Greeting Card" button fits above/near the 844px mobile fold.
-   - 6-Case Switcher opens exact 6 curated positive cases (including 40th Birthday Health & Newborn Wellness).
-   - Client Brief Card auto-collapses to a 1-line bar (<68px tall) upon entering Step 2 / Step 3,
-     and re-expands on tapping "Case Info".
+   - Client Brief Card auto-collapses to a 1-line bar upon entering Step 2 / Step 3, and re-expands on tapping "Case Info".
+   - Step 3 tab is `disabled` before sending WhatsApp and client reply (`Incoming Client WhatsApp Reply` / `AIA`) is NOT staged early;
+     tapping "Send WhatsApp Message" runs mock send + client typing transition, unlocks Step 3 automatically, and reveals both
+     outgoing `"WhatsApp Sent"` confirmation and `"Incoming Client WhatsApp Reply"`.
    - Universal Click-to-Zoom (#arena-image-zoom-lightbox) opens on tapping zoomable slide/card images,
      zooms to 200% via 2x preset, and closes cleanly.
 """
@@ -205,15 +211,48 @@ async function run() {
           })
         : [];
 
-      // 3 horizontal tone pills
+      // 1. Boardroom Style: 3 horizontal tone pills
       const toneGrid = Array.from(document.querySelectorAll("div.grid.grid-cols-3")).find(
         g => g.children.length === 3 && /Boardroom|CFO|Empathy/i.test(g.innerText)
       );
       const toneRects = toneGrid
         ? Array.from(toneGrid.children).map(el => Math.round(el.getBoundingClientRect().top))
         : [];
+      const toneTop = toneGrid ? Math.round(toneGrid.getBoundingClientRect().top) : null;
 
-      // Raw prompt collapsed by default (only 1 textarea visible = Personal Strategic Angle)
+      // 2. Personal Strategic Angle section (with 4th custom "Write my own" option)
+      const customAngleBtn = Array.from(document.querySelectorAll("button")).find(b =>
+        /Write my own|自定义|自己輸入|Tulis sudut|எனது சொந்த/i.test(b.textContent)
+      );
+      const angleTop = customAngleBtn ? Math.round(customAngleBtn.getBoundingClientRect().top) : null;
+
+      // 3. Improve Your Prompt! (R.C.T.F.C.) collapsible drawer — collapsed by default on load!
+      const rctfcCollapsible = document.querySelector("[data-testid='c2-rctfc-collapsible']");
+      const rctfcHeaderBtn =
+        (rctfcCollapsible && rctfcCollapsible.querySelector("button")) ||
+        Array.from(document.querySelectorAll("button")).find(b =>
+          /Improve Your Prompt|R\\.C\\.T\\.F\\.C\\./i.test(b.textContent)
+        );
+      const rctfcTop = rctfcHeaderBtn
+        ? Math.round(rctfcHeaderBtn.getBoundingClientRect().top)
+        : rctfcCollapsible
+        ? Math.round(rctfcCollapsible.getBoundingClientRect().top)
+        : null;
+
+      const visibleRoleCardOnLoad = Array.from(document.querySelectorAll("button")).some(b => {
+        if (!/R\\s*·\\s*Role/i.test(b.textContent)) return false;
+        const st = window.getComputedStyle(b);
+        return st.display !== "none" && st.visibility !== "hidden" && b.getBoundingClientRect().height > 0;
+      });
+
+      const sectionOrder123Ok =
+        toneTop !== null &&
+        angleTop !== null &&
+        rctfcTop !== null &&
+        toneTop < angleTop &&
+        angleTop < rctfcTop;
+
+      // Live prompt box (1 textarea visible)
       const textareas = Array.from(document.querySelectorAll("textarea"));
 
       return {
@@ -226,35 +265,110 @@ async function run() {
         hasPptxBeforeSubmit: bodyTxt.includes(".pptx"),
         tileRects,
         toneRects,
+        hasCustomAngleOption: Boolean(customAngleBtn),
+        rctfcCollapsedByDefault: Boolean(rctfcHeaderBtn || rctfcCollapsible) && !visibleRoleCardOnLoad,
+        sectionOrder123Ok,
+        sectionTops: { toneTop, angleTop, rctfcTop },
         textareaCountCollapsed: textareas.length,
       };
     })()`);
 
-    // Test Live Visible Prompt Editing: tapping +Role visibly adds [Role]:, tapping again removes it,
-    // tapping +Add All 5 adds all 5 pillars, and switching Mandarin -> English leaves ZERO Chinese chars!
+    // Test Aligned 1 -> 2 -> 3 Step-1 Flow & 0/5 Pillar Removal + Custom Angle Input + Collapsible R.C.T.F.C.:
     const c2LivePromptAudit = await evalJs(`(async () => {
       const ta = document.querySelector("textarea");
       if (!ta) return { found: false };
       const initialVal = ta.value;
-      const initialEnglishOnly = !/[\\u4e00-\\u9fff]/.test(initialVal) && initialVal.includes("[Task]:");
+      // Starts at 0/5 R.C.T.F.C. pillars pre-selected (baseline 1-line simple_prompt, NOT [Task]:!)
+      const initialZeroPillars =
+        initialVal.trim().length > 5 &&
+        !/\\[(Role|Context|Task|Format|Constraints)\\]:/i.test(initialVal);
+      const initialEnglishOnly = !/[\\u4e00-\\u9fff]/.test(initialVal) && initialZeroPillars;
       const editable = !ta.readOnly;
 
-      // Click + Role pill -> verify [Role]: appears in live textarea!
-      const roleBtn = Array.from(document.querySelectorAll("button")).find(b => /R\\s*·\\s*Role/i.test(b.textContent));
+      // Section 1: Clicking a Boardroom Style pill toggles [Tone]: ON then OFF cleanly!
+      const toneGrid = Array.from(document.querySelectorAll("div.grid.grid-cols-3")).find(
+        g => g.children.length === 3 && /Boardroom|CFO|Empathy/i.test(g.innerText)
+      );
+      const firstToneBtn = toneGrid ? toneGrid.querySelector("button") : null;
+      if (firstToneBtn) firstToneBtn.click();
+      await new Promise(r => setTimeout(r, 100));
+      const toneAddedOk = /\\[Tone\\]:/i.test(document.querySelector("textarea").value);
+      if (firstToneBtn) firstToneBtn.click();
+      await new Promise(r => setTimeout(r, 100));
+      const toneRemovedOk = !/\\[Tone\\]:/i.test(document.querySelector("textarea").value);
+
+      // Section 2: Click 4th custom Personal Strategic Angle button ("Write my own") -> verify <input type="text"> (>=16px) populates [Personal Strategic Angle]: live!
+      const writeOwnBtn = Array.from(document.querySelectorAll("button")).find(b =>
+        /Write my own|自定义|自己輸入|Tulis sudut|எனது சொந்த/i.test(b.textContent)
+      );
+      if (writeOwnBtn) writeOwnBtn.click();
+      await new Promise(r => setTimeout(r, 120));
+      const customInp = Array.from(document.querySelectorAll("input[type='text']")).find(el => {
+        const st = window.getComputedStyle(el);
+        return st.display !== "none" && st.visibility !== "hidden" && el.getBoundingClientRect().height > 0;
+      });
+      let customAngleInputFontPx = 0;
+      let customAnglePopulatedOk = false;
+      if (customInp) {
+        customAngleInputFontPx = parseFloat(window.getComputedStyle(customInp).fontSize || "0");
+        const inpSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        inpSetter.call(customInp, "Custom 20-min boardroom co-review");
+        customInp.dispatchEvent(new Event("input", { bubbles: true }));
+        await new Promise(r => setTimeout(r, 120));
+        const valWithCustomAngle = document.querySelector("textarea").value;
+        customAnglePopulatedOk = valWithCustomAngle.includes(
+          "[Personal Strategic Angle]: Custom 20-min boardroom co-review"
+        );
+      }
+      // Remove [Personal Strategic Angle] via its [Angle ✕] chip so we test pure 0/5 R.C.T.F.C. toggle cleanly
+      const angleRemoveChip = Array.from(document.querySelectorAll("button")).find(
+        b => b.title === "Remove [Personal Strategic Angle] section"
+      );
+      if (angleRemoveChip) {
+        angleRemoveChip.click();
+        await new Promise(r => setTimeout(r, 100));
+      }
+
+      // Section 3: Expand collapsible "3. 🚀 Improve Your Prompt! (R.C.T.F.C.)" drawer
+      const rctfcContainer = document.querySelector("[data-testid='c2-rctfc-collapsible']");
+      const rctfcToggleBtn =
+        (rctfcContainer && rctfcContainer.querySelector("button")) ||
+        Array.from(document.querySelectorAll("button")).find(b =>
+          /Improve Your Prompt|R\\.C\\.T\\.F\\.C\\./i.test(b.textContent)
+        );
+      if (rctfcToggleBtn) rctfcToggleBtn.click();
+      await new Promise(r => setTimeout(r, 140));
+
+      const getPillarCards = () =>
+        Array.from(document.querySelectorAll("button")).filter(b =>
+          /(R\\s*·\\s*Role|C\\s*·\\s*Context|T\\s*·\\s*Task|F\\s*·\\s*Format|C\\s*·\\s*Constraints)/i.test(
+            b.textContent
+          )
+        );
+
+      const rctfcExpandedCardCount = getPillarCards().length;
+
+      // Click R · Role -> verify [Role]: appears in live textarea!
+      const roleBtn = getPillarCards().find(b => /R\\s*·\\s*Role/i.test(b.textContent));
       if (roleBtn) roleBtn.click();
       await new Promise(r => setTimeout(r, 100));
       const afterAddRole = document.querySelector("textarea").value;
-      const roleAddedVisibly = afterAddRole.includes("[Role]:") && afterAddRole.includes("[Task]:");
+      const roleAddedVisibly = afterAddRole.includes("[Role]:");
 
-      // Click Role pill again -> verify [Role]: is removed from live textarea!
-      const roleBtn2 = Array.from(document.querySelectorAll("button")).find(b => /R\\s*·\\s*Role/i.test(b.textContent));
+      // Click R · Role again -> verify [Role]: is removed cleanly back down to 0/5 pillars selected!
+      const roleBtn2 = getPillarCards().find(b => /R\\s*·\\s*Role/i.test(b.textContent));
       if (roleBtn2) roleBtn2.click();
       await new Promise(r => setTimeout(r, 100));
       const afterRemoveRole = document.querySelector("textarea").value;
-      const roleRemovedVisibly = !afterRemoveRole.includes("[Role]:") && afterRemoveRole.includes("[Task]:");
+      const zeroCheckmarksAfterRemove = getPillarCards().every(b => !b.textContent.includes("✓"));
+      const roleRemovedBackToZeroPillars =
+        !/\\[(Role|Context|Task|Format|Constraints)\\]:/i.test(afterRemoveRole) &&
+        zeroCheckmarksAfterRemove;
 
       // Click All 5 On button -> verify all 5 sections appear visibly!
-      const addAllBtn = Array.from(document.querySelectorAll("button")).find(b => /All 5 On|Activate All 5|Add All 5/i.test(b.textContent));
+      const addAllBtn = Array.from(document.querySelectorAll("button")).find(b =>
+        /All 5 On|Activate All 5|Add All 5/i.test(b.textContent)
+      );
       if (addAllBtn) addAllBtn.click();
       await new Promise(r => setTimeout(r, 100));
       const afterAll5 = document.querySelector("textarea").value;
@@ -278,7 +392,7 @@ async function run() {
       const backToEnPrompt = document.querySelector("textarea").value;
       const backToEnglishZeroCjk = !/[\\u4e00-\\u9fff]/.test(backToEnPrompt) && backToEnPrompt.includes("[Role]:");
 
-      // Edit text inside [Role]: block manually (even collapsing blank lines!), then click [Role ✕] chip -> verify 100% removed!
+      // Edit text inside [Role]: block manually, then click [Role ✕] chip -> verify 100% removed!
       const taNow = document.querySelector("textarea");
       const editedVal = taNow.value.replace(/\\[Role\\]:[^\\n]*/, "[Role]: Custom edited family office advisor text!");
       const taSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
@@ -298,9 +412,15 @@ async function run() {
       return {
         found: true,
         editable,
+        initialZeroPillars,
         initialEnglishOnly,
+        toneAddedOk,
+        toneRemovedOk,
+        customAngleInputFontPx,
+        customAnglePopulatedOk,
+        rctfcExpandedCardCount,
         roleAddedVisibly,
-        roleRemovedVisibly,
+        roleRemovedBackToZeroPillars,
         all5AddedVisibly,
         switchedToChineseOk,
         backToEnglishZeroCjk,
@@ -398,21 +518,38 @@ async function run() {
     }
     await sleep(250);
 
-    // Switch to Case 1/6 (Newborn Baby) via C3 6-Case Switcher and verify 6 options
+    // Switch to Case 1/6 (Newborn Baby) via C3 Dark-Slate 6-Case Switcher and verify 6 options
     const c3CaseSwitcherAudit = await evalJs(`(async () => {
-      const swBtn = Array.from(document.querySelectorAll("button")).find(b => /\\([1-6]\\/6\\)/.test(b.textContent));
+      const swBtn = Array.from(document.querySelectorAll("button")).find(b =>
+        /Switch.*\\([1-6]\\/6\\)|\\([1-6]\\/6\\)/i.test(b.textContent)
+      );
       if (!swBtn) return { found: false };
       swBtn.click();
       await new Promise(r => setTimeout(r, 150));
-      const pickerGrid = Array.from(document.querySelectorAll("div.grid")).find(
-        g => g.children.length >= 5 && Array.from(g.querySelectorAll("button")).every(b => /^[1-6]\\.\\s/.test(b.textContent.trim()))
-      );
-      const pickerBtns = pickerGrid ? Array.from(pickerGrid.querySelectorAll("button")) : [];
+      const darkBrief = document.querySelector("div.from-slate-900");
+      const searchRoot = darkBrief || document;
+      const pickerGrid = Array.from(searchRoot.querySelectorAll("div.grid")).find(g => {
+        const btns = Array.from(g.querySelectorAll("button"));
+        return (
+          btns.length === 6 &&
+          btns.every(b => /^[1-6]\\.\\s|[1-6]\\/6/.test(b.textContent.trim()))
+        );
+      });
+      const pickerBtns = pickerGrid
+        ? Array.from(pickerGrid.querySelectorAll("button"))
+        : Array.from(searchRoot.querySelectorAll("button")).filter(b =>
+            /^[1-6]\\.\\s|[1-6]\\/6$/.test(b.textContent.trim())
+          );
       const count = pickerBtns.length;
-      if (pickerBtns[0]) pickerBtns[0].click(); // Select 1. Newborn Baby
+      if (pickerBtns[0]) pickerBtns[0].click(); // Select Case 1/6 (Newborn Baby)
       await new Promise(r => setTimeout(r, 350));
       const updatedBtn = Array.from(document.querySelectorAll("button")).find(b => /\\(1\\/6\\)/.test(b.textContent));
-      return { found: true, optionCount: count, switchedTo1of6: Boolean(updatedBtn) };
+      return {
+        found: true,
+        hasDarkSlateBrief: Boolean(darkBrief),
+        optionCount: count,
+        switchedTo1of6: Boolean(updatedBtn),
+      };
     })()`);
 
     // Audit C3 Step 1 layout at 390x844
@@ -422,7 +559,7 @@ async function run() {
 
       // 3 visual style pills in 1 horizontal row
       const styleGrid = Array.from(document.querySelectorAll("div.grid.grid-cols-3")).find(
-        g => g.children.length === 3 && /Watercolor|Luxury|Modern|水彩|奢华/i.test(g.innerText)
+        g => g.children.length === 3 && /Watercolor|Prestige|Luxury|Modern|Lifestyle|水彩|奢华|尊尚/i.test(g.innerText)
       );
       const styleTops = styleGrid
         ? Array.from(styleGrid.children).map(el => Math.round(el.getBoundingClientRect().top))
@@ -432,13 +569,15 @@ async function run() {
       const step1Inputs = Array.from(document.querySelectorAll("input[type='text']"));
 
       // Primary Create Greeting Card button position relative to 844px mobile fold
-      const createBtn = Array.from(document.querySelectorAll("button")).find(b => /Create Greeting Card|生成专属贺卡/i.test(b.textContent));
+      const createBtn = Array.from(document.querySelectorAll("button")).find(b => /Create Greeting Card|生成专属贺卡|生成专属祝贺卡/i.test(b.textContent));
       const createRect = createBtn ? createBtn.getBoundingClientRect() : null;
 
-      // Brief card expanded height on Step 1
-      const briefCard = Array.from(document.querySelectorAll("div")).find(
-        d => d.querySelector("button") && /\\(1\\/6\\)/.test(d.innerText) && d.className.includes("rounded-2xl") && d.className.includes("border-slate-200")
-      );
+      // Dark-slate brief card expanded height on Step 1
+      const briefCard =
+        document.querySelector("div.from-slate-900") ||
+        Array.from(document.querySelectorAll("div")).find(
+          d => d.querySelector("button") && /\\(1\\/6\\)/.test(d.innerText) && d.className.includes("rounded-2xl")
+        );
       const step1BriefHeight = briefCard ? Math.round(briefCard.getBoundingClientRect().height) : null;
 
       return {
@@ -454,9 +593,10 @@ async function run() {
       };
     })()`);
 
-    // Switch to C3 Step 2 -> verify Client Brief AUTO-COLLAPSES to 1-line bar & positive "Day-1 Baby Peace of Mind" pill renders!
+    // Switch to C3 Step 2 -> verify Client Brief AUTO-COLLAPSES, Step 3 is LOCKED & client reply UNSTAGED before WhatsApp send,
+    // then Draft & Mock-Send WhatsApp -> verify auto-transition to Step 3 + "WhatsApp Sent" + "Incoming Client WhatsApp Reply"!
     const c3Step2And3Audit = await evalJs(`(async () => {
-      const step2Tab = Array.from(document.querySelectorAll("button")).find(b => /^2\\.\\s/.test(b.textContent.trim()));
+      const step2Tab = Array.from(document.querySelectorAll("button")).find(b => /^2\\./.test(b.textContent.trim()));
       if (step2Tab) step2Tab.click();
       await new Promise(r => setTimeout(r, 200));
 
@@ -464,8 +604,11 @@ async function run() {
       const hasPositiveBabyPill = bodyStep2.includes("Day-1 Baby Peace of Mind");
       const hasMorbidCongenital = /congenital|jaundice/i.test(bodyStep2);
 
-      // Verify Client Brief collapsed (no 3-bullet Life Moment / Coverage Gap box visible)
-      const briefBulletsVisibleOnStep2 = bodyStep2.includes("Suitable PRU Portfolio:") || bodyStep2.includes("Coverage Gap:");
+      // Verify Client Brief collapsed (no 3-bullet Moment / Gap / PRU Plan box visible until Case Info tapped)
+      const briefBulletsVisibleOnStep2 =
+        bodyStep2.includes("PRU Plan:") ||
+        bodyStep2.includes("Suitable PRU Portfolio:") ||
+        bodyStep2.includes("Coverage Gap:");
 
       // Tap Case Info to re-expand and verify toggle works!
       const caseInfoBtn = Array.from(document.querySelectorAll("button")).find(b => /Case Info/i.test(b.textContent));
@@ -474,21 +617,59 @@ async function run() {
         caseInfoBtn.click();
         await new Promise(r => setTimeout(r, 120));
         reExpandedOk = document.body.innerText.includes("PRUMy Child Plus");
-        caseInfoBtn.click();
+        const hideBtn = Array.from(document.querySelectorAll("button")).find(b => /Hide|Case Info/i.test(b.textContent));
+        if (hideBtn) hideBtn.click();
         await new Promise(r => setTimeout(r, 80));
       }
 
-      // Switch to Step 3 -> verify horizontal scroll stays <= 390px and no amber readiness wall
-      const step3Tab = Array.from(document.querySelectorAll("button")).find(b => /^3\\.\\s/.test(b.textContent.trim()));
-      if (step3Tab) step3Tab.click();
-      await new Promise(r => setTimeout(r, 200));
+      // CRITICAL: Before sending WhatsApp (!waSent), Step 3 tab is disabled AND client reply is NOT staged!
+      const step3TabBefore = Array.from(document.querySelectorAll("button")).find(b => /^3\\./.test(b.textContent.trim()));
+      const step3DisabledBeforeSend = Boolean(step3TabBefore && step3TabBefore.disabled === true);
+      const bodyBeforeSend = document.body.innerText;
+      const replyUnstagedBeforeSend =
+        !bodyBeforeSend.includes("Incoming Client WhatsApp Reply") &&
+        !bodyBeforeSend.includes("AIA friend quoted") &&
+        !bodyBeforeSend.includes("AIA agent just quoted");
+
+      // Draft First-Touch WhatsApp Message
+      const draftWaBtn = Array.from(document.querySelectorAll("button")).find(b =>
+        /Draft My WhatsApp Message/i.test(b.textContent)
+      );
+      if (draftWaBtn) draftWaBtn.click();
+
+      // Wait up to 8s for WhatsApp textarea & "Send WhatsApp Message" button
+      let sendWaBtn = null;
+      for (let i = 0; i < 40; i++) {
+        sendWaBtn = Array.from(document.querySelectorAll("button")).find(b =>
+          /Send WhatsApp Message/i.test(b.textContent)
+        );
+        const waTa = document.querySelector("textarea");
+        if (sendWaBtn && waTa && waTa.value.trim().length > 10) break;
+        await new Promise(r => setTimeout(r, 200));
+      }
+
+      if (sendWaBtn) sendWaBtn.click();
+      // Wait ~1250ms for mock WhatsApp send (420ms) + client typing (550ms) transition to complete
+      await new Promise(r => setTimeout(r, 1250));
+
       const step3ScrollW = document.documentElement.scrollWidth;
+      const bodyAfterSend = document.body.innerText;
+      const whatsappSentVisible = bodyAfterSend.includes("WhatsApp Sent");
+      const incomingReplyVisibleAfterSend = bodyAfterSend.includes("Incoming Client WhatsApp Reply");
+      const step3UnlockedAfterSend = Boolean(
+        Array.from(document.querySelectorAll("button")).find(b => /Draft Winning Comparison Reply/i.test(b.textContent))
+      );
 
       return {
         hasPositiveBabyPill,
         hasMorbidCongenital,
         briefAutoCollapsedOnStep2: !briefBulletsVisibleOnStep2,
         reExpandedOk,
+        step3DisabledBeforeSend,
+        replyUnstagedBeforeSend,
+        whatsappSentVisible,
+        incomingReplyVisibleAfterSend,
+        step3UnlockedAfterSend,
         step3ScrollW,
       };
     })()`);
@@ -672,7 +853,7 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
             env=env,
             capture_output=True,
             text=True,
-            timeout=45,
+            timeout=65,
         )
         self.assertEqual(
             proc.returncode,
@@ -698,19 +879,51 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         self.assertLessEqual(abs(c2["tileRects"][2]["top"] - c2["tileRects"][3]["top"]), 3)
         self.assertGreater(c2["tileRects"][2]["top"], c2["tileRects"][0]["top"] + 20)
 
-        # 3 Boardroom Tone pills aligned horizontally on 1 row
+        # 3 Boardroom Tone pills aligned horizontally on 1 row + 1 -> 2 -> 3 Step-1 Section Order & Collapsible R.C.T.F.C.
         self.assertEqual(len(c2["toneRects"]), 3, f"Expected 3 tone pills, got {c2['toneRects']}")
         self.assertLessEqual(max(c2["toneRects"]) - min(c2["toneRects"]), 3)
+        self.assertTrue(c2["hasCustomAngleOption"], "Missing 4th custom Personal Strategic Angle ('Write my own') option!")
+        self.assertTrue(
+            c2["rctfcCollapsedByDefault"],
+            "C2 '3. Improve Your Prompt! (R.C.T.F.C.)' collapsible section must be collapsed by default on load!",
+        )
+        self.assertTrue(
+            c2["sectionOrder123Ok"],
+            f"C2 Step 1 sections must follow 1. Style -> 2. Angle -> 3. R.C.T.F.C. order, got {c2['sectionTops']}",
+        )
 
-        # Single Always-Visible Live Editable Prompt Box + Pillar Toggle & Language Switch Sync
+        # Single Always-Visible Live Editable Prompt Box + 0/5 Starter + Custom Angle + Pillar Toggle & Language Switch Sync
         self.assertEqual(c2["textareaCountCollapsed"], 1)
         lp = res["c2LivePromptAudit"]
         self.assertTrue(lp["found"])
         self.assertTrue(lp["editable"], "C2 Live Prompt Box should be directly editable")
+        self.assertTrue(
+            lp["initialZeroPillars"],
+            "C2 Step 1 must start with 0/5 R.C.T.F.C. pillars pre-selected (baseline simple_prompt, NOT [Task]:)!",
+        )
         self.assertTrue(lp["initialEnglishOnly"], "C2 default prompt was not English on load!")
+        self.assertTrue(lp["toneAddedOk"], "Clicking Boardroom Style pill did not toggle [Tone]: ON")
+        self.assertTrue(lp["toneRemovedOk"], "Clicking Boardroom Style pill again did not toggle [Tone]: OFF")
+        self.assertGreaterEqual(
+            lp["customAngleInputFontPx"],
+            15.9,
+            f"C2 4th custom angle <input type='text'> font-size < 16px ({lp['customAngleInputFontPx']}px) triggers iOS focus zoom!",
+        )
+        self.assertTrue(
+            lp["customAnglePopulatedOk"],
+            "Typing in C2 4th custom angle input did not populate '[Personal Strategic Angle]: Custom 20-min boardroom co-review'!",
+        )
+        self.assertEqual(
+            lp["rctfcExpandedCardCount"],
+            5,
+            f"Expanding Section 3 R.C.T.F.C. should show all 5 pillar cards, got {lp['rctfcExpandedCardCount']}",
+        )
         self.assertTrue(lp["roleAddedVisibly"], "Clicking +Role did not visibly add [Role]: to promptText")
-        self.assertTrue(lp["roleRemovedVisibly"], "Clicking Role again did not visibly remove [Role]:")
-        self.assertTrue(lp["all5AddedVisibly"], "Clicking Add All 5 did not visibly populate all 5 pillars")
+        self.assertTrue(
+            lp["roleRemovedBackToZeroPillars"],
+            "Clicking R · Role again did not remove [Role]: cleanly back down to 0/5 pillars with zero ✓ checkmarks!",
+        )
+        self.assertTrue(lp["all5AddedVisibly"], "Clicking All 5 On did not visibly populate all 5 pillars")
         self.assertTrue(lp["switchedToChineseOk"], "Switching to Mandarin did not translate promptText")
         self.assertTrue(lp["backToEnglishZeroCjk"], "Switching back to English left Chinese text in prompt!")
         self.assertTrue(lp["editedBlockRemovedCleanly"], "Edited [Role] block was not removed cleanly!")
@@ -735,6 +948,7 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         # --- Challenge 3 Assertions ---
         c3_sw = res["c3CaseSwitcherAudit"]
         self.assertTrue(c3_sw["found"])
+        self.assertTrue(c3_sw["hasDarkSlateBrief"], "C3 brief card must use dark-slate executive styling (from-slate-900)")
         self.assertEqual(c3_sw["optionCount"], 6, f"Expected 6 C3 cases, got {c3_sw}")
         self.assertTrue(c3_sw["switchedTo1of6"])
 
@@ -747,6 +961,7 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         self.assertEqual(len(c3["styleTops"]), 3, f"Expected 3 visual style pills, got {c3['styleTops']}")
         self.assertLessEqual(max(c3["styleTops"]) - min(c3["styleTops"]), 3)
         self.assertEqual(c3["openTextInputsCount"], 0, "C3 Personal Touch input should be collapsed by default")
+        self.assertIsNotNone(c3["step1BriefHeight"])
         self.assertIsNotNone(c3["createBtnBottomPx"])
         self.assertLessEqual(
             c3["createBtnBottomPx"],
@@ -759,6 +974,20 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         self.assertFalse(c3_s23["hasMorbidCongenital"], "Morbid congenital/jaundice leaked into Step 2 DOM")
         self.assertTrue(c3_s23["briefAutoCollapsedOnStep2"], "C3 Client Brief did not auto-collapse on Step 2")
         self.assertTrue(c3_s23["reExpandedOk"], "C3 Case Info toggle failed to re-expand brief")
+        self.assertTrue(c3_s23["step3DisabledBeforeSend"], "C3 Step 3 tab must be disabled before sending WhatsApp!")
+        self.assertTrue(
+            c3_s23["replyUnstagedBeforeSend"],
+            "C3 client reply ('Incoming Client WhatsApp Reply' / AIA) leaked before WhatsApp was sent!",
+        )
+        self.assertTrue(c3_s23["whatsappSentVisible"], "Missing outgoing 'WhatsApp Sent' confirmation on Step 3")
+        self.assertTrue(
+            c3_s23["incomingReplyVisibleAfterSend"],
+            "Missing 'Incoming Client WhatsApp Reply' bubble after mock WhatsApp send + typing transition",
+        )
+        self.assertTrue(
+            c3_s23["step3UnlockedAfterSend"],
+            "Did not automatically land on unlocked Step 3 ('Draft Winning Comparison Reply') after sending WhatsApp",
+        )
         self.assertLessEqual(c3_s23["step3ScrollW"], 392, f"C3 Step 3 horizontal overflow: {c3_s23['step3ScrollW']}")
 
         # 5-Language Mobile Overflow Check (EN, Mandarin, Cantonese, Malay, Tamil)

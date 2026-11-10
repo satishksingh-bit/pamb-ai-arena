@@ -23,10 +23,13 @@ Across EVERY mobile browser engine & profile, verifies:
 - Real Touch (`page.tap`) & Restricted-WebView Behavioral Regressions:
   * Challenge 1 Camera Modal (`Take a photo`) fits inside 660px/667px short viewports and renders
     the native phone camera fallback (`capture="user"`) when `getUserMedia` is denied/unavailable.
-  * Challenge 2 R.C.T.F.C. pillar toggle (`+ Role` / `[Role ✕]`), `🎯 Sample` modal `backdrop-filter`
-    blur + Slide-3 stacked mobile cards, and inline case-switch confirmation when `window.confirm`
-    is suppressed (`() => false`) in WhatsApp/WeChat WebViews!
-  * Challenge 3 6-case switcher, Step 1 -> Step 2 brief auto-collapse, `execCommand("copy")` fallback
+  * Challenge 2 aligned 1 -> 2 -> 3 Step-1 flow: 0/5 baseline starter prompt, collapsible Section 3
+    `Improve Your Prompt! (R.C.T.F.C.)` drawer (`+ Role` / `[Role ✕]` back to 0/5 -> `All 5 On`),
+    4th custom Personal Strategic Angle (`Write my own` `<input type="text">` >= 16px), `🎯 Sample` modal
+    `backdrop-filter` blur + Slide-3 stacked mobile cards, and inline case-switch confirmation when
+    `window.confirm` is suppressed (`() => false`) in WhatsApp/WeChat WebViews!
+  * Challenge 3 dark-slate 6-case switcher, Step 1 -> Step 2 brief auto-collapse, Step 3 locked & client reply
+    unstaged until tapping `Send WhatsApp Message` (mock send + typing transition), `execCommand("copy")` fallback
     when `navigator.clipboard` is missing, and Lightbox Touch Pan -> Backdrop Tap Close without
     `state.dragMoved` getting stuck!
 """
@@ -562,8 +565,8 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
 
                         c3_header_w = page.evaluate(
                             """() => {
-                              // First button inside C3 brief card is the clientShortName toggle
-                              const card = document.querySelector('div.border-t-4');
+                              // First button inside C3 dark-slate brief card is the clientShortName toggle
+                              const card = document.querySelector('div.from-slate-900') || document.querySelector('div.border-t-4');
                               if (!card) return 0;
                               const btn = card.querySelector('button');
                               return btn ? Math.round(btn.getBoundingClientRect().width) : 0;
@@ -579,12 +582,24 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
                     self._tap_button_containing(page, "EN")
                     page.wait_for_timeout(200)
 
-                    # 4) Challenge 2 Deep Touch Flow + Sample Backdrop-Blur + WebView Case-Switch Confirmation
+                    # 4) Challenge 2 Deep Touch Flow (1 -> 2 -> 3 Step-1 Order + Collapsible R.C.T.F.C. + 0/5 Removal + 4th Custom Angle + Sample Blur + WebView Switch)
                     page.locator("main button:visible", has_text="C2").first.tap()
                     page.locator("textarea:visible").first.wait_for(state="visible", timeout=8000)
                     page.wait_for_timeout(250)
 
-                    # Tap `+ Role` pillar -> verify `[Role]:` appears -> tap `Role ✕` -> verify removed
+                    # Verify C2 starts at 0/5 pillars pre-selected (baseline simple_prompt, NOT [Task]:)
+                    init_c2_val = page.locator("textarea:visible").first.input_value()
+                    self.assertNotRegex(
+                        init_c2_val,
+                        r"\[(Role|Context|Task|Format|Constraints)\]:",
+                        f"[{profile['id']}] C2 should start with 0/5 R.C.T.F.C. pillars pre-selected!",
+                    )
+
+                    # Expand Section 3 collapsible R.C.T.F.C. drawer ("Improve Your Prompt")
+                    self._tap_button_containing(page, "Improve Your Prompt")
+                    page.wait_for_timeout(150)
+
+                    # Tap `+ Role` pillar -> verify `[Role]:` appears -> tap `[Role ✕]` -> verify 0/5 pillars remain!
                     self._tap_button_containing(page, "Role")
                     page.wait_for_timeout(150)
                     val_after_add = page.locator("textarea:visible").first.input_value()
@@ -594,10 +609,31 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
                     role_chip.tap()
                     page.wait_for_timeout(150)
                     val_after_rm = page.locator("textarea:visible").first.input_value()
-                    self.assertNotIn("[Role]:", val_after_rm)
+                    self.assertNotRegex(
+                        val_after_rm,
+                        r"\[(Role|Context|Task|Format|Constraints)\]:",
+                        f"[{profile['id']}] Removing [Role ✕] should return C2 cleanly to 0/5 pillars!",
+                    )
 
-                    # Tap `All 5 On` and open `Sample` modal -> verify Tailwind v3.4 backdrop-blur works!
+                    # Tap `All 5 On`, then test 4th custom Personal Strategic Angle option (`Write my own` + >=16px input check!)
                     self._tap_button_containing(page, "All 5 On")
+                    page.wait_for_timeout(120)
+
+                    self._tap_button_containing(page, "Write my own")
+                    page.wait_for_timeout(120)
+                    self._assert_ios_focus_zoom_safe_inputs(page, f"{profile['id']}:C2:custom_angle_input")
+                    custom_angle_inp = page.locator("input[type='text']:visible").first
+                    custom_angle_inp.wait_for(state="visible", timeout=4000)
+                    custom_angle_inp.tap()
+                    custom_angle_inp.fill("Custom 20-min boardroom co-review")
+                    page.wait_for_timeout(120)
+                    val_with_angle = page.locator("textarea:visible").first.input_value()
+                    self.assertIn(
+                        "[Personal Strategic Angle]: Custom 20-min boardroom co-review",
+                        val_with_angle,
+                    )
+
+                    # Open `Sample` modal -> verify Tailwind v3.4 backdrop-blur works!
                     self._tap_button_containing(page, "Sample")
                     page.wait_for_timeout(200)
                     sample_modal_info = page.evaluate(
@@ -621,7 +657,7 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
                     self._tap_button_containing(page, "Close")
                     page.wait_for_timeout(150)
 
-                    # Generate 3-Slide Deck -> auto-collapses brief -> check collapsed clientShort width >= 95px!
+                    # Generate 3-Slide Deck -> auto-collapses brief -> check collapsed clientShort width >= 80px!
                     self._tap_button_containing(page, "Generate 3-Slide Executive Deck")
                     page.locator("button:visible", has_text="Finalize & Submit Deck").first.wait_for(
                         state="visible", timeout=10000
@@ -665,7 +701,7 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
                         f"[{profile['id']}] Switching C2 case failed when deck existed (WebView confirm regression)!",
                     )
 
-                    # 5) Challenge 3 Deep Touch Flow + Personal Touch >=16px + Clipboard Fallback + Lightbox Touch Pan!
+                    # 5) Challenge 3 Deep Touch Flow + Unstaged Client Reply + Mock WhatsApp Send + Clipboard Fallback!
                     page.locator("main button:visible", has_text="C3").first.tap()
                     page.wait_for_timeout(250)
 
@@ -674,7 +710,7 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
                     page.wait_for_timeout(120)
                     self._assert_ios_focus_zoom_safe_inputs(page, f"{profile['id']}:C3:personal_touch_open")
 
-                    # Generate Card -> Step 2 WhatsApp -> Step 3 Email -> Submit -> Test Copy Pack fallback!
+                    # Generate Card -> Step 2 WhatsApp -> Mock-Send WhatsApp -> Step 3 Email -> Submit -> Copy Pack!
                     self._tap_button_containing(page, "Create Greeting Card")
                     page.locator("button:visible", has_text="Next: Craft First WhatsApp").first.wait_for(
                         state="visible", timeout=10000
@@ -685,8 +721,40 @@ class Top5MobileBrowsersRegressionTests(unittest.TestCase):
                     page.locator("textarea:visible").first.wait_for(state="visible", timeout=10000)
                     self._assert_ios_focus_zoom_safe_inputs(page, f"{profile['id']}:C3:whatsapp_textarea")
 
-                    self._tap_button_containing(page, "See Client Reply")
-                    page.wait_for_timeout(150)
+                    # Before sending WhatsApp: verify Step 3 tab is disabled AND client reply is NOT staged!
+                    pre_send_c3 = page.evaluate(
+                        """() => {
+                          const step3Btn = Array.from(document.querySelectorAll('button')).find((b) =>
+                            /^3\\./.test((b.textContent || '').trim())
+                          );
+                          const bodyTxt = document.body.innerText || '';
+                          return {
+                            step3Disabled: Boolean(step3Btn && step3Btn.disabled === true),
+                            hasReplyEarly:
+                              bodyTxt.includes('Incoming Client WhatsApp Reply') ||
+                              bodyTxt.includes('AIA friend quoted') ||
+                              bodyTxt.includes('AIA agent just quoted'),
+                          };
+                        }"""
+                    )
+                    self.assertTrue(
+                        pre_send_c3["step3Disabled"],
+                        f"[{profile['id']}] C3 Step 3 tab should be disabled before sending WhatsApp!",
+                    )
+                    self.assertFalse(
+                        pre_send_c3["hasReplyEarly"],
+                        f"[{profile['id']}] C3 client reply was staged before sending WhatsApp!",
+                    )
+
+                    # Tap "Send WhatsApp Message" -> wait for ~1s mock send + client typing animation -> Step 3 unlocked!
+                    self._tap_button_containing(page, "Send WhatsApp Message")
+                    page.locator("button:visible", has_text="Draft Winning Comparison Reply").first.wait_for(
+                        state="visible", timeout=8000
+                    )
+                    post_send_body = page.evaluate("() => document.body.innerText || ''")
+                    self.assertIn("WhatsApp Sent", post_send_body)
+                    self.assertIn("Incoming Client WhatsApp Reply", post_send_body)
+
                     self._tap_button_containing(page, "Draft Winning Comparison Reply")
                     page.locator("button:visible", has_text="Submit Pre-Pitch").first.wait_for(
                         state="visible", timeout=10000

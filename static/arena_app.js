@@ -25,6 +25,19 @@ const { useState, useEffect, useRef } = React;
 function getRouteMode() {
   const path = window.location.pathname.toLowerCase();
   const params = new URLSearchParams(window.location.search);
+  if (path.startsWith("/mobile/") || params.get("solo") === "1") {
+    const num =
+      params.get("challenge") ||
+      params.get("c") ||
+      path.split("/mobile/")[1]?.split("/")[0] ||
+      "1";
+    const initLang = params.get("lang") || "";
+    return {
+      mode: "solo_mobile",
+      sandboxChallenge: ["1", "2", "3"].includes(num) ? num : "1",
+      initLang,
+    };
+  }
   if (path.startsWith("/sandbox/") || params.get("sandbox")) {
     const num = params.get("sandbox") || path.split("/sandbox/")[1]?.split("/")[0] || "1";
     return { mode: "sandbox", sandboxChallenge: ["1", "2", "3"].includes(num) ? num : "1" };
@@ -2012,7 +2025,140 @@ function ParticipantIsolatedApp({ arenaState, fetchArenaState }) {
 }
 
 /* ============================================================================
-   3. DEVELOPER SPLIT-SCREEN SANDBOX (/sandbox/1, /sandbox/2, /sandbox/3)
+   3. SOLO MOBILE CHALLENGE TESTER (/mobile/1, /mobile/2, /mobile/3)
+      Scanned from the Developer Sandbox QR code — pops directly into ONLY the
+      selected challenge on mobile (no onboarding wall, no tab bar, no sandbox chrome).
+============================================================================ */
+function SoloMobileChallengeApp({
+  challengeNum,
+  initialLang,
+  arenaState,
+  fetchArenaState,
+}) {
+  const cNum = ["1", "2", "3"].includes(String(challengeNum)) ? String(challengeNum) : "1";
+  const [agentId] = useState(() => {
+    const saved = safeGetStorage("pamb_solo_mobile_id_v1");
+    if (saved) return saved;
+    const fresh = `mob-c${cNum}-${Date.now()}-${Math.floor(Math.random() * 900 + 100)}`;
+    safeSetStorage("pamb_solo_mobile_id_v1", fresh);
+    return fresh;
+  });
+  const [agentName] = useState(
+    () => safeGetStorage("pamb_agent_name_v1") || "PRUMDA Mobile Tester"
+  );
+  const [lang, setLang] = useState(() => {
+    if (initialLang && window.PAMB_LANGUAGES.some((l) => l.code === initialLang)) {
+      return initialLang;
+    }
+    return safeGetStorage("pamb_agent_lang_v1") || "en";
+  });
+
+  const t = window.PAMB_I18N[lang] || window.PAMB_I18N.en;
+  const myRecord =
+    (arenaState.participants || []).find((p) => p.id === agentId) || null;
+
+  useEffect(() => {
+    fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: agentId,
+        name: agentName,
+        language: lang,
+      }),
+    })
+      .then(() => fetchArenaState && fetchArenaState())
+      .catch(() => {});
+  }, [agentId]);
+
+  const challengeBadge =
+    cNum === "1" ? "📸 Challenge 1" : cNum === "2" ? "🧠 Challenge 2" : "🎯 Challenge 3";
+
+  return (
+    <div className="min-h-[100dvh] bg-[#f4f6f9] text-slate-900 pb-8 overflow-x-hidden">
+      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur border-t-4 border-t-[#ed1b2e] border-b border-slate-200 px-3 sm:px-5 py-2 shadow-sm">
+        <div className="w-full max-w-xl mx-auto flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#ed1b2e] text-white text-xs font-extrabold shrink-0">
+              {challengeBadge}
+            </span>
+            <span className="text-xs font-bold text-slate-600 truncate">
+              🇲🇾 Mobile Direct
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-1">
+            {window.PAMB_LANGUAGES.map((l) => (
+              <button
+                key={l.code}
+                type="button"
+                onClick={() => {
+                  setLang(l.code);
+                  safeSetStorage("pamb_agent_lang_v1", l.code);
+                }}
+                className={`px-2 py-1 rounded-lg text-[11px] font-extrabold border transition-all ${
+                  lang === l.code
+                    ? "bg-[#ed1b2e] text-white border-[#ed1b2e]"
+                    : "bg-white hover:bg-red-50 text-slate-700 border-slate-300"
+                }`}
+              >
+                {l.short}
+              </button>
+            ))}
+          </div>
+        </div>
+      </header>
+
+      <main className="w-full max-w-xl mx-auto px-3 sm:px-5 pt-3">
+        {cNum === "1" && (
+          <window.Challenge1ParticipantView
+            t={t}
+            lang={lang}
+            agentId={agentId}
+            agentName={agentName}
+            agentRegion=""
+            canProceedNext={false}
+            onNext={() => {}}
+            fetchArenaState={fetchArenaState}
+          />
+        )}
+        {cNum === "2" && (
+          <window.Challenge2ParticipantView
+            t={t}
+            lang={lang}
+            agentId={agentId}
+            agentName={agentName}
+            agentRegion=""
+            canProceedNext={false}
+            onNext={() => {}}
+            onViewScorecard={null}
+            existingSubmission={myRecord?.submissions?.["2"] || null}
+            existingScore={myRecord?.scores?.["2"] || null}
+            isCompleted={Boolean(myRecord?.completed?.["2"])}
+            fetchArenaState={fetchArenaState}
+          />
+        )}
+        {cNum === "3" && (
+          <window.Challenge3ParticipantView
+            t={t}
+            lang={lang}
+            agentId={agentId}
+            agentName={agentName}
+            agentRegion=""
+            onNext={() => {}}
+            existingSubmission={myRecord?.submissions?.["3"] || null}
+            existingScore={myRecord?.scores?.["3"] || null}
+            isCompleted={Boolean(myRecord?.completed?.["3"])}
+            fetchArenaState={fetchArenaState}
+          />
+        )}
+      </main>
+    </div>
+  );
+}
+
+/* ============================================================================
+   4. DEVELOPER SPLIT-SCREEN SANDBOX (/sandbox/1, /sandbox/2, /sandbox/3)
 ============================================================================ */
 function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) {
   const [cNum, setCNum] = useState(initialChallenge || "1");
@@ -2023,6 +2169,13 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
   const demoLeader = (arenaState.participants || [])[0] || {};
   const activeSubmission =
     sandboxSubmission || demoLeader.submissions?.[cNum] || null;
+
+  const mobileDirectUrl = `${window.location.origin}/mobile/${cNum}${
+    lang && lang !== "en" ? `?lang=${encodeURIComponent(lang)}` : ""
+  }`;
+  const sandboxQrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&data=${encodeURIComponent(
+    mobileDirectUrl
+  )}`;
 
   return (
     <div className="min-h-screen bg-[#f4f6f9] text-slate-900 p-4 lg:p-6 space-y-5">
@@ -2126,6 +2279,41 @@ function DeveloperSandboxApp({ initialChallenge, arenaState, fetchArenaState }) 
         </div>
 
         <div className="lg:col-span-7 space-y-4 min-w-0">
+          {/* Direct Single-Challenge Mobile QR Card (Pops Straight into Challenge {cNum} on Phone) */}
+          <div className="bg-white border-2 border-[#ed1b2e]/30 rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
+            <div className="space-y-1.5 text-center sm:text-left min-w-0 flex-1">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-50 border border-red-200 text-[#ed1b2e] text-[11px] font-extrabold uppercase">
+                📱 Scan to Test Challenge {cNum} on Mobile
+              </div>
+              <div className="text-sm sm:text-base font-extrabold text-slate-900">
+                Pops straight into Challenge {cNum} only (no sandbox chrome or tab bar)
+              </div>
+              <div className="text-xs text-slate-500">
+                Switch between <strong className="text-slate-700">Sandbox C1 / C2 / C3</strong> above and scan to jump directly into that challenge on your phone:
+              </div>
+              <div className="pt-0.5">
+                <a
+                  href={mobileDirectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-mono font-extrabold text-[#ed1b2e] hover:underline break-all"
+                >
+                  {mobileDirectUrl} ↗
+                </a>
+              </div>
+            </div>
+            <div className="shrink-0 flex flex-col items-center gap-1">
+              <img
+                src={sandboxQrImageUrl}
+                alt={`Scan to test Challenge ${cNum} on mobile`}
+                title="Tap to zoom QR code"
+                data-zoomable="true"
+                className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border-2 border-[#ed1b2e]/30 shadow-sm bg-white p-1 cursor-zoom-in"
+              />
+              <span className="text-[10px] font-bold text-slate-400">🔍 Tap QR to enlarge</span>
+            </div>
+          </div>
+
           <div className="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 shadow-md">
             <div className="text-xs font-extrabold uppercase text-[#ed1b2e]">
               🖥️ Live Presenter Screen Render Preview (`mode=&quot;spotlight&quot;`)
@@ -2192,6 +2380,16 @@ function RootApp() {
     return () => clearInterval(id);
   }, []);
 
+  if (route.mode === "solo_mobile") {
+    return (
+      <SoloMobileChallengeApp
+        challengeNum={route.sandboxChallenge}
+        initialLang={route.initLang}
+        arenaState={arenaState}
+        fetchArenaState={fetchArenaState}
+      />
+    );
+  }
   if (route.mode === "sandbox") {
     return (
       <DeveloperSandboxApp

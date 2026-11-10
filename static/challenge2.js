@@ -96,8 +96,12 @@ const C2_UI_I18N = {
     switchConfirmMsg: "Switch client case and start a fresh 3-slide deck?",
     step1Tab: "1. 🧩 Build Prompt",
     step2Tab: "2. 📊 3-Slide Deck",
-    pillarsHeader: "1. R.C.T.F.C. Prompt Pillars",
+    pillarsHeader: "3. 🚀 Improve Your Prompt! (R.C.T.F.C. Power-Ups)",
+    improveHeader: "3. 🚀 Improve Your Prompt! (R.C.T.F.C. Power-Ups)",
+    improveSub:
+      "Tap any R.C.T.F.C. pillar below to inject structured context into your prompt (tap again to remove):",
     activateAllShort: "✨ All 5 On",
+    clearAllShort: "✕ Clear 5",
     pillarTitles: {
       role: "R · Role",
       context: "C · Context",
@@ -105,7 +109,7 @@ const C2_UI_I18N = {
       format: "F · Format",
       constraints: "C · Constraints",
     },
-    toneHeader: "2. Boardroom Style",
+    toneHeader: "1. Boardroom Style",
     tones: [
       {
         id: "boardroom",
@@ -126,9 +130,11 @@ const C2_UI_I18N = {
           "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
       },
     ],
-    angleHeader: "3. 💡 Personal Strategic Angle",
+    angleHeader: "2. 💡 Personal Strategic Angle",
+    customAngleBtn: "✍️ Write my own custom angle...",
+    customAngleInputPlaceholder: "Type your custom strategic angle (populates your prompt live)...",
     anglePlaceholder:
-      "Tap a quick angle above or write your bespoke hook (e.g., 30-min co-review with accountant)...",
+      "Tap a style, angle, or R.C.T.F.C. power-up above — or edit your live prompt directly...",
     inspectPromptShow: "Inspect Full Prompt ▾",
     inspectPromptHide: "Hide Full Prompt ▴",
     pillarsReadySuffix: "Pillars Ready",
@@ -181,8 +187,11 @@ const C2_UI_I18N = {
     switchConfirmMsg: "确认切换客户案例并重新生成 3 页简报吗？",
     step1Tab: "1. 🧩 构建提示词",
     step2Tab: "2. 📊 3页简报",
-    pillarsHeader: "1. R.C.T.F.C. 五维积木",
+    pillarsHeader: "3. 🚀 升级您的提示词！(R.C.T.F.C. 五维强化)",
+    improveHeader: "3. 🚀 升级您的提示词！(R.C.T.F.C. 五维强化)",
+    improveSub: "点击下方任意 R.C.T.F.C. 模块即可注入提示词（再次点击即可移除）：",
     activateAllShort: "✨ 全选5维",
+    clearAllShort: "✕ 清空5维",
     pillarTitles: {
       role: "R · 角色",
       context: "C · 背景",
@@ -190,7 +199,7 @@ const C2_UI_I18N = {
       format: "F · 格式",
       constraints: "C · 合规",
     },
-    toneHeader: "2. 董事会呈现风格",
+    toneHeader: "1. 董事会呈现风格",
     tones: [
       {
         id: "boardroom",
@@ -211,8 +220,10 @@ const C2_UI_I18N = {
           "[呈现风格]：严谨 CFO 财务视角——对比每年约 2% 资金配置成本与守护 100% 企业估值完整及法定信托隔离。",
       },
     ],
-    angleHeader: "3. 💡 个人策略切入点",
-    anglePlaceholder: "点击上方灵感胶囊，或输入您的专属顾问邀约切入点...",
+    angleHeader: "2. 💡 个人策略切入点",
+    customAngleBtn: "✍️ 自定义输入我的专属切入点...",
+    customAngleInputPlaceholder: "输入您的专属顾问切入点（实时写入下方提示词）...",
+    anglePlaceholder: "点击上方风格、切入点或 R.C.T.F.C. 模块，或直接编辑提示词...",
     inspectPromptShow: "查看完整提示词 ▾",
     inspectPromptHide: "收起完整提示词 ▴",
     pillarsReadySuffix: "维已就绪",
@@ -265,8 +276,11 @@ const C2_UI_I18N = {
     switchConfirmMsg: "確認切換客戶個案並重新生成 3 頁簡報嗎？",
     step1Tab: "1. 🧩 構建提示詞",
     step2Tab: "2. 📊 3頁簡報",
-    pillarsHeader: "1. R.C.T.F.C. 五維積木",
+    pillarsHeader: "3. 🚀 升級你嘅提示詞！(R.C.T.F.C. 五維強化)",
+    improveHeader: "3. 🚀 升級你嘅提示詞！(R.C.T.F.C. 五維強化)",
+    improveSub: "撳下面任何一個 R.C.T.F.C. 積木即可寫入提示詞（再撳一次即可移除）：",
     activateAllShort: "✨ 全選5維",
+    clearAllShort: "✕ 清空5維",
     pillarTitles: {
       role: "R · 角色",
       context: "C · 背景",
@@ -274,7 +288,7 @@ const C2_UI_I18N = {
       format: "F · 格式",
       constraints: "C · 合規",
     },
-    toneHeader: "2. 董事會呈現風格",
+    toneHeader: "1. 董事會呈現風格",
     tones: [
       {
         id: "boardroom",
@@ -295,8 +309,10 @@ const C2_UI_I18N = {
           "[呈現風格]：嚴謹 CFO 財務視角——對比每年約 2% 資金配置成本與守護 100% 企業估值完整同法定信託隔離。",
       },
     ],
-    angleHeader: "3. 💡 個人策略切入點",
-    anglePlaceholder: "撳上面靈感膠囊，或者輸入你嘅專屬約見切入點...",
+    angleHeader: "2. 💡 個人策略切入點",
+    customAngleBtn: "✍️ 自己輸入專屬切入點...",
+    customAngleInputPlaceholder: "輸入你嘅專屬切入點（即時寫入下面提示詞）...",
+    anglePlaceholder: "撳上面風格、切入點或 R.C.T.F.C. 積木，或者直接修改提示詞...",
     inspectPromptShow: "查看完整提示詞 ▾",
     inspectPromptHide: "收起完整提示詞 ▴",
     pillarsReadySuffix: "維已就緒",
@@ -349,8 +365,12 @@ const C2_UI_I18N = {
     switchConfirmMsg: "Tukar kes pelanggan dan mulakan dek 3-slaid baharu?",
     step1Tab: "1. 🧩 Bina Prompt",
     step2Tab: "2. 📊 Dek 3-Slaid",
-    pillarsHeader: "1. Tiang Prompt R.C.T.F.C.",
+    pillarsHeader: "3. 🚀 Tingkatkan Prompt Anda! (R.C.T.F.C.)",
+    improveHeader: "3. 🚀 Tingkatkan Prompt Anda! (R.C.T.F.C.)",
+    improveSub:
+      "Ketik mana-mana tiang R.C.T.F.C. di bawah untuk menambah ke dalam prompt (ketik lagi untuk buang):",
     activateAllShort: "✨ Aktif Semua 5",
+    clearAllShort: "✕ Kosongkan",
     pillarTitles: {
       role: "R · Peranan",
       context: "C · Konteks",
@@ -358,7 +378,7 @@ const C2_UI_I18N = {
       format: "F · Format",
       constraints: "C · Kekangan",
     },
-    toneHeader: "2. Gaya Bilik Lembaga",
+    toneHeader: "1. Gaya Bilik Lembaga",
     tones: [
       {
         id: "boardroom",
@@ -379,8 +399,10 @@ const C2_UI_I18N = {
           "[Gaya Pembentangan]: Nada analitik CFO — tekankan kecekapan modal (peruntukan kecairan ~2% setahun demi memelihara 100% nilai ekuiti perniagaan) serta perlindungan amanah.",
       },
     ],
-    angleHeader: "3. 💡 Sudut Strategik Peribadi",
-    anglePlaceholder: "Ketik cadangan di atas atau tulis pendekatan peribadi anda...",
+    angleHeader: "2. 💡 Sudut Strategik Peribadi",
+    customAngleBtn: "✍️ Tulis sudut strategik saya sendiri...",
+    customAngleInputPlaceholder: "Taip sudut strategik anda (dikemas kini terus dalam prompt)...",
+    anglePlaceholder: "Ketik gaya, sudut strategik atau R.C.T.F.C. di atas, atau sunting terus...",
     inspectPromptShow: "Lihat Prompt Penuh ▾",
     inspectPromptHide: "Sembunyi Prompt ▴",
     pillarsReadySuffix: "Tiang Sedia",
@@ -433,8 +455,12 @@ const C2_UI_I18N = {
     switchConfirmMsg: "வாடிக்கையாளர் வழக்கை மாற்றி புதிய 3-ஸ்லைடு டெக்கை உருவாக்கவா?",
     step1Tab: "1. 🧩 ப்ராம்ப்ட்",
     step2Tab: "2. 📊 3-ஸ்லைடு டெக்",
-    pillarsHeader: "1. R.C.T.F.C. 5 தூண்கள்",
+    pillarsHeader: "3. 🚀 உங்கள் ப்ராம்ப்ட்டை மேம்படுத்துங்கள்! (R.C.T.F.C.)",
+    improveHeader: "3. 🚀 உங்கள் ப்ராம்ப்ட்டை மேம்படுத்துங்கள்! (R.C.T.F.C.)",
+    improveSub:
+      "ப்ராம்ப்ட்டில் சேர்க்க கீழே உள்ள R.C.T.F.C. தூண்களைத் தட்டவும் (நீக்க மீண்டும் தட்டவும்):",
     activateAllShort: "✨ 5-ம் இயக்கு",
+    clearAllShort: "✕ நீக்கு",
     pillarTitles: {
       role: "R · பங்கு",
       context: "C · பின்னணி",
@@ -442,7 +468,7 @@ const C2_UI_I18N = {
       format: "F · வடிவம்",
       constraints: "C · விதிகள்",
     },
-    toneHeader: "2. போர்டுரூம் பாணி",
+    toneHeader: "1. போர்டுரூம் பாணி",
     tones: [
       {
         id: "boardroom",
@@ -463,8 +489,10 @@ const C2_UI_I18N = {
           "[Presentation Style]: Analytical CFO tone — emphasize capital efficiency (~2% p.a. liquidity allocation vs preserving 100% enterprise valuation) and statutory ring-fencing.",
       },
     ],
-    angleHeader: "3. 💡 தனிப்பட்ட உத்தி கோணம்",
-    anglePlaceholder: "மேலுள்ள குறிப்பைத் தட்டவும் அல்லது உங்கள் அணுகுமுறையை எழுதவும்...",
+    angleHeader: "2. 💡 தனிப்பட்ட உத்தி கோணம்",
+    customAngleBtn: "✍️ எனது சொந்த உத்தி கோணத்தை எழுதவும்...",
+    customAngleInputPlaceholder: "உங்கள் சொந்த கோணத்தை உள்ளிடவும்...",
+    anglePlaceholder: "மேலுள்ள பாணி, கோணம் அல்லது R.C.T.F.C.-ஐத் தட்டவும்...",
     inspectPromptShow: "முழு ப்ராம்ப்ட்டை பார்க்க ▾",
     inspectPromptHide: "ப்ராம்ப்ட்டை மறை ▴",
     pillarsReadySuffix: "தூண்கள் தயார்",
@@ -507,17 +535,8 @@ const C2_UI_I18N = {
   },
 };
 
-const PILLAR_HEURISTICS = {
-  role: [/role|peranan|角色|பங்கு|strategist|consultant|advisor|perunding|顾问|顧問|ஆலோசகர்|family-office|prumda/i],
-  context: [/rm\s*\d+|net worth|nilai bersih|净资产|淨資產|நிகர சொத்து|liquidity|kecairan|流动性|流動性|பணப்புழக்க/i],
-  task: [/3-slide|3 slide|3 slaid|3页|3 页|3頁|3 頁|3-ஸ்லைடு|3 ஸ்லைடுகள்|pre-pitch|pra-pembentangan|战前|戰前|முன்-முன்மொழிவு/i],
-  format: [/kpi|chart|table|carta|jadual|柱状图|柱狀圖|策略|வரைபடம்|அட்டவணை|speaker notes|nota pembentang|备注|備註|பேச்சாளர்/i],
-  constraints: [/bnm|pds|free-look|free look|15-day|15 hari|15天|15日|15-நாள்|fact-find|analisis keperluan|需求分析|schedule 10|shariah|syariah|takaful|hibah|法定信托|法定信託|ஷரியா/i],
-};
-
 function detectPillarStatusClient(promptText, guideSteps) {
   const txt = String(promptText || "");
-  const hasExplicitTags = /\[(Role|Context|Task|Format|Constraints)\]:/i.test(txt);
   const tagMap = {
     role: "Role",
     context: "Context",
@@ -529,21 +548,16 @@ function detectPillarStatusClient(promptText, guideSteps) {
   (guideSteps || []).forEach((g) => {
     const k = g.key;
     const tag = tagMap[k];
-    if (tag && new RegExp(`\\[${tag}\\]:\\s*\\S`, "i").test(txt)) {
+    if (tag && new RegExp("^\\s*\\[" + tag + "\\]:\\s*\\S", "im").test(txt)) {
       out[k] = "done";
       return;
     }
     const tmpl = String(g.template || "").trim();
-    if (tmpl && txt.includes(tmpl.slice(0, Math.min(26, tmpl.length)))) {
+    if (tmpl.length >= 24 && txt.includes(tmpl.slice(0, 26))) {
       out[k] = "done";
       return;
     }
-    if (hasExplicitTags) {
-      out[k] = "missing";
-      return;
-    }
-    const regexes = PILLAR_HEURISTICS[k] || [];
-    out[k] = regexes.some((rx) => rx.test(txt)) ? "done" : "missing";
+    out[k] = "missing";
   });
   return out;
 }
@@ -873,7 +887,7 @@ window.Challenge2ParticipantView = function ({
   const { useState, useEffect, useRef } = React;
   const normLang = lang === "zh-TW" || lang === "zh-HK" ? "yue" : lang || "en";
   const ui = C2_UI_I18N[normLang] || C2_UI_I18N.en;
-  const storageKey = `prumda_c2_v6_${agentId || "anon"}`;
+  const storageKey = `prumda_c2_v7_${agentId || "anon"}`;
 
   // Restore saved draft from localStorage if available (only reuse text if draftLang matches normLang!)
   const savedDraftRef = useRef(null);
@@ -908,9 +922,16 @@ window.Challenge2ParticipantView = function ({
     sameDraftLang && initDraft.selectedToneId ? initDraft.selectedToneId : null
   );
   const [selectedAngleChipIdx, setSelectedAngleChipIdx] = useState(
-    sameDraftLang && typeof initDraft.selectedAngleChipIdx === "number"
+    sameDraftLang &&
+      (typeof initDraft.selectedAngleChipIdx === "number" ||
+        initDraft.selectedAngleChipIdx === "custom")
       ? initDraft.selectedAngleChipIdx
       : null
+  );
+  const [showCustomAngleInput, setShowCustomAngleInput] = useState(
+    sameDraftLang
+      ? Boolean(initDraft.showCustomAngleInput || initDraft.selectedAngleChipIdx === "custom")
+      : false
   );
   const [userTypedCustomAngle, setUserTypedCustomAngle] = useState(
     sameDraftLang ? Boolean(initDraft.userTypedCustomAngle) : false
@@ -923,18 +944,22 @@ window.Challenge2ParticipantView = function ({
   );
   const [manualPromptEdited, setManualPromptEdited] = useState(false);
   const [manualEditUnlocked, setManualEditUnlocked] = useState(true);
+  const [showRctfcDrawer, setShowRctfcDrawer] = useState(false);
   const [activePillarsMap, setActivePillarsMap] = useState(
     sameDraftLang && initDraft.activePillarsMap
       ? initDraft.activePillarsMap
       : {
           role: false,
           context: false,
-          task: true,
+          task: false,
           format: false,
           constraints: false,
         }
   );
   const [lastUpdatedTag, setLastUpdatedTag] = useState("");
+  const initialPromptLoadedRef = useRef(
+    Boolean(sameDraftLang && typeof initDraft.promptText === "string" && initDraft.promptText.length > 0)
+  );
 
   // Generated 3-Slide Deck State
   const [deck, setDeck] = useState(initDraft.deck || null);
@@ -983,6 +1008,7 @@ window.Challenge2ParticipantView = function ({
           seatOverride: seatOverride,
           selectedToneId,
           selectedAngleChipIdx,
+          showCustomAngleInput,
           userTypedCustomAngle,
           personalAngle,
           promptText,
@@ -1000,6 +1026,7 @@ window.Challenge2ParticipantView = function ({
     seatOverride,
     selectedToneId,
     selectedAngleChipIdx,
+    showCustomAngleInput,
     userTypedCustomAngle,
     personalAngle,
     promptText,
@@ -1124,12 +1151,17 @@ window.Challenge2ParticipantView = function ({
 
   const upsertOrRemovePromptBlock = (currentPrompt, tag, bodyText, shouldInclude) => {
     const { blocks, customParas } = parsePromptBlocks(currentPrompt);
+    const simpleStr = (challengeData?.simple_prompt || "").trim();
+    let filteredCustomParas = customParas;
+    if (shouldInclude && tag === "Task" && simpleStr) {
+      filteredCustomParas = customParas.filter((cp) => cp.trim() !== simpleStr);
+    }
     if (shouldInclude && bodyText && String(bodyText).trim()) {
       blocks[tag] = String(bodyText).trim();
     } else {
       delete blocks[tag];
     }
-    return serializePromptBlocks(blocks, customParas);
+    return serializePromptBlocks(blocks, filteredCustomParas);
   };
 
   // Assemble clean R.C.T.F.C. + Tone + Personal Strategic Angle prompt in explicit targetLang
@@ -1160,7 +1192,8 @@ window.Challenge2ParticipantView = function ({
       blocks["Personal Strategic Angle"] = angleStr.trim();
     }
     const built = serializePromptBlocks(blocks, []);
-    return built || simpleFallback || "";
+    if (!built) return simpleFallback || "";
+    return built;
   };
 
   const flashTagFeedback = (label) => {
@@ -1201,10 +1234,17 @@ window.Challenge2ParticipantView = function ({
         const gList = data.guide || [];
         const hints = data.angleHints || [];
         if (resetDeckOnSwitch) {
-          const starterMap = { role: false, context: false, task: true, format: false, constraints: false };
+          const starterMap = {
+            role: false,
+            context: false,
+            task: false,
+            format: false,
+            constraints: false,
+          };
           setActivePillarsMap(starterMap);
           setSelectedToneId(null);
           setSelectedAngleChipIdx(null);
+          setShowCustomAngleInput(false);
           setUserTypedCustomAngle(false);
           setPersonalAngle("");
           setDeck(null);
@@ -1214,6 +1254,7 @@ window.Challenge2ParticipantView = function ({
           setPromptText(
             buildAssembledPrompt(gList, starterMap, null, "", data.simple_prompt, targetLang)
           );
+          initialPromptLoadedRef.current = true;
         } else {
           const isTargetCjk = targetLang === "zh-CN" || targetLang === "yue";
           const hasStaleCjkInNonCjk = !isTargetCjk && /[\u4e00-\u9fff]/.test(personalAngle || "");
@@ -1230,8 +1271,7 @@ window.Challenge2ParticipantView = function ({
           setPersonalAngle(nextAngle);
           if (
             langSwitched ||
-            !promptText ||
-            !promptText.trim() ||
+            !initialPromptLoadedRef.current ||
             (!isTargetCjk && /[\u4e00-\u9fff]/.test(promptText || ""))
           ) {
             setPromptText(
@@ -1244,6 +1284,7 @@ window.Challenge2ParticipantView = function ({
                 targetLang
               )
             );
+            initialPromptLoadedRef.current = true;
           }
         }
       })
@@ -1284,25 +1325,61 @@ window.Challenge2ParticipantView = function ({
       setSelectedToneId(null);
     } else if (tag === "Personal Strategic Angle") {
       setSelectedAngleChipIdx(null);
+      setShowCustomAngleInput(false);
+      setUserTypedCustomAngle(false);
       setPersonalAngle("");
     }
     flashTagFeedback(`− Removed [${tag}]`);
   };
 
+  const handleClearAllPillars = () => {
+    setActivePillarsMap({
+      role: false,
+      context: false,
+      task: false,
+      format: false,
+      constraints: false,
+    });
+    setPromptText((prev) => {
+      let cur = prev;
+      ["Role", "Context", "Task", "Format", "Constraints"].forEach((tg) => {
+        cur = upsertOrRemovePromptBlock(cur, tg, "", false);
+      });
+      return cur;
+    });
+    flashTagFeedback("✕ Removed All 5 R.C.T.F.C. Pillars");
+  };
+
   const handleClearAllPrompt = () => {
-    setActivePillarsMap({ role: false, context: false, task: false, format: false, constraints: false });
+    setActivePillarsMap({
+      role: false,
+      context: false,
+      task: false,
+      format: false,
+      constraints: false,
+    });
     setSelectedToneId(null);
     setSelectedAngleChipIdx(null);
+    setShowCustomAngleInput(false);
+    setUserTypedCustomAngle(false);
     setPersonalAngle("");
     setPromptText("");
     flashTagFeedback("✕ Cleared Prompt");
   };
 
   const handleResetStarterPrompt = () => {
-    const starterMap = { role: false, context: false, task: true, format: false, constraints: false };
+    const starterMap = {
+      role: false,
+      context: false,
+      task: false,
+      format: false,
+      constraints: false,
+    };
     setActivePillarsMap(starterMap);
     setSelectedToneId(null);
     setSelectedAngleChipIdx(null);
+    setShowCustomAngleInput(false);
+    setUserTypedCustomAngle(false);
     setPersonalAngle("");
     setPromptText(
       buildAssembledPrompt(
@@ -1348,9 +1425,12 @@ window.Challenge2ParticipantView = function ({
   const handlePickAngleChip = (hintVal, chipIdx) => {
     const hasAngleBlock = /^\s*\[Personal Strategic Angle\]:/im.test(promptText || "");
     const togglingOff =
-      hasAngleBlock && (selectedAngleChipIdx === chipIdx || personalAngle.trim() === hintVal.trim());
+      !showCustomAngleInput &&
+      hasAngleBlock &&
+      (selectedAngleChipIdx === chipIdx || personalAngle.trim() === hintVal.trim());
     const nextIdx = togglingOff ? null : chipIdx;
     const nextVal = togglingOff ? "" : hintVal;
+    setShowCustomAngleInput(false);
     setSelectedAngleChipIdx(nextIdx);
     setUserTypedCustomAngle(false);
     setPersonalAngle(nextVal);
@@ -1358,6 +1438,47 @@ window.Challenge2ParticipantView = function ({
       upsertOrRemovePromptBlock(prev, "Personal Strategic Angle", nextVal, Boolean(nextVal))
     );
     flashTagFeedback(nextVal ? "+ Added [Personal Strategic Angle]" : "− Removed [Angle]");
+  };
+
+  const handleToggleCustomAngleOption = () => {
+    const turningOff = showCustomAngleInput || selectedAngleChipIdx === "custom";
+    if (turningOff) {
+      setShowCustomAngleInput(false);
+      setSelectedAngleChipIdx(null);
+      setUserTypedCustomAngle(false);
+      setPersonalAngle("");
+      setPromptText((prev) => upsertOrRemovePromptBlock(prev, "Personal Strategic Angle", "", false));
+      flashTagFeedback("− Removed [Angle]");
+    } else {
+      const startCustomVal = userTypedCustomAngle ? personalAngle : "";
+      setShowCustomAngleInput(true);
+      setSelectedAngleChipIdx("custom");
+      setUserTypedCustomAngle(true);
+      setPersonalAngle(startCustomVal);
+      setPromptText((prev) =>
+        upsertOrRemovePromptBlock(
+          prev,
+          "Personal Strategic Angle",
+          startCustomVal,
+          Boolean(startCustomVal && startCustomVal.trim())
+        )
+      );
+    }
+  };
+
+  const handleCustomAngleType = (typedVal) => {
+    setShowCustomAngleInput(true);
+    setSelectedAngleChipIdx("custom");
+    setUserTypedCustomAngle(true);
+    setPersonalAngle(typedVal);
+    setPromptText((prev) =>
+      upsertOrRemovePromptBlock(
+        prev,
+        "Personal Strategic Angle",
+        typedVal,
+        Boolean(typedVal && typedVal.trim())
+      )
+    );
   };
 
   const handleLivePromptEdit = (rawVal) => {
@@ -1373,6 +1494,14 @@ window.Challenge2ParticipantView = function ({
     setActivePillarsMap(nextMap);
     if (blocks["Personal Strategic Angle"]) {
       setPersonalAngle(blocks["Personal Strategic Angle"]);
+    } else if (!/^\s*\[Personal Strategic Angle\]:/im.test(rawVal || "")) {
+      setPersonalAngle("");
+      if (!showCustomAngleInput) {
+        setSelectedAngleChipIdx(null);
+      }
+    }
+    if (!blocks["Tone"]) {
+      setSelectedToneId(null);
     }
   };
 
@@ -1731,7 +1860,7 @@ window.Challenge2ParticipantView = function ({
     );
 
     return (
-      <div className="bg-white border-2 border-emerald-500 rounded-3xl p-4 sm:p-6 space-y-4 shadow-lg">
+      <div className="w-full max-w-full min-w-0 overflow-hidden bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3.5 sm:p-5 space-y-3.5 shadow-md">
         <div className="flex flex-wrap items-center justify-between gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 sm:p-4">
           <div className="space-y-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-extrabold tracking-wide">
@@ -1874,7 +2003,7 @@ window.Challenge2ParticipantView = function ({
   const gapValue = scen?.gapAmount ? `Gap ${scen.gapAmount}` : "";
 
   return (
-    <div className="w-full max-w-full min-w-0 overflow-hidden bg-white border border-slate-200 rounded-3xl p-3.5 sm:p-5 space-y-3 shadow-sm">
+    <div className="w-full max-w-full min-w-0 overflow-hidden bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-5 space-y-3 shadow-sm">
       {/* 1. Slim Top Studio Bar + Compact 🎯 Sample Button */}
       <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-200 min-w-0">
         <h2 className="text-sm sm:text-base font-extrabold text-slate-900 truncate min-w-0">
@@ -1978,31 +2107,33 @@ window.Challenge2ParticipantView = function ({
         ) : (
           /* Expanded Client Card Header */
           <div className="flex items-center justify-between gap-2">
-            <div className="min-w-0 flex-1 flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => setShowBrief(false)}
+              className="min-w-0 flex-1 flex items-center gap-1.5 text-left"
+            >
               <span className="text-base leading-none shrink-0">{scen?.icon || "🏛️"}</span>
               <span className="text-xs font-extrabold text-amber-300 truncate">
                 {scen?.shortLabel || clientShort}
               </span>
-            </div>
+            </button>
             <div className="flex items-center gap-1.5 shrink-0">
-              {activeStep === "2" && (
-                <button
-                  type="button"
-                  onClick={() => setShowBrief(false)}
-                  className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] font-bold text-slate-300"
-                >
-                  {ui.hideCaseBtn}
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={() => setShowBrief(false)}
+                className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-bold text-slate-200"
+              >
+                {ui.hideCaseBtn}
+              </button>
               <button
                 type="button"
                 onClick={() => {
                   setConfirmArmedSlot(null);
                   setShowCasePicker((v) => !v);
                 }}
-                className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300"
+                className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300"
               >
-                {ui.switchCaseFmt} ({currentCaseSlot + 1}/6) ▾
+                {ui.switchShortFmt} ({currentCaseSlot + 1}/6) ▾
               </button>
             </div>
           </div>
@@ -2085,18 +2216,21 @@ window.Challenge2ParticipantView = function ({
         )}
       </div>
 
-      {/* Two-Step Workflow Bar (Short 1-Line Mobile Labels) */}
-      <div className="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-2xl min-w-0">
+      {/* Unified Segmented Step Workflow Bar (Aligned across C2 & C3) */}
+      <div className="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 min-w-0">
         <button
           type="button"
           onClick={() => setActiveStep("1")}
-          className={`min-w-0 overflow-hidden truncate py-2 px-2 rounded-xl text-xs font-extrabold transition-all ${
+          className={`min-w-0 overflow-hidden py-2 px-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1 ${
             activeStep === "1"
-              ? "bg-white text-slate-900 shadow-sm border border-slate-200"
-              : "text-slate-600 hover:text-slate-900"
+              ? "bg-[#ed1b2e] text-white shadow-sm"
+              : activePillarCount >= 3
+              ? "bg-white text-emerald-800 border border-emerald-200 shadow-sm"
+              : "text-slate-700 hover:bg-white/70 hover:text-slate-900"
           }`}
         >
-          {ui.step1Tab}
+          {activeStep !== "1" && activePillarCount >= 3 && <span className="shrink-0">✓</span>}
+          <span className="truncate">{ui.step1Tab}</span>
         </button>
         <button
           type="button"
@@ -2106,10 +2240,11 @@ window.Challenge2ParticipantView = function ({
             activeStep === "2"
               ? "bg-[#ed1b2e] text-white shadow-sm"
               : deck
-              ? "text-slate-800 hover:bg-white/60"
-              : "text-slate-400 cursor-not-allowed"
+              ? "bg-white text-emerald-800 border border-emerald-200 shadow-sm"
+              : "text-slate-400 cursor-not-allowed opacity-75"
           }`}
         >
+          {!deck && <span className="shrink-0 text-[10px]">🔒</span>}
           <span className="truncate">{ui.step2Tab}</span>
           {deck && (
             <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[9px]">
@@ -2120,62 +2255,11 @@ window.Challenge2ParticipantView = function ({
       </div>
 
       {/* ========================================================================
-         STEP 1: COMPACT R.C.T.F.C. PILLARS + 3-PILL TONE + PERSONAL ANGLE
+         STEP 1: 1. BOARDROOM STYLE -> 2. PERSONAL ANGLE -> 3. COLLAPSIBLE R.C.T.F.C.
       ======================================================================== */}
       {activeStep === "1" && (
-        <div className="space-y-3">
-          {/* 1. Compact 2-Col / 5-Col R.C.T.F.C. Pill Toggles */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between gap-2">
-              <div className="text-xs font-extrabold text-slate-900">{ui.pillarsHeader}</div>
-              {activePillarCount < 5 && (
-                <button
-                  type="button"
-                  onClick={handleActivateAllPillars}
-                  className="px-2.5 py-1 rounded-lg bg-[#ed1b2e] text-white text-[11px] font-extrabold"
-                >
-                  {ui.activateAllShort}
-                </button>
-              )}
-            </div>
-
-            {loadingChallenge ? (
-              <div className="text-xs text-slate-500 py-3 text-center">Loading scenario...</div>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
-                {guideSteps.map((g, gi) => {
-                  const isDone = pillarStatuses[g.key] === "done";
-                  const shortTitle =
-                    (ui.pillarTitles && ui.pillarTitles[g.key]) || g.label;
-                  const spanLast = gi === 4 ? "col-span-2 sm:col-span-1" : "";
-                  return (
-                    <button
-                      key={g.key}
-                      type="button"
-                      onClick={() => handleTogglePillar(g.key)}
-                      className={`${spanLast} min-w-0 max-w-full overflow-hidden px-2.5 py-2 rounded-xl border text-left transition-all ${
-                        isDone
-                          ? "bg-emerald-50/80 border-emerald-500 shadow-sm"
-                          : "bg-slate-50 hover:bg-slate-100 border-slate-200 opacity-75"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between gap-1 min-w-0">
-                        <span className="block text-[11px] font-extrabold text-slate-900 truncate">
-                          {isDone ? "✓ " : "+ "}
-                          {shortTitle}
-                        </span>
-                      </div>
-                      <div className="block text-[10px] text-slate-600 truncate mt-0.5">
-                        {g.summary || g.tip}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* 2. 1-Row 3-Pill Boardroom Tone Selector */}
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-3">
+          {/* 1. 1-Row 3-Pill Boardroom Style Selector */}
           <div className="space-y-1.5 min-w-0">
             <div className="text-xs font-extrabold text-slate-900">{ui.toneHeader}</div>
             <div className="grid grid-cols-3 gap-1.5 min-w-0">
@@ -2188,8 +2272,8 @@ window.Challenge2ParticipantView = function ({
                     onClick={() => handleSelectTone(tn.id)}
                     className={`min-w-0 max-w-full overflow-hidden px-2 py-2 rounded-xl border text-[11px] sm:text-xs font-extrabold text-center truncate transition-all ${
                       active
-                        ? "bg-slate-900 text-white border-slate-900 shadow-sm"
-                        : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200"
+                        ? "bg-[#ed1b2e] text-white border-[#ed1b2e] shadow-sm"
+                        : "bg-white hover:bg-red-50/50 text-slate-800 border-slate-200"
                     }`}
                   >
                     {tn.shortLabel}
@@ -2199,45 +2283,164 @@ window.Challenge2ParticipantView = function ({
             </div>
           </div>
 
-          {/* 3. Personal Strategic Angle Quick-Insert Chips */}
-          {angleHints.length > 0 && (
-            <div className="space-y-1.5 min-w-0">
-              <div className="text-xs font-extrabold text-slate-900">{ui.angleHeader}</div>
-              <div className="flex flex-col gap-1.5 min-w-0">
-                {angleHints.map((hint, hi) => {
-                  const hasAngleBlock = /^\s*\[Personal Strategic Angle\]:/im.test(promptText || "");
-                  const selected =
-                    hasAngleBlock && (selectedAngleChipIdx === hi || promptText.includes(hint.trim()));
-                  return (
-                    <button
-                      key={hi}
-                      type="button"
-                      onClick={() => handlePickAngleChip(hint, hi)}
-                      className={`w-full min-w-0 max-w-full overflow-hidden px-2.5 py-1.5 rounded-xl text-[11px] font-bold border text-left whitespace-normal break-words leading-snug transition-all ${
-                        selected
-                          ? "bg-amber-600 text-white border-amber-700 shadow-sm"
-                          : "bg-amber-50/70 hover:bg-amber-100 text-slate-800 border-amber-300"
-                      }`}
-                    >
-                      {selected ? "✓ " : "+ ✨ "}
-                      {hint}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
+          {/* 2. Personal Strategic Angle Quick-Insert Chips + 4th Custom Option */}
+          <div className="space-y-1.5 min-w-0">
+            <div className="text-xs font-extrabold text-slate-900">{ui.angleHeader}</div>
+            <div className="flex flex-col gap-1.5 min-w-0">
+              {angleHints.slice(0, 3).map((hint, hi) => {
+                const hasAngleBlock = /^\s*\[Personal Strategic Angle\]:/im.test(promptText || "");
+                const selected =
+                  !showCustomAngleInput &&
+                  hasAngleBlock &&
+                  (selectedAngleChipIdx === hi || promptText.includes(hint.trim()));
+                return (
+                  <button
+                    key={hi}
+                    type="button"
+                    onClick={() => handlePickAngleChip(hint, hi)}
+                    className={`w-full min-w-0 max-w-full overflow-hidden px-2.5 py-2 rounded-xl text-xs font-bold border text-left whitespace-normal break-words leading-snug transition-all ${
+                      selected
+                        ? "bg-red-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
+                        : "bg-white hover:bg-red-50/40 text-slate-800 border-slate-200"
+                    }`}
+                  >
+                    {selected ? "✓ " : "+ ✨ "}
+                    {hint}
+                  </button>
+                );
+              })}
 
-          {/* 4. SINGLE LIVE EDITABLE PROMPT BOX (100% Transparent — Removable [Tag ✕] Pills + Clear/Reset!) */}
+              {/* 4th Option: Write Your Own Custom Strategic Angle */}
+              <button
+                type="button"
+                onClick={handleToggleCustomAngleOption}
+                className={`w-full min-w-0 max-w-full overflow-hidden px-2.5 py-2 rounded-xl text-xs font-extrabold border text-left whitespace-normal break-words leading-snug transition-all ${
+                  showCustomAngleInput || selectedAngleChipIdx === "custom"
+                    ? "bg-amber-50 border-[#ed1b2e] text-[#ed1b2e] shadow-sm"
+                    : "bg-white hover:bg-amber-50/60 text-slate-800 border-slate-300 border-dashed"
+                }`}
+              >
+                {showCustomAngleInput || selectedAngleChipIdx === "custom" ? "✓ " : "+ "}
+                {ui.customAngleBtn}
+              </button>
+
+              {(showCustomAngleInput || selectedAngleChipIdx === "custom") && (
+                <input
+                  type="text"
+                  value={personalAngle}
+                  onChange={(e) => handleCustomAngleType(e.target.value)}
+                  placeholder={ui.customAngleInputPlaceholder}
+                  className="w-full bg-white border border-amber-300 focus:border-[#ed1b2e] rounded-xl px-3 py-2 text-base sm:text-xs text-slate-900 font-medium focus:outline-none"
+                />
+              )}
+            </div>
+          </div>
+
+          {/* 3. 🚀 Improve Your Prompt! (R.C.T.F.C.) Collapsible Power-Ups Drawer */}
+          <div data-testid="c2-rctfc-collapsible" className="min-w-0">
+            <button
+              type="button"
+              onClick={() => setShowRctfcDrawer((v) => !v)}
+              className="w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl bg-white hover:bg-red-50/40 border border-slate-300 text-left transition-all"
+            >
+              <span className="text-xs font-extrabold text-slate-900 truncate">
+                {ui.improveHeader}
+              </span>
+              <span className="shrink-0 flex items-center gap-1.5">
+                <span
+                  className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold border ${
+                    activePillarCount > 0
+                      ? "bg-emerald-50 text-emerald-800 border-emerald-300"
+                      : "bg-slate-100 text-slate-600 border-slate-200"
+                  }`}
+                >
+                  {activePillarCount}/5
+                </span>
+                <span className="text-xs font-extrabold text-slate-500">
+                  {showRctfcDrawer ? "▴" : "▾"}
+                </span>
+              </span>
+            </button>
+
+            {showRctfcDrawer && (
+              <div className="pt-2 space-y-2">
+                <div className="flex flex-wrap items-center justify-between gap-1.5">
+                  <span className="text-[11px] text-slate-600 leading-snug">
+                    {ui.improveSub}
+                  </span>
+                  <div className="flex items-center gap-1.5 ml-auto shrink-0">
+                    {activePillarCount < 5 && (
+                      <button
+                        type="button"
+                        onClick={handleActivateAllPillars}
+                        className="px-2.5 py-1 rounded-lg bg-[#ed1b2e] hover:bg-[#c81526] text-white text-[11px] font-extrabold transition-all"
+                      >
+                        {ui.activateAllShort}
+                      </button>
+                    )}
+                    {activePillarCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={handleClearAllPillars}
+                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-red-50 border border-slate-300 hover:border-[#ed1b2e] text-slate-700 hover:text-[#ed1b2e] text-[11px] font-extrabold transition-all"
+                      >
+                        {ui.clearAllShort}
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {loadingChallenge ? (
+                  <div className="text-xs text-slate-500 py-3 text-center">Loading scenario...</div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                    {guideSteps.map((g) => {
+                      const isDone = pillarStatuses[g.key] === "done";
+                      const shortTitle =
+                        (ui.pillarTitles && ui.pillarTitles[g.key]) || g.label;
+                      return (
+                        <button
+                          key={g.key}
+                          type="button"
+                          onClick={() => handleTogglePillar(g.key)}
+                          className={`min-w-0 max-w-full px-3 py-2.5 rounded-xl border text-left transition-all ${
+                            isDone
+                              ? "bg-emerald-50/90 border-emerald-500 shadow-sm"
+                              : "bg-white hover:bg-red-50/40 border-slate-200"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-1.5 min-w-0">
+                            <span
+                              className={`text-xs font-extrabold ${
+                                isDone ? "text-emerald-900" : "text-slate-900"
+                              }`}
+                            >
+                              {isDone ? "✓ " : "+ "}
+                              {shortTitle}
+                            </span>
+                          </div>
+                          <div className="text-[11px] text-slate-600 leading-snug mt-0.5 whitespace-normal break-words">
+                            {g.tip || g.summary}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* 4. LIVE EDITABLE PROMPT BOX (100% Transparent — Removable [Tag ✕] Pills + Clear/Reset!) */}
           {(() => {
             const activeTagsInPrompt = CANONICAL_TAGS.filter((tg) =>
               new RegExp(`^\\s*\\[${tg}\\]:`, "im").test(promptText || "")
             );
             return (
-              <div className="bg-slate-50 border-2 border-slate-300 focus-within:border-[#ed1b2e] rounded-2xl p-2.5 space-y-2 transition-all">
+              <div className="bg-white border-2 border-slate-300 focus-within:border-[#ed1b2e] rounded-2xl p-2.5 space-y-2 transition-all">
                 <div className="flex flex-wrap items-center justify-between gap-1.5">
                   <span className="text-[11px] font-extrabold text-slate-800">
-                    ✍️ Your Live AI Prompt ({activePillarCount}/5 Pillars)
+                    ✍️ Your Live AI Prompt ({activePillarCount}/5 R.C.T.F.C.)
                   </span>
                   <div className="flex items-center gap-1">
                     {lastUpdatedTag && (
@@ -2248,7 +2451,7 @@ window.Challenge2ParticipantView = function ({
                     <button
                       type="button"
                       onClick={handleResetStarterPrompt}
-                      className="px-2 py-0.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-[10px] font-extrabold text-slate-700"
+                      className="px-2 py-0.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-300 text-[10px] font-extrabold text-slate-700"
                       title="Reset to starter prompt"
                     >
                       ↺ Reset
@@ -2257,7 +2460,7 @@ window.Challenge2ParticipantView = function ({
                       <button
                         type="button"
                         onClick={handleClearAllPrompt}
-                        className="px-2 py-0.5 rounded-lg bg-white hover:bg-red-50 border border-slate-300 hover:border-red-300 text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e]"
+                        className="px-2 py-0.5 rounded-lg bg-slate-50 hover:bg-red-50 border border-slate-300 hover:border-red-300 text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e]"
                         title="Clear entire prompt"
                       >
                         ✕ Clear
@@ -2276,7 +2479,7 @@ window.Challenge2ParticipantView = function ({
                           key={tg}
                           type="button"
                           onClick={() => handleRemoveBlockByTag(tg)}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white hover:bg-red-50 border border-slate-300 hover:border-[#ed1b2e] text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e] transition-all"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-50 hover:bg-red-50 border border-slate-300 hover:border-[#ed1b2e] text-[10px] font-extrabold text-slate-700 hover:text-[#ed1b2e] transition-all"
                           title={`Remove [${tg}] section`}
                         >
                           <span>{shortTg}</span>
@@ -2292,7 +2495,7 @@ window.Challenge2ParticipantView = function ({
                   value={promptText}
                   onChange={(e) => handleLivePromptEdit(e.target.value)}
                   placeholder={ui.anglePlaceholder}
-                  className="w-full rounded-xl border border-slate-200 bg-white focus:outline-none p-2.5 text-base sm:text-xs text-slate-900 leading-relaxed font-sans"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none p-2.5 text-base sm:text-xs text-slate-900 leading-relaxed font-sans"
                 />
               </div>
             );

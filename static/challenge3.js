@@ -12,9 +12,12 @@
 
 const C3_PLAYBOOK_UI = {
   en: {
+    studioHeader: "🎯 Pre-Pitch Advisor Studio",
     badge: "CHALLENGE 3 • ADVISOR PLAYBOOK",
     assignedCase: "Client Case:",
     switchCase: "Switch Case",
+    switchShortFmt: "Switch",
+    switchConfirmMsg: "Switch client case and start a fresh Pre-Pitch?",
     caseInfoBtn: "Case Info",
     personalTouchBtn: "+ 💡 Add Personal Touch (Bonus pts)",
     cardSettingsBar: "🎨 Card Settings",
@@ -32,6 +35,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🎨 Greeting Card",
     step2TabFull: "2. 💬 First WhatsApp",
     step3TabFull: "3. 📧 Win vs. AIA",
+    step3LockedShort: "3. 🔒 Step 3",
+    step3LockedFull: "3. 🔒 Send WhatsApp First",
 
     step1Title: "Step 1: Warm Door-Opener Greeting Card",
     pickVisualStyle: "1. Choose Card Visual Style:",
@@ -76,7 +81,11 @@ const C3_PLAYBOOK_UI = {
       { label: "↻ Clearer Wealth Hook", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
     backBtn: "← Back",
-    nextStep3Btn: "Send WhatsApp & See Client Reply →",
+    nextStep3Btn: "📲 Send WhatsApp Message →",
+    resendWaBtn: "📲 Re-Send WhatsApp →",
+    sendingWaBtn: "📤 Sending via WhatsApp...",
+    sentWaLabel: "✓✓ Your WhatsApp Sent & Delivered",
+    typingLabel: "💬 Client is typing a reply on WhatsApp...",
 
     incomingBubbleTag: "📲 Incoming Client WhatsApp Reply • Just now",
     pickWinningFacts: "1. Pick Winning PRU Advantages vs. AIA (Tap cards or Select All 3):",
@@ -109,9 +118,12 @@ const C3_PLAYBOOK_UI = {
   },
 
   "zh-CN": {
+    studioHeader: "🎯 战前顾问实战工作台",
     badge: "挑战 3 • 绩优顾问实战手册",
     assignedCase: "客户案例：",
     switchCase: "切换案例",
+    switchShortFmt: "切换",
+    switchConfirmMsg: "确定切换客户案例并重新开始吗？",
     caseInfoBtn: "案例详情",
     personalTouchBtn: "+ 💡 专属巧思（加分）",
     cardSettingsBar: "🎨 贺卡设定",
@@ -129,6 +141,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🎨 暖心祝贺卡",
     step2TabFull: "2. 💬 首条 WhatsApp",
     step3TabFull: "3. 📧 应对 AIA 对比",
+    step3LockedShort: "3. 🔒 第3步",
+    step3LockedFull: "3. 🔒 发送 WhatsApp 后解锁",
 
     step1Title: "第 1 步：制作专属开门红祝贺卡",
     pickVisualStyle: "1. 选择祝贺卡视觉风格：",
@@ -173,7 +187,11 @@ const C3_PLAYBOOK_UI = {
       { label: "↻ 突出财富数字亮点", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
     backBtn: "← 上一步",
-    nextStep3Btn: "发送 WhatsApp 查看客户回复 →",
+    nextStep3Btn: "📲 发送 WhatsApp 信息 →",
+    resendWaBtn: "📲 重新发送 WhatsApp →",
+    sendingWaBtn: "📤 正在通过 WhatsApp 发送...",
+    sentWaLabel: "✓✓ 您的 WhatsApp 已发送并送达",
+    typingLabel: "💬 客户正在 WhatsApp 输入回复...",
 
     incomingBubbleTag: "📲 客户刚刚回复了您的 WhatsApp • 刚刚",
     pickWinningFacts: "1. 点选胜出友邦 (AIA) 的核心条款优势（可单选或一键全选 3 项）：",
@@ -206,9 +224,12 @@ const C3_PLAYBOOK_UI = {
   },
 
   yue: {
+    studioHeader: "🎯 戰前顧問實戰工作台",
     badge: "挑戰 3 • 王牌顧問實戰手冊",
     assignedCase: "客戶個案：",
     switchCase: "轉個案",
+    switchShortFmt: "轉個案",
+    switchConfirmMsg: "確定轉去另一個客戶個案重新開始？",
     caseInfoBtn: "個案詳情",
     personalTouchBtn: "+ 💡 專屬心思（加分）",
     cardSettingsBar: "🎨 賀卡設定",
@@ -226,6 +247,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🎨 窩心賀卡",
     step2TabFull: "2. 💬 首條 WhatsApp",
     step3TabFull: "3. 📧 應對 AIA 比較",
+    step3LockedShort: "3. 🔒 第3步",
+    step3LockedFull: "3. 🔒 Send 咗 WhatsApp 先解鎖",
 
     step1Title: "第 1 步：整張專屬開門紅賀卡",
     pickVisualStyle: "1. 揀賀卡視覺風格：",
@@ -270,7 +293,11 @@ const C3_PLAYBOOK_UI = {
       { label: "↻ 突出財富數字亮點", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
     backBtn: "← 上一步",
-    nextStep3Btn: "Send WhatsApp 睇個客點覆 →",
+    nextStep3Btn: "📲 Send WhatsApp 信息 →",
+    resendWaBtn: "📲 重新 Send WhatsApp →",
+    sendingWaBtn: "📤 正在透過 WhatsApp 發送...",
+    sentWaLabel: "✓✓ 你嘅 WhatsApp 已送達",
+    typingLabel: "💬 個客喺 WhatsApp 打緊字覆你...",
 
     incomingBubbleTag: "📲 個客啱啱覆咗你 WhatsApp • 剛剛",
     pickWinningFacts: "1. 揀贏過 AIA 嘅實際條款優勢（單選或一撳全選 3 項）：",
@@ -303,9 +330,12 @@ const C3_PLAYBOOK_UI = {
   },
 
   ms: {
+    studioHeader: "🎯 Studio Pra-Pitch Perunding",
     badge: "CABARAN 3 • BUKU PANDUAN PERUNDING",
     assignedCase: "Kes Pelanggan:",
     switchCase: "Tukar Kes",
+    switchShortFmt: "Tukar",
+    switchConfirmMsg: "Tukar kes pelanggan dan mulakan Pra-Pitch baharu?",
     caseInfoBtn: "Info Kes",
     personalTouchBtn: "+ 💡 Sentuhan Peribadi (Bonus)",
     cardSettingsBar: "🎨 Tetapan Kad",
@@ -323,6 +353,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🎨 Kad Ucapan",
     step2TabFull: "2. 💬 WhatsApp Pertama",
     step3TabFull: "3. 📧 Banding lwn AIA",
+    step3LockedShort: "3. 🔒 Langkah 3",
+    step3LockedFull: "3. 🔒 Hantar WhatsApp Dahulu",
 
     step1Title: "Langkah 1: Kad Ucapan Pembuka Bicara Mesra",
     pickVisualStyle: "1. Pilih Gaya Visual Kad:",
@@ -367,7 +399,11 @@ const C3_PLAYBOOK_UI = {
       { label: "↻ Jelas Angka Manfaat", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
     backBtn: "← Kembali",
-    nextStep3Btn: "Hantar WhatsApp & Lihat Balasan Pelanggan →",
+    nextStep3Btn: "📲 Hantar Mesej WhatsApp →",
+    resendWaBtn: "📲 Hantar Semula WhatsApp →",
+    sendingWaBtn: "📤 Menghantar melalui WhatsApp...",
+    sentWaLabel: "✓✓ WhatsApp Anda Dihantar",
+    typingLabel: "💬 Pelanggan sedang menaip balasan...",
 
     incomingBubbleTag: "📲 Balasan WhatsApp Pelanggan • Sebentar tadi",
     pickWinningFacts: "1. Pilih Kelebihan Fakta PRU lwn AIA (Tekan kad atau Pilih Semua 3):",
@@ -400,9 +436,12 @@ const C3_PLAYBOOK_UI = {
   },
 
   ta: {
+    studioHeader: "🎯 முன்-முன்மொழிவு ஸ்டுடியோ",
     badge: "சவால் 3 • ஆலோசகர் வழிகாட்டி",
     assignedCase: "வாடிக்கையாளர்:",
     switchCase: "கேஸ் மாற்று",
+    switchShortFmt: "மாற்று",
+    switchConfirmMsg: "வாடிக்கையாளர் கேஸை மாற்றி புதிதாகத் தொடங்கவா?",
     caseInfoBtn: "கேஸ் விவரம்",
     personalTouchBtn: "+ 💡 தனிப்பட்ட தொடல் (போனஸ்)",
     cardSettingsBar: "🎨 அட்டை அமைப்பு",
@@ -420,6 +459,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🎨 வாழ்த்து அட்டை",
     step2TabFull: "2. 💬 முதல் WhatsApp",
     step3TabFull: "3. 📧 AIA ஒப்பீடு",
+    step3LockedShort: "3. 🔒 படி 3",
+    step3LockedFull: "3. 🔒 முதலில் WhatsApp அனுப்புக",
 
     step1Title: "படி 1: அன்பான வாழ்த்து அட்டையை உருவாக்குங்கள்",
     pickVisualStyle: "1. அட்டையின் காட்சி பாணியைத் தேர்ந்தெடுக்கவும்:",
@@ -464,7 +505,11 @@ const C3_PLAYBOOK_UI = {
       { label: "↻ எண்களைத் தெளிவாக்கு", inst: "Make the financial/wealth benefit crystal-clear in one simple sentence" },
     ],
     backBtn: "← பின்செல்",
-    nextStep3Btn: "WhatsApp அனுப்பி வாடிக்கையாளர் பதிலைப் பார் →",
+    nextStep3Btn: "📲 WhatsApp செய்தி அனுப்பு →",
+    resendWaBtn: "📲 மீண்டும் WhatsApp அனுப்பு →",
+    sendingWaBtn: "📤 WhatsApp வழியாக அனுப்புகிறது...",
+    sentWaLabel: "✓✓ உங்கள் WhatsApp அனுப்பப்பட்டது",
+    typingLabel: "💬 வாடிக்கையாளர் தட்டச்சு செய்கிறார்...",
 
     incomingBubbleTag: "📲 வாடிக்கையாளரின் WhatsApp பதில் • இப்போது",
     pickWinningFacts: "1. AIA-வை வெல்லும் PRU நன்மைகளைத் தேர்ந்தெடுக்கவும் (அனைத்து 3-ம் சேர்க்கலாம்):",
@@ -2040,7 +2085,7 @@ window.Challenge3ParticipantView = function ({
 
   const normLang = lang === "zh-TW" ? "yue" : lang || "en";
   const ui = C3_PLAYBOOK_UI[normLang] || C3_PLAYBOOK_UI.en;
-  const storageKey = `prumda_c3_v3_${agentId || "guest"}`;
+  const storageKey = `prumda_c3_v9_${agentId || "guest"}`;
 
   // Load persisted mobile draft state so phone lock / refresh / tab switch never loses work
   const [savedInit] = useState(() => {
@@ -2076,6 +2121,7 @@ window.Challenge3ParticipantView = function ({
   );
   const [serverScenario, setServerScenario] = useState(null);
   const [showCasePicker, setShowCasePicker] = useState(false);
+  const [confirmArmedSlot, setConfirmArmedSlot] = useState(null);
 
   const rawFallbackSc = PAMB_C3_SCENARIOS[scenarioIdx % PAMB_C3_SCENARIOS.length] || PAMB_C3_SCENARIOS[0];
   const fallbackSc = _getLocalizedScenario(rawFallbackSc, normLang);
@@ -2127,7 +2173,27 @@ window.Challenge3ParticipantView = function ({
       .replace(/\bAIA\b/g, rivalShort);
   };
 
-  const [step, setStep] = useState(() => savedInit.step || 1);
+  const initialWaAlreadySent = Boolean(
+    savedInit.waSent === true || existingSubmission
+  );
+  const [step, setStep] = useState(() => {
+    const s = savedInit.step || 1;
+    return s === 3 && !initialWaAlreadySent ? 2 : s;
+  });
+  const [waSent, setWaSent] = useState(() => initialWaAlreadySent);
+  const [waReplyArrived, setWaReplyArrived] = useState(() =>
+    Boolean((savedInit.waSent === true && savedInit.waReplyArrived) || existingSubmission)
+  );
+  const [waSendPhase, setWaSendPhase] = useState("idle"); // "idle" | "sending" | "typing"
+  const [showSentWaPreview, setShowSentWaPreview] = useState(false);
+  const waTimerRef = useRef([]);
+
+  const clearWaTimers = () => {
+    (waTimerRef.current || []).forEach((tid) => clearTimeout(tid));
+    waTimerRef.current = [];
+  };
+
+  useEffect(() => () => clearWaTimers(), []);
   const [isBusy, setIsBusy] = useState(false);
   const [cardStageIdx, setCardStageIdx] = useState(0);
   const [langChangedBanner, setLangChangedBanner] = useState(false);
@@ -2237,6 +2303,8 @@ window.Challenge3ParticipantView = function ({
           selectedWaIdeaIdxs,
           waPersonalNote,
           whatsappText,
+          waSent,
+          waReplyArrived,
           selectedFactIdxs,
           advisoryStyleId,
           emailPersonalNote,
@@ -2258,6 +2326,8 @@ window.Challenge3ParticipantView = function ({
     selectedWaIdeaIdxs,
     waPersonalNote,
     whatsappText,
+    waSent,
+    waReplyArrived,
     selectedFactIdxs,
     advisoryStyleId,
     emailPersonalNote,
@@ -2341,6 +2411,7 @@ window.Challenge3ParticipantView = function ({
   }, [step, sc.shortLabel, lang]);
 
   const resetDraftsForNewCase = () => {
+    clearWaTimers();
     setSelectedHeadlineIdx(0);
     setCardPersonalNote("");
     setCardUrl(null);
@@ -2349,6 +2420,10 @@ window.Challenge3ParticipantView = function ({
     setSelectedWaIdeaIdxs([0, 1]);
     setWaPersonalNote("");
     setWhatsappText("");
+    setWaSent(false);
+    setWaReplyArrived(false);
+    setWaSendPhase("idle");
+    setShowSentWaPreview(false);
     setShowStep2Pickers(true);
     setShowWaTouch(false);
     setSelectedFactIdxs([0, 1, 2]);
@@ -2362,7 +2437,7 @@ window.Challenge3ParticipantView = function ({
     setStep(1);
   };
 
-  const handleSelectCaseSlot = (targetSlot) => {
+  const executeSelectCaseSlot = (targetSlot) => {
     const k =
       ((Number(targetSlot) || 0) % C3_CURATED_6_SEATS.length +
         C3_CURATED_6_SEATS.length) %
@@ -2375,15 +2450,65 @@ window.Challenge3ParticipantView = function ({
         : 0;
     const curRound = Math.floor(baseSeat / C3_CURATED_6_SEATS.length);
     const nextSeat = curRound * C3_CURATED_6_SEATS.length + k;
+    setConfirmArmedSlot(null);
     setSeatOverride(nextSeat);
     setScenarioIdx(seatToFallbackIdx(nextSeat));
     setShowCasePicker(false);
     resetDraftsForNewCase();
   };
 
-  const handleRotateScenario = () => {
-    const nextSlot = (activeSlot + 1) % C3_CURATED_6_SEATS.length;
-    handleSelectCaseSlot(nextSlot);
+  const handleSelectCaseSlot = (targetSlot) => {
+    const k =
+      ((Number(targetSlot) || 0) % C3_CURATED_6_SEATS.length +
+        C3_CURATED_6_SEATS.length) %
+      C3_CURATED_6_SEATS.length;
+    if (k === activeSlot) {
+      setConfirmArmedSlot(null);
+      setShowCasePicker(false);
+      return;
+    }
+    const hasProgress = Boolean(cardUrl || whatsappText.trim() || emailText.trim());
+    if (hasProgress && confirmArmedSlot !== k) {
+      setConfirmArmedSlot(k);
+      return;
+    }
+    executeSelectCaseSlot(k);
+  };
+
+  const handleMockSendWhatsapp = () => {
+    if (!whatsappText.trim() || waSendPhase === "sending") return;
+    clearWaTimers();
+    setWaSendPhase("sending");
+    fetch("/api/activity", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: agentId,
+        challenge: 3,
+        language: lang,
+        region: agentRegion,
+        status: `📲 C3 (${sc.shortLabel}): Sent First-Touch WhatsApp — awaiting client reply`,
+        agenticStep: "Step 2/3: Mock WhatsApp Sent",
+      }),
+    }).catch(() => {});
+
+    const tDeliver = setTimeout(() => {
+      setWaSent(true);
+      setWaReplyArrived(false);
+      setShowSentWaPreview(false);
+      setWaSendPhase("typing");
+      setStep(3);
+      try {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {}
+
+      const tReply = setTimeout(() => {
+        setWaReplyArrived(true);
+        setWaSendPhase("idle");
+      }, 550);
+      waTimerRef.current.push(tReply);
+    }, 420);
+    waTimerRef.current.push(tDeliver);
   };
 
   const activeHeadline =
@@ -2799,7 +2924,6 @@ window.Challenge3ParticipantView = function ({
   if (submitted && submittedData) {
     const pillarEntries = Object.entries(submittedData.pillarScores || {});
     const fullSharePack = `${submittedData.whatsappText}\n\n---\n\n${submittedData.emailText}`;
-    const waDeepLink = `https://wa.me/?text=${encodeURIComponent(submittedData.whatsappText || "")}`;
 
     return (
       <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-4 shadow-lg space-y-3">
@@ -2859,7 +2983,7 @@ window.Challenge3ParticipantView = function ({
           </div>
         )}
 
-        {/* Real-World Advisor Takeaway Actions: Copy Full Pre-Pitch or Open in WhatsApp */}
+        {/* Real-World Advisor Takeaway Actions (100% In-App — Never Bounces User Out of Browser) */}
         <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -2868,14 +2992,15 @@ window.Challenge3ParticipantView = function ({
           >
             {copyToast || "📋 Copy Full Pre-Pitch Pack"}
           </button>
-          <a
-            href={waDeepLink}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() =>
+              handleCopyPrePitch(submittedData.whatsappText || "", "✓ WhatsApp Copied!")
+            }
             className="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold text-center shadow-sm"
           >
-            📲 Send First-Touch via WhatsApp
-          </a>
+            💬 Copy First-Touch WhatsApp
+          </button>
         </div>
 
         {submittedData.cardUrl && (
@@ -2951,99 +3076,129 @@ window.Challenge3ParticipantView = function ({
     sc.shortLabel || activeCaseMeta.labels[normLang] || activeCaseMeta.labels.en;
 
   return (
-    <div className="bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-2.5 sm:p-4 shadow-md space-y-2.5">
-      {/* Unified Auto-Collapsing Mobile Client Brief Card + Curated 6-Case Switcher */}
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
-        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 min-h-[36px]">
+    <div className="w-full max-w-full min-w-0 overflow-hidden bg-white border-t-4 border-t-[#ed1b2e] border-x border-b border-slate-200 rounded-2xl p-3 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
+      {/* 1. Slim Top Studio Bar (Aligned 1:1 with Challenge 2 Studio Header) */}
+      <div className="flex items-center justify-between gap-2 pb-1.5 border-b border-slate-200 min-w-0">
+        <h2 className="text-sm sm:text-base font-extrabold text-slate-900 truncate min-w-0">
+          {ui.studioHeader}
+        </h2>
+        <span className="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-red-50 text-[#ed1b2e] border border-red-200 shrink-0">
+          Step {step}/3
+        </span>
+      </div>
+
+      {/* 2. Unified Auto-Collapsing Executive Dark-Slate Client Brief Card + 6-Case Switcher (Aligned 1:1 with C2) */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-2xl p-2.5 sm:p-3 space-y-2 shadow-md">
+        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5">
           <button
             type="button"
             onClick={() => setShowCaseBrief((v) => !v)}
-            className="flex items-center gap-1.5 min-w-[140px] text-left flex-1"
+            className="flex items-center gap-1.5 min-w-[130px] text-left flex-1"
           >
-            <span className="text-base shrink-0">{sc.icon || activeCaseMeta.icon}</span>
+            <span className="text-base leading-none shrink-0">{sc.icon || activeCaseMeta.icon}</span>
             <div className="min-w-0 flex-1">
-              <div className="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
-                {clientShortName} <span className="text-[#ed1b2e]">• {clientShortTitle}</span>
+              <div className="text-xs font-extrabold text-white truncate">
+                {clientShortName}{" "}
+                <span className="hidden min-[400px]:inline text-amber-300 font-bold">
+                  • {clientShortTitle}
+                </span>
               </div>
             </div>
           </button>
 
-          <div className="flex items-center gap-1 shrink-0 ml-auto">
+          <div className="flex items-center gap-1.5 shrink-0 ml-auto">
             <button
               type="button"
               onClick={() => setShowCaseBrief((v) => !v)}
-              className={`px-2 py-1 rounded-lg border text-[11px] font-extrabold whitespace-nowrap transition-all ${
-                showCaseBrief
-                  ? "bg-red-50 border-red-200 text-[#ed1b2e]"
-                  : "bg-white border-slate-300 text-slate-700 hover:border-[#ed1b2e]"
-              }`}
+              className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-bold text-slate-200 whitespace-nowrap transition-all"
             >
-              {ui.caseInfoBtn} {showCaseBrief ? "▴" : "▾"}
+              {showCaseBrief ? `${ui.hideBtn} ▴` : `${ui.caseInfoBtn} ▾`}
             </button>
 
             <button
               type="button"
-              onClick={() => setShowCasePicker((v) => !v)}
-              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 text-slate-800 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold whitespace-nowrap transition-all"
+              onClick={() => {
+                setConfirmArmedSlot(null);
+                setShowCasePicker((v) => !v);
+              }}
+              className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-[11px] font-extrabold text-amber-300 whitespace-nowrap transition-all"
             >
-              {ui.switchCase} ({activeSlot + 1}/6) {showCasePicker ? "▴" : "▾"}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleRotateScenario}
-              title="Next curated case"
-              aria-label="Next curated case"
-              className="hidden sm:inline-flex items-center justify-center px-2 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-slate-700 hover:text-[#ed1b2e] border border-slate-300 text-[11px] font-extrabold transition-all"
-            >
-              ↻
+              {ui.switchShortFmt} ({activeSlot + 1}/6) ▾
             </button>
           </div>
         </div>
 
-        {/* Curated 6-Case Popover / List */}
+        {/* Sleek 6-Item Curated Case Picker (Aligned 1:1 with C2 + WebView-Safe Inline Switch Confirmation) */}
         {showCasePicker && (
-          <div className="bg-white border border-slate-200 rounded-xl p-1.5 grid grid-cols-1 sm:grid-cols-3 gap-1 shadow-sm">
-            {C3_CURATED_6_META.map((item, idx) => {
-              const isCurrent = idx === activeSlot;
-              const locLabel = item.labels[normLang] || item.labels.en;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => handleSelectCaseSlot(idx)}
-                  className={`px-2.5 py-1.5 rounded-lg border text-left text-xs font-bold transition-all flex items-center justify-between sm:block gap-2 ${
-                    isCurrent
-                      ? "bg-[#ed1b2e] text-white border-[#ed1b2e]"
-                      : "bg-slate-50 hover:bg-red-50 text-slate-800 border-slate-200"
-                  }`}
-                >
-                  <div className="truncate font-extrabold">
-                    {idx + 1}. {item.icon} {locLabel}
-                  </div>
-                  <div className={`text-[10px] truncate ${isCurrent ? "text-red-100" : "text-slate-500"}`}>
-                    {isCurrent && clientShortName ? clientShortName : item.clientName}
-                  </div>
-                </button>
-              );
-            })}
+          <div className="bg-slate-800/95 border border-slate-700 rounded-xl p-2 space-y-2">
+            {confirmArmedSlot !== null && (
+              <div className="bg-amber-950/80 border border-amber-400/60 rounded-lg p-2 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-[11px] font-bold text-amber-200 leading-snug">
+                  ⚠️ {ui.switchConfirmMsg}
+                </span>
+                <div className="flex items-center gap-1.5 ml-auto">
+                  <button
+                    type="button"
+                    onClick={() => setConfirmArmedSlot(null)}
+                    className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[11px] font-bold text-slate-200"
+                  >
+                    ✕
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => executeSelectCaseSlot(confirmArmedSlot)}
+                    className="px-2.5 py-1 rounded-lg bg-[#ed1b2e] hover:bg-[#c81526] text-white text-[11px] font-extrabold"
+                  >
+                    ✓ {ui.switchShortFmt} ({confirmArmedSlot + 1}/6)
+                  </button>
+                </div>
+              </div>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              {C3_CURATED_6_META.map((item, idx) => {
+                const isCurrent = idx === activeSlot;
+                const isArmed = confirmArmedSlot === idx;
+                const locLabel = item.labels[normLang] || item.labels.en;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleSelectCaseSlot(idx)}
+                    className={`text-left px-2.5 py-2 rounded-lg border text-xs font-extrabold transition-all flex items-center justify-between gap-2 ${
+                      isCurrent
+                        ? "bg-[#ed1b2e]/25 border-[#ed1b2e] text-white"
+                        : isArmed
+                        ? "bg-amber-500/20 border-amber-400 text-amber-200"
+                        : "bg-slate-900/80 hover:bg-slate-900 border-slate-700 text-slate-200"
+                    }`}
+                  >
+                    <span className="truncate">
+                      {idx + 1}. {item.icon} {locLabel}
+                    </span>
+                    <span className="text-[10px] font-mono text-amber-300 shrink-0">
+                      {idx + 1}/6
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
 
-        {/* Expandable 3 Ultra-Concise 1-Line Bullets */}
+        {/* Expandable 3 Ultra-Concise 1-Line Bullets in Matching Dark-Slate Card */}
         {showCaseBrief && (
-          <div className="bg-white border border-slate-200 rounded-lg px-2.5 py-2 space-y-1 text-[11px] sm:text-xs leading-snug">
+          <div className="bg-slate-800/90 border border-slate-700 rounded-xl px-2.5 py-2 space-y-1 text-[11px] sm:text-xs leading-snug">
             <div className="flex items-baseline gap-1.5">
-              <span className="font-extrabold text-[#ed1b2e] shrink-0">{ui.lifeEventLabel}:</span>
-              <span className="text-slate-800 font-medium line-clamp-1">{sc.lifeEvent}</span>
+              <span className="font-extrabold text-amber-300 shrink-0">{ui.lifeEventLabel}:</span>
+              <span className="text-slate-100 font-medium line-clamp-1">{sc.lifeEvent}</span>
             </div>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-extrabold text-slate-700 shrink-0">{ui.gapLabel}:</span>
-              <span className="text-slate-700 line-clamp-1">{sc.existingGap}</span>
+              <span className="font-extrabold text-slate-300 shrink-0">{ui.gapLabel}:</span>
+              <span className="text-slate-200 line-clamp-1">{sc.existingGap}</span>
             </div>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-extrabold text-[#ed1b2e] shrink-0">{ui.offerLabel}:</span>
-              <span className="text-slate-900 font-bold line-clamp-1">{sc.pambPlan}</span>
+              <span className="font-extrabold text-emerald-300 shrink-0">{ui.offerLabel}:</span>
+              <span className="text-white font-bold line-clamp-1">{sc.pambPlan}</span>
             </div>
           </div>
         )}
@@ -3062,16 +3217,32 @@ window.Challenge3ParticipantView = function ({
         </div>
       )}
 
-      {/* 3-Step Navigation Bar (375px-safe concise labels on mobile, full labels on sm+) */}
-      <div className="grid grid-cols-3 gap-1.5">
+      {/* 3. Unified Segmented 3-Step Workflow Bar (Aligned 1:1 with C2 • Step 3 Locked Until WhatsApp Sent!) */}
+      <div className="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 min-w-0">
         {[
-          { n: 1, short: ui.step1Tab, full: ui.step1TabFull || ui.step1Tab, done: !!cardUrl },
-          { n: 2, short: ui.step2Tab, full: ui.step2TabFull || ui.step2Tab, done: !!whatsappText.trim() },
+          {
+            n: 1,
+            short: ui.step1Tab,
+            full: ui.step1TabFull || ui.step1Tab,
+            done: !!cardUrl,
+            unlocked: true,
+          },
+          {
+            n: 2,
+            short: ui.step2Tab,
+            full: ui.step2TabFull || ui.step2Tab,
+            done: !!whatsappText.trim() && waSent,
+            unlocked: true,
+          },
           {
             n: 3,
-            short: adaptRivalLabel(ui.step3Tab),
-            full: adaptRivalLabel(ui.step3TabFull || ui.step3Tab),
+            short: waSent && waReplyArrived ? adaptRivalLabel(ui.step3Tab) : ui.step3LockedShort,
+            full:
+              waSent && waReplyArrived
+                ? adaptRivalLabel(ui.step3TabFull || ui.step3Tab)
+                : ui.step3LockedFull,
             done: !!emailText.trim(),
+            unlocked: waSent,
           },
         ].map((s) => {
           const active = step === s.n;
@@ -3079,13 +3250,16 @@ window.Challenge3ParticipantView = function ({
             <button
               type="button"
               key={s.n}
-              onClick={() => setStep(s.n)}
-              className={`py-2 px-1.5 sm:px-3 rounded-xl border text-[11px] sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1 min-w-0 ${
+              disabled={!s.unlocked}
+              onClick={() => s.unlocked && setStep(s.n)}
+              className={`py-2 px-1.5 sm:px-3 rounded-xl text-[11px] sm:text-xs font-extrabold transition-all flex items-center justify-center gap-1 min-w-0 ${
                 active
-                  ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow"
+                  ? "bg-[#ed1b2e] text-white shadow-sm"
+                  : !s.unlocked
+                  ? "text-slate-400 cursor-not-allowed opacity-75"
                   : s.done
-                  ? "bg-emerald-50 border-emerald-300 text-emerald-800"
-                  : "bg-slate-50 border-slate-200 text-slate-700 hover:border-[#ed1b2e]"
+                  ? "bg-white text-emerald-800 border border-emerald-200 shadow-sm"
+                  : "text-slate-700 hover:bg-white/70 hover:text-slate-900"
               }`}
             >
               {s.done && !active && <span className="shrink-0">✓</span>}
@@ -3098,7 +3272,7 @@ window.Challenge3ParticipantView = function ({
 
       {/* STEP 1: DOOR-OPENER GREETING CARD */}
       {step === 1 && (
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2.5">
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2">
           {cardUrl && !showStep1Pickers ? (
             <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
               <div className="text-xs font-extrabold text-slate-800 truncate">
@@ -3113,7 +3287,7 @@ window.Challenge3ParticipantView = function ({
               </button>
             </div>
           ) : (
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               <div className="flex items-center justify-between gap-2">
                 <div className="text-xs sm:text-sm font-extrabold text-slate-900">
                   {ui.step1Title}
@@ -3129,8 +3303,8 @@ window.Challenge3ParticipantView = function ({
                 )}
               </div>
 
-              <div className="space-y-1">
-                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickVisualStyle}</div>
+              <div className="space-y-1 min-w-0">
+                <div className="text-xs font-extrabold text-slate-900">{ui.pickVisualStyle}</div>
                 <div className="grid grid-cols-3 gap-1.5 min-w-0">
                   {ui.visualStyles.map((vs) => {
                     const active = cardStyleId === vs.id;
@@ -3153,7 +3327,7 @@ window.Challenge3ParticipantView = function ({
               </div>
 
               <div className="space-y-1">
-                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickHeadline}</div>
+                <div className="text-xs font-extrabold text-slate-900">{ui.pickHeadline}</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                   {(sc.cardChips || [sc.cardHeadline]).map((hl, idx) => {
                     const active = selectedHeadlineIdx === idx;
@@ -3226,7 +3400,7 @@ window.Challenge3ParticipantView = function ({
                 type="button"
                 onClick={handleGenerateCard}
                 disabled={isBusy}
-                className="w-full py-3 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+                className="w-full rounded-2xl py-3 sm:py-3.5 px-4 bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
               >
                 {isBusy ? ui.generatingCard : cardUrl ? ui.redrawCard : ui.generateCardBtn}
               </button>
@@ -3269,7 +3443,7 @@ window.Challenge3ParticipantView = function ({
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-sm font-extrabold shadow-md transition-all"
+                  className="w-full rounded-2xl py-3 sm:py-3.5 px-4 bg-slate-900 hover:bg-[#ed1b2e] text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
                 >
                   {ui.nextStep2Btn}
                 </button>
@@ -3340,7 +3514,7 @@ window.Challenge3ParticipantView = function ({
               </div>
 
               <div className="space-y-1">
-                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickOpeningTone}</div>
+                <div className="text-xs font-extrabold text-slate-900">{ui.pickOpeningTone}</div>
                 <div className="flex flex-wrap gap-1.5">
                   {ui.openingTones.map((ot) => {
                     const active = openingToneId === ot.id;
@@ -3364,7 +3538,7 @@ window.Challenge3ParticipantView = function ({
 
               <div className="space-y-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[11px] font-extrabold text-slate-700">{ui.pickWealthHooks}</span>
+                  <span className="text-xs font-extrabold text-slate-900">{ui.pickWealthHooks}</span>
                   <button
                     type="button"
                     onClick={() => setSelectedWaIdeaIdxs((pb.waIdeas || []).map((_, i) => i))}
@@ -3447,7 +3621,7 @@ window.Challenge3ParticipantView = function ({
                 type="button"
                 onClick={() => handleGenerateWhatsapp("")}
                 disabled={isBusy}
-                className="w-full py-3 px-4 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+                className="w-full rounded-2xl py-3 sm:py-3.5 px-4 bg-[#ed1b2e] hover:bg-[#c8102e] disabled:opacity-75 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
               >
                 {isBusy ? ui.waDrafting : whatsappText ? ui.waRegenerateBtn : ui.waGenerateBtn}
               </button>
@@ -3495,32 +3669,91 @@ window.Challenge3ParticipantView = function ({
             {whatsappText.trim() && (
               <button
                 type="button"
-                onClick={() => setStep(3)}
-                className="py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-[#ed1b2e] text-white text-xs sm:text-sm font-extrabold shadow-md transition-all"
+                onClick={handleMockSendWhatsapp}
+                disabled={waSendPhase === "sending"}
+                className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-80 text-white rounded-xl py-2.5 sm:py-3 px-4 text-xs sm:text-sm font-extrabold shadow-md transition-all flex items-center gap-1.5"
               >
-                {ui.nextStep3Btn}
+                <span>
+                  {waSendPhase === "sending"
+                    ? ui.sendingWaBtn
+                    : waSent
+                    ? ui.resendWaBtn
+                    : ui.nextStep3Btn}
+                </span>
               </button>
             )}
           </div>
         </div>
       )}
 
-      {/* STEP 3: PLOT TWIST! CLIENT REPLIES ("COMPETITOR QUOTED US!") -> WINNING REPLY */}
+      {/* STEP 3: UNLOCKED ONLY AFTER MOCK WHATSAPP SEND -> LIVE CLIENT REPLY -> WINNING COMPARISON */}
       {step === 3 && (
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2.5">
-          <div className="bg-amber-50 border border-amber-300 rounded-xl p-2.5 space-y-1 shadow-sm">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[11px] font-extrabold uppercase text-amber-900">
-                {ui.incomingBubbleTag}
-              </span>
-              <span className="text-[11px] font-bold text-amber-800 truncate">
-                {clientShortName}
-              </span>
+          {!waSent ? (
+            <div className="bg-white border border-slate-200 rounded-xl p-4 text-center space-y-2.5">
+              <div className="text-xs sm:text-sm font-extrabold text-slate-800">
+                🔒 {ui.step3LockedFull}
+              </div>
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="px-4 py-2 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-xs font-extrabold shadow-sm"
+              >
+                {ui.backBtn}
+              </button>
             </div>
-            <div className="bg-white border border-amber-200 rounded-xl rounded-tl-none px-2.5 py-2 text-xs font-bold text-slate-900 leading-snug">
-              {sc.customerReply}
-            </div>
-          </div>
+          ) : (
+            <>
+              {/* Compact Outgoing Sent WhatsApp Confirmation Bar (Collapsible) */}
+              <div className="bg-[#e7f8ee] border border-emerald-300 rounded-xl px-2.5 py-2 space-y-1.5">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="min-w-0 flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-900 truncate">
+                    <span className="text-sky-600 shrink-0">✓✓</span>
+                    <span className="truncate">{ui.sentWaLabel}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowSentWaPreview((v) => !v)}
+                    className="text-[10px] font-extrabold text-emerald-800 bg-white/80 border border-emerald-300 px-2 py-0.5 rounded-lg shrink-0"
+                  >
+                    {showSentWaPreview ? `${ui.hideBtn} ▴` : `${ui.detailsBtn} ▾`}
+                  </button>
+                </div>
+                {showSentWaPreview && (
+                  <div className="bg-white border border-emerald-200 rounded-lg p-2 text-xs text-slate-800 whitespace-pre-line leading-snug">
+                    {whatsappText}
+                  </div>
+                )}
+              </div>
+
+              {!waReplyArrived || waSendPhase === "typing" ? (
+                /* Simulated Live WhatsApp Typing State — Client Reply NOT Staged Yet! */
+                <div className="bg-white border border-amber-300 rounded-xl p-3.5 flex items-center justify-between gap-2 shadow-sm animate-pulse">
+                  <div className="text-xs font-extrabold text-amber-900">
+                    {ui.typingLabel}
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-bounce" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-bounce" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-bounce" />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {/* Incoming Client WhatsApp Reply Bubble — Arrives ONLY After Sending WhatsApp! */}
+                  <div className="bg-amber-50 border border-amber-300 rounded-xl p-2.5 space-y-1 shadow-sm">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-extrabold tracking-wide text-amber-900">
+                        {ui.incomingBubbleTag}
+                      </span>
+                      <span className="text-[11px] font-bold text-amber-800 truncate">
+                        {clientShortName}
+                      </span>
+                    </div>
+                    <div className="bg-white border border-amber-200 rounded-xl rounded-tl-none px-2.5 py-2 text-xs font-bold text-slate-900 leading-snug">
+                      {sc.customerReply}
+                    </div>
+                  </div>
 
           {emailText && !showStep3Pickers ? (
             <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2">
@@ -3552,7 +3785,7 @@ window.Challenge3ParticipantView = function ({
 
               <div className="space-y-1.5">
                 <div className="flex flex-wrap items-center justify-between gap-1.5">
-                  <span className="text-[11px] font-extrabold text-slate-800">
+                  <span className="text-xs font-extrabold text-slate-900">
                     {adaptRivalLabel(ui.pickWinningFacts)}
                   </span>
                   <button
@@ -3612,7 +3845,7 @@ window.Challenge3ParticipantView = function ({
               </div>
 
               <div className="space-y-1">
-                <div className="text-[11px] font-extrabold text-slate-700">{ui.pickAdvisoryStyle}</div>
+                <div className="text-xs font-extrabold text-slate-900">{ui.pickAdvisoryStyle}</div>
                 <div className="flex flex-wrap gap-1.5">
                   {ui.advisoryStyles.map((as) => {
                     const active = advisoryStyleId === as.id;
@@ -3685,7 +3918,7 @@ window.Challenge3ParticipantView = function ({
                 type="button"
                 onClick={() => handleGenerateEmail("")}
                 disabled={isBusy}
-                className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-75 text-white text-sm sm:text-base font-extrabold shadow-md transition-all"
+                className="w-full rounded-2xl py-3 sm:py-3.5 px-4 bg-slate-900 hover:bg-slate-800 disabled:opacity-75 text-white font-extrabold text-sm sm:text-base shadow-md transition-all"
               >
                 {isBusy ? ui.emailDrafting : emailText ? ui.emailRegenerateBtn : ui.emailGenerateBtn}
               </button>
@@ -3743,7 +3976,7 @@ window.Challenge3ParticipantView = function ({
                 type="button"
                 onClick={handleFinalSubmit}
                 disabled={isBusy || !readyToSubmit}
-                className={`py-3 px-5 rounded-xl text-sm font-extrabold shadow-lg transition-all ${
+                className={`rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 font-extrabold text-sm sm:text-base shadow-md transition-all ${
                   readyToSubmit
                     ? "bg-[#ed1b2e] hover:bg-[#c8102e] text-white"
                     : "bg-slate-200 text-slate-400 cursor-not-allowed"
@@ -3753,6 +3986,10 @@ window.Challenge3ParticipantView = function ({
               </button>
             )}
           </div>
+                </>
+              )}
+            </>
+          )}
         </div>
       )}
     </div>
