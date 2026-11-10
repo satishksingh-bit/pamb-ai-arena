@@ -61,7 +61,12 @@ from challenges.c3_scenarios_bank import (
 )
 from challenges.stage_demos import CANVAS_BLUEPRINTS, handle_canvas_ai, handle_coach_ai
 
-PROJECT_ID = os.environ.get("PROJECT_ID", "argolis-sandbox-main")
+PROJECT_ID = (
+    os.environ.get("PROJECT_ID")
+    or os.environ.get("GOOGLE_CLOUD_PROJECT")
+    or os.environ.get("GCLOUD_PROJECT")
+    or "argolis-sandbox-main"
+)
 LOCATION = os.environ.get("VERTEX_LOCATION", "us-central1")
 PORT = int(os.environ.get("PORT", "8095"))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
