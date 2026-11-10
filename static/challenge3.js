@@ -35,6 +35,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🤖 Pre-Pitch Brief",
     step2TabFull: "2. 💬 First WhatsApp",
     step3TabFull: "3. 📧 Win vs. AIA",
+    step2LockedShort: "2. 🔒 Step 2",
+    step2LockedFull: "2. 🔒 Get Brief First",
     step3LockedShort: "3. 🔒 Step 3",
     step3LockedFull: "3. 🔒 Send WhatsApp First",
 
@@ -169,6 +171,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🤖 智能战前简报",
     step2TabFull: "2. 💬 首条 WhatsApp",
     step3TabFull: "3. 📧 应对 AIA 对比",
+    step2LockedShort: "2. 🔒 第2步",
+    step2LockedFull: "2. 🔒 先生成简报",
     step3LockedShort: "3. 🔒 第3步",
     step3LockedFull: "3. 🔒 发送 WhatsApp 后解锁",
 
@@ -303,6 +307,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🤖 智能戰前簡報",
     step2TabFull: "2. 💬 首條 WhatsApp",
     step3TabFull: "3. 📧 應對 AIA 比較",
+    step2LockedShort: "2. 🔒 第2步",
+    step2LockedFull: "2. 🔒 先生成簡報",
     step3LockedShort: "3. 🔒 第3步",
     step3LockedFull: "3. 🔒 Send 咗 WhatsApp 先解鎖",
 
@@ -437,6 +443,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🤖 Ringkasan Pra-Pitch",
     step2TabFull: "2. 💬 WhatsApp Pertama",
     step3TabFull: "3. 📧 Banding lwn AIA",
+    step2LockedShort: "2. 🔒 Langkah 2",
+    step2LockedFull: "2. 🔒 Jana Ringkasan Dahulu",
     step3LockedShort: "3. 🔒 Langkah 3",
     step3LockedFull: "3. 🔒 Hantar WhatsApp Dahulu",
 
@@ -571,6 +579,8 @@ const C3_PLAYBOOK_UI = {
     step1TabFull: "1. 🤖 முன்-முன்மொழிவு சுருக்கம்",
     step2TabFull: "2. 💬 முதல் WhatsApp",
     step3TabFull: "3. 📧 AIA ஒப்பீடு",
+    step2LockedShort: "2. 🔒 படி 2",
+    step2LockedFull: "2. 🔒 முதலில் சுருக்கம் பெறுக",
     step3LockedShort: "3. 🔒 படி 3",
     step3LockedFull: "3. 🔒 முதலில் WhatsApp அனுப்புக",
 
@@ -2313,11 +2323,18 @@ window.Challenge3ParticipantView = function ({
       .replace(/\bAIA\b/g, rivalShort);
   };
 
+  const initialBriefReady = Boolean(
+    savedInit.prePitchBrief ||
+      existingSubmission?.prePitchBrief ||
+      savedInit.cardUrl ||
+      existingSubmission?.imageAfter
+  );
   const initialWaAlreadySent = Boolean(
     savedInit.waSent === true || existingSubmission
   );
   const [step, setStep] = useState(() => {
     const s = savedInit.step || 1;
+    if (!initialBriefReady) return 1;
     return s === 3 && !initialWaAlreadySent ? 2 : s;
   });
   const [waSent, setWaSent] = useState(() => initialWaAlreadySent);
@@ -4041,58 +4058,68 @@ window.Challenge3ParticipantView = function ({
         </div>
       )}
 
-      {/* 3. Unified Segmented 3-Step Workflow Bar (Aligned 1:1 with C2 • Step 3 Locked Until WhatsApp Sent!) */}
-      <div className="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 min-w-0">
-        {[
-          {
-            n: 1,
-            short: ui.step1Tab,
-            full: ui.step1TabFull || ui.step1Tab,
-            done: Boolean(prePitchBrief || cardUrl),
-            unlocked: true,
-          },
-          {
-            n: 2,
-            short: ui.step2Tab,
-            full: ui.step2TabFull || ui.step2Tab,
-            done: !!whatsappText.trim() && waSent,
-            unlocked: true,
-          },
-          {
-            n: 3,
-            short: waSent && waReplyArrived ? adaptRivalLabel(ui.step3Tab) : ui.step3LockedShort,
-            full:
-              waSent && waReplyArrived
-                ? adaptRivalLabel(ui.step3TabFull || ui.step3Tab)
-                : ui.step3LockedFull,
-            done: !!emailText.trim(),
-            unlocked: waSent,
-          },
-        ].map((s) => {
-          const active = step === s.n;
-          return (
-            <button
-              type="button"
-              key={s.n}
-              disabled={!s.unlocked}
-              onClick={() => s.unlocked && setStep(s.n)}
-              className={`py-2 px-1.5 sm:px-3 rounded-xl text-[11px] sm:text-xs font-extrabold transition-all flex items-center justify-center gap-1 min-w-0 ${
-                active
-                  ? "bg-[#ed1b2e] text-white shadow-sm"
-                  : !s.unlocked
-                  ? "text-slate-400 cursor-not-allowed opacity-75"
-                  : s.done
-                  ? "bg-white text-emerald-800 border border-emerald-200 shadow-sm"
-                  : "text-slate-700 hover:bg-white/70 hover:text-slate-900"
-              }`}
-            >
-              {s.done && !active && <span className="shrink-0">✓</span>}
-              <span className="truncate sm:hidden">{s.short}</span>
-              <span className="hidden sm:inline truncate">{s.full}</span>
-            </button>
-          );
-        })}
-      </div>
+      {/* 3. Unified Segmented 3-Step Workflow Bar (Aligned 1:1 with C2 • Step 2 Locked Until Brief Ready • Step 3 Locked Until WhatsApp Sent!) */}
+      {(() => {
+        const hasStep1Brief = Boolean(prePitchBrief || cardUrl);
+        return (
+          <div className="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 min-w-0">
+            {[
+              {
+                n: 1,
+                short: ui.step1Tab,
+                full: ui.step1TabFull || ui.step1Tab,
+                done: hasStep1Brief,
+                unlocked: true,
+              },
+              {
+                n: 2,
+                short: hasStep1Brief ? ui.step2Tab : ui.step2LockedShort || "2. 🔒 Step 2",
+                full: hasStep1Brief
+                  ? ui.step2TabFull || ui.step2Tab
+                  : ui.step2LockedFull || "2. 🔒 Get Brief First",
+                done: !!whatsappText.trim() && waSent,
+                unlocked: hasStep1Brief,
+              },
+              {
+                n: 3,
+                short:
+                  hasStep1Brief && waSent && waReplyArrived
+                    ? adaptRivalLabel(ui.step3Tab)
+                    : ui.step3LockedShort,
+                full:
+                  hasStep1Brief && waSent && waReplyArrived
+                    ? adaptRivalLabel(ui.step3TabFull || ui.step3Tab)
+                    : ui.step3LockedFull,
+                done: !!emailText.trim(),
+                unlocked: hasStep1Brief && waSent,
+              },
+            ].map((s) => {
+              const active = step === s.n;
+              return (
+                <button
+                  type="button"
+                  key={s.n}
+                  disabled={!s.unlocked}
+                  onClick={() => s.unlocked && setStep(s.n)}
+                  className={`py-2 px-1.5 sm:px-3 rounded-xl text-[11px] sm:text-xs font-extrabold transition-all flex items-center justify-center gap-1 min-w-0 ${
+                    active
+                      ? "bg-[#ed1b2e] text-white shadow-sm"
+                      : !s.unlocked
+                      ? "text-slate-400 cursor-not-allowed opacity-75"
+                      : s.done
+                      ? "bg-white text-emerald-800 border border-emerald-200 shadow-sm"
+                      : "text-slate-700 hover:bg-white/70 hover:text-slate-900"
+                  }`}
+                >
+                  {s.done && !active && <span className="shrink-0">✓</span>}
+                  <span className="truncate sm:hidden">{s.short}</span>
+                  <span className="hidden sm:inline truncate">{s.full}</span>
+                </button>
+              );
+            })}
+          </div>
+        );
+      })()}
 
       {/* STEP 1: CRM CLIENT ROSTER + AGENT ASSIST 1-PAGE PRE-PITCH BRIEF (Greeting Card code preserved) */}
       {step === 1 && (
@@ -4484,10 +4511,25 @@ window.Challenge3ParticipantView = function ({
         </div>
       )}
 
-      {/* STEP 2: FIRST-TOUCH WHATSAPP */}
+      {/* STEP 2: FIRST-TOUCH WHATSAPP (UNLOCKED ONLY AFTER STEP 1 PRE-PITCH BRIEF!) */}
       {step === 2 && (
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-2.5">
-          {(prePitchBrief || cardUrl) && (
+          {!(prePitchBrief || cardUrl) ? (
+            <div className="bg-white border border-slate-200 rounded-xl p-4 text-center space-y-2.5">
+              <div className="text-xs sm:text-sm font-extrabold text-slate-800">
+                🔒 {ui.step2LockedFull || "2. 🔒 Get Brief First"}
+              </div>
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="px-4 py-2 rounded-xl bg-[#ed1b2e] hover:bg-[#c8102e] text-white text-xs font-extrabold shadow-sm"
+              >
+                {ui.backBtn}
+              </button>
+            </div>
+          ) : (
+            <>
+              {(prePitchBrief || cardUrl) && (
             <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-2.5 py-1.5">
               <div className="flex items-center gap-2 min-w-0">
                 {cardUrl && (
@@ -4716,6 +4758,8 @@ window.Challenge3ParticipantView = function ({
               </button>
             )}
           </div>
+            </>
+          )}
         </div>
       )}
 

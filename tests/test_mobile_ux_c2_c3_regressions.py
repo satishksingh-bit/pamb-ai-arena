@@ -599,11 +599,28 @@ async function run() {
       };
     })()`);
 
-    // Switch to C3 Step 2 -> verify Client Brief AUTO-COLLAPSES, Step 3 is LOCKED & client reply UNSTAGED before WhatsApp send,
+    // Verify Step 2 is LOCKED before synthesizing the Step 1 Pre-Pitch Brief, then synthesize the Brief,
+    // advance to Step 2 -> verify Client Brief AUTO-COLLAPSES, Step 3 is LOCKED & client reply UNSTAGED before WhatsApp send,
     // then Draft & Mock-Send WhatsApp -> verify auto-transition to Step 3 + "WhatsApp Sent" + "Incoming Client WhatsApp Reply"!
     const c3Step2And3Audit = await evalJs(`(async () => {
-      const step2Tab = Array.from(document.querySelectorAll("button")).find(b => /^2\\./.test(b.textContent.trim()));
-      if (step2Tab) step2Tab.click();
+      const step2TabBeforeBrief = Array.from(document.querySelectorAll("button")).find(b => /^2\\./.test(b.textContent.trim()));
+      const step2DisabledBeforeBrief = Boolean(step2TabBeforeBrief && step2TabBeforeBrief.disabled === true);
+
+      // Synthesize Step 1 Pre-Pitch Brief to unlock Step 2
+      const synthBtn = Array.from(document.querySelectorAll("button")).find(b =>
+        /Synthesize Pre-Pitch Brief|Create Greeting Card/i.test(b.textContent)
+      );
+      if (synthBtn) synthBtn.click();
+      for (let i = 0; i < 40; i++) {
+        const nextBtn = Array.from(document.querySelectorAll("button")).find(b =>
+          /Next: Craft First WhatsApp/i.test(b.textContent)
+        );
+        if (nextBtn) {
+          nextBtn.click();
+          break;
+        }
+        await new Promise(r => setTimeout(r, 150));
+      }
       await new Promise(r => setTimeout(r, 200));
 
       const bodyStep2 = document.body.innerText;
@@ -693,6 +710,7 @@ async function run() {
       }
 
       return {
+        step2DisabledBeforeBrief,
         hasPositiveBabyPill,
         hasMorbidCongenital,
         step2HasRctfc,
@@ -1008,6 +1026,7 @@ class TestMobileUXChallenge2And3(unittest.TestCase):
         )
 
         c3_s23 = res["c3Step2And3Audit"]
+        self.assertTrue(c3_s23["step2DisabledBeforeBrief"], "C3 Step 2 tab must be disabled before synthesizing Brief!")
         self.assertTrue(c3_s23["hasPositiveBabyPill"], "Missing positive 'Day-1 Baby Peace of Mind' pill")
         self.assertFalse(c3_s23["hasMorbidCongenital"], "Morbid congenital/jaundice leaked into Step 2 DOM")
         self.assertFalse(c3_s23["step2HasRctfc"], "C3 Step 2 should NOT show R.C.T.F.C. drawer")
