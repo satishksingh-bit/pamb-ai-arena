@@ -512,43 +512,30 @@ async function run() {
     })()`);
 
     for (let i = 0; i < 30; i++) {
-      const loaded = await evalJs(`Array.from(document.querySelectorAll("button")).some(b => /\\([1-6]\\/6\\)/.test(b.textContent))`);
+      const loaded = await evalJs(`Array.from(document.querySelectorAll("button")).some(b => /[1-6]\\/6/.test(b.textContent))`);
       if (loaded) break;
       await sleep(200);
     }
     await sleep(250);
 
-    // Switch to Case 1/6 (Newborn Baby) via C3 Dark-Slate 6-Case Switcher and verify 6 options
+    // Switch to Case 1/6 (Newborn Baby) via C3 Step 1 6-Client CRM Roster and verify 6 options + instant 0ms highlight
     const c3CaseSwitcherAudit = await evalJs(`(async () => {
-      const swBtn = Array.from(document.querySelectorAll("button")).find(b =>
-        /Switch.*\\([1-6]\\/6\\)|\\([1-6]\\/6\\)/i.test(b.textContent)
-      );
-      if (!swBtn) return { found: false };
-      swBtn.click();
-      await new Promise(r => setTimeout(r, 150));
       const darkBrief = document.querySelector('[data-testid="client-brief-card"]');
-      const searchRoot = darkBrief || document;
-      const pickerGrid = Array.from(searchRoot.querySelectorAll("div.grid")).find(g => {
-        const btns = Array.from(g.querySelectorAll("button"));
-        return (
-          btns.length === 6 &&
-          btns.every(b => /^[1-6]\\.\\s|[1-6]\\/6/.test(b.textContent.trim()))
-        );
-      });
-      const pickerBtns = pickerGrid
-        ? Array.from(pickerGrid.querySelectorAll("button"))
-        : Array.from(searchRoot.querySelectorAll("button")).filter(b =>
-            /^[1-6]\\.\\s|[1-6]\\/6$/.test(b.textContent.trim())
-          );
-      const count = pickerBtns.length;
-      if (pickerBtns[0]) pickerBtns[0].click(); // Select Case 1/6 (Newborn Baby)
-      await new Promise(r => setTimeout(r, 350));
-      const updatedBtn = Array.from(document.querySelectorAll("button")).find(b => /\\(1\\/6\\)/.test(b.textContent));
+      const rosterBtns = Array.from(document.querySelectorAll("button")).filter(b =>
+        /^[1-6]\\.\\s.*[1-6]\\/6$/.test(b.textContent.replace(/\\s+/g, " ").trim())
+      );
+      const count = rosterBtns.length;
+      if (!count) return { found: false };
+      if (rosterBtns[1]) rosterBtns[1].click(); // Tap Client 2/6 first
+      const highlighted2Immediately = rosterBtns[1] ? rosterBtns[1].className.includes("bg-[#ed1b2e]") : false;
+      if (rosterBtns[0]) rosterBtns[0].click(); // Tap Client 1/6 (Newborn Baby)
+      const highlighted1Immediately = rosterBtns[0] ? rosterBtns[0].className.includes("bg-[#ed1b2e]") : false;
+      await new Promise(r => setTimeout(r, 150));
       return {
         found: true,
         hasDarkSlateBrief: Boolean(darkBrief),
         optionCount: count,
-        switchedTo1of6: Boolean(updatedBtn),
+        switchedTo1of6: highlighted1Immediately && highlighted2Immediately,
       };
     })()`);
 

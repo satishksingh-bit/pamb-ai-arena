@@ -2273,25 +2273,38 @@ window.Challenge3ParticipantView = function ({
   const [showCasePicker, setShowCasePicker] = useState(false);
   const [confirmArmedSlot, setConfirmArmedSlot] = useState(null);
 
-  const rawFallbackSc = PAMB_C3_SCENARIOS[scenarioIdx % PAMB_C3_SCENARIOS.length] || PAMB_C3_SCENARIOS[0];
-  const fallbackSc = _getLocalizedScenario(rawFallbackSc, normLang);
-  const sc = serverScenario || fallbackSc;
-
   const effectiveSeat =
-    typeof sc.seatIndex === "number"
-      ? sc.seatIndex
-      : typeof seatOverride === "number"
+    typeof seatOverride === "number"
       ? seatOverride
+      : typeof serverScenario?.seatIndex === "number"
+      ? serverScenario.seatIndex
       : _pickAssignedScenarioIdx(agentId) % C3_CURATED_6_SEATS.length;
-  const matchedMetaSlot = C3_CURATED_6_META.findIndex((m) => m.id === sc.id);
   const activeSlot =
-    typeof sc.seatIndex === "number" || typeof seatOverride === "number"
-      ? ((effectiveSeat % C3_CURATED_6_SEATS.length) + C3_CURATED_6_SEATS.length) %
-        C3_CURATED_6_SEATS.length
-      : matchedMetaSlot >= 0
-      ? matchedMetaSlot
-      : 0;
+    ((effectiveSeat % C3_CURATED_6_SEATS.length) + C3_CURATED_6_SEATS.length) %
+    C3_CURATED_6_SEATS.length;
   const activeCaseMeta = C3_CURATED_6_META[activeSlot] || C3_CURATED_6_META[0];
+
+  const rawFallbackSc =
+    PAMB_C3_SCENARIOS.find((s) => s.id === activeCaseMeta.id) ||
+    PAMB_C3_SCENARIOS[scenarioIdx % PAMB_C3_SCENARIOS.length] ||
+    PAMB_C3_SCENARIOS[0];
+  const fallbackSc = _getLocalizedScenario(rawFallbackSc, normLang);
+  const optimisticRosterSlot =
+    serverScenario &&
+    Array.isArray(serverScenario.clientRoster6) &&
+    serverScenario.clientRoster6[activeSlot]
+      ? serverScenario.clientRoster6[activeSlot]
+      : null;
+  const sc =
+    serverScenario &&
+    (typeof seatOverride !== "number" || serverScenario.seatIndex === seatOverride)
+      ? serverScenario
+      : {
+          ...fallbackSc,
+          ...(optimisticRosterSlot || {}),
+          seatIndex: effectiveSeat,
+          clientRoster6: serverScenario?.clientRoster6,
+        };
 
   const fallbackPb =
     (C3_ADVISOR_PLAYBOOK[sc.id] &&
@@ -3947,20 +3960,9 @@ window.Challenge3ParticipantView = function ({
             <button
               type="button"
               onClick={() => setShowCaseBrief((v) => !v)}
-              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 border border-slate-300 text-[11px] font-bold text-slate-700 hover:text-[#ed1b2e] whitespace-nowrap transition-all"
+              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 border border-slate-300 text-[11px] font-bold text-slate-700 hover:text-[#ed1b2e] whitespace-nowrap transition-colors"
             >
               {showCaseBrief ? `${ui.hideBtn} ▴` : `${ui.caseInfoBtn} ▾`}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                setConfirmArmedSlot(null);
-                setShowCasePicker((v) => !v);
-              }}
-              className="px-2 py-1 rounded-lg bg-white hover:bg-red-50 border border-slate-300 text-[11px] font-extrabold text-slate-800 hover:text-[#ed1b2e] whitespace-nowrap transition-all"
-            >
-              {ui.switchShortFmt} ({activeSlot + 1}/6) ▾
             </button>
           </div>
         </div>
@@ -4192,7 +4194,8 @@ window.Challenge3ParticipantView = function ({
                         key={cl.id || idx}
                         type="button"
                         onClick={() => handleSelectCaseSlot(idx)}
-                        className={`min-w-0 px-2 py-1 rounded-xl border text-left transition-all ${
+                        style={{ touchAction: "manipulation" }}
+                        className={`min-w-0 px-2 py-1 rounded-xl border text-left transition-none select-none ${
                           isCurrent
                             ? "bg-[#ed1b2e] border-[#ed1b2e] text-white shadow-sm"
                             : isArmed
